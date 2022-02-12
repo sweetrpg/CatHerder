@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kittytalents:throw_bone_wet"
+    }
+  ],
+  "result": {
+    "item": "kittytalents:throw_bone"
+  }
+}

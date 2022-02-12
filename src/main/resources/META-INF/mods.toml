@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="${fml_version_range}"
+license="GNU GPLv3"
+issueTrackerURL="https://github.com/percivalalb/KittyTalents/issues"
+displayURL="https://minecraft.curseforge.com/projects/kitty-talents/"
+logoFile="dt_logo.png"
+[[mods]] #mandatory
+    modId="kittytalents"
+    version="${version}"
+    updateJSONURL="https://www.dropbox.com/s/raw/q6ckhwos45jires/version-kittytalents.json"
+    displayName="Kitty Talents 2"
+    credits="percivalalb,RaustBlackDragon,NovaViper"
+    authors="percivalalb"
+    description='''
+    Turning your wolves into fun, playful dogs.
+    '''
+[[dependencies.kittytalents]] #optional
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}" #mandatory
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.kittytalents]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"

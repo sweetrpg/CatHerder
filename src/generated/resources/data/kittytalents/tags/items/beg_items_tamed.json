@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "kittytalents:breeding_bone",
+    "kittytalents:throw_stick",
+    "kittytalents:throw_bone",
+    "minecraft:bone"
+  ]
+}

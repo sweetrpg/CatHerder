@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kittytalents:master_treat"
+    },
+    {
+      "item": "kittytalents:master_treat"
+    },
+    {
+      "item": "kittytalents:master_treat"
+    },
+    {
+      "item": "kittytalents:master_treat"
+    },
+    {
+      "item": "kittytalents:master_treat"
+    },
+    {
+      "item": "minecraft:end_stone"
+    }
+  ],
+  "result": {
+    "item": "kittytalents:dire_treat"
+  }
+}

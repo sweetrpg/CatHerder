@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kittytalents:training_treat"
+    },
+    {
+      "item": "kittytalents:training_treat"
+    },
+    {
+      "item": "kittytalents:training_treat"
+    },
+    {
+      "item": "kittytalents:training_treat"
+    },
+    {
+      "item": "kittytalents:training_treat"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    }
+  ],
+  "result": {
+    "item": "kittytalents:super_treat",
+    "count": 5
+  }
+}

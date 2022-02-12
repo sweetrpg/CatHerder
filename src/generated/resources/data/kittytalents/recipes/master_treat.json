@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kittytalents:super_treat"
+    },
+    {
+      "item": "kittytalents:super_treat"
+    },
+    {
+      "item": "kittytalents:super_treat"
+    },
+    {
+      "item": "kittytalents:super_treat"
+    },
+    {
+      "item": "kittytalents:super_treat"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "item": "kittytalents:master_treat",
+    "count": 5
+  }
+}
