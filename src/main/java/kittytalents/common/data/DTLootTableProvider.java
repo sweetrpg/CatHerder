@@ -57,6 +57,7 @@ public class DTLootTableProvider extends LootTableProvider {
             dropsSelf(KittyBlocks.CAT_BATH);
             dropCatbed(KittyBlocks.CAT_BED);
             dropsSelf(KittyBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
+            dropsSelf(KittyBlocks.LITTER_BOX);
         }
 
         private void dropCatbed(Supplier<? extends Block> block) {
