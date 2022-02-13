@@ -49,7 +49,7 @@ public class BeddingMaterial extends IBeddingMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("dogbed.bedding", KittyTalentsAPI.BEDDING_MATERIAL.getKey(this));
+            this.translationKey = Util.makeDescriptionId("catbed.bedding", KittyTalentsAPI.BEDDING_MATERIAL.getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);

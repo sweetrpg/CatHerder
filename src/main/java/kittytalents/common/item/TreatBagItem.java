@@ -106,13 +106,13 @@ public class TreatBagItem extends Item implements kittytalents.api.inferface.ICa
     }
 
     @Override
-    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
-        return entityIn instanceof LivingEntity ? dogIn.canInteract((LivingEntity) entityIn) : false;
+    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
+        return entityIn instanceof LivingEntity ? catIn.canInteract((LivingEntity) entityIn) : false;
     }
 
     @Override
-    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
+    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
         IItemHandlerModifiable treatBag = (IItemHandlerModifiable) stackIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(EmptyHandler.INSTANCE);
-        return InventoryUtil.feedDogFrom(dogIn, entityIn, treatBag);
+        return InventoryUtil.feedDogFrom(catIn, entityIn, treatBag);
     }
 }

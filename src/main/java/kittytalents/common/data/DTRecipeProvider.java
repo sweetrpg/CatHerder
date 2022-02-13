@@ -61,6 +61,8 @@ public class DTRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(KittyItems.RADIO_COLLAR.get(), 1).pattern("XX").pattern("YX").define('X', Items.IRON_INGOT).define('Y', Items.REDSTONE).unlockedBy("has_redstone", has(Items.REDSTONE)).save(consumer);
         ShapelessRecipeBuilder.shapeless(KittyItems.RADAR.get(), 1).requires(Items.MAP, 1).requires(Items.REDSTONE, 1).requires(KittyItems.RADIO_COLLAR.get(), 1).unlockedBy("has_redstone", has(Items.REDSTONE)).save(consumer);
 
+        ShapedRecipeBuilder.shaped(KittyBlocks.LITTER_BOX.get(), 1).pattern("ISI").pattern("III").define('I', Items.IRON_INGOT).define('S', Items.SAND).unlockedBy("has_sand", has(Items.SAND)).unlockedBy("has_iron", has(Items.IRON_INGOT)).save(consumer);
+
         SpecialRecipeBuilder.special(KittyRecipeSerializers.CAT_BED.get()).save(consumer, Util.getResourcePath("cat_bed"));
     }
 

@@ -56,11 +56,11 @@ public class TalentInstance implements kittytalents.api.inferface.ICatAlteration
         return this.talentDelegate.get().getDefault(this.level);
     }
 
-    public void writeToNBT(kittytalents.api.inferface.AbstractCatEntity dogIn, CompoundTag compound) {
+    public void writeToNBT(kittytalents.api.inferface.AbstractCatEntity catIn, CompoundTag compound) {
         compound.putInt("level", this.level());
     }
 
-    public void readFromNBT(kittytalents.api.inferface.AbstractCatEntity dogIn, CompoundTag compound) {
+    public void readFromNBT(kittytalents.api.inferface.AbstractCatEntity catIn, CompoundTag compound) {
         this.setLevel(compound.getInt("level"));
     }
 
@@ -72,20 +72,20 @@ public class TalentInstance implements kittytalents.api.inferface.ICatAlteration
         this.setLevel(buf.readInt());
     }
 
-    public final void writeInstance(kittytalents.api.inferface.AbstractCatEntity dogIn, CompoundTag compound) {
+    public final void writeInstance(kittytalents.api.inferface.AbstractCatEntity catIn, CompoundTag compound) {
         ResourceLocation rl = this.talentDelegate.name();
         if (rl != null) {
             compound.putString("type", rl.toString());
         }
 
-        this.writeToNBT(dogIn, compound);
+        this.writeToNBT(catIn, compound);
     }
 
-    public static Optional<TalentInstance> readInstance(kittytalents.api.inferface.AbstractCatEntity dogIn, CompoundTag compound) {
+    public static Optional<TalentInstance> readInstance(kittytalents.api.inferface.AbstractCatEntity catIn, CompoundTag compound) {
         ResourceLocation rl = ResourceLocation.tryParse(compound.getString("type"));
         if (KittyTalentsAPI.TALENTS.containsKey(rl)) {
             TalentInstance inst = KittyTalentsAPI.TALENTS.getValue(rl).getDefault();
-            inst.readFromNBT(dogIn, compound);
+            inst.readFromNBT(catIn, compound);
             return Optional.of(inst);
         } else {
             KittyTalentsAPI.LOGGER.warn("Failed to load talent {}", rl);
@@ -112,9 +112,9 @@ public class TalentInstance implements kittytalents.api.inferface.ICatAlteration
      * the level is first set on the cat or when it is loaded from NBT and when the
      * talents are synced to the client
      *
-     * @param dogIn The cat
+     * @param catIn The cat
      */
-    public void init(kittytalents.api.inferface.AbstractCatEntity dogIn) {
+    public void init(kittytalents.api.inferface.AbstractCatEntity catIn) {
 
     }
 
@@ -122,7 +122,7 @@ public class TalentInstance implements kittytalents.api.inferface.ICatAlteration
      * Called when the level of the cat changes
      * Is not called when the cat is loaded from NBT
      *
-     * @param dogIn The cat
+     * @param cat The cat
      */
     public void set(kittytalents.api.inferface.AbstractCatEntity cat, int levelBefore) {
 

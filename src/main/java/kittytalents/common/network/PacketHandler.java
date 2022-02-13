@@ -10,17 +10,17 @@ public final class PacketHandler {
     private static int disc = 0;
 
     public static void init() {
-        registerPacket(new DogModePacket(), DogModeData.class);
-        registerPacket(new DogNamePacket(), DogNameData.class);
-        registerPacket(new DogObeyPacket(), DogObeyData.class);
-        registerPacket(new DogTalentPacket(), DogTalentData.class);
+        registerPacket(new CatModePacket(), CatModeData.class);
+        registerPacket(new CatNamePacket(), CatNameData.class);
+        registerPacket(new CatObeyPacket(), CatObeyData.class);
+        registerPacket(new CatTalentPacket(), CatTalentData.class);
         //registerPacket(new DogTexturePacket(), DogTextureData.class);
         registerPacket(new FriendlyFirePacket(), FriendlyFireData.class);
         registerPacket(new SendSkinPacket(), SendSkinData.class);
         registerPacket(new RequestSkinPacket(), RequestSkinData.class);
-        registerPacket(new OpenDogScreenPacket(), OpenDogScreenData.class);
-        registerPacket(new DogInventoryPagePacket(), DogInventoryPageData.class);
-        registerPacket(new DogTexturePacket(), DogTextureData.class);
+        registerPacket(new OpenCatScreenPacket(), OpenCatScreenData.class);
+        registerPacket(new CatInventoryPagePacket(), CatInventoryPageData.class);
+        registerPacket(new CatTexturePacket(), CatTextureData.class);
     }
 
     public static <MSG> void send(PacketDistributor.PacketTarget target, MSG message) {

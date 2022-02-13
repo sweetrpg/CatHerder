@@ -11,10 +11,10 @@ public class QuickHealerTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResultHolder<Integer> healingTick(kittytalents.api.inferface.AbstractCatEntity dogIn, int healingTick) {
+    public InteractionResultHolder<Integer> healingTick(kittytalents.api.inferface.AbstractCatEntity catIn, int healingTick) {
         if (this.level() > 0) {
-            if (dogIn.isInSittingPose() && this.level() >= 5) {
-                if (dogIn.getNoActionTime() > 100) {
+            if (catIn.isInSittingPose() && this.level() >= 5) {
+                if (catIn.getNoActionTime() > 100) {
                     healingTick *= 15;
                 } else {
                     healingTick *= 10;

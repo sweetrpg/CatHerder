@@ -13,15 +13,15 @@ public class FisherCatTalent extends TalentInstance {
     }
 
     @Override
-    public void onShakingDry(kittytalents.api.inferface.AbstractCatEntity dogIn, WetSource source) {
-        if (dogIn.level.isClientSide) { // On client do nothing
+    public void onShakingDry(kittytalents.api.inferface.AbstractCatEntity catIn, WetSource source) {
+        if (catIn.level.isClientSide) { // On client do nothing
             return;
         }
 
         if (source.isWaterBlock()) {
-            if (dogIn.getRandom().nextInt(15) < this.level() * 2) {
-                int lvlHellHound = dogIn.getDogLevel(KittyTalents.HELL_HOUND);
-                dogIn.spawnAtLocation(dogIn.getRandom().nextInt(15) < lvlHellHound * 2 ? Items.COOKED_COD : Items.COD);
+            if (catIn.getRandom().nextInt(15) < this.level() * 2) {
+                int lvlHellHound = catIn.getCatLevel(KittyTalents.HELL_BEAST);
+                catIn.spawnAtLocation(catIn.getRandom().nextInt(15) < lvlHellHound * 2 ? Items.COOKED_COD : Items.COD);
             }
         }
     }

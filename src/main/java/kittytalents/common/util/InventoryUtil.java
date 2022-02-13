@@ -15,15 +15,15 @@ import java.util.function.Predicate;
 
 public class InventoryUtil {
 
-    public static InteractionResult feedDogFrom(kittytalents.api.inferface.AbstractCatEntity dogIn, @Nullable Entity entity, IItemHandlerModifiable source) {
+    public static InteractionResult feedDogFrom(kittytalents.api.inferface.AbstractCatEntity catIn, @Nullable Entity entity, IItemHandlerModifiable source) {
 
         for (int i = 0; i < source.getSlots(); i++) {
 
             ItemStack stack = source.getStackInSlot(i).copy();
-            Optional<kittytalents.api.inferface.ICatFoodHandler> foodHandler = FoodHandler.getMatch(dogIn, stack, entity);
+            Optional<kittytalents.api.inferface.ICatFoodHandler> foodHandler = FoodHandler.getMatch(catIn, stack, entity);
 
             if (foodHandler.isPresent()) {
-                InteractionResult response = foodHandler.get().consume(dogIn, stack, entity);
+                InteractionResult response = foodHandler.get().consume(catIn, stack, entity);
                 source.setStackInSlot(i, stack);
                 return response;
             }

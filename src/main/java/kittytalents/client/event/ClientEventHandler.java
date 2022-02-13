@@ -7,7 +7,7 @@ import kittytalents.KittyBlocks;
 import kittytalents.KittyTalents2;
 import kittytalents.client.screen.widget.DogInventoryButton;
 import kittytalents.common.network.PacketHandler;
-import kittytalents.common.network.packet.data.OpenDogScreenData;
+import kittytalents.common.network.packet.data.OpenCatScreenData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.Screen;
@@ -94,7 +94,7 @@ public class ClientEventHandler {
             int y = guiTop + (creative ? 7 : 48);
 
             event.addListener(new DogInventoryButton(x, y, screen, (btn) -> {
-                PacketHandler.send(PacketDistributor.SERVER.noArg(), new OpenDogScreenData());
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new OpenCatScreenData());
                 btn.active = false;
             }));
         }
@@ -203,13 +203,13 @@ public class ClientEventHandler {
 //        label: if (event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT) {
 //            Minecraft mc = Minecraft.getInstance();
 //
-//            if (mc.player == null || !(mc.player.getVehicle() instanceof DogEntity)) {
+//            if (mc.player == null || !(mc.player.getVehicle() instanceof CatEntity)) {
 //                break label;
 //            }
 //
 //            PoseStack stack = event.getMatrixStack();
 //
-//            DogEntity cat = (DogEntity) mc.player.getVehicle();
+//            CatEntity cat = (CatEntity) mc.player.getVehicle();
 //            int width = mc.getWindow().getGuiScaledWidth();
 //            int height = mc.getWindow().getGuiScaledHeight();
 //            RenderSystem.pushMatrix();
@@ -220,7 +220,7 @@ public class ClientEventHandler {
 //            int left = width / 2 + 91;
 //            int top = height - ((ForgeIngameGui) mc.gui).right_height;
 //            ((ForgeIngameGui) mc.gui).right_height += 10;
-//            int level = Mth.ceil((cat.getDogHunger() / cat.getMaxHunger()) * 20.0D);
+//            int level = Mth.ceil((cat.getCatHunger() / cat.getMaxHunger()) * 20.0D);
 //
 //            for (int i = 0; i < 10; ++i) {
 //                int idx = i * 2 + 1;

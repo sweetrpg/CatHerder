@@ -31,7 +31,7 @@ public class KittyItems {
     public static final RegistryObject<Item> MASTER_TREAT = registerTreat("master_treat", kittytalents.api.feature.CatLevel.Type.NORMAL, 60);
     public static final RegistryObject<Item> DIRE_TREAT = registerTreat("dire_treat", kittytalents.api.feature.CatLevel.Type.DIRE, 30);
     public static final RegistryObject<Item> BREEDING_BONE = register("breeding_bone");
-    public static final RegistryObject<Item> COLLAR_SHEARS = registerWith("collar_shears", DogShearsItem::new, 1);
+    public static final RegistryObject<Item> COLLAR_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
     public static final RegistryObject<Item> KITTY_CHARM = registerWith("kitty_charm", KittyCharmItem::new, 1);
     public static final RegistryObject<AccessoryItem> RADIO_COLLAR = registerAccessory("radio_collar", KittyAccessories.RADIO_BAND);
     public static final RegistryObject<DyeableAccessoryItem> WOOL_COLLAR = registerAccessoryDyed("wool_collar", KittyAccessories.DYEABLE_COLLAR);
@@ -51,6 +51,7 @@ public class KittyItems {
     public static final RegistryObject<Item> TINY_BONE = registerSizeBone("tiny_bone", SizeBoneItem.Type.TINY);
     public static final RegistryObject<Item> BIG_BONE = registerSizeBone("big_bone", SizeBoneItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
+//    public static final RegistryObject<Item> LITTER_BOX = register("litter_box", LitterBoxItem::new);
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
 
     private static Item.Properties createInitialProp() {

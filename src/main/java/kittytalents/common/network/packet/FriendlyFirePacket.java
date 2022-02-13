@@ -6,7 +6,7 @@ import net.minecraftforge.network.NetworkEvent.Context;
 
 import java.util.function.Supplier;
 
-public class FriendlyFirePacket extends DogPacket<FriendlyFireData> {
+public class FriendlyFirePacket extends CatPacket<FriendlyFireData> {
 
     @Override
     public void encode(FriendlyFireData data, FriendlyByteBuf buf) {
@@ -22,11 +22,11 @@ public class FriendlyFirePacket extends DogPacket<FriendlyFireData> {
     }
 
     @Override
-    public void handleDog(kittytalents.common.entity.CatEntity dogIn, FriendlyFireData data, Supplier<Context> ctx) {
-        if (!dogIn.canInteract(ctx.get().getSender())) {
+    public void handleDog(kittytalents.common.entity.CatEntity catIn, FriendlyFireData data, Supplier<Context> ctx) {
+        if (!catIn.canInteract(ctx.get().getSender())) {
             return;
         }
 
-        dogIn.setCanPlayersAttack(data.friendlyFire);
+        catIn.setCanPlayersAttack(data.friendlyFire);
     }
 }

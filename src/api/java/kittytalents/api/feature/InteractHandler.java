@@ -19,17 +19,17 @@ public class InteractHandler {
         HANDLERS.add(handler);
     }
 
-    public static InteractionResult getMatch(@Nullable kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Player playerIn, InteractionHand handIn) {
+    public static InteractionResult getMatch(@Nullable kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Player playerIn, InteractionHand handIn) {
         if (stackIn.getItem() instanceof kittytalents.api.inferface.ICatItem) {
             kittytalents.api.inferface.ICatItem item = (kittytalents.api.inferface.ICatItem) stackIn.getItem();
-            InteractionResult result = item.processInteract(dogIn, dogIn.level, playerIn, handIn);
+            InteractionResult result = item.processInteract(catIn, catIn.level, playerIn, handIn);
             if (result != InteractionResult.PASS) {
                 return result;
             }
         }
 
         for (kittytalents.api.inferface.ICatItem handler : HANDLERS) {
-            InteractionResult result = handler.processInteract(dogIn, dogIn.level, playerIn, handIn);
+            InteractionResult result = handler.processInteract(catIn, catIn.level, playerIn, handIn);
             if (result != InteractionResult.PASS) {
                 return result;
             }

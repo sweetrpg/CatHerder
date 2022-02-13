@@ -8,9 +8,9 @@ public class BerserkerModeGoal<T extends LivingEntity> extends NearestAttackable
 
     private final kittytalents.common.entity.CatEntity cat;
 
-    public BerserkerModeGoal(kittytalents.common.entity.CatEntity dogIn, Class<T> targetClassIn, boolean checkSight) {
-        super(dogIn, targetClassIn, checkSight, false);
-        this.cat = dogIn;
+    public BerserkerModeGoal(kittytalents.common.entity.CatEntity catIn, Class<T> targetClassIn, boolean checkSight) {
+        super(catIn, targetClassIn, checkSight, false);
+        this.cat = catIn;
     }
 
     @Override

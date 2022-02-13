@@ -19,7 +19,7 @@ public class DyeableAccessoryItem extends AccessoryItem implements IDyeableArmor
     }
 
     @Override
-    public AccessoryInstance createInstance(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stack, Player playerIn) {
+    public AccessoryInstance createInstance(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stack, Player playerIn) {
         return this.accessory.get().create(this.getColor(stack));
     }
 

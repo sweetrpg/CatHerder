@@ -10,8 +10,8 @@ public class FetchGoal extends MoveToClosestItemGoal {
 
     public static Predicate<ItemStack> BONE_PREDICATE = (item) -> item.getItem() instanceof IThrowableItem;
 
-    public FetchGoal(kittytalents.common.entity.CatEntity dogIn, double speedIn, float range) {
-        super(dogIn, speedIn, range, 2, BONE_PREDICATE);
+    public FetchGoal(kittytalents.common.entity.CatEntity catIn, double speedIn, float range) {
+        super(catIn, speedIn, range, 2, BONE_PREDICATE);
     }
 
     @Override

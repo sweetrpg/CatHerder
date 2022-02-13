@@ -21,20 +21,20 @@ public class CatShearsItem extends Item implements kittytalents.api.inferface.IC
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (dogIn.isOwnedBy(playerIn)) {
-            List<AccessoryInstance> accessories = dogIn.getAccessories();
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (catIn.isOwnedBy(playerIn)) {
+            List<AccessoryInstance> accessories = catIn.getAccessories();
             if (accessories.isEmpty()) {
-                if (!dogIn.isTame()) {
+                if (!catIn.isTame()) {
                     return InteractionResult.CONSUME;
                 }
 
                 if (!worldIn.isClientSide) {
-                    int cooldownLeft = dogIn.getDataOrDefault(COOLDOWN, dogIn.tickCount) - dogIn.tickCount;
+                    int cooldownLeft = catIn.getDataOrDefault(COOLDOWN, catIn.tickCount) - catIn.tickCount;
 
                     if (cooldownLeft <= 0) {
-                        worldIn.broadcastEntityEvent(dogIn, Constants.EntityState.WOLF_SMOKE);
-                        dogIn.untame();
+                        worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
+                        catIn.untame();
                     }
                 }
 
@@ -44,11 +44,11 @@ public class CatShearsItem extends Item implements kittytalents.api.inferface.IC
             if (!worldIn.isClientSide) {
                 for (AccessoryInstance inst : accessories) {
                     ItemStack returnItem = inst.getReturnItem();
-                    dogIn.spawnAtLocation(returnItem, 1);
+                    catIn.spawnAtLocation(returnItem, 1);
                 }
 
-                dogIn.removeAccessories();
-                dogIn.setData(COOLDOWN, dogIn.tickCount + 40);
+                catIn.removeAccessories();
+                catIn.setData(COOLDOWN, catIn.tickCount + 40);
 
                 return InteractionResult.SUCCESS;
             }

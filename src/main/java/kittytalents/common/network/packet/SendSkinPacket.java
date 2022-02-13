@@ -1,7 +1,7 @@
 package kittytalents.common.network.packet;
 
 import kittytalents.KittyTalents2;
-import kittytalents.common.entity.texture.DogTextureServer;
+import kittytalents.common.entity.texture.CatTextureServer;
 import kittytalents.common.network.IPacket;
 import kittytalents.common.network.packet.data.SendSkinData;
 import net.minecraft.network.FriendlyByteBuf;
@@ -67,13 +67,13 @@ public class SendSkinPacket implements IPacket<SendSkinData> {
                         BufferedImage bImage2 = ImageIO.read(bis);
 
 
-                        DogTextureServer.INSTANCE.saveTexture(DogTextureServer.INSTANCE.getServerFolder(), IOUtils.toByteArray(bis));
+                        CatTextureServer.INSTANCE.saveTexture(CatTextureServer.INSTANCE.getServerFolder(), IOUtils.toByteArray(bis));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                String hash = DogTextureServer.INSTANCE.getHash(data.image);
+                String hash = CatTextureServer.INSTANCE.getHash(data.image);
                 cat.setSkinHash(hash);
             }
         });

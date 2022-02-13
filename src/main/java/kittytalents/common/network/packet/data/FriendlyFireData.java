@@ -1,6 +1,6 @@
 package kittytalents.common.network.packet.data;
 
-public class FriendlyFireData extends DogData {
+public class FriendlyFireData extends CatData {
 
     public final boolean friendlyFire;
 

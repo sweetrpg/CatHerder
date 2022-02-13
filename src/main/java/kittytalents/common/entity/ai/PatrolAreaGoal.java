@@ -18,9 +18,9 @@ public class PatrolAreaGoal extends Goal {
     public int index;
     private int timeToRecalcPath;
 
-    public PatrolAreaGoal(kittytalents.common.entity.CatEntity dogIn) {
-        this.cat = dogIn;
-        this.navigator = dogIn.getNavigation();
+    public PatrolAreaGoal(kittytalents.common.entity.CatEntity catIn) {
+        this.cat = catIn;
+        this.navigator = catIn.getNavigation();
         this.setFlags(EnumSet.of(Flag.MOVE));
     }
 

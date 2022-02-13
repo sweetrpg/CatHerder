@@ -1,6 +1,6 @@
 package kittytalents.common.entity.ai;
 
-import kittytalents.common.block.tileentity.DogBedTileEntity;
+import kittytalents.common.block.tileentity.CatBedTileEntity;
 import kittytalents.common.lib.Constants;
 import kittytalents.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
@@ -12,8 +12,8 @@ public class MoveToBlockGoal extends Goal {
 
     protected final kittytalents.common.entity.CatEntity cat;
 
-    public MoveToBlockGoal(kittytalents.common.entity.CatEntity dogIn) {
-        this.cat = dogIn;
+    public MoveToBlockGoal(kittytalents.common.entity.CatEntity catIn) {
+        this.cat = catIn;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 
@@ -31,12 +31,12 @@ public class MoveToBlockGoal extends Goal {
     public void stop() {
         BlockPos target = this.cat.getTargetBlock();
 
-        DogBedTileEntity dogBedTileEntity = WorldUtil.getTileEntity(cat.level, target, DogBedTileEntity.class);
+        CatBedTileEntity catBedTileEntity = WorldUtil.getTileEntity(cat.level, target, CatBedTileEntity.class);
 
-        if (dogBedTileEntity != null) {
+        if (catBedTileEntity != null) {
             // Double check the bed still has no owner
-            if (dogBedTileEntity.getOwnerUUID() == null) {
-                dogBedTileEntity.setOwner(this.cat);
+            if (catBedTileEntity.getOwnerUUID() == null) {
+                catBedTileEntity.setOwner(this.cat);
                 this.cat.setBedPos(this.cat.level.dimension(), target);
             }
         }
@@ -44,7 +44,7 @@ public class MoveToBlockGoal extends Goal {
         this.cat.setTargetBlock(null);
         this.cat.setOrderedToSit(true);
 
-        this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.WOLF_HEARTS);
+        this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
     }
 
     @Override

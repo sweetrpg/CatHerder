@@ -3,7 +3,7 @@ package kittytalents.common.addon.jei;
 import kittytalents.KittyBlocks;
 import kittytalents.api.registry.IBeddingMaterial;
 import kittytalents.api.registry.ICasingMaterial;
-import kittytalents.common.util.DogBedUtil;
+import kittytalents.common.util.CatBedUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.ModIds;
@@ -24,7 +24,7 @@ public class DTPlugin implements IModPlugin {
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         registration.registerSubtypeInterpreter(KittyBlocks.CAT_BED.get().asItem(), (stack, ctx) -> {
-            Pair<ICasingMaterial, IBeddingMaterial> materials = DogBedUtil.getMaterials(stack);
+            Pair<ICasingMaterial, IBeddingMaterial> materials = CatBedUtil.getMaterials(stack);
 
             String casingKey = materials.getLeft() != null
                     ? materials.getLeft().getRegistryName().toString()
@@ -40,6 +40,6 @@ public class DTPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(DogBedRecipeMaker.createDogBedRecipes(), VanillaRecipeCategoryUid.CRAFTING);
+        registration.addRecipes(CatBedRecipeMaker.createCatbedRecipes(), VanillaRecipeCategoryUid.CRAFTING);
     }
 }

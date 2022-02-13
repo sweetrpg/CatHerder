@@ -19,7 +19,7 @@ public class KittySerializers {
     public static final RegistryObject<DataSerializerEntry> ACCESSORY_SERIALIZER = register2("accessories", AccessorySerializer::new);
     public static final RegistryObject<DataSerializerEntry> GENDER_SERIALIZER = register2("gender", GenderSerializer::new);
     public static final RegistryObject<DataSerializerEntry> MODE_SERIALIZER = register2("mode", ModeSerializer::new);
-    public static final RegistryObject<DataSerializerEntry> DOG_LEVEL_SERIALIZER = register2("dog_level", DogLevelSerializer::new);
+    public static final RegistryObject<DataSerializerEntry> CAT_LEVEL_SERIALIZER = register2("cat_level", CatLevelSerializer::new);
     public static final RegistryObject<DataSerializerEntry> BED_LOC_SERIALIZER = register2("cat_bed_location", BedLocationsSerializer::new);
 
     private static <X extends EntityDataSerializer<?>> RegistryObject<DataSerializerEntry> register2(final String name, final Supplier<X> factory) {

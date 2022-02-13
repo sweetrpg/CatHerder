@@ -2,7 +2,7 @@ package kittytalents.client.block.model;
 
 import kittytalents.api.registry.IBeddingMaterial;
 import kittytalents.api.registry.ICasingMaterial;
-import kittytalents.common.util.DogBedUtil;
+import kittytalents.common.util.CatBedUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.resources.model.BakedModel;
@@ -20,9 +20,9 @@ public class CatBedItemOverride extends ItemOverrides {
 
     @Override
     public BakedModel resolve(BakedModel modelOriginal, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity livingEntity, int p_173469_) {
-        if (modelOriginal instanceof DogBedModel) {
-            Pair<ICasingMaterial, IBeddingMaterial> materials = DogBedUtil.getMaterials(stack);
-            return ((DogBedModel) modelOriginal).getModelVariant(materials.getLeft(), materials.getRight(), Direction.NORTH);
+        if (modelOriginal instanceof CatBedModel) {
+            Pair<ICasingMaterial, IBeddingMaterial> materials = CatBedUtil.getMaterials(stack);
+            return ((CatBedModel) modelOriginal).getModelVariant(materials.getLeft(), materials.getRight(), Direction.NORTH);
         }
 
         return modelOriginal;

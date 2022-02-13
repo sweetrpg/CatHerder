@@ -13,19 +13,19 @@ public class MeatFoodHandler implements kittytalents.api.inferface.ICatFoodHandl
     }
 
     @Override
-    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
+    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
         return this.isFood(stackIn);
     }
 
     @Override
-    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
+    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
 
-        if (dogIn.getDogHunger() < dogIn.getMaxHunger()) {
-            if (!dogIn.level.isClientSide) {
+        if (catIn.getCatHunger() < catIn.getMaxHunger()) {
+            if (!catIn.level.isClientSide) {
                 int heal = stackIn.getItem().getFoodProperties().getNutrition() * 5;
 
-                dogIn.setDogHunger(dogIn.getDogHunger() + heal);
-                dogIn.consumeItemFromStack(entityIn, stackIn);
+                catIn.setCatHunger(catIn.getCatHunger() + heal);
+                catIn.consumeItemFromStack(entityIn, stackIn);
             }
 
             return InteractionResult.SUCCESS;

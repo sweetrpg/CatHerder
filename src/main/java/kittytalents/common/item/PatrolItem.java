@@ -56,10 +56,10 @@ public class PatrolItem extends Item implements kittytalents.api.inferface.ICatI
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
         List<BlockPos> pos = getPos(playerIn.getItemInHand(handIn));
         KittyTalents2.LOGGER.debug("{}", pos);
-        dogIn.setData(POS, pos);
+        catIn.setData(POS, pos);
         return InteractionResult.SUCCESS;
     }
 }

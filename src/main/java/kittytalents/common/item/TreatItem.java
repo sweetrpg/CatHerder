@@ -20,26 +20,26 @@ public class TreatItem extends Item implements kittytalents.api.inferface.ICatIt
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (!dogIn.isTame() || !dogIn.canInteract(playerIn)) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (!catIn.isTame() || !catIn.canInteract(playerIn)) {
             return InteractionResult.FAIL;
         }
 
-        kittytalents.api.feature.CatLevel catLevel = dogIn.getDogLevel();
+        kittytalents.api.feature.CatLevel catLevel = catIn.getCatLevel();
 
-        if (dogIn.getAge() < 0) {
+        if (catIn.getAge() < 0) {
 
             if (!worldIn.isClientSide) {
-                worldIn.broadcastEntityEvent(dogIn, Constants.EntityState.WOLF_SMOKE);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".too_young"), dogIn.getUUID());
+                worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
+                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".too_young"), catIn.getUUID());
             }
 
             return InteractionResult.CONSUME;
         } else if (!catLevel.canIncrease(this.type)) {
 
             if (!worldIn.isClientSide) {
-                worldIn.broadcastEntityEvent(dogIn, Constants.EntityState.WOLF_SMOKE);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".low_level"), dogIn.getUUID());
+                worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
+                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".low_level"), catIn.getUUID());
             }
 
             return InteractionResult.CONSUME;
@@ -51,11 +51,11 @@ public class TreatItem extends Item implements kittytalents.api.inferface.ICatIt
                     playerIn.getItemInHand(handIn).shrink(1);
                 }
 
-                dogIn.increaseLevel(this.type);
-                dogIn.setHealth(dogIn.getMaxHealth());
-                dogIn.setOrderedToSit(true);
-                worldIn.broadcastEntityEvent(dogIn, Constants.EntityState.WOLF_HEARTS);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".level_up"), dogIn.getUUID());
+                catIn.increaseLevel(this.type);
+                catIn.setHealth(catIn.getMaxHealth());
+                catIn.setOrderedToSit(true);
+                worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_HEARTS);
+                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".level_up"), catIn.getUUID());
             }
 
             return InteractionResult.SUCCESS;
@@ -63,8 +63,8 @@ public class TreatItem extends Item implements kittytalents.api.inferface.ICatIt
         else {
 
             if (!worldIn.isClientSide) {
-                worldIn.broadcastEntityEvent(dogIn, Constants.EntityState.WOLF_SMOKE);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".max_level"), dogIn.getUUID());
+                worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
+                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".max_level"), catIn.getUUID());
             }
 
             return InteractionResult.CONSUME;

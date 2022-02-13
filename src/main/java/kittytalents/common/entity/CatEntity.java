@@ -14,9 +14,12 @@ import kittytalents.common.entity.ai.MoveToBlockGoal;
 import kittytalents.common.entity.ai.*;
 import kittytalents.common.entity.serializers.DimensionDependantArg;
 import kittytalents.common.entity.stats.StatsTracker;
-import kittytalents.common.storage.DogLocationStorage;
-import kittytalents.common.storage.DogRespawnStorage;
-import kittytalents.common.util.*;
+import kittytalents.common.storage.CatLocationStorage;
+import kittytalents.common.storage.CatRespawnStorage;
+import kittytalents.common.util.Cache;
+import kittytalents.common.util.NBTUtil;
+import kittytalents.common.util.Util;
+import kittytalents.common.util.WorldUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -54,7 +57,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
@@ -89,7 +92,7 @@ import java.util.stream.Collectors;
 public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     private static final EntityDataAccessor<Optional<Component>> LAST_KNOWN_NAME = SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, EntityDataSerializers.OPTIONAL_COMPONENT);
-    private static final EntityDataAccessor<Byte> DOG_FLAGS = SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Byte> CAT_FLAGS = SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, EntityDataSerializers.BYTE);
 
     private static final EntityDataAccessor<Float> HUNGER_INT = SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<String> CUSTOM_SKIN = SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, EntityDataSerializers.STRING);
@@ -98,22 +101,22 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     private static final EntityDataAccessor<ItemStack> BONE_VARIANT = SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, EntityDataSerializers.ITEM_STACK);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
-    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES =  Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> (EntityDataAccessor<List<TalentInstance>>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.TALENT_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DogLevel>> DOG_LEVEL = Cache.make(() -> (EntityDataAccessor<DogLevel>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.DOG_LEVEL_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class,  KittySerializers.GENDER_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.GENDER_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.MODE_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.BED_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> DOG_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(kittytalents.common.entity.CatEntity.class, KittySerializers.BED_LOC_SERIALIZER.get().getSerializer()));
 
     public static final void initDataParameters() {
         ACCESSORIES.get();
         TALENTS.get();
-        DOG_LEVEL.get();
+        CAT_LEVEL.get();
         GENDER.get();
         MODE.get();
         CAT_BED_LOCATION.get();
-        DOG_BOWL_LOCATION.get();
+        CAT_BOWL_LOCATION.get();
     }
 
     // Cached values
@@ -133,8 +136,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     private float headRotationCourseOld;
     private WetSource wetSource;
     private boolean isShaking;
-    private float timeWolfIsShaking;
-    private float prevTimeWolfIsShaking;
+    private float timeCatIsShaking;
+    private float prevTimeCatIsShaking;
 
     protected boolean dogJumping;
     protected float jumpPower;
@@ -153,16 +156,16 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         this.entityData.define(ACCESSORIES.get(), new ArrayList<>(4));
         this.entityData.define(TALENTS.get(), new ArrayList<>(4));
         this.entityData.define(LAST_KNOWN_NAME, Optional.empty());
-        this.entityData.define(DOG_FLAGS, (byte) 0);
+        this.entityData.define(CAT_FLAGS, (byte) 0);
         this.entityData.define(GENDER.get(), EnumGender.UNISEX);
         this.entityData.define(MODE.get(), EnumMode.DOCILE);
         this.entityData.define(HUNGER_INT, 60F);
         this.entityData.define(CUSTOM_SKIN, "");
-        this.entityData.define(DOG_LEVEL.get(), new DogLevel(0, 0));
+        this.entityData.define(CAT_LEVEL.get(), new CatLevel(0, 0));
         this.entityData.define(SIZE, (byte) 3);
         this.entityData.define(BONE_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_BED_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
-        this.entityData.define(DOG_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
     }
 
     @Override
@@ -175,12 +178,12 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new MoveToBlockGoal(this));
-        this.goalSelector.addGoal(5, new DogWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.0D, 32.0F));
-        this.goalSelector.addGoal(6, new DogFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(9, new DogBegGoal(this, 8.0F));
+        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
@@ -195,26 +198,26 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.WOLF_STEP, 0.15F, 1.0F);
+        // this.playSound(SoundEvents.CATWOLF_STEP, 0.15F, 1.0F);
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        if (this.random.nextInt(3) == 0) {
-            return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.WOLF_WHINE : SoundEvents.WOLF_PANT;
-        } else {
-            return SoundEvents.WOLF_AMBIENT;
-        }
+//        if (this.random.nextInt(3) == 0) {
+//            return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.WOLF_WHINE : SoundEvents.WOLF_PANT;
+//        } else {
+        return SoundEvents.CAT_AMBIENT;
+//        }
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.WOLF_HURT;
+        return SoundEvents.CAT_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.WOLF_DEATH;
+        return SoundEvents.CAT_DEATH;
     }
 
     @Override
@@ -228,41 +231,44 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @OnlyIn(Dist.CLIENT)
     public float getShadingWhileWet(float partialTicks) {
-        return Math.min(0.5F + Mth.lerp(partialTicks, this.prevTimeWolfIsShaking, this.timeWolfIsShaking) / 2.0F * 0.5F, 1.0F);
+        return Math.min(0.5F + Mth.lerp(partialTicks, this.prevTimeCatIsShaking, this.timeCatIsShaking) / 2.0F * 0.5F, 1.0F);
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public float getShakeAngle(float partialTicks, float offset) {
-        float f = (Mth.lerp(partialTicks, this.prevTimeWolfIsShaking, this.timeWolfIsShaking) + offset) / 1.8F;
-        if (f < 0.0F) {
+        float f = (Mth.lerp(partialTicks, this.prevTimeCatIsShaking, this.timeCatIsShaking) + offset) / 1.8F;
+        if(f < 0.0F) {
             f = 0.0F;
-        } else if (f > 1.0F) {
+        }
+        else if(f > 1.0F) {
             f = 1.0F;
         }
 
-        return Mth.sin(f * (float)Math.PI) * Mth.sin(f * (float)Math.PI * 11.0F) * 0.15F * (float)Math.PI;
+        return Mth.sin(f * (float) Math.PI) * Mth.sin(f * (float) Math.PI * 11.0F) * 0.15F * (float) Math.PI;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public float getInterestedAngle(float partialTicks) {
-        return Mth.lerp(partialTicks, this.headRotationCourseOld, this.headRotationCourse) * 0.15F * (float)Math.PI;
+        return Mth.lerp(partialTicks, this.headRotationCourseOld, this.headRotationCourse) * 0.15F * (float) Math.PI;
     }
 
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == kittytalents.common.lib.Constants.EntityState.WOLF_START_SHAKING) {
+        if(id == kittytalents.common.lib.Constants.EntityState.CAT_START_SHAKING) {
             this.startShaking();
-        } else if (id == kittytalents.common.lib.Constants.EntityState.WOLF_INTERUPT_SHAKING) {
+        }
+        else if(id == kittytalents.common.lib.Constants.EntityState.CAT_INTERUPT_SHAKING) {
             this.finishShaking();
-        } else {
+        }
+        else {
             super.handleEntityEvent(id);
         }
     }
 
     public float getTailRotation() {
-        return this.isTame() ? (0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F);
+        return this.isTame() ? (0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * (float) Math.PI : ((float) Math.PI / 5F);
     }
 
     @Override
@@ -294,11 +300,12 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public void tick() {
         super.tick();
 
-        if (this.isAlive()) {
+        if(this.isAlive()) {
             this.headRotationCourseOld = this.headRotationCourse;
-            if (this.isBegging()) {
+            if(this.isBegging()) {
                 this.headRotationCourse += (1.0F - this.headRotationCourse) * 0.4F;
-            } else {
+            }
+            else {
                 this.headRotationCourse += (0.0F - this.headRotationCourse) * 0.4F;
             }
 
@@ -307,26 +314,27 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
             boolean inRain = inWater ? false : this.isInWaterOrRain();
             boolean inBubbleColumn = this.isInBubbleColumn();
 
-            if (inWater || inRain || inBubbleColumn) {
-                if (this.wetSource == null) {
+            if(inWater || inRain || inBubbleColumn) {
+                if(this.wetSource == null) {
                     this.wetSource = WetSource.of(inWater, inBubbleColumn, inRain);
                 }
-                if (this.isShaking && !this.level.isClientSide) {
+                if(this.isShaking && !this.level.isClientSide) {
                     this.finishShaking();
-                    this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.WOLF_INTERUPT_SHAKING);
+                    this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.CAT_INTERUPT_SHAKING);
                 }
-            } else if ((this.wetSource != null || this.isShaking) && this.isShaking) {
-                if (this.timeWolfIsShaking == 0.0F) {
-                    this.playSound(SoundEvents.WOLF_SHAKE, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+            }
+            else if((this.wetSource != null || this.isShaking) && this.isShaking) {
+                if(this.timeCatIsShaking == 0.0F) {
+//                    this.playSound(SoundEvents.WOLF_SHAKE, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 }
 
-                this.prevTimeWolfIsShaking = this.timeWolfIsShaking;
-                this.timeWolfIsShaking += 0.05F;
-                if (this.prevTimeWolfIsShaking >= 2.0F) {
+                this.prevTimeCatIsShaking = this.timeCatIsShaking;
+                this.timeCatIsShaking += 0.05F;
+                if(this.prevTimeCatIsShaking >= 2.0F) {
 
                     //TODO check if only called server side
-                    if (this.wetSource != null) {
-                        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+                    if(this.wetSource != null) {
+                        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
                             alter.onShakingDry(this, this.wetSource);
                         }
                     }
@@ -335,12 +343,12 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
                     this.finishShaking();
                 }
 
-                if (this.timeWolfIsShaking > 0.4F) {
-                    float f = (float)this.getY();
-                    int i = (int)(Mth.sin((this.timeWolfIsShaking - 0.4F) * (float)Math.PI) * 7.0F);
+                if(this.timeCatIsShaking > 0.4F) {
+                    float f = (float) this.getY();
+                    int i = (int) (Mth.sin((this.timeCatIsShaking - 0.4F) * (float) Math.PI) * 7.0F);
                     Vec3 vec3d = this.getDeltaMovement();
 
-                    for (int j = 0; j < i; ++j) {
+                    for(int j = 0; j < i; ++j) {
                         float f1 = (this.random.nextFloat() * 2.0F - 1.0F) * this.getBbWidth() * 0.5F;
                         float f2 = (this.random.nextFloat() * 2.0F - 1.0F) * this.getBbWidth() * 0.5F;
                         this.level.addParticle(ParticleTypes.SPLASH, this.getX() + f1, f + 0.8F, this.getZ() + f2, vec3d.x, vec3d.y, vec3d.z);
@@ -349,13 +357,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
             }
 
             // On server side
-            if (!this.level.isClientSide) {
+            if(!this.level.isClientSide) {
 
                 // Every 2 seconds
-                if (this.tickCount % 40 == 0) {
-                    DogLocationStorage.get(this.level).getOrCreateData(this).update(this);
+                if(this.tickCount % 40 == 0) {
+                    CatLocationStorage.get(this.level).getOrCreateData(this).update(this);
 
-                    if (this.getOwner() != null) {
+                    if(this.getOwner() != null) {
                         this.setOwnersName(this.getOwner().getName());
                     }
                 }
@@ -368,29 +376,29 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide && this.wetSource != null && !this.isShaking && !this.isPathFinding() && this.isOnGround()) {
+        if(!this.level.isClientSide && this.wetSource != null && !this.isShaking && !this.isPathFinding() && this.isOnGround()) {
             this.startShaking();
-            this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.WOLF_START_SHAKING);
+            this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.CAT_START_SHAKING);
         }
 
-        if (!this.level.isClientSide) {
-            if (!ConfigHandler.SERVER.DISABLE_HUNGER.get()) {
+        if(!this.level.isClientSide) {
+            if(!ConfigHandler.SERVER.DISABLE_HUNGER.get()) {
                 this.prevHungerTick = this.hungerTick;
 
-                if (!this.isVehicle() && !this.isInSittingPose()) {
+                if(!this.isVehicle() && !this.isInSittingPose()) {
                     this.hungerTick += 1;
                 }
 
-                for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+                for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
                     InteractionResultHolder<Integer> result = alter.hungerTick(this, this.hungerTick - this.prevHungerTick);
 
-                    if (result.getResult().shouldSwing()) {
+                    if(result.getResult().shouldSwing()) {
                         this.hungerTick = result.getObject() + this.prevHungerTick;
                     }
                 }
 
-                if (this.hungerTick > 400) {
-                    this.setDogHunger(this.getDogHunger() - 1);
+                if(this.hungerTick > 400) {
+                    this.setCatHunger(this.getCatHunger() - 1);
                     this.hungerTick -= 400;
                 }
             }
@@ -398,20 +406,20 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
             this.prevHealingTick = this.healingTick;
             this.healingTick += 8;
 
-            if (this.isInSittingPose()) {
+            if(this.isInSittingPose()) {
                 this.healingTick += 4;
             }
 
-            for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+            for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
                 InteractionResultHolder<Integer> result = alter.healingTick(this, this.healingTick - this.prevHealingTick);
 
-                if (result.getResult().shouldSwing()) {
+                if(result.getResult().shouldSwing()) {
                     this.healingTick = result.getObject() + this.prevHealingTick;
                 }
             }
 
-            if (this.healingTick >= 6000) {
-                if (this.getHealth() < this.getMaxHealth()) {
+            if(this.healingTick >= 6000) {
+                if(this.getHealth() < this.getMaxHealth()) {
                     this.heal(1);
                 }
 
@@ -419,20 +427,20 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
             }
         }
 
-        if (ConfigHandler.CLIENT.DIRE_PARTICLES.get() && this.level.isClientSide && this.getDogLevel().isDireDog()) {
-            for (int i = 0; i < 2; i++) {
+        if(ConfigHandler.CLIENT.DIRE_PARTICLES.get() && this.level.isClientSide && this.getCatLevel().isDireDog()) {
+            for(int i = 0; i < 2; i++) {
                 this.level.addParticle(ParticleTypes.PORTAL, this.getRandomX(0.5D), this.getRandomY() - 0.25D, this.getRandomZ(0.5D), (this.random.nextDouble() - 0.5D) * 2D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2D);
             }
         }
 
         // Check if cat bowl still exists every 50t/2.5s, if not remove
-        if (this.tickCount % 50 == 0) {
+        if(this.tickCount % 50 == 0) {
             ResourceKey<Level> dimKey = this.level.dimension();
             Optional<BlockPos> bowlPos = this.getBowlPos(dimKey);
 
             // If the cat has a food bowl in this dimension then check if it is still there
             // Only check if the chunk it is in is loaded
-            if (bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(KittyBlocks.FOOD_BOWL.get())) {
+            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(KittyBlocks.FOOD_BOWL.get())) {
                 this.setBowlPos(dimKey, Optional.empty());
             }
         }
@@ -445,30 +453,32 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
         ItemStack stack = player.getItemInHand(hand);
 
-        if (this.isTame()) {
-            if (stack.getItem() == Items.STICK && this.canInteract(player)) {
+        if(this.isTame()) {
+            if(stack.getItem() == Items.STICK && this.canInteract(player)) {
 
-                if (this.level.isClientSide) {
+                if(this.level.isClientSide) {
                     kittytalents.client.screen.CatInfoScreen.open(this);
                 }
 
                 return InteractionResult.SUCCESS;
             }
-        } else { // Not tamed
-            if (stack.getItem() == Items.BONE || stack.getItem() == KittyItems.TRAINING_TREAT.get()) {
+        }
+        else { // Not tamed
+            if(stack.getItem() == Items.BONE || stack.getItem() == KittyItems.TRAINING_TREAT.get()) {
 
-                if (!this.level.isClientSide) {
+                if(!this.level.isClientSide) {
                     this.usePlayerItem(player, hand, stack);
 
-                    if (stack.getItem() == KittyItems.TRAINING_TREAT.get() || this.random.nextInt(3) == 0) {
+                    if(stack.getItem() == KittyItems.TRAINING_TREAT.get() || this.random.nextInt(3) == 0) {
                         this.tame(player);
                         this.navigation.stop();
                         this.setTarget((LivingEntity) null);
                         this.setOrderedToSit(true);
                         this.setHealth(20.0F);
-                        this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.WOLF_HEARTS);
-                    } else {
-                        this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.WOLF_SMOKE);
+                        this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.CAT_HEARTS);
+                    }
+                    else {
+                        this.level.broadcastEntityEvent(this, kittytalents.common.lib.Constants.EntityState.CAT_SMOKE);
                     }
                 }
 
@@ -478,25 +488,25 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
         Optional<kittytalents.api.inferface.ICatFoodHandler> foodHandler = FoodHandler.getMatch(this, stack, player);
 
-        if (foodHandler.isPresent()) {
+        if(foodHandler.isPresent()) {
             return foodHandler.get().consume(this, stack, player);
         }
 
         InteractionResult interactResult = InteractHandler.getMatch(this, stack, player, hand);
 
-        if (interactResult != InteractionResult.PASS) {
+        if(interactResult != InteractionResult.PASS) {
             return interactResult;
         }
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.processInteract(this, this.level, player, hand);
-            if (result != InteractionResult.PASS) {
+            if(result != InteractionResult.PASS) {
                 return result;
             }
         }
 
         InteractionResult actionresulttype = super.mobInteract(player, hand);
-        if ((!actionresulttype.consumesAction() || this.isBaby()) && this.canInteract(player)) {
+        if((!actionresulttype.consumesAction() || this.isBaby()) && this.canInteract(player)) {
             this.setOrderedToSit(!this.isOrderedToSit());
             this.jumping = false;
             this.navigation.stop();
@@ -509,12 +519,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canBeRiddenInWater(Entity rider) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canBeRiddenInWater(this, rider);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -524,12 +535,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canTrample(BlockState state, BlockPos pos, float fallDistance) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canTrample(this, state, pos, fallDistance);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -539,38 +551,42 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource source) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.onLivingFall(this, distance, damageMultiplier); // TODO pass source
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
 
         // Start: Logic copied from the super call and altered to apply the reduced fall damage to passengers too. #358
         float[] ret = net.minecraftforge.common.ForgeHooks.onLivingFall(this, distance, damageMultiplier);
-        if (ret == null) return false;
+        if(ret == null) {
+            return false;
+        }
         distance = ret[0];
         damageMultiplier = ret[1];
 
         int i = this.calculateFallDamage(distance, damageMultiplier);
 
-        if (i > 0) {
-            if (this.isVehicle()) {
+        if(i > 0) {
+            if(this.isVehicle()) {
                 for(Entity e : this.getPassengers()) {
-                   e.hurt(DamageSource.FALL, i);
+                    e.hurt(DamageSource.FALL, i);
                 }
             }
 
             // Sound selection is copied from Entity#getFallDamageSound()
-           this.playSound(i > 4 ? this.getFallSounds().big() : this.getFallSounds().small(), 1.0F, 1.0F);
-           this.playBlockFallSound();
-           this.hurt(DamageSource.FALL, (float)i);
-           return true;
-        } else {
-           return false;
+            this.playSound(i > 4 ? this.getFallSounds().big() : this.getFallSounds().small(), 1.0F, 1.0F);
+            this.playBlockFallSound();
+            this.hurt(DamageSource.FALL, (float) i);
+            return true;
+        }
+        else {
+            return false;
         }
         // End: Logic copied from the super call and altered to apply the reduced fall damage to passengers too. #358
     }
@@ -587,10 +603,10 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         float f = effectInst == null ? 0.0F : effectInst.getAmplifier() + 1;
         distance -= f;
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResultHolder<Float> result = alter.calculateFallDistance(this, distance);
 
-            if (result.getResult().shouldSwing()) {
+            if(result.getResult().shouldSwing()) {
                 distance = result.getObject();
                 break;
             }
@@ -601,12 +617,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canBreatheUnderwater() {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canBreatheUnderwater(this);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -616,10 +633,10 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     protected int decreaseAirSupply(int air) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResultHolder<Integer> result = alter.decreaseAirSupply(this, air);
 
-            if (result.getResult().shouldSwing()) {
+            if(result.getResult().shouldSwing()) {
                 return result.getObject();
             }
         }
@@ -630,10 +647,10 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     @Override
     protected int increaseAirSupply(int currentAir) {
         currentAir += 4;
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResultHolder<Integer> result = alter.determineNextAir(this, currentAir);
 
-            if (result.getResult().shouldSwing()) {
+            if(result.getResult().shouldSwing()) {
                 currentAir = result.getObject();
                 break;
             }
@@ -644,23 +661,24 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canAttack(LivingEntity target) {
-        if (this.isMode(EnumMode.DOCILE)) {
+        if(this.isMode(EnumMode.DOCILE)) {
             return false;
         }
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canAttack(this, target);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
 
         // Stop dogs being able to attack creepers. If the cat has lvl 5 creeper
         // sweeper then we will return true in the for loop above.
-        if (target instanceof Creeper) {
+        if(target instanceof Creeper) {
             return false;
         }
 
@@ -669,23 +687,24 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canAttackType(EntityType<?> entityType) {
-        if (this.isMode(EnumMode.DOCILE)) {
+        if(this.isMode(EnumMode.DOCILE)) {
             return false;
         }
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canAttack(this, entityType);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
 
         // Stop dogs being able to attack creepers. If the cat has lvl 5 creeper
         // sweeper then we will return true in the for loop above.
-        if (entityType == EntityType.CREEPER) {
+        if(entityType == EntityType.CREEPER) {
             return false;
         }
 
@@ -694,39 +713,44 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean wantsToAttack(LivingEntity target, LivingEntity owner) {
-        if (this.isMode(EnumMode.DOCILE)) {
+        if(this.isMode(EnumMode.DOCILE)) {
             return false;
         }
 
         //TODO make wolves not able to attack dogs
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.shouldAttackEntity(this, target, owner);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
 
         // Stop dogs being able to attack creepers. If the cat has lvl 5 creeper
         // sweeper then we will return true in the for loop above.
-        if (target instanceof Creeper || target instanceof Ghast) {
+        if(target instanceof Creeper || target instanceof Ghast) {
             return false;
         }
 
-        if (target instanceof Wolf) {
-            Wolf wolfentity = (Wolf)target;
-            return !wolfentity.isTame() || wolfentity.getOwner() != owner;
-        } else if (target instanceof kittytalents.common.entity.CatEntity) {
-            kittytalents.common.entity.CatEntity dogEntity = (kittytalents.common.entity.CatEntity)target;
-            return !dogEntity.isTame() || dogEntity.getOwner() != owner;
-         } else if (target instanceof Player && owner instanceof Player && !((Player)owner).canHarmPlayer((Player)target)) {
-             return false;
-        } else if (target instanceof AbstractHorse && ((AbstractHorse)target).isTamed()) {
+        if(target instanceof Cat) {
+            Cat catEntity = (Cat) target;
+            return !catEntity.isTame() || catEntity.getOwner() != owner;
+        }
+        else if(target instanceof kittytalents.common.entity.CatEntity) {
+            kittytalents.common.entity.CatEntity catEntity = (kittytalents.common.entity.CatEntity) target;
+            return !catEntity.isTame() || catEntity.getOwner() != owner;
+        }
+        else if(target instanceof Player && owner instanceof Player && !((Player) owner).canHarmPlayer((Player) target)) {
             return false;
-        } else {
-            return !(target instanceof TamableAnimal) || !((TamableAnimal)target).isTame();
+        }
+        else if(target instanceof AbstractHorse && ((AbstractHorse) target).isTamed()) {
+            return false;
+        }
+        else {
+            return !(target instanceof TamableAnimal) || !((TamableAnimal) target).isTame();
         }
     }
 
@@ -738,30 +762,32 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResultHolder<Float> result = alter.attackEntityFrom(this, source, amount);
 
             // TODO
-            if (result.getResult() == InteractionResult.FAIL) {
+            if(result.getResult() == InteractionResult.FAIL) {
                 return false;
-            } else {
+            }
+            else {
                 amount = result.getObject();
             }
         }
 
-        if (this.isInvulnerableTo(source)) {
+        if(this.isInvulnerableTo(source)) {
             return false;
-        } else {
+        }
+        else {
             Entity entity = source.getEntity();
             // Must be checked here too as hitByEntity only applies to when the cat is
             // directly hit not indirect damage like sweeping effect etc
-            if (entity instanceof Player && !this.canPlayersAttack()) {
+            if(entity instanceof Player && !this.canPlayersAttack()) {
                 return false;
             }
 
             this.setOrderedToSit(false);
 
-            if (entity != null && !(entity instanceof Player) && !(entity instanceof AbstractArrow)) {
+            if(entity != null && !(entity instanceof Player) && !(entity instanceof AbstractArrow)) {
                 amount = (amount + 1.0F) / 2.0F;
             }
 
@@ -771,12 +797,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean doHurtTarget(Entity target) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.attackEntityAsMob(this, target);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -785,22 +812,22 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
         Set<AttributeModifier> critModifiers = null;
 
-        if (this.getAttribute(KittyAttributes.CRIT_CHANCE.get()).getValue() > this.getRandom().nextDouble()) {
+        if(this.getAttribute(KittyAttributes.CRIT_CHANCE.get()).getValue() > this.getRandom().nextDouble()) {
             critModifiers = this.getAttribute(KittyAttributes.CRIT_BONUS.get()).getModifiers();
             critModifiers.forEach(attackDamageInst::addTransientModifier);
         }
 
         int damage = ((int) attackDamageInst.getValue());
-        if (critModifiers != null) {
+        if(critModifiers != null) {
             critModifiers.forEach(attackDamageInst::removeModifier);
         }
 
         boolean flag = target.hurt(DamageSource.mobAttack(this), damage);
-        if (flag) {
+        if(flag) {
             this.doEnchantDamageEffects(this, target);
             this.statsTracker.increaseDamageDealt(damage);
 
-            if (critModifiers != null) {
+            if(critModifiers != null) {
                 // TODO Might want to make into a packet
                 DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> Minecraft.getInstance().particleEngine.createTrackingEmitter(target, ParticleTypes.CRIT));
             }
@@ -817,12 +844,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean isDamageSourceBlocked(DamageSource source) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canBlockDamageSource(this, source);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -832,10 +860,10 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public void setSecondsOnFire(int second) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResultHolder<Integer> result = alter.setFire(this, second);
 
-            if (result.getResult().shouldSwing()) {
+            if(result.getResult().shouldSwing()) {
                 second = result.getObject();
             }
         }
@@ -845,12 +873,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean fireImmune() {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.isImmuneToFire(this);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -860,12 +889,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.isInvulnerableTo(this, source);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -875,12 +905,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean isInvulnerable() {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.isInvulnerable(this);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -890,12 +921,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canBeAffected(MobEffectInstance effectIn) {
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.isPotionApplicable(this, effectIn);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -914,15 +946,15 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         // If the UUID is changed remove old one and add new one
         UUID oldUniqueId = this.getUUID();
 
-        if (uniqueIdIn.equals(oldUniqueId)) {
+        if(uniqueIdIn.equals(oldUniqueId)) {
             return; // No change do nothing
         }
 
         super.setUUID(uniqueIdIn);
 
-        if (this.level != null && !this.level.isClientSide) {
-            DogLocationStorage.get(this.level).remove(oldUniqueId);
-            DogLocationStorage.get(this.level).getOrCreateData(this).update(this);
+        if(this.level != null && !this.level.isClientSide) {
+            CatLocationStorage.get(this.level).remove(oldUniqueId);
+            CatLocationStorage.get(this.level).getOrCreateData(this).update(this);
         }
     }
 
@@ -936,37 +968,39 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     @Override
     public void setTame(boolean tamed) {
         super.setTame(tamed);
-        if (tamed) {
-           this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
-           this.setHealth(20.0F);
-        } else {
-           this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(8.0D);
+        if(tamed) {
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20.0D);
+            this.setHealth(20.0F);
+        }
+        else {
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(8.0D);
         }
 
         this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-     }
+    }
 
     @Override
     public void setOwnerUUID(@Nullable UUID uuid) {
         super.setOwnerUUID(uuid);
 
-        if (uuid == null) {
+        if(uuid == null) {
             this.setOwnersName((Component) null);
         }
     }
 
     @Override // blockAttackFromPlayer
     public boolean skipAttackInteraction(Entity entityIn) {
-        if (entityIn instanceof Player && !this.canPlayersAttack()) {
+        if(entityIn instanceof Player && !this.canPlayersAttack()) {
             return true;
         }
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.hitByEntity(this, entityIn);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
-            } else if (result == InteractionResult.FAIL) {
+            }
+            else if(result == InteractionResult.FAIL) {
                 return false;
             }
         }
@@ -986,21 +1020,27 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public boolean canMate(Animal otherAnimal) {
-        if (otherAnimal == this) {
+        if(otherAnimal == this) {
             return false;
-        } else if (!this.isTame()) {
+        }
+        else if(!this.isTame()) {
             return false;
-        } else if (!(otherAnimal instanceof kittytalents.common.entity.CatEntity)) {
+        }
+        else if(!(otherAnimal instanceof kittytalents.common.entity.CatEntity)) {
             return false;
-        } else {
+        }
+        else {
             kittytalents.common.entity.CatEntity entitydog = (kittytalents.common.entity.CatEntity) otherAnimal;
-            if (!entitydog.isTame()) {
+            if(!entitydog.isTame()) {
                 return false;
-            } else if (entitydog.isInSittingPose()) {
+            }
+            else if(entitydog.isInSittingPose()) {
                 return false;
-            } else if (ConfigHandler.SERVER.DOG_GENDER.get() && !this.getGender().canMateWith(entitydog.getGender())) {
+            }
+            else if(ConfigHandler.SERVER.DOG_GENDER.get() && !this.getGender().canMateWith(entitydog.getGender())) {
                 return false;
-            } else {
+            }
+            else {
                 return this.isInLove() && entitydog.isInLove();
             }
         }
@@ -1011,13 +1051,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         kittytalents.common.entity.CatEntity child = KittyEntityTypes.CAT.get().create(worldIn);
         UUID uuid = this.getOwnerUUID();
 
-        if (uuid != null) {
+        if(uuid != null) {
             child.setOwnerUUID(uuid);
             child.setTame(true);
         }
 
-        if (partner instanceof kittytalents.common.entity.CatEntity && ConfigHandler.SERVER.PUPS_GET_PARENT_LEVELS.get()) {
-            child.setLevel(this.getDogLevel().combine(((kittytalents.common.entity.CatEntity) partner).getDogLevel()));
+        if(partner instanceof kittytalents.common.entity.CatEntity && ConfigHandler.SERVER.PUPS_GET_PARENT_LEVELS.get()) {
+            child.setLevel(this.getCatLevel().combine(((kittytalents.common.entity.CatEntity) partner).getCatLevel()));
         }
 
         return child;
@@ -1030,10 +1070,11 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public float getScale() {
-        if (this.isBaby()) {
+        if(this.isBaby()) {
             return 0.5F;
-        } else {
-            return this.getDogSize() * 0.3F + 0.1F;
+        }
+        else {
+            return this.getCatSize() * 0.3F + 0.1F;
         }
     }
 
@@ -1047,14 +1088,14 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         // Since this.alterations will be empty anyway as we have not read
         // NBT data at this point just avoid silent error
         // KittyTalents#295, KittyTalents#296
-        if (this.alterations == null) {
+        if(this.alterations == null) {
             return super.getCapability(cap, side);
         }
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             LazyOptional<T> result = alter.getCapability(this, cap, side);
 
-            if (result != null) {
+            if(result != null) {
                 return result;
             }
         }
@@ -1065,8 +1106,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     @Override
     public Entity changeDimension(ServerLevel worldIn, ITeleporter teleporter) {
         Entity transportedEntity = super.changeDimension(worldIn, teleporter);
-        if (transportedEntity instanceof kittytalents.common.entity.CatEntity) {
-            DogLocationStorage.get(this.level).getOrCreateData(this).update((kittytalents.common.entity.CatEntity) transportedEntity);
+        if(transportedEntity instanceof kittytalents.common.entity.CatEntity) {
+            CatLocationStorage.get(this.level).getOrCreateData(this).update((kittytalents.common.entity.CatEntity) transportedEntity);
         }
         return transportedEntity;
     }
@@ -1075,18 +1116,18 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public void remove(Entity.RemovalReason removalReason) {
         super.remove(removalReason);
 
-        if (removalReason == RemovalReason.DISCARDED || removalReason == RemovalReason.KILLED) {
-            if (this.level != null && !this.level.isClientSide) {
-                DogRespawnStorage.get(this.level).putData(this);
-                DogLocationStorage.get(this.level).remove(this);
+        if(removalReason == RemovalReason.DISCARDED || removalReason == RemovalReason.KILLED) {
+            if(this.level != null && !this.level.isClientSide) {
+                CatRespawnStorage.get(this.level).putData(this);
+                CatLocationStorage.get(this.level).remove(this);
             }
         }
     }
 
     @Override
     protected void tickDeath() {
-        if (this.deathTime == 19) { // 1 second after death
-            if (this.level != null && !this.level.isClientSide) {
+        if(this.deathTime == 19) { // 1 second after death
+            if(this.level != null && !this.level.isClientSide) {
 //                DogRespawnStorage.get(this.world).putData(this);
 //                KittyTalents.LOGGER.debug("Saved cat as they died {}", this);
 //
@@ -1100,14 +1141,14 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     private void startShaking() {
         this.isShaking = true;
-        this.timeWolfIsShaking = 0.0F;
-        this.prevTimeWolfIsShaking = 0.0F;
+        this.timeCatIsShaking = 0.0F;
+        this.prevTimeCatIsShaking = 0.0F;
     }
 
     private void finishShaking() {
         this.isShaking = false;
-        this.timeWolfIsShaking = 0.0F;
-        this.prevTimeWolfIsShaking = 0.0F;
+        this.timeCatIsShaking = 0.0F;
+        this.prevTimeCatIsShaking = 0.0F;
     }
 
     @Override
@@ -1139,7 +1180,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         ListTag talentList = new ListTag();
         List<TalentInstance> talents = this.getTalentMap();
 
-        for (int i = 0; i < talents.size(); i++) {
+        for(int i = 0; i < talents.size(); i++) {
             CompoundTag talentTag = new CompoundTag();
             talents.get(i).writeInstance(this, talentTag);
             talentList.add(talentTag);
@@ -1150,7 +1191,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         ListTag accessoryList = new ListTag();
         List<AccessoryInstance> accessories = this.getAccessories();
 
-        for (int i = 0; i < accessories.size(); i++) {
+        for(int i = 0; i < accessories.size(); i++) {
             CompoundTag accessoryTag = new CompoundTag();
             accessories.get(i).writeInstance(accessoryTag);
             accessoryList.add(accessoryTag);
@@ -1159,8 +1200,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         compound.put("accessories", accessoryList);
 
         compound.putString("mode", this.getMode().getSaveName());
-        compound.putString("dogGender", this.getGender().getSaveName());
-        compound.putFloat("dogHunger", this.getDogHunger());
+        compound.putString("catGender", this.getGender().getSaveName());
+        compound.putFloat("catHunger", this.getCatHunger());
         this.getOwnersName().ifPresent((comp) -> {
             NBTUtil.putTextComponent(compound, "lastKnownOwnerName", comp);
         });
@@ -1168,17 +1209,17 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         compound.putString("customSkinHash", this.getSkinHash());
         compound.putBoolean("willObey", this.willObeyOthers());
         compound.putBoolean("friendlyFire", this.canPlayersAttack());
-        compound.putInt("dogSize", this.getDogSize());
-        compound.putInt("level_normal", this.getDogLevel().getLevel(Type.NORMAL));
-        compound.putInt("level_dire", this.getDogLevel().getLevel(Type.DIRE));
+        compound.putInt("catSize", this.getCatSize());
+        compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
+        compound.putInt("level_dire", this.getCatLevel().getLevel(Type.DIRE));
         NBTUtil.writeItemStack(compound, "fetchItem", this.getBoneVariant());
 
         DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_BED_LOCATION.get());
 
-        if (!bedsData.isEmpty()) {
+        if(!bedsData.isEmpty()) {
             ListTag bedsList = new ListTag();
 
-            for (Entry<ResourceKey<Level>, Optional<BlockPos>> entry : bedsData.entrySet()) {
+            for(Entry<ResourceKey<Level>, Optional<BlockPos>> entry : bedsData.entrySet()) {
                 CompoundTag bedNBT = new CompoundTag();
                 NBTUtil.putResourceLocation(bedNBT, "dim", entry.getKey().location());
                 NBTUtil.putBlockPos(bedNBT, "pos", entry.getValue());
@@ -1188,12 +1229,12 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
             compound.put("beds", bedsList);
         }
 
-        DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(DOG_BOWL_LOCATION.get());
+        DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get());
 
-        if (!bowlsData.isEmpty()) {
+        if(!bowlsData.isEmpty()) {
             ListTag bowlsList = new ListTag();
 
-            for (Entry<ResourceKey<Level>, Optional<BlockPos>> entry : bowlsData.entrySet()) {
+            for(Entry<ResourceKey<Level>, Optional<BlockPos>> entry : bowlsData.entrySet()) {
                 CompoundTag bowlsNBT = new CompoundTag();
                 NBTUtil.putResourceLocation(bowlsNBT, "dim", entry.getKey().location());
                 NBTUtil.putBlockPos(bowlsNBT, "pos", entry.getValue());
@@ -1213,80 +1254,112 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
         // DataFix uuid entries and attribute ids
         try {
-            if (NBTUtil.hasOldUniqueId(compound, "UUID")) {
+            if(NBTUtil.hasOldUniqueId(compound, "UUID")) {
                 UUID entityUUID = NBTUtil.getOldUniqueId(compound, "UUID");
 
                 compound.putUUID("UUID", entityUUID);
                 NBTUtil.removeOldUniqueId(compound, "UUID");
             }
 
-            if (compound.contains("OwnerUUID", Tag.TAG_STRING)) {
+            if(compound.contains("OwnerUUID", Tag.TAG_STRING)) {
                 UUID ownerUUID = UUID.fromString(compound.getString("OwnerUUID"));
 
                 compound.putUUID("Owner", ownerUUID);
                 compound.remove("OwnerUUID");
-            } else if (compound.contains("Owner", Tag.TAG_STRING)) {
+            }
+            else if(compound.contains("Owner", Tag.TAG_STRING)) {
                 UUID ownerUUID = OldUsersConverter.convertMobOwnerIfNecessary(this.getServer(), compound.getString("Owner"));
 
                 compound.putUUID("Owner", ownerUUID);
             }
 
-            if (NBTUtil.hasOldUniqueId(compound, "LoveCause")) {
+            if(NBTUtil.hasOldUniqueId(compound, "LoveCause")) {
                 UUID entityUUID = NBTUtil.getOldUniqueId(compound, "LoveCause");
 
                 compound.putUUID("LoveCause", entityUUID);
                 NBTUtil.removeOldUniqueId(compound, "LoveCause");
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to data fix UUIDs: " + e.getMessage());
         }
 
         try {
-            if (compound.contains("Attributes", Tag.TAG_LIST)) {
+            if(compound.contains("Attributes", Tag.TAG_LIST)) {
                 ListTag attributeList = compound.getList("Attributes", Tag.TAG_COMPOUND);
-                for (int i = 0; i < attributeList.size(); i++) {
+                for(int i = 0; i < attributeList.size(); i++) {
                     CompoundTag attributeData = attributeList.getCompound(i);
                     String namePrev = attributeData.getString("Name");
                     Object name = namePrev;
 
-                    switch (namePrev) {
-                    case "forge.swimSpeed": name = ForgeMod.SWIM_SPEED; break;
-                    case "forge.nameTagDistance": name = ForgeMod.NAMETAG_DISTANCE; break;
-                    case "forge.entity_gravity": name = ForgeMod.ENTITY_GRAVITY; break;
-                    case "forge.reachDistance": name = ForgeMod.REACH_DISTANCE; break;
-                    case "generic.maxHealth": name = Attributes.MAX_HEALTH; break;
-                    case "generic.knockbackResistance": name = Attributes.KNOCKBACK_RESISTANCE; break;
-                    case "generic.movementSpeed": name = Attributes.MOVEMENT_SPEED; break;
-                    case "generic.armor": name = Attributes.ARMOR; break;
-                    case "generic.armorToughness": name = Attributes.ARMOR_TOUGHNESS; break;
-                    case "generic.followRange": name = Attributes.FOLLOW_RANGE; break;
-                    case "generic.attackKnockback": name = Attributes.ATTACK_KNOCKBACK; break;
-                    case "generic.attackDamage": name = Attributes.ATTACK_DAMAGE; break;
-                    case "generic.jumpStrength": name = KittyAttributes.JUMP_POWER; break;
-                    case "generic.critChance": name = KittyAttributes.CRIT_CHANCE; break;
-                    case "generic.critBonus": name = KittyAttributes.CRIT_BONUS; break;
+                    switch(namePrev) {
+                        case "forge.swimSpeed":
+                            name = ForgeMod.SWIM_SPEED;
+                            break;
+                        case "forge.nameTagDistance":
+                            name = ForgeMod.NAMETAG_DISTANCE;
+                            break;
+                        case "forge.entity_gravity":
+                            name = ForgeMod.ENTITY_GRAVITY;
+                            break;
+                        case "forge.reachDistance":
+                            name = ForgeMod.REACH_DISTANCE;
+                            break;
+                        case "generic.maxHealth":
+                            name = Attributes.MAX_HEALTH;
+                            break;
+                        case "generic.knockbackResistance":
+                            name = Attributes.KNOCKBACK_RESISTANCE;
+                            break;
+                        case "generic.movementSpeed":
+                            name = Attributes.MOVEMENT_SPEED;
+                            break;
+                        case "generic.armor":
+                            name = Attributes.ARMOR;
+                            break;
+                        case "generic.armorToughness":
+                            name = Attributes.ARMOR_TOUGHNESS;
+                            break;
+                        case "generic.followRange":
+                            name = Attributes.FOLLOW_RANGE;
+                            break;
+                        case "generic.attackKnockback":
+                            name = Attributes.ATTACK_KNOCKBACK;
+                            break;
+                        case "generic.attackDamage":
+                            name = Attributes.ATTACK_DAMAGE;
+                            break;
+                        case "generic.jumpStrength":
+                            name = KittyAttributes.JUMP_POWER;
+                            break;
+                        case "generic.critChance":
+                            name = KittyAttributes.CRIT_CHANCE;
+                            break;
+                        case "generic.critBonus":
+                            name = KittyAttributes.CRIT_BONUS;
+                            break;
                     }
 
                     ResourceLocation attributeRL = Util.getRegistryId(name);
 
-                    if (attributeRL != null && ForgeRegistries.ATTRIBUTES.containsKey(attributeRL)) {
+                    if(attributeRL != null && ForgeRegistries.ATTRIBUTES.containsKey(attributeRL)) {
                         attributeData.putString("Name", attributeRL.toString());
                         ListTag modifierList = attributeData.getList("Modifiers", Tag.TAG_COMPOUND);
-                        for (int j = 0; j < modifierList.size(); j++) {
+                        for(int j = 0; j < modifierList.size(); j++) {
                             CompoundTag modifierData = modifierList.getCompound(j);
-                            if (NBTUtil.hasOldUniqueId(modifierData, "UUID")) {
+                            if(NBTUtil.hasOldUniqueId(modifierData, "UUID")) {
                                 UUID entityUUID = NBTUtil.getOldUniqueId(modifierData, "UUID");
 
                                 modifierData.putUUID("UUID", entityUUID);
                                 NBTUtil.removeOldUniqueId(modifierData, "UUID");
                             }
                         }
-                    } else {
+                    }
+                    else {
                         KittyTalents2.LOGGER.warn("Failed to data fix '" + namePrev + "'");
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to data fix attribute IDs: " + e.getMessage());
         }
 
@@ -1300,34 +1373,36 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         List<TalentInstance> talentMap = this.getTalentMap();
         talentMap.clear();
 
-        if (compound.contains("talents", Tag.TAG_LIST)) {
+        if(compound.contains("talents", Tag.TAG_LIST)) {
             ListTag talentList = compound.getList("talents", Tag.TAG_COMPOUND);
 
-            for (int i = 0; i < talentList.size(); i++) {
+            for(int i = 0; i < talentList.size(); i++) {
                 // Add directly so that nothing is lost, if number allowed on changes
                 TalentInstance.readInstance(this, talentList.getCompound(i)).ifPresent(talentMap::add);
             }
-        } else {
-            // Try to read old talent format if new one doesn't exist
-            BackwardsComp.readTalentMapping(compound, talentMap);
         }
+//        else {
+//            // Try to read old talent format if new one doesn't exist
+//            BackwardsComp.readTalentMapping(compound, talentMap);
+//        }
 
         this.markDataParameterDirty(TALENTS.get(), false); // Mark dirty so data is synced to client
 
         List<AccessoryInstance> accessories = this.getAccessories();
         accessories.clear();
 
-        if (compound.contains("accessories", Tag.TAG_LIST)) {
+        if(compound.contains("accessories", Tag.TAG_LIST)) {
             ListTag accessoryList = compound.getList("accessories", Tag.TAG_COMPOUND);
 
-            for (int i = 0; i < accessoryList.size(); i++) {
+            for(int i = 0; i < accessoryList.size(); i++) {
                 // Add directly so that nothing is lost, if number allowed on changes
                 AccessoryInstance.readInstance(accessoryList.getCompound(i)).ifPresent(accessories::add);
             }
-        } else {
-            // Try to read old accessories from their individual format
-            BackwardsComp.readAccessories(compound, accessories);
         }
+//        else {
+//            // Try to read old accessories from their individual format
+//            BackwardsComp.readAccessories(compound, accessories);
+//        }
 
         this.markDataParameterDirty(ACCESSORIES.get(), false); // Mark dirty so data is synced to client
 
@@ -1336,59 +1411,62 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         this.spendablePoints.markForRefresh();
 
         try {
-            for (kittytalents.api.inferface.ICatAlteration inst : this.alterations) {
+            for(kittytalents.api.inferface.ICatAlteration inst : this.alterations) {
                 inst.init(this);
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to init alteration: " + e.getMessage());
             e.printStackTrace();
-		}
+        }
 
         try {
-            this.setGender(EnumGender.bySaveName(compound.getString("dogGender")));
+            this.setGender(EnumGender.bySaveName(compound.getString("catGender")));
 
-            if (compound.contains("mode", Tag.TAG_STRING)) {
+            if(compound.contains("mode", Tag.TAG_STRING)) {
                 this.setMode(EnumMode.bySaveName(compound.getString("mode")));
-            } else {
-                // Read old mode id
-                BackwardsComp.readMode(compound, this::setMode);
             }
+//            else {
+//                // Read old mode id
+//                BackwardsComp.readMode(compound, this::setMode);
+//            }
 
-            if (compound.contains("customSkinHash", Tag.TAG_STRING)) {
+            if(compound.contains("customSkinHash", Tag.TAG_STRING)) {
                 this.setSkinHash(compound.getString("customSkinHash"));
-            } else {
-                BackwardsComp.readDogTexture(compound, this::setSkinHash);
             }
+//            else {
+//                BackwardsComp.readDogTexture(compound, this::setSkinHash);
+//            }
 
-            if (compound.contains("fetchItem", Tag.TAG_COMPOUND)) {
+            if(compound.contains("fetchItem", Tag.TAG_COMPOUND)) {
                 this.setBoneVariant(NBTUtil.readItemStack(compound, "fetchItem"));
-            } else {
-                BackwardsComp.readHasBone(compound, this::setBoneVariant);
             }
+//            else {
+//                BackwardsComp.readHasBone(compound, this::setBoneVariant);
+//            }
 
-            this.setHungerDirectly(compound.getFloat("dogHunger"));
+            this.setHungerDirectly(compound.getFloat("catHunger"));
             this.setOwnersName(NBTUtil.getTextComponent(compound, "lastKnownOwnerName"));
             this.setWillObeyOthers(compound.getBoolean("willObey"));
             this.setCanPlayersAttack(compound.getBoolean("friendlyFire"));
-            if (compound.contains("dogSize", Tag.TAG_ANY_NUMERIC)) {
-                this.setDogSize(compound.getInt("dogSize"));
+            if(compound.contains("catSize", Tag.TAG_ANY_NUMERIC)) {
+                this.setCatSize(compound.getInt("catSize"));
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to load levels: " + e.getMessage());
             e.printStackTrace();
         }
 
         try {
-            if (compound.contains("level_normal", Tag.TAG_ANY_NUMERIC)) {
-                this.getDogLevel().setLevel(Type.NORMAL, compound.getInt("level_normal"));
-                this.markDataParameterDirty(DOG_LEVEL.get());
+            if(compound.contains("level_normal", Tag.TAG_ANY_NUMERIC)) {
+                this.getCatLevel().setLevel(Type.NORMAL, compound.getInt("level_normal"));
+                this.markDataParameterDirty(CAT_LEVEL.get());
             }
 
-            if (compound.contains("level_dire", Tag.TAG_ANY_NUMERIC)) {
-                this.getDogLevel().setLevel(Type.DIRE, compound.getInt("level_dire"));
-                this.markDataParameterDirty(DOG_LEVEL.get());
+            if(compound.contains("level_dire", Tag.TAG_ANY_NUMERIC)) {
+                this.getCatLevel().setLevel(Type.DIRE, compound.getInt("level_dire"));
+                this.markDataParameterDirty(CAT_LEVEL.get());
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to load levels: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1396,59 +1474,62 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_BED_LOCATION.get()).copyEmpty();
 
         try {
-            if (compound.contains("beds", Tag.TAG_LIST)) {
+            if(compound.contains("beds", Tag.TAG_LIST)) {
                 ListTag bedsList = compound.getList("beds", Tag.TAG_COMPOUND);
 
-                for (int i = 0; i < bedsList.size(); i++) {
+                for(int i = 0; i < bedsList.size(); i++) {
                     CompoundTag bedNBT = bedsList.getCompound(i);
                     ResourceLocation loc = NBTUtil.getResourceLocation(bedNBT, "dim");
                     ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
                     Optional<BlockPos> pos = NBTUtil.getBlockPos(bedNBT, "pos");
                     bedsData.put(type, pos);
                 }
-            } else {
-                BackwardsComp.readBedLocations(compound, bedsData);
             }
-        } catch (Exception e) {
+//            else {
+//                BackwardsComp.readBedLocations(compound, bedsData);
+//            }
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to load beds: " + e.getMessage());
             e.printStackTrace();
         }
 
         this.entityData.set(CAT_BED_LOCATION.get(), bedsData);
 
-        DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(DOG_BOWL_LOCATION.get()).copyEmpty();
+        DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
 
         try {
-            if (compound.contains("bowls", Tag.TAG_LIST)) {
+            if(compound.contains("bowls", Tag.TAG_LIST)) {
                 ListTag bowlsList = compound.getList("bowls", Tag.TAG_COMPOUND);
 
-                for (int i = 0; i < bowlsList.size(); i++) {
+                for(int i = 0; i < bowlsList.size(); i++) {
                     CompoundTag bowlsNBT = bowlsList.getCompound(i);
                     ResourceLocation loc = NBTUtil.getResourceLocation(bowlsNBT, "dim");
                     ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
                     Optional<BlockPos> pos = NBTUtil.getBlockPos(bowlsNBT, "pos");
                     bowlsData.put(type, pos);
                 }
-            } else {
-                BackwardsComp.readBowlLocations(compound, bowlsData);
             }
-        } catch (Exception e) {
+//            else {
+//                BackwardsComp.readBowlLocations(compound, bowlsData);
+//            }
+        }
+        catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to load bowls: " + e.getMessage());
             e.printStackTrace();
         }
 
-        this.entityData.set(DOG_BOWL_LOCATION.get(), bowlsData);
+        this.entityData.set(CAT_BOWL_LOCATION.get(), bowlsData);
 
         try {
             this.statsTracker.readAdditional(compound);
-        } catch (Exception e) {
+        } catch(Exception e) {
             KittyTalents2.LOGGER.error("Failed to load stats tracker: " + e.getMessage());
             e.printStackTrace();
         }
         this.alterations.forEach((alter) -> {
             try {
                 alter.onRead(this, compound);
-            } catch (Exception e) {
+            } catch(Exception e) {
                 KittyTalents2.LOGGER.error("Failed to load alteration: " + e.getMessage());
                 e.printStackTrace();
             }
@@ -1459,32 +1540,32 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
         super.onSyncedDataUpdated(key);
-        if (TALENTS.get().equals(key) || ACCESSORIES.get().equals(key)) {
+        if(TALENTS.get().equals(key) || ACCESSORIES.get().equals(key)) {
             this.recalculateAlterationsCache();
 
-            for (kittytalents.api.inferface.ICatAlteration inst : this.alterations) {
+            for(kittytalents.api.inferface.ICatAlteration inst : this.alterations) {
                 inst.init(this);
             }
         }
 
-        if (TALENTS.get().equals(key)) {
+        if(TALENTS.get().equals(key)) {
             this.spendablePoints.markForRefresh();
         }
 
-        if (DOG_LEVEL.get().equals(key)) {
+        if(CAT_LEVEL.get().equals(key)) {
             this.spendablePoints.markForRefresh();
         }
 
-        if (ACCESSORIES.get().equals(key)) {
+        if(ACCESSORIES.get().equals(key)) {
             // If client sort accessories
-            if (this.level.isClientSide) {
+            if(this.level.isClientSide) {
                 // Does not recall this notifyDataManagerChange as list object is
                 // still the same, maybe in future MC versions this will change so need to watch out
                 this.getAccessories().sort(AccessoryInstance.RENDER_SORTER);
             }
         }
 
-        if (SIZE.equals(key)) {
+        if(SIZE.equals(key)) {
             this.refreshDimensions();
         }
     }
@@ -1493,20 +1574,21 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
         this.alterations.clear();
         this.foodHandlers.clear();
 
-        for (AccessoryInstance inst : this.getAccessories()) {
-            if (inst instanceof kittytalents.api.inferface.ICatAlteration) {
+        for(AccessoryInstance inst : this.getAccessories()) {
+            if(inst instanceof kittytalents.api.inferface.ICatAlteration) {
                 this.alterations.add((kittytalents.api.inferface.ICatAlteration) inst);
             }
 
-            if (inst instanceof kittytalents.api.inferface.ICatFoodHandler) {
+            if(inst instanceof kittytalents.api.inferface.ICatFoodHandler) {
                 this.foodHandlers.add((kittytalents.api.inferface.ICatFoodHandler) inst);
             }
-        };
+        }
+        ;
 
         List<TalentInstance> talents = this.getTalentMap();
         this.alterations.addAll(talents);
-        for (TalentInstance inst : talents) {
-            if (inst instanceof kittytalents.api.inferface.ICatFoodHandler) {
+        for(TalentInstance inst : talents) {
+            if(inst instanceof kittytalents.api.inferface.ICatFoodHandler) {
                 this.foodHandlers.add((kittytalents.api.inferface.ICatFoodHandler) inst);
             }
         }
@@ -1514,6 +1596,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     /**
      * If the entity can make changes to the cat
+     *
      * @param livingEntity The entity
      */
     @Override
@@ -1541,7 +1624,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 //            filtered.remove(0);
 //        }
 
-        if (filtered.size() >= type.numberToPutOn()) {
+        if(filtered.size() >= type.numberToPutOn()) {
             return false;
         }
 
@@ -1556,8 +1639,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public List<AccessoryInstance> removeAccessories() {
         List<AccessoryInstance> removed = new ArrayList<>(this.getAccessories());
 
-        for (AccessoryInstance inst : removed) {
-            if (inst instanceof kittytalents.api.inferface.ICatAlteration) {
+        for(AccessoryInstance inst : removed) {
+            if(inst instanceof kittytalents.api.inferface.ICatAlteration) {
                 ((kittytalents.api.inferface.ICatAlteration) inst).remove(this);
             }
         }
@@ -1570,8 +1653,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public Optional<AccessoryInstance> getAccessory(AccessoryType typeIn) {
         List<AccessoryInstance> accessories = this.getAccessories();
 
-        for (AccessoryInstance inst : accessories) {
-            if (inst.getAccessory().getType() == typeIn) {
+        for(AccessoryInstance inst : accessories) {
+            if(inst.getAccessory().getType() == typeIn) {
                 return Optional.of(inst);
             }
         }
@@ -1582,8 +1665,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public Optional<AccessoryInstance> getAccessory(Accessory typeIn) {
         List<AccessoryInstance> accessories = this.getAccessories();
 
-        for (AccessoryInstance inst : accessories) {
-            if (inst.getAccessory() == typeIn) {
+        for(AccessoryInstance inst : accessories) {
+            if(inst.getAccessory() == typeIn) {
                 return Optional.of(inst);
             }
         }
@@ -1618,8 +1701,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     public boolean isMode(EnumMode... modes) {
         EnumMode mode = this.getMode();
-        for (EnumMode test : modes) {
-            if (mode == test) {
+        for(EnumMode test : modes) {
+            if(mode == test) {
                 return true;
             }
         }
@@ -1656,7 +1739,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     public Optional<BlockPos> getBowlPos(ResourceKey<Level> registryKey) {
-        return this.entityData.get(DOG_BOWL_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
+        return this.entityData.get(CAT_BOWL_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
     }
 
     public void setBowlPos(@Nullable BlockPos pos) {
@@ -1668,17 +1751,17 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     public void setBowlPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
-        this.entityData.set(DOG_BOWL_LOCATION.get(), this.entityData.get(DOG_BOWL_LOCATION.get()).copy().set(registryKey, pos));
+        this.entityData.set(CAT_BOWL_LOCATION.get(), this.entityData.get(CAT_BOWL_LOCATION.get()).copy().set(registryKey, pos));
     }
 
     @Override
     public float getMaxHunger() {
         float maxHunger = ConfigHandler.DEFAULT_MAX_HUNGER;
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
             InteractionResultHolder<Float> result = alter.getMaxHunger(this, maxHunger);
 
-            if (result.getResult().shouldSwing()) {
+            if(result.getResult().shouldSwing()) {
                 maxHunger = result.getObject();
             }
         }
@@ -1687,25 +1770,25 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     @Override
-    public float getDogHunger() {
+    public float getCatHunger() {
         return this.entityData.get(HUNGER_INT);
     }
 
     @Override
     public void addHunger(float add) {
-        this.setDogHunger(this.getDogHunger() + add);
+        this.setCatHunger(this.getCatHunger() + add);
     }
 
     @Override
-    public void setDogHunger(float hunger) {
-        float diff = hunger - this.getDogHunger();
+    public void setCatHunger(float hunger) {
+        float diff = hunger - this.getCatHunger();
 
-        for (kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
-            InteractionResultHolder<Float> result = alter.setDogHunger(this, hunger, diff);
+        for(kittytalents.api.inferface.ICatAlteration alter : this.alterations) {
+            InteractionResultHolder<Float> result = alter.setCatHunger(this, hunger, diff);
 
-            if (result.getResult().shouldSwing()) {
+            if(result.getResult().shouldSwing()) {
                 hunger = result.getObject();
-                diff = hunger - this.getDogHunger();
+                diff = hunger - this.getCatHunger();
             }
         }
 
@@ -1725,34 +1808,34 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     public void setSkinHash(String hash) {
-        if (hash == null) {
+        if(hash == null) {
             hash = "";
         }
         this.entityData.set(CUSTOM_SKIN, hash);
     }
 
     @Override
-    public DogLevel getDogLevel() {
-        return this.entityData.get(DOG_LEVEL.get());
+    public CatLevel getCatLevel() {
+        return this.entityData.get(CAT_LEVEL.get());
     }
 
-    public void setLevel(DogLevel level) {
-        this.entityData.set(DOG_LEVEL.get(), level);
-    }
-
-    @Override
-    public void increaseLevel(DogLevel.Type typeIn) {
-        this.getDogLevel().incrementLevel(typeIn);
-        this.markDataParameterDirty(DOG_LEVEL.get());
+    public void setLevel(CatLevel level) {
+        this.entityData.set(CAT_LEVEL.get(), level);
     }
 
     @Override
-    public void setDogSize(int value) {
-        this.entityData.set(SIZE, (byte)Math.min(5, Math.max(1, value)));
+    public void increaseLevel(CatLevel.Type typeIn) {
+        this.getCatLevel().incrementLevel(typeIn);
+        this.markDataParameterDirty(CAT_LEVEL.get());
     }
 
     @Override
-    public int getDogSize() {
+    public void setCatSize(int value) {
+        this.entityData.set(SIZE, (byte) Math.min(5, Math.max(1, value)));
+    }
+
+    @Override
+    public int getCatSize() {
         return this.entityData.get(SIZE);
     }
 
@@ -1775,12 +1858,12 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     private boolean getDogFlag(int bit) {
-        return (this.entityData.get(DOG_FLAGS) & bit) != 0;
+        return (this.entityData.get(CAT_FLAGS) & bit) != 0;
     }
 
     private void setDogFlag(int bits, boolean flag) {
-        byte c = this.entityData.get(DOG_FLAGS);
-        this.entityData.set(DOG_FLAGS, (byte)(flag ? c | bits : c & ~bits));
+        byte c = this.entityData.get(CAT_FLAGS);
+        this.entityData.set(CAT_FLAGS, (byte) (flag ? c | bits : c & ~bits));
     }
 
     public void setBegging(boolean begging) {
@@ -1848,38 +1931,39 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     public InteractionResult setTalentLevel(Talent talent, int level) {
-        if (0 > level || level > talent.getMaxLevel()) {
+        if(0 > level || level > talent.getMaxLevel()) {
             return InteractionResult.FAIL;
         }
 
         List<TalentInstance> activeTalents = this.getTalentMap();
 
         TalentInstance inst = null;
-        for (TalentInstance activeInst : activeTalents) {
-            if (activeInst.of(talent)) {
+        for(TalentInstance activeInst : activeTalents) {
+            if(activeInst.of(talent)) {
                 inst = activeInst;
                 break;
             }
         }
 
-        if (inst == null) {
-            if (level == 0) {
+        if(inst == null) {
+            if(level == 0) {
                 return InteractionResult.PASS;
             }
 
             inst = talent.getDefault(level);
             activeTalents.add(inst);
             inst.init(this);
-        } else {
+        }
+        else {
             int previousLevel = inst.level();
-            if (previousLevel == level) {
+            if(previousLevel == level) {
                 return InteractionResult.PASS;
             }
 
             inst.setLevel(level);
             inst.set(this, previousLevel);
 
-            if (level == 0) {
+            if(level == 0) {
                 activeTalents.remove(inst);
             }
         }
@@ -1894,7 +1978,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     public <T> void markDataParameterDirty(EntityDataAccessor<T> key, boolean notify) {
-        if (notify) {
+        if(notify) {
             this.onSyncedDataUpdated(key);
         }
 
@@ -1913,8 +1997,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public Optional<TalentInstance> getTalent(Talent talentIn) {
         List<TalentInstance> activeTalents = this.getTalentMap();
 
-        for (TalentInstance activeInst : activeTalents) {
-            if (activeInst.of(talentIn)) {
+        for(TalentInstance activeInst : activeTalents) {
+            if(activeInst.of(talentIn)) {
                 return Optional.of(activeInst);
             }
         }
@@ -1923,13 +2007,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     }
 
     @Override
-    public int getDogLevel(Talent talentIn) {
+    public int getCatLevel(Talent talentIn) {
         return this.getTalent(talentIn).map(TalentInstance::level).orElse(0);
     }
 
     @Override
     public <T> void setData(DataKey<T> key, T value) {
-        if (key.isFinal() && this.hasData(key)) {
+        if(key.isFinal() && this.hasData(key)) {
             throw new RuntimeException("Key is final but was tried to be set again.");
         }
         this.objects.put(key.getIndex(), value);
@@ -1940,7 +2024,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
      */
     @Override
     public <T> void setDataIfEmpty(DataKey<T> key, T value) {
-        if (!this.hasData(key)) {
+        if(!this.hasData(key)) {
             this.objects.put(key.getIndex(), value);
         }
     }
@@ -1953,7 +2037,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public <T> T getDataOrGet(DataKey<T> key, Supplier<T> other) {
-        if (this.hasData(key)) {
+        if(this.hasData(key)) {
             return this.getData(key);
         }
         return other.get();
@@ -1961,7 +2045,7 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public <T> T getDataOrDefault(DataKey<T> key, T other) {
-        if (this.hasData(key)) {
+        if(this.hasData(key)) {
             return this.getData(key);
         }
         return other;
@@ -1993,8 +2077,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     // When this method is changed the cache may need to be updated at certain points
     private final int getSpendablePointsInternal() {
-        int totalPoints = 15 + this.getDogLevel().getLevel(Type.NORMAL) + this.getDogLevel().getLevel(Type.DIRE);
-        for (TalentInstance entry : this.getTalentMap()) {
+        int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.DIRE);
+        for(TalentInstance entry : this.getTalentMap()) {
             totalPoints -= entry.getTalent().getCummulativeCost(entry.level());
         }
         return totalPoints;
@@ -2053,9 +2137,9 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     // 0 - 100 input
     public void setJumpPower(int jumpPowerIn) {
-       // if (this.TALENTS.getLevel(ModTalents.WOLF_MOUNT) > 0) {
-            this.jumpPower = 1.0F;
-       // }
+        // if (this.TALENTS.getLevel(ModTalents.WOLF_MOUNT) > 0) {
+        this.jumpPower = 1.0F;
+        // }
     }
 
     public boolean canJump() {
@@ -2065,8 +2149,8 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
 
     @Override
     public void travel(Vec3 positionIn) {
-        if (this.isAlive()) {
-            if (this.isVehicle() && this.canBeControlledByRider()) {
+        if(this.isAlive()) {
+            if(this.isVehicle() && this.canBeControlledByRider()) {
                 LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
 
                 // Face the cat in the direction of the controlling passenger
@@ -2083,15 +2167,15 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
                 float foward = livingentity.zza;
 
                 // If moving backwards half the speed
-                if (foward <= 0.0F) {
-                   foward *= 0.5F;
+                if(foward <= 0.0F) {
+                    foward *= 0.5F;
                 }
 
-                if (this.jumpPower > 0.0F && !this.isDogJumping() && this.isOnGround()) {
+                if(this.jumpPower > 0.0F && !this.isDogJumping() && this.isOnGround()) {
 
                     // Calculate jump value based of jump strength, power this jump and jump boosts
                     double jumpValue = this.getAttribute(KittyAttributes.JUMP_POWER.get()).getValue() * this.getBlockJumpFactor() * this.jumpPower; //TODO do we want getJumpFactor?
-                    if (this.hasEffect(MobEffects.JUMP)) {
+                    if(this.hasEffect(MobEffects.JUMP)) {
                         jumpValue += (this.getEffect(MobEffects.JUMP).getAmplifier() + 1) * 0.1F;
                     }
 
@@ -2102,10 +2186,10 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
                     this.hasImpulse = true;
 
                     // If moving forward, propel further in the direction
-                    if (foward > 0.0F) {
+                    if(foward > 0.0F) {
                         final float amount = 0.4F; // TODO Allow people to change this value
-                        float compX = Mth.sin(this.getYRot() * ((float)Math.PI / 180F));
-                        float compZ = Mth.cos(this.getYRot() * ((float)Math.PI / 180F));
+                        float compX = Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
+                        float compZ = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
                         this.setDeltaMovement(this.getDeltaMovement().add(-amount * compX * this.jumpPower, 0.0D, amount * compZ * this.jumpPower));
                         //this.playJumpSound();
                     }
@@ -2115,18 +2199,19 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
                 }
 
                 this.flyingSpeed = this.getSpeed() * 0.1F;
-                if (this.isControlledByLocalInstance()) {
+                if(this.isControlledByLocalInstance()) {
                     // Set the move speed and move the cat in the direction of the controlling entity
-                    this.setSpeed((float)this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.5F);
+                    this.setSpeed((float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.5F);
                     super.travel(new Vec3(straf, positionIn.y, foward));
                     this.lerpSteps = 0;
-                } else if (livingentity instanceof Player) {
+                }
+                else if(livingentity instanceof Player) {
                     // A player is riding and can not control then
                     this.setDeltaMovement(Vec3.ZERO);
                 }
 
                 // Once the entity reaches the ground again allow it to jump again
-                if (this.isOnGround()) {
+                if(this.isOnGround()) {
                     this.jumpPower = 0.0F;
                     this.setDogJumping(false);
                 }
@@ -2137,54 +2222,60 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
                 double changeY = this.getZ() - this.zo;
                 float f4 = Mth.sqrt((float) (changeX * changeX + changeY * changeY)) * 4.0F;
 
-                if (f4 > 1.0F) {
-                   f4 = 1.0F;
+                if(f4 > 1.0F) {
+                    f4 = 1.0F;
                 }
 
                 this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
                 this.animationPosition += this.animationSpeed;
 
-                if (this.onClimbable()) {
+                if(this.onClimbable()) {
                     this.fallDistance = 0.0F;
                 }
-             } else {
-                 this.maxUpStep = 0.5F; // Default
-                 this.flyingSpeed = 0.02F; // Default
-                 super.travel(positionIn);
-             }
+            }
+            else {
+                this.maxUpStep = 0.5F; // Default
+                this.flyingSpeed = 0.02F; // Default
+                super.travel(positionIn);
+            }
 
             this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
         }
     }
 
     public void addMovementStat(double xD, double yD, double zD) {
-        if (this.isVehicle()) {
+        if(this.isVehicle()) {
             int j = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
             this.statsTracker.increaseDistanceRidden(j);
         }
-        if (!this.isPassenger()) {
-            if (this.isEyeInFluid(FluidTags.WATER)) {
+        if(!this.isPassenger()) {
+            if(this.isEyeInFluid(FluidTags.WATER)) {
                 int j = Math.round(Mth.sqrt((float) (xD * xD + yD * yD + zD * zD)) * 100.0F);
-                if (j > 0) {
+                if(j > 0) {
                     this.statsTracker.increaseDistanceOnWater(j);
                 }
-            } else if (this.isInWater()) {
+            }
+            else if(this.isInWater()) {
                 int k = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
-                if (k > 0) {
+                if(k > 0) {
                     this.statsTracker.increaseDistanceInWater(k);
                 }
-            } else if (this.isOnGround()) {
+            }
+            else if(this.isOnGround()) {
                 int l = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
-                if (l > 0) {
-                    if (this.isSprinting()) {
+                if(l > 0) {
+                    if(this.isSprinting()) {
                         this.statsTracker.increaseDistanceSprint(l);
-                    } else if (this.isCrouching()) {
+                    }
+                    else if(this.isCrouching()) {
                         this.statsTracker.increaseDistanceSneaking(l);
-                    } else {
+                    }
+                    else {
                         this.statsTracker.increaseDistanceWalk(l);
                     }
                 }
-            } else { // Time in air
+            }
+            else { // Time in air
                 int j1 = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
                 //this.STATS.increaseDistanceInWater(k);
             }
@@ -2202,13 +2293,13 @@ public class CatEntity extends kittytalents.api.inferface.AbstractCatEntity {
     public boolean isLying() {
         LivingEntity owner = this.getOwner();
         boolean ownerSleeping = owner != null && owner.isSleeping();
-        if (ownerSleeping) {
+        if(ownerSleeping) {
             return true;
         }
 
         Block blockBelow = this.level.getBlockState(this.blockPosition().below()).getBlock();
         boolean onBed = blockBelow == KittyBlocks.CAT_BED.get() || BlockTags.BEDS.contains(blockBelow);
-        if (onBed) {
+        if(onBed) {
             return true;
         }
 

@@ -41,8 +41,8 @@ public class HelmetInteractHandler implements kittytalents.api.inferface.ICatIte
        .build();
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (dogIn.isTame() && dogIn.canInteract(playerIn)) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (catIn.isTame() && catIn.canInteract(playerIn)) {
             ItemStack stack = playerIn.getItemInHand(handIn);
 
             if (!stack.isEmpty()) {
@@ -51,8 +51,8 @@ public class HelmetInteractHandler implements kittytalents.api.inferface.ICatIte
                 if (associatedAccessory != null) {
                     AccessoryInstance inst = associatedAccessory.get().createFromStack(stack.copy().split(1));
 
-                    if (dogIn.addAccessory(inst)) {
-                        dogIn.consumeItemFromStack(playerIn, stack);
+                    if (catIn.addAccessory(inst)) {
+                        catIn.consumeItemFromStack(playerIn, stack);
                         return InteractionResult.SUCCESS;
                     }
                 }

@@ -177,7 +177,7 @@ public class WhistleItem extends Item {
                 return new InteractionResultHolder<>(InteractionResult.CONSUME, player.getItemInHand(hand));
             } else if (mode == 6) {
                 if (!world.isClientSide) {
-                    List<kittytalents.common.entity.CatEntity> roarDogs = dogsList.stream().filter(cat -> cat.getDogLevel(KittyTalents.ROARING_GALE) > 0).collect(Collectors.toList());
+                    List<kittytalents.common.entity.CatEntity> roarDogs = dogsList.stream().filter(cat -> cat.getCatLevel(KittyTalents.ROARING_GALE) > 0).collect(Collectors.toList());
                     if (roarDogs.isEmpty()) {
                         player.displayClientMessage(new TranslatableComponent("talent.kittytalents.roaring_gale.level"), true);
                     } else {
@@ -188,7 +188,7 @@ public class WhistleItem extends Item {
                             boolean anyHits = false;
 
                             for (kittytalents.common.entity.CatEntity cat : dogsList) {
-                                int level = cat.getDogLevel(KittyTalents.ROARING_GALE);
+                                int level = cat.getCatLevel(KittyTalents.ROARING_GALE);
                                 int roarCooldown = cat.tickCount;
 
                                 byte damage = (byte)(level > 4 ? level * 2 : level);
@@ -214,11 +214,11 @@ public class WhistleItem extends Item {
                                 }
 
                                 if (hit) {
-                                    cat.playSound(SoundEvents.WOLF_GROWL, 0.7F, 1.0F);
+                                    cat.playSound(SoundEvents.CAT_HISS, 0.7F, 1.0F);
                                     roarCooldown += level >= 5 ? 60 : 100;
                                     anyHits = true;
                                 } else {
-                                    cat.playSound(SoundEvents.WOLF_AMBIENT, 1F, 1.2F);
+                                    cat.playSound(SoundEvents.CAT_AMBIENT, 1F, 1.2F);
                                     roarCooldown += level >= 5 ? 30 : 50;
                                 }
 

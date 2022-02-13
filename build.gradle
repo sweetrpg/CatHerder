@@ -1,6 +1,9 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
+        maven { // PARCHMENT
+            url = "https://maven.parchmentmc.org"
+        }
         gradlePluginPortal()
         mavenCentral()
     }
@@ -9,10 +12,12 @@ buildscript {
         classpath "gradle.plugin.se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.71.4"
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
         classpath "org.ajoberstar.grgit:grgit-gradle:4.1.0"
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
@@ -59,10 +64,17 @@ repositories {
         url "https://modmaven.k-4u.nl"
         content { includeGroup "mezz.jei" }
     }
+    maven { // JEI
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven { // The One Probe
+        url "https://cursemaven.com"
+    }
 }
 
 minecraft {
-    mappings channel: project.mcp_channel, version: project.mcp_mappings
+//    mappings channel: project.mcp_channel, version: project.mcp_mappings
+    mappings channel: 'parchment', version: '2022.01.23-1.18.1'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -105,6 +117,8 @@ dependencies {
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+
+    implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
 }
 
 task sourcesJar(type: Jar) {
@@ -142,7 +156,7 @@ def replaceResources = tasks.register('replaceResources', Copy) {
 
 
 processResources {
-    duplicatesStrategy(DuplicatesStrategy.FAIL)
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE) // .FAIL
     exclude('META-INF/mods.toml')
     configure { finalizedBy(replaceResources) }
 }

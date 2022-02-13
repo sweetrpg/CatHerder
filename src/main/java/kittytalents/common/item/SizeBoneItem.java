@@ -32,11 +32,11 @@ public class SizeBoneItem extends Item implements kittytalents.api.inferface.ICa
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (dogIn.getAge() < 0) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (catIn.getAge() < 0) {
 
             if (!playerIn.level.isClientSide){
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".too_young"), dogIn.getUUID());
+                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".too_young"), catIn.getUUID());
             }
 
             return InteractionResult.FAIL;
@@ -47,7 +47,7 @@ public class SizeBoneItem extends Item implements kittytalents.api.inferface.ICa
             }
 
             if (!playerIn.level.isClientSide) {
-                dogIn.setDogSize(dogIn.getDogSize() + (this.type == Type.BIG ? 1 : -1));
+                catIn.setCatSize(catIn.getCatSize() + (this.type == Type.BIG ? 1 : -1));
             }
             return InteractionResult.SUCCESS;
         }

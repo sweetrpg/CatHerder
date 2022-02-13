@@ -36,9 +36,9 @@ public class CatRescueModel extends ListModel<kittytalents.common.entity.CatEnti
     }
 
     @Override
-    public void prepareMobModel(kittytalents.common.entity.CatEntity dogIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        if (dogIn.isInSittingPose()) {
-            if (dogIn.isLying()) {
+    public void prepareMobModel(kittytalents.common.entity.CatEntity catIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+        if (catIn.isInSittingPose()) {
+            if (catIn.isLying()) {
                 this.rescueBox.setPos(-1F, 20F, -2F);
                 this.rescueBox.xRot = (float) (Math.PI / 2);
             }

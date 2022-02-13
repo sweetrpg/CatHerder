@@ -42,9 +42,9 @@ public class CatBackpackModel extends ListModel<kittytalents.common.entity.CatEn
     }
 
     @Override
-    public void prepareMobModel(kittytalents.common.entity.CatEntity dogIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        if (dogIn.isInSittingPose()) {
-            if (dogIn.isLying()) {
+    public void prepareMobModel(kittytalents.common.entity.CatEntity catIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+        if (catIn.isInSittingPose()) {
+            if (catIn.isLying()) {
                 this.rightChest.setPos(0.0F, 20.0F, 2.0F);
                 this.rightChest.xRot = ((float)Math.PI / 2F);
                 this.leftChest.setPos(0.0F, 20.0F, 2.0F);
@@ -65,12 +65,12 @@ public class CatBackpackModel extends ListModel<kittytalents.common.entity.CatEn
 
         }
 
-        this.rightChest.zRot = dogIn.getShakeAngle(partialTickTime, -0.16F);
+        this.rightChest.zRot = catIn.getShakeAngle(partialTickTime, -0.16F);
         this.leftChest.zRot = this.rightChest.zRot;
     }
 
     @Override
-    public void setupAnim(kittytalents.common.entity.CatEntity dogIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(kittytalents.common.entity.CatEntity catIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 }

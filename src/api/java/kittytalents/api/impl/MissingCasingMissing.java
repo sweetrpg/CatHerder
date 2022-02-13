@@ -18,7 +18,7 @@ public class MissingCasingMissing extends ICasingMaterial {
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("dogbed.casing.missing", this.getRegistryName());
+        return new TranslatableComponent("catbed.casing.missing", this.getRegistryName());
     }
 
     @Override

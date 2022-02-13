@@ -12,7 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 // TODO: Add javadoc
 public interface ICat {
 
-    public kittytalents.api.inferface.AbstractCatEntity getDog();
+    public kittytalents.api.inferface.AbstractCatEntity getCat();
 
     public void untame();
 
@@ -20,16 +20,16 @@ public interface ICat {
 
     public EnumMode getMode();
 
-    public DogLevel getDogLevel();
-    public void increaseLevel(DogLevel.Type typeIn);
+    public CatLevel getCatLevel();
+    public void increaseLevel(CatLevel.Type typeIn);
 
     /**
      * Convenience method to get the level of a talent
      * @param talentGetter A getter function, typically a {@link RegistryObject<Talent>} would be provided
      * @return The level of the talent
      */
-    default int getDogLevel(Supplier<? extends Talent> talentGetter) {
-        return this.getDogLevel(talentGetter.get());
+    default int getCatLevel(Supplier<? extends Talent> talentGetter) {
+        return this.getCatLevel(talentGetter.get());
     }
 
     /**
@@ -37,7 +37,7 @@ public interface ICat {
      * @param talentIn The {@link Talent}
      * @return The level of the talent
      */
-    public int getDogLevel(Talent talentIn);
+    public int getCatLevel(Talent talentIn);
 
     default Optional<TalentInstance> getTalent(Supplier<? extends Talent> talentGetter) {
         return this.getTalent(talentGetter.get());
@@ -45,13 +45,13 @@ public interface ICat {
 
     public Optional<TalentInstance> getTalent(Talent talentIn);
 
-    public int getDogSize();
-    public void setDogSize(int size);
+    public int getCatSize();
+    public void setCatSize(int size);
 
     public float getMaxHunger();
-    public float getDogHunger();
+    public float getCatHunger();
     public void addHunger(float add);
-    public void setDogHunger(float hunger);
+    public void setCatHunger(float hunger);
 
     public boolean addAccessory(AccessoryInstance inst);
     public List<AccessoryInstance> getAccessories();

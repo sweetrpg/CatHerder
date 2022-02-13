@@ -19,20 +19,20 @@ public class BlackPeltTalent extends TalentInstance {
     }
 
     @Override
-    public void init(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        dogIn.setAttributeModifier(Attributes.ATTACK_DAMAGE, BLACK_PELT_DAMAGE_ID, this::createPeltModifier);
-        dogIn.setAttributeModifier(KittyAttributes.CRIT_CHANCE.get(), BLACK_PELT_CRIT_CHANCE_ID, this::createPeltCritChance);
-        dogIn.setAttributeModifier(KittyAttributes.CRIT_BONUS.get(), BLACK_PELT_CRIT_BONUS_ID, this::createPeltCritBonus);
+    public void init(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        catIn.setAttributeModifier(Attributes.ATTACK_DAMAGE, BLACK_PELT_DAMAGE_ID, this::createPeltModifier);
+        catIn.setAttributeModifier(KittyAttributes.CRIT_CHANCE.get(), BLACK_PELT_CRIT_CHANCE_ID, this::createPeltCritChance);
+        catIn.setAttributeModifier(KittyAttributes.CRIT_BONUS.get(), BLACK_PELT_CRIT_BONUS_ID, this::createPeltCritBonus);
     }
 
     @Override
-    public void set(kittytalents.api.inferface.AbstractCatEntity dogIn, int levelBefore) {
-        dogIn.setAttributeModifier(Attributes.ATTACK_DAMAGE, BLACK_PELT_DAMAGE_ID, this::createPeltModifier);
-        dogIn.setAttributeModifier(KittyAttributes.CRIT_CHANCE.get(), BLACK_PELT_CRIT_CHANCE_ID, this::createPeltCritChance);
-        dogIn.setAttributeModifier(KittyAttributes.CRIT_BONUS.get(), BLACK_PELT_CRIT_BONUS_ID, this::createPeltCritBonus);
+    public void set(kittytalents.api.inferface.AbstractCatEntity catIn, int levelBefore) {
+        catIn.setAttributeModifier(Attributes.ATTACK_DAMAGE, BLACK_PELT_DAMAGE_ID, this::createPeltModifier);
+        catIn.setAttributeModifier(KittyAttributes.CRIT_CHANCE.get(), BLACK_PELT_CRIT_CHANCE_ID, this::createPeltCritChance);
+        catIn.setAttributeModifier(KittyAttributes.CRIT_BONUS.get(), BLACK_PELT_CRIT_BONUS_ID, this::createPeltCritBonus);
     }
 
-    public AttributeModifier createPeltModifier(kittytalents.api.inferface.AbstractCatEntity dogIn, UUID uuidIn) {
+    public AttributeModifier createPeltModifier(kittytalents.api.inferface.AbstractCatEntity catIn, UUID uuidIn) {
         if (this.level() > 0) {
             double damageBonus = this.level();
 
@@ -46,7 +46,7 @@ public class BlackPeltTalent extends TalentInstance {
         return null;
     }
 
-    public AttributeModifier createPeltCritChance(kittytalents.api.inferface.AbstractCatEntity dogIn, UUID uuidIn) {
+    public AttributeModifier createPeltCritChance(kittytalents.api.inferface.AbstractCatEntity catIn, UUID uuidIn) {
         if (this.level() <= 0) {
             return null;
         }
@@ -60,7 +60,7 @@ public class BlackPeltTalent extends TalentInstance {
         return new AttributeModifier(uuidIn, "Black Pelt Crit Chance", damageBonus, AttributeModifier.Operation.ADDITION);
     }
 
-    public AttributeModifier createPeltCritBonus(kittytalents.api.inferface.AbstractCatEntity dogIn, UUID uuidIn) {
+    public AttributeModifier createPeltCritBonus(kittytalents.api.inferface.AbstractCatEntity catIn, UUID uuidIn) {
         if (this.level() <= 0) {
             return null;
         }

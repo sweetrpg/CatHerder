@@ -270,9 +270,9 @@ public class CatModel<T extends kittytalents.api.inferface.AbstractCatEntity> ex
     }
 
     @Override
-    public void setupAnim(T dogIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(T catIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.head.xRot = headPitch * ((float)Math.PI / 180F);
-        this.head.yRot = netHeadYaw * (dogIn.isInSittingPose() && dogIn.isLying() ? 0.005F : (float)Math.PI / 180F);
+        this.head.yRot = netHeadYaw * (catIn.isInSittingPose() && catIn.isLying() ? 0.005F : (float)Math.PI / 180F);
         this.tail.xRot = ageInTicks;
     }
 

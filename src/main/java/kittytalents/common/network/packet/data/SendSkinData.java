@@ -5,7 +5,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SendSkinData extends DogData {
+public class SendSkinData extends CatData {
 
     public final byte[] image;
 

@@ -33,8 +33,8 @@ public class DTBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        dogBath(KittyBlocks.CAT_BATH);
-        dogBed(KittyBlocks.CAT_BED);
+        catBath(KittyBlocks.CAT_BATH);
+        catBed(KittyBlocks.CAT_BED);
         createFromShape(KittyBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
     }
 
@@ -59,7 +59,7 @@ public class DTBlockstateProvider extends BlockStateProvider {
     }
 
 
-    protected void dogBed(Supplier<? extends Block> blockIn) {
+    protected void catBed(Supplier<? extends Block> blockIn) {
         BlockModelBuilder model = this.models()
                 .getBuilder(name(blockIn))
                 .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
@@ -107,7 +107,7 @@ public class DTBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(blockIn.get(), model);
     }
 
-    protected void dogBath(Supplier<? extends Block> blockIn) {
+    protected void catBath(Supplier<? extends Block> blockIn) {
         BlockModelBuilder model = this.models()
                 .getBuilder(name(blockIn))
                 .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))

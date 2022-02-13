@@ -1,8 +1,8 @@
 package kittytalents.common.item;
 
 import kittytalents.KittyItems;
-import kittytalents.common.storage.DogLocationData;
-import kittytalents.common.storage.DogLocationStorage;
+import kittytalents.common.storage.CatLocationData;
+import kittytalents.common.storage.CatLocationStorage;
 import net.minecraft.Util;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -39,7 +39,7 @@ public class RadarItem extends Item {
 
         if (!worldIn.isClientSide) {
             if (playerIn.isShiftKeyDown()) {
-                DogLocationStorage locationManager = DogLocationStorage.get(worldIn);
+                CatLocationStorage locationManager = CatLocationStorage.get(worldIn);
                 for (UUID uuid : locationManager.getAllUUID()) {
                     playerIn.sendMessage(new TextComponent(locationManager.getData(uuid).toString()), Util.NIL_UUID);
                 }
@@ -50,15 +50,15 @@ public class RadarItem extends Item {
 
             playerIn.sendMessage(new TextComponent(""), Util.NIL_UUID);
 
-            DogLocationStorage locationManager = DogLocationStorage.get(worldIn);
-            List<DogLocationData> ownDogs = locationManager.getDogs(playerIn, dimCurr).collect(Collectors.toList());
+            CatLocationStorage locationManager = CatLocationStorage.get(worldIn);
+            List<CatLocationData> ownDogs = locationManager.getDogs(playerIn, dimCurr).collect(Collectors.toList());
 
             if (ownDogs.isEmpty()) {
                 playerIn.sendMessage(new TranslatableComponent("dogradar.errornull", dimCurr.location()), Util.NIL_UUID);
             } else {
                 boolean flag = false;
 
-                for (DogLocationData loc : ownDogs) {
+                for (CatLocationData loc : ownDogs) {
                     if (loc.shouldDisplay(worldIn, playerIn, handIn)) {
                         flag = true;
 
@@ -94,7 +94,7 @@ public class RadarItem extends Item {
         return new InteractionResultHolder<ItemStack>(InteractionResult.FAIL, stack);
     }
 
-    public static String getDirectionTranslationKey(DogLocationData loc, Entity entity) {
+    public static String getDirectionTranslationKey(CatLocationData loc, Entity entity) {
         if (loc.getPos() == null) {
             return "dogradar.unknown";
         }

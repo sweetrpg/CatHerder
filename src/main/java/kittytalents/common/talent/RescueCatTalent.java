@@ -12,21 +12,21 @@ public class RescueCatTalent extends TalentInstance {
     }
 
     @Override
-    public void livingTick(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        if (dogIn.level.isClientSide) {
+    public void livingTick(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        if (catIn.level.isClientSide) {
             return;
         }
 
         if (this.level() > 0) {
-            LivingEntity owner = dogIn.getOwner();
+            LivingEntity owner = catIn.getOwner();
 
             //TODO add particles and check how far away cat is
             if (owner != null && owner.getHealth() <= 6) {
                 int healCost = this.healCost(this.level());
 
-                if (dogIn.getDogHunger() >= healCost) {
+                if (catIn.getCatHunger() >= healCost) {
                     owner.heal(Mth.floor(this.level() * 1.5D));
-                    dogIn.setDogHunger(dogIn.getDogHunger() - healCost);
+                    catIn.setCatHunger(catIn.getCatHunger() - healCost);
                 }
             }
         }

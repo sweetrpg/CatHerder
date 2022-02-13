@@ -78,9 +78,9 @@ public class CatInfoScreen extends Screen {
         int topX = this.width / 2;
         int topY = this.height / 2;
 
-        EditBox nameTextField = new EditBox(this.font, topX - 100, topY + 50, 200, 20,  new TranslatableComponent("dogInfo.enterName"));
+        EditBox nameTextField = new EditBox(this.font, topX - 100, topY + 50, 200, 20,  new TranslatableComponent("catInfo.enterName"));
         nameTextField.setResponder(text ->  {
-            PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogNameData(kittytalents.client.screen.CatInfoScreen.this.cat.getId(), text));
+            PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatNameData(kittytalents.client.screen.CatInfoScreen.this.cat.getId(), text));
         });
         nameTextField.setFocus(false);
         nameTextField.setMaxLength(32);
@@ -96,7 +96,7 @@ public class CatInfoScreen extends Screen {
         if (this.cat.isOwnedBy(this.player)) {
             Button obeyBtn = new Button(this.width - 64, topY + 77, 42, 20, new TextComponent(String.valueOf(this.cat.willObeyOthers())), (btn) -> {
                 btn.setMessage(new TextComponent(String.valueOf(!this.cat.willObeyOthers())));
-                PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogObeyData(this.cat.getId(), !this.cat.willObeyOthers()));
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatObeyData(this.cat.getId(), !this.cat.willObeyOthers()));
             });
 
             this.addRenderableWidget(obeyBtn);
@@ -138,7 +138,7 @@ public class CatInfoScreen extends Screen {
                 button.setMessage(new TranslatableComponent(mode.getUnlocalisedName()));
             }
 
-            PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogModeData(kittytalents.client.screen.CatInfoScreen.this.cat.getId(), mode));
+            PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatModeData(kittytalents.client.screen.CatInfoScreen.this.cat.getId(), mode));
         }) {
             @Override
             public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
@@ -214,7 +214,7 @@ public class CatInfoScreen extends Screen {
                 KittyTalents2.LOGGER.error("Was unable to get resource data for {}, {}", rl, e);
             }
         } else {
-            PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogTextureData(this.cat.getId(), kittytalents.client.CatTextureManager.INSTANCE.getTextureHash(rl)));
+            PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTextureData(this.cat.getId(), kittytalents.client.CatTextureManager.INSTANCE.getTextureHash(rl)));
         }
     }
 
@@ -231,9 +231,9 @@ public class CatInfoScreen extends Screen {
             Talent talent = this.talentList.get(index);
 
             Button button = new TalentButton(25, 10 + i * 21, 20, 20, new TextComponent("+"), talent, (btn) -> {
-                int level = kittytalents.client.screen.CatInfoScreen.this.cat.getDogLevel(talent);
+                int level = kittytalents.client.screen.CatInfoScreen.this.cat.getCatLevel(talent);
                 if (level < talent.getMaxLevel() && kittytalents.client.screen.CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
-                    PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogTalentData(kittytalents.client.screen.CatInfoScreen.this.cat.getId(), talent));
+                    PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(kittytalents.client.screen.CatInfoScreen.this.cat.getId(), talent));
                 }
 
             }) {
@@ -243,7 +243,7 @@ public class CatInfoScreen extends Screen {
 
                     list.add(new TranslatableComponent(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
                     if (this.active) {
-                        list.add(new TextComponent("Level: " + kittytalents.client.screen.CatInfoScreen.this.cat.getDogLevel(talent)));
+                        list.add(new TextComponent("Level: " + kittytalents.client.screen.CatInfoScreen.this.cat.getCatLevel(talent)));
                         list.add(new TextComponent("--------------------------------").withStyle(ChatFormatting.GRAY));
                         list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, kittytalents.client.screen.CatInfoScreen.this.font));
                     } else {
@@ -296,8 +296,8 @@ public class CatInfoScreen extends Screen {
         }
 
         this.font.draw(stack, I18n.get("doggui.newname"), topX - 100, topY + 38, 4210752);
-        this.font.draw(stack, I18n.get("doggui.level") + " " + this.cat.getDogLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
-        this.font.draw(stack, I18n.get("doggui.leveldire") + " " + this.cat.getDogLevel().getLevel(Type.DIRE), topX, topY + 75, 0xFF10F9);
+        this.font.draw(stack, I18n.get("doggui.level") + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
+        this.font.draw(stack, I18n.get("doggui.leveldire") + " " + this.cat.getCatLevel().getLevel(Type.DIRE), topX, topY + 75, 0xFF10F9);
         if (this.cat.getAccessory(KittyAccessories.GOLDEN_COLLAR.get()).isPresent()) {
             this.font.draw(stack, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
         } else {

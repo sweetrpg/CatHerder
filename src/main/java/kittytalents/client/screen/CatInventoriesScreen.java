@@ -7,11 +7,11 @@ import kittytalents.KittyAccessories;
 import kittytalents.api.registry.AccessoryInstance;
 import kittytalents.client.screen.widget.SmallButton;
 import kittytalents.common.entity.accessory.DyeableAccessory.DyeableAccessoryInstance;
-import kittytalents.common.inventory.container.DogInventoriesContainer;
-import kittytalents.common.inventory.container.slot.DogInventorySlot;
+import kittytalents.common.inventory.container.CatInventoriesContainer;
+import kittytalents.common.inventory.container.slot.CatInventorySlot;
 import kittytalents.common.lib.Resources;
 import kittytalents.common.network.PacketHandler;
-import kittytalents.common.network.packet.data.DogInventoryPageData;
+import kittytalents.common.network.packet.data.CatInventoryPageData;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -25,12 +25,12 @@ import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Optional;
 
-public class CatInventoriesScreen extends AbstractContainerScreen<DogInventoriesContainer> {
+public class CatInventoriesScreen extends AbstractContainerScreen<CatInventoriesContainer> {
 
     private Button left, right;
     private Player player;
 
-    public CatInventoriesScreen(DogInventoriesContainer packPuppy, Inventory playerInventory, Component displayName) {
+    public CatInventoriesScreen(CatInventoriesContainer packPuppy, Inventory playerInventory, Component displayName) {
         super(packPuppy, playerInventory, displayName);
         this.player = playerInventory.player;
     }
@@ -49,7 +49,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<DogInventories
             int page = this.getMenu().getPage();
 
             if (page > 0) {
-                PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogInventoryPageData(--page));
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatInventoryPageData(--page));
             }
 
             btn.active = page > 0;
@@ -59,7 +59,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<DogInventories
             int page = this.getMenu().getPage();
 
             if (page < this.getMenu().getTotalNumColumns() - 9) {
-                PacketHandler.send(PacketDistributor.SERVER.noArg(), new DogInventoryPageData(++page));
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatInventoryPageData(++page));
             }
 
             btn.active = page < this.getMenu().getTotalNumColumns() - 9;
@@ -93,7 +93,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<DogInventories
         int i1 = (this.height - this.imageHeight) / 2;
         this.blit(stack, l, i1, 0, 0, this.imageWidth, this.imageHeight);
 
-        for (DogInventorySlot slot : this.getMenu().getSlots()) {
+        for (CatInventorySlot slot : this.getMenu().getSlots()) {
             if (!slot.isActive()) {
                 continue;
             }

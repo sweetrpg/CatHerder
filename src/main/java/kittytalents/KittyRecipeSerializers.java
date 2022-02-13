@@ -1,6 +1,6 @@
 package kittytalents;
 
-import kittytalents.common.inventory.recipe.DogBedRecipe;
+import kittytalents.common.inventory.recipe.CatBedRecipe;
 import kittytalents.common.lib.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
@@ -17,7 +17,7 @@ public class KittyRecipeSerializers {
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Constants.MOD_ID);
 
-    public static final RegistryObject<SimpleRecipeSerializer<DogBedRecipe>> CAT_BED = register("cat_bed", DogBedRecipe::new);
+    public static final RegistryObject<SimpleRecipeSerializer<CatBedRecipe>> CAT_BED = register("cat_bed", CatBedRecipe::new);
 //    public static final RegistryObject<SpecialRecipeSerializer<DogCollarRecipe>> COLLAR_COLOURING = register("collar_colouring", DogCollarRecipe::new);
 //    public static final RegistryObject<SpecialRecipeSerializer<DogCapeRecipe>> CAPE_COLOURING = register("cape_colouring", DogCapeRecipe::new);
 

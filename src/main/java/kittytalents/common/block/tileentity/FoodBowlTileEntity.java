@@ -80,7 +80,7 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
                 cat.setBowlPos(bowl.worldPosition);
             }
 
-            if (cat.getDogHunger() < cat.getMaxHunger() / 2) {
+            if (cat.getCatHunger() < cat.getMaxHunger() / 2) {
                InventoryUtil.feedDogFrom(cat, null, bowl.inventory);
             }
         }

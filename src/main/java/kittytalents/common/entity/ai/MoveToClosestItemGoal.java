@@ -31,9 +31,9 @@ public class MoveToClosestItemGoal extends Goal {
     private float oldWaterCost;
     private double oldRangeSense;
 
-    public MoveToClosestItemGoal(kittytalents.common.entity.CatEntity dogIn, double speedIn, float maxDist, float stopDist, @Nullable Predicate<ItemStack> targetSelector) {
-        this.cat = dogIn;
-        this.dogNavigator = dogIn.getNavigation();
+    public MoveToClosestItemGoal(kittytalents.common.entity.CatEntity catIn, double speedIn, float maxDist, float stopDist, @Nullable Predicate<ItemStack> targetSelector) {
+        this.cat = catIn;
+        this.dogNavigator = catIn.getNavigation();
         this.followSpeed = speedIn;
         this.maxDist = maxDist;
         this.minDist = stopDist;
@@ -46,7 +46,7 @@ public class MoveToClosestItemGoal extends Goal {
                 return entity.distanceTo(this.cat) <= EntityUtil.getFollowRange(this.cat);
             }
         };
-        this.sorter = new EntityUtil.Sorter(dogIn);
+        this.sorter = new EntityUtil.Sorter(catIn);
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 

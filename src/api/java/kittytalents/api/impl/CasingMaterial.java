@@ -49,7 +49,7 @@ public class CasingMaterial extends ICasingMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("dogbed.casing", KittyTalentsAPI.CASING_MATERIAL.getKey(this));
+            this.translationKey = Util.makeDescriptionId("catbed.casing", KittyTalentsAPI.CASING_MATERIAL.getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);

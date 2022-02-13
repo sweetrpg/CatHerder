@@ -88,25 +88,25 @@ public class ArmourAccessory extends Accessory {
         }
 
         @Override
-        public void init(kittytalents.api.inferface.AbstractCatEntity dogIn) {
+        public void init(kittytalents.api.inferface.AbstractCatEntity catIn) {
             EquipmentSlot slotType = null;
 
             if (this.armourStack.getItem() instanceof ArmorItem) {
                 slotType = ((ArmorItem) this.armourStack.getItem()).getSlot();
             }
 
-            dogIn.getAttributes().addTransientAttributeModifiers(this.armourStack.getAttributeModifiers(slotType));
+            catIn.getAttributes().addTransientAttributeModifiers(this.armourStack.getAttributeModifiers(slotType));
         }
 
         @Override
-        public void remove(kittytalents.api.inferface.AbstractCatEntity dogIn) {
+        public void remove(kittytalents.api.inferface.AbstractCatEntity catIn) {
             EquipmentSlot slotType = null;
 
             if (this.armourStack.getItem() instanceof ArmorItem) {
                 slotType = ((ArmorItem) this.armourStack.getItem()).getSlot();
             }
 
-            dogIn.getAttributes().removeAttributeModifiers(this.armourStack.getAttributeModifiers(slotType));
+            catIn.getAttributes().removeAttributeModifiers(this.armourStack.getAttributeModifiers(slotType));
         }
 
         @Override

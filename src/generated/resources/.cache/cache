@@ -72,5 +72,5 @@ f2557091e16f6686dfa024cb93b8ebc4717beac6 data/kittytalents/recipes/throw_stick.j
 d1d24a612db9117f220d380a49102132950c88ab data/kittytalents/tags/items/beg_items_tamed.json
 77136aef4cf4e56b0437d2a1a06b4a69bb67e897 data/kittytalents/tags/items/beg_items_untamed.json
 f1cec25821677b79a1df362e849acdbd421913e1 data/kittytalents/tags/items/breeding_items.json
-5bf2d6a32c698c6fed10a638ce14a2a9a57efded data/kittytalents/tags/items/pack_puppy_blacklist.json
+5bf2d6a32c698c6fed10a638ce14a2a9a57efded data/kittytalents/tags/items/pack_kitty_blacklist.json
 bf51c683c6592d6f19c8dce3522235eaad1abfcd data/kittytalents/tags/items/treats.json

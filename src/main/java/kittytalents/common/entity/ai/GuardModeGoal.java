@@ -10,9 +10,9 @@ public class GuardModeGoal extends NearestAttackableTargetGoal<Monster> {
     private final kittytalents.common.entity.CatEntity cat;
     private LivingEntity owner;
 
-    public GuardModeGoal(kittytalents.common.entity.CatEntity dogIn, boolean checkSight) {
-        super(dogIn, Monster.class, 0, checkSight, false, null);
-        this.cat = dogIn;
+    public GuardModeGoal(kittytalents.common.entity.CatEntity catIn, boolean checkSight) {
+        super(catIn, Monster.class, 0, checkSight, false, null);
+        this.cat = catIn;
     }
 
     @Override

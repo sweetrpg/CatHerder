@@ -21,22 +21,22 @@ public class BedFinderTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
         if (this.level() > 0) {
-            if (!playerIn.hasPassenger(dogIn)) {
-                if (playerIn.getItemInHand(handIn).getItem() == Items.BONE && dogIn.canInteract(playerIn)) {
+            if (!playerIn.hasPassenger(catIn)) {
+                if (playerIn.getItemInHand(handIn).getItem() == Items.BONE && catIn.canInteract(playerIn)) {
 
-                    if (dogIn.startRiding(playerIn)) {
-                        if (!dogIn.level.isClientSide) {
-                            dogIn.setOrderedToSit(true);
+                    if (catIn.startRiding(playerIn)) {
+                        if (!catIn.level.isClientSide) {
+                            catIn.setOrderedToSit(true);
                         }
 
-                        playerIn.displayClientMessage(new TranslatableComponent("talent.kittytalents.bed_finder.dog_mount", dogIn.getGenderPronoun()), true);
+                        playerIn.displayClientMessage(new TranslatableComponent("talent.kittytalents.bed_finder.dog_mount", catIn.getGenderPronoun()), true);
                         return InteractionResult.SUCCESS;
                     }
                 }
             } else {
-                dogIn.stopRiding();
+                catIn.stopRiding();
                 return InteractionResult.SUCCESS;
             }
         }

@@ -2,7 +2,7 @@ package kittytalents.client.tileentity.renderer;
 
 import com.google.common.base.Objects;
 import com.mojang.blaze3d.vertex.PoseStack;
-import kittytalents.common.block.tileentity.DogBedTileEntity;
+import kittytalents.common.block.tileentity.CatBedTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -11,12 +11,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class CatBedRenderer implements BlockEntityRenderer<DogBedTileEntity> {
+public class CatBedRenderer implements BlockEntityRenderer<CatBedTileEntity> {
 
     public CatBedRenderer(BlockEntityRendererProvider.Context ctx) {}
 
     @Override
-    public void render(DogBedTileEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(CatBedTileEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.getBedName() != null && this.isLookingAtBed(tileEntityIn)) {
             matrixStackIn.pushPose();
             matrixStackIn.translate(0.5D, 0.5D, 0.5D);
@@ -26,7 +26,7 @@ public class CatBedRenderer implements BlockEntityRenderer<DogBedTileEntity> {
 
     }
 
-    public boolean isLookingAtBed(DogBedTileEntity tileEntityIn) {
+    public boolean isLookingAtBed(CatBedTileEntity tileEntityIn) {
         Minecraft mc = Minecraft.getInstance();
 
         if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.BLOCK) {

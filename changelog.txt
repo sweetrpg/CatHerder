@@ -1,0 +1,1068 @@
+﻿Kitty Talents - Changelog
+
+Update List Key
+(+) A new feature
+(-) A removed feature
+(#) A changed feature
+(*) A bug fix
+(/) Other
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.15.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.15.2.3 | 20th February 2020
++ Added config option to disable dogs eating food on the ground
++ Added Korean translations (thanks to MilkissWhite from github)
+# Improved German translations (thanks to sigy4444 from curseforge)
+# Dogs will now be smarter when they eat food on the ground (only when less than 50% health or is missing at least 2/3rds of the value of the food item)
+* Fixed treat bags sometimes loosing it's items (thanks to pau101 from github)
+/ Added safe guards to stop a malicious user being able to exploit the packets to change any cat regardless of ownership (pau101)
+/ Added API hook to make items cat food and callback when the food is eaten
+Built on Forge-1.15.2-31.1.0
+
+1.15.2.2 | 16th February 2020
+* Fixed bone fetch item render & bed finder outline render (thanks to pau101 from github)
+
+1.15.2.1 | 1st February 2020
+* Fixed crash on server when feeding or giving treats to dogs (#213)
+
+1.15.2.0 | 28th January 2020
+Requires forge 30.0.0 or higher
+Initial release, parent version 1.14.4-1.15.2.0
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.14.4
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.15.2.0 | 2nd October 2019
++ Added config option for the revive item, default still cake
+* Fixed tactical whistle not working
+* Fixed dogs attacking all entities not just monsters in berserker mode (#193)
+* Fixed being forced dismount when in water even on level 5 swimmer cat
++ Added an API to add talents, bed materials etc (will try to get some docs out)
+
+1.15.1.7 | 13th September 2019
+Requires forge 28.1.0 or higher
+* Fixed crash with 1.14.4 forge RB
+
+1.15.1.6 | 8th September 2019
+* Fixed treats not converting wolves into dogs
+
+1.15.1.5 | 8th September 2019
+Requires forge 28.0.92 or higher
++ Added message when a cat mounts a player (bed finder talent)
+# (Internal) Use item stack capabilities instead of IInventory
+# Remove sided proxies and reorganise loading/registration which should...
+# Dogs in Berserker mode will no longer attack other untamed dogs
+* Fixed crash related to Talent registry type not existing
+* Fixed crash due to breaking change in forge
+* Fixed spider eye usage being available at all levels not just level 5 posion fang
+
+1.15.1.4 | 1st September 2019
++ Added German language file (de_de.json), thanks to Creepingpasta from github
+* Fixed obey others option causing dogs not to attack any entities
+
+1.15.1.3 | 15th August 2019
+* Fix shearing baby dogs turning into adult wolves
+
+1.15.1.2 | 14th August 2019
+* I have been getting reports of the render of the cat bed crashing the game. This appears to be due to a bug in optifine, this DT version disables the proper rendering of the cat bed when optifine of installed.
+
+1.15.1.1 | 7th August 2019
+Requires forge 28.0.45 or higher
+# Changed cat bed particles to use the forge ModelData system
+* Fixed crash with newer versions of forge
+
+1.15.1.0 | 22nd July 2019
+Requires forge 28.0.11 or higher
+Initial release, parent version 1.14.3-1.15.0.7
++ Readded vanilla leaping as this was fixed in 1.14.4
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.14.3
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.15.0.7 | 12th July 2019
+# Upon changing mode dogs will reset attack target and pathing
+* Fixed dogs attacking each other and other pets in berseker mode.
+
+1.15.0.6 | 5th July 2019
+* Fix possible crash due to missing registy
+
+1.15.0.5 | 26th June 2019
++ Add some secret cat stat tracking in the background (more coming soon)
++ Add help message when trying to feed food to incapacitated cat
+- Remove buggy vanilla leaping for now till a fix is found
+# Improve cat bed material API
+# Recode fetch item, so fetch items now keep nbt tag and will allow easy addition of more throwable items in the future
+# Sync talent ids so we can use ids in entity datasync to reduce payload
+* Fixed dogs attacking players when obey others is on
+* Fixed cat not sitting when on head
+* Fixed cat bed custom particles being sent to far away players
+* Fixed dogs still attacking entities when incapacitated
+
+1.15.0.4 | 25th June 2019
+Requires forge 27.0.2 or higher
+Initial release, parent version 1.14.2-1.15.0.4
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.14.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.15.0.4 | 25th June 2019
+Requires forge 26.0.63 or higher
++ Add summary of treat bag contents to tooltip
+* Fix change mode actually changing gender
+* Correct bone render for child cat
+
+1.15.0.3 | 24th June 2019
++ Readded JEI intergration (cat bed recipes and seperation in item list)
++ Remove max id limit on talent registry and disable sync
++ Play hearts effect when cat is fed
+# Reduced size of cat data payload sent to client
+# Change log level of registration events to 'debug'
+# Dogs respect pickup delay on fetch items and pack puppy
+# Cleaned up gender cat and added unisex gender
+* Fix crash when registering block/item colors
+* Fix inverted hunger setting
+* Fix fisher dogs dropping fish in rain
+* Fix cat model going crazy when shaking and death animation starts
+
+1.15.0.2 | 23rd June 2019
+Requires forge 26.0.61 or higher
+* Fixed cat bed rendering
+* Fixed friendly fire not working
+* Fixed incompatibility with latest versions of forge
+
+1.15.0.0-pr6 | 15th June 2019
++ Cat Bath, Bed and Bowl can now all be waterlogged
++ Can use pick block button on cat with gives kittycharm
++ Fix dogs wandering when trying to follow owner
+# Change entity tracking param to be less demanding
+* Fix incorrect bounding box for different cat sizes
+
+1.15.0.0-pr5 | 13th June 2019
+* Fixed being unable to connect to servers (that was a pesky bug to track down)
+* Fixed dogs being able to attack tamed cats
+* Skeletons run from dogs like wolves
+* Dogs run to water when on fire
+* Fixed swimmer cat
+* Beg, items, packpuppy blacklist now use Item tags
+
+1.15.0.0-pr4 | 12th June 2019
+* Added two new kitty textures
+* Improved follow AI
+* Use Tags for item lists
+* Change roaring gale msgs to status msg
+* Don't display UUID if owner unknown
+
+* Updated ru_ru lang file 
+1.15.0.0-pr3 | 11th June 2019
+* Fix pack puppy not rendering cat and incorrect number of slots
+* Fix sunglasses not rendering properly
+* Implement config properly and change config option names and add a few more.
+* Fix tactical beam being invisible
+* Fix crash on server
+* Others
+* Re-added ability to disable talents in server-config/kittytalents-talents.toml
+* You can now fill glass bottles on cat bath
+* Updated zh_cn lang file 
+
+1.15.0.0-pr2 | 9th June 2019
+Requires forge 26.0.12 or higher
+* GUI's are working now
+* Fixed bed recipe and dye-able collar/cape recipes
+
+1.15.0.0-pr1 | 8th June 2019
+Initial release, parent version 1.13.2-1.15.0.0
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.13.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.15.0.2 | 15th June 2019
++ Can use pick block button on cat with gives kittycharm
++ Fix dogs wandering when trying to follow owner
+# Change entity tracking param to be less demanding
+* Fix incorrect bounding box for different cat sizes
+
+1.15.0.1 | 13th June 2019
++ Untamed dogs (don't mistake dogs with wolves) can also be tamed with training treats
++ When untaming a cat with collar shears it will drop it's pack puppy inventory
++ Add two new cat textures
++ Can now Fill bottles from cat bath
++ Dogs now run to water when on fire
++ Update zh_cn lang file (Thanks to mcBegins2Snow from github)
++ Update zh_cn lang file (Thanks to kellixon from github)
+# Redone config file and options
+# Changed roaring whistle errors messages from chat messages to status update messsages
+# Improve last owner name tag (shift to see owner tag below cat name)
+# Change roaring gale chat messages to status messages
+# Improved follow AI
+# Beg, items, packpuppy blacklist now use Item tags
+* Fix not dismounting cat in water and not being able to stay underwater for long (swimmerdog)
+
+1.15.0.0 | 31st May 2019
++ The whistle now has different modes (shift click to change mode), replaces command emblem and is also used for shepherd cat and roaring gale talent.
++ Added whistle sounds
++ Shepherd Cat Talent now works, use the shepherd whistle and dogs will round up animals so they follow you and stay at the back keeping them in check. Level 1 allows 1 animal to follow while level 5 allows 16 animals to follow.
++ Wandering mode now works properly, if close enought to it's bowl will stay within 5 blocks, otherwise will continue to follow you until you get back to the bowl
++ Added Cat Owner changer, will change any cat to be yours
++ Using the kitty charm on a cat will spawn a tamed baby (creative only)
++ Using a stick will on an incapacitated cat will tell you how to revive your cat
++ Improved radar messages and it will now give info about dogs in other dimensions
++ Added tooltips to creative collar and creative radar
++ Added help message when using stick on incapacitated dogs
+- Removed command emblem - whistle has the command emblem features
+- Dogs no longer take damage when on 0 hunger
+# Changed versioning protocol
+# Reduce the general wander range from 10 to 7 blocks
+# Default config option for spawning with kitty charm is now false
+# Roaring gale talent now uses the Roaring whistle
+# Lots of under the hood changes
+# Changed most lang translation keys
+* Fixed format error in talents with description including a % symbol
+* Fixed warning message due to way DataParameter objects were registered
+* Can no longer attack a cat you are riding
+* Fixed crash on server startup
+- Removed the abiltiy to disable talents for now
+
+1.14.3.451 | 29th April 2019
++ Added config option so that puppies will get some levels from parents up to a max of 20.
+* Set max stacksize of treat bag to 1 to fix item duplication bug
+
+1.14.3.438 | 9th April 2019
++ Added config option to disable cat skins and always use default (this is client only so will only affect you, other players can still use the textures)
++ Added config options to disable the rendering of the pack puppy chest and wolf mount saddle
+# The first dt skin is now the default minecraft skin, so if you use a texture pack your cat will fit in better :)
+# Moved saddle and pack puppy chest texture to their own .png file
++ Readded Chinese translation files in new .json format
++ Readded Russian translation files in new .json format and add new translation keys (thanks to Just-random-user off github)
+# Enabled repeat keyboard events in cat info screen, so you holding down a key continuously does an action
+
+1.14.3.425 | 2nd April 2019
+* Fixed translation key for packpuppy gui being wrong
+- Removed the accidentally included JEI api code
+
+1.14.3.424 | 1st April 2019
++ Added creative radar, will let you know where your dogs are no matter if they have a radio collar on
++ Moved client only config (mainy render options) to their own config file "kittytalents-client.toml" in config folder.
++ Added JEI Intergration, now all cat beds show up in the JEI item list and all recipes for cat beds show
+# To open the pack puppy gui you now shift while holding nothing.
+
+1.14.3.418 | 30th March 2019
+Initial release, parent version 1.14.2.396
++ Radar is now fully functional, will now inform you of the location of your dogs. Just remember to put a radio collar on them! Aesthetics and refinements to come :)
+# To open the pack puppy gui you now shift instead of holding a plank.
+* Fixed dogs still being susceptible to posion even above level 3 posion fang
+- Removed mod support for itemphysic, foresty, biomesoplenty, extratrees, terraqueous, natura, botania since they have not been updated to 1.13 yet
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.12.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.15.1.4 | 1st September 2019
++ Added German language file (de_de.json), thanks to Creepingpasta from github
+
+1.15.1.3 | 15th August 2019
+* Fix shearing baby dogs turning into adult wolves
+# Upon changing mode dogs will reset attack target and pathing
+
+1.15.0.6 | 5th July 2019
+* Fix broken throw stick & bone recipes
+
+1.15.0.5 | 26th June 2019
++ Add some secret cat stat tracking in the background (more coming soon)
++ Add help message when trying to feed food to incapacitated cat
+# Improve cat bed material API
+# Recode fetch item, so fetch items now keep nbt tag and will allow easy addition of more throwable items in the future
+* Fixed dogs attacking players when obey others is on
+* Fixed cat not sitting when on head
+* Fixed cat bed custom particles being sent to far away players
+* Fixed dogs still attacking entities when incapacitated
+
+1.15.0.4 | 25th June 2019
++ Add summary of treat bag contents to tooltip
++ Remove max id limit on talent registry
++ Play hearts effect when cat is fed
+# Reduced size of cat data payload sent to client
+# Change log level of registration events to 'debug'
+# Dogs respect pickup delay on fetch items and pack puppy
+# Cleaned up gender cat and added unisex gender
+# Change time for cat pups to 2 minecraft days (can change in config)
+* Fix cat bed, cat bath and food bowl staying when block below is destroyed
+* Fix fisher dogs dropping fish in rain
+* Fix cat model going crazy when shaking and death animation starts
+* Correct bone render for child cat
+
+1.15.0.2 | 15th June 2019
++ Can use pick block button on cat with gives kittycharm
++ Fix dogs wandering when trying to follow owner
+# Change entity tracking param to be less demanding
+* Fix natura fusewood casing texture
+* Remove inventory string in treat bag GUI
+* Fix incorrect bounding box for different cat sizes
+
+1.15.0.1 | 13th June 2019
++ Untamed dogs (don't mistake dogs with wolves) can also be tamed with training treats
++ When untaming a cat with collar shears it will drop it's pack puppy inventory
++ Add two new cat textures
++ Can now Fill bottles from cat bath
++ Dogs now run to water when on fire
++ Update zh_cn lang file (Thanks to mcBegins2Snow from github)
++ Update zh_cn lang file (Thanks to kellixon from github)
+# Redone config file and options
+# Changed roaring whistle errors messages from chat messages to status update messsages
+# Improve last owner name tag (shift to see owner tag below cat name)
+# Change roaring gale chat messages to status messages
+# Improved follow AI
+* Fix not dismounting cat in water and not being able to stay underwater for long (swimmerdog)
+
+1.15.0.0 | 31st May 2019
+Requires forge 14.23.5.2826 or higher
++ The whistle now has different modes (shift click to change mode), replaces command emblem and is also used for shepherd cat and roaring gale talent.
++ Added whistle sounds
++ Shepherd Cat Talent now works, use the shepherd whistle and dogs will round up animals so they follow you and stay at the back keeping them in check. Level 1 allows 1 animal to follow while level 5 allows 16 animals to follow.
++ Wandering mode now works properly, if close enought to it's bowl will stay within 5 blocks, otherwise will continue to follow you until you get back to the bowl
++ Added Cat Owner changer, will change any cat to be yours
++ Using the kitty charm on a cat will spawn a tamed baby (creative only)
++ Using a stick will on an incapacitated cat will tell you how to revive your cat
++ Improved radar messages and it will now give info about dogs in other dimensions
++ Added tooltips to creative collar and creative radar
++ Added help message when using stick on incapacitated dogs
+- Removed command emblem - whistle has the command emblem features
+- Dogs no longer take damage when on 0 hunger
+# Changed versioning protocol
+# Reduce the general wander range from 10 to 7 blocks
+# Default config option for spawning with kitty charm is now false
+# Roaring gale talent now uses the Roaring whistle
+# Lots of under the hood changes
+# Changed most lang translation keys
+* Fixed format error in talents with description including a % symbol
+* Fixed warning message due to way DataParameter objects were registered
+* Can no longer attack a cat you are riding
+* Fixed crash on server startup
+
+1.14.2.451 | 29th April 2019
++ Added config option so that puppies will get some levels from parents up to a max of 20.
++ Added config option to disable cat bed being able to use mod planks to reduce the amount of beds
+* Set max stacksize of treat bag to 1 to fix item duplication bug
+
+1.14.2.438 | 9th April 2019
++ Radar is now fully functional, will now inform you of the location of your dogs. Just remember to put a radio collar on them! Aesthetics and refinements to come :)
++ Added creative radar, will let you know where your dogs are no matter if they have a radio collar on
++ Added config option to disable cat skins and always use default (this is client only so will only affect you, other players can still use the textures)
++ Added config options to disable the rendering of the pack puppy chest and wolf mount saddle
+# The first dt skin is now the default minecraft skin, so if you use a texture pack your cat will fit in better :)
+# Moved saddle and pack puppy chest texture to their own .png file
+# To open the pack puppy gui you now shift while holding nothing instead of holding a plank.
+# Updated Russian translation files with new translation (thanks to Just-random-user off github)
+* Fixed dogs still being susceptible to posion even above level 3 posion fang
+
+1.14.2.396 | 15th February 2019
+* Fixed crash with older versions and newer versions of CreativeCore
+/ Updated source code to MCP mappings stable_39
+
+1.14.2.382 | 10th December 2018
+# Renamed Kitty Settings to Cat Behavior settings
+# Moved Talents config category under Cat Behavior Category
+# Changed lang text for general settings category and cat behavior (former kitty settings) category
+
+1.14.2.381 | 10th December 2018
+* Fixed #114
+* Corrected PuppyEyes phrase 1 string error
+
+1.14.2.380 | 8th December 2018
++ Added ability to toggle rather a cat whines when it is low on hunger
+- Removed empty General settings category until further notice
+* Fixed textues for Pack Puppy and Cat Bowl, #111
+
+1.14.2.379 | 6th October 2018
+* Fixed puppies running backwards forever, #110
+* Small amount of code cleanup
+
+1.14.2.321 | 6th August 2018
+* Fixed dogs suddenly disappearing on the server side, #106
+
+1.14.2.320 | 4th August 2018
+* Fixed dogs not following when the player is holding a bone, #104
+* Fixed issue with Roaring Gale not affecting certain mobs, #102
+# Made dogs check for master order items in either the active hand or the off hand, #102
++ Dogs can now eat off the ground, #103
+
+1.14.2.319 | 1st August 2018
+* Fixed post initalization crash with newest version of CreativeCore #99
+* Fixed some bed casings from ExtraTrees not showing up
+# Changed casing name to match Foresty
+# Improve registery logging
+- Removed  Dendrology support
+
+1.14.2.318 | 1st July 2018
+* Fixed some bugs in #86, made the cat's legs move only when it is moving while being ridden.
+/ Beginning work on WorldSaveData in order to get the whistle to function
+
+1.14.2.317 | 31th May 2018
+* Fixed bug #65, made Fisher cat talent and water bath work again!
+* Fixed item interaction bug
++ Added genders! Which are configurable
++ Added cat basic info, will show the cat's health, gender (if true), speed, age, and owner!
++ Added Roaring Gale talent
+/ Updated to latest version of Forge: 14.23.4.2705
+
+1.15.0*** | March 2018
+Only supported version is now MC 1.12.2 and above
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.8.9, 1.9.4, 1.10.2, 1.11.2, 1.12, 1.12.1 and 1.12.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.14.2.314 | 6th December 2017
+* Fixed items not stacked when being picked up by the Pack Puppy Talent
+* Fixed crash with Terraqueous when trees are disabled
+
+1.14.2.311 | 20th October 2017
++ Added recipe for throw stick, same as throw bone but sticks instead of bones
+# Updated Russian Translation files to be more accurate and include some of the newer translations keys
+* Fixed crash when holding no items and clicking on a wolf
+* Fixed crash when holding no items the pressing the arrow keys
+* Fixed dogs been able to attack creepers even when they are not level 5 CreeperSweeper
+
+1.14.2.308 | 26th August 2017
++ Added support for MC 1.12.2
++ Added a constant purple and black 'glitch' texture
+# Updated Chinese Translation files to be more accurate and include some of the newer translations keys
+* Fixed crash on server startup with CraftTweaker 4.0.4+ on MC 1.12+
+
+1.14.2.298 | 20th July 2017
++ Two new cat skins that look like dobermans species - thanks to oitsjustjose
+* Fixed dogs disapearing when loading up from older versions of the mod - v1.10.0a (only 1.8.9)
+
+1.14.2.295 | 15th July 2017
+- Removed unnecessary model files that are not required for the version you are on 
+# Wings only render at level 5 pillow paw
+# Changed crafting recipes of spotted and multicollar collar so that they work in all versions - now need some string
+* Fixed creative, spotted and multicoloured collar being in all the creative tabs in MC 1.12 
+* Fixed name off multicoloured collar being only multicolour collar
+
+1.14.2.290 | 15th July 2017
++ Added Cat Sunglasses
++ Added Cat Leather Jacket - turn your cat into a secret agent!
++ Added Creative Collar which gives your cat 1000 points to spend on talents (only available in creative obviously)
++ Added Spotted Collar and Multicolour Collar
++ Readded kitty texture index (for now) you can add your own skins assets/kittytalents/textures/mob/cat/kittytex$NO.png up to 128 textures
++ Added 8 new textures for dogs - 2 of the textures are from an old mod "Extended Wolves". We are trying to contact the owner, it is unlikely he will reply, he hasn't been on his MCF account in over a year. Hopefully he doesn't mind, if he wants us to remove them we will. 
++ Added dyeable capes that you can put on the cat
++ Added tartan cape that you can put on the cat
++ Added throw stick that you can play fetch with your cat
++ Collar shears now remove all items on your cat
++ Added wings on your cat when you have level 5 Pillow paw (can be disabled in config file/gui)
++ Added 3D saddle when you have at least 1 level in wolf mount
++ Added Tiny Bone and Big Bone this decreases and increases your dogs size respectively
++ Added support for MC 1.8.9
++ Added support for the wooden planks from Botania mod to be used as casing in cat bed
++ Added lots more translation keys to the language files
+# Changed incapacitated blood to look much better
+* Fixed no message being displayed when riding a cat and it runs out of hunger
+Special thanks to knuckles001 for lots of the content in this update
+
+1.14.1.240 | 6th August 2017
++ Added support for MC 1.12.1
+* Fixed cat bed dropping in creative mode
+* Cat bed now uses its casing (plank) texture for all its particle effects
+* Fixed the bounding box of DT blocks not been know server side causing you get stuck in the block
+
+1.14.1.228 | 3rd August 2017
++ Added support for the wooden planks from Natura mod to be used as casing in cat bed
++ Added support for the wooden planks from Ancient Trees L (Dendrology) mod to be used as casing in cat bed
++ Added options to disable each talent in the config file
+
+1.14.1.214 | 31st July 2017
++ Added support for the wooden planks from ExtraTrees mod to be used as casing in cat bed
++ Added support for the wooden planks from Terraqueous mod to be used as casing in cat bed
++ Added Chinese translation file zh_CN.lang, thanks to 317620111 of the MC forums
+* Fixed crash when ItemPhysic Lite is loaded without CreativeCore
+
+1.14.0.206 | 29th July 2017
+* Fixed cat glitch when playing with the throw bone
+
+1.14.0.200 | 25th July 2017
++ Added treat bag recipe LCL, LLL C = Chew Stick, L = Leather
+* Fixed there being no wool collar recipe on MC < 1.12
+* Fixed possible crash on 1.12 server
+
+1.14.0.196 | 24th July 2017
++ All minecraft versions above now use the same basic code, this will mean that updates for all these version with be released simulationously. The only thing I have to do is click compile 4 times for the different MC versions
++ Add chew stick recipe SW, WS W = Wheat, S = Sugar
++ As a reminder MC 1.9.4 - 1.11.2 now have the new dyeable collar feature and treat bag which original was only in MC 1.12 version. Now it is in all version as they use the same code
++ Updated ru_RU.lang file
+# Changed the speed kitty dash gives, a bit faster and more noticable
+# Mod version now indicates which git commit it was built from (the last number)
+* Fixed dogs trying to attack their owner when spamming the command emblem
+* Fixed dogs attacking your pet wolfs
+* Fixed max cat health not being persistent
+* Fixed cat movespeed not being persistent
+* Fixed there being no lang translation for entity cat
+* Fixed others layers retaining collar colour
+* Fixed dyes turning collar black
+* Fixed food bowl pos not reseting when destroyed
+- Removed dogs getting 0.05 extra speed when they become level 30 dire cat
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.12
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.13.3c | 15th July 2017
+* Fixed dogs not attacking anything you attacked (for all hostile modes)
+* Fixed crash because of BedFinder Talent
+
+v1.13.3b | 15th July 2017
++ Added the Treat Bag which is an extra 5 slots where you can store food, right clicking on a cat will feed the cat from the first slot with food in. Right clicking on a food bowl will put all the contents into the food bowl.
++ Added the Chew stick, this restores 10HP and gives your cat some fancy potion effects
+# Changed all reference to GL11 to use GlStateManager - not sure what effect this has but its what you should do
+* Fixed cat collars losing their colour in survival mode
+* Fixed any player being able to dye a cat collar even when they are not allowed
+
+v1.13.3a | 15th July 2017
++ Added Wool Collars, crafted with 8 string in the outline of square. This means by default a cat doesnt have a collar.
++ You can dye these collars just like leather armour in the crafting table as well as when the collar is on the cat
++ Wool Collars can be removed by using the collar shears on your cat, if you click again on the cat it will turn it into a wolf like before
++ Added a Whistle item in the creative menu. Currently it does nothing apart from look cool
+- Removed the cat texture index system, for the moment you will not be able to turn your cat into the brown species
+* Using AxisAlignedBB#grow instead of AxisAlignedBB#expand, from 1.11.2 to 1.12 there remained a method named 'expand' but its functionally changed, equivalent in 1.12 is AxisAlignedBB#grow
+* Fixed dogs not attack mobs in any mode, due to ^^
+* Fixed CreeperSweeper, PestFighter and Puppy Eyes not working as intended, due to ^^
+* Fixed cat hunger being able to go above 120 HP and below 0 HP
+
+v1.13.2a | 12th July 2017
++ Added option in cat info screen, you can now enable to disable friendly fire. If the cat is set to obey others they will also not beable to damage it
+* Fixed wandering mode, they will walk around their bowl. If they are too far from their bowl when you set them to wandering mode they will stand still.
+* Fixed crash with Animalium mod and other mods
+
+v1.13.1g | 5th July 2017
++ Added support for ItemPhysic mod, items that you would expect to float now float and blocks that burn now burn
++ Readded support for the wooden planks from Forestry mod to be used as casing in cat bed
++ Readded support for the wooden planks and bamboo thatching from BiomesoPlenty mod to be used as casing in cat bed
++ Added a whole new creative tab just for cat beds, there are hundreds of combinations!
++ Added Russian language file - thanks to MrShadowJasonRus for the translation
+* Fixed crash on server startup
+* Fixed cat bed not displaying their tooltip
+
+v1.13.1f | 30th June 2017
++ Now works with the recommended version of MinecraftForge (there have been alot of internal changes) - build on version #1.12-14.21.1.2387
+# Increased the accuracy of the kitty Command Emblem
+
+v1.13.1e | 17th June 2017
+Initial release, parent version v1.12.1d
++ You can now use Cooked Salmon instead of/as well as Cooked Fish in the breeding bone recipe
+# Improved checks for wheather a block is solid when a cat tries to teleport
+* Fixed passengers taking the full amount of fall damage when riding a cat - you will now take the same as your cat, if your cat is immune you are too while riding it
+* Fixed crash after using collar shears and sneaking
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.11.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.12.2a | 14th July 2017
++ Added option in cat info screen, you can now enable to disable friendly fire. If the cat is set to obey others they will also not beable to damage it
++ Readded support for the wooden planks and bamboo thatching from BiomesoPlenty mod to be used as casing in cat bed
+* Fixed wandering mode, they will walk around their bowl. If they are too far from their bowl when you set them to wandering mode they will stand still.
+* Fixed crash with Animalium mod and other mods
+
+v1.12.1g | 5th July 2017
++ Added support for ItemPhysic mod, items that you would expect to float now float and blocks that burn now burn
++ Readded support for the wooden planks from Forestry mod to be used as casing in cat bed
++ Added a whole new creative tab just for cat beds, there are hundreds of combinations!
++ Added Russian language file - thanks to MrShadowJasonRus for the translation
+# Block/Item registration now uses the event registry system
+# Entity renderer registration is now how it should be
+* Fixed crash on server startup
+* Fixed cat bed not displaying their tooltip
+
+v1.12.1e | 17th June 2017
+* Fixed passengers taking the full amount of fall damage when riding a cat - you will now take the same as your cat, if your cat is immune you are too while riding it
+* Fixed crash after using collar shears and sneaking
+
+v1.12.1d | 20th April 2017
++ Cat will now vary their distance from you based on if you have a tool or sword in your hand
++ Cat now holds a bone in his mouth once he has picked up the throw bone
+* Fixed throw bone not working in survival
+* Cleaning up cat code
+* Fetch bone ai is much less derpy
+* Fixed head not rotation when playing fetch
+
+v1.12.1c | 5th April 2017
++ Added a config gui to the forge mod list menu, you can now change the mods/kitty settings in game
+# Changed the jump height for each level of Wolf mount so at max rank you will no longer take fall damage when jumping on a static y plane (lvl 1-4: starting at half a block going up to 2 blocks high jump, lvl 5: 3 block high jump)
+* Fixed the cat model being shifted over 1 pixel to the left
+* Fixed the dogs nose being too long
+* Fixed training treat spawning two dogs and consuming 2 items
+
+v1.12.1b | 2nd April 2017
++ Food bowl will now output redstone signal using a comparator based on how many items are in the bowl (same as vanilla inventories)
++ Added code for cat bed that can allow it to be flipped and rotated by other mods
+# Food Bowl and Cat Bath can only be broken by pickaxe, and it is much better to use an axe on a wooden cat bed :P
+* Fixed food bowl not dropping its contents when broken
+* Fixed cat bed not dropping anything
+* Fixed pick block on cat bed
+* Fixed time to break some blocks (food bowl) being instant 
+- Removed old redundant custom version checker
+
+v1.12.1a | 2nd April 2017
+# Version checker now uses the forge version checker so when you look at the list of mods it will alert you to an update and have the changelog as well
+# Dogs can now be removed from your head by sneaking
+* Fixed not been able to jump when riding dogs with Wolf Mount
+* Fixed bed finder not highlighting your bed when a cat is on your head (now highlights in yellow colour)
+* Fixed not being able to mount a cat with Wolf Mount
+* Fixed some internal code using null instead of ItemStack.EMPTY (new to 1.11.2) which was causing some bugs
+* Fixed dogs drowning in water when pillow paw is level 5
+* Fixed dogs responding to holding wheat and picking up animals even when no points where put in Shepherd Cat
+* Fixed Kitty Dash not really increasing the speed at which dogs run by much - should notice it more now when riding and as they follow you
+
+v1.12.0a | 1st April 2017
+Initial release, parent version v1.11.0b
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.10.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.11.2a | 14th July 2017
++ Added option in cat info screen, you can now enable to disable friendly fire. If the cat is set to obey others they will also not beable to damage it
++ Readded support for the wooden planks and bamboo thatching from BiomesoPlenty mod to be used as casing in cat bed
+* Fixed wandering mode, they will walk around their bowl. If they are too far from their bowl when you set them to wandering mode they will stand still.
+* Fixed crash with Animalium mod and other mods
+
+v1.11.1g | 5th July 2017
++ Added support for ItemPhysic mod, items that you would expect to float now float and blocks that burn now burn
++ Readded support for the wooden planks from Forestry mod to be used as casing in cat bed
++ Added a whole new creative tab just for cat beds, there are hundreds of combinations!
++ Added Russian language file - thanks to MrShadowJasonRus for the translation
+# Block/Item registration now uses the event registry system
+# Entity renderer registration is now how it should be
+* Fixed crash on server startup
+* Fixed cat bed not displaying their tooltip
+
+v1.11.1e | 17th June 2017
+* Fixed passengers taking the full amount of fall damage when riding a cat - you will now take the same as your cat, if your cat is immune you are too while riding it
+* Fixed crash after using collar shears and sneaking
+
+v1.11.1d | 20th April 2017
++ Cat will now vary their distance from you based on if you have a tool or sword in your hand
++ Cat now holds a bone in his mouth once he has picked up the throw bone
+* Fixed throw bone not working in survival
+* Cleaning up cat code
+* Fetch bone ai is much less derpy
+* Fixed head not rotation when playing fetch
+
+v1.11.1c | 5th April 2017
++ Added a config gui to the forge mod list menu, you can now change the mods/kitty settings in game
+# Changed the jump height for each level of Wolf mount so at max rank you will no longer take fall damage when jumping on a static y plane (lvl 1-4: starting at half a block going up to 2 blocks high jump, lvl 5: 3 block high jump)
+* Fixed the cat model being shifted over 1 pixel to the left
+* Fixed the dogs nose being too long
+* Fixed training treat spawning two dogs and consuming 2 items
+
+v1.11.1b | 2nd April 2017
++ Food bowl will now output redstone signal using a comparator based on how many items are in the bowl (same as vanilla inventories)
++ Added code for cat bed that can allow it to be flipped and rotated by other mods
+# Food Bowl and Cat Bath can only be broken by pickaxe, and it is much better to use an axe on a wooden cat bed :P
+* Fixed food bowl not dropping its contents when broken
+* Fixed cat bed not dropping anything
+* Fixed pick block on cat bed
+* Fixed time to break some blocks (food bowl) being instant 
+- Removed old redundant custom version checker
+
+v1.11.1a | 2nd April 2017
+# Version checker now uses the forge version checker so when you look at the list of mods it will alert you to an update and have the changelog as well
+# Dogs can now be removed from your head by sneaking
+* Fixed not been able to jump when riding dogs with Wolf Mount
+* Fixed bed finder not highlighting your bed when a cat is on your head (now highlights in yellow colour)
+* Fixed dogs drowning in water when pillow paw is level 5
+* Fixed dogs responding to holding wheat and picking up animals even when no points where put in Shepherd Cat
+* Fixed Kitty Dash not really increasing the speed at which dogs run by much - should notice it more now when riding and as they follow you
+
+v1.11.0b | 1st April 2017
+# Changed the file names of some textures
+* Fixed the collision box of cat beds
+
+v1.11.0a | 1st April 2017
+Initial release, parent version v1.10.0a
++ Added some missing localisation no more entity.kittytalent.kittytalent:cat.name etc!
+# Changed the way the radar works, when you right click it will tell you how the distance and direction your cat is away from you along with their name so you can identify them has a range of ~ 150 blocks
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.9.4
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.10.2a | 14th July 2017
++ Added option in cat info screen, you can now enable to disable friendly fire. If the cat is set to obey others they will also not beable to damage it
++ Readded support for the wooden planks and bamboo thatching from BiomesoPlenty mod to be used as casing in cat bed
+* Fixed wandering mode, they will walk around their bowl. If they are too far from their bowl when you set them to wandering mode they will stand still.
+* Fixed crash with Animalium mod and other mods
+This is the last offical update for MC 1.9.4
+
+v1.10.1g | 5th July 2017
++ Added support for ItemPhysic mod, items that you would expect to float now float and blocks that burn now burn
++ Readded support for the wooden planks from Forestry mod to be used as casing in cat bed
++ Added a whole new creative tab just for cat beds, there are hundreds of combinations!
++ Added Russian language file - thanks to MrShadowJasonRus for the translation
+
+v1.10.1e | 18th June 2017
++ Cat will now vary their distance from you based on if you have a tool or sword in your hand
++ Cat now holds a bone in his mouth once he has picked up the throw bone
+* Fixed throw bone not working in survival
+* Cleaning up cat code
+* Fetch bone ai is much less derpy
+* Fixed head not rotation when playing fetch
+* Fixed passengers taking the full amount of fall damage when riding a cat - you will now take the same as your cat, if your cat is immune you are too while riding it
+* Fixed crash after using collar shears and sneaking
+
+v1.10.1c | 5th April 2017
+Initial release, parent version v1.10.1c
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.8.9
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.14.1.242 | 7th August 2017
++ Cat now holds a bone in his mouth once he has picked up the throw bone
+* Fixed dogs having no step sound
+Initial release, parent version 1.7.10-1.14.1.240
+
+v1.10.0a | 16th April 2016
+Initial release, parent version v1.9.1g
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.8
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.9.1g - 16th July 2015
+* Fixed crash on server startup
+
+v1.9.1f - 16th July 2015
++ Added new talent swimmer cat
++ When dogs have been sitting for a while they will regen hunger up to 60 NP and can stop being incapcitated
++ Added hunger icons when riding dogs to see what NP they are on
++ Added air icons when riding dogs to see how much breath they have left
+# The version checker is not more reliable and will provide a link you can click on in chat to send you to the download page
+* Fixed bug when registering bed casing and bedding
+* Fixed being able to access other peoples cat without permission
+* Fixed localisation data being missing for foresty wood casing tool tips
+* Fixed dogs been able to teleport to you even when they were sat down
+* Fixed some abilities still working when a cat was incapcitated
+* Fixed players being able to mount other peoples dogs regardless
+* Fixed error message with cat bath having no texture when it wasn't needed
+* FINALLY Fixed constantly getting kitty charms and command emblems on respawn, you now will only get them once
+* Fixed pillow paw talent now working
+
+v1.9.1e - 18th March 2015
+* Fixed compatibly issue with Copious Dogs 
+
+v1.9.1d - 15th March 2015
++ Readded the rendering for the radio collar and the incapacitated blood on the cat
+# Optimized the code for rendering the cat bed to improve performance
+* Fixed the cat not acting correctly when it was dire level 30 (no particles, 15 less points to spend)
+* Fixed dogs moving things they are riding
+* Fixed crash when right clicking on a non-tamed cat with an empty hand
+* Fixed the cat bath not dropping itself as an item when the block below was removed
+* Fixed the cat bowl not dropping itself as an item when the block below was removed
+
+v1.9.1c - 28th February 2015
+* Fixed mcmod.info file now working and having invalid data in it
+* Fixed the talent happy eater not affecting what the cat and eat and the NP value
+* Fixed the talent kitty dash not affecting the speed at which the cat moves
+* Fixed dogs being inside you when the was meant to be on your head
+* Fixed dogs being 1 block under minecarts when they were meant to be in the them
+* Fixed the cat standing still when holding wheat if they have no points in shepherd cat
+
+v1.9.1b - 27th February 2015
++ Added a recipe for cat bath - water bucket surrounded by iron ingots
+* Fixed not spawning with the Kitty Charm and command emblem in new worlds
+* Fixed there sometimes only being one talent in the talent gui
+* Mod will not load with forge version 11.14.0.1292 or lower to avoid crashes
+
+v1.9.1a - 16th February 2015
+Initial release, parent version v1.9.0b
+* Fixed crash when sneaking and looking at a dogs label in multiplayer if the owner of the do was not on the server
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.7.10
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.14.3. | 
+* Set max stacksize of treat bag to 1 to fix item duplication bug
+
+1.14.3.317 | 20th March 2018
+* Fixed radar not showing up in creative tab
+
+1.14.2.317 | 14th January 2018
+* Fixed multiple issues with the Kitty Bowl
+* Fixed crash when trying to ride a cat that is on your head
+
+1.14.2.314 | 6th December 2017
+* Fixed items not stacked when being picked up by the Pack Puppy Talent
+
+1.14.2.311 | 20th October 2017
++ Added recipe for throw stick, same as throw bone but sticks instead of bones
+# Updated Russian Translation files to be more accurate and include some of the newer translations keys
+* Fixed crash when holding no items and clicking on a wolf
+* Fixed crash when holding no items the pressing the arrow keys
+* Fixed dogs been able to attack creepers even when they are not level 5 CreeperSweeper
+
+1.14.2.308 | 26th August 2017
++ Added a constant purple and black 'glitch' texture
+# Updated Chinese Translation files to be more accurate and include some of the newer translations keys
+
+1.14.2.298 | 20th July 2017
++ Two new cat skins that look like dobermans species - thanks to oitsjustjose
+* Fixed dogs disapearing when loading up from older versions of the mod - v1.9.0h
+
+1.14.2.295 | 15th July 2017
++ Added Cat Sunglasses
++ Added Cat Leather Jacket - turn your cat into a secret agent!
++ Added Creative Collar which gives your cat 1000 points to spend on talents (only available in creative obviously)
++ Added Spotted Collar and Multicolour Collar
++ Readded kitty texture index (for now) you can add your own skins assets/kittytalents/textures/mob/cat/kittytex$NO.png up to 128 textures
++ Added 8 new textures for dogs - 2 of the textures are from an old mod "Extended Wolves". We are trying to contact the owner, it is unlikely he will reply, he hasn't been on his MCF account in over a year. Hopefully he doesn't mind, if he wants us to remove them we will. 
++ Added dyeable capes that you can put on the cat
++ Added tartan cape that you can put on the cat
++ Added throw stick that you can play fetch with your cat
++ Collar shears now remove all items on your cat
++ Added wings on your cat when you have level 5 Pillow paw (can be disabled in config file/gui)
++ Added 3D saddle when you have at least 1 level in wolf mount
++ Added Tiny Bone and Big Bone this decreases and increases your dogs size respectively
++ Added support for MC 1.8.9
++ Added support for the wooden planks from Botania mod to be used as casing in cat bed
++ Added lots more translation keys to the language files
+# Changed incapacitated blood to look much better
+* Fixed no message being displayed when riding a cat and it runs out of hunger
+* Fixed dogs not having a step sound
+* Fixed crash with PuppyEyes talent
+Special thanks to knuckles001 for lots of the content in this update
+
+1.14.1.240 | 6th August 2017
++ Added options to disable each talent in the config file
+* Fixed cat bed dropping in creative mode
+* Fixed cat bed not using correct particle for hit effects
+
+1.14.1.229 | 3rd August 2017
++ Added new talent swimmer cat
++ When dogs have been sitting for a while they will regen hunger up to 60 NP and can stop being incapcitated
++ Added hunger icons when riding dogs to see what NP they are on
++ Added air icons when riding dogs to see how much breath they have left
++ Added a recipe for cat bath - water bucket surrounded by iron ingots
++ Cat will now vary their distance from you based on if you have a tool or sword in your hand
++ Added a whole new creative tab just for cat beds, there are hundreds of combinations!
++ Added Russian language file - thanks to MrShadowJasonRus for the translation
++ Added option in cat info screen, you can now enable to disable friendly fire. If the cat is set to obey others they will also not beable to damage it
++ Added Wool Collars, crafted with 8 string in the outline of square. This means by default a cat doesnt have a collar.
++ You can dye these collars just like leather armour in the crafting table as well as when the collar is on the cat
++ Wool Collars can be removed by using the collar shears on your cat, if you click again on the cat it will turn it into a wolf like before
++ Added a Whistle item in the creative menu. Currently it does nothing apart from look cool
++ Added the Treat Bag which is an extra 5 slots where you can store food, right clicking on a cat will feed the cat from the first slot with food in. Right clicking on a food bowl will put all the contents into the food bowl.
++ Added the Chew stick, this restores 10HP and gives your cat some fancy potion effects
++ Add chew stick recipe SW, WS W = Wheat, S = Sugar
++ Added treat bag recipe LCL, LLL C = Chew Stick, L = Leather
++ Added Chinese translation file zh_CN.lang, thanks to 317620111 of the MC forums
+* Many bug fixes just look at all then changes from ~July 2015 to present
+
+v1.9.0h - 16th July 2015
+* Fixed crash on server startup
+
+v1.9.0g - 16th July 2015
++ Added new talent swimmer cat
++ When dogs have been sitting for a while they will regen hunger up to 60 NP and can stop being incapcitated
++ Added hunger icons when riding dogs to see what NP they are on
++ Added air icons when riding dogs to see how much breath they have left
++ You can now make beds using planks from biomesoplenty, extrautilies, thaumcraft, tropicraft and twilight forest
+# The version checker is not more reliable and will provide a link you can click on in chat to send you to the download page
+* Fixed bug when registering bed casing and bedding
+* Fixed being able to access other peoples cat without permission
+* Fixed Forestry addon not registering planks for the cat casing
+* Fixed localisation data being missing for foresty wood casing tool tips
+* Fixed dogs been able to teleport to you even when they were sat down
+* Fixed some abilities still working when a cat was incapcitated
+* Fixed players being able to mount other peoples dogs regardless
+* Fixed error message with cat bath having no texture when it wasn't needed
+* FINALLY Fixed constantly getting kitty charms and command emblems on respawn, you now will only get them once
+
+v1.9.0f - 18th March 2015
+* Fixed compatibly issue with Copious Dogs
+
+v1.9.0e - 15th March 2015
+* Fixed the cat not acting correctly when it was dire level 30 (no particles, 15 less points to spend)
+* Fixed dogs moving things they are riding
+* Fixed crash when right clicking on a non-tamed cat with an empty hand
+* Fixed the cat bath not dropping itself as an item when broken or when the block below was removed
+* Fixed the cat bowl not dropping itself as an item when the block below was removed
+
+v1.9.0d - 28th February 2015
+* Fixed mcmod.info file now working and having invalid data in it
+* Fixed crash when sneaking and looking at a dogs label in multiplayer if the owner of the do was not on the server
+* Fixed the talent happy eater not affecting what the cat and eat and the NP value
+* Fixed the talent kitty dash not affecting the speed at which the cat moves
+* Fixed dogs being inside you when the was meant to be on your head
+* Fixed dogs being 1 block under minecarts when they were meant to be in the them
+* Fixed the cat standing still when holding wheat if they have no points in shepherd cat
+
+v1.9.0c - 27th February 2015
++ Added a recipe for cat bath - water bucket surrounded by iron ingots
+
+* Fixed not spawning with the Kitty Charm and command emblem in new worlds
+* Fixed there sometimes only being one talent in the talent gui
+
+v1.9.0b - 08th February 2015
+* Fixed NEI and TMI overlapping with the kitty info screen
+
+v1.9.0a - 08th February 2015
++ Added cat bath for aesthetic purposes
+# Changed many numbers due to the massive code redo
+# Changed the max stack size of the cat bed to 64 not 1
+# Changed the way bed finder shows the bed, instead of the cat facing it the bed is highlighted in black
+# Updated for the lastest version of forestry
+* Fixed crash when clicking space
+
+v1.8.3a - 18th October 2014
++ For every level of talent kittymount you now can jump half a block more (basicly need 2 level to jump 1 block, level 5 is about 4 blocks)
+# Changed the layout of the changelog and added dates of release to early versions of the mod
+* Fixed cake not getting the cat out of incapacitated mode
+* Fixed jumping with you cat when you are riding him with wolf mount
+* Fixed the talent pillowpaw at level 5 not making the cat float when you jumped
+* Fixed the talent kittydash not increasing the speed when you are riding your cat
+* Fixed the cat not standing up when you mounted it
+* Fixed dogs not being able to attack creepers at level 5
+* Fixed creepers sometimes exploding when dogs are attacking them
+
+v1.8.2a - 17th October 2014
+* Fixed Forestry addon not registering planks for the cat casing
+
+v1.8.1a - 16th October 2014
++ Added Radio Collar which can be put on a cat
++ Added Radar with shows any dogs within 128 blocks which have a radio collar on
++ Added config option to check if you want to check for updates or not
+# Improved version checker so it will will only tell you new versions available for the version of minecraft you are on
+* Fixed crash on server due to cat bed casing
+* Fixed a glitch where you could duplicate items with the packpuppy talent
+* Fixed dogs not begging when holding a master treat
+* Fixed crash with foresty
+
+v1.8.0a - 12th October 2014
++ Added acacia and dark oak plank casing for cat beds
++ Added a visual indicator to show when the talent packpuppy is present, tiny chests on the dogs side! Thanks to 'knuckles001'
++ Added 2 more ears (side ears and flat ears on top of head) and a shorter tail to the cat model so you can texture appropriately to have the ear size you want, thanks to 'knuckles001'
++ When using a plank to open a dogs inventory it will make the chest opening sound
++ Increased the amount of skins you can have from 17 to 128 to add new skins use make the skin and put it in the "/assets/kittytalents/textures/mob/" folder and name it kittytex50.png etc (up to 127)
++ Added 2 new skins kittytex17.png and kittytex18.png
+# The different plank types for cat beds now uses the ore dictionary to look up planks, thanks to 'mezz'
+* Fixed packpuppy talent at level 5 not automatically picking up items from the floor
+* Fixed dogs not begging (tilting their head) when holding food
+* Fixed the spelling of 'Poison' from 'Posion'.
+* Fixed the talent shepherd cat not working
+* Fixed a baby wolf being turned straight into a adult cat not a baby cat
+* Fixed the name of the owner (when shifting looking at a cat) being the UUID id not the users in game name
+* Fixed various spelling and grammatical mistakes
+
+v1.7.3a - 24th July 2014
++ Added zh_CN language file, thanks to 'crafteverywhere'
+* Fixed the NEI intergration not working
+
+v1.7.2a - 9th July 2014
+* Fixed crash when opening inventory with NEI installed
+* Fixed mcmod.info file not working
+
+v1.7.1a - 8th July 2014
+* Fixed kitty charm spawning a cat you can't interact with
+
+v1.7.0a - 8th July 2014
+Initial release, parent version v1.6.1a
+# Updated owner name system to cater for upcoming name changes
+# Removed some unused classes
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MC 1.7.2
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.6.2a - 19th March 2015
++ Updated the 1.7.2 to have the lastest bug fixes and features in the most recent versions (v1.9.0f)
+* Fixed bug when registering bed casing and bedding
+
+v1.6.1a - 24th July 2014
++ Added zh_CN language file, thanks to 'crafteverywhere'
+* Fixed the NEI intergration not working
+
+v1.6.0a - 10th February 2014
+Initial release, parent version v1.5.1a
+# Most text is now in the .lang files so other languages can edit them
+* Fixed crash on server (In first version of this version)
+* Fixed some small bugs on the way
+NOTE: This was a straight port to 1.7 no features were changed, in the next update quite a lot will change :D.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Old Versions
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.5.1a - 30th November 2013
+# Moved all kitty talents items to the DT tab now
+* Fixed tooltips of the cat talents going off the screen
+* Fixed crash with Forestry on server
+* Fixed the dogs inventory not being saved on world restart
+* Fixed the cat bed crafting recipe being upside down
+
+v1.5.0a - 14th October 2013
++ Recoded everything to be able to use the latest AI system (Dogs should now not fall in lava/get such behind trees XD)
++ Added the infamous wolf mount talents!
++ Added a new mode called TACTICAL, this will mean the cat will not attack unless instructed to by a command beam
++ Added a new ability to the Command Emblem that so when you right click you will fire a command beam causing any dogs in TACTICAL or AGGRESSIVE mode nearby to attack it
++ Added critical hit particles when a cat with Black Pelt attacks a mob
++ The cat will now wag his tail when not moving or sitting
++ Added a version checker, it will tell you when there is a new update
++ Added Cat Beds which you can make using any plank and wool
+  They will heal them by 1/2 a heart every 20 seconds if they are within 3 blocks
+  More coming soon
+* Fixed dogs being invisible on the server
+* Fixed the training treat not converting wolfs to dogs
+* Fixed it not using the item when right clicking with training treats
+* Fixed mods like 'Damage Indicators' showing the entityId name instead of the dogs name
+
+v1.4.0a - 10th July 2013
+Updated to MC 1.6.2
++ Made the placement code of the cat bowl better so it cannot be placed in midair, and can be placed on blocks such as the top of half slabs
++ Made the cat have red dots (blood) over him when Incapacitated (This can be switched of in the config file)
++ Added tool tips about the talents when hovering over the + button
++ Added 4 modes for the cat to be in (Docile, Wandering, Aggressive and Berserker)
+  These can be changed in the kitty menu for your cat
+  There are tool tips in-game for the modes so look there to find out what each mode is
+# Made the cat not go for a throw bone if it already has one.
+# Made the cat attack speed slower like the wolf attack speed
+# Made the distance you have to be away from your cat for him to teleport 20 blocks.
+# Moved textures to /assets/kittytalents/textures/ so old textures packs will need to be updated.
+# Put spaces between the words in the main Kitty GUI
+# Added the 'Wolf Mount' Texture to the kitty GUI (Is still not added)
+* Fixed not being able to get the cat off your head once he was on.
+* Fixed a bug where you could sometimes get a talent to level 6 which would cause a crash.
+* Fixed the cat being one block too high when on your head.
+* Fixed the pickup sound playing over and over again when a cat is near a throw bone
+* Fixed the pickup sound playing over and over again when the item can't fit in the cat's inventory
+* Fixed the cat getting damaged by fire even when the Talent 'HellHound' is level to 5
+* Fixed the cat sometimes not looking at your bed when you give them the Talent 'BedFinder'
+* Fixed the dogs insta-killing creepers they now only attack creepers when Talent 'CreeperSweeper' is level 5 and when they do they reset the explosion time.
+* Fixed the config file not working for Block & Item Id's
+/ General Cleanup of the code (The EntityDTKitty.class is still 2024 lines long :(.)
+
+v1.3.0a - 17th March 2013
+Updated to MC 1.5
++ Made it so you can set whether other players can interact with your cat
+# Rewrote code to fix some bugs and make it easier to add new features.
+* Fixed Breeding Bone not working.
+* Fixed name tags above dogs head not disappearing when F1 was clicked.
+* Fixed the cat reverting to docile mode when reloading the world.
+* Fixed the cat picking up the throw bone into its inventory when pack puppy was level 5.
+
+v1.1.0a - 26th February 2013
++ Added 14 talents back from the original mod.
++ Made wolfs stay away from you when holding a tool or sword, to give you a bit more space.
++ When sneaking and looking at a cat an extra line of information will appear above their head. (The owners name.)
+# Reverted to the MC 1.1 wolf AI to give the dogs less of a robotic feel.
+* Collar shears now work.
+
+v1.0.0a - 17th January 2013
++ Initial Release

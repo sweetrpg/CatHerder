@@ -19,26 +19,26 @@ public class CreeperSweeperTalent extends TalentInstance {
     }
 
     @Override
-    public void init(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        this.cooldown = dogIn.tickCount;
+    public void init(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        this.cooldown = catIn.tickCount;
     }
 
     @Override
-    public void tick(kittytalents.api.inferface.AbstractCatEntity dogIn) {
+    public void tick(kittytalents.api.inferface.AbstractCatEntity catIn) {
         if (this.level() > 0) {
-            int timeLeft = this.cooldown - dogIn.tickCount;
+            int timeLeft = this.cooldown - catIn.tickCount;
 
-            if (timeLeft <= 0 && !dogIn.isInSittingPose()) {
-                List<Creeper> list = dogIn.level.getEntitiesOfClass(Creeper.class, dogIn.getBoundingBox().inflate(this.level() * 5,this.level() * 2, this.level() * 5));
+            if (timeLeft <= 0 && !catIn.isInSittingPose()) {
+                List<Creeper> list = catIn.level.getEntitiesOfClass(Creeper.class, catIn.getBoundingBox().inflate(this.level() * 5,this.level() * 2, this.level() * 5));
 
                 if (!list.isEmpty()) {
-                    dogIn.playSound(SoundEvents.WOLF_GROWL, dogIn.getSoundVolume(), (dogIn.getRandom().nextFloat() - dogIn.getRandom().nextFloat()) * 0.2F + 1.0F);
-                    this.cooldown = dogIn.tickCount + 60 + dogIn.getRandom().nextInt(40);
+                    catIn.playSound(SoundEvents.CAT_HISS, catIn.getSoundVolume(), (catIn.getRandom().nextFloat() - catIn.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    this.cooldown = catIn.tickCount + 60 + catIn.getRandom().nextInt(40);
                 }
             }
 
-            if (dogIn.getTarget() instanceof Creeper) {
-                Creeper creeper = (Creeper) dogIn.getTarget();
+            if (catIn.getTarget() instanceof Creeper) {
+                Creeper creeper = (Creeper) catIn.getTarget();
                 creeper.setSwellDir(-1);
             }
         }

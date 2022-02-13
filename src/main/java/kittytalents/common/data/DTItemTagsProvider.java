@@ -32,7 +32,7 @@ public class DTItemTagsProvider extends ItemTagsProvider {
         appendToTag(KittyTags.TREATS);
         createTag(KittyTags.BEG_ITEMS_UNTAMED, KittyItems.TRAINING_TREAT, Items.BONE.delegate);
         createTag(KittyTags.BREEDING_ITEMS, KittyItems.BREEDING_BONE);
-        createTag(KittyTags.PACK_PUPPY_BLACKLIST, KittyItems.THROW_BONE, KittyItems.THROW_BONE_WET, KittyItems.THROW_STICK, KittyItems.THROW_STICK_WET);
+        createTag(KittyTags.PACK_KITTY_BLACKLIST, KittyItems.THROW_BONE, KittyItems.THROW_BONE_WET, KittyItems.THROW_STICK, KittyItems.THROW_STICK_WET);
         createTag(KittyTags.TREATS, KittyItems.TRAINING_TREAT, KittyItems.SUPER_TREAT, KittyItems.MASTER_TREAT, KittyItems.DIRE_TREAT);
     }
 

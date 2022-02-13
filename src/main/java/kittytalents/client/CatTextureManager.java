@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import kittytalents.KittyTalents2;
 import kittytalents.common.config.ConfigHandler;
-import kittytalents.common.entity.texture.DogTextureServer;
+import kittytalents.common.entity.texture.CatTextureServer;
 import kittytalents.common.lib.Resources;
 import kittytalents.common.network.PacketHandler;
 import kittytalents.common.network.packet.data.RequestSkinData;
@@ -110,7 +110,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<kittytalen
             return kittytalents.client.CatTextureManager.INSTANCE.getLocFromHashOrGet(hash, this::getCached);
         }
 
-        return Resources.ENTITY_WOLF;
+        return Resources.ENTITY_VANILLA_CAT;
     }
 
 
@@ -118,8 +118,8 @@ public class CatTextureManager extends SimplePreparableReloadListener<kittytalen
         Minecraft mc = Minecraft.getInstance();
         TextureManager textureManager = mc.getTextureManager();
 
-        File cacheFile = DogTextureServer.INSTANCE.getCacheFile(baseFolder, hash);
-        ResourceLocation loc = DogTextureServer.INSTANCE.getResourceLocation(hash);
+        File cacheFile = CatTextureServer.INSTANCE.getCacheFile(baseFolder, hash);
+        ResourceLocation loc = CatTextureServer.INSTANCE.getResourceLocation(hash);
 
         AbstractTexture texture = textureManager.getTexture(loc);
         if (texture == null && cacheFile.isFile() && cacheFile.exists()) {
@@ -138,10 +138,10 @@ public class CatTextureManager extends SimplePreparableReloadListener<kittytalen
         Minecraft mc = Minecraft.getInstance();
         TextureManager textureManager = mc.getTextureManager();
 
-        String hash = DogTextureServer.INSTANCE.getHash(data);
+        String hash = CatTextureServer.INSTANCE.getHash(data);
 
-        File cacheFile = DogTextureServer.INSTANCE.getCacheFile(baseFolder, hash);
-        ResourceLocation loc = DogTextureServer.INSTANCE.getResourceLocation(hash);
+        File cacheFile = CatTextureServer.INSTANCE.getCacheFile(baseFolder, hash);
+        ResourceLocation loc = CatTextureServer.INSTANCE.getResourceLocation(hash);
 
         AbstractTexture texture = textureManager.getTexture(loc);
         if (texture == null) {
@@ -156,10 +156,10 @@ public class CatTextureManager extends SimplePreparableReloadListener<kittytalen
 
     public ResourceLocation getCached(String hash) {
         if (!ConfigHandler.DISPLAY_OTHER_DOG_SKINS) {
-            return Resources.ENTITY_WOLF;
+            return Resources.ENTITY_VANILLA_CAT;
         }
 
-        ResourceLocation loc = DogTextureServer.INSTANCE.getResourceLocation(hash);
+        ResourceLocation loc = CatTextureServer.INSTANCE.getResourceLocation(hash);
 
         AbstractTexture texture = getOrLoadTexture(getClientFolder(), hash);
         if (texture != null) {
@@ -172,14 +172,14 @@ public class CatTextureManager extends SimplePreparableReloadListener<kittytalen
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new RequestSkinData(hash));
         }
 
-        return Resources.ENTITY_WOLF;
+        return Resources.ENTITY_VANILLA_CAT;
     }
 
     private synchronized void loadDogSkinResource(kittytalents.client.CatTextureManager.Preparations prep, Resource resource) {
         InputStream inputstream = null;
         try {
             inputstream = resource.getInputStream();
-            String hash = DogTextureServer.INSTANCE.getHash(IOUtils.toByteArray(inputstream));
+            String hash = CatTextureServer.INSTANCE.getHash(IOUtils.toByteArray(inputstream));
             ResourceLocation rl = resource.getLocation();
 
             if (prep.skinHashToLoc.containsKey(hash)) {
@@ -276,7 +276,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<kittytalen
 
     @Override
     public String getName() {
-        return "DogTextureManager";
+        return "CatTextureManager";
     }
 
     protected static class Preparations {

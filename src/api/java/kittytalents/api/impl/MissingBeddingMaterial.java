@@ -18,7 +18,7 @@ public class MissingBeddingMaterial extends IBeddingMaterial {
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("dogbed.bedding.missing", this.getRegistryName());
+        return new TranslatableComponent("catbed.bedding.missing", this.getRegistryName());
     }
 
     @Override

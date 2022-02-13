@@ -1,8 +1,9 @@
 package kittytalents;
 
-import kittytalents.common.block.DogBathBlock;
-import kittytalents.common.block.DogBedBlock;
+import kittytalents.common.block.CatBathBlock;
+import kittytalents.common.block.CatBedBlock;
 import kittytalents.common.block.FoodBowlBlock;
+import kittytalents.common.block.LitterBoxBlock;
 import kittytalents.common.lib.Constants;
 import kittytalents.common.util.Util;
 import net.minecraft.client.color.block.BlockColors;
@@ -24,8 +25,9 @@ public class KittyBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = KittyItems.ITEMS;
 
-    public static final RegistryObject<DogBedBlock> CAT_BED = registerWithItem("cat_bed", DogBedBlock::new, (prop) -> prop.tab(KittyItemGroups.CAT_BED));
-    public static final RegistryObject<DogBathBlock> CAT_BATH = registerWithItem("cat_bath", DogBathBlock::new);
+    public static final RegistryObject<CatBedBlock> CAT_BED = registerWithItem("cat_bed", CatBedBlock::new, (prop) -> prop.tab(KittyItemGroups.CAT_BED));
+    public static final RegistryObject<CatBathBlock> CAT_BATH = registerWithItem("cat_bath", CatBathBlock::new);
+    public static final RegistryObject<LitterBoxBlock> LITTER_BOX = registerWithItem("litter_box", LitterBoxBlock::new);
     public static final RegistryObject<FoodBowlBlock> FOOD_BOWL = registerWithItem("food_bowl", FoodBowlBlock::new);
 
     private static Item.Properties createInitialProp() {

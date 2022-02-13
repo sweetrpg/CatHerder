@@ -21,16 +21,16 @@ public class AccessoryItem extends Item implements kittytalents.api.inferface.IC
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (dogIn.canInteract(playerIn) && dogIn.addAccessory(this.createInstance(dogIn, playerIn.getItemInHand(handIn), playerIn))) {
-            dogIn.consumeItemFromStack(playerIn, playerIn.getItemInHand(handIn));
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (catIn.canInteract(playerIn) && catIn.addAccessory(this.createInstance(catIn, playerIn.getItemInHand(handIn), playerIn))) {
+            catIn.consumeItemFromStack(playerIn, playerIn.getItemInHand(handIn));
             return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
     }
 
-    public AccessoryInstance createInstance(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stack, Player playerIn) {
+    public AccessoryInstance createInstance(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stack, Player playerIn) {
         return this.type.get().getDefault();
     }
 }

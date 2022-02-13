@@ -110,7 +110,7 @@ public class DyeableAccessory extends Accessory {
         }
 
         @Override
-        public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
             ItemStack stack = playerIn.getItemInHand(handIn);
 
             DyeColor dyeColor = DyeColor.getColor(stack);
@@ -123,9 +123,9 @@ public class DyeableAccessory extends Accessory {
                 }
 
                 this.color = ColourCache.make(colorNew);
-                dogIn.consumeItemFromStack(playerIn, stack);
+                catIn.consumeItemFromStack(playerIn, stack);
                 // Make sure to sync change with client
-                dogIn.markAccessoriesDirty();
+                catIn.markAccessoriesDirty();
                 return InteractionResult.SUCCESS;
             }
             return InteractionResult.PASS;

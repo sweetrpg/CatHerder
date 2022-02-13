@@ -4,10 +4,9 @@ import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Either;
 import kittytalents.api.registry.IBeddingMaterial;
 import kittytalents.api.registry.ICasingMaterial;
-import kittytalents.common.block.DogBedBlock;
-import kittytalents.common.block.tileentity.DogBedTileEntity;
+import kittytalents.common.block.CatBedBlock;
+import kittytalents.common.block.tileentity.CatBedTileEntity;
 import kittytalents.common.lib.Constants;
-import net.minecraft.client.particle.TerrainParticle;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -37,7 +36,7 @@ import java.util.*;
 @OnlyIn(Dist.CLIENT)
 public class CatBedModel implements BakedModel {
 
-    public static DogBedItemOverride ITEM_OVERIDE = new DogBedItemOverride();
+    public static CatBedItemOverride ITEM_OVERIDE = new CatBedItemOverride();
     private static final ResourceLocation MISSING_TEXTURE = new ResourceLocation("missingno");
 
     private ForgeModelBakery modelLoader;
@@ -53,7 +52,7 @@ public class CatBedModel implements BakedModel {
     }
 
     public BakedModel getModelVariant(@Nonnull IModelData data) {
-        return this.getModelVariant(data.getData(DogBedTileEntity.CASING), data.getData(DogBedTileEntity.BEDDING), data.getData(DogBedTileEntity.FACING));
+        return this.getModelVariant(data.getData(CatBedTileEntity.CASING), data.getData(CatBedTileEntity.BEDDING), data.getData(CatBedTileEntity.FACING));
     }
 
     public BakedModel getModelVariant(ICasingMaterial casing, IBeddingMaterial bedding, Direction facing) {
@@ -85,18 +84,18 @@ public class CatBedModel implements BakedModel {
         Direction facing = Direction.NORTH;
 
         BlockEntity tile = world.getBlockEntity(pos);
-        if (tile instanceof DogBedTileEntity) {
-            casing = ((DogBedTileEntity) tile).getCasing();
-            bedding = ((DogBedTileEntity) tile).getBedding();
+        if (tile instanceof CatBedTileEntity) {
+            casing = ((CatBedTileEntity) tile).getCasing();
+            bedding = ((CatBedTileEntity) tile).getBedding();
         }
 
-        if (state.hasProperty(DogBedBlock.FACING)) {
-            facing = state.getValue(DogBedBlock.FACING);
+        if (state.hasProperty(CatBedBlock.FACING)) {
+            facing = state.getValue(CatBedBlock.FACING);
         }
 
-        tileData.setData(DogBedTileEntity.CASING, casing);
-        tileData.setData(DogBedTileEntity.BEDDING, bedding);
-        tileData.setData(DogBedTileEntity.FACING, facing);
+        tileData.setData(CatBedTileEntity.CASING, casing);
+        tileData.setData(CatBedTileEntity.BEDDING, bedding);
+        tileData.setData(CatBedTileEntity.FACING, facing);
 
         return tileData;
     }
@@ -126,10 +125,10 @@ public class CatBedModel implements BakedModel {
     private ResourceLocation createResourceVariant(@Nonnull IRegistryDelegate<ICasingMaterial> casingResource, @Nonnull IRegistryDelegate<IBeddingMaterial> beddingResource, @Nonnull Direction facing) {
         String beddingKey = beddingResource != null
                 ? beddingResource.name().toString().replace(':', '.')
-                : "kittytalents.dogbed.bedding.missing";
+                : "kittytalents.catbed.bedding.missing";
         String casingKey = beddingResource != null
                 ? casingResource.name().toString().replace(':', '.')
-                : "kittytalents.dogbed.casing.missing";
+                : "kittytalents.catbed.casing.missing";
         return new ModelResourceLocation(Constants.MOD_ID, "block/cat_bed#bedding=" + beddingKey + ",casing=" + casingKey + ",facing=" + facing.getName());
     }
 
@@ -150,12 +149,12 @@ public class CatBedModel implements BakedModel {
     }
 
     private BlockModelRotation getModelRotation(@Nonnull Direction dir) {
-        switch (dir) {
-        default:    return BlockModelRotation.X0_Y0; // North
-        case EAST:  return BlockModelRotation.X0_Y90;
-        case SOUTH: return BlockModelRotation.X0_Y180;
-        case WEST:  return BlockModelRotation.X0_Y270;
-        }
+        return switch(dir) {
+            default -> BlockModelRotation.X0_Y0; // North
+            case EAST -> BlockModelRotation.X0_Y90;
+            case SOUTH -> BlockModelRotation.X0_Y180;
+            case WEST -> BlockModelRotation.X0_Y270;
+        };
     }
 
     @Override

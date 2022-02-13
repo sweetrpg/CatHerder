@@ -15,15 +15,15 @@ public class ChangeOwnerItem extends Item implements kittytalents.api.inferface.
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (!dogIn.isOwnedBy(playerIn)) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (!catIn.isOwnedBy(playerIn)) {
 
             if (!worldIn.isClientSide) {
-                dogIn.tame(playerIn);
-                dogIn.getNavigation().stop();
-                dogIn.setTarget((LivingEntity) null);
-                dogIn.setOrderedToSit(true);
-                worldIn.broadcastEntityEvent(dogIn, Constants.EntityState.WOLF_HEARTS);
+                catIn.tame(playerIn);
+                catIn.getNavigation().stop();
+                catIn.setTarget((LivingEntity) null);
+                catIn.setOrderedToSit(true);
+                worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_HEARTS);
 
                 //TODO playerIn.sendMessage(new TranslationTextComponent(""));
             }

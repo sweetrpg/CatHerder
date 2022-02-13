@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 public class Resources {
 
     public static final ResourceLocation GUI_FOOD_BOWL = getGui("food_bowl");
-    public static final ResourceLocation GUI_PACK_PUPPY = getGui("pack_puppy");
+    public static final ResourceLocation GUI_PACK_PUPPY = getGui("pack_kitty");
     public static final ResourceLocation GUI_TREAT_BAG = getGui("treat_bag");
     public static final ResourceLocation GUI_RADAR = getGui("radar");
 
@@ -14,11 +14,11 @@ public class Resources {
     public static final ResourceLocation INVENTORY_BUTTON = getGui("dog_button");
     public static final ResourceLocation SMALL_WIDGETS = getGui("small_widgets");
 
-    // Vanilla wolf
-    public static final ResourceLocation ENTITY_WOLF = Util.getResource(Constants.VANILLA_ID, "textures/entity/wolf/wolf_tame.png");
-    public static final ResourceLocation ENTITY_WOLF_WILD = Util.getResource(Constants.VANILLA_ID, "textures/entity/wolf/wolf.png");
-    public static final ResourceLocation ENTITY_WOLF_ANGRY = Util.getResource(Constants.VANILLA_ID, "textures/entity/wolf/wolf_angry.png");
-    public static final ResourceLocation ENTITY_WOLF_COLLAR = Util.getResource(Constants.VANILLA_ID, "textures/entity/wolf/wolf_collar.png");
+    // Vanilla cat
+    public static final ResourceLocation ENTITY_VANILLA_CAT = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/siamese.png");
+    public static final ResourceLocation ENTITY_VANILLA_CAT_WILD = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat.png");
+//    public static final ResourceLocation ENTITY_WOLF_ANGRY = Util.getResource(Constants.VANILLA_ID, "textures/entity/wolf/wolf_angry.png");
+    public static final ResourceLocation ENTITY_VANILLA_CAT_COLLAR = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat_collar.png");
 
     public static final ResourceLocation COLLAR_DEFAULT = getEntity("cat", "kitty_collar");
     public static final ResourceLocation COLLAR_GOLDEN = getEntity("cat", "kitty_collar_0");

@@ -31,17 +31,17 @@ public class BowTieModel extends ListModel<kittytalents.common.entity.CatEntity>
     }
 
     @Override
-    public void prepareMobModel(kittytalents.common.entity.CatEntity dogIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
+    public void prepareMobModel(kittytalents.common.entity.CatEntity catIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
 
         this.rightChest.xRot += 0.1;
         this.middleChest.xRot += 0.1;
         this.leftChest.xRot += 0.1;
-        this.rightChest.zRot = dogIn.getShakeAngle(partialTickTime, -0.16F);
+        this.rightChest.zRot = catIn.getShakeAngle(partialTickTime, -0.16F);
         this.leftChest.zRot = this.rightChest.zRot;
     }
 
     @Override
-    public void setupAnim(kittytalents.common.entity.CatEntity dogIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(kittytalents.common.entity.CatEntity catIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 }

@@ -20,16 +20,16 @@ public class PillowPawTalent extends TalentInstance {
     }
 
     @Override
-    public void init(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        dogIn.setAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), PILLOW_PAW_BOOST_ID, this::createSpeedModifier);
+    public void init(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        catIn.setAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), PILLOW_PAW_BOOST_ID, this::createSpeedModifier);
     }
 
     @Override
-    public void set(kittytalents.api.inferface.AbstractCatEntity dogIn, int level) {
-        dogIn.setAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), PILLOW_PAW_BOOST_ID, this::createSpeedModifier);
+    public void set(kittytalents.api.inferface.AbstractCatEntity catIn, int level) {
+        catIn.setAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), PILLOW_PAW_BOOST_ID, this::createSpeedModifier);
     }
 
-    public AttributeModifier createSpeedModifier(kittytalents.api.inferface.AbstractCatEntity dogIn, UUID uuidIn) {
+    public AttributeModifier createSpeedModifier(kittytalents.api.inferface.AbstractCatEntity catIn, UUID uuidIn) {
         if (this.level() >= 5) {
             return new AttributeModifier(uuidIn, "Pillow Paw", -0.065D, AttributeModifier.Operation.ADDITION);
         }
@@ -38,17 +38,17 @@ public class PillowPawTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResult canTrample(kittytalents.api.inferface.AbstractCatEntity dogIn, BlockState state, BlockPos pos, float fallDistance) {
+    public InteractionResult canTrample(kittytalents.api.inferface.AbstractCatEntity catIn, BlockState state, BlockPos pos, float fallDistance) {
         return this.level() >= 5 ? InteractionResult.FAIL : InteractionResult.PASS;
     }
 
     @Override
-    public InteractionResult onLivingFall(kittytalents.api.inferface.AbstractCatEntity dogIn, float distance, float damageMultiplier) {
+    public InteractionResult onLivingFall(kittytalents.api.inferface.AbstractCatEntity catIn, float distance, float damageMultiplier) {
         return this.level() >= 5 ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 
     @Override
-    public InteractionResultHolder<Float> calculateFallDistance(kittytalents.api.inferface.AbstractCatEntity dogIn, float distance) {
+    public InteractionResultHolder<Float> calculateFallDistance(kittytalents.api.inferface.AbstractCatEntity catIn, float distance) {
         if (this.level() > 0) {
             return InteractionResultHolder.success(distance - this.level() * 3);
         }

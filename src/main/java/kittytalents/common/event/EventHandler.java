@@ -3,7 +3,7 @@ package kittytalents.common.event;
 import kittytalents.KittyEntityTypes;
 import kittytalents.KittyItems;
 import kittytalents.common.config.ConfigHandler;
-import kittytalents.common.talent.HunterDogTalent;
+import kittytalents.common.talent.HunterCatTalent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -30,14 +30,14 @@ public class EventHandler {
         ItemStack stack = event.getItemStack();
         Entity target = event.getTarget();
 
-        if (target.getType() == EntityType.WOLF && target instanceof TamableAnimal && stack.getItem() == KittyItems.TRAINING_TREAT.get()) {
+        if (target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == KittyItems.TRAINING_TREAT.get()) {
             event.setCanceled(true);
 
-            TamableAnimal wolf = (TamableAnimal) target;
+            TamableAnimal vanillaCat = (TamableAnimal) target;
 
             Player player = event.getPlayer();
 
-            if (wolf.isAlive() && wolf.isTame() && wolf.isOwnedBy(player)) {
+            if (vanillaCat.isAlive() && vanillaCat.isTame() && vanillaCat.isOwnedBy(player)) {
 
                 if (!world.isClientSide) {
                     if (!player.getAbilities().instabuild) {
@@ -48,12 +48,12 @@ public class EventHandler {
                     cat.tame(player);
                     cat.setHealth(cat.getMaxHealth());
                     cat.setOrderedToSit(false);
-                    cat.setAge(wolf.getAge());
-                    cat.absMoveTo(wolf.getX(), wolf.getY(), wolf.getZ(), wolf.getYRot(), wolf.getXRot());
+                    cat.setAge(vanillaCat.getAge());
+                    cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
 
                     world.addFreshEntity(cat);
 
-                    wolf.discard();
+                    vanillaCat.discard();
                 }
 
                 event.setCancellationResult(InteractionResult.SUCCESS);
@@ -98,6 +98,6 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onLootDrop(final LootingLevelEvent event) {
-        HunterDogTalent.onLootDrop(event);
+        HunterCatTalent.onLootDrop(event);
     }
 }

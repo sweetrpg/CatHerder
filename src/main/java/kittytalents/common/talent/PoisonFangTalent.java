@@ -20,8 +20,8 @@ public class PoisonFangTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity dogIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (dogIn.isTame()) {
+    public InteractionResult processInteract(kittytalents.api.inferface.AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (catIn.isTame()) {
             if (this.level() < 5) {
                 return InteractionResult.PASS;
             }
@@ -30,14 +30,14 @@ public class PoisonFangTalent extends TalentInstance {
 
             if (stack.getItem() == Items.SPIDER_EYE) {
 
-                if (playerIn.getEffect(MobEffects.POISON) == null || dogIn.getDogHunger() < 30) {
+                if (playerIn.getEffect(MobEffects.POISON) == null || catIn.getCatHunger() < 30) {
                     return InteractionResult.FAIL;
                 }
 
                 if (!worldIn.isClientSide) {
                     playerIn.removeAllEffects();
-                    dogIn.setDogHunger(dogIn.getDogHunger() - 30);
-                    dogIn.consumeItemFromStack(playerIn, stack);
+                    catIn.setCatHunger(catIn.getCatHunger() - 30);
+                    catIn.consumeItemFromStack(playerIn, stack);
                 }
 
                 return InteractionResult.SUCCESS;
@@ -48,7 +48,7 @@ public class PoisonFangTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResult isPotionApplicable(kittytalents.api.inferface.AbstractCatEntity dogIn, MobEffectInstance effectIn) {
+    public InteractionResult isPotionApplicable(kittytalents.api.inferface.AbstractCatEntity catIn, MobEffectInstance effectIn) {
         if (this.level() >= 3) {
             if (effectIn.getEffect() == MobEffects.POISON) {
                 return InteractionResult.FAIL;

@@ -3,7 +3,7 @@ package kittytalents.client.entity.render.layer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import kittytalents.api.inferface.IThrowableItem;
-import kittytalents.client.entity.render.DogRenderer;
+import kittytalents.client.entity.render.CatRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 
 public class BoneLayer extends RenderLayer<kittytalents.common.entity.CatEntity, kittytalents.client.entity.model.CatModel<kittytalents.common.entity.CatEntity>> {
 
-    public BoneLayer(DogRenderer dogRendererIn) {
-        super(dogRendererIn);
+    public BoneLayer(CatRenderer catRendererIn) {
+        super(catRendererIn);
     }
 
     @Override

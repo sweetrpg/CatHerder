@@ -2,7 +2,7 @@ package kittytalents.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import kittytalents.common.inventory.container.PackPuppyContainer;
+import kittytalents.common.inventory.container.PackKittyContainer;
 import kittytalents.common.lib.Resources;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -11,9 +11,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
-public class PackKittyScreen extends AbstractContainerScreen<PackPuppyContainer> {
+public class PackKittyScreen extends AbstractContainerScreen<PackKittyContainer> {
 
-    public PackKittyScreen(PackPuppyContainer packPuppy, Inventory playerInventory, Component displayName) {
+    public PackKittyScreen(PackKittyContainer packPuppy, Inventory playerInventory, Component displayName) {
         super(packPuppy, playerInventory, displayName);
         //TODO this.container.allowUserInput = false;
     }
@@ -41,7 +41,7 @@ public class PackKittyScreen extends AbstractContainerScreen<PackPuppyContainer>
         this.blit(stack, l, i1, 0, 0, this.imageWidth, this.imageHeight);
 
         for (int j1 = 0; j1 < 3; j1++)
-            for (int k1 = 0; k1 < Mth.clamp(this.getMenu().getDogLevel(), 0, 5); k1++)
+            for (int k1 = 0; k1 < Mth.clamp(this.getMenu().getCatLevel(), 0, 5); k1++)
                 this.blit(stack, l + 78 + 18 * k1, i1 + 9 + 18 * j1 + 15, 197, 2, 18, 18);
 
         InventoryScreen.renderEntityInInventory(l + 42, i1 + 51, 30, (float)(l + 51) - xMouse, (float)((i1 + 75) - 50) - yMouse, this.getMenu().getDog());

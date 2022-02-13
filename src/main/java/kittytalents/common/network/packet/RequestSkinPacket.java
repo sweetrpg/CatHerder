@@ -1,7 +1,7 @@
 package kittytalents.common.network.packet;
 
 import kittytalents.KittyTalents2;
-import kittytalents.common.entity.texture.DogTextureServer;
+import kittytalents.common.entity.texture.CatTextureServer;
 import kittytalents.common.network.IPacket;
 import kittytalents.common.network.packet.data.RequestSkinData;
 import kittytalents.common.network.packet.data.SendSkinData;
@@ -29,7 +29,7 @@ public class RequestSkinPacket implements IPacket<RequestSkinData> {
             LogicalSide side = ctx.get().getDirection().getReceptionSide();
 
             if (side.isServer()) {
-                byte[] stream = DogTextureServer.INSTANCE.getCachedBytes(DogTextureServer.INSTANCE.getServerFolder(), data.hash);
+                byte[] stream = CatTextureServer.INSTANCE.getCachedBytes(CatTextureServer.INSTANCE.getServerFolder(), data.hash);
                 if (stream != null) {
                     KittyTalents2.HANDLER.reply(new SendSkinData(0, stream), ctx.get());
 

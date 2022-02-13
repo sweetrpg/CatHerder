@@ -18,10 +18,10 @@ public class SwimmerCatTalent extends TalentInstance {
     }
 
     @Override
-    public void livingTick(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        if (this.level() >= 5 && dogIn.isVehicle() && dogIn.canBeControlledByRider()) {
+    public void livingTick(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        if (this.level() >= 5 && catIn.isVehicle() && catIn.canBeControlledByRider()) {
             // canBeSteered checks entity is LivingEntity
-            LivingEntity rider = (LivingEntity) dogIn.getControllingPassenger();
+            LivingEntity rider = (LivingEntity) catIn.getControllingPassenger();
             if (rider.isInWater()) {
                 rider.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 80, 1, true, false));
             }
@@ -29,18 +29,18 @@ public class SwimmerCatTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResult canBeRiddenInWater(kittytalents.api.inferface.AbstractCatEntity dogIn, Entity rider) {
+    public InteractionResult canBeRiddenInWater(kittytalents.api.inferface.AbstractCatEntity catIn, Entity rider) {
         return this.level() >= 5 ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 
     @Override
-    public InteractionResult canBreatheUnderwater(kittytalents.api.inferface.AbstractCatEntity dogIn) {
+    public InteractionResult canBreatheUnderwater(kittytalents.api.inferface.AbstractCatEntity catIn) {
         return this.level() >= 5 ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 
     @Override
-    public InteractionResultHolder<Integer> decreaseAirSupply(kittytalents.api.inferface.AbstractCatEntity dogIn, int air) {
-        if (this.level() > 0 && dogIn.getRandom().nextInt(this.level() + 1) > 0) {
+    public InteractionResultHolder<Integer> decreaseAirSupply(kittytalents.api.inferface.AbstractCatEntity catIn, int air) {
+        if (this.level() > 0 && catIn.getRandom().nextInt(this.level() + 1) > 0) {
             return InteractionResultHolder.success(air);
         }
 
@@ -48,7 +48,7 @@ public class SwimmerCatTalent extends TalentInstance {
     }
 
     @Override
-    public InteractionResultHolder<Integer> determineNextAir(kittytalents.api.inferface.AbstractCatEntity dogIn, int currentAir) {
+    public InteractionResultHolder<Integer> determineNextAir(kittytalents.api.inferface.AbstractCatEntity catIn, int currentAir) {
         if (this.level() > 0) {
             return InteractionResultHolder.pass(currentAir + this.level());
         }

@@ -5,11 +5,11 @@ import kittytalents.api.feature.InteractHandler;
 import kittytalents.client.ClientSetup;
 import kittytalents.client.data.DTBlockstateProvider;
 import kittytalents.client.data.DTItemModelProvider;
-import kittytalents.client.entity.render.world.BedFinderRenderer;
+//import kittytalents.client.entity.render.world.BedFinderRenderer;
 import kittytalents.client.event.ClientEventHandler;
 import kittytalents.common.Capabilities;
 import kittytalents.common.addon.AddonManager;
-import kittytalents.common.command.DogRespawnCommand;
+import kittytalents.common.command.CatRespawnCommand;
 import kittytalents.common.config.ConfigHandler;
 import kittytalents.common.data.*;
 import kittytalents.common.entity.HelmetInteractHandler;
@@ -18,7 +18,7 @@ import kittytalents.common.event.EventHandler;
 import kittytalents.common.lib.Constants;
 import kittytalents.common.network.PacketHandler;
 import kittytalents.common.talent.HappyEaterTalent;
-import kittytalents.common.util.BackwardsComp;
+//import kittytalents.common.util.BackwardsComp;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -85,7 +85,7 @@ public class KittyTalents2 {
         forgeEventBus.addListener(this::registerCommands);
 
         forgeEventBus.register(new EventHandler());
-        forgeEventBus.register(new BackwardsComp());
+//        forgeEventBus.register(new BackwardsComp());
 
         // Client Events
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
@@ -97,7 +97,7 @@ public class KittyTalents2 {
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
             forgeEventBus.register(new ClientEventHandler());
-            forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
+//            forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
         });
 
         ConfigHandler.init(modEventBus);
@@ -113,7 +113,7 @@ public class KittyTalents2 {
         FoodHandler.registerDynPredicate(HappyEaterTalent.INNER_DYN_PRED);
         InteractHandler.registerHandler(new HelmetInteractHandler());
         ConfigHandler.initTalentConfig();
-        DogRespawnCommand.registerSerilizers();
+        CatRespawnCommand.registerSerilizers();
         kittytalents.common.entity.CatEntity.initDataParameters();
     }
 
@@ -122,7 +122,7 @@ public class KittyTalents2 {
     }
 
     public void registerCommands(final RegisterCommandsEvent event) {
-        DogRespawnCommand.register(event.getDispatcher());
+        CatRespawnCommand.register(event.getDispatcher());
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -133,7 +133,7 @@ public class KittyTalents2 {
     }
 
     protected void interModProcess(final InterModProcessEvent event) {
-        BackwardsComp.init();
+//        BackwardsComp.init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         AddonManager.init();

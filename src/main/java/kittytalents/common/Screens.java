@@ -2,8 +2,8 @@ package kittytalents.common;
 
 import kittytalents.KittyItems;
 import kittytalents.common.block.tileentity.FoodBowlTileEntity;
-import kittytalents.common.inventory.container.DogInventoriesContainer;
-import kittytalents.common.inventory.container.PackPuppyContainer;
+import kittytalents.common.inventory.container.CatInventoriesContainer;
+import kittytalents.common.inventory.container.PackKittyContainer;
 import kittytalents.common.inventory.container.TreatBagContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -24,18 +24,18 @@ public class Screens {
 
         private kittytalents.api.inferface.AbstractCatEntity cat;
 
-        public PackPuppyContainerProvider(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-            this.cat = dogIn;
+        public PackPuppyContainerProvider(kittytalents.api.inferface.AbstractCatEntity catIn) {
+            this.cat = catIn;
         }
 
         @Override
         public AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player) {
-            return new PackPuppyContainer(windowId, inventory, this.cat);
+            return new PackKittyContainer(windowId, inventory, this.cat);
         }
 
         @Override
         public Component getDisplayName() {
-            return new TranslatableComponent("container.kittytalents.pack_puppy");
+            return new TranslatableComponent("container.kittytalents.pack_kitty");
         }
     }
 
@@ -43,8 +43,8 @@ public class Screens {
 
         private List<kittytalents.common.entity.CatEntity> dogs;
 
-        public DogInventoriesContainerProvider(List<kittytalents.common.entity.CatEntity> dogIn) {
-            this.dogs = dogIn;
+        public DogInventoriesContainerProvider(List<kittytalents.common.entity.CatEntity> catIn) {
+            this.dogs = catIn;
         }
 
         @Override
@@ -53,7 +53,7 @@ public class Screens {
             for (int i = 0; i < array.getCount(); i++) {
                 array.set(i, this.dogs.get(i).getId());
             }
-            return new DogInventoriesContainer(windowId, inventory, array);
+            return new CatInventoriesContainer(windowId, inventory, array);
         }
 
         @Override
@@ -83,19 +83,19 @@ public class Screens {
         }
     }
 
-    public static void openPackPuppyScreen(ServerPlayer player, kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        if (dogIn.isAlive()) {
-            NetworkHooks.openGui(player, new PackPuppyContainerProvider(dogIn), (buf) -> {
-                buf.writeInt(dogIn.getId());
+    public static void openPackPuppyScreen(ServerPlayer player, kittytalents.api.inferface.AbstractCatEntity catIn) {
+        if (catIn.isAlive()) {
+            NetworkHooks.openGui(player, new PackPuppyContainerProvider(catIn), (buf) -> {
+                buf.writeInt(catIn.getId());
             });
         }
     }
 
-    public static void openDogInventoriesScreen(ServerPlayer player, List<kittytalents.common.entity.CatEntity> dogIn) {
-        if (!dogIn.isEmpty()) {
-            NetworkHooks.openGui(player, new DogInventoriesContainerProvider(dogIn), (buf) -> {
-                buf.writeInt(dogIn.size());
-                for (kittytalents.common.entity.CatEntity cat : dogIn) {
+    public static void openDogInventoriesScreen(ServerPlayer player, List<kittytalents.common.entity.CatEntity> catIn) {
+        if (!catIn.isEmpty()) {
+            NetworkHooks.openGui(player, new DogInventoriesContainerProvider(catIn), (buf) -> {
+                buf.writeInt(catIn.size());
+                for (kittytalents.common.entity.CatEntity cat : catIn) {
                     buf.writeInt(cat.getId());
                 }
             });

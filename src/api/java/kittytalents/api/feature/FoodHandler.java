@@ -45,21 +45,21 @@ public class FoodHandler {
         return Optional.empty();
     }
 
-    public static Optional<kittytalents.api.inferface.ICatFoodHandler> getMatch(@Nullable kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, @Nullable Entity entityIn) {
-        for (kittytalents.api.inferface.ICatFoodHandler handler : dogIn.getFoodHandlers()) {
-            if (handler.canConsume(dogIn, stackIn, entityIn)) {
+    public static Optional<kittytalents.api.inferface.ICatFoodHandler> getMatch(@Nullable kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, @Nullable Entity entityIn) {
+        for (kittytalents.api.inferface.ICatFoodHandler handler : catIn.getFoodHandlers()) {
+            if (handler.canConsume(catIn, stackIn, entityIn)) {
                 return Optional.of(handler);
             }
         }
 
         if (stackIn.getItem() instanceof kittytalents.api.inferface.ICatFoodHandler) {
-            if (((kittytalents.api.inferface.ICatFoodHandler) stackIn.getItem()).canConsume(dogIn, stackIn, entityIn)) {
+            if (((kittytalents.api.inferface.ICatFoodHandler) stackIn.getItem()).canConsume(catIn, stackIn, entityIn)) {
                 return Optional.of((kittytalents.api.inferface.ICatFoodHandler) stackIn.getItem());
             }
         }
 
         for (kittytalents.api.inferface.ICatFoodHandler handler : HANDLERS) {
-            if (handler.canConsume(dogIn, stackIn, entityIn)) {
+            if (handler.canConsume(catIn, stackIn, entityIn)) {
                 return Optional.of(handler);
             }
         }

@@ -1,5 +1,6 @@
 package kittytalents;
 
+import kittytalents.common.entity.CatEntity;
 import kittytalents.common.entity.KittyBeamEntity;
 import kittytalents.common.lib.Constants;
 import kittytalents.common.util.Util;

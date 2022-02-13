@@ -24,39 +24,39 @@ public class GuardCatTalent extends TalentInstance {
     }
 
     @Override
-    public void init(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        this.cooldown = dogIn.tickCount;
+    public void init(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        this.cooldown = catIn.tickCount;
     }
 
     @Override
-    public void writeToNBT(kittytalents.api.inferface.AbstractCatEntity dogIn, CompoundTag compound) {
-        super.writeToNBT(dogIn, compound);
-        int timeLeft = this.cooldown - dogIn.tickCount;
+    public void writeToNBT(kittytalents.api.inferface.AbstractCatEntity catIn, CompoundTag compound) {
+        super.writeToNBT(catIn, compound);
+        int timeLeft = this.cooldown - catIn.tickCount;
         compound.putInt("guardtime", timeLeft);
     }
 
     @Override
-    public void readFromNBT(kittytalents.api.inferface.AbstractCatEntity dogIn, CompoundTag compound) {
-        super.readFromNBT(dogIn, compound);
-        this.cooldown = dogIn.tickCount + compound.getInt("guardtime");
+    public void readFromNBT(kittytalents.api.inferface.AbstractCatEntity catIn, CompoundTag compound) {
+        super.readFromNBT(catIn, compound);
+        this.cooldown = catIn.tickCount + compound.getInt("guardtime");
     }
 
     @Override
-    public InteractionResultHolder<Float> attackEntityFrom(kittytalents.api.inferface.AbstractCatEntity dogIn, DamageSource damageSource, float damage) {
-        if (dogIn.level.isClientSide) {
+    public InteractionResultHolder<Float> attackEntityFrom(kittytalents.api.inferface.AbstractCatEntity catIn, DamageSource damageSource, float damage) {
+        if (catIn.level.isClientSide) {
             return InteractionResultHolder.pass(damage);
         }
 
         Entity entity = damageSource.getEntity();
 
         if (entity != null) {
-            int timeLeft =  this.cooldown - dogIn.tickCount;
+            int timeLeft =  this.cooldown - catIn.tickCount;
             if (timeLeft <= 0) {
                 int blockChance = this.level() + (this.level() >= 5 ? 1 : 0);
 
-                if (dogIn.getRandom().nextInt(12) < blockChance) {
-                    this.cooldown = dogIn.tickCount + 10;
-                    dogIn.playSound(SoundEvents.ITEM_BREAK, dogIn.getSoundVolume() / 2, (dogIn.getRandom().nextFloat() - dogIn.getRandom().nextFloat()) * 0.2F + 1.0F);
+                if (catIn.getRandom().nextInt(12) < blockChance) {
+                    this.cooldown = catIn.tickCount + 10;
+                    catIn.playSound(SoundEvents.ITEM_BREAK, catIn.getSoundVolume() / 2, (catIn.getRandom().nextFloat() - catIn.getRandom().nextFloat()) * 0.2F + 1.0F);
                     return InteractionResultHolder.fail(0F);
                 }
             }

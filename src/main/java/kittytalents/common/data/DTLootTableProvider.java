@@ -55,11 +55,11 @@ public class DTLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             dropsSelf(KittyBlocks.CAT_BATH);
-            dropDogBed(KittyBlocks.CAT_BED);
+            dropCatbed(KittyBlocks.CAT_BED);
             dropsSelf(KittyBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
         }
 
-        private void dropDogBed(Supplier<? extends Block> block) {
+        private void dropCatbed(Supplier<? extends Block> block) {
             LootTable.Builder lootTableBuilder = LootTable.lootTable().withPool(applyExplosionCondition(block.get(),
                        LootPool.lootPool()
                          .setRolls(ConstantValue.exactly(1)))

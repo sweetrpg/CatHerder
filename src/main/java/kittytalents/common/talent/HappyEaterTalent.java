@@ -22,7 +22,7 @@ public class HappyEaterTalent extends TalentInstance implements kittytalents.api
     }
 
     @Override
-    public InteractionResultHolder<Float> setDogHunger(kittytalents.api.inferface.AbstractCatEntity dogIn, float hunger, float diff) {
+    public InteractionResultHolder<Float> setCatHunger(kittytalents.api.inferface.AbstractCatEntity catIn, float hunger, float diff) {
         hunger += diff / 10 * this.level();
         return InteractionResultHolder.success(hunger);
     }
@@ -33,7 +33,7 @@ public class HappyEaterTalent extends TalentInstance implements kittytalents.api
     }
 
     @Override
-    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
+    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
         if (this.level() >= 3) {
 
             Item item = stackIn.getItem();
@@ -51,20 +51,20 @@ public class HappyEaterTalent extends TalentInstance implements kittytalents.api
     }
 
     @Override
-    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
+    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
         if (this.level() >= 3) {
 
             Item item = stackIn.getItem();
 
             if (item == Items.ROTTEN_FLESH) {
-                dogIn.addHunger(30);
-                dogIn.consumeItemFromStack(entityIn, stackIn);
+                catIn.addHunger(30);
+                catIn.consumeItemFromStack(entityIn, stackIn);
                 return InteractionResult.SUCCESS;
             }
 
             if (this.level() >= 5 && item.isEdible() && ItemTags.FISHES.contains(item)) {
-                dogIn.addHunger(item.getFoodProperties().getNutrition() * 5);
-                dogIn.consumeItemFromStack(entityIn, stackIn);
+                catIn.addHunger(item.getFoodProperties().getNutrition() * 5);
+                catIn.consumeItemFromStack(entityIn, stackIn);
                 return InteractionResult.SUCCESS;
             }
         }

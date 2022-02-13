@@ -15,8 +15,8 @@ public class PestFighterTalent extends TalentInstance {
     }
 
     @Override
-    public void livingTick(kittytalents.api.inferface.AbstractCatEntity dogIn) {
-        if (dogIn.level.isClientSide || dogIn.tickCount % 2 == 0) {
+    public void livingTick(kittytalents.api.inferface.AbstractCatEntity catIn) {
+        if (catIn.level.isClientSide || catIn.tickCount % 2 == 0) {
             return;
         }
 
@@ -27,11 +27,11 @@ public class PestFighterTalent extends TalentInstance {
                 damage = 2;
             }
 
-            List<Silverfish> list = dogIn.level.getEntitiesOfClass(
-                Silverfish.class, dogIn.getBoundingBox().inflate(this.level() * 3, 4D, this.level() * 3), EntitySelector.ENTITY_STILL_ALIVE
+            List<Silverfish> list = catIn.level.getEntitiesOfClass(
+                Silverfish.class, catIn.getBoundingBox().inflate(this.level() * 3, 4D, this.level() * 3), EntitySelector.ENTITY_STILL_ALIVE
             );
             for (Silverfish silverfish : list) {
-                if (dogIn.getRandom().nextInt(10) == 0) {
+                if (catIn.getRandom().nextInt(10) == 0) {
                     silverfish.hurt(DamageSource.GENERIC, damage);
                 }
             }

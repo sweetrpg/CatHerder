@@ -6,9 +6,9 @@ public class OwnerHurtTargetGoal extends net.minecraft.world.entity.ai.goal.targ
 
     private kittytalents.common.entity.CatEntity cat;
 
-    public OwnerHurtTargetGoal(kittytalents.common.entity.CatEntity dogIn) {
-        super(dogIn);
-        this.cat = dogIn;
+    public OwnerHurtTargetGoal(kittytalents.common.entity.CatEntity catIn) {
+        super(catIn);
+        this.cat = catIn;
     }
 
     @Override

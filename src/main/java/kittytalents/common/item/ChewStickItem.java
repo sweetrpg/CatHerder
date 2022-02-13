@@ -19,17 +19,17 @@ public class ChewStickItem extends Item implements kittytalents.api.inferface.IC
     }
 
     @Override
-    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
+    public boolean canConsume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
         return true;
     }
 
     @Override
-    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity dogIn, ItemStack stackIn, Entity entityIn) {
-        if (!dogIn.level.isClientSide) {
-            dogIn.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 1, false, true));
-            dogIn.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 6, false, true));
-            dogIn.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 2, false, true));
-            dogIn.consumeItemFromStack(entityIn, stackIn);
+    public InteractionResult consume(kittytalents.api.inferface.AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
+        if (!catIn.level.isClientSide) {
+            catIn.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 1, false, true));
+            catIn.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 6, false, true));
+            catIn.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 2, false, true));
+            catIn.consumeItemFromStack(entityIn, stackIn);
         }
 
         return InteractionResult.SUCCESS;
