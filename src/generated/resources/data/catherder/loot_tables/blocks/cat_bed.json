@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "casingId",
+                  "target": "catherder.casingId",
+                  "op": "replace"
+                },
+                {
+                  "source": "beddingId",
+                  "target": "catherder.beddingId",
+                  "op": "replace"
+                },
+                {
+                  "source": "ownerId",
+                  "target": "catherder.ownerId",
+                  "op": "replace"
+                },
+                {
+                  "source": "name",
+                  "target": "catherder.name",
+                  "op": "replace"
+                },
+                {
+                  "source": "ownerName",
+                  "target": "catherder.ownerName",
+                  "op": "replace"
+                }
+              ]
+            }
+          ],
+          "name": "catherder:cat_bed"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

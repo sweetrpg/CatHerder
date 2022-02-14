@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "catherder:training_treat"
+    },
+    {
+      "item": "catherder:training_treat"
+    },
+    {
+      "item": "catherder:training_treat"
+    },
+    {
+      "item": "catherder:training_treat"
+    },
+    {
+      "item": "catherder:training_treat"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    }
+  ],
+  "result": {
+    "item": "catherder:super_treat",
+    "count": 5
+  }
+}

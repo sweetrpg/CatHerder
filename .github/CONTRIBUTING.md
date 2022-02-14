@@ -20,7 +20,7 @@ The following below are the guidelines for reporting bugs on the Kitty Talents c
 
 ## Processing
 The following with happen to this type of issues:
-- Automatically be labeled as "Bug" and moved under the [Known Issues Project](https://github.com/ProPercivalalb/KittyTalents/projects/1) for easier access and better organization.
+- Automatically be labeled as "Bug" and moved under the [Known Issues Project](https://github.com/Sweetrpg/CatHerder/projects/1) for easier access and better organization.
 - It may take a few hours or so for the authors to respond, so be patient.
 
 
@@ -41,7 +41,7 @@ The following below are the guidelines for requesting features on the Kitty Tale
 
 ## Processing
 The following with happen to this type of issues:
-- Automatically be labeled as "Feature Request" and moved under the [Suggestions Project](https://github.com/ProPercivalalb/KittyTalents/projects/2) for easier access and better organization.
+- Automatically be labeled as "Feature Request" and moved under the [Suggestions Project](https://github.com/Sweetrpg/CatHerder/projects/2) for easier access and better organization.
 - It may take a few hours or so for the authors to respond, so be patient.
 
 
@@ -57,7 +57,7 @@ The following below are the guidelines for contributing to the mod's source code
 
 ## Processing
 The following with happen to this type of issues:
-- Automatically be labeled as "Enhancement" and moved under the [Suggestions Project](https://github.com/ProPercivalalb/KittyTalents/projects/2) for easier access and better organization.
+- Automatically be labeled as "Enhancement" and moved under the [Suggestions Project](https://github.com/Sweetrpg/CatHerder/projects/2) for easier access and better organization.
 - It may take a few hours or so for the authors to respond, so be patient
 
 # Contributing to the Locales
@@ -72,5 +72,5 @@ The following below are the guidelines for contributing to the mod's language pa
 
 ## Processing
 The following with happen to this type of issues:
-- Automatically be labeled as "Enhancement" and moved under the [Suggestions Project](https://github.com/ProPercivalalb/KittyTalents/projects/2) for easier access and better organization.
+- Automatically be labeled as "Enhancement" and moved under the [Suggestions Project](https://github.com/Sweetrpg/CatHerder/projects/2) for easier access and better organization.
 - It may take a few hours or so for the authors to respond, so be patient.

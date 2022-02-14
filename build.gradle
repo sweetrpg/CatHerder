@@ -29,7 +29,7 @@ println "On branch: ${branch.fullName}"
 println "Pipeline branch: " + (System.getenv('CI_COMMIT_BRANCH') ?: 'NONE')
 
 group = 'com.sweetrpg'
-archivesBaseName = "KittyTalents-${project.target_mc_version}"
+archivesBaseName = "CatHerder-${project.target_mc_version}"
 version = (grgit.describe(longDescr: true, tags: true) ?: '0-0-0').split('-').with { it -> "${it[0]}.${it[1]}" }
 
 println "Version: ${version}"
@@ -80,30 +80,30 @@ minecraft {
 
     runs {
         client {
-            taskName 'kittytalents_client'
+            taskName 'catherder_client'
             workingDirectory file('run')
             property 'forge.logging.console.level', 'debug'
             mods {
-                kittytalents.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
             }
         }
 
         server {
-            taskName 'kittytalents_server'
+            taskName 'catherder_server'
             workingDirectory file('run-server')
             property 'forge.logging.console.level', 'debug'
             mods {
-                kittytalents.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
             }
         }
 
         data {
-            taskName 'kittytalents_data'
+            taskName 'catherder_data'
             workingDirectory file('run')
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'kittytalents', '--all', '--output', '"' + file('src/generated/resources/') + '"', '--existing', '"' + sourceSets.main.resources.srcDirs[0] + '"'
+            args '--mod', 'catherder', '--all', '--output', '"' + file('src/generated/resources/') + '"', '--existing', '"' + sourceSets.main.resources.srcDirs[0] + '"'
             mods {
-                kittytalents.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
             }
         }
     }
@@ -171,7 +171,7 @@ jar {
 
     manifest {
         attributes([
-            "Specification-Title": "Kitty Talents",
+            "Specification-Title": "Cat Herder",
             "Specification-Vendor": "SweetRPG",
             "Specification-Version": project.version, // We are version 1 of ourselves
             "Implementation-Title": project.name,

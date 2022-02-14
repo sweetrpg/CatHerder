@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:map"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "catherder:radio_collar"
+    }
+  ],
+  "result": {
+    "item": "catherder:radar"
+  }
+}

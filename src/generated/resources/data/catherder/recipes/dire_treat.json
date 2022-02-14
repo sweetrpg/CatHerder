@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "catherder:master_treat"
+    },
+    {
+      "item": "catherder:master_treat"
+    },
+    {
+      "item": "catherder:master_treat"
+    },
+    {
+      "item": "catherder:master_treat"
+    },
+    {
+      "item": "catherder:master_treat"
+    },
+    {
+      "item": "minecraft:end_stone"
+    }
+  ],
+  "result": {
+    "item": "catherder:dire_treat"
+  }
+}

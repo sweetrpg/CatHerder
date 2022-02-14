@@ -1,0 +1,10 @@
+{
+  "whistle_short": {
+    "subtitle": "catherder.whistle.short",
+    "sounds": [ "catherder:whistle/short" ]
+  },
+  "whistle_long": {
+    "subtitle": "catherder.whistle.long",
+    "sounds": [ "catherder:whistle/long" ]
+  }
+}

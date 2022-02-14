@@ -1,27 +1,27 @@
 modLoader="javafml"
 loaderVersion="${fml_version_range}"
 license="MIT"
-issueTrackerURL="https://github.com/sweetrpg/KittyTalents/issues"
-displayURL="https://minecraft.curseforge.com/projects/kitty-talents/"
-logoFile="dt_logo.png"
+issueTrackerURL="https://github.com/sweetrpg/CatHerder/issues"
+displayURL="https://minecraft.curseforge.com/projects/cat-herder/"
+logoFile= "../ch_logo.png"
 [[mods]] #mandatory
-    modId="kittytalents"
+    modId="catherder"
     version="${version}"
-    updateJSONURL="https://www.dropbox.com/s/raw/q6ckhwos45jires/version-kittytalents.json"
-    displayName="Kitty Talents"
+    updateJSONURL="https://www.dropbox.com/s/raw/q6ckhwos45jires/version-catherder.json"
+    displayName="Cat Herder"
     credits="paulyhedral,percivalalb,RaustBlackDragon,NovaViper"
     authors="paulyhedral"
     description='''
     Turning your cats into fun, playful cats.
     '''
-[[dependencies.kittytalents]] #optional
+[[dependencies.catherder]] #optional
     modId="forge"
     mandatory=true
     versionRange="${forge_version_range}" #mandatory
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.kittytalents]]
+[[dependencies.catherder]]
     modId="minecraft"
     mandatory=true
     versionRange="${minecraft_version_range}"

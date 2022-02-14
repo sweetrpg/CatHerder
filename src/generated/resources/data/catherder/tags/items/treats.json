@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "catherder:training_treat",
+    "catherder:super_treat",
+    "catherder:master_treat",
+    "catherder:dire_treat"
+  ]
+}

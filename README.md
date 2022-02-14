@@ -14,7 +14,7 @@ Thanks to everyone that has contributed. This includes but is not limited to...
  * **NovaViper** for coding help and maintaining order
  * **SimonMeskens** for some of the textures
 
-Want to know more about the mod? Take a gander at the [wiki](https://github.com/sweetrpg/KittyTalents/wiki)!
+Want to know more about the mod? Take a gander at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
 
 -----------------
 
@@ -40,13 +40,13 @@ Want to know more about the mod? Take a gander at the [wiki](https://github.com/
  - **Q:** Which Minecraft versions are supported?  
    **A:** It is normally be the last two major releases, currently `1.18.x`.
  - **Q:** Are cats no longer immortal?  
-   **A:** Unlike the previous versions, **cats can die**. Fortunately, they can be revived. Visit the [Behaviour wiki](https://github.com/sweetrpg/KittyTalents/wiki/Behavior#immortality-only-mc-112-and-older-versions-for-mc-115) for more info.
+   **A:** Unlike the previous versions, **cats can die**. Fortunately, they can be revived. Visit the [Behaviour wiki](https://github.com/sweetrpg/CatHerder/wiki/Behavior#immortality-only-mc-112-and-older-versions-for-mc-115) for more info.
  - **Q:** I have a cat, how to get started?  
-   **A:** Use a **Training Treat** to turn him into a **KittyTalents Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/KittyTalents/wiki/Getting-Started) for more info.
+   **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
 -----------------
 
 ### Licenses
-KittyTalents API
+CatHerder API
  - 2022
  - [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)

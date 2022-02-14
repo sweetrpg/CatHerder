@@ -1,0 +1,77 @@
+package com.sweetrpg.catherder.common.talent;
+
+import com.sweetrpg.catherder.api.registry.Talent;
+import com.sweetrpg.catherder.api.registry.TalentInstance;
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
+import com.sweetrpg.catherder.api.inferface.ICatFoodHandler;
+import com.sweetrpg.catherder.api.inferface.ICatFoodPredicate;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+
+public class HappyEaterTalent extends TalentInstance implements ICatFoodHandler {
+
+    public static final ICatFoodPredicate INNER_DYN_PRED = (stackIn) -> {
+        Item item = stackIn.getItem();
+        return item == Items.ROTTEN_FLESH || (item.isEdible() && ItemTags.FISHES.contains(item));
+    };
+
+    public HappyEaterTalent(Talent talentIn, int levelIn) {
+        super(talentIn, levelIn);
+    }
+
+    @Override
+    public InteractionResultHolder<Float> setCatHunger(AbstractCatEntity catIn, float hunger, float diff) {
+        hunger += diff / 10 * this.level();
+        return InteractionResultHolder.success(hunger);
+    }
+
+    @Override
+    public boolean isFood(ItemStack stackIn) {
+        return HappyEaterTalent.INNER_DYN_PRED.isFood(stackIn);
+    }
+
+    @Override
+    public boolean canConsume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
+        if (this.level() >= 3) {
+
+            Item item = stackIn.getItem();
+
+            if (item == Items.ROTTEN_FLESH) {
+                return true;
+            }
+
+            if (this.level() >= 5 && item.isEdible() && ItemTags.FISHES.contains(item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public InteractionResult consume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
+        if (this.level() >= 3) {
+
+            Item item = stackIn.getItem();
+
+            if (item == Items.ROTTEN_FLESH) {
+                catIn.addHunger(30);
+                catIn.consumeItemFromStack(entityIn, stackIn);
+                return InteractionResult.SUCCESS;
+            }
+
+            if (this.level() >= 5 && item.isEdible() && ItemTags.FISHES.contains(item)) {
+                catIn.addHunger(item.getFoodProperties().getNutrition() * 5);
+                catIn.consumeItemFromStack(entityIn, stackIn);
+                return InteractionResult.SUCCESS;
+            }
+        }
+
+        return InteractionResult.FAIL;
+    }
+}

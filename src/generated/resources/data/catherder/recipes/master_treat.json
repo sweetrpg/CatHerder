@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "catherder:super_treat"
+    },
+    {
+      "item": "catherder:super_treat"
+    },
+    {
+      "item": "catherder:super_treat"
+    },
+    {
+      "item": "catherder:super_treat"
+    },
+    {
+      "item": "catherder:super_treat"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "item": "catherder:master_treat",
+    "count": 5
+  }
+}
