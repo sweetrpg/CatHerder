@@ -58,7 +58,7 @@ public class CatHerder {
     public static final RegistryObject<Talent> HAPPY_EATER = registerInst("happy_eater", HappyEaterTalent::new);
     public static final RegistryObject<Talent> HELL_BEAST = registerInst("hell_beast", HellBeastTalent::new);
     public static final RegistryObject<Talent> BIRDCATCHER = registerInst("birdcatcher", null);
-    public static final RegistryObject<Talent> PACK_CAT = registerInst("pack_cat", PackKittyTalent::new);
+    public static final RegistryObject<Talent> PACK_CAT = registerInst("pack_cat", PackCatTalent::new);
     public static final RegistryObject<Talent> PEST_FIGHTER = registerInst("pest_fighter", PestFighterTalent::new);
     //    public static final RegistryObject<Talent> PILLOW_PAW = registerInst("pillow_paw", PillowPawTalent::new);
     public static final RegistryObject<Talent> POISON_FANG = registerInst("poison_fang", PoisonFangTalent::new);
@@ -70,7 +70,7 @@ public class CatHerder {
     //    public static final RegistryObject<Talent> SHEPHERD_DOG = registerInst("shepherd_cat", ShepherdCatTalent::new);
 //    public static final RegistryObject<Talent> SWIMMER_CAT = registerInst("swimmer_cat", SwimmerCatTalent::new);
     public static final RegistryObject<Talent> MOUNT = registerInst("mount", MountTalent::new);
-    public static final RegistryObject<Talent> KITTY_TORCH = registerInst("kitty_torch", KittyTorchTalent::new);
+    public static final RegistryObject<Talent> CAT_TORCH = registerInst("cat_torch", CatTorchTalent::new);
 
     private static <T extends Talent> RegistryObject<Talent> registerInst(final String name, final BiFunction<Talent, Integer, TalentInstance> sup) {
         return register(name, () -> new Talent(sup));

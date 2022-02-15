@@ -1,7 +1,7 @@
-Kitty Talents [![Curseforge](http://cf.way2muchnoise.eu/full_kitty-talents_downloads.svg)](https://minecraft.curseforge.com/projects/kitty-talents) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%kitty-talents_all.svg)](https://minecraft.curseforge.com/projects/kitty-talents)
+Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.svg)](https://minecraft.curseforge.com/projects/cat-herder) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20cat-herder_all.svg)](https://minecraft.curseforge.com/projects/cat-herder)
 ===========
 
-**Kitty Talents** is a **Minecraft mod** made for **Minecraft Forge**
+**Cat Herder** is a **Minecraft mod** made for **Minecraft Forge**
 
 * Special talents for your cats
 * Improved AI making cats smarter than cats
@@ -10,9 +10,6 @@ Kitty Talents [![Curseforge](http://cf.way2muchnoise.eu/full_kitty-talents_downl
 * A cat tracking and revival system
 
 Thanks to everyone that has contributed. This includes but is not limited to...
- * **RaustBlackDragon** for creating the original mod and ideas back in 2013
- * **NovaViper** for coding help and maintaining order
- * **SimonMeskens** for some of the textures
 
 Want to know more about the mod? Take a gander at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
 
@@ -29,7 +26,7 @@ Want to know more about the mod? Take a gander at the [wiki](https://github.com/
   - For **Mac**, it is located at ````~/Library/Application Support/minecraft````
   - For **Linux**, it is located at ```~/.minecraft``` 
 - In this directory, there will be a new folder called ```mods``` (*create one if there isn't one*)
-- Download the mod from [here](https://www.curseforge.com/minecraft/mc-mods/kitty-talents/files), then drag n' drop the mod into the ```mods``` folder.
+- Download the mod from [here](https://www.curseforge.com/minecraft/mc-mods/cat-herder/files), then drag n' drop the mod into the ```mods``` folder.
 - *Run Minecraft and enjoy!*
 
 -----------------

@@ -15,11 +15,11 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 
 import java.util.Optional;
 
-public class PackKittyRenderer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
+public class PackCatRenderer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
 
     private CatBackpackModel model;
 
-    public PackKittyRenderer(RenderLayerParent parentRenderer, EntityRendererProvider.Context ctx) {
+    public PackCatRenderer(RenderLayerParent parentRenderer, EntityRendererProvider.Context ctx) {
         super(parentRenderer);
         this.model = new CatBackpackModel(ctx.bakeLayer(ClientSetup.DOG_BACKPACK));
     }

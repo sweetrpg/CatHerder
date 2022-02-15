@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sweetrpg.catherder.common.lib.Resources;
-import com.sweetrpg.catherder.common.talent.PackKittyTalent;
+import com.sweetrpg.catherder.common.talent.PackCatTalent;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -53,7 +53,7 @@ public class CatInventoryButton extends Button {
         if (this.visible) {
             Minecraft mc = Minecraft.getInstance();
             List<CatEntity> dogs = mc.level.getEntitiesOfClass(CatEntity.class, mc.player.getBoundingBox().inflate(12D, 12D, 12D),
-                                                               (cat) -> cat.canInteract(mc.player) && PackKittyTalent.hasInventory(cat)
+                                                               (cat) -> cat.canInteract(mc.player) && PackCatTalent.hasInventory(cat)
             );
             this.active = !dogs.isEmpty();
         }

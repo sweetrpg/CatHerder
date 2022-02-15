@@ -56,7 +56,7 @@
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",
 
-   "itemGroup.catherder": "Kitty Talents",
+   "itemGroup.catherder": "Cat Talents",
    "itemGroup.catherder.catbed": "Cat Bed Variants",
 
    "treat.dire_treat.low_level": "Ваша собака не может справиться с удивительной силой, содержащейся в этих лакомствах.",
@@ -89,7 +89,7 @@
    "talent.catherder.roaring_gale": "Штормовой рык",
    "talent.catherder.nermal": "Щенячьи глазки",
    "talent.catherder.swimmer_cat": "Плавец",
-   "talent.catherder.kitty_torch": "Kitty Torch",
+   "talent.catherder.cat_torch": "Cat Torch",
 
    "talent.catherder.bed_finder.description": "В течение того времени, пока эта собака находится у Вас на голове, она будет смотреть в сторону Вашей кровати. Чтобы собака запрыгнула Вам на голову, просто нажмите ПКМ, держа в руке кость. Дальность чутья собаки увеличивается на 200 блоков за каждый уровень, а на уровне 5 расстояние становится бесконечным.",
    "talent.catherder.tomcat.description": "Увеличивает критический урон собаки на 1/2 сердца за уровень, при полном освоении бонус - 1 сердце.",
@@ -111,7 +111,7 @@
    "talent.catherder.roaring_gale.description": "Возьми кость в руку и высвободи внутренний рык своей собаки! Длительность эффектов оглушения и урона за рык увеличится, а время восстановления этой способности уменьшится за каждый уровень. При полном освоении отдых составит 40 тактов (2 секунды), а длительность эффекта - 70 тактов (3.5 секунд).",
    "talent.catherder.nermal.description": "Этот навык поможет Вашей собаке завоевать сердце любого жителя. Также есть шанс получения подарка. При повышении Вы получите более дорогие подарки. Этот навык может быть использован только раз в 2 дня (игровое время). При полном освоении навык может быть использован 1 раз в день.",
    "talent.catherder.swimmer_cat.description": "Даёт возможность кататься на собаке в воде и дольше дышать под водой. Полное освоение позволит наезднику лучше видеть под водой.",
-   "talent.catherder.kitty_torch.description": "Allows your cat put torch when light level is down, at the cost of one torch of his inventory. To give it torches you can drop some nearby and it will pick it up. At level 5 he doesnt need torches in his inventory anymore.",
+   "talent.catherder.cat_torch.description": "Allows your cat put torch when light level is down, at the cost of one torch of his inventory. To give it torches you can drop some nearby and it will pick it up. At level 5 he doesnt need torches in his inventory anymore.",
 
    "talent.catherder.roaring_gale.cooldown": "Ревущая буря на перезарядке",
    "talent.catherder.roaring_gale.level": "Положите несколько очков в ревущую бурю, чтобы использовать!",
@@ -227,9 +227,9 @@
    "catradar.errornull": "**** Собаки не найдены в %s! ****",
    "catradar.errorown": "**** %s - не ваш пёс! Убедитесь, что у вас есть разрешение взаимодействовать с %d! ****",
 
-   "title.catherder.config": "Настройки Kitty Talents",
-   "modgui.config.kittysettings": "Настройки поведения собак",
-   "modgui.config.kittysettings.tooltip": "Здесь можно изменить детали поведения собак",
+   "title.catherder.config": "Настройки Cat Talents",
+   "modgui.config.catsettings": "Настройки поведения собак",
+   "modgui.config.catsettings.tooltip": "Здесь можно изменить детали поведения собак",
    "modgui.config.general": "Общие настройки",
    "modgui.config.general.tooltip": "Общие настройки для мода",
    "modgui.config.talents": "Таланты",
@@ -421,5 +421,5 @@
    "catbed.casing.botania:shimmerwoodplanks.0": "Корпус из мерцающих досок",
    "catbed.missing": "Missing: %s",
    "catbed.null": "Null",
-   "itemGroup.catherder.catbed": "Kitty Talents: Варианты собачих кроватей"
+   "itemGroup.catherder.catbed": "Cat Talents: Варианты собачих кроватей"
 }

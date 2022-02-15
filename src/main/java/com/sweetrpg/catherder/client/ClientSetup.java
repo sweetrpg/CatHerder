@@ -11,13 +11,13 @@ import com.sweetrpg.catherder.client.entity.render.CollarRenderManager;
 import com.sweetrpg.catherder.client.entity.render.CatScreenOverlays;
 import com.sweetrpg.catherder.client.entity.render.CatRenderer;
 import com.sweetrpg.catherder.client.entity.render.CatBeamRenderer;
-import com.sweetrpg.catherder.client.entity.render.layer.PackKittyRenderer;
+import com.sweetrpg.catherder.client.entity.render.layer.PackCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.RescueCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.ArmorAccessoryRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.DefaultAccessoryRenderer;
 import com.sweetrpg.catherder.client.screen.CatInventoriesScreen;
 import com.sweetrpg.catherder.client.screen.FoodBowlScreen;
-import com.sweetrpg.catherder.client.screen.PackKittyScreen;
+import com.sweetrpg.catherder.client.screen.PackCatScreen;
 import com.sweetrpg.catherder.client.screen.TreatBagScreen;
 import com.sweetrpg.catherder.client.tileentity.renderer.CatBedRenderer;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -44,7 +44,7 @@ public class ClientSetup {
 //        ItemBlockRenderTypes.setRenderLayer(CatBlocks.CATNIP_CROP.get(), RenderType.cutout());
 
         MenuScreens.register(ModContainerTypes.FOOD_BOWL.get(), FoodBowlScreen::new);
-        MenuScreens.register(ModContainerTypes.PACK_CAT.get(), PackKittyScreen::new);
+        MenuScreens.register(ModContainerTypes.PACK_CAT.get(), PackCatScreen::new);
         MenuScreens.register(ModContainerTypes.TREAT_BAG.get(), TreatBagScreen::new);
         MenuScreens.register(ModContainerTypes.CAT_INVENTORIES.get(), CatInventoriesScreen::new);
     }
@@ -54,7 +54,7 @@ public class ClientSetup {
         event.registerLayerDefinition(DOG_ARMOR, CatModel::createArmorLayer);
         event.registerLayerDefinition(DOG_BACKPACK, CatBackpackModel::createChestLayer);
         event.registerLayerDefinition(DOG_RESCUE_BOX, CatRescueModel::createRescueBoxLayer);
-        // TODO: RenderingRegistry.registerEntityRenderingHandler(KittyEntityTypes.DOG_BEAM.get(), manager -> new KittyBeamRenderer<>(manager, event.getMinecraftSupplier().get().getItemRenderer()));
+        // TODO: RenderingRegistry.registerEntityRenderingHandler(CatEntityTypes.DOG_BEAM.get(), manager -> new CatBeamRenderer<>(manager, event.getMinecraftSupplier().get().getItemRenderer()));
     }
 
     public static void setupTileEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
@@ -66,7 +66,7 @@ public class ClientSetup {
     public static void setupCollarRenderers(final FMLClientSetupEvent event) {
         CollarRenderManager.registerLayer(DefaultAccessoryRenderer::new);
         CollarRenderManager.registerLayer(ArmorAccessoryRenderer::new);
-        CollarRenderManager.registerLayer(PackKittyRenderer::new);
+        CollarRenderManager.registerLayer(PackCatRenderer::new);
         CollarRenderManager.registerLayer(RescueCatRenderer::new);
 
         OverlayRegistry.registerOverlayTop("Cat Food Level", CatScreenOverlays.FOOD_LEVEL_ELEMENT);

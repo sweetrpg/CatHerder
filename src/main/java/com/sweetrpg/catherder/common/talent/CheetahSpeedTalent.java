@@ -34,7 +34,7 @@ public class CheetahSpeedTalent extends TalentInstance {
                 speed += 0.04D;
             }
 
-            return new AttributeModifier(uuidIn, "Kitty Dash", speed, AttributeModifier.Operation.ADDITION);
+            return new AttributeModifier(uuidIn, "Cheetah Speed", speed, AttributeModifier.Operation.ADDITION);
         }
 
         return null;

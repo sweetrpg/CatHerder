@@ -56,7 +56,7 @@
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",
 
-   "itemGroup.catherder": "Kitty Talents",
+   "itemGroup.catherder": "Cat Talents",
    "itemGroup.catherder.catbed": "Cat Bed Variants",
 
    "treat.dire_treat.low_level": "당신의 개는 이 간식 속에 숨겨진 무시무시한 힘을 제대로 다룰 수 없습니다.",
@@ -89,7 +89,7 @@
    "talent.catherder.roaring_gale": "깜짝 포효",
    "talent.catherder.nermal": "귀여운 댕댕이",
    "talent.catherder.swimmer_cat": "나는야 물개",
-   "talent.catherder.kitty_torch": "Kitty Torch",
+   "talent.catherder.cat_torch": "Cat Torch",
 
    "talent.catherder.bed_finder.description": "이 스킬을 가진 개를 머리 위에 올린 동안, 당신의 침대가 검은 테두리로 표시됩니다. 개를 머리 위에 올리려면, 손에 뼈를 든 채로 우클릭 하세요. 유효범위는 레벨 당 200 블록 이며, 레벨 5 때 무제한이 됩니다.",
    "talent.catherder.tomcat.description": "치명타의 위력이 레벨 당 1/2 하트 만큼, 마스터 시 추가로 하트 하나 만큼 높아집니다.",
@@ -111,7 +111,7 @@
    "talent.catherder.roaring_gale.description": "-개피리: 소리 질러!-를 써서 당신의 개가 지닌 강력한 포효를 선보이세요! 레벨을 올리면 기절 효과의 지속시간과 포효의 피해량은 늘어나고, 다음 포효까지의 준비시간은 줄어듭니다. 마스터하면 이 스킬의 준비시간은 40 틱(2 초)이 되고, 기절 효과의 지속시간은 70 틱(3.5 초)이 됩니다.",
    "talent.catherder.nermal.description": "이 스킬은 당신의 개가 마을 주민들의 마음을 녹여, 당신에게 무언가 선물을 주게 만듭니다! 레벨을 올리면 선물의 품질이 좋아집니다. 이 효과는 마인크래프트 기준 2 일마다 한 번만 발생합니다. 스킬을 마스터하면 마인크래프트 기준 하루에 한 번 발생하게 됩니다.",
    "talent.catherder.swimmer_cat.description": "물 속에서 당신의 개를 올라타고 더 오래 숨을 참을 수 있게 합니다. 마스터하면 올라탄 동안 물 속에서 시야가 좋아집니다.",
-   "talent.catherder.kitty_torch.description": "Allows your cat put torch when light level is down, at the cost of one torch of his inventory. To give it torches you can drop some nearby and it will pick it up. At level 5 he doesnt need torches in his inventory anymore.",
+   "talent.catherder.cat_torch.description": "Allows your cat put torch when light level is down, at the cost of one torch of his inventory. To give it torches you can drop some nearby and it will pick it up. At level 5 he doesnt need torches in his inventory anymore.",
 
    "talent.catherder.roaring_gale.cooldown": "깜짝 포효는 아직 준비 중입니다.",
    "talent.catherder.roaring_gale.level": "깜짝 포효 스킬에 포인트를 투자해야 사용할 수 있습니다!",
@@ -227,9 +227,9 @@
    "catradar.errornull": "**** 여기 %s 차원에는 개가 없습니다! ****",
    "catradar.errorown": "**** 당신은 %s의 주인이 아닙니다! %d와 상호작용하려면 먼저 자격을 얻어주세요! ****",
 
-   "title.catherder.config": "Kitty Talents Configurations",
-   "modgui.config.kittysettings": "Cat Behavior Settings",
-   "modgui.config.kittysettings.tooltip": "Change certain behaviors of dogs.",
+   "title.catherder.config": "Cat Talents Configurations",
+   "modgui.config.catsettings": "Cat Behavior Settings",
+   "modgui.config.catsettings.tooltip": "Change certain behaviors of dogs.",
    "modgui.config.general": "General Settings",
    "modgui.config.general.tooltip": "General settings for the mod",
    "modgui.config.talents": "Talents",

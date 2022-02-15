@@ -4,7 +4,7 @@ import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
 import com.sweetrpg.catherder.common.inventory.container.slot.CatInventorySlot;
-import com.sweetrpg.catherder.common.talent.PackKittyTalent;
+import com.sweetrpg.catherder.common.talent.PackCatTalent;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -69,7 +69,7 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
                 CatEntity cat = (CatEntity) entity;
 
                 PackCatItemHandler packInventory = cat.getTalent(CatHerder.PACK_CAT)
-                                                      .map((inst) -> inst.cast(PackKittyTalent.class).inventory()).orElse(null);
+                                                      .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
                 if (packInventory == null) {
                     continue;
                 }

@@ -27,26 +27,26 @@ import net.minecraftforge.common.util.LazyOptional;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class PackKittyTalent extends TalentInstance {
+public class PackCatTalent extends TalentInstance {
 
     public static Capability<PackCatItemHandler> PACK_PUPPY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});;
 
-    private PackCatItemHandler packPuppyHandler;
-    private LazyOptional<?> lazyPackPuppyHandler;
+    private PackCatItemHandler packCatItemHandler;
+    private LazyOptional<?> lazyPackCatHandler;
 
     public static Predicate<ItemEntity> SHOULD_PICKUP_ENTITY_ITEM = (entity) -> {
         return entity.isAlive() && !entity.hasPickUpDelay() && !ModTags.PACK_CAT_BLACKLIST.contains(entity.getItem().getItem());// && !EntityAIFetch.BONE_PREDICATE.test(entity.getItem());
     };
 
-    public PackKittyTalent(Talent talentIn, int levelIn) {
+    public PackCatTalent(Talent talentIn, int levelIn) {
         super(talentIn, levelIn);
         PackCatItemHandler handler = new PackCatItemHandler();
-        this.packPuppyHandler = handler;
-        this.lazyPackPuppyHandler = LazyOptional.of(() -> handler);
+        this.packCatItemHandler = handler;
+        this.lazyPackCatHandler = LazyOptional.of(() -> handler);
     }
 
     public PackCatItemHandler inventory() {
-        return this.packPuppyHandler;
+        return this.packCatItemHandler;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class PackKittyTalent extends TalentInstance {
 
             if (!list.isEmpty()) {
                 for (ItemEntity entityItem : list) {
-                    ItemStack remaining = InventoryUtil.addItem(this.packPuppyHandler, entityItem.getItem());
+                    ItemStack remaining = InventoryUtil.addItem(this.packCatItemHandler, entityItem.getItem());
 
                     if (!remaining.isEmpty()) {
                         entityItem.setItem(remaining);
@@ -101,41 +101,41 @@ public class PackKittyTalent extends TalentInstance {
     public void dropInventory(AbstractCatEntity catIn) {
         //TODO either drop inventory or save to respawn data, currently does both
         // No need to drop anything if cat didn't have pack puppy
-        for (int i = 0; i < this.packPuppyHandler.getSlots(); ++i) {
-            Containers.dropItemStack(catIn.level, catIn.getX(), catIn.getY(), catIn.getZ(), this.packPuppyHandler.getStackInSlot(i));
-            this.packPuppyHandler.setStackInSlot(i, ItemStack.EMPTY);
+        for (int i = 0; i < this.packCatItemHandler.getSlots(); ++i) {
+            Containers.dropItemStack(catIn.level, catIn.getX(), catIn.getY(), catIn.getZ(), this.packCatItemHandler.getStackInSlot(i));
+            this.packCatItemHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
     }
 
     @Override
     public void writeToNBT(AbstractCatEntity catIn, CompoundTag compound) {
         super.writeToNBT(catIn, compound);
-        compound.merge(this.packPuppyHandler.serializeNBT());
+        compound.merge(this.packCatItemHandler.serializeNBT());
     }
 
     @Override
     public void readFromNBT(AbstractCatEntity catIn, CompoundTag compound) {
         super.readFromNBT(catIn, compound);
-        this.packPuppyHandler.deserializeNBT(compound);
+        this.packCatItemHandler.deserializeNBT(compound);
     }
 
     // Left in for backwards compatibility for versions <= 2.0.0.5
     @Override
     public void onRead(AbstractCatEntity catIn, CompoundTag compound) {
-        this.packPuppyHandler.deserializeNBT(compound);
+        this.packCatItemHandler.deserializeNBT(compound);
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(AbstractCatEntity catIn, Capability<T> cap, Direction side) {
-        if (cap == PackKittyTalent.PACK_PUPPY_CAPABILITY) {
-            return (LazyOptional<T>) this.lazyPackPuppyHandler;
+        if (cap == PackCatTalent.PACK_PUPPY_CAPABILITY) {
+            return (LazyOptional<T>) this.lazyPackCatHandler;
         }
         return null;
     }
 
     @Override
     public void invalidateCapabilities(AbstractCatEntity catIn) {
-        this.lazyPackPuppyHandler.invalidate();
+        this.lazyPackCatHandler.invalidate();
     }
 
     @Override

@@ -145,7 +145,7 @@ public class ClientEventHandler {
 //        Minecraft mc = Minecraft.getInstance();
 //        PlayerEntity player = mc.player;
 //
-//        if (player == null || player.getHeldItem(Hand.MAIN_HAND).getItem() != KittyItems.PATROL.get()) {
+//        if (player == null || player.getHeldItem(Hand.MAIN_HAND).getItem() != CatItems.PATROL.get()) {
 //            return;
 //        }
 //

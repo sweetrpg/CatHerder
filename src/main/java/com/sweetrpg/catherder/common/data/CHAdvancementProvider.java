@@ -67,7 +67,7 @@ public class CHAdvancementProvider extends AdvancementProvider {
         Advancement advancement = Advancement.Builder.advancement()
                 .display(DisplayInfoBuilder.create().icon(ModItems.TRAINING_TREAT).frame(FrameType.TASK).translate("cat.root").background("stone.png").noToast().noAnnouncement().build())
                 .addCriterion("tame_dog", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(ModEntityTypes.CAT.get()).build()))
-                //.withCriterion("get_dog", ItemUseTrigger.TameAnimalTrigger.Instance.create(EntityPredicate.Builder.create().type(KittyEntityTypes.CAT.get()).build()))
+                //.withCriterion("get_dog", ItemUseTrigger.TameAnimalTrigger.Instance.create(EntityPredicate.Builder.create().type(CatEntityTypes.CAT.get()).build()))
                 .requirements(RequirementsStrategy.OR)
                 .save(consumer, Util.getResourcePath("default/tame_dog"));
 

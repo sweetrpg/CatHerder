@@ -89,7 +89,7 @@
    "talent.catherder.roaring_gale": "狂风怒吼",
    "talent.catherder.nermal": "卖萌天赋",
    "talent.catherder.swimmer_cat": "游泳健将",
-   "talent.catherder.kitty_torch": "Kitty Torch",
+   "talent.catherder.cat_torch": "Cat Torch",
 
    "talent.catherder.bed_finder.description": "当拥有该技能的狗在你头上时，你的床就会黑色高亮突出显示。要让你的狗爬到你的头上，你需要拿着骨头右击它们。每提升一级，有效范围半径增加200格，当升到5级时，有效范围无限大。",
    "talent.catherder.tomcat.description": "增加致命一击的发生几率，每提升一级增加半颗心的伤害，精通后额外增加1颗心得伤害。",
@@ -111,7 +111,7 @@
    "talent.catherder.roaring_gale.description": "使用咆哮的哨子，释放你的狗内心的怒吼！每吼叫一声的晕眩效果和伤害的持续时间将会逐级增加，狗下一次吼叫之前的冷却时间将会逐级减少。精通这项技能将会把冷却时间降低至40刻（2秒），效果持续时间增加至70刻（3.5秒）。",
    "talent.catherder.nermal.description": "这项技能将会使你的狗温暖所有村民的心，然后村民会送你礼物！更高的等级可以让村民送给你更好的东西；不过这项技能每隔两天（Minecraft中的时间）才能使用一次。精通这项技能可以让你每天都使用该技能。",
    "talent.catherder.swimmer_cat.description": "在水下骑你的狗，你可以水下憋气更长时间。精通这项技能时，你可以很容易地看到水底。",
-   "talent.catherder.kitty_torch.description": "Allows your cat put torch when light level is down, at the cost of one torch of his inventory. To give it torches you can drop some nearby and it will pick it up. At level 5 he doesnt need torches in his inventory anymore.",
+   "talent.catherder.cat_torch.description": "Allows your cat put torch when light level is down, at the cost of one torch of his inventory. To give it torches you can drop some nearby and it will pick it up. At level 5 he doesnt need torches in his inventory anymore.",
 
    "talent.catherder.roaring_gale.cooldown": "狂风怒吼还在冷却中。",
    "talent.catherder.roaring_gale.level": "在狂风怒吼中使用一些点数！",
@@ -228,8 +228,8 @@
    "catradar.errorown": "**** 你不是%s的主人！请确保你具有与%d交互的权限！ ****",
 
    "title.catherder.config": "小狗天才的配置设定",
-   "modgui.config.kittysettings": "狗的设置",
-   "modgui.config.kittysettings.tooltip": "修改狗的某些行为",
+   "modgui.config.catsettings": "狗的设置",
+   "modgui.config.catsettings.tooltip": "修改狗的某些行为",
    "modgui.config.general": "通用设置",
    "modgui.config.general.tooltip": "本模组的通用设置",
    "modgui.config.talents": "能力",

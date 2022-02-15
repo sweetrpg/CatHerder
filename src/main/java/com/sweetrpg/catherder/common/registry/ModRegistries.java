@@ -52,7 +52,7 @@ public class ModRegistries {
 //
 //        @Override
 //        public Accessory createDummy(ResourceLocation key) {
-//            return new Accessory(() -> KittyAccessoryTypes.CLOTHING).setRegistryName(key);
+//            return new Accessory(() -> CatAccessoryTypes.CLOTHING).setRegistryName(key);
 //        }
 //    }
 //

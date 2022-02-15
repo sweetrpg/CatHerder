@@ -13,9 +13,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class KittyTorchTalent extends TalentInstance {
+public class CatTorchTalent extends TalentInstance {
 
-    public KittyTorchTalent(Talent talentIn, int levelIn) {
+    public CatTorchTalent(Talent talentIn, int levelIn) {
         super(talentIn, levelIn);
     }
 
@@ -28,7 +28,7 @@ public class KittyTorchTalent extends TalentInstance {
 
             if (catIn.level.getMaxLocalRawBrightness(catIn.blockPosition()) < 8 && catIn.level.isEmptyBlock(pos) && torchState.canSurvive(catIn.level, pos)) {
                 PackCatItemHandler inventory = catIn.getTalent(CatHerder.PACK_CAT)
-                                                    .map((inst) -> inst.cast(PackKittyTalent.class).inventory()).orElse(null);
+                                                    .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
 
                 // If null might be because no pack puppy
                 if (this.level() >= 5) {

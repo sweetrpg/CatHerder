@@ -11,9 +11,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
-public class PackKittyScreen extends AbstractContainerScreen<PackCatContainer> {
+public class PackCatScreen extends AbstractContainerScreen<PackCatContainer> {
 
-    public PackKittyScreen(PackCatContainer packPuppy, Inventory playerInventory, Component displayName) {
+    public PackCatScreen(PackCatContainer packPuppy, Inventory playerInventory, Component displayName) {
         super(packPuppy, playerInventory, displayName);
         //TODO this.container.allowUserInput = false;
     }

@@ -56,7 +56,7 @@
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",
 
-   "itemGroup.catherder": "Kitty Talents",
+   "itemGroup.catherder": "Cat Talents",
    "itemGroup.catherder.catbed": "Cat Bed Variants",
 
    "treat.dire_treat.low_level": "Chú cún của bạn có thể không chịu nổi năng lượng chứa trong Xương này",
@@ -89,7 +89,7 @@
    "talent.catherder.roaring_gale": "Cơn lốc Gầm thét",
    "talent.catherder.nermal": "Cún Dễ thương",
    "talent.catherder.swimmer_cat": "Cún Bơi lội",
-   "talent.catherder.kitty_torch": "Cún Đặt đuốc",
+   "talent.catherder.cat_torch": "Cún Đặt đuốc",
 
    "talent.catherder.bed_finder.description": "Khi một chú cún với kĩ năng này trên đầu bạn, giường bạn sẽ được tô lên bằng một khung màu đen. Để đưa chú cún lên đầu bạn, nhấp Chuột Phải vào nó với cục xương thường trên tay. Cự li chú cún có thể làm được điều này bằng 200 khối trên 1 cấp, nhưng trở thành vô cực tại cấp 5.",
    "talent.catherder.tomcat.description": "Tăng sát thương lên 1/2 tim với mỗi cấp, và thêm 3/2 tim khi đạt cấp tối đa",
@@ -111,7 +111,7 @@
    "talent.catherder.roaring_gale.description": "Sử dụng Còi Gầm Thét và giải phóng tiếng gầm bên trong của cún bạn! Thời gian của hiệu ứng choáng và sát thương mỗi lần gầm sẽ tăng lên và thời gian hồi phục kỹ năng trước tiếng gầm tiếp theo của cún bạn sẽ giảm theo mỗi cấp. Thành thạo kỹ năng này sẽ đặt thời gian hồi phục kỹ năng thành 2 giây, và thời gian hiệu ứng sẽ được đặt thành 3.5 giây.",
    "talent.catherder.nermal.description": "Kỹ năng này sẽ khiến chú cún sưởi ấm trái tim của bất kỳ dân làng nào trong làng, khiến họ tặng quà cho bạn! Các cấp cao hơn trong kỹ năng sẽ tăng chất lượng của quà tặng ngẫu nhiên. Điều này chỉ có thể được thực hiện một lần trong hai ngày trong trò chơi. Thành thạo kỹ năng cho phép bạn làm điều này một lần mỗi ngày trong trò chơi.",
    "talent.catherder.swimmer_cat.description": "Cho phép bạn cưỡi cún trong nước và nó thở lâu hơn dưới nước. Cấp 5 cho phép bạn dễ dàng nhìn thấy dưới nước.",
-   "talent.catherder.kitty_torch.description": "Cho phép cún bạn đặt đuốc khi mức độ ánh sáng giảm, với chi phí là một đuốc trong túi đồ của nó. Để cho nó đuốc, bạn có thể thả một vài đuốc gần đó và nó sẽ tự nhặt. Ở cấp độ 5, nó không cần có đuốc trong túi đồ của mình nữa!",
+   "talent.catherder.cat_torch.description": "Cho phép cún bạn đặt đuốc khi mức độ ánh sáng giảm, với chi phí là một đuốc trong túi đồ của nó. Để cho nó đuốc, bạn có thể thả một vài đuốc gần đó và nó sẽ tự nhặt. Ở cấp độ 5, nó không cần có đuốc trong túi đồ của mình nữa!",
 
    "talent.catherder.roaring_gale.cooldown": "Cơn lốc Gầm thét đang ở trong trạng thái phục hồi.",
    "talent.catherder.roaring_gale.level": "Hãy đặt điểm vào Cơn lốc Gầm thét để dùng",
@@ -227,9 +227,9 @@
    "catradar.errornull": "**** Không có chú cún nào được tìm thấy tại %s! ****",
    "catradar.errorown": "**** Bạn không phải là chủ của %s! Hãy chắc chắn rằng bạn có quyền tiếp xúc với %d! ****",
 
-   "title.catherder.config": "Cài đặt Kitty Talents",
-   "modgui.config.kittysettings": "Cài đặt hành động của cún",
-   "modgui.config.kittysettings.tooltip": "Thay đổi một số hành động của cún",
+   "title.catherder.config": "Cài đặt Cat Talents",
+   "modgui.config.catsettings": "Cài đặt hành động của cún",
+   "modgui.config.catsettings.tooltip": "Thay đổi một số hành động của cún",
    "modgui.config.general": "Cài đặt chung",
    "modgui.config.general.tooltip": "Cài đặt chung của mod",
    "modgui.config.talents": "Talents",

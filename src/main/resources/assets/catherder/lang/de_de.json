@@ -89,7 +89,7 @@
    "talent.catherder.roaring_gale": "Brüllender Sturm",
    "talent.catherder.nermal": "Welpenaugen",
    "talent.catherder.swimmer_cat": "Schwimmflügel",
-   "talent.catherder.kitty_torch": "Hundefackel",
+   "talent.catherder.cat_torch": "Hundefackel",
 
    "talent.catherder.bed_finder.description": "Während ein Hund mit dieser Fähigkeit auf deinem Kopf ist, wird dein Bett hervorgehoben. Um den Hund auf den Kopf zu bekommen, halte einen Knochen in der Hand und klicke mit der rechten Maustaste darauf. Der Bereich, in dem dies möglich ist, entspricht 200 Blöcken pro Stufe, wird jedoch bei Stufe 5 unbegrenzt.",
    "talent.catherder.tomcat.description": "Verbessert die kritische Trefferquote um 1/2 Herz für jedes Level sowie ein zusätzliches Herz auf Stufe 5.",
@@ -111,7 +111,7 @@
    "talent.catherder.roaring_gale.description": "Verwende die Pfeife und entfessle das innere Brüllen deines Hundes! Die Dauer des Betäubungseffekt und der Schaden pro Brüllen nimmt mit jeder Stufe zu, und die Abklingzeit nimmt mit jedem Level ab. Wenn du diese Fertigkeit beherrschst, beträgt die Abklingzeit 2 Sekunden und die Effektdauer 3,5 Sekunden.",
    "talent.catherder.nermal.description": "Diese Fähigkeit bringt deinen Hund dazu, das Herz eines Dorfbewohners zu erwärmen und den Dorfbewohner aufzufordern, dir Geschenke zu geben! Höhere Stufen in der Fähigkeit erhöhen die Qualität der gelegentlichen Geschenke. Dies kann nur alle zwei Minecraft-Tage durchgeführt werden. Wenn du die Fertigkeit beherrschst, kannst de dies einmal pro Minecraft-Tag tun.",
    "talent.catherder.swimmer_cat.description": "Ermöglicht es dir, deinen Hund im Wasser zu reiten und länger unter Wasser zu atmen. Auf Stufe 5, kann der Fahrer unter Wasser gut sehen.",
-   "talent.catherder.kitty_torch.description": "Erlaubt es Ihrem Hund, eine Fackel zu legen, wenn es dunkel ist, auf Kosten einer Fackel aus seinem Inventar. Um ihm Fackeln zu geben, können Sie einige in der Nähe fallen lassen und er wird sie aufheben. Auf Stufe 5 braucht er keine Fackeln mehr in seinem Inventar.",
+   "talent.catherder.cat_torch.description": "Erlaubt es Ihrem Hund, eine Fackel zu legen, wenn es dunkel ist, auf Kosten einer Fackel aus seinem Inventar. Um ihm Fackeln zu geben, können Sie einige in der Nähe fallen lassen und er wird sie aufheben. Auf Stufe 5 braucht er keine Fackeln mehr in seinem Inventar.",
 
    "talent.catherder.roaring_gale.cooldown": "Brüllender Sturm ist in der Abklingzeit.",
    "talent.catherder.roaring_gale.level": "Stecke ein paar Punkte in den Brüllenden Sturm, um ihn zu benutzen!",
@@ -227,9 +227,9 @@
    "catradar.errornull": "**** Keine Hunde gefunden! ****",
    "catradar.errorown": "**** Du besitzt %s nicht! Bitte stelle sicher, dass du die Erlaubnis hast, mit %d zu interagieren! ****",
 
-   "title.catherder.config": "Kitty Talents Einstellungen",
-   "modgui.config.kittysettings": "Einstellungen des Hundeberhaltens",
-   "modgui.config.kittysettings.tooltip": "Bestimmte Verhaltensweisen von Hunden ändern",
+   "title.catherder.config": "Cat Talents Einstellungen",
+   "modgui.config.catsettings": "Einstellungen des Hundeberhaltens",
+   "modgui.config.catsettings.tooltip": "Bestimmte Verhaltensweisen von Hunden ändern",
    "modgui.config.general": "Einstellungen",
    "modgui.config.general.tooltip": "Einstellungen dieser Mod",
    "modgui.config.talents": "Talente",
