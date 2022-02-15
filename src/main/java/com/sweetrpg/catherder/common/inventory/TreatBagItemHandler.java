@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.inventory;
 
 import javax.annotation.Nonnull;
 
-import com.sweetrpg.catherder.CatTags;
+import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +29,6 @@ public class TreatBagItemHandler extends ItemStackHandler {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return CatTags.TREATS.contains(stack.getItem()) || FoodHandler.isFood(stack).isPresent();
+        return ModTags.TREATS.contains(stack.getItem()) || FoodHandler.isFood(stack).isPresent();
     }
 }

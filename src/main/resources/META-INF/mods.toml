@@ -7,7 +7,7 @@ logoFile= "../ch_logo.png"
 [[mods]] #mandatory
     modId="catherder"
     version="${version}"
-    updateJSONURL="https://www.dropbox.com/s/raw/q6ckhwos45jires/version-catherder.json"
+    updateJSONURL="https://minecraft.sweetrpg.com/mods/catherder/version.json"
     displayName="Cat Herder"
     credits="paulyhedral,percivalalb,RaustBlackDragon,NovaViper"
     authors="paulyhedral"

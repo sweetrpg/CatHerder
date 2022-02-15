@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.block;
 
-import com.sweetrpg.catherder.CatItems;
-import com.sweetrpg.catherder.CatTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModItems;
+import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.common.Screens;
 import com.sweetrpg.catherder.common.block.tileentity.FoodBowlTileEntity;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
@@ -63,7 +63,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, CatTileEntityTypes.FOOD_BOWL.get(), FoodBowlTileEntity::tick);
+        return createTickerHelper(blockEntityType, ModTileEntityTypes.FOOD_BOWL.get(), FoodBowlTileEntity::tick);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
             if (foodBowl != null) {
                 ItemStack stack = playerIn.getItemInHand(handIn);
 
-                if (!stack.isEmpty() && stack.getItem() == CatItems.TREAT_BAG.get()) {
+                if (!stack.isEmpty() && stack.getItem() == ModItems.TREAT_BAG.get()) {
                     IItemHandler bagInventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(EmptyHandler.INSTANCE);
                     IItemHandler bowlInventory = foodBowl.getInventory();
 

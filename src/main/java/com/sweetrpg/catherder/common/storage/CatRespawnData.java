@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.storage;
 
 import com.google.common.collect.Lists;
-import com.sweetrpg.catherder.CatEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -71,7 +71,7 @@ public class CatRespawnData implements ICatData {
 
     @Nullable
     public CatEntity respawn(ServerLevel worldIn, Player playerIn, BlockPos pos) {
-        CatEntity cat = CatEntityTypes.CAT.get().spawn(worldIn, (CompoundTag) null, (Component) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
+        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, (CompoundTag) null, (Component) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
 
         // Failed for some reason
         if (cat == null) {

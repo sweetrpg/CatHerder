@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.client.entity.render.layer.accessory;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.sweetrpg.catherder.CatAccessoryTypes;
+import com.sweetrpg.catherder.common.registry.ModAccessoryTypes;
 import com.sweetrpg.catherder.api.inferface.IColoredObject;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.client.ClientSetup;
@@ -45,17 +45,17 @@ public class ArmorAccessoryRenderer extends RenderLayer<CatEntity, CatModel<CatE
 
                 this.model.setVisible(false);
 
-                if (accessoryInst.ofType(CatAccessoryTypes.FEET)) {
+                if (accessoryInst.ofType(ModAccessoryTypes.FEET)) {
                     this.model.legBackLeft.visible = true;
                     this.model.legBackRight.visible = true;
                     this.model.legFrontLeft.visible = true;
                     this.model.legFrontRight.visible = true;
-                } else if (accessoryInst.ofType(CatAccessoryTypes.HEAD)) {
+                } else if (accessoryInst.ofType(ModAccessoryTypes.HEAD)) {
                     this.model.head.visible = true;
-                } else if (accessoryInst.ofType(CatAccessoryTypes.CLOTHING)) {
+                } else if (accessoryInst.ofType(ModAccessoryTypes.CLOTHING)) {
                     this.model.body.visible = true;
                     this.model.mane.visible = true;
-                } else if (accessoryInst.ofType(CatAccessoryTypes.TAIL)) {
+                } else if (accessoryInst.ofType(ModAccessoryTypes.TAIL)) {
                     this.model.tail.visible = true;
                 }
 

@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.block;
 
-import com.sweetrpg.catherder.CatEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
@@ -178,7 +178,7 @@ public class CatBedBlock extends BaseEntityBlock {
                     worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
                     return InteractionResult.SUCCESS;
                 } else if (player.isShiftKeyDown() && catBedTileEntity.getOwnerUUID() == null) {
-                    List<CatEntity> dogs = worldIn.getEntities(CatEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
+                    List<CatEntity> dogs = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
                     Collections.sort(dogs, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
 
                     CatEntity closestStanding = null;

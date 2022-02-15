@@ -4,482 +4,129 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d75d03a-07d6-4d38-b03a-cd4ca765e60e" name="Changes" comment="Add litter box loot table and recipe to generated data.">
-      <change afterPath="$PROJECT_DIR$/Notes.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/FoodHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/cat_bed.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/food_bowl.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/litter_box.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/radio_collar.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/super_treat.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/wool_collar.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/cat_bed.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/dire_treat.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/master_treat.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/super_treat.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/beg_items_tamed.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/pack_cat_blacklist.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/treats.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatHerder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/CollarRenderManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/TalentLayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/world/BedFinderRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTRecipeProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/HelmetInteractHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Clothing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/CatLevelSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/blockstates/litter_box.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/sounds.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/overrides.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/CONTRIBUTING.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/bug_report.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/bug_report.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/feature-request.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/feature-request.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="8d75d03a-07d6-4d38-b03a-cd4ca765e60e" name="Changes" comment="Rename.&#10;Remove some unneeded items.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/CommonSetup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/CatnipBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/WildCatnipBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModTags.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/world/WildCropGeneration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/integration/jei/JEIPlugin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/catnip_stage7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/wild_catnip.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/catnip_seeds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/some_catnip.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/loot_tables/blocks/catnip.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/loot_tables/blocks/wild_catnip.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/loot_tables/inject/crops_villager_houses.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/catnip_crate.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/botanypots/crops/catnip.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/create/milling/wild_catnip.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/immersiveengineering/cloche/catnip.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/immersiveengineering/crusher/wild_catnip.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/immersiveengineering/squeezer/catnip_seeds.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/items/autumn_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/items/spring_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/items/summer_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/items/winter_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/tags/autumn_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/tags/spring_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/tags/summer_crops.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/data/sereneseasons/tags/winter_crops.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changelog.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/changelog.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changelog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/changelog.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/KittyTalentsAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/CatHerderAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/enu/WetSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/enu/WetSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/CatLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/CatLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/DataKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/DataKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/EnumGender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/EnumGender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/EnumMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/EnumMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/FoodHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/ICat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/ICat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/feature/InteractHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/feature/InteractHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/impl/BeddingMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/impl/BeddingMaterial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/impl/CasingMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/impl/CasingMaterial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/impl/MissingBeddingMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/impl/MissingBeddingMaterial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/impl/MissingCasingMissing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/impl/MissingCasingMissing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/AbstractCatEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/AbstractCatEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/ICatAlteration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/ICatAlteration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/ICatFoodHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/ICatFoodHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/ICatFoodPredicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/ICatFoodPredicate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/ICatItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/ICatItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/IColoredObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/IColoredObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/inferface/IThrowableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/inferface/IThrowableItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/Accessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/Accessory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/AccessoryInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/AccessoryInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/AccessoryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/AccessoryType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/IBeddingMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/IBeddingMaterial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/ICasingMaterial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/ICasingMaterial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/Talent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/Talent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/java/kittytalents/api/registry/TalentInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/java/com/sweetrpg/catherder/api/registry/TalentInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/.cache/cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/blockstates/cat_bath.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/blockstates/cat_bed.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/blockstates/cat_bed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/blockstates/food_bowl.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/blockstates/food_bowl.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/block/cat_bath.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/block/cat_bed.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/block/cat_bed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/block/food_bowl.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/block/food_bowl.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/big_bone.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/cat_toy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/breeding_bone.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/cape.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/cape.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/cape_coloured.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/multicoloured_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/cat_bath.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/cat_bed.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/chew_stick.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/breeding_bone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/collar_shears.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/creative_collar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/creative_radar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/creative_radar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/dire_treat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/master_treat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/food_bowl.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/guard_suit.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/owner_change.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/kitty_charm.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/spotted_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/leather_jacket.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/master_treat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/multicoloured_collar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/owner_change.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/creative_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/radar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/radar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/radio_collar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/spotted_collar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/sunglasses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/sunglasses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/super_treat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/training_treat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/throw_bone.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/collar_shears.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/throw_bone_wet.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/throw_stick.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/throw_stick_wet.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/tiny_bone.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/dire_treat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/training_treat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/treat_bag.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/treat_bag.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/whistle.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/cat_charm.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/kittytalents/models/item/wool_collar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/loot_tables/blocks/cat_bath.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/loot_tables/blocks/cat_bed.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/loot_tables/blocks/cat_bed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/loot_tables/blocks/food_bowl.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/loot_tables/blocks/food_bowl.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/loot_tables/blocks/litter_box.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/loot_tables/blocks/litter_box.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/loot_tables/entities/cat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/loot_tables/entities/cat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/big_bone.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/breeding_bone.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/breeding_bone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/cape.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/cape.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/cape_coloured.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/cat_bath.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/cat_bed.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/chew_stick.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/cat_toy.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/collar_shears.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/collar_shears.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/dire_treat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/food_bowl.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/food_bowl.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/guard_suit.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/leather_jacket.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/litter_box.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/litter_box.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/master_treat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/multicoloured_collar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/multicoloured_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/radar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/radar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/radio_collar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/radio_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/spotted_collar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/spotted_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/spotted_collar_alt.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/spotted_collar_alt.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/sunglasses.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/sunglasses.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/super_treat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/throw_bone.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/throw_bone_wet.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/throw_stick.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/throw_stick_wet.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/tiny_bone.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/training_treat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/training_treat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/treat_bag.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/treat_bag.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/whistle.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/recipes/wool_collar.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/wool_collar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/tags/items/beg_items_tamed.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/tags/items/beg_items_untamed.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/beg_items_untamed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/tags/items/breeding_items.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/breeding_items.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/tags/items/pack_kitty_blacklist.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/kittytalents/tags/items/treats.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyAccessories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatAccessories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyAccessoryTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatAccessoryTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatAttributes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyBedMaterials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatBedMaterials.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyBlocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatBlocks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyContainerTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatContainerTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyEntityTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatEntityTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyItemGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatItemGroups.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyRecipeSerializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatRecipeSerializers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyRegistries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatRegistries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittySerializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatSerializers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittySounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatSounds.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatTags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyTalents.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyTalents2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/KittyTileEntityTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatTileEntityTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/CachedFileTexture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/CachedFileTexture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/CatTextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/CatTextureManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/ClientSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/ClientSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/SkinRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/SkinRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/block/model/CatBedItemOverride.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/block/model/CatBedItemOverride.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/block/model/CatBedModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/block/model/CatBedModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/data/DTBlockstateProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/data/DTBlockstateProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/data/DTItemModelProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/data/DTItemModelProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/model/BowTieModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/model/BowTieModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/model/CatBackpackModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/model/CatBackpackModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/model/CatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/model/CatModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/model/CatRescueModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/model/CatRescueModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/CatRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/CatRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/CatScreenOverlays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/CatScreenOverlays.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/CollarRenderManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/KittyBeamRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/CatBeamRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/RenderUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/RenderUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/BoneLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/CatnipLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/LayerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/LayerFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/PackKittyRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/PackKittyRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/RescueCatRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/RescueCatRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/TalentLayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/accessory/ArmorAccessoryRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/accessory/ArmorAccessoryRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/layer/accessory/DefaultAccessoryRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/accessory/DefaultAccessoryRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/entity/render/world/BedFinderRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/event/ClientEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/event/ClientEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/CatInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/CatInfoScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/CatInventoriesScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/CatInventoriesScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/FoodBowlScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/FoodBowlScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/PackKittyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/PackKittyScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/RadarScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/RadarScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/ScreenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/ScreenUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/TreatBagScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/TreatBagScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/widget/DogInventoryButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/widget/DogInventoryButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/screen/widget/SmallButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/widget/SmallButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/client/tileentity/renderer/CatBedRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/tileentity/renderer/CatBedRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/Capabilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/Capabilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/Screens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/Screens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/Addon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/Addon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/AddonManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/AddonManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/autumnity/AutumnityAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/autumnity/AutumnityAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/biomesoplenty/BiomesOPlentyAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/biomesoplenty/BiomesOPlentyAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/botania/BotaniaAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/botania/BotaniaAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/itemphysic/ItemPhysicsAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/itemphysic/ItemPhysicsAddon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/jei/CatBedRecipeMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/jei/CatBedRecipeMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/addon/jei/DTPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/jei/CHPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/CatBathBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/CatBedBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/CatBedBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/FoodBowlBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/FoodBowlBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/LitterBoxBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/LitterBoxBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/tileentity/CatBedTileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/CatBedTileEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/tileentity/FoodBowlTileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/FoodBowlTileEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/block/tileentity/PlacedTileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/PlacedTileEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/command/CatRespawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/command/CatRespawnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/command/arguments/UUIDArgument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/command/arguments/UUIDArgument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/config/ConfigHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/config/ConfigHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/DTAdvancementProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTAdvancementProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/DTBlockTagsProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTBlockTagsProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/DTItemTagsProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTItemTagsProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/DTLootTableProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTLootTableProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/DTRecipeProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/DisplayInfoBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DisplayInfoBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/data/KittyTalentsAdvancements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CatHerderAdvancements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/CatEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/CatEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/HelmetInteractHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/KittyBeamEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/CatBeamEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/MeatFoodHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/MeatFoodHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/ArmourAccessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/ArmourAccessory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/Band.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Band.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/Clothing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/Collar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Collar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/DyeableAccessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/DyeableAccessory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/Glasses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Glasses.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/Helmet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Helmet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/LeatherArmourAccessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/LeatherArmourAccessory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/accessory/LeatherHelmet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/LeatherHelmet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/BerserkerModeGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/BerserkerModeGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/BreedGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/BreedGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/CatBegGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/CatBegGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/CatFollowOwnerGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/CatFollowOwnerGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/CatWanderGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/CatWanderGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/FetchGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/FetchGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/FindWaterGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/FindWaterGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/GuardModeGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/GuardModeGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/MoveToBlockGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/MoveToBlockGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/MoveToClosestItemGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/MoveToClosestItemGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/OwnerHurtByTargetGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/OwnerHurtByTargetGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/OwnerHurtTargetGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/OwnerHurtTargetGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/ai/PatrolAreaGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/PatrolAreaGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/AccessorySerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/AccessorySerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/BedLocationsSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/BedLocationsSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/CatLevelSerializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/CollarSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/CollarSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/DimensionDependantArg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/DimensionDependantArg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/GenderSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/GenderSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/ModeSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/ModeSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/serializers/TalentListSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/serializers/TalentListSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/stats/StatsTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/stats/StatsTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/entity/texture/CatTextureServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/texture/CatTextureServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/event/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/event/EventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/PackKittyItemHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/PackCatItemHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/TreatBagItemHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/TreatBagItemHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/container/CatInventoriesContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/CatInventoriesContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/container/FoodBowlContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/FoodBowlContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/container/PackKittyContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/PackCatContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/container/TreatBagContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/TreatBagContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/container/slot/CatInventorySlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/slot/CatInventorySlot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/inventory/recipe/CatBedRecipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/recipe/CatBedRecipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/AccessoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/AccessoryItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/CatShearsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/CatShearsItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/ChangeOwnerItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/ChangeOwnerItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/ChewStickItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/CatToyItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/DroolBoneItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/BallOfYarnItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/DyeableAccessoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/DyeableAccessoryItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/IDyeableArmorItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/IDyeableArmorItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/KittyCharmItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/CatCharmItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/PatrolItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/PatrolItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/RadarItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/RadarItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/SizeBoneItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/BundleOfCatnipItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/ThrowableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/ThrowableItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/TreatBagItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/TreatBagItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/TreatItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/TreatItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/item/WhistleItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/lib/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/lib/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/lib/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/lib/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/IPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/IPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/PacketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/PacketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatInventoryPagePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatInventoryPagePacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatModePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatModePacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatNamePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatNamePacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatObeyPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatObeyPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatTalentPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatTalentPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/CatTexturePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/CatTexturePacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/FriendlyFirePacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/FriendlyFirePacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/OpenCatScreenPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/OpenCatScreenPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/RequestSkinPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/RequestSkinPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/SendSkinPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/SendSkinPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatInventoryPageData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatInventoryPageData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatModeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatModeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatNameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatNameData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatObeyData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatObeyData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatTalentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatTalentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/CatTextureData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/CatTextureData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/FriendlyFireData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/FriendlyFireData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/OpenCatScreenData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/OpenCatScreenData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/RequestSkinData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/RequestSkinData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/network/packet/data/SendSkinData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/network/packet/data/SendSkinData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/storage/CatLocationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatLocationData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/storage/CatLocationStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatLocationStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/storage/CatRespawnData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatRespawnData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/storage/CatRespawnStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatRespawnStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/storage/ICatData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/ICatData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/BedFinderTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/BedFinderTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/BlackPeltTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/TomcatTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/CreeperSweeperTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/CreeperSweeperTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/FisherCatTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/FisherCatTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/GuardCatTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/CatlikeReflexesTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/HappyEaterTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/HappyEaterTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/HellBeastTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/HellBeastTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/HunterCatTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/BirdCatcherTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/KittyDashTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/CheetahSpeedTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/KittyEyesTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/NermalTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/KittyTorchTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/KittyTorchTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/MountTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/MountTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/PackKittyTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/PackKittyTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/PestFighterTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/PestFighterTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/PillowPawTalent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/PoisonFangTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/PoisonFangTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/QuickHealerTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/QuickHealerTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/RescueCatTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/RescueCatTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/RoaringGaleTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/RoaringGaleTalent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/ShepherdCatTalent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/talent/SwimmerCatTalent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/BackwardsComp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/Cache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/CatBedUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/CatBedUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/ColourCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/ColourCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/EntityUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/EntityUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/InventoryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/InventoryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/ItemUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/ItemUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/NBTUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/NBTUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/RadialCoordinateIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/RadialCoordinateIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/ReflectionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/ReflectionUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kittytalents/common/util/WorldUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/WorldUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/breeding_bone.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/assets/catherder/models/item/breeding_bone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/breeding_bone.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/breeding_bone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/training_treat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/recipes/training_treat.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/beg_items_tamed.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/beg_items_tamed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/breeding_items.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/generated/resources/data/catherder/tags/items/breeding_items.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatAccessories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModAccessories.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatAccessoryTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModAccessoryTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatBedMaterials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/CatBedMaterials.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatBlocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModBlocks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatContainerTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModContainerTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatEntityTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModEntityTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatHerder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatHerder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatItemGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModItemGroups.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatRecipeSerializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModRecipeSerializers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatRegistries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModRegistries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatSerializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModSerializers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatSounds.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModSounds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatTags.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/CatTileEntityTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/registry/ModTileEntityTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/ClientSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/ClientSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/data/DTBlockstateProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/data/CHBlockstateProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/data/DTItemModelProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/data/CHItemModelProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/accessory/ArmorAccessoryRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/entity/render/layer/accessory/ArmorAccessoryRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/event/ClientEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/event/ClientEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/CatInfoScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/CatInfoScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/CatInventoriesScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/CatInventoriesScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/widget/DogInventoryButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/client/screen/widget/CatInventoryButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/Screens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/Screens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/itemphysic/ItemPhysicsAddon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/itemphysic/ItemPhysicsAddon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/jei/CHPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/addon/jei/CHPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/CatBedBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/CatBedBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/FoodBowlBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/FoodBowlBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/CatBedTileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/CatBedTileEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/FoodBowlTileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/block/tileentity/FoodBowlTileEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/command/CatRespawnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/command/CatRespawnCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/config/ConfigHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/config/ConfigHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CatHerderAdvancements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CatHerderAdvancements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTAdvancementProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CHAdvancementProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTBlockTagsProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CHBlockTagsProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTItemTagsProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CHItemTagsProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTLootTableProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CHLootTableProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/DTRecipeProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/data/CHRecipeProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/CatBeamEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/CatBeamEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/CatEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/CatEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/HelmetInteractHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/HelmetInteractHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/ArmourAccessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/ArmourAccessory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Band.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Band.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Clothing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Clothing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Collar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Collar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Glasses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Glasses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Helmet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/Helmet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/LeatherArmourAccessory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/LeatherArmourAccessory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/LeatherHelmet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/accessory/LeatherHelmet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/CatBegGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/entity/ai/CatBegGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/event/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/event/EventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/TreatBagItemHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/TreatBagItemHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/CatInventoriesContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/CatInventoriesContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/FoodBowlContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/FoodBowlContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/PackCatContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/PackCatContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/TreatBagContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/container/TreatBagContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/recipe/CatBedRecipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/inventory/recipe/CatBedRecipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/BundleOfCatnipItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/BundleOfCatnipItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/CatCharmItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/CatCharmItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/RadarItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/item/RadarItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatLocationData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatLocationData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatRespawnData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/storage/CatRespawnData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/MountTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/MountTalent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/PackKittyTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/PackKittyTalent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/TomcatTalent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/talent/TomcatTalent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/CatBedUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sweetrpg/catherder/common/util/CatBedUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/mods.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/mods.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/blockstates/litter_box.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/de_de.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/de_de.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/en_gb.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/en_gb.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/en_us.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/ko_kr.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/ko_kr.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/ru_ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/ru_ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/vi_vn.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/vi_vn.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/zh_cn.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/zh_cn.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/lang/zh_tw.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/zh_tw.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/models/block/cat_bed.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/models/block/cat_bed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/models/block/litter_box.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/models/block/litter_box.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/sounds.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/sounds/whistle/long.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/sounds/whistle/long.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/sounds/whistle/short.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/sounds/whistle/short.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/block/food_bowl_bottom.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/food_bowl_bottom.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/block/food_bowl_side.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/food_bowl_side.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/block/food_bowl_top.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/food_bowl_top.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/block/litter_box.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/block/litter_box.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/chainmail_body.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/chainmail_body.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/chainmail_boots.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/chainmail_boots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/chainmail_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/chainmail_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/diamond_body.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/diamond_body.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/diamond_boots.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/diamond_boots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/diamond_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/diamond_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/golden_body.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/golden_body.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/golden_boots.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/golden_boots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/golden_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/golden_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/iron_body.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/iron_body.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/iron_boots.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/iron_boots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/iron_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/iron_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/leather_body.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/leather_body.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/leather_boots.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/leather_boots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/leather_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/leather_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/netherite_body.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/netherite_body.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/netherite_boots.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/netherite_boots.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/netherite_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/netherite_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/armor/turtle_helmet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/armor/turtle_helmet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex10.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex12.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex13.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex13.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex14.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex14.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex15.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex15.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex16.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex17.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex17.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex18.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex18.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex19.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex19.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex20.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex20.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/kittytex9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/custom/kittytex9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/custom/overrides.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_armor.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_armor.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_bowtie.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_bowtie.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_cape.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_cape.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_cape1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_cape1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_cape1_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_cape1_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_cape_coloured.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_cape_coloured.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_chest.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_chest.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_collar_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_collar_0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_collar_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_collar_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_collar_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_collar_2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_guard_suit.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_guard_suit.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_hurt.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_hurt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_leather_jacket.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_leather_jacket.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_leather_jacket_boni.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_leather_jacket_boni.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_radio_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_radio_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_saddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_saddle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_sunglasses.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_sunglasses.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_sunglasses_night.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_sunglasses_night.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/kitty_wings.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/kitty_wings.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/entity/cat/talents/rescue.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/entity/cat/talents/rescue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/cat_button.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/cat_button.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/cat_inventory.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/cat_inventory.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/food_bowl.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/food_bowl.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/gui.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/gui.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/pack_kitty.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/pack_kitty.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/radar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/radar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/small_widgets.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/small_widgets.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/treat_bag.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/treat_bag.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/gui/treat_bag_possible.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/gui/treat_bag_possible.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/alternative/breeding_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/alternative/breeding_bone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/alternative/command_emblem.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/alternative/command_emblem.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/alternative/dire_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/alternative/dire_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/alternative/master_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/alternative/master_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/alternative/super_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/alternative/super_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/alternative/training_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/alternative/training_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/big_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/big_bone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/breeding_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/breeding_bone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/cape.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/cape.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/cape_coloured.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/cape_coloured.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/chew_stick.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/cat_toy.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/collar_shears.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/collar_shears.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/creative_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/creative_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/creative_radar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/creative_radar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/dire_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/dire_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/guard_suit.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/guard_suit.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/kitty_charm.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/cat_charm.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/leather_jacket.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/leather_jacket.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/master_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/master_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/multicoloured_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/multicoloured_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/old/throw_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/old/throw_bone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/owner_change.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/owner_change.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/radar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/radar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/radio_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/radio_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/spotted_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/spotted_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/sunglasses.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/sunglasses.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/super_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/super_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/throw_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/catnip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/throw_bone_wet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/throw_bone_wet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/throw_stick.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/throw_stick.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/throw_stick_wet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/throw_stick_wet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/tiny_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/tiny_bone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/training_treat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/training_treat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/treat_bag.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/treat_bag.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/whistle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/item/wool_collar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/wool_collar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dt_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ch_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pack.mcmeta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/doggytalents/test/CacheTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sweetrpg/catherder/test/CacheTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/doggytalents/test/doggytalents/common/util/UtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/sweetrpg/catherder/test/catherder/common/util/UtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/de_de.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/de_de.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/en_gb.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/en_gb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/en_us.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/ko_kr.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/ko_kr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/ru_ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/ru_ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/vi_vn.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/vi_vn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/zh_cn.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/zh_cn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/zh_tw.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/lang/zh_tw.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/big_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/bundle_of_catnip.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/breeding_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/breeding_treat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/throw_stick.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/yarn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/tiny_bone.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/catherder/textures/item/sprig_of_catnip.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ch_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ch_logo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -533,6 +180,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="251solarloPQCDQkR5GiGmvenOo" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -542,17 +192,29 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/data/catherder/loot_tables/inject" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/data/catherder/loot_tables/inject" />
+      <recent name="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/immersiveengineering/squeezer" />
+      <recent name="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/immersiveengineering/crusher" />
+      <recent name="$PROJECT_DIR$/src/main/resources/data/catherder/recipes/integration/immersiveengineering/cloche" />
+      <recent name="$PROJECT_DIR$/src/main/resources/data/sereneseasons/items" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/assets/kittytalents/textures/block" />
       <recent name="$PROJECT_DIR$/src/main/resources/assets/kittytalents/models/block" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.sweetrpg.catherder.integration.jei" />
+      <recent name="com.sweetrpg.catherder.common.world" />
     </key>
   </component>
   <component name="RunManager" selected="Application.catherder client">
@@ -600,7 +262,9 @@
       <workItem from="1644706107047" duration="2413000" />
       <workItem from="1644708598593" duration="6631000" />
       <workItem from="1644728796744" duration="21852000" />
-      <workItem from="1644807193482" duration="522000" />
+      <workItem from="1644807193482" duration="851000" />
+      <workItem from="1644893103214" duration="9590000" />
+      <workItem from="1644932111754" duration="6591000" />
     </task>
     <task id="LOCAL-00001" summary="Change the names of nearly everything.&#10;Add a litter box.&#10;Remove some talents that don't make sense for cats.">
       <created>1644763765209</created>
@@ -623,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644765532583</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Rename.&#10;Remove some unneeded items.">
+      <created>1644807894839</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1644807894840</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,7 +314,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Change the names of nearly everything.&#10;Add a litter box.&#10;Remove some talents that don't make sense for cats." />
     <MESSAGE value="Add litter box loot table and recipe to generated data." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add litter box loot table and recipe to generated data." />
+    <MESSAGE value="Rename.&#10;Remove some unneeded items." />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename.&#10;Remove some unneeded items." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

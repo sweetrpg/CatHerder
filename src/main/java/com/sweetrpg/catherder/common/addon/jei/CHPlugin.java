@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.addon.jei;
 
-import com.sweetrpg.catherder.CatBlocks;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
 import com.sweetrpg.catherder.common.util.CatBedUtil;
@@ -23,7 +23,7 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        registration.registerSubtypeInterpreter(CatBlocks.CAT_BED.get().asItem(), (stack, ctx) -> {
+        registration.registerSubtypeInterpreter(ModBlocks.CAT_BED.get().asItem(), (stack, ctx) -> {
             Pair<ICasingMaterial, IBeddingMaterial> materials = CatBedUtil.getMaterials(stack);
 
             String casingKey = materials.getLeft() != null

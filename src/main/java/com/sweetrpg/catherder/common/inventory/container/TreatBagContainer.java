@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.inventory.container;
 
-import com.sweetrpg.catherder.CatContainerTypes;
-import com.sweetrpg.catherder.CatItems;
+import com.sweetrpg.catherder.common.registry.ModContainerTypes;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,7 +18,7 @@ public class TreatBagContainer extends AbstractContainerMenu {
     public IItemHandler bagInventory;
 
     public TreatBagContainer(int windowId, Inventory playerInventory, int slotIn, ItemStack itemstackIn) {
-        super(CatContainerTypes.TREAT_BAG.get(), windowId);
+        super(ModContainerTypes.TREAT_BAG.get(), windowId);
         this.slot = slotIn;
         this.itemstack = itemstackIn;
         this.bagInventory = itemstackIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
@@ -79,6 +79,6 @@ public class TreatBagContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player playerIn) {
-        return playerIn.getInventory().getItem(this.slot).getItem() == CatItems.TREAT_BAG.get();
+        return playerIn.getInventory().getItem(this.slot).getItem() == ModItems.TREAT_BAG.get();
     }
 }

@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.item;
 
-import com.sweetrpg.catherder.CatItems;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import net.minecraft.Util;
@@ -54,7 +54,7 @@ public class RadarItem extends Item {
             List<CatLocationData> ownDogs = locationManager.getDogs(playerIn, dimCurr).collect(Collectors.toList());
 
             if (ownDogs.isEmpty()) {
-                playerIn.sendMessage(new TranslatableComponent("dogradar.errornull", dimCurr.location()), Util.NIL_UUID);
+                playerIn.sendMessage(new TranslatableComponent("catradar.errornull", dimCurr.location()), Util.NIL_UUID);
             } else {
                 boolean flag = false;
 
@@ -70,7 +70,7 @@ public class RadarItem extends Item {
                 }
 
                 if (!flag) {
-                    playerIn.sendMessage(new TranslatableComponent("dogradar.errornoradio"), Util.NIL_UUID);
+                    playerIn.sendMessage(new TranslatableComponent("catradar.errornoradio"), Util.NIL_UUID);
                 }
             }
 
@@ -84,11 +84,11 @@ public class RadarItem extends Item {
             }
 
             if (otherDogs.size() > 0) {
-                playerIn.sendMessage(new TranslatableComponent("dogradar.notindim", otherDogs.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+                playerIn.sendMessage(new TranslatableComponent("catradar.notindim", otherDogs.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
             }
 
-            if (noDogs.size() > 0 && stack.getItem() == CatItems.CREATIVE_RADAR.get()) {
-                playerIn.sendMessage(new TranslatableComponent("dogradar.errornull", noDogs.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+            if (noDogs.size() > 0 && stack.getItem() == ModItems.CREATIVE_RADAR.get()) {
+                playerIn.sendMessage(new TranslatableComponent("catradar.errornull", noDogs.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
             }
         }
         return new InteractionResultHolder<ItemStack>(InteractionResult.FAIL, stack);
@@ -96,29 +96,29 @@ public class RadarItem extends Item {
 
     public static String getDirectionTranslationKey(CatLocationData loc, Entity entity) {
         if (loc.getPos() == null) {
-            return "dogradar.unknown";
+            return "catradar.unknown";
         }
         Vec3 diff = loc.getPos().add(entity.position().reverse());
         double angle = Mth.atan2(diff.x(), diff.z());
 
         if (angle < -Math.PI + Math.PI / 8) {
-            return "dogradar.north";
+            return "catradar.north";
         } else if (angle < -Math.PI + 3 * Math.PI / 8) {
-            return "dogradar.north.west";
+            return "catradar.north.west";
         } else if (angle < -Math.PI + 5 * Math.PI / 8) {
-            return "dogradar.west";
+            return "catradar.west";
         } else if (angle < -Math.PI + 7 * Math.PI / 8) {
-            return "dogradar.south.west";
+            return "catradar.south.west";
         } else if (angle < -Math.PI + 9 * Math.PI / 8) {
-            return "dogradar.south";
+            return "catradar.south";
         } else if (angle < -Math.PI + 11 * Math.PI / 8) {
-            return "dogradar.south.east";
+            return "catradar.south.east";
         } else if (angle < -Math.PI + 13 * Math.PI / 8) {
-            return "dogradar.east";
+            return "catradar.east";
         } else if (angle < -Math.PI + 15 * Math.PI / 8) {
-            return "dogradar.north.east";
+            return "catradar.north.east";
         } else {
-            return "dogradar.north";
+            return "catradar.north";
         }
     }
 }

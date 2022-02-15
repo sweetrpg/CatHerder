@@ -1,10 +1,11 @@
 package com.sweetrpg.catherder.common.event;
 
-import com.sweetrpg.catherder.CatEntityTypes;
-import com.sweetrpg.catherder.CatItems;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.talent.BirdCatcherTalent;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -15,10 +16,14 @@ import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class EventHandler {
@@ -31,7 +36,7 @@ public class EventHandler {
         ItemStack stack = event.getItemStack();
         Entity target = event.getTarget();
 
-        if (target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == CatItems.TRAINING_TREAT.get()) {
+        if (target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == ModItems.TRAINING_TREAT.get()) {
             event.setCanceled(true);
 
             TamableAnimal vanillaCat = (TamableAnimal) target;
@@ -45,7 +50,7 @@ public class EventHandler {
                         stack.shrink(1);
                     }
 
-                    CatEntity cat = CatEntityTypes.CAT.get().create(world);
+                    CatEntity cat = ModEntityTypes.CAT.get().create(world);
                     cat.tame(player);
                     cat.setHealth(cat.getMaxHealth());
                     cat.setOrderedToSit(false);
@@ -61,6 +66,19 @@ public class EventHandler {
             } else {
                 event.setCancellationResult(InteractionResult.FAIL);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBiomeLoad(BiomeLoadingEvent event) {
+        BiomeGenerationSettingsBuilder builder = event.getGeneration();
+        Biome.ClimateSettings climate = event.getClimate();
+        if ((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
+                event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
+                event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
+                event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
+                (climate.temperature > 0.3F && climate.temperature < 1.0F)) {
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
         }
     }
 
@@ -91,7 +109,7 @@ public class EventHandler {
             if (!persistTag.getBoolean("gotDTStartingItems")) {
                 persistTag.putBoolean("gotDTStartingItems", true);
 
-                player.getInventory().add(new ItemStack(CatItems.CAT_CHARM.get()));
+                player.getInventory().add(new ItemStack(ModItems.CAT_CHARM.get()));
 //                player.getInventory().add(new ItemStack(CatItems.WHISTLE.get()));
             }
         }

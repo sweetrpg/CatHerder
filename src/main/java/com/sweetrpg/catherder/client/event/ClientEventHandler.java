@@ -3,9 +3,9 @@ package com.sweetrpg.catherder.client.event;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.sweetrpg.catherder.CatBlocks;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.CatHerder;
-import com.sweetrpg.catherder.client.screen.widget.DogInventoryButton;
+import com.sweetrpg.catherder.client.screen.widget.CatInventoryButton;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.network.packet.data.OpenCatScreenData;
 import com.sweetrpg.catherder.client.block.model.CatBedModel;
@@ -44,14 +44,14 @@ public class ClientEventHandler {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModelRegistry();
 
         try {
-            ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(CatBlocks.CAT_BED.get());
+            ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_BED.get());
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
 
             BlockModel model = (BlockModel) event.getModelLoader().getModel(unbakedModelLoc);
             BakedModel customModel = new CatBedModel(event.getModelLoader(), model, model.bake(event.getModelLoader(), model, ForgeModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
 
             // Replace all valid block states
-            CatBlocks.CAT_BED.get().getStateDefinition().getPossibleStates().forEach(state -> {
+            ModBlocks.CAT_BED.get().getStateDefinition().getPossibleStates().forEach(state -> {
                 modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
             });
 
@@ -95,7 +95,7 @@ public class ClientEventHandler {
             int x = guiLeft + (creative ? 36 : sizeX / 2 - 10);
             int y = guiTop + (creative ? 7 : 48);
 
-            event.addListener(new DogInventoryButton(x, y, screen, (btn) -> {
+            event.addListener(new CatInventoryButton(x, y, screen, (btn) -> {
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new OpenCatScreenData());
                 btn.active = false;
             }));
@@ -107,12 +107,12 @@ public class ClientEventHandler {
         Screen screen = event.getScreen();
         if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             boolean creative = screen instanceof CreativeModeInventoryScreen;
-            DogInventoryButton btn = null;
+            CatInventoryButton btn = null;
 
             //TODO just create a static variable in this class
             for (Widget widget : screen.renderables) {
-                if (widget instanceof DogInventoryButton) {
-                    btn = (DogInventoryButton) widget;
+                if (widget instanceof CatInventoryButton) {
+                    btn = (CatInventoryButton) widget;
                     break;
                 }
             }

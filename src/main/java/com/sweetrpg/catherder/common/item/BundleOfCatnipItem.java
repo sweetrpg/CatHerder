@@ -14,8 +14,9 @@ public class BundleOfCatnipItem extends Item implements ICatItem {
     private final BundleOfCatnipItem.Type type;
 
     public static enum Type {
-        TINY("tiny_bone"),
-        BIG("big_bone");
+        TINY("tiny_catnip"),
+        MEDIUM("medium_catnip"),
+        BIG("big_catnip");
 
         String n;
 

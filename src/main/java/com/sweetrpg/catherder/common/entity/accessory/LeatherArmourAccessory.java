@@ -1,15 +1,12 @@
 package com.sweetrpg.catherder.common.entity.accessory;
 
-import com.sweetrpg.catherder.CatAccessories;
 import com.sweetrpg.catherder.api.inferface.IColoredObject;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.api.registry.AccessoryType;
 import com.sweetrpg.catherder.common.util.ColourCache;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Supplier;

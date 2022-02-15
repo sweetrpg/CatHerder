@@ -1,25 +1,21 @@
 package com.sweetrpg.catherder;
 
-import com.sweetrpg.catherder.api.feature.FoodHandler;
-import com.sweetrpg.catherder.api.feature.InteractHandler;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.client.ClientSetup;
-import com.sweetrpg.catherder.client.data.DTBlockstateProvider;
-import com.sweetrpg.catherder.client.data.DTItemModelProvider;
+import com.sweetrpg.catherder.client.data.CHBlockstateProvider;
+import com.sweetrpg.catherder.client.data.CHItemModelProvider;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
 import com.sweetrpg.catherder.client.event.ClientEventHandler;
 import com.sweetrpg.catherder.common.Capabilities;
+import com.sweetrpg.catherder.common.CommonSetup;
 import com.sweetrpg.catherder.common.addon.AddonManager;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.data.*;
-import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.entity.HelmetInteractHandler;
-import com.sweetrpg.catherder.common.entity.MeatFoodHandler;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
-import com.sweetrpg.catherder.common.network.PacketHandler;
+import com.sweetrpg.catherder.common.registry.*;
 import com.sweetrpg.catherder.common.talent.*;
 //import com.sweetrpg.catherder.common.util.BackwardsComp;
 import net.minecraft.data.DataGenerator;
@@ -31,7 +27,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
@@ -98,27 +93,27 @@ public class CatHerder {
 
         // Mod lifecycle
         modEventBus.addListener(this::gatherData);
-        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(CommonSetup::init);
         modEventBus.addListener(this::interModProcess);
 
         // Registries
-        CatBlocks.BLOCKS.register(modEventBus);
-        CatTileEntityTypes.TILE_ENTITIES.register(modEventBus);
-        CatItems.ITEMS.register(modEventBus);
-        CatEntityTypes.ENTITIES.register(modEventBus);
-        CatContainerTypes.CONTAINERS.register(modEventBus);
-        CatSerializers.SERIALIZERS.register(modEventBus);
-        CatSounds.SOUNDS.register(modEventBus);
-        CatRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModTileEntityTypes.TILE_ENTITIES.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModEntityTypes.ENTITIES.register(modEventBus);
+        ModContainerTypes.CONTAINERS.register(modEventBus);
+        ModSerializers.SERIALIZERS.register(modEventBus);
+        ModSounds.SOUNDS.register(modEventBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
         CatHerder.TALENTS.register(modEventBus);
-        CatAccessories.ACCESSORIES.register(modEventBus);
-        CatAccessoryTypes.ACCESSORY_TYPES.register(modEventBus);
+        ModAccessories.ACCESSORIES.register(modEventBus);
+        ModAccessoryTypes.ACCESSORY_TYPES.register(modEventBus);
         CatBedMaterials.BEDDINGS.register(modEventBus);
         CatBedMaterials.CASINGS.register(modEventBus);
-        CatAttributes.ATTRIBUTES.register(modEventBus);
+        ModAttributes.ATTRIBUTES.register(modEventBus);
 
-        modEventBus.addListener(CatRegistries::newRegistry);
-        modEventBus.addListener(CatEntityTypes::addEntityAttributes);
+        modEventBus.addListener(ModRegistries::newRegistry);
+        modEventBus.addListener(ModEntityTypes::addEntityAttributes);
         modEventBus.addListener(Capabilities::registerCaps);
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
@@ -131,8 +126,8 @@ public class CatHerder {
         // Client Events
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             modEventBus.addListener(this::clientSetup);
-            modEventBus.addListener(CatBlocks::registerBlockColours);
-            modEventBus.addListener(CatItems::registerItemColours);
+            modEventBus.addListener(ModBlocks::registerBlockColours);
+            modEventBus.addListener(ModItems::registerItemColours);
             modEventBus.addListener(ClientEventHandler::onModelBakeEvent);
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
@@ -146,17 +141,8 @@ public class CatHerder {
         AddonManager.init();
     }
 
-    public void commonSetup(final FMLCommonSetupEvent event) {
-        PacketHandler.init();
-        //TODO CriteriaTriggers.register(criterion)
-        FoodHandler.registerHandler(new MeatFoodHandler());
-
-        FoodHandler.registerDynPredicate(HappyEaterTalent.INNER_DYN_PRED);
-        InteractHandler.registerHandler(new HelmetInteractHandler());
-        ConfigHandler.initTalentConfig();
-        CatRespawnCommand.registerSerilizers();
-        CatEntity.initDataParameters();
-    }
+//    public void commonSetup(final FMLCommonSetupEvent event) {
+//    }
 
     public void serverStarting(final ServerStartingEvent event) {
 
@@ -184,19 +170,19 @@ public class CatHerder {
         DataGenerator gen = event.getGenerator();
 
         if (event.includeClient()) {
-            DTBlockstateProvider blockstates = new DTBlockstateProvider(gen, event.getExistingFileHelper());
+            CHBlockstateProvider blockstates = new CHBlockstateProvider(gen, event.getExistingFileHelper());
             gen.addProvider(blockstates);
-            gen.addProvider(new DTItemModelProvider(gen, blockstates.getExistingHelper()));
+            gen.addProvider(new CHItemModelProvider(gen, blockstates.getExistingHelper()));
         }
 
         if (event.includeServer()) {
             // gen.addProvider(new DTBlockTagsProvider(gen));
-            gen.addProvider(new DTAdvancementProvider(gen));
-            DTBlockTagsProvider blockTagProvider = new DTBlockTagsProvider(gen, event.getExistingFileHelper());
+            gen.addProvider(new CHAdvancementProvider(gen));
+            CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(gen, event.getExistingFileHelper());
             gen.addProvider(blockTagProvider);
-            gen.addProvider(new DTItemTagsProvider(gen, blockTagProvider, event.getExistingFileHelper()));
-            gen.addProvider(new DTRecipeProvider(gen));
-            gen.addProvider(new DTLootTableProvider(gen));
+            gen.addProvider(new CHItemTagsProvider(gen, blockTagProvider, event.getExistingFileHelper()));
+            gen.addProvider(new CHRecipeProvider(gen));
+            gen.addProvider(new CHLootTableProvider(gen));
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.entity;
 
 import com.google.common.base.Predicates;
-import com.sweetrpg.catherder.CatEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.EntityUtil;
@@ -28,11 +28,11 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
     }
 
     public CatBeamEntity(Level worldIn, LivingEntity livingEntityIn) {
-        super(CatEntityTypes.DOG_BEAM.get(), livingEntityIn, worldIn);
+        super(ModEntityTypes.DOG_BEAM.get(), livingEntityIn, worldIn);
     }
 
     public CatBeamEntity(PlayMessages.SpawnEntity packet, Level worldIn) {
-        super(CatEntityTypes.DOG_BEAM.get(), worldIn);
+        super(ModEntityTypes.DOG_BEAM.get(), worldIn);
     }
 
     @Override

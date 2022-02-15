@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.block.tileentity;
 
-import com.sweetrpg.catherder.CatTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
@@ -40,7 +40,7 @@ public class CatBedTileEntity extends PlacedTileEntity {
     private @Nullable Component ownerName;
 
     public CatBedTileEntity(BlockPos pos, BlockState blockState) {
-        super(CatTileEntityTypes.CAT_BED.get(), pos, blockState);
+        super(ModTileEntityTypes.CAT_BED.get(), pos, blockState);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.entity;
 
 import com.google.common.collect.ImmutableMap;
-import com.sweetrpg.catherder.CatAccessories;
+import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
@@ -38,7 +38,7 @@ public class HelmetInteractHandler implements ICatItem {
 //        .put(Items.CHAINMAIL_CHESTPLATE.delegate, CatAccessories.CHAINMAIL_BODY_PIECE)
 //        .put(Items.NETHERITE_CHESTPLATE.delegate, CatAccessories.NETHERITE_BODY_PIECE)
 //        .put(Items.LEATHER_HELMET.delegate, CatAccessories.LEATHER_HELMET)
-        .put(Items.LEATHER_BOOTS.delegate, CatAccessories.LEATHER_BOOTS)
+        .put(Items.LEATHER_BOOTS.delegate, ModAccessories.LEATHER_BOOTS)
 //        .put(Items.LEATHER_CHESTPLATE.delegate, CatAccessories.LEATHER_BODY_PIECE)
        .build();
 

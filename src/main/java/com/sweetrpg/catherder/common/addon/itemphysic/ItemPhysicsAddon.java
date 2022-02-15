@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.addon.itemphysic;
 
 import com.google.common.collect.Lists;
-import com.sweetrpg.catherder.CatBlocks;
-import com.sweetrpg.catherder.CatItems;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.addon.Addon;
 import com.sweetrpg.catherder.common.util.ReflectionUtil;
 
@@ -28,19 +28,19 @@ public class ItemPhysicsAddon implements Addon {
         Method addMethod = ReflectionUtil.getMethod(API_CLASS, methodName, paramTypes);
 
         ReflectionUtil.invokeStaticMethod(addMethod, swimmingItems,
-                                          CatItems.BREEDING_TREAT, CatItems.DIRE_TREAT, CatItems.MASTER_TREAT,
-                                          CatItems.SUPER_TREAT, CatItems.TRAINING_TREAT, CatItems.COLLAR_SHEARS,
+                                          ModItems.BREEDING_TREAT, ModItems.DIRE_TREAT, ModItems.MASTER_TREAT,
+                                          ModItems.SUPER_TREAT, ModItems.TRAINING_TREAT, ModItems.COLLAR_SHEARS,
 //                                          CatItems.THROW_BONE,
-                                          CatItems.WOOL_COLLAR, CatItems.TREAT_BAG,
-                                          CatItems.CAT_TOY);
+                                          ModItems.WOOL_COLLAR, ModItems.TREAT_BAG,
+                                          ModItems.CAT_TOY);
 
         ReflectionUtil.invokeStaticMethod(addMethod, burningItems,
-                                          CatBlocks.CAT_BED, CatItems.BREEDING_TREAT, CatItems.DIRE_TREAT,
-                                          CatItems.MASTER_TREAT, CatItems.SUPER_TREAT, CatItems.TRAINING_TREAT,
-                                          CatItems.COLLAR_SHEARS,
+                                          ModBlocks.CAT_BED, ModItems.BREEDING_TREAT, ModItems.DIRE_TREAT,
+                                          ModItems.MASTER_TREAT, ModItems.SUPER_TREAT, ModItems.TRAINING_TREAT,
+                                          ModItems.COLLAR_SHEARS,
 //                                          CatItems.THROW_BONE,
-                                          CatItems.RADAR,
-                                          CatItems.WOOL_COLLAR, CatItems.TREAT_BAG, CatItems.CAT_TOY);
+                                          ModItems.RADAR,
+                                          ModItems.WOOL_COLLAR, ModItems.TREAT_BAG, ModItems.CAT_TOY);
     }
 
     @Override

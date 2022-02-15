@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.CatAttributes;
+import com.sweetrpg.catherder.common.registry.ModAttributes;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
@@ -22,15 +22,15 @@ public class TomcatTalent extends TalentInstance {
     @Override
     public void init(AbstractCatEntity catIn) {
         catIn.setAttributeModifier(Attributes.ATTACK_DAMAGE, TOMCAT_DAMAGE_ID, this::createPeltModifier);
-        catIn.setAttributeModifier(CatAttributes.CRIT_CHANCE.get(), TOMCAT_CRIT_CHANCE_ID, this::createPeltCritChance);
-        catIn.setAttributeModifier(CatAttributes.CRIT_BONUS.get(), TOMCAT_CRIT_BONUS_ID, this::createPeltCritBonus);
+        catIn.setAttributeModifier(ModAttributes.CRIT_CHANCE.get(), TOMCAT_CRIT_CHANCE_ID, this::createPeltCritChance);
+        catIn.setAttributeModifier(ModAttributes.CRIT_BONUS.get(), TOMCAT_CRIT_BONUS_ID, this::createPeltCritBonus);
     }
 
     @Override
     public void set(AbstractCatEntity catIn, int levelBefore) {
         catIn.setAttributeModifier(Attributes.ATTACK_DAMAGE, TOMCAT_DAMAGE_ID, this::createPeltModifier);
-        catIn.setAttributeModifier(CatAttributes.CRIT_CHANCE.get(), TOMCAT_CRIT_CHANCE_ID, this::createPeltCritChance);
-        catIn.setAttributeModifier(CatAttributes.CRIT_BONUS.get(), TOMCAT_CRIT_BONUS_ID, this::createPeltCritBonus);
+        catIn.setAttributeModifier(ModAttributes.CRIT_CHANCE.get(), TOMCAT_CRIT_CHANCE_ID, this::createPeltCritChance);
+        catIn.setAttributeModifier(ModAttributes.CRIT_BONUS.get(), TOMCAT_CRIT_BONUS_ID, this::createPeltCritBonus);
     }
 
     public AttributeModifier createPeltModifier(AbstractCatEntity catIn, UUID uuidIn) {

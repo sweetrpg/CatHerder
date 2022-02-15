@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.block.tileentity;
 
-import com.sweetrpg.catherder.CatTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.inventory.container.FoodBowlContainer;
@@ -49,7 +49,7 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
     public int timeoutCounter;
 
     public FoodBowlTileEntity(BlockPos pos, BlockState blockState) {
-        super(CatTileEntityTypes.FOOD_BOWL.get(), pos, blockState);
+        super(ModTileEntityTypes.FOOD_BOWL.get(), pos, blockState);
     }
 
     @Override

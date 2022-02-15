@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.inventory.recipe;
 
-import com.sweetrpg.catherder.CatRecipeSerializers;
+import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
@@ -87,7 +87,7 @@ public class CatBedRecipe extends CustomRecipe implements IShapedRecipe<Crafting
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return CatRecipeSerializers.CAT_BED.get();
+        return ModRecipeSerializers.CAT_BED.get();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.item;
 
-import com.sweetrpg.catherder.CatEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,7 +50,7 @@ public class CatCharmItem extends Item {
             }
 
 
-            Entity entity = CatEntityTypes.CAT.get().spawn((ServerLevel) world, itemstack, context.getPlayer(), blockpos1, MobSpawnType.SPAWN_EGG, !Objects.equals(blockpos, blockpos1) && enumfacing == Direction.UP, false);
+            Entity entity = ModEntityTypes.CAT.get().spawn((ServerLevel) world, itemstack, context.getPlayer(), blockpos1, MobSpawnType.SPAWN_EGG, !Objects.equals(blockpos, blockpos1) && enumfacing == Direction.UP, false);
             if (entity instanceof CatEntity) {
                CatEntity cat = (CatEntity)entity;
                if (player != null) {
@@ -76,7 +76,7 @@ public class CatCharmItem extends Item {
                 if (!(worldIn.getBlockState(blockpos).getBlock() instanceof LiquidBlock)) {
                     return new InteractionResultHolder<>(InteractionResult.PASS, itemstack);
                 } else if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, ((BlockHitResult)raytraceresult).getDirection(), itemstack)) {
-                    Entity entity = CatEntityTypes.CAT.get().spawn((ServerLevel) worldIn, itemstack, playerIn, blockpos, MobSpawnType.SPAWN_EGG, false, false);
+                    Entity entity = ModEntityTypes.CAT.get().spawn((ServerLevel) worldIn, itemstack, playerIn, blockpos, MobSpawnType.SPAWN_EGG, false, false);
                     if (entity instanceof CatEntity) {
                         CatEntity cat = (CatEntity)entity;
                            cat.setTame(true);

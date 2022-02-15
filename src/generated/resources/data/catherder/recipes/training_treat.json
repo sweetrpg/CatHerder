@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "TUV",
+    "TFR",
     "XXX",
     "YYY"
   ],
@@ -9,17 +9,17 @@
     "T": {
       "item": "minecraft:string"
     },
-    "U": {
-      "item": "minecraft:bone"
+    "F": {
+      "tag": "minecraft:fishes"
     },
-    "V": {
-      "item": "minecraft:gunpowder"
+    "R": {
+      "item": "minecraft:rabbit"
     },
     "X": {
       "item": "minecraft:sugar"
     },
     "Y": {
-      "item": "minecraft:wheat"
+      "item": "catherder:catnip"
     }
   },
   "result": {

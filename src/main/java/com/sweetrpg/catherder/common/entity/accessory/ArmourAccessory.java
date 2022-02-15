@@ -1,6 +1,5 @@
 package com.sweetrpg.catherder.common.entity.accessory;
 
-import com.sweetrpg.catherder.CatAccessories;
 import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.api.registry.AccessoryType;
@@ -11,7 +10,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nonnull;

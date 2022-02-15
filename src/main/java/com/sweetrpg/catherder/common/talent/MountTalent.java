@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.CatAttributes;
+import com.sweetrpg.catherder.common.registry.ModAttributes;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
@@ -26,12 +26,12 @@ public class MountTalent extends TalentInstance {
 
     @Override
     public void init(AbstractCatEntity catIn) {
-        catIn.setAttributeModifier(CatAttributes.JUMP_POWER.get(), CAT_MOUNT_JUMP, this::createSpeedModifier);
+        catIn.setAttributeModifier(ModAttributes.JUMP_POWER.get(), CAT_MOUNT_JUMP, this::createSpeedModifier);
     }
 
     @Override
     public void set(AbstractCatEntity catIn, int level) {
-        catIn.setAttributeModifier(CatAttributes.JUMP_POWER.get(), CAT_MOUNT_JUMP, this::createSpeedModifier);
+        catIn.setAttributeModifier(ModAttributes.JUMP_POWER.get(), CAT_MOUNT_JUMP, this::createSpeedModifier);
     }
 
     public AttributeModifier createSpeedModifier(AbstractCatEntity catIn, UUID uuidIn) {

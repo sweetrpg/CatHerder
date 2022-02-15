@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common;
 
-import com.sweetrpg.catherder.CatItems;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.common.block.tileentity.FoodBowlTileEntity;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
@@ -109,7 +109,7 @@ public class Screens {
     }
 
     public static void openTreatBagScreen(ServerPlayer player, ItemStack stackIn, int slotId) {
-        if (stackIn.getItem() == CatItems.TREAT_BAG.get()) {
+        if (stackIn.getItem() == ModItems.TREAT_BAG.get()) {
             NetworkHooks.openGui(player, new TreatBagContainerProvider(stackIn, slotId), buf -> {
                 buf.writeVarInt(slotId);
                 buf.writeItem(stackIn);

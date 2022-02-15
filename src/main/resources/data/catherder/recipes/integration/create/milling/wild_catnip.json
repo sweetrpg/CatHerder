@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "catherder:wild_catnip"
+    }
+  ],
+  "results": [
+    {
+      "item": "catherder:catnip_seeds",
+      "count": 1
+    },
+    {
+      "item": "minecraft:green_dye",
+      "count": 1
+    }
+  ],
+  "processingTime": 50
+}

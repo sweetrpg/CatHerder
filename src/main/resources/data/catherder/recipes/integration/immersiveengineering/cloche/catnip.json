@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "immersiveengineering:cloche",
+  "results": [
+    {
+      "item": "catherder:catnip",
+      "count": 2
+    },
+    {
+      "item": "catherder:catnip_seeds"
+    }
+  ],
+  "input": {
+    "item": "catherder:catnip_seeds"
+  },
+  "soil": {
+    "item": "minecraft:dirt"
+  },
+  "time": 800,
+  "render": {
+    "type": "crop",
+    "block": "catherder:catnip"
+  }
+}

@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.client.screen;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sweetrpg.catherder.CatAccessories;
+import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.client.screen.widget.SmallButton;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
@@ -98,7 +98,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
                 continue;
             }
 
-            Optional<AccessoryInstance> inst = slot.getDog().getAccessory(CatAccessories.DYEABLE_COLLAR.get());
+            Optional<AccessoryInstance> inst = slot.getDog().getAccessory(ModAccessories.DYEABLE_COLLAR.get());
             if (inst.isPresent()) {
                 float[] color = inst.get().cast(DyeableAccessory.DyeableAccessoryInstance.class).getColor();
                 RenderSystem.setShaderColor(color[0], color[1], color[2], 1.0F);

@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.CatTags;
+import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.world.InteractionHand;
@@ -67,11 +67,11 @@ public class CatBegGoal extends Goal {
     private boolean hasTemptationItemInHand(Player player) {
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack itemstack = player.getItemInHand(hand);
-            if ((this.cat.isTame() ? CatTags.BEG_ITEMS_TAMED : CatTags.BEG_ITEMS_UNTAMED).contains(itemstack.getItem())) {
+            if ((this.cat.isTame() ? ModTags.BEG_ITEMS_TAMED : ModTags.BEG_ITEMS_UNTAMED).contains(itemstack.getItem())) {
                 return true;
             }
 
-            if (CatTags.TREATS.contains(itemstack.getItem())) {
+            if (ModTags.TREATS.contains(itemstack.getItem())) {
                 return true;
             }
 

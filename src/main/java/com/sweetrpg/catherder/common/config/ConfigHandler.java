@@ -60,46 +60,31 @@ public class ConfigHandler {
         public ForgeConfigSpec.BooleanValue RENDER_BLOOD;
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
-            builder.push("General");
+            {
+                builder.push("General");
 
-            builder.pop();
-            builder.push("Cat Render");
+                builder.pop();
+            }
 
-            DIRE_PARTICLES = builder
-                    .comment("Enables the particle effect on Dire Level 30 dogs.")
-                    .translation("catherder.config.client.enable_dire_particles")
-                    .define("enable_dire_particles", true);
-            RENDER_CHEST = builder
-                    .comment("When enabled, dogs with points in pack puppy will have chests on their side.")
-                    .translation("catherder.config.client.render_chest")
-                    .define("render_chest", true);
-            USE_DT_TEXTURES = builder
-                    .comment("If disabled will use the default minecraft wolf skin for all cat textures.")
-                    .translation("catherder.config.client.enable_dt_textures")
-                    .define("enable_dt_textures", true);
-            RENDER_ARMOUR = builder
-                    .comment("When enabled, dogs with points in guard cat will have armour.")
-                    .translation("catherder.config.client.render_armour")
-                    .define("render_armour", false);
-            RENDER_SADDLE = builder
-                    .comment("When enabled, dogs with points in wolf mount will have a saddle on.")
-                    .translation("catherder.config.client.render_saddle")
-                    .define("render_saddle", true);
-            RENDER_WINGS = builder
-                    .comment("When enabled, Dogs will have wings when at level 5 pillow paw.")
-                    .translation("catherder.config.client.render_wings")
-                    .define("render_wings", false);
-            RENDER_BLOOD = builder
-                    .comment("When enabled, Dogs will show blood texture while incapacitated.")
-                    .translation("catherder.config.client.render_incapacitated_overlay")
-                    .define("render_incapacitated_overlay", true);
+            {
+                builder.push("Cat Render");
 
-            builder.pop();
+                DIRE_PARTICLES = builder.comment("Enables the particle effect on Dire Level 30 dogs.").translation("catherder.config.client.enable_dire_particles").define("enable_dire_particles", true);
+                RENDER_CHEST = builder.comment("When enabled, dogs with points in pack puppy will have chests on their side.").translation("catherder.config.client.render_chest").define("render_chest", true);
+                USE_DT_TEXTURES = builder.comment("If disabled will use the default minecraft wolf skin for all cat textures.").translation("catherder.config.client.enable_dt_textures").define("enable_dt_textures", true);
+                RENDER_ARMOUR = builder.comment("When enabled, dogs with points in guard cat will have armour.").translation("catherder.config.client.render_armour").define("render_armour", false);
+                RENDER_SADDLE = builder.comment("When enabled, dogs with points in wolf mount will have a saddle on.").translation("catherder.config.client.render_saddle").define("render_saddle", true);
+                RENDER_WINGS = builder.comment("When enabled, Dogs will have wings when at level 5 pillow paw.").translation("catherder.config.client.render_wings").define("render_wings", false);
+                RENDER_BLOOD = builder.comment("When enabled, Dogs will show blood texture while incapacitated.").translation("catherder.config.client.render_incapacitated_overlay").define("render_incapacitated_overlay", true);
+
+                builder.pop();
+            }
         }
     }
 
     public static class ServerConfig {
 
+        public ForgeConfigSpec.IntValue CHANCE_WILD_CATNIP;
         public ForgeConfigSpec.BooleanValue DISABLE_HUNGER;
         public ForgeConfigSpec.BooleanValue STARTING_ITEMS;
         public ForgeConfigSpec.BooleanValue DOG_GENDER;
@@ -111,45 +96,30 @@ public class ConfigHandler {
         public Map<String, ForgeConfigSpec.BooleanValue> DISABLED_TALENTS;
 
         public ServerConfig(ForgeConfigSpec.Builder builder) {
-            builder.push("General");
+            {
+                builder.push("General");
 
-            //DEBUG_MODE = builder
-            //        .comment("Enables debugging mode, which would output values for the sake of finding issues in the mod.")
-            //        .define("debugMode", false);
+                //DEBUG_MODE = builder
+                //        .comment("Enables debugging mode, which would output values for the sake of finding issues in the mod.")
+                //        .define("debugMode", false);
+                CHANCE_WILD_CATNIP = builder.comment("Chance that catnip appears in the wild").translation("catherder.config.cat.chance_wild_catnip").defineInRange("chance_wild_catnip", 20, 1, 100);
 
-            builder.pop();
-            builder.push("Cat Constants");
+                builder.pop();
+            }
 
-            DISABLE_HUNGER = builder
-                    .comment("Disable hunger mode for the cat")
-                    .translation("catherder.config.cat.disable_hunger")
-                    .define("disable_hunger", false);
-            STARTING_ITEMS = builder
-                    .comment("When enabled you will spawn with a guide, Kitty Charm and Command Emblem.")
-                    .translation("catherder.config.enable_starting_items")
-                    .define("enable_starting_items", false);
-            DOG_GENDER = builder
-                    .comment("When enabled, dogs will be randomly assigned genders and will only mate and produce children with the opposite gender.")
-                    .translation("catherder.config.enable_gender")
-                    .define("enable_gender", true);
-            PUPS_GET_PARENT_LEVELS = builder
-                    .comment("When enabled, puppies get some levels from parents. When disabled, puppies start at 0 points.")
-                    .translation("catherder.config.enable_pup_get_parent_levels")
-                    .define("enable_pup_get_parent_levels", false);
-            TIME_TO_MATURE = builder
-                    .comment("The time in ticks it takes for a baby cat to become an adult, default 48000 (2 Minecraft days) and minimum 0")
-                    .translation("catherder.config.cat.time_to_mature")
-                    .defineInRange("time_to_mature", 48000, 0, Integer.MAX_VALUE);
-            DOG_WHINE_WHEN_HUNGER_LOW = builder
-                    .comment("Determines if dogs should whine when hunger reaches below 20 DP.")
-                    .translation("catherder.config.whine_when_hungry")
-                    .define("whine_when_hungry", true);
-            EAT_FOOD_ON_FLOOR = builder
-                    .comment("When enabled dogs will path and eat editable items in the world.")
-                    .translation("catherder.config.eat_food_on_floor")
-                    .define("eat_food_on_floor", true);
+            {
+                builder.push("Cat Constants");
 
-            builder.pop();
+                DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation("catherder.config.cat.disable_hunger").define("disable_hunger", false);
+                STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Kitty Charm and Command Emblem.").translation("catherder.config.enable_starting_items").define("enable_starting_items", false);
+                DOG_GENDER = builder.comment("When enabled, dogs will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation("catherder.config.enable_gender").define("enable_gender", true);
+                PUPS_GET_PARENT_LEVELS = builder.comment("When enabled, puppies get some levels from parents. When disabled, puppies start at 0 points.").translation("catherder.config.enable_pup_get_parent_levels").define("enable_pup_get_parent_levels", false);
+                TIME_TO_MATURE = builder.comment("The time in ticks it takes for a baby cat to become an adult, default 48000 (2 Minecraft days) and minimum 0").translation("catherder.config.cat.time_to_mature").defineInRange("time_to_mature", 48000, 0, Integer.MAX_VALUE);
+                DOG_WHINE_WHEN_HUNGER_LOW = builder.comment("Determines if dogs should whine when hunger reaches below 20 DP.").translation("catherder.config.whine_when_hungry").define("whine_when_hungry", true);
+                EAT_FOOD_ON_FLOOR = builder.comment("When enabled dogs will path and eat editable items in the world.").translation("catherder.config.eat_food_on_floor").define("eat_food_on_floor", true);
+
+                builder.pop();
+            }
         }
     }
 

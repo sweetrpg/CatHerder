@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.CatTags;
+import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
@@ -35,7 +35,7 @@ public class PackKittyTalent extends TalentInstance {
     private LazyOptional<?> lazyPackPuppyHandler;
 
     public static Predicate<ItemEntity> SHOULD_PICKUP_ENTITY_ITEM = (entity) -> {
-        return entity.isAlive() && !entity.hasPickUpDelay() && !CatTags.PACK_CAT_BLACKLIST.contains(entity.getItem().getItem());// && !EntityAIFetch.BONE_PREDICATE.test(entity.getItem());
+        return entity.isAlive() && !entity.hasPickUpDelay() && !ModTags.PACK_CAT_BLACKLIST.contains(entity.getItem().getItem());// && !EntityAIFetch.BONE_PREDICATE.test(entity.getItem());
     };
 
     public PackKittyTalent(Talent talentIn, int levelIn) {

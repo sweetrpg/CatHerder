@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.inventory.container;
 
 import com.sweetrpg.catherder.CatHerder;
-import com.sweetrpg.catherder.CatContainerTypes;
+import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
 import com.sweetrpg.catherder.common.inventory.container.slot.CatInventorySlot;
 import com.sweetrpg.catherder.common.talent.PackKittyTalent;
@@ -34,7 +34,7 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
 
     //Server method
     public CatInventoriesContainer(int windowId, Inventory playerInventory, SimpleContainerData trackableArray) {
-        super(CatContainerTypes.CAT_INVENTORIES.get(), windowId);
+        super(ModContainerTypes.CAT_INVENTORIES.get(), windowId);
         this.world = playerInventory.player.level;
         this.player = playerInventory.player;
         this.position = DataSlot.standalone();

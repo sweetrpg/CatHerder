@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.storage;
 
-import com.sweetrpg.catherder.CatAccessories;
-import com.sweetrpg.catherder.CatItems;
+import com.sweetrpg.catherder.common.registry.ModAccessories;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.api.feature.EnumGender;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
@@ -81,7 +81,7 @@ public class CatLocationData implements ICatData {
         this.name = catIn.getName();
         this.ownerName = catIn.getOwnersName().orElse(null);
         this.gender = catIn.getGender();
-        this.hasRadarCollar = catIn.getAccessory(CatAccessories.RADIO_BAND.get()).isPresent();
+        this.hasRadarCollar = catIn.getAccessory(ModAccessories.RADIO_BAND.get()).isPresent();
 
         this.cat = catIn;
         this.storage.setDirty();
@@ -164,7 +164,7 @@ public class CatLocationData implements ICatData {
     }
 
     public boolean shouldDisplay(Level worldIn, Player playerIn, InteractionHand handIn) {
-        return this.hasRadarCollar || playerIn.isCreative() || playerIn.getItemInHand(handIn).getItem() == CatItems.CREATIVE_RADAR.get();
+        return this.hasRadarCollar || playerIn.isCreative() || playerIn.getItemInHand(handIn).getItem() == ModItems.CREATIVE_RADAR.get();
     }
 
     @Nullable

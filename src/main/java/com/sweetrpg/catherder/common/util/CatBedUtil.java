@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.util;
 
-import com.sweetrpg.catherder.CatBlocks;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
@@ -46,7 +46,7 @@ public class CatBedUtil {
     }
 
     public static ItemStack createItemStack(ICasingMaterial casingId, IBeddingMaterial beddingId) {
-        ItemStack stack = new ItemStack(CatBlocks.CAT_BED.get(), 1);
+        ItemStack stack = new ItemStack(ModBlocks.CAT_BED.get(), 1);
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
         NBTUtil.putRegistryValue(tag, "casingId", casingId);

@@ -18,6 +18,7 @@ import com.sweetrpg.catherder.common.entity.ai.*;
 import com.sweetrpg.catherder.common.entity.serializers.DimensionDependantArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
+import com.sweetrpg.catherder.common.registry.*;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import com.sweetrpg.catherder.common.storage.CatRespawnStorage;
 import com.sweetrpg.catherder.common.util.Cache;
@@ -105,13 +106,13 @@ public class CatEntity extends AbstractCatEntity {
     private static final EntityDataAccessor<ItemStack> BONE_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
-    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> (EntityDataAccessor<List<TalentInstance>>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.TALENT_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.GENDER_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.MODE_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, CatSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> (EntityDataAccessor<List<TalentInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.TALENT_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
 
     public static final void initDataParameters() {
         ACCESSORIES.get();
@@ -444,7 +445,7 @@ public class CatEntity extends AbstractCatEntity {
 
             // If the cat has a food bowl in this dimension then check if it is still there
             // Only check if the chunk it is in is loaded
-            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(CatBlocks.FOOD_BOWL.get())) {
+            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.FOOD_BOWL.get())) {
                 this.setBowlPos(dimKey, Optional.empty());
             }
         }
@@ -468,12 +469,12 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
         else { // Not tamed
-            if(stack.getItem() == Items.BONE || stack.getItem() == CatItems.TRAINING_TREAT.get()) {
+            if(stack.getItem() == Items.BONE || stack.getItem() == ModItems.TRAINING_TREAT.get()) {
 
                 if(!this.level.isClientSide) {
                     this.usePlayerItem(player, hand, stack);
 
-                    if(stack.getItem() == CatItems.TRAINING_TREAT.get() || this.random.nextInt(3) == 0) {
+                    if(stack.getItem() == ModItems.TRAINING_TREAT.get() || this.random.nextInt(3) == 0) {
                         this.tame(player);
                         this.navigation.stop();
                         this.setTarget((LivingEntity) null);
@@ -816,8 +817,8 @@ public class CatEntity extends AbstractCatEntity {
 
         Set<AttributeModifier> critModifiers = null;
 
-        if(this.getAttribute(CatAttributes.CRIT_CHANCE.get()).getValue() > this.getRandom().nextDouble()) {
-            critModifiers = this.getAttribute(CatAttributes.CRIT_BONUS.get()).getModifiers();
+        if(this.getAttribute(ModAttributes.CRIT_CHANCE.get()).getValue() > this.getRandom().nextDouble()) {
+            critModifiers = this.getAttribute(ModAttributes.CRIT_BONUS.get()).getModifiers();
             critModifiers.forEach(attackDamageInst::addTransientModifier);
         }
 
@@ -1014,12 +1015,12 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public ItemStack getPickedResult(HitResult target) {
-        return new ItemStack(CatItems.CAT_CHARM.get());
+        return new ItemStack(ModItems.CAT_CHARM.get());
     }
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return CatTags.BREEDING_ITEMS.contains(stack.getItem());
+        return ModTags.BREEDING_ITEMS.contains(stack.getItem());
     }
 
     @Override
@@ -1052,7 +1053,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public AgeableMob getBreedOffspring(ServerLevel worldIn, AgeableMob partner) {
-        CatEntity child = CatEntityTypes.CAT.get().create(worldIn);
+        CatEntity child = ModEntityTypes.CAT.get().create(worldIn);
         UUID uuid = this.getOwnerUUID();
 
         if(uuid != null) {
@@ -1132,7 +1133,7 @@ public class CatEntity extends AbstractCatEntity {
     protected void tickDeath() {
         if(this.deathTime == 19) { // 1 second after death
             if(this.level != null && !this.level.isClientSide) {
-//                DogRespawnStorage.get(this.world).putData(this);
+//                catrespawnStorage.get(this.world).putData(this);
 //                CatHerder.LOGGER.debug("Saved cat as they died {}", this);
 //
 //                DogLocationStorage.get(this.world).remove(this);
@@ -1333,13 +1334,13 @@ public class CatEntity extends AbstractCatEntity {
                             name = Attributes.ATTACK_DAMAGE;
                             break;
                         case "generic.jumpStrength":
-                            name = CatAttributes.JUMP_POWER;
+                            name = ModAttributes.JUMP_POWER;
                             break;
                         case "generic.critChance":
-                            name = CatAttributes.CRIT_CHANCE;
+                            name = ModAttributes.CRIT_CHANCE;
                             break;
                         case "generic.critBonus":
-                            name = CatAttributes.CRIT_BONUS;
+                            name = ModAttributes.CRIT_BONUS;
                             break;
                     }
 
@@ -2076,7 +2077,7 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public boolean canSpendPoints(int amount) {
-        return this.getSpendablePoints() >= amount || this.getAccessory(CatAccessories.GOLDEN_COLLAR.get()).isPresent();
+        return this.getSpendablePoints() >= amount || this.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent();
     }
 
     // When this method is changed the cache may need to be updated at certain points
@@ -2178,7 +2179,7 @@ public class CatEntity extends AbstractCatEntity {
                 if(this.jumpPower > 0.0F && !this.isDogJumping() && this.isOnGround()) {
 
                     // Calculate jump value based of jump strength, power this jump and jump boosts
-                    double jumpValue = this.getAttribute(CatAttributes.JUMP_POWER.get()).getValue() * this.getBlockJumpFactor() * this.jumpPower; //TODO do we want getJumpFactor?
+                    double jumpValue = this.getAttribute(ModAttributes.JUMP_POWER.get()).getValue() * this.getBlockJumpFactor() * this.jumpPower; //TODO do we want getJumpFactor?
                     if(this.hasEffect(MobEffects.JUMP)) {
                         jumpValue += (this.getEffect(MobEffects.JUMP).getAmplifier() + 1) * 0.1F;
                     }
@@ -2302,7 +2303,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         Block blockBelow = this.level.getBlockState(this.blockPosition().below()).getBlock();
-        boolean onBed = blockBelow == CatBlocks.CAT_BED.get() || BlockTags.BEDS.contains(blockBelow);
+        boolean onBed = blockBelow == ModBlocks.CAT_BED.get() || BlockTags.BEDS.contains(blockBelow);
         if(onBed) {
             return true;
         }

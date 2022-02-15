@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.inventory.container;
 
-import com.sweetrpg.catherder.CatBlocks;
-import com.sweetrpg.catherder.CatContainerTypes;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +24,7 @@ public class FoodBowlContainer extends AbstractContainerMenu {
 
     //Server method
     public FoodBowlContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
-        super(CatContainerTypes.FOOD_BOWL.get(), windowId);
+        super(ModContainerTypes.FOOD_BOWL.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         IItemHandler inventory = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
 
@@ -47,7 +47,7 @@ public class FoodBowlContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(this.tileEntity.getLevel(), this.tileEntity.getBlockPos()), player, CatBlocks.FOOD_BOWL.get());
+        return stillValid(ContainerLevelAccess.create(this.tileEntity.getLevel(), this.tileEntity.getBlockPos()), player, ModBlocks.FOOD_BOWL.get());
     }
 
     @Override

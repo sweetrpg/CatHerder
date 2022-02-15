@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sweetrpg.catherder.CatAccessories;
+import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel.Type;
@@ -10,8 +10,6 @@ import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.client.CatTextureManager;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
-import com.sweetrpg.catherder.common.network.packet.data.*;
-import com.sweetrpg.catherder.common.network.packet.data.*;
 import com.sweetrpg.catherder.common.network.packet.data.*;
 import com.sweetrpg.catherder.common.util.Util;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -187,7 +185,7 @@ public class CatInfoScreen extends Screen {
             }) {
                 @Override
                 public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
-                    CatInfoScreen.this.renderTooltip(stack, new TranslatableComponent("doggui.prevpage").withStyle(ChatFormatting.ITALIC), mouseX, mouseY);
+                    CatInfoScreen.this.renderTooltip(stack, new TranslatableComponent("catgui.prevpage").withStyle(ChatFormatting.ITALIC), mouseX, mouseY);
                 }
             };
             this.leftBtn.active = false;
@@ -200,7 +198,7 @@ public class CatInfoScreen extends Screen {
             }) {
                 @Override
                 public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
-                    CatInfoScreen.this.renderTooltip(stack, new TranslatableComponent("doggui.nextpage").withStyle(ChatFormatting.ITALIC), mouseX, mouseY);
+                    CatInfoScreen.this.renderTooltip(stack, new TranslatableComponent("catgui.nextpage").withStyle(ChatFormatting.ITALIC), mouseX, mouseY);
                 }
             };
 
@@ -277,46 +275,46 @@ public class CatInfoScreen extends Screen {
         String speedValue = Util.format2DP(this.cat.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
         String armorValue = Util.format2DP(this.cat.getAttribute(Attributes.ARMOR).getValue());
         String ageValue = Util.format2DP(this.cat.getAge());
-        String ageRel = I18n.get(this.cat.isBaby() ? "doggui.age.baby" : "doggui.age.adult");
+        String ageRel = I18n.get(this.cat.isBaby() ? "catgui.age.baby" : "catgui.age.adult");
 
         String ageString = ageValue + " " + ageRel;
 
         String tamedString = "";
         if (this.cat.isTame()) {
             if (this.cat.isOwnedBy(this.player)) {
-                tamedString = I18n.get("doggui.owner.you");
+                tamedString = I18n.get("catgui.owner.you");
             } else if (this.cat.getOwnersName().isPresent()) {
                 tamedString = this.cat.getOwnersName().get().getString();
             }
         }
 
-        //this.font.drawString(I18n.format("doggui.health") + healthState, this.width - 160, topY - 110, 0xFFFFFF);
-        this.font.draw(stack, I18n.get("doggui.speed") + " " + speedValue, this.width - 160, topY - 100, 0xFFFFFF);
-        this.font.draw(stack, I18n.get("doggui.owner") + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
-        this.font.draw(stack, I18n.get("doggui.age") + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
-        this.font.draw(stack, I18n.get("doggui.armor") + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
+        //this.font.drawString(I18n.format("catgui.health") + healthState, this.width - 160, topY - 110, 0xFFFFFF);
+        this.font.draw(stack, I18n.get("catgui.speed") + " " + speedValue, this.width - 160, topY - 100, 0xFFFFFF);
+        this.font.draw(stack, I18n.get("catgui.owner") + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
+        this.font.draw(stack, I18n.get("catgui.age") + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
+        this.font.draw(stack, I18n.get("catgui.armor") + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
         if (ConfigHandler.SERVER.DOG_GENDER.get()) {
-            this.font.draw(stack, I18n.get("doggui.gender") + " "+ I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
+            this.font.draw(stack, I18n.get("catgui.gender") + " "+ I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
         }
 
-        this.font.draw(stack, I18n.get("doggui.newname"), topX - 100, topY + 38, 4210752);
-        this.font.draw(stack, I18n.get("doggui.level") + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
-        this.font.draw(stack, I18n.get("doggui.leveldire") + " " + this.cat.getCatLevel().getLevel(Type.DIRE), topX, topY + 75, 0xFF10F9);
-        if (this.cat.getAccessory(CatAccessories.GOLDEN_COLLAR.get()).isPresent()) {
+        this.font.draw(stack, I18n.get("catgui.newname"), topX - 100, topY + 38, 4210752);
+        this.font.draw(stack, I18n.get("catgui.level") + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
+        this.font.draw(stack, I18n.get("catgui.leveldire") + " " + this.cat.getCatLevel().getLevel(Type.DIRE), topX, topY + 75, 0xFF10F9);
+        if (this.cat.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent()) {
             this.font.draw(stack, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
         } else {
-            this.font.draw(stack, I18n.get("doggui.pointsleft") + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
+            this.font.draw(stack, I18n.get("catgui.pointsleft") + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
         }
        // if (ConfigHandler.CLIENT.USE_DT_TEXTURES.get()) {
-            this.font.draw(stack, I18n.get("doggui.textureindex"), this.width - 80, topY + 20, 0xFFFFFF);
+            this.font.draw(stack, I18n.get("catgui.textureindex"), this.width - 80, topY + 20, 0xFFFFFF);
             this.font.draw(stack, this.cat.getSkinHash().substring(0, Math.min(this.cat.getSkinHash().length(), 10)), this.width - 73, topY + 54, 0xFFFFFF);
        // }
 
         if (this.cat.isOwnedBy(this.player)) {
-            this.font.draw(stack, I18n.get("doggui.obeyothers"), this.width - 76, topY + 67, 0xFFFFFF);
+            this.font.draw(stack, I18n.get("catgui.obeyothers"), this.width - 76, topY + 67, 0xFFFFFF);
         }
 
-        this.font.draw(stack, I18n.get("doggui.friendlyfire"), this.width - 76, topY - 15, 0xFFFFFF);
+        this.font.draw(stack, I18n.get("catgui.friendlyfire"), this.width - 76, topY - 15, 0xFFFFFF);
 
 
         this.renderables.forEach(widget -> {
