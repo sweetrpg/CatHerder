@@ -41,7 +41,7 @@ jobs:
         arguments: build
     - uses: SOLIDSoftworks/semver-tags
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         tag-prefix: ''
         default-version: '0.0.1'
         prerelease: 'alpha'
