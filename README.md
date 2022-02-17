@@ -1,6 +1,8 @@
 Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.svg)](https://minecraft.curseforge.com/projects/cat-herder) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20cat-herder_all.svg)](https://minecraft.curseforge.com/projects/cat-herder)
 ===========
 
+[![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/gradle.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/gradle.yml)
+
 **Cat Herder** is a **Minecraft mod** made for **Minecraft Forge**
 
 * Special talents for your cats
@@ -10,14 +12,16 @@ Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.s
 * A cat tracking and revival system
 
 Thanks to everyone that has contributed. This includes but is not limited to...
+* **DoggyTalents** -- from whom this mod borrows heavily 
 
 Want to know more about the mod? Take a gander at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
 
 -----------------
 
-### Installation Instructions
+# Installation Instructions
 
-##### Client
+## Client
+- 
 - Download **Minecraft Forge** from the [official site](https://files.minecraftforge.net/).
 - Run the Installer jar and select the 'Install client' option and click OK. **Minecraft Forge** should now be installed!
 - Now open up the launcher and in the profile selector select ```Forge```, login and run Minecraft (*This may take a while*).
@@ -31,19 +35,19 @@ Want to know more about the mod? Take a gander at the [wiki](https://github.com/
 
 -----------------
 
-### FAQ
+# FAQ
+
  - **Q:** Will there be a Fabric version?  
-   **A:** I will not be creating one, if someone wants to take up this task please contact me.
+   **A:** Probably not.
  - **Q:** Which Minecraft versions are supported?  
-   **A:** It is normally be the last two major releases, currently `1.18.x`.
- - **Q:** Are cats no longer immortal?  
-   **A:** Unlike the previous versions, **cats can die**. Fortunately, they can be revived. Visit the [Behaviour wiki](https://github.com/sweetrpg/CatHerder/wiki/Behavior#immortality-only-mc-112-and-older-versions-for-mc-115) for more info.
+   **A:** It is normally the most current release, currently `1.18.x`.
  - **Q:** I have a cat, how to get started?  
    **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
 -----------------
 
-### Licenses
+# Licenses
+
 CatHerder API
  - 2022
  - [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)
