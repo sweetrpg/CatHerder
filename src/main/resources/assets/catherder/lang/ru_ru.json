@@ -75,7 +75,6 @@
    "talent.catherder.hell_beast": "Адская гончая",
    "talent.catherder.mount": "Волчий наездник",
    "talent.catherder.pack_cat": "Ходячий сундучок",
-   "talent.catherder.pillow_paw": "Подушечки лап",
    "talent.catherder.quick_healer": "Быстрая регенерация",
    "talent.catherder.creeper_sweeper": "Победитель криперов",
    "talent.catherder.cheetah_speed": "Собачий рывок",
@@ -84,11 +83,9 @@
    "talent.catherder.bed_finder": "Ищейка кроватей",
    "talent.catherder.pest_fighter": "Борец с вредителями",
    "talent.catherder.poison_fang": "Ядовитый клык",
-   "talent.catherder.shepherd_cat": "Пастух",
    "talent.catherder.rescue_cat": "Спасатель",
    "talent.catherder.roaring_gale": "Штормовой рык",
    "talent.catherder.nermal": "Щенячьи глазки",
-   "talent.catherder.swimmer_cat": "Плавец",
    "talent.catherder.cat_torch": "Cat Torch",
 
    "talent.catherder.bed_finder.description": "В течение того времени, пока эта собака находится у Вас на голове, она будет смотреть в сторону Вашей кровати. Чтобы собака запрыгнула Вам на голову, просто нажмите ПКМ, держа в руке кость. Дальность чутья собаки увеличивается на 200 блоков за каждый уровень, а на уровне 5 расстояние становится бесконечным.",
@@ -183,12 +180,9 @@
    "cat.gender.unisex.subject": "they",
    "cat.gender.unisex.title": "unisex",
 
-   "entity.catherder.cat": "Пёс",
+   "entity.catherder.cat": "Кот",
    "entity.catherder.cat.unknown_owner": "Владелец неизвестен",
    "entity.catherder.cat.untamed": "Untamed",
-
-   "catherder.whistle.short": "Короткий свисток",
-   "catherder.whistle.long": "Длинный свисток",
 
    "catcommand.come": "Ко мне!",
    "catcommand.stay": "Стой!",

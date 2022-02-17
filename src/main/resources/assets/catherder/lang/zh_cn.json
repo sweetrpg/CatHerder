@@ -75,7 +75,6 @@
    "talent.catherder.hell_beast": "地狱犬",
    "talent.catherder.mount": "骑乘犬",
    "talent.catherder.pack_cat": "背包犬",
-   "talent.catherder.pillow_paw": "枕头爪",
    "talent.catherder.quick_healer": "快速愈合",
    "talent.catherder.creeper_sweeper": "爬行者清道夫",
    "talent.catherder.cheetah_speed": "狗狗冲刺",
@@ -84,11 +83,9 @@
    "talent.catherder.bed_finder": "寻床能手",
    "talent.catherder.pest_fighter": "除虫斗士",
    "talent.catherder.poison_fang": "剧毒獠牙",
-   "talent.catherder.shepherd_cat": "牧羊犬",
    "talent.catherder.rescue_cat": "急救先锋",
    "talent.catherder.roaring_gale": "狂风怒吼",
    "talent.catherder.nermal": "卖萌天赋",
-   "talent.catherder.swimmer_cat": "游泳健将",
    "talent.catherder.cat_torch": "Cat Torch",
 
    "talent.catherder.bed_finder.description": "当拥有该技能的狗在你头上时，你的床就会黑色高亮突出显示。要让你的狗爬到你的头上，你需要拿着骨头右击它们。每提升一级，有效范围半径增加200格，当升到5级时，有效范围无限大。",
@@ -183,12 +180,9 @@
    "cat.gender.unisex.subject": "they",
    "cat.gender.unisex.title": "unisex",
 
-   "entity.catherder.cat": "狗",
+   "entity.catherder.cat": "貓",
    "entity.catherder.cat.unknown_owner": "未知主人",
    "entity.catherder.cat.untamed": "Untamed",
-
-   "catherder.whistle.short": "短哨子",
-   "catherder.whistle.long": "长哨子",
 
    "catcommand.come": "起立！",
    "catcommand.stay": "坐下！",

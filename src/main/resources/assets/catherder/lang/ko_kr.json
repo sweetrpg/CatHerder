@@ -75,7 +75,6 @@
    "talent.catherder.hell_beast": "지옥견 주의",
    "talent.catherder.mount": "말 대신 멍",
    "talent.catherder.pack_cat": "멍멍이 가방",
-   "talent.catherder.pillow_paw": "폭신폭신 발바닥",
    "talent.catherder.quick_healer": "맞아도 벌떡",
    "talent.catherder.creeper_sweeper": "크리퍼 제거반",
    "talent.catherder.cheetah_speed": "후다닥 달리기",
@@ -84,11 +83,9 @@
    "talent.catherder.bed_finder": "침대 찾아라",
    "talent.catherder.pest_fighter": "해충 박멸",
    "talent.catherder.poison_fang": "맹독 송곳니",
-   "talent.catherder.shepherd_cat": "똑똑한 양치기",
    "talent.catherder.rescue_cat": "긴급 구조견",
    "talent.catherder.roaring_gale": "깜짝 포효",
    "talent.catherder.nermal": "귀여운 댕댕이",
-   "talent.catherder.swimmer_cat": "나는야 물개",
    "talent.catherder.cat_torch": "Cat Torch",
 
    "talent.catherder.bed_finder.description": "이 스킬을 가진 개를 머리 위에 올린 동안, 당신의 침대가 검은 테두리로 표시됩니다. 개를 머리 위에 올리려면, 손에 뼈를 든 채로 우클릭 하세요. 유효범위는 레벨 당 200 블록 이며, 레벨 5 때 무제한이 됩니다.",
@@ -183,12 +180,9 @@
    "cat.gender.unisex.subject": "they",
    "cat.gender.unisex.title": "unisex",
 
-   "entity.catherder.cat": "cat",
+   "entity.catherder.cat": "Cat",
    "entity.catherder.cat.unknown_owner": "Owner Unknown",
    "entity.catherder.cat.untamed": "Untamed",
-
-   "catherder.whistle.short": "Whistle Short",
-   "catherder.whistle.long": "Whistle Long",
 
    "catcommand.come": "일어나!",
    "catcommand.stay": "앉아!",

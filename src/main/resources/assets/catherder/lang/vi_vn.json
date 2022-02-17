@@ -75,7 +75,6 @@
    "talent.catherder.hell_beast": "Cún Lửa",
    "talent.catherder.mount": "Sói Cưỡi",
    "talent.catherder.pack_cat": "Cún Giữ đồ",
-   "talent.catherder.pillow_paw": "Chân Gối",
    "talent.catherder.quick_healer": "Hồi máu Cấp tốc",
    "talent.catherder.creeper_sweeper": "Săn Creeper",
    "talent.catherder.cheetah_speed": "Tốc độ Cún",
@@ -84,11 +83,9 @@
    "talent.catherder.bed_finder": "Tìm Giường",
    "talent.catherder.pest_fighter": "Săn Côn Trùng",
    "talent.catherder.poison_fang": "Răng Độc",
-   "talent.catherder.shepherd_cat": "Cún Chăn cừu",
    "talent.catherder.rescue_cat": "Cún Cứu hộ",
    "talent.catherder.roaring_gale": "Cơn lốc Gầm thét",
    "talent.catherder.nermal": "Cún Dễ thương",
-   "talent.catherder.swimmer_cat": "Cún Bơi lội",
    "talent.catherder.cat_torch": "Cún Đặt đuốc",
 
    "talent.catherder.bed_finder.description": "Khi một chú cún với kĩ năng này trên đầu bạn, giường bạn sẽ được tô lên bằng một khung màu đen. Để đưa chú cún lên đầu bạn, nhấp Chuột Phải vào nó với cục xương thường trên tay. Cự li chú cún có thể làm được điều này bằng 200 khối trên 1 cấp, nhưng trở thành vô cực tại cấp 5.",
@@ -183,12 +180,9 @@
    "cat.gender.unisex.subject": "cún",
    "cat.gender.unisex.title": "cún",
 
-   "entity.catherder.cat": "Cún",
+   "entity.catherder.cat": "Con mèo",
    "entity.catherder.cat.unknown_owner": "Chủ không xác định",
    "entity.catherder.cat.untamed": "Không có chủ",
-
-   "catherder.whistle.short": "Còi tiếng ngắn",
-   "catherder.whistle.long": "Còi tiếng dài",
 
    "catcommand.come": "Đứng!",
    "catcommand.stay": "Ngồi!",
