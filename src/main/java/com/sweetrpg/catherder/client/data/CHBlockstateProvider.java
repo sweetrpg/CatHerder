@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.client.data;
 
+import com.sweetrpg.catherder.common.block.CatnipBlock;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.core.Direction;
@@ -15,6 +16,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
@@ -40,8 +42,9 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //        catBath(CatBlocks.CAT_BATH);
         catBed(ModBlocks.CAT_BED);
         createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
-//        this.customStageBlock(CatBlocks.CATNIP_CROP.get(), resourceBlock("crop_cross"), "cross", CatnipBlock.AGE, new ArrayList<>());
+        this.customStageBlock(ModBlocks.CATNIP_CROP.get(), resourceBlock("crop_cross"), "cross", CatnipBlock.AGE, new ArrayList<>());
         this.wildCropBlock(ModBlocks.WILD_CATNIP.get());
+        makeSimple(ModBlocks.CARDBOARD_BOX);
     }
 
     private String blockName(Block block) {
