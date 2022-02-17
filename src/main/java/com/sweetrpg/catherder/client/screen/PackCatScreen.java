@@ -13,8 +13,8 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class PackCatScreen extends AbstractContainerScreen<PackCatContainer> {
 
-    public PackCatScreen(PackCatContainer packPuppy, Inventory playerInventory, Component displayName) {
-        super(packPuppy, playerInventory, displayName);
+    public PackCatScreen(PackCatContainer packcat, Inventory playerInventory, Component displayName) {
+        super(packcat, playerInventory, displayName);
         //TODO this.container.allowUserInput = false;
     }
 
@@ -35,7 +35,7 @@ public class PackCatScreen extends AbstractContainerScreen<PackCatContainer> {
     protected void renderBg(PoseStack stack, float partialTicks, int xMouse, int yMouse) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, Resources.GUI_PACK_PUPPY);
+        RenderSystem.setShaderTexture(0, Resources.GUI_PACK_CAT);
         int l = (this.width - this.imageWidth) / 2;
         int i1 = (this.height - this.imageHeight) / 2;
         this.blit(stack, l, i1, 0, 0, this.imageWidth, this.imageHeight);

@@ -29,7 +29,7 @@ import java.util.function.Predicate;
 
 public class PackCatTalent extends TalentInstance {
 
-    public static Capability<PackCatItemHandler> PACK_PUPPY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});;
+    public static Capability<PackCatItemHandler> PACK_CAT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});;
 
     private PackCatItemHandler packCatItemHandler;
     private LazyOptional<?> lazyPackCatHandler;
@@ -91,7 +91,7 @@ public class PackCatTalent extends TalentInstance {
 
     @Override
     public void set(AbstractCatEntity cat, int preLevel) {
-        // No need to drop anything if cat didn't have pack puppy
+        // No need to drop anything if cat didn't have pack cat
         if (preLevel > 0 && this.level == 0) {
             this.dropInventory(cat);
         }
@@ -100,7 +100,7 @@ public class PackCatTalent extends TalentInstance {
     @Override
     public void dropInventory(AbstractCatEntity catIn) {
         //TODO either drop inventory or save to respawn data, currently does both
-        // No need to drop anything if cat didn't have pack puppy
+        // No need to drop anything if cat didn't have pack cat
         for (int i = 0; i < this.packCatItemHandler.getSlots(); ++i) {
             Containers.dropItemStack(catIn.level, catIn.getX(), catIn.getY(), catIn.getZ(), this.packCatItemHandler.getStackInSlot(i));
             this.packCatItemHandler.setStackInSlot(i, ItemStack.EMPTY);
@@ -127,7 +127,7 @@ public class PackCatTalent extends TalentInstance {
 
     @Override
     public <T> LazyOptional<T> getCapability(AbstractCatEntity catIn, Capability<T> cap, Direction side) {
-        if (cap == PackCatTalent.PACK_PUPPY_CAPABILITY) {
+        if (cap == PackCatTalent.PACK_CAT_CAPABILITY) {
             return (LazyOptional<T>) this.lazyPackCatHandler;
         }
         return null;

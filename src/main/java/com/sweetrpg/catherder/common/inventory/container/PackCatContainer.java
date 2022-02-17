@@ -26,7 +26,7 @@ public class PackCatContainer extends AbstractContainerMenu {
         super(ModContainerTypes.PACK_CAT.get(), windowId);
         this.cat = catIn;
         this.level = Mth.clamp(catIn.getCatLevel(CatHerder.PACK_CAT), 0, 5);
-        this.packInventory = catIn.getCapability(PackCatTalent.PACK_PUPPY_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
+        this.packInventory = catIn.getCapability(PackCatTalent.PACK_CAT_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
 
         for (int j = 0; j < 3; j++) {
             for (int i1 = 0; i1 < this.level; i1++) {
@@ -52,17 +52,17 @@ public class PackCatContainer extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player player, int i) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(i);
-        int packpuppyLevel = Mth.clamp(this.level, 0, 5);
+        int packcatLevel = Mth.clamp(this.level, 0, 5);
 
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 
-            if (i < 3 * packpuppyLevel) {
-                if (!this.moveItemStackTo(itemstack1, 3 * packpuppyLevel, this.slots.size(), true))
+            if (i < 3 * packcatLevel) {
+                if (!this.moveItemStackTo(itemstack1, 3 * packcatLevel, this.slots.size(), true))
                     return ItemStack.EMPTY;
             }
-            else if (!this.moveItemStackTo(itemstack1, 0, 3 * packpuppyLevel, false))
+            else if (!this.moveItemStackTo(itemstack1, 0, 3 * packcatLevel, false))
                 return ItemStack.EMPTY;
 
             if (itemstack1.isEmpty())

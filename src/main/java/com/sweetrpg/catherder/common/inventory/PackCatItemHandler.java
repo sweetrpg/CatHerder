@@ -45,8 +45,8 @@ public class PackCatItemHandler extends ItemStackHandler {
                 }
             }
             this.onLoad();
-        } else if (compound.contains("packpuppyitems", Tag.TAG_LIST)) {
-            ListTag tagList = compound.getList("packpuppyitems", Tag.TAG_COMPOUND);
+        } else if (compound.contains("packcatitems", Tag.TAG_LIST)) {
+            ListTag tagList = compound.getList("packcatitems", Tag.TAG_COMPOUND);
             for (int i = 0; i < tagList.size(); i++) {
                 CompoundTag itemTag = tagList.getCompound(i);
                 int slot = itemTag.getInt("Slot");

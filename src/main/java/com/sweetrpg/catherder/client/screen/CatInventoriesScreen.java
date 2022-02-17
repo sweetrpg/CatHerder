@@ -30,8 +30,8 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
     private Button left, right;
     private Player player;
 
-    public CatInventoriesScreen(CatInventoriesContainer packPuppy, Inventory playerInventory, Component displayName) {
-        super(packPuppy, playerInventory, displayName);
+    public CatInventoriesScreen(CatInventoriesContainer packcat, Inventory playerInventory, Component displayName) {
+        super(packcat, playerInventory, displayName);
         this.player = playerInventory.player;
     }
 

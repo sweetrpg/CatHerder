@@ -70,7 +70,7 @@ public class ConfigHandler {
                 builder.push("Cat Render");
 
                 DIRE_PARTICLES = builder.comment("Enables the particle effect on Dire Level 30 cats.").translation("catherder.config.client.enable_dire_particles").define("enable_dire_particles", true);
-                RENDER_CHEST = builder.comment("When enabled, cats with points in pack puppy will have chests on their side.").translation("catherder.config.client.render_chest").define("render_chest", true);
+                RENDER_CHEST = builder.comment("When enabled, cats with points in pack cat will have chests on their side.").translation("catherder.config.client.render_chest").define("render_chest", true);
                 USE_DT_TEXTURES = builder.comment("If disabled will use the default minecraft wolf skin for all cat textures.").translation("catherder.config.client.enable_dt_textures").define("enable_dt_textures", true);
                 RENDER_ARMOUR = builder.comment("When enabled, cats with points in guard cat will have armour.").translation("catherder.config.client.render_armour").define("render_armour", false);
                 RENDER_SADDLE = builder.comment("When enabled, cats with points in wolf mount will have a saddle on.").translation("catherder.config.client.render_saddle").define("render_saddle", true);
