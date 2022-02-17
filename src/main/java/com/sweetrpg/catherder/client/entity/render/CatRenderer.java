@@ -43,7 +43,6 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
         if(this.shouldShowName(entityIn)) {
-
             double d0 = this.entityRenderDispatcher.distanceToSqr(entityIn);
             if(d0 <= 64 * 64) {
                 String tip = entityIn.getMode().getTip();
