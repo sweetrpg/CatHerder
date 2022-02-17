@@ -39,7 +39,7 @@ jobs:
       uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
       with:
         arguments: build
-    - uses: SOLIDSoftworks/semver-tags
+    - uses: SOLIDSoftworks/semver-tags@1.0.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         tag-prefix: ''
