@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 
 public class InventoryUtil {
 
-    public static InteractionResult feedDogFrom(AbstractCatEntity catIn, @Nullable Entity entity, IItemHandlerModifiable source) {
+    public static InteractionResult feedCatFrom(AbstractCatEntity catIn, @Nullable Entity entity, IItemHandlerModifiable source) {
 
         for (int i = 0; i < source.getSlots(); i++) {
 

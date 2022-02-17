@@ -49,7 +49,7 @@ public class CatLocationData implements ICatData {
     }
 
     @Override
-    public UUID getDogId() {
+    public UUID getCatId() {
         return this.uuid;
     }
 
@@ -60,7 +60,7 @@ public class CatLocationData implements ICatData {
     }
 
     @Override
-    public String getDogName() {
+    public String getCatName() {
         return this.name == null ? "" : this.name.getString();
     }
 
@@ -141,7 +141,7 @@ public class CatLocationData implements ICatData {
     }
 
     @Nullable
-    public Optional<CatEntity> getDog(@Nullable Level worldIn) {
+    public Optional<CatEntity> getCat(@Nullable Level worldIn) {
         if (worldIn == null) {
             return Optional.ofNullable(this.cat);
         }
@@ -152,9 +152,9 @@ public class CatLocationData implements ICatData {
         }
 
         for (ServerLevel world : server.getAllLevels()) {
-            CatEntity possibleDog = WorldUtil.getCachedEntity(world, CatEntity.class, this.cat, this.uuid);
-            if (possibleDog != null) {
-                this.cat = possibleDog;
+            CatEntity possibleCat = WorldUtil.getCachedEntity(world, CatEntity.class, this.cat, this.uuid);
+            if (possibleCat != null) {
+                this.cat = possibleCat;
                 return Optional.of(this.cat);
             }
         }
@@ -169,12 +169,12 @@ public class CatLocationData implements ICatData {
 
     @Nullable
     public Component getName(@Nullable Level worldIn) {
-        return this.getDog(worldIn).map(CatEntity::getDisplayName).orElse(this.name);
+        return this.getCat(worldIn).map(CatEntity::getDisplayName).orElse(this.name);
     }
 
     @Nullable
     public Vec3 getPos(@Nullable ServerLevel worldIn) {
-        return this.getDog(worldIn).map(CatEntity::position).orElse(this.position);
+        return this.getCat(worldIn).map(CatEntity::position).orElse(this.position);
     }
 
     @Nullable
@@ -189,7 +189,7 @@ public class CatLocationData implements ICatData {
 
     @Override
     public String toString() {
-        return "DogLocationData [uuid=" + uuid + ", owner=" + ownerId + ", position=" + position + ", dimension=" + dimension + ", name=" + name + ", gender=" + gender + ", hasRadarCollar=" + hasRadarCollar + "]";
+        return "CatLocationData [uuid=" + uuid + ", owner=" + ownerId + ", position=" + position + ", dimension=" + dimension + ", name=" + name + ", gender=" + gender + ", hasRadarCollar=" + hasRadarCollar + "]";
     }
 
 

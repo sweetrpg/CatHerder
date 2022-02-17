@@ -51,14 +51,14 @@ public class RadarItem extends Item {
             playerIn.sendMessage(new TextComponent(""), Util.NIL_UUID);
 
             CatLocationStorage locationManager = CatLocationStorage.get(worldIn);
-            List<CatLocationData> ownDogs = locationManager.getDogs(playerIn, dimCurr).collect(Collectors.toList());
+            List<CatLocationData> ownCats = locationManager.getCats(playerIn, dimCurr).collect(Collectors.toList());
 
-            if (ownDogs.isEmpty()) {
+            if (ownCats.isEmpty()) {
                 playerIn.sendMessage(new TranslatableComponent("catradar.errornull", dimCurr.location()), Util.NIL_UUID);
             } else {
                 boolean flag = false;
 
-                for (CatLocationData loc : ownDogs) {
+                for (CatLocationData loc : ownCats) {
                     if (loc.shouldDisplay(worldIn, playerIn, handIn)) {
                         flag = true;
 
@@ -74,21 +74,21 @@ public class RadarItem extends Item {
                 }
             }
 
-            List<ResourceKey<Level>> otherDogs = new ArrayList<>();
-            List<ResourceKey<Level>> noDogs = new ArrayList<>();
+            List<ResourceKey<Level>> otherCats = new ArrayList<>();
+            List<ResourceKey<Level>> noCats = new ArrayList<>();
             for (ResourceKey<Level> worldkey : worldIn.getServer().levelKeys()) {
                 if (worldkey.equals(worldIn.dimension()))  continue;
-                ownDogs = locationManager.getDogs(playerIn, worldkey).collect(Collectors.toList()); // Check if radio collar is on
+                ownCats = locationManager.getCats(playerIn, worldkey).collect(Collectors.toList()); // Check if radio collar is on
 
-                (ownDogs.size() > 0 ? otherDogs : noDogs).add(worldkey);
+                (ownCats.size() > 0 ? otherCats : noCats).add(worldkey);
             }
 
-            if (otherDogs.size() > 0) {
-                playerIn.sendMessage(new TranslatableComponent("catradar.notindim", otherDogs.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+            if (otherCats.size() > 0) {
+                playerIn.sendMessage(new TranslatableComponent("catradar.notindim", otherCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
             }
 
-            if (noDogs.size() > 0 && stack.getItem() == ModItems.CREATIVE_RADAR.get()) {
-                playerIn.sendMessage(new TranslatableComponent("catradar.errornull", noDogs.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+            if (noCats.size() > 0 && stack.getItem() == ModItems.CREATIVE_RADAR.get()) {
+                playerIn.sendMessage(new TranslatableComponent("catradar.errornull", noCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
             }
         }
         return new InteractionResultHolder<ItemStack>(InteractionResult.FAIL, stack);

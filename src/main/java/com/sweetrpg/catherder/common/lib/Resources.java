@@ -10,8 +10,8 @@ public class Resources {
     public static final ResourceLocation GUI_TREAT_BAG = getGui("treat_bag");
     public static final ResourceLocation GUI_RADAR = getGui("radar");
 
-    public static final ResourceLocation DOG_INVENTORY = getGui("dog_inventory");
-    public static final ResourceLocation INVENTORY_BUTTON = getGui("dog_button");
+    public static final ResourceLocation CAT_INVENTORY = getGui("cat_inventory");
+    public static final ResourceLocation INVENTORY_BUTTON = getGui("cat_button");
     public static final ResourceLocation SMALL_WIDGETS = getGui("small_widgets");
 
     // Vanilla cat

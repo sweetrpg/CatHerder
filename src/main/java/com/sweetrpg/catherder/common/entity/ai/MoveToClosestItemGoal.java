@@ -23,7 +23,7 @@ public class MoveToClosestItemGoal extends Goal {
     protected final Predicate<ItemEntity> predicate;
     protected final Comparator<Entity> sorter;
     protected final double followSpeed;
-    protected final PathNavigation dogNavigator;
+    protected final PathNavigation catNavigator;
     protected final float minDist;
 
     protected ItemEntity target;
@@ -34,7 +34,7 @@ public class MoveToClosestItemGoal extends Goal {
 
     public MoveToClosestItemGoal(CatEntity catIn, double speedIn, float maxDist, float stopDist, @Nullable Predicate<ItemStack> targetSelector) {
         this.cat = catIn;
-        this.dogNavigator = catIn.getNavigation();
+        this.catNavigator = catIn.getNavigation();
         this.followSpeed = speedIn;
         this.maxDist = maxDist;
         this.minDist = stopDist;
@@ -95,7 +95,7 @@ public class MoveToClosestItemGoal extends Goal {
             if (--this.timeToRecalcPath <= 0) {
                 this.timeToRecalcPath = 10;
 
-                if (!this.dogNavigator.moveTo(this.target, this.followSpeed)) {
+                if (!this.catNavigator.moveTo(this.target, this.followSpeed)) {
                     this.cat.getLookControl().setLookAt(this.target, 10.0F, this.cat.getMaxHeadXRot());
                 }
             }
@@ -105,7 +105,7 @@ public class MoveToClosestItemGoal extends Goal {
     @Override
     public void stop() {
         this.target = null;
-        this.dogNavigator.stop();
+        this.catNavigator.stop();
         this.cat.setPathfindingMalus(BlockPathTypes.WATER, this.oldWaterCost);
         this.cat.getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(this.oldRangeSense);
     }

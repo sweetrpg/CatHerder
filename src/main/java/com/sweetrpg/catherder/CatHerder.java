@@ -67,7 +67,7 @@ public class CatHerder {
     //public static final RegistryObject<Talent> RANGED_ATTACKER = registerInst("ranged_attacker", RangedAttacker::new);
     public static final RegistryObject<Talent> RESCUE_CAT = registerInst("rescue_cat", RescueCatTalent::new);
     public static final RegistryObject<Talent> ROARING_GALE = registerInst("roaring_gale", RoaringGaleTalent::new);
-    //    public static final RegistryObject<Talent> SHEPHERD_DOG = registerInst("shepherd_cat", ShepherdCatTalent::new);
+    //    public static final RegistryObject<Talent> SHEPHERD_CAT = registerInst("shepherd_cat", ShepherdCatTalent::new);
 //    public static final RegistryObject<Talent> SWIMMER_CAT = registerInst("swimmer_cat", SwimmerCatTalent::new);
     public static final RegistryObject<Talent> MOUNT = registerInst("mount", MountTalent::new);
     public static final RegistryObject<Talent> CAT_TORCH = registerInst("cat_torch", CatTorchTalent::new);

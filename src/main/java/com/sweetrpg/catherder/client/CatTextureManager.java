@@ -81,7 +81,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
     public File getClientFolder() {
         Minecraft mc = Minecraft.getInstance();
         SkinManager skinManager = mc.getSkinManager();
-        return new File(skinManager.skinsDirectory.getParentFile(), "skins_dog");
+        return new File(skinManager.skinsDirectory.getParentFile(), "skins_cat");
     }
 
     @Nullable
@@ -156,7 +156,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
     }
 
     public ResourceLocation getCached(String hash) {
-        if (!ConfigHandler.DISPLAY_OTHER_DOG_SKINS) {
+        if (!ConfigHandler.DISPLAY_OTHER_CAT_SKINS) {
             return Resources.ENTITY_VANILLA_CAT;
         }
 
@@ -176,7 +176,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         return Resources.ENTITY_VANILLA_CAT;
     }
 
-    private synchronized void loadDogSkinResource(CatTextureManager.Preparations prep, Resource resource) {
+    private synchronized void loadCatSkinResource(CatTextureManager.Preparations prep, Resource resource) {
         InputStream inputstream = null;
         try {
             inputstream = resource.getInputStream();
@@ -248,7 +248,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
                     continue;
                 }
 
-                this.loadDogSkinResource(prep, resource);
+                this.loadCatSkinResource(prep, resource);
             } catch (FileNotFoundException e) {
                 ;
             } catch (Exception exception) {

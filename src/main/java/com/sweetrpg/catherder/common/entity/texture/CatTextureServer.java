@@ -19,7 +19,7 @@ public class CatTextureServer {
      * Get the dedicated servers cache location
      */
     public File getServerFolder() {
-        return new File(ServerLifecycleHooks.getCurrentServer().getServerDirectory(), "dog_skins");
+        return new File(ServerLifecycleHooks.getCurrentServer().getServerDirectory(), "cat_skins");
     }
 
     @Nullable
@@ -66,7 +66,7 @@ public class CatTextureServer {
 
 
     public ResourceLocation getResourceLocation(String name) {
-        return Util.getResource("dogskins/" + name);
+        return Util.getResource("catskins/" + name);
     }
 
     /**

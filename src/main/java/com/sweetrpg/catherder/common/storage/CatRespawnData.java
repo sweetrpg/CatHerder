@@ -34,12 +34,12 @@ public class CatRespawnData implements ICatData {
     }
 
     @Override
-    public UUID getDogId() {
+    public UUID getCatId() {
         return this.uuid;
     }
 
     @Override
-    public String getDogName() {
+    public String getCatName() {
         Component name = NBTUtil.getTextComponent(this.data, "CustomName");
         return name == null ? "" : name.getString();
     }

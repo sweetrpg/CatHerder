@@ -117,13 +117,13 @@ public class CatInfoScreen extends Screen {
                 this.textureIndex %= this.customSkinList.size();
                 ResourceLocation rl = this.customSkinList.get(this.textureIndex);
 
-                this.setDogTexture(rl);
+                this.setCatTexture(rl);
             });
             Button lessBtn = new Button(this.width - 64, topY + 30, 20, 20, new TextComponent("-"), (btn) -> {
                 this.textureIndex += this.customSkinList.size() - 1;
                 this.textureIndex %= this.customSkinList.size();
                 ResourceLocation rl = this.customSkinList.get(this.textureIndex);
-                this.setDogTexture(rl);
+                this.setCatTexture(rl);
             });
 
             this.addRenderableWidget(addBtn);
@@ -207,7 +207,7 @@ public class CatInfoScreen extends Screen {
         }
     }
 
-    private void setDogTexture(ResourceLocation rl) {
+    private void setCatTexture(ResourceLocation rl) {
         if (ConfigHandler.SEND_SKIN) {
             try {
                 byte[] data = CatTextureManager.INSTANCE.getResourceBytes(rl);

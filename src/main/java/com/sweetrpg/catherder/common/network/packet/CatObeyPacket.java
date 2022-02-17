@@ -23,7 +23,7 @@ public class CatObeyPacket extends CatPacket<CatObeyData> {
     }
 
     @Override
-    public void handleDog(CatEntity catIn, CatObeyData data, Supplier<Context> ctx) {
+    public void handleCat(CatEntity catIn, CatObeyData data, Supplier<Context> ctx) {
         if (!catIn.canInteract(ctx.get().getSender())) {
             return;
         }

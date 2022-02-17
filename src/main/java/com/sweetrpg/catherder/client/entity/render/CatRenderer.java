@@ -20,8 +20,8 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
 
     public CatRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new CatModel(ctx.bakeLayer(ClientSetup.CAT)), 0.5F);
-//        this.addLayer(new DogTalentLayer(this, ctx));
-//        this.addLayer(new DogAccessoryLayer(this, ctx));
+//        this.addLayer(new CatTalentLayer(this, ctx));
+//        this.addLayer(new CatAccessoryLayer(this, ctx));
         this.addLayer(new CatnipLayer(this));
         for(LayerFactory<CatEntity, CatModel<CatEntity>> layer : CollarRenderManager.getLayers()) {
             this.addLayer(layer.createLayer(this, ctx));

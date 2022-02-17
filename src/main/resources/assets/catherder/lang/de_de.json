@@ -239,7 +239,7 @@
    "argument.catherder.uuid.section.invalid": "%s contains one or more invalid characters",
    "commands.catrespawn.uuid.success": "Summoned %s from the dead",
    "commands.catrespawn.uuid.failure": "Failed to rise %s from the dead",
-   "command.catrespawn.imprecise": "Too many dogs (%d) for this owner under this name, use `byuuid` for %s",
+   "command.catrespawn.imprecise": "Too many cats (%d) for this owner under this name, use `byuuid` for %s",
 
    "catbed.bedding.null": "Bedding material not set",
    "catbed.casing.null": "Casing material not set",

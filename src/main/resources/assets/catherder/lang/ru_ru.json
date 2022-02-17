@@ -160,7 +160,7 @@
    "cat.mode.berserker.description": "В этом режиме Ваша собака будет следовать за Вами и атаковать всех мобов без предупреждения.",
    "cat.mode.docile.description": "В этом режиме Ваша собака будет следовать за Вами, но игнорировать всех мобов. Так же, в этом режиме, Ваша собака ждет, когда Вы бросите ей косточку.",
    "cat.mode.patrol.description": "В этом режиме ваша собака будет патрулировать между 2-4 точками (использую командную эмблему) и атакуя монстров.",
-   "cat.mode.guard.description": "Dogs follow closely and attack any monsters that come close.",
+   "cat.mode.guard.description": "Cats follow closely and attack any monsters that come close.",
 
    "cat.mode.incapacitated.help": "%s недееспособен и требует торт, чтобы оживить их.",
    "cat.mode.docile.nobowl": "Нет привязаной миски.",
@@ -239,7 +239,7 @@
    "argument.catherder.uuid.section.invalid": "%s contains one or more invalid characters",
    "commands.catrespawn.uuid.success": "Summoned %s from the dead",
    "commands.catrespawn.uuid.failure": "Failed to rise %s from the dead",
-   "command.catrespawn.imprecise": "Too many dogs (%d) for this owner under this name, use `byuuid` for %s",
+   "command.catrespawn.imprecise": "Too many cats (%d) for this owner under this name, use `byuuid` for %s",
 
    "catbed.bedding.null": "Bedding material not set",
    "catbed.casing.null": "Casing material not set",

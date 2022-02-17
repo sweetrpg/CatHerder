@@ -29,7 +29,7 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
     private Player player;
     private DataSlot position;
     private SimpleContainerData trackableArray;
-    private final List<CatInventorySlot> dogSlots = new ArrayList<>();
+    private final List<CatInventorySlot> catSlots = new ArrayList<>();
     private int possibleSlots = 0;
 
     //Server method
@@ -52,10 +52,10 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, col, 8 + col * 18, 142));
         }
 
-        this.addDogSlots();
+        this.addCatSlots();
     }
 
-    public void addDogSlots() {
+    public void addCatSlots() {
         final int TOTAL_COLUMNS = 9;
 
         int page = this.position.get();
@@ -80,7 +80,7 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
                 for (int row = 0; row < 3; row++) {
                     for (int col = 0; col < numCols; col++) {
                         CatInventorySlot slot = new CatInventorySlot(cat, this.player, packInventory, drawingColumn + col, row, col, col * 3 + row, 8 + 18 * (drawingColumn + col - page), 18 * row + 18);
-                        this.addDogSlot(slot);
+                        this.addCatSlot(slot);
                         int adjustedColumn = slot.getOverallColumn() - page;
                         if (adjustedColumn - page < 0 || adjustedColumn - page >= 9) {
                             slot.setEnabled(false);
@@ -100,10 +100,10 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
         super.setData(id, data);
 
         if (id == 0) {
-            for (int i = 0; i < this.dogSlots.size(); i++) {
-                CatInventorySlot slot = this.dogSlots.get(i);
+            for (int i = 0; i < this.catSlots.size(); i++) {
+                CatInventorySlot slot = this.catSlots.get(i);
                 CatInventorySlot newSlot = new CatInventorySlot(slot, 8 + 18 * (slot.getOverallColumn() - data));
-                this.replaceDogSlot(i, newSlot);
+                this.replaceCatSlot(i, newSlot);
                 int adjustedColumn = slot.getOverallColumn() - data;
                 if (adjustedColumn < 0 || adjustedColumn >= 9) {
                     newSlot.setEnabled(false);
@@ -113,13 +113,13 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
 
     }
 
-    private void addDogSlot(CatInventorySlot slotIn) {
+    private void addCatSlot(CatInventorySlot slotIn) {
         this.addSlot(slotIn);
-        this.dogSlots.add(slotIn);
+        this.catSlots.add(slotIn);
     }
 
-    private void replaceDogSlot(int i, CatInventorySlot slotIn) {
-        this.dogSlots.set(i, slotIn);
+    private void replaceCatSlot(int i, CatInventorySlot slotIn) {
+        this.catSlots.set(i, slotIn);
         // Work around to set Slot#slotNumber (MCP name) which is Slot#index in official
         // mappings. Needed because SlotItemHandler#index shadows the latter.
         Slot s = slotIn;
@@ -139,7 +139,7 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
     }
 
     public List<CatInventorySlot> getSlots() {
-        return this.dogSlots;
+        return this.catSlots;
     }
 
     @Override
@@ -156,15 +156,15 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 
-            int startIndex = this.slots.size() - this.dogSlots.size() + this.position.get() * 3;
+            int startIndex = this.slots.size() - this.catSlots.size() + this.position.get() * 3;
             int endIndex = Math.min(startIndex + 9 * 3, this.slots.size());
 
-            if (i >= this.slots.size() - this.dogSlots.size() && i < this.slots.size()) {
-                if (!moveItemStackTo(itemstack1, 0, this.slots.size() - this.dogSlots.size(), true)) {
+            if (i >= this.slots.size() - this.catSlots.size() && i < this.slots.size()) {
+                if (!moveItemStackTo(itemstack1, 0, this.slots.size() - this.catSlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!moveItemStackTo(itemstack1, this.slots.size() - this.dogSlots.size(), this.slots.size(), false)) {
+            else if (!moveItemStackTo(itemstack1, this.slots.size() - this.catSlots.size(), this.slots.size(), false)) {
                 return ItemStack.EMPTY;
             }
 

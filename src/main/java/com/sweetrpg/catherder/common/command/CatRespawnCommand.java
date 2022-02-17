@@ -15,8 +15,6 @@ import com.sweetrpg.catherder.common.item.RadarItem;
 import com.sweetrpg.catherder.common.storage.*;
 import com.sweetrpg.catherder.common.util.Util;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.storage.*;
-import com.sweetrpg.catherder.common.storage.*;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -53,21 +51,21 @@ public class CatRespawnCommand {
                     .requires(s -> s.hasPermission(2))
                     .then(Commands.literal("locate")
                         .then(Commands.literal("byuuid")
-                          .then(Commands.argument("dog_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsLocate())
-                                        .then(Commands.argument("dog_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getDogIdSuggestionsLocate())
+                          .then(Commands.argument("cat_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsLocate())
+                                        .then(Commands.argument("cat_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getCatIdSuggestionsLocate())
                           .executes(c -> locate(c)))))
                         .then(Commands.literal("byname")
                            .then(Commands.argument("owner_name", StringArgumentType.string()).suggests(CatRespawnCommand.getOwnerNameSuggestionsLocate())
-                           .then(Commands.argument("dog_name", StringArgumentType.string()).suggests(CatRespawnCommand.getDogNameSuggestionsLocate())
+                           .then(Commands.argument("cat_name", StringArgumentType.string()).suggests(CatRespawnCommand.getCatNameSuggestionsLocate())
                            .executes(c -> locate2(c))))))
                     .then(Commands.literal("revive")
                       .then(Commands.literal("byuuid")
-                        .then(Commands.argument("dog_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsRevive())
-                        .then(Commands.argument("dog_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getDogIdSuggestionsRevive())
+                        .then(Commands.argument("cat_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsRevive())
+                        .then(Commands.argument("cat_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getCatIdSuggestionsRevive())
                         .executes(c -> respawn(c)))))
                       .then(Commands.literal("byname")
                         .then(Commands.argument("owner_name", StringArgumentType.string()).suggests(CatRespawnCommand.getOwnerNameSuggestionsRevive())
-                         .then(Commands.argument("dog_name", StringArgumentType.string()).suggests(CatRespawnCommand.getDogNameSuggestionsRevive())
+                         .then(Commands.argument("cat_name", StringArgumentType.string()).suggests(CatRespawnCommand.getCatNameSuggestionsRevive())
                          .executes(c -> respawn2(c))))))
         );
     }
@@ -101,24 +99,24 @@ public class CatRespawnCommand {
         }
     }
 
-    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getDogIdSuggestionsLocate() {
-        return (context, builder) -> getDogIdSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatIdSuggestionsLocate() {
+        return (context, builder) -> getCatIdSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
     }
 
-    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getDogIdSuggestionsRevive() {
-        return (context, builder) -> getDogIdSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatIdSuggestionsRevive() {
+        return (context, builder) -> getCatIdSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
     }
 
-    private static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getDogIdSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
+    private static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getCatIdSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
         if (context.getSource() instanceof CommandSourceStack) {
-            UUID ownerId = context.getArgument("dog_owner", UUID.class);
+            UUID ownerId = context.getArgument("cat_owner", UUID.class);
             if (ownerId == null) {
                 return Suggestions.empty();
             }
 
             return SharedSuggestionProvider.suggest(possibilities.stream()
                      .filter(data -> ownerId.equals(data.getOwnerId()))
-                     .map(ICatData::getDogId)
+                     .map(ICatData::getCatId)
                      .map(Object::toString)
                      .collect(Collectors.toSet()),
                     builder);
@@ -154,15 +152,15 @@ public class CatRespawnCommand {
         }
     }
 
-    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getDogNameSuggestionsLocate() {
-        return (context, builder) -> getDogNameSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatNameSuggestionsLocate() {
+        return (context, builder) -> getCatNameSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
     }
 
-    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getDogNameSuggestionsRevive() {
-        return (context, builder) -> getDogNameSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatNameSuggestionsRevive() {
+        return (context, builder) -> getCatNameSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
     }
 
-    public static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getDogNameSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
+    public static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getCatNameSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
         if (context.getSource() instanceof CommandSourceStack) {
             String ownerName = context.getArgument("owner_name", String.class);
 
@@ -172,7 +170,7 @@ public class CatRespawnCommand {
 
             return SharedSuggestionProvider.suggest(possibilities.stream()
                     .filter(data -> ownerName.equals(data.getOwnerName()))
-                    .map(ICatData::getDogName)
+                    .map(ICatData::getCatName)
                     .filter((str) -> !Strings.isNullOrEmpty(str))
                      .collect(Collectors.toList()),
                      builder);
@@ -189,9 +187,9 @@ public class CatRespawnCommand {
         source.getPlayerOrException(); // Check source is a player
         ServerLevel world = source.getLevel();
 
-        UUID ownerUuid = ctx.getArgument("dog_owner", UUID.class);
+        UUID ownerUuid = ctx.getArgument("cat_owner", UUID.class);
 
-        UUID uuid = ctx.getArgument("dog_uuid", UUID.class);
+        UUID uuid = ctx.getArgument("cat_uuid", UUID.class);
 
         CatRespawnStorage respawnStorage = CatRespawnStorage.get(world);
         CatRespawnData respawnData = respawnStorage.getData(uuid);
@@ -210,18 +208,18 @@ public class CatRespawnCommand {
 
         String ownerName = ctx.getArgument("owner_name", String.class);
 
-        String dogName = ctx.getArgument("dog_name", String.class);
+        String catName = ctx.getArgument("cat_name", String.class);
         CatRespawnStorage respawnStorage = CatRespawnStorage.get(world);
-        List<CatRespawnData> respawnData = respawnStorage.getDogs(ownerName).filter((data) -> data.getDogName().equalsIgnoreCase(dogName)).collect(Collectors.toList());
+        List<CatRespawnData> respawnData = respawnStorage.getCats(ownerName).filter((data) -> data.getCatName().equalsIgnoreCase(catName)).collect(Collectors.toList());
 
         if (respawnData.isEmpty()) {
-            throw COLOR_INVALID.create(dogName);
+            throw COLOR_INVALID.create(catName);
         }
 
         if (respawnData.size() > 1) {
             StringJoiner joiner = new StringJoiner(", ");
             for (CatRespawnData data : respawnData) {
-                joiner.add(Objects.toString(data.getDogId()));
+                joiner.add(Objects.toString(data.getCatId()));
             }
             throw TOO_MANY_OPTIONS.create(joiner.toString(), respawnData.size());
         }
@@ -233,12 +231,12 @@ public class CatRespawnCommand {
         CatEntity cat = respawnData.respawn(source.getLevel(), source.getPlayerOrException(), source.getPlayerOrException().blockPosition().above());
 
         if (cat != null) {
-            respawnStorage.remove(respawnData.getDogId());
-            source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.success", respawnData.getDogName()), false);
+            respawnStorage.remove(respawnData.getCatId());
+            source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.success", respawnData.getCatName()), false);
             return 1;
         }
 
-        source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.failure", respawnData.getDogName()), false);
+        source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.failure", respawnData.getCatName()), false);
         return 0;
     }
 
@@ -247,9 +245,9 @@ public class CatRespawnCommand {
         source.getPlayerOrException(); // Check source is a player
         ServerLevel world = source.getLevel();
 
-        UUID ownerUuid = ctx.getArgument("dog_owner", UUID.class);
+        UUID ownerUuid = ctx.getArgument("cat_owner", UUID.class);
 
-        UUID uuid = ctx.getArgument("dog_uuid", UUID.class);
+        UUID uuid = ctx.getArgument("cat_uuid", UUID.class);
 
         CatLocationStorage locationStorage = CatLocationStorage.get(world);
         CatLocationData locationData = locationStorage.getData(uuid);
@@ -268,19 +266,19 @@ public class CatRespawnCommand {
 
         String ownerName = ctx.getArgument("owner_name", String.class);
 
-        String dogName = ctx.getArgument("dog_name", String.class);
+        String catName = ctx.getArgument("cat_name", String.class);
         CatLocationStorage locationStorage = CatLocationStorage.get(world);
         List<CatLocationData> locationData = locationStorage.getAll().stream()
-                .filter(data -> ownerName.equals(data.getOwnerName())).filter((data) -> data.getDogName().equalsIgnoreCase(dogName)).collect(Collectors.toList());
+                                                            .filter(data -> ownerName.equals(data.getOwnerName())).filter((data) -> data.getCatName().equalsIgnoreCase(catName)).collect(Collectors.toList());
 
         if (locationData.isEmpty()) {
-            throw COLOR_INVALID.create(dogName);
+            throw COLOR_INVALID.create(catName);
         }
 
         if (locationData.size() > 1) {
             StringJoiner joiner = new StringJoiner(", ");
             for (CatLocationData data : locationData) {
-                joiner.add(Objects.toString(data.getDogId()));
+                joiner.add(Objects.toString(data.getCatId()));
             }
             throw TOO_MANY_OPTIONS.create(joiner.toString(), locationData.size());
         }

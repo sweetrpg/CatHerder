@@ -24,7 +24,7 @@ public class CatModePacket extends CatPacket<CatModeData> {
     }
 
     @Override
-    public void handleDog(CatEntity catIn, CatModeData data, Supplier<Context> ctx) {
+    public void handleCat(CatEntity catIn, CatModeData data, Supplier<Context> ctx) {
         if (!catIn.canInteract(ctx.get().getSender())) {
             return;
         }

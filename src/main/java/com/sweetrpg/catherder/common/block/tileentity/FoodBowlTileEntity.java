@@ -72,17 +72,17 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
         //Only run update code every 5 ticks (0.25s)
         if (++bowl.timeoutCounter < 5) { return; }
 
-        List<CatEntity> dogList = bowl.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
+        List<CatEntity> catList = bowl.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
 
-        for (CatEntity cat : dogList) {
-            //TODO make cat bowl remember who placed and only their dogs can attach to the bowl
+        for (CatEntity cat : catList) {
+            //TODO make cat bowl remember who placed and only their cats can attach to the bowl
             UUID placerId = bowl.getPlacerId();
             if (placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getBowlPos().isPresent()) {
                 cat.setBowlPos(bowl.worldPosition);
             }
 
             if (cat.getCatHunger() < cat.getMaxHunger() / 2) {
-               InventoryUtil.feedDogFrom(cat, null, bowl.inventory);
+               InventoryUtil.feedCatFrom(cat, null, bowl.inventory);
             }
         }
 

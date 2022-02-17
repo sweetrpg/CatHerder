@@ -87,7 +87,7 @@ public class PackCatContainer extends AbstractContainerMenu {
         super.removed(player);
     }
 
-    public AbstractCatEntity getDog() {
+    public AbstractCatEntity getCat() {
         return this.cat;
     }
 

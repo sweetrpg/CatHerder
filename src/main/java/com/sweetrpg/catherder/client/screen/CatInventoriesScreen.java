@@ -88,7 +88,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
     protected void renderBg(PoseStack stack, float partialTicks, int xMouse, int yMouse) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, Resources.DOG_INVENTORY);
+        RenderSystem.setShaderTexture(0, Resources.CAT_INVENTORY);
         int l = (this.width - this.imageWidth) / 2;
         int i1 = (this.height - this.imageHeight) / 2;
         this.blit(stack, l, i1, 0, 0, this.imageWidth, this.imageHeight);
@@ -98,7 +98,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
                 continue;
             }
 
-            Optional<AccessoryInstance> inst = slot.getDog().getAccessory(ModAccessories.DYEABLE_COLLAR.get());
+            Optional<AccessoryInstance> inst = slot.getCat().getAccessory(ModAccessories.DYEABLE_COLLAR.get());
             if (inst.isPresent()) {
                 float[] color = inst.get().cast(DyeableAccessory.DyeableAccessoryInstance.class).getColor();
                 RenderSystem.setShaderColor(color[0], color[1], color[2], 1.0F);
@@ -128,7 +128,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
     @Override
     protected void renderTooltip(PoseStack stack, int mouseX, int mouseY) {
         if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
-//            if (this.hoveredSlot instanceof DogInventorySlot) {
+//            if (this.hoveredSlot instanceof CatInventorySlot) {
 //                this.renderTooltip(Arrays.asList(new TranslationTextComponent("test").applyTextStyle(TextFormatting.RED).getFormattedText()), mouseX, mouseY);
 //            } else {
                 this.renderTooltip(stack, this.hoveredSlot.getItem(), mouseX, mouseY);

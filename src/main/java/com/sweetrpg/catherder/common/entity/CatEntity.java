@@ -114,7 +114,7 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
 
-    public static final void initDataParameters() {
+    public static void initDataParameters() {
         ACCESSORIES.get();
         TALENTS.get();
         CAT_LEVEL.get();
@@ -433,7 +433,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        if(ConfigHandler.CLIENT.DIRE_PARTICLES.get() && this.level.isClientSide && this.getCatLevel().isDireDog()) {
+        if(ConfigHandler.CLIENT.DIRE_PARTICLES.get() && this.level.isClientSide && this.getCatLevel().isDireCat()) {
             for(int i = 0; i < 2; i++) {
                 this.level.addParticle(ParticleTypes.PORTAL, this.getRandomX(0.5D), this.getRandomY() - 0.25D, this.getRandomZ(0.5D), (this.random.nextDouble() - 0.5D) * 2D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2D);
             }
@@ -683,7 +683,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        // Stop dogs being able to attack creepers. If the cat has lvl 5 creeper
+        // Stop cats being able to attack creepers. If the cat has lvl 5 creeper
         // sweeper then we will return true in the for loop above.
         if(target instanceof Creeper) {
             return false;
@@ -1137,7 +1137,7 @@ public class CatEntity extends AbstractCatEntity {
 //                catrespawnStorage.get(this.world).putData(this);
 //                CatHerder.LOGGER.debug("Saved cat as they died {}", this);
 //
-//                DogLocationStorage.get(this.world).remove(this);
+//                CatLocationStorage.get(this.world).remove(this);
 //                CatHerder.LOGGER.debug("Removed cat location as they were removed from the world {}", this);
             }
         }
@@ -1186,9 +1186,9 @@ public class CatEntity extends AbstractCatEntity {
         ListTag talentList = new ListTag();
         List<TalentInstance> talents = this.getTalentMap();
 
-        for(int i = 0; i < talents.size(); i++) {
+        for(TalentInstance talent : talents) {
             CompoundTag talentTag = new CompoundTag();
-            talents.get(i).writeInstance(this, talentTag);
+            talent.writeInstance(this, talentTag);
             talentList.add(talentTag);
         }
 
@@ -1197,9 +1197,9 @@ public class CatEntity extends AbstractCatEntity {
         ListTag accessoryList = new ListTag();
         List<AccessoryInstance> accessories = this.getAccessories();
 
-        for(int i = 0; i < accessories.size(); i++) {
+        for(AccessoryInstance accessory : accessories) {
             CompoundTag accessoryTag = new CompoundTag();
-            accessories.get(i).writeInstance(accessoryTag);
+            accessory.writeInstance(accessoryTag);
             accessoryList.add(accessoryTag);
         }
 
@@ -1285,7 +1285,8 @@ public class CatEntity extends AbstractCatEntity {
                 compound.putUUID("LoveCause", entityUUID);
                 NBTUtil.removeOldUniqueId(compound, "LoveCause");
             }
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to data fix UUIDs: " + e.getMessage());
         }
 
@@ -1365,7 +1366,8 @@ public class CatEntity extends AbstractCatEntity {
                     }
                 }
             }
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to data fix attribute IDs: " + e.getMessage());
         }
 
@@ -1420,7 +1422,8 @@ public class CatEntity extends AbstractCatEntity {
             for(ICatAlteration inst : this.alterations) {
                 inst.init(this);
             }
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to init alteration: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1440,7 +1443,7 @@ public class CatEntity extends AbstractCatEntity {
                 this.setSkinHash(compound.getString("customSkinHash"));
             }
 //            else {
-//                BackwardsComp.readDogTexture(compound, this::setSkinHash);
+//                BackwardsComp.readCatTexture(compound, this::setSkinHash);
 //            }
 
             if(compound.contains("fetchItem", Tag.TAG_COMPOUND)) {
@@ -1457,7 +1460,8 @@ public class CatEntity extends AbstractCatEntity {
             if(compound.contains("catSize", Tag.TAG_ANY_NUMERIC)) {
                 this.setCatSize(compound.getInt("catSize"));
             }
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to load levels: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1472,7 +1476,8 @@ public class CatEntity extends AbstractCatEntity {
                 this.getCatLevel().setLevel(Type.DIRE, compound.getInt("level_dire"));
                 this.markDataParameterDirty(CAT_LEVEL.get());
             }
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to load levels: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1494,7 +1499,8 @@ public class CatEntity extends AbstractCatEntity {
 //            else {
 //                BackwardsComp.readBedLocations(compound, bedsData);
 //            }
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to load beds: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1528,14 +1534,16 @@ public class CatEntity extends AbstractCatEntity {
 
         try {
             this.statsTracker.readAdditional(compound);
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             CatHerder.LOGGER.error("Failed to load stats tracker: " + e.getMessage());
             e.printStackTrace();
         }
         this.alterations.forEach((alter) -> {
             try {
                 alter.onRead(this, compound);
-            } catch(Exception e) {
+            }
+            catch(Exception e) {
                 CatHerder.LOGGER.error("Failed to load alteration: " + e.getMessage());
                 e.printStackTrace();
             }
@@ -2135,7 +2143,7 @@ public class CatEntity extends AbstractCatEntity {
         this.catJumping = jumping;
     }
 
-//    public double getDogJumpStrength() {
+//    public double getCatJumpStrength() {
 //        float verticalVelocity = 0.42F + 0.06F * this.TALENTS.getLevel(ModTalents.WOLF_MOUNT);
 //        if (this.TALENTS.getLevel(ModTalents.WOLF_MOUNT) == 5) verticalVelocity += 0.04F;
 //        return verticalVelocity;

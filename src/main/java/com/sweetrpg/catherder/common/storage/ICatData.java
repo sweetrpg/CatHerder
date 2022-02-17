@@ -4,11 +4,11 @@ import java.util.UUID;
 
 public interface ICatData {
 
-    public UUID getDogId();
+    public UUID getCatId();
 
     public UUID getOwnerId();
 
-    public String getDogName();
+    public String getCatName();
 
     public String getOwnerName();
 }

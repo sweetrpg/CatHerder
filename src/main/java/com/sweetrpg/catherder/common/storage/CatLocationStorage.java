@@ -37,14 +37,14 @@ public class CatLocationStorage extends SavedData {
         return storage.computeIfAbsent(CatLocationStorage::load, CatLocationStorage::new, Constants.STORAGE_CAT_LOCATION);
     }
 
-    public Stream<CatLocationData> getDogs(LivingEntity owner) {
+    public Stream<CatLocationData> getCats(LivingEntity owner) {
         UUID ownerId = owner.getUUID();
 
         return this.locationDataMap.values().stream()
                 .filter(data -> ownerId.equals(data.getOwnerId()));
     }
 
-    public Stream<CatLocationData> getDogs(LivingEntity owner, ResourceKey<Level> key) {
+    public Stream<CatLocationData> getCats(LivingEntity owner, ResourceKey<Level> key) {
         UUID ownerId = owner.getUUID();
 
         return this.locationDataMap.values().stream()

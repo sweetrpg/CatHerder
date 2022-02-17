@@ -160,7 +160,7 @@
    "cat.mode.berserker.description": "在这个模式下，你的狗狗会跟着你，任何生物靠近你时，它们会直接主动攻击。",
    "cat.mode.docile.description": "在这个模式下，你的狗狗会跟着你，但是并不会攻击任何生物。它们已经准备好去捡扔出去的骨头了。",
    "cat.mode.patrol.description": "在这个模式下，你的狗狗会在2-4个点（使用命令徽章指定）之间巡逻并攻击视野内出现的怪物。",
-   "cat.mode.guard.description": "Dogs follow closely and attack any monsters that come close.",
+   "cat.mode.guard.description": "Cats follow closely and attack any monsters that come close.",
 
    "cat.mode.incapacitated.help": "%s 是无能为力的，需要蛋糕来恢复它们。",
    "cat.mode.docile.nobowl": "当前尚未指定食盆。",
@@ -239,7 +239,7 @@
    "argument.catherder.uuid.section.invalid": "%s contains one or more invalid characters",
    "commands.catrespawn.uuid.success": "Summoned %s from the dead",
    "commands.catrespawn.uuid.failure": "Failed to rise %s from the dead",
-   "command.catrespawn.imprecise": "Too many dogs (%d) for this owner under this name, use `byuuid` for %s",
+   "command.catrespawn.imprecise": "Too many cats (%d) for this owner under this name, use `byuuid` for %s",
 
    "catbed.bedding.null": "Bedding material not set",
    "catbed.casing.null": "Casing material not set",

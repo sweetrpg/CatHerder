@@ -35,12 +35,12 @@ public class CatRespawnStorage extends SavedData {
         return storage.computeIfAbsent(CatRespawnStorage::load, CatRespawnStorage::new, Constants.STORAGE_CAT_RESPAWN);
     }
 
-    public Stream<CatRespawnData> getDogs(@Nonnull UUID ownerId) {
+    public Stream<CatRespawnData> getCats(@Nonnull UUID ownerId) {
         return this.respawnDataMap.values().stream()
                 .filter(data -> ownerId.equals(data.getOwnerId()));
     }
 
-    public Stream<CatRespawnData> getDogs(@Nonnull String ownerName) {
+    public Stream<CatRespawnData> getCats(@Nonnull String ownerName) {
         return this.respawnDataMap.values().stream()
                 .filter(data -> ownerName.equals(data.getOwnerName()));
     }

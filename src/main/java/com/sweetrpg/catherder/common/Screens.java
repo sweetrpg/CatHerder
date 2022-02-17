@@ -22,11 +22,11 @@ import java.util.List;
 
 public class Screens {
 
-    public static class PackPuppyContainerProvider implements MenuProvider {
+    public static class PackCatContainerProvider implements MenuProvider {
 
         private AbstractCatEntity cat;
 
-        public PackPuppyContainerProvider(AbstractCatEntity catIn) {
+        public PackCatContainerProvider(AbstractCatEntity catIn) {
             this.cat = catIn;
         }
 
@@ -41,26 +41,26 @@ public class Screens {
         }
     }
 
-    public static class DogInventoriesContainerProvider implements MenuProvider {
+    public static class CatInventoriesContainerProvider implements MenuProvider {
 
-        private List<CatEntity> dogs;
+        private List<CatEntity> cats;
 
-        public DogInventoriesContainerProvider(List<CatEntity> catIn) {
-            this.dogs = catIn;
+        public CatInventoriesContainerProvider(List<CatEntity> catIn) {
+            this.cats = catIn;
         }
 
         @Override
         public AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player) {
-            SimpleContainerData array = new SimpleContainerData(this.dogs.size());
+            SimpleContainerData array = new SimpleContainerData(this.cats.size());
             for (int i = 0; i < array.getCount(); i++) {
-                array.set(i, this.dogs.get(i).getId());
+                array.set(i, this.cats.get(i).getId());
             }
             return new CatInventoriesContainer(windowId, inventory, array);
         }
 
         @Override
         public Component getDisplayName() {
-            return new TranslatableComponent("container.catherder.dog_inventories");
+            return new TranslatableComponent("container.catherder.cat_inventories");
         }
     }
 
@@ -85,17 +85,17 @@ public class Screens {
         }
     }
 
-    public static void openPackPuppyScreen(ServerPlayer player, AbstractCatEntity catIn) {
+    public static void openPackCatScreen(ServerPlayer player, AbstractCatEntity catIn) {
         if (catIn.isAlive()) {
-            NetworkHooks.openGui(player, new PackPuppyContainerProvider(catIn), (buf) -> {
+            NetworkHooks.openGui(player, new PackCatContainerProvider(catIn), (buf) -> {
                 buf.writeInt(catIn.getId());
             });
         }
     }
 
-    public static void openDogInventoriesScreen(ServerPlayer player, List<CatEntity> catIn) {
+    public static void openCatInventoriesScreen(ServerPlayer player, List<CatEntity> catIn) {
         if (!catIn.isEmpty()) {
-            NetworkHooks.openGui(player, new DogInventoriesContainerProvider(catIn), (buf) -> {
+            NetworkHooks.openGui(player, new CatInventoriesContainerProvider(catIn), (buf) -> {
                 buf.writeInt(catIn.size());
                 for (CatEntity cat : catIn) {
                     buf.writeInt(cat.getId());

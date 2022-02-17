@@ -17,7 +17,7 @@ public class CatScreenOverlays {
             CatEntity cat = (CatEntity) mc.player.getVehicle();
             gui.setupOverlayRenderState(true, false);
 
-            mc.getProfiler().push("food_dog");
+            mc.getProfiler().push("food_cat");
 
             RenderSystem.enableBlend();
             int left = screenWidth / 2 + 91;
@@ -57,7 +57,7 @@ public class CatScreenOverlays {
             CatEntity cat = (CatEntity) mc.player.getVehicle();
 
             gui.setupOverlayRenderState(true, false);
-            mc.getProfiler().push("air_dog");
+            mc.getProfiler().push("air_cat");
             RenderSystem.enableBlend();
             int left = screenWidth / 2 + 91;
             int top = screenHeight - gui.right_height;

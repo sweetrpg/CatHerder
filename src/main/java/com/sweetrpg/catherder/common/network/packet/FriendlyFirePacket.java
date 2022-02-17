@@ -23,7 +23,7 @@ public class FriendlyFirePacket extends CatPacket<FriendlyFireData> {
     }
 
     @Override
-    public void handleDog(CatEntity catIn, FriendlyFireData data, Supplier<Context> ctx) {
+    public void handleCat(CatEntity catIn, FriendlyFireData data, Supplier<Context> ctx) {
         if (!catIn.canInteract(ctx.get().getSender())) {
             return;
         }

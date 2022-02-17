@@ -178,12 +178,12 @@ public class CatBedBlock extends BaseEntityBlock {
                     worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
                     return InteractionResult.SUCCESS;
                 } else if (player.isShiftKeyDown() && catBedTileEntity.getOwnerUUID() == null) {
-                    List<CatEntity> dogs = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
-                    Collections.sort(dogs, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
+                    List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
+                    Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
 
                     CatEntity closestStanding = null;
                     CatEntity closestSitting = null;
-                    for (CatEntity cat : dogs) {
+                    for (CatEntity cat : cats) {
                         if (closestSitting != null && closestSitting != null) {
                             break;
                         }

@@ -18,7 +18,7 @@ public interface ICatItem {
     public InteractionResult processInteract(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn);
 
     @Deprecated
-    default InteractionResult onInteractWithDog(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
+    default InteractionResult onInteractWithCat(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
         return processInteract(catIn, worldIn, playerIn, handIn);
     }
 }

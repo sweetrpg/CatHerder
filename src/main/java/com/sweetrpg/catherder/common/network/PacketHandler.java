@@ -17,7 +17,7 @@ public final class PacketHandler {
         registerPacket(new CatNamePacket(), CatNameData.class);
         registerPacket(new CatObeyPacket(), CatObeyData.class);
         registerPacket(new CatTalentPacket(), CatTalentData.class);
-        //registerPacket(new DogTexturePacket(), DogTextureData.class);
+        //registerPacket(new CatTexturePacket(), CatTextureData.class);
         registerPacket(new FriendlyFirePacket(), FriendlyFireData.class);
         registerPacket(new SendSkinPacket(), SendSkinData.class);
         registerPacket(new RequestSkinPacket(), RequestSkinData.class);

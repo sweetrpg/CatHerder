@@ -28,12 +28,12 @@ public abstract class CatPacket<T extends CatData> implements IPacket<T> {
                 return;
             }
 
-            this.handleDog((CatEntity) target, data, ctx);
+            this.handleCat((CatEntity) target, data, ctx);
         });
 
         ctx.get().setPacketHandled(true);
     }
 
-    public abstract void handleDog(CatEntity catIn, T data, Supplier<Context> ctx);
+    public abstract void handleCat(CatEntity catIn, T data, Supplier<Context> ctx);
 
 }

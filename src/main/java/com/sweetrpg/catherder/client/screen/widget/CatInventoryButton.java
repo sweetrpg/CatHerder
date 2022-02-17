@@ -52,10 +52,10 @@ public class CatInventoryButton extends Button {
 
         if (this.visible) {
             Minecraft mc = Minecraft.getInstance();
-            List<CatEntity> dogs = mc.level.getEntitiesOfClass(CatEntity.class, mc.player.getBoundingBox().inflate(12D, 12D, 12D),
+            List<CatEntity> cats = mc.level.getEntitiesOfClass(CatEntity.class, mc.player.getBoundingBox().inflate(12D, 12D, 12D),
                                                                (cat) -> cat.canInteract(mc.player) && PackCatTalent.hasInventory(cat)
             );
-            this.active = !dogs.isEmpty();
+            this.active = !cats.isEmpty();
         }
 
         super.render(stack, mouseX, mouseY, partialTicks);
@@ -78,10 +78,10 @@ public class CatInventoryButton extends Button {
     @Override
     public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
         if (this.active) {
-            Component msg = new TranslatableComponent("container.catherder.dog_inventories.link");
+            Component msg = new TranslatableComponent("container.catherder.cat_inventories.link");
             this.parent.renderTooltip(stack, msg, mouseX, mouseY);
         } else {
-            Component msg = new TranslatableComponent("container.catherder.dog_inventories.link").withStyle(ChatFormatting.RED);
+            Component msg = new TranslatableComponent("container.catherder.cat_inventories.link").withStyle(ChatFormatting.RED);
             this.parent.renderTooltip(stack, msg, mouseX, mouseY);
         }
     }

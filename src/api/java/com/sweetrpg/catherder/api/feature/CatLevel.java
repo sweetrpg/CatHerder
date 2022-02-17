@@ -61,7 +61,7 @@ public class CatLevel {
         return new CatLevel(combinedLevel, 0);
     }
 
-    public final boolean isDireDog() {
+    public final boolean isDireCat() {
         return this.direLevel >= 30;
     }
 

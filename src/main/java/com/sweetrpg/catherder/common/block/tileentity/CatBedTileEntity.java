@@ -34,7 +34,7 @@ public class CatBedTileEntity extends PlacedTileEntity {
 
     private @Deprecated @Nullable
     CatEntity cat;
-    private @Nullable UUID dogUUID;
+    private @Nullable UUID catUUID;
 
     private @Nullable Component name;
     private @Nullable Component ownerName;
@@ -50,7 +50,7 @@ public class CatBedTileEntity extends PlacedTileEntity {
         this.casingType = NBTUtil.getRegistryValue(compound, "casingId", CatHerderAPI.CASING_MATERIAL);
         this.beddingType = NBTUtil.getRegistryValue(compound, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
 
-        this.dogUUID = NBTUtil.getUniqueId(compound, "ownerId");
+        this.catUUID = NBTUtil.getUniqueId(compound, "ownerId");
         this.name = NBTUtil.getTextComponent(compound, "name");
         this.ownerName = NBTUtil.getTextComponent(compound, "ownerName");
         this.requestModelDataUpdate();
@@ -63,7 +63,7 @@ public class CatBedTileEntity extends PlacedTileEntity {
         NBTUtil.putRegistryValue(compound, "casingId", this.casingType);
         NBTUtil.putRegistryValue(compound, "beddingId", this.beddingType);
 
-        NBTUtil.putUniqueId(compound, "ownerId", this.dogUUID);
+        NBTUtil.putUniqueId(compound, "ownerId", this.catUUID);
         NBTUtil.putTextComponent(compound, "name", this.name);
         NBTUtil.putTextComponent(compound, "ownerName", this.ownerName);
     }
@@ -106,19 +106,19 @@ public class CatBedTileEntity extends PlacedTileEntity {
 
     public void setOwner(@Nullable UUID owner) {
         this.cat = null;
-        this.dogUUID = owner;
+        this.catUUID = owner;
 
         this.setChanged();
     }
 
     @Nullable
     public UUID getOwnerUUID() {
-        return this.dogUUID;
+        return this.catUUID;
     }
 
     @Nullable
     public CatEntity getOwner() {
-       return WorldUtil.getCachedEntity(this.level, CatEntity.class, this.cat, this.dogUUID);
+       return WorldUtil.getCachedEntity(this.level, CatEntity.class, this.cat, this.catUUID);
     }
 
     @Nullable
@@ -128,11 +128,11 @@ public class CatBedTileEntity extends PlacedTileEntity {
 
     @Nullable
     public Component getOwnerName() {
-        if (this.dogUUID == null || this.level == null) { return null; }
+        if (this.catUUID == null || this.level == null) { return null; }
 
         CatLocationData locData = CatLocationStorage
                 .get(this.level)
-                .getData(this.dogUUID);
+                .getData(this.catUUID);
 
         if (locData != null) {
             Component text = locData.getName(this.level);

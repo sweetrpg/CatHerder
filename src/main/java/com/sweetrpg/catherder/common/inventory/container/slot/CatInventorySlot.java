@@ -59,7 +59,7 @@ public class CatInventorySlot extends SlotItemHandler {
         return this.enabled && this.cat.isAlive() && this.cat.distanceToSqr(this.player) < 400;
     }
 
-    public CatEntity getDog() {
+    public CatEntity getCat() {
         return this.cat;
     }
 

@@ -115,6 +115,6 @@ public class TreatBagItem extends Item implements ICatFoodHandler {
     @Override
     public InteractionResult consume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
         IItemHandlerModifiable treatBag = (IItemHandlerModifiable) stackIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(EmptyHandler.INSTANCE);
-        return InventoryUtil.feedDogFrom(catIn, entityIn, treatBag);
+        return InventoryUtil.feedCatFrom(catIn, entityIn, treatBag);
     }
 }

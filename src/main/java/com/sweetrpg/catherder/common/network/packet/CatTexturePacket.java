@@ -23,7 +23,7 @@ public class CatTexturePacket extends CatPacket<CatTextureData> {
     }
 
     @Override
-    public void handleDog(CatEntity catIn, CatTextureData data, Supplier<Context> ctx) {
+    public void handleCat(CatEntity catIn, CatTextureData data, Supplier<Context> ctx) {
         if (!catIn.canInteract(ctx.get().getSender())) {
             return;
         }

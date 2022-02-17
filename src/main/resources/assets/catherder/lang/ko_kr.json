@@ -160,7 +160,7 @@
    "cat.mode.berserker.description": "이 상태의 개는 당신을 따라다니며, 누구든지 다가오면 경고없이 공격합니다.",
    "cat.mode.docile.description": "이 상태의 개는 당신을 따라다니지만 아무도 공격하지 않습니다. 장난감을 던져주면 바로 놀 수 있는 상태죠!",
    "cat.mode.patrol.description": "이 상태의 개는 지정된 2~4 개 장소(지시 문양을 사용해서 지정)를 순찰하면서 보이는 괴물들을 공격합니다.",
-   "cat.mode.guard.description": "Dogs follow closely and attack any monsters that come close.",
+   "cat.mode.guard.description": "Cats follow closely and attack any monsters that come close.",
 
    "cat.mode.incapacitated.help": "무력화 된 %s 에게는 케이크를 줘야 되살릴 수 있습니다.",
    "cat.mode.docile.nobowl": "점유한 밥그릇이 없습니다.",
@@ -229,7 +229,7 @@
 
    "title.catherder.config": "Cat Talents Configurations",
    "modgui.config.catsettings": "Cat Behavior Settings",
-   "modgui.config.catsettings.tooltip": "Change certain behaviors of dogs.",
+   "modgui.config.catsettings.tooltip": "Change certain behaviors of cats.",
    "modgui.config.general": "General Settings",
    "modgui.config.general.tooltip": "General settings for the mod",
    "modgui.config.talents": "Talents",
@@ -239,7 +239,7 @@
    "argument.catherder.uuid.section.invalid": "%s contains one or more invalid characters",
    "commands.catrespawn.uuid.success": "Summoned %s from the dead",
    "commands.catrespawn.uuid.failure": "Failed to rise %s from the dead",
-   "command.catrespawn.imprecise": "Too many dogs (%d) for this owner under this name, use `byuuid` for %s",
+   "command.catrespawn.imprecise": "Too many cats (%d) for this owner under this name, use `byuuid` for %s",
 
    "catbed.bedding.null": "Bedding material not set",
    "catbed.casing.null": "Casing material not set",
