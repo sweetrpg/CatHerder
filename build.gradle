@@ -154,7 +154,6 @@ def replaceResources = tasks.register('replaceResources', Copy) {
     it.into "$buildDir/resources/main/"
 }
 
-
 processResources {
     duplicatesStrategy(DuplicatesStrategy.INCLUDE) // .FAIL
     exclude('META-INF/mods.toml')
@@ -188,15 +187,16 @@ test {
 
 task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
     file = new File("build/changelog.html")
+    fromRepo = file(".")
     untaggedName = "Current release ${project.version}"
-    fromCommit = 'f594ba81ba02d04a2189b6cf15216d2afb6943ba'
+    fromCommit = '22a7cb0a2ad7baae3b6fb6e6cdf18c8866fd8b36'
     toRef = 'HEAD'
 
     templateContent = file('changelog.mustache').getText('UTF-8')
 }
 
 curseforge {
-    apiKey = findProperty('curseforge_api_key') ?: 0
+    apiKey = System.getenv('CURSEFORGE_API_KEY') ?: 0
     project {
         id = project.curseforge_project_id
         changelog = file("build/changelog.html")
