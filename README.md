@@ -12,7 +12,7 @@ Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.s
 * A cat tracking and revival system
 
 Thanks to everyone that has contributed. This includes but is not limited to...
-* **DoggyTalents** -- from whom this mod borrows heavily 
+* **DoggyTalents** -- from which this mod borrows heavily 
 
 Want to know more about the mod? Take a gander at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
 
