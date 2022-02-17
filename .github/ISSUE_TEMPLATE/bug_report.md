@@ -13,6 +13,7 @@ This header will not be reflected upon submitting this issue.
 -->
 
 ## Environment And Mod Information:
+
 * Minecraft Version: [i.e. 1.18.1]
 * Forge Version: [i.e. 14.21.1.2443]
 * Cat Herder Version: [i.e. 1.14.1.240]
@@ -27,11 +28,13 @@ This header will not be reflected upon submitting this issue.
 
 
 ## Steps to reproduce:
+
 1. 
 2. 
 3. 
 4.
 
 ## Additional Information:
+
 - More Details: 
 - Screenshots:
