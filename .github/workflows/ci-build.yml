@@ -9,14 +9,14 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
     paths:
       - 'src/**'
       - 'test/**'
       - build.gradle
       - gradle.properties
   pull_request:
-    branches: [ master ]
+    branches: [ develop ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -38,4 +38,10 @@ jobs:
     - name: Build with Gradle
       uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
       with:
-        arguments: curseforge
+        arguments: build
+    - uses: SOLIDSoftworks/semver-tags
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        tag-prefix: ''
+        default-version: '0.0.1'
+        prerelease: 'alpha'
