@@ -1,7 +1,7 @@
 Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.svg)](https://minecraft.curseforge.com/projects/cat-herder) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20cat-herder_all.svg)](https://minecraft.curseforge.com/projects/cat-herder)
 ===========
 
-[![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/gradle.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/gradle.yml)
+[![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
 
 **Cat Herder** is a **Minecraft mod** made for **Minecraft Forge**
 
