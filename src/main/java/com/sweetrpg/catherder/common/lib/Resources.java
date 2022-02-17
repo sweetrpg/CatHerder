@@ -17,7 +17,6 @@ public class Resources {
     // Vanilla cat
     public static final ResourceLocation ENTITY_VANILLA_CAT = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/siamese.png");
     public static final ResourceLocation ENTITY_VANILLA_CAT_WILD = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat.png");
-//    public static final ResourceLocation ENTITY_WOLF_ANGRY = Util.getResource(Constants.VANILLA_ID, "textures/entity/wolf/wolf_angry.png");
     public static final ResourceLocation ENTITY_VANILLA_CAT_COLLAR = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat_collar.png");
 
     public static final ResourceLocation COLLAR_DEFAULT = getEntity("cat", "cat_collar");

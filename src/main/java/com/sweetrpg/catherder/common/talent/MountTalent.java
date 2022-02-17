@@ -42,7 +42,7 @@ public class MountTalent extends TalentInstance {
                 speed += 0.04D;
             }
 
-            return new AttributeModifier(uuidIn, "Wolf Mount", speed, AttributeModifier.Operation.ADDITION);
+            return new AttributeModifier(uuidIn, "Mount", speed, AttributeModifier.Operation.ADDITION);
         }
 
         return null;
