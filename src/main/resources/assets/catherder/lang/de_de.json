@@ -46,17 +46,17 @@
    "item.catherder.cape_coloured.tooltip": "Farbe: %s",
    "item.catherder.wool_collar.tooltip": "Farbe: %s",
    "item.catherder.creative_collar.tooltip": "1000 Punkte gegeben zum Verwenden.",
-   "item.catherder.creative_radar.tooltip": "Finde JEDEN Hund, der dir gehört.",
-   "item.catherder.owner_change.tooltip": "Setze JEDEN Hund so, dass er dir gehört.",
+   "item.catherder.creative_radar.tooltip": "Finde JEDEN Katze, der dir gehört.",
+   "item.catherder.owner_change.tooltip": "Setze JEDEN Katze so, dass er dir gehört.",
    "item.catherder.treat_bag.contents": "%d %s",
 
-   "container.catherder.pack_cat": "Hunderucksack",
+   "container.catherder.pack_cat": "Katzerucksack",
    "container.catherder.food_bowl": "Futternapf",
    "container.catherder.treat_bag": "Leckerlistasche",
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",
 
-   "itemGroup.catherder": "Hunde Talente",
+   "itemGroup.catherder": "Katze Talente",
    "itemGroup.catherder.catbed": "Cat Bed Variants",
 
    "treat.dire_treat.low_level": "Die Stufe deines Hundes ist zu niedrig für diese Leckerli",
