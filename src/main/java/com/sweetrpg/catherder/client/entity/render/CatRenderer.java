@@ -3,10 +3,10 @@ package com.sweetrpg.catherder.client.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sweetrpg.catherder.client.CatTextureManager;
 import com.sweetrpg.catherder.client.ClientSetup;
+import com.sweetrpg.catherder.client.entity.model.CatModel;
 import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
 import com.sweetrpg.catherder.client.entity.render.layer.LayerFactory;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
-import com.sweetrpg.catherder.client.entity.model.CatModel;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -23,7 +23,7 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
 //        this.addLayer(new DogTalentLayer(this, ctx));
 //        this.addLayer(new DogAccessoryLayer(this, ctx));
         this.addLayer(new CatnipLayer(this));
-        for (LayerFactory<CatEntity, CatModel<CatEntity>> layer : CollarRenderManager.getLayers()) {
+        for(LayerFactory<CatEntity, CatModel<CatEntity>> layer : CollarRenderManager.getLayers()) {
             this.addLayer(layer.createLayer(this, ctx));
         }
     }
@@ -35,33 +35,30 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
 
     @Override
     public void render(CatEntity entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-        if (entityIn.isDogWet()) {
+        if(entityIn.isCatWet()) {
             float f = entityIn.getShadingWhileWet(partialTicks);
             this.model.setColor(f, f, f);
         }
 
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 
-        if (this.shouldShowName(entityIn)) {
+        if(this.shouldShowName(entityIn)) {
 
             double d0 = this.entityRenderDispatcher.distanceToSqr(entityIn);
-            if (d0 <= 64 * 64) {
+            if(d0 <= 64 * 64) {
                 String tip = entityIn.getMode().getTip();
-                String label = String.format(ConfigHandler.SERVER.DOG_GENDER.get() ? "%s(%d)%s" : "%s(%d)",
-                        new TranslatableComponent(tip).getString(),
-                        Mth.ceil(entityIn.getCatHunger()),
-                        new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
 
                 RenderUtil.renderLabelWithScale(entityIn, this, this.entityRenderDispatcher, label, matrixStackIn, bufferIn, packedLightIn, 0.01F, 0.12F);
 
-                if (d0 <= 5 * 5 && this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
+                if(d0 <= 5 * 5 && this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
                     RenderUtil.renderLabelWithScale(entityIn, this, this.entityRenderDispatcher, entityIn.getOwnersName().orElseGet(() -> this.getNameUnknown(entityIn)), matrixStackIn, bufferIn, packedLightIn, 0.01F, -0.25F);
                 }
             }
         }
 
 
-        if (entityIn.isDogWet()) {
+        if(entityIn.isCatWet()) {
             this.model.setColor(1.0F, 1.0F, 1.0F);
         }
     }

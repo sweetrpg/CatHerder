@@ -28,11 +28,11 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
     }
 
     public CatBeamEntity(Level worldIn, LivingEntity livingEntityIn) {
-        super(ModEntityTypes.DOG_BEAM.get(), livingEntityIn, worldIn);
+        super(ModEntityTypes.CAT_BEAM.get(), livingEntityIn, worldIn);
     }
 
     public CatBeamEntity(PlayMessages.SpawnEntity packet, Level worldIn) {
-        super(ModEntityTypes.DOG_BEAM.get(), worldIn);
+        super(ModEntityTypes.CAT_BEAM.get(), worldIn);
     }
 
     @Override

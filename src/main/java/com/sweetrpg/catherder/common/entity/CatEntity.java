@@ -144,7 +144,7 @@ public class CatEntity extends AbstractCatEntity {
     private float timeCatIsShaking;
     private float prevTimeCatIsShaking;
 
-    protected boolean dogJumping;
+    protected boolean catJumping;
     protected float jumpPower;
 
     protected BlockPos targetBlock;
@@ -208,11 +208,12 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-//        if (this.random.nextInt(3) == 0) {
-//            return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.WOLF_WHINE : SoundEvents.WOLF_PANT;
-//        } else {
+        if (this.random.nextInt(3) == 0) {
+            return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.CAT_BEG_FOR_FOOD : SoundEvents.CAT_PURREOW;
+        }
+        else {
         return SoundEvents.CAT_AMBIENT;
-//        }
+        }
     }
 
     @Override
@@ -230,7 +231,7 @@ public class CatEntity extends AbstractCatEntity {
         return 0.4F;
     }
 
-    public boolean isDogWet() {
+    public boolean isCatWet() {
         return this.wetSource != null;
     }
 
@@ -469,7 +470,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
         else { // Not tamed
-            if(stack.getItem() == Items.BONE || stack.getItem() == ModItems.TRAINING_TREAT.get()) {
+            if(/*stack.getItem() == ModItems. ||*/ stack.getItem() == ModItems.TRAINING_TREAT.get()) {
 
                 if(!this.level.isClientSide) {
                     this.usePlayerItem(player, hand, stack);
@@ -510,8 +511,8 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        InteractionResult actionresulttype = super.mobInteract(player, hand);
-        if((!actionresulttype.consumesAction() || this.isBaby()) && this.canInteract(player)) {
+        InteractionResult actionResultType = super.mobInteract(player, hand);
+        if((!actionResultType.consumesAction() || this.isBaby()) && this.canInteract(player)) {
             this.setOrderedToSit(!this.isOrderedToSit());
             this.jumping = false;
             this.navigation.stop();
@@ -519,7 +520,7 @@ public class CatEntity extends AbstractCatEntity {
             return InteractionResult.SUCCESS;
         }
 
-        return actionresulttype;
+        return actionResultType;
     }
 
     @Override
@@ -604,20 +605,21 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     protected int calculateFallDamage(float distance, float damageMultiplier) {
-        MobEffectInstance effectInst = this.getEffect(MobEffects.JUMP);
-        float f = effectInst == null ? 0.0F : effectInst.getAmplifier() + 1;
-        distance -= f;
-
-        for(ICatAlteration alter : this.alterations) {
-            InteractionResultHolder<Float> result = alter.calculateFallDistance(this, distance);
-
-            if(result.getResult().shouldSwing()) {
-                distance = result.getObject();
-                break;
-            }
-        }
-
-        return Mth.ceil((distance - 3.0F - f) * damageMultiplier);
+        return 0;
+//        MobEffectInstance effectInst = this.getEffect(MobEffects.JUMP);
+//        float f = effectInst == null ? 0.0F : effectInst.getAmplifier() + 1;
+//        distance -= f;
+//
+//        for(ICatAlteration alter : this.alterations) {
+//            InteractionResultHolder<Float> result = alter.calculateFallDistance(this, distance);
+//
+//            if(result.getResult().shouldSwing()) {
+//                distance = result.getObject();
+//                break;
+//            }
+//        }
+//
+//        return Mth.ceil((distance - 3.0F - f) * damageMultiplier);
     }
 
     @Override
@@ -707,7 +709,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        // Stop dogs being able to attack creepers. If the cat has lvl 5 creeper
+        // Stop cats being able to attack creepers. If the cat has lvl 5 creeper
         // sweeper then we will return true in the for loop above.
         if(entityType == EntityType.CREEPER) {
             return false;
@@ -722,7 +724,6 @@ public class CatEntity extends AbstractCatEntity {
             return false;
         }
 
-        //TODO make wolves not able to attack dogs
         for(ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.shouldAttackEntity(this, target, owner);
 
@@ -734,7 +735,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        // Stop dogs being able to attack creepers. If the cat has lvl 5 creeper
+        // Stop cats being able to attack creepers. If the cat has lvl 5 creeper
         // sweeper then we will return true in the for loop above.
         if(target instanceof Creeper || target instanceof Ghast) {
             return false;
@@ -1035,18 +1036,18 @@ public class CatEntity extends AbstractCatEntity {
             return false;
         }
         else {
-            CatEntity entitydog = (CatEntity) otherAnimal;
-            if(!entitydog.isTame()) {
+            CatEntity entityCat = (CatEntity) otherAnimal;
+            if(!entityCat.isTame()) {
                 return false;
             }
-            else if(entitydog.isInSittingPose()) {
+            else if(entityCat.isInSittingPose()) {
                 return false;
             }
-            else if(ConfigHandler.SERVER.DOG_GENDER.get() && !this.getGender().canMateWith(entitydog.getGender())) {
+            else if(ConfigHandler.SERVER.CAT_GENDER.get() && !this.getGender().canMateWith(entityCat.getGender())) {
                 return false;
             }
             else {
-                return this.isInLove() && entitydog.isInLove();
+                return this.isInLove() && entityCat.isInLove();
             }
         }
     }
@@ -1061,7 +1062,7 @@ public class CatEntity extends AbstractCatEntity {
             child.setTame(true);
         }
 
-        if(partner instanceof CatEntity && ConfigHandler.SERVER.PUPS_GET_PARENT_LEVELS.get()) {
+        if(partner instanceof CatEntity && ConfigHandler.SERVER.KITTENS_GET_PARENT_LEVELS.get()) {
             child.setLevel(this.getCatLevel().combine(((CatEntity) partner).getCatLevel()));
         }
 
@@ -1070,7 +1071,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean shouldShowName() {
-        return (ConfigHandler.ALWAYS_SHOW_DOG_NAME && this.hasCustomName()) || super.shouldShowName();
+        return (ConfigHandler.ALWAYS_SHOW_CAT_NAME && this.hasCustomName()) || super.shouldShowName();
     }
 
     @Override
@@ -1862,69 +1863,69 @@ public class CatEntity extends AbstractCatEntity {
         return !this.getBoneVariant().isEmpty();
     }
 
-    private boolean getDogFlag(int bit) {
+    private boolean getCatFlag(int bit) {
         return (this.entityData.get(CAT_FLAGS) & bit) != 0;
     }
 
-    private void setDogFlag(int bits, boolean flag) {
+    private void setCatFlag(int bits, boolean flag) {
         byte c = this.entityData.get(CAT_FLAGS);
         this.entityData.set(CAT_FLAGS, (byte) (flag ? c | bits : c & ~bits));
     }
 
     public void setBegging(boolean begging) {
-        this.setDogFlag(1, begging);
+        this.setCatFlag(1, begging);
     }
 
     public boolean isBegging() {
-        return this.getDogFlag(1);
+        return this.getCatFlag(1);
     }
 
     public void setWillObeyOthers(boolean obeyOthers) {
-        this.setDogFlag(2, obeyOthers);
+        this.setCatFlag(2, obeyOthers);
     }
 
     public boolean willObeyOthers() {
-        return this.getDogFlag(2);
+        return this.getCatFlag(2);
     }
 
     public void setCanPlayersAttack(boolean flag) {
-        this.setDogFlag(4, flag);
+        this.setCatFlag(4, flag);
     }
 
     public boolean canPlayersAttack() {
-        return this.getDogFlag(4);
+        return this.getCatFlag(4);
     }
 
     public void set8Flag(boolean collar) {
-        this.setDogFlag(8, collar);
+        this.setCatFlag(8, collar);
     }
 
     public boolean get8Flag() {
-        return this.getDogFlag(8);
+        return this.getCatFlag(8);
     }
 
     public void setHasSunglasses(boolean sunglasses) {
-        this.setDogFlag(16, sunglasses);
+        this.setCatFlag(16, sunglasses);
     }
 
     public boolean hasSunglasses() {
-        return this.getDogFlag(16);
+        return this.getCatFlag(16);
     }
 
     public void setLyingDown(boolean lying) {
-        this.setDogFlag(32, lying);
+        this.setCatFlag(32, lying);
     }
 
     public boolean isLyingDown() {
-        return this.getDogFlag(32);
+        return this.getCatFlag(32);
     }
 
     public void set64Flag(boolean lying) {
-        this.setDogFlag(64, lying);
+        this.setCatFlag(64, lying);
     }
 
     public boolean get64Flag() {
-        return this.getDogFlag(64);
+        return this.getCatFlag(64);
     }
 
     public List<TalentInstance> getTalentMap() {
@@ -2126,12 +2127,12 @@ public class CatEntity extends AbstractCatEntity {
         return super.isControlledByLocalInstance() && this.canInteract((LivingEntity) this.getControllingPassenger());
     }
 
-    public boolean isDogJumping() {
-        return this.dogJumping;
+    public boolean isCatJumping() {
+        return this.catJumping;
     }
 
-    public void setDogJumping(boolean jumping) {
-        this.dogJumping = jumping;
+    public void setCatJumping(boolean jumping) {
+        this.catJumping = jumping;
     }
 
 //    public double getDogJumpStrength() {
@@ -2176,7 +2177,7 @@ public class CatEntity extends AbstractCatEntity {
                     foward *= 0.5F;
                 }
 
-                if(this.jumpPower > 0.0F && !this.isDogJumping() && this.isOnGround()) {
+                if(this.jumpPower > 0.0F && !this.isCatJumping() && this.isOnGround()) {
 
                     // Calculate jump value based of jump strength, power this jump and jump boosts
                     double jumpValue = this.getAttribute(ModAttributes.JUMP_POWER.get()).getValue() * this.getBlockJumpFactor() * this.jumpPower; //TODO do we want getJumpFactor?
@@ -2187,7 +2188,7 @@ public class CatEntity extends AbstractCatEntity {
                     // Apply jump
                     Vec3 vec3d = this.getDeltaMovement();
                     this.setDeltaMovement(vec3d.x, jumpValue, vec3d.z);
-                    this.setDogJumping(true);
+                    this.setCatJumping(true);
                     this.hasImpulse = true;
 
                     // If moving forward, propel further in the direction
@@ -2218,7 +2219,7 @@ public class CatEntity extends AbstractCatEntity {
                 // Once the entity reaches the ground again allow it to jump again
                 if(this.isOnGround()) {
                     this.jumpPower = 0.0F;
-                    this.setDogJumping(false);
+                    this.setCatJumping(false);
                 }
 
                 //
@@ -2291,7 +2292,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public TranslatableComponent getTranslationKey(Function<EnumGender, String> function) {
-        return new TranslatableComponent(function.apply(ConfigHandler.SERVER.DOG_GENDER.get() ? this.getGender() : EnumGender.UNISEX));
+        return new TranslatableComponent(function.apply(ConfigHandler.SERVER.CAT_GENDER.get() ? this.getGender() : EnumGender.UNISEX));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class RescueCatRenderer extends RenderLayer<CatEntity, CatModel<CatEntity
 
     public RescueCatRenderer(RenderLayerParent parentRenderer, EntityRendererProvider.Context ctx) {
         super(parentRenderer);
-        this.model = new CatRescueModel(ctx.bakeLayer(ClientSetup.DOG_RESCUE_BOX));
+        this.model = new CatRescueModel(ctx.bakeLayer(ClientSetup.CAT_RESCUE_BOX));
     }
 
     @Override

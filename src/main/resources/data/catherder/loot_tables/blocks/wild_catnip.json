@@ -10,7 +10,7 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
-              "chance": 0.2
+              "chance": 0.5
             },
             {
               "condition": "minecraft:inverted",
@@ -43,7 +43,7 @@
                   }
                 }
               ],
-              "name": "farmersdelight:wild_catnip"
+              "name": "catherder:wild_catnip"
             },
             {
               "type": "minecraft:item",
@@ -60,7 +60,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "farmersdelight:catnip_seeds"
+              "name": "catherder:catnip_seeds"
             }
           ]
         }

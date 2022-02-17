@@ -62,6 +62,8 @@ public class CHRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1).requires(Items.MAP, 1).requires(Items.REDSTONE, 1).requires(ModItems.RADIO_COLLAR.get(), 1).unlockedBy("has_redstone", has(Items.REDSTONE)).save(consumer);
 
         ShapedRecipeBuilder.shaped(ModBlocks.LITTER_BOX.get(), 1).pattern("ISI").pattern("III").define('I', Items.IRON_INGOT).define('S', Items.SAND).unlockedBy("has_sand", has(Items.SAND)).unlockedBy("has_iron", has(Items.IRON_INGOT)).save(consumer);
+        ShapedRecipeBuilder.shaped(ModBlocks.CARDBOARD_BOX.get(), 1).pattern("CCC").pattern("C C").pattern("CCC").define('C', ModItems.CARDBOARD.get()).unlockedBy("has_cardboard", has(ModItems.CARDBOARD.get())).save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9).pattern("PPP").pattern("PPP").pattern("PPP").define('P', Items.PAPER).unlockedBy("has_paper", has(Items.PAPER)).save(consumer);
 
         SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_BED.get()).save(consumer, Util.getResourcePath("cat_bed"));
     }

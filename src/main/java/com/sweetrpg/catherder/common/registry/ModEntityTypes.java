@@ -27,7 +27,7 @@ public class ModEntityTypes {
             .setTrackingRange(16)
             .setShouldReceiveVelocityUpdates(true));
 
-    public static final RegistryObject<EntityType<CatBeamEntity>> DOG_BEAM = register("dog_beam", CatBeamEntity::new, MobCategory.MISC, (b) -> b
+    public static final RegistryObject<EntityType<CatBeamEntity>> CAT_BEAM = register("dog_beam", CatBeamEntity::new, MobCategory.MISC, (b) -> b
             .sized(0.25F, 0.25F)
             .setUpdateInterval(4)
             .setTrackingRange(10)

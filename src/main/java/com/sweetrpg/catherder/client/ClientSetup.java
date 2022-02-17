@@ -34,10 +34,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientSetup {
 
     public static final ModelLayerLocation CAT = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "main");
-    public static final ModelLayerLocation DOG_ARMOR = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "armor");
-    public static final ModelLayerLocation DOG_BACKPACK = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "dog_backpack"), "main");
-    public static final ModelLayerLocation DOG_RESCUE_BOX = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "dog_rescue_box"), "main");
-    public static final ModelLayerLocation DOG_BEAM = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "main");
+    public static final ModelLayerLocation CAT_ARMOR = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "armor");
+    public static final ModelLayerLocation CAT_BACKPACK = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat_backpack"), "main");
+    public static final ModelLayerLocation CAT_RESCUE_BOX = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat_rescue_box"), "main");
+    public static final ModelLayerLocation CAT_BEAM = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "main");
 
     public static void setupScreenManagers(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CATNIP.get(), RenderType.cutout());
@@ -51,15 +51,15 @@ public class ClientSetup {
 
     public static void setupEntityRenderers(final EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(CAT, CatModel::createBodyLayer);
-        event.registerLayerDefinition(DOG_ARMOR, CatModel::createArmorLayer);
-        event.registerLayerDefinition(DOG_BACKPACK, CatBackpackModel::createChestLayer);
-        event.registerLayerDefinition(DOG_RESCUE_BOX, CatRescueModel::createRescueBoxLayer);
-        // TODO: RenderingRegistry.registerEntityRenderingHandler(CatEntityTypes.DOG_BEAM.get(), manager -> new CatBeamRenderer<>(manager, event.getMinecraftSupplier().get().getItemRenderer()));
+        event.registerLayerDefinition(CAT_ARMOR, CatModel::createArmorLayer);
+        event.registerLayerDefinition(CAT_BACKPACK, CatBackpackModel::createChestLayer);
+        event.registerLayerDefinition(CAT_RESCUE_BOX, CatRescueModel::createRescueBoxLayer);
+        // TODO: RenderingRegistry.registerEntityRenderingHandler(CatEntityTypes.CAT_BEAM.get(), manager -> new CatBeamRenderer<>(manager, event.getMinecraftSupplier().get().getItemRenderer()));
     }
 
     public static void setupTileEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.CAT.get(), CatRenderer::new);
-        event.registerEntityRenderer(ModEntityTypes.DOG_BEAM.get(), CatBeamRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.CAT_BEAM.get(), CatBeamRenderer::new);
         event.registerBlockEntityRenderer(ModTileEntityTypes.CAT_BED.get(), CatBedRenderer::new);
     }
 

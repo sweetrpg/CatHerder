@@ -22,7 +22,7 @@ public class ConfigHandler {
     private static ForgeConfigSpec CONFIG_CLIENT_SPEC;
     private static ForgeConfigSpec CONFIG_TALENT_SPEC;
 
-    public static final boolean ALWAYS_SHOW_DOG_NAME = true;
+    public static final boolean ALWAYS_SHOW_CAT_NAME = true;
     public static final float DEFAULT_MAX_HUNGER = 120F;
     public static final boolean SEND_SKIN = false;
     public static final boolean DISPLAY_OTHER_DOG_SKINS = false;
@@ -87,8 +87,8 @@ public class ConfigHandler {
         public ForgeConfigSpec.IntValue CHANCE_WILD_CATNIP;
         public ForgeConfigSpec.BooleanValue DISABLE_HUNGER;
         public ForgeConfigSpec.BooleanValue STARTING_ITEMS;
-        public ForgeConfigSpec.BooleanValue DOG_GENDER;
-        public ForgeConfigSpec.BooleanValue PUPS_GET_PARENT_LEVELS;
+        public ForgeConfigSpec.BooleanValue CAT_GENDER;
+        public ForgeConfigSpec.BooleanValue KITTENS_GET_PARENT_LEVELS;
         public ForgeConfigSpec.IntValue TIME_TO_MATURE;
         public ForgeConfigSpec.BooleanValue DOG_WHINE_WHEN_HUNGER_LOW;
         public ForgeConfigSpec.BooleanValue EAT_FOOD_ON_FLOOR;
@@ -112,8 +112,8 @@ public class ConfigHandler {
 
                 DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation("catherder.config.cat.disable_hunger").define("disable_hunger", false);
                 STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation("catherder.config.enable_starting_items").define("enable_starting_items", false);
-                DOG_GENDER = builder.comment("When enabled, dogs will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation("catherder.config.enable_gender").define("enable_gender", true);
-                PUPS_GET_PARENT_LEVELS = builder.comment("When enabled, puppies get some levels from parents. When disabled, puppies start at 0 points.").translation("catherder.config.enable_pup_get_parent_levels").define("enable_pup_get_parent_levels", false);
+                CAT_GENDER = builder.comment("When enabled, dogs will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation("catherder.config.enable_gender").define("enable_gender", true);
+                KITTENS_GET_PARENT_LEVELS = builder.comment("When enabled, puppies get some levels from parents. When disabled, puppies start at 0 points.").translation("catherder.config.enable_pup_get_parent_levels").define("enable_pup_get_parent_levels", false);
                 TIME_TO_MATURE = builder.comment("The time in ticks it takes for a baby cat to become an adult, default 48000 (2 Minecraft days) and minimum 0").translation("catherder.config.cat.time_to_mature").defineInRange("time_to_mature", 48000, 0, Integer.MAX_VALUE);
                 DOG_WHINE_WHEN_HUNGER_LOW = builder.comment("Determines if dogs should whine when hunger reaches below 20 DP.").translation("catherder.config.whine_when_hungry").define("whine_when_hungry", true);
                 EAT_FOOD_ON_FLOOR = builder.comment("When enabled dogs will path and eat editable items in the world.").translation("catherder.config.eat_food_on_floor").define("eat_food_on_floor", true);

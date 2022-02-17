@@ -26,7 +26,7 @@ public class ArmorAccessoryRenderer extends RenderLayer<CatEntity, CatModel<CatE
 
     public ArmorAccessoryRenderer(RenderLayerParent parentRenderer, EntityRendererProvider.Context ctx) {
         super(parentRenderer);
-        this.model = new CatModel(ctx.bakeLayer(ClientSetup.DOG_ARMOR));
+        this.model = new CatModel(ctx.bakeLayer(ClientSetup.CAT_ARMOR));
     }
 
     @Override
