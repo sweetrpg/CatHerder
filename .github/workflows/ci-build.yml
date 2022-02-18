@@ -47,16 +47,11 @@ jobs:
         tag-prefix: ''
         default-version: '0.0.1'
         prerelease: 'alpha'
-    - name: Update version
-      uses: brettdorrans/write-version-to-file@master
-      with:
-        filename: '.VERSION'
-        placeholder: ${{ steps.tag-version.outputs.semantic-version }}
     - name: Commit version file
       run: |
-        cat .VERSION
         git config --global user.email "ci@sweetrpg.com"
         git config --global user.name "SweetRPG Version Updater"
+        echo "${{ steps.tag-version.outputs.semantic-version }}" > .VERSION
         git add .VERSION
         git commit -m "Update .VERSION"
         git push origin
