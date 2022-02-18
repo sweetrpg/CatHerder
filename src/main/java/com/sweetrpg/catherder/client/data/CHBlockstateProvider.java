@@ -42,7 +42,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //        catBath(CatBlocks.CAT_BATH);
         catBed(ModBlocks.CAT_BED);
         createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
-        this.customStageBlock(ModBlocks.CATNIP_CROP.get(), resourceBlock("crop_cross"), "cross", CatnipBlock.AGE, new ArrayList<>());
+        this.stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
+//        this.customStageBlock(ModBlocks.CATNIP_CROP.get(), resourceBlock("crop_cross"), "cross", CatnipBlock.AGE, new ArrayList<>());
         this.wildCropBlock(ModBlocks.WILD_CATNIP.get());
         makeSimple(ModBlocks.CARDBOARD_BOX);
     }
@@ -78,7 +79,6 @@ public class CHBlockstateProvider extends BlockStateProvider {
 
         this.simpleBlock(blockIn.get(), model);
     }
-
 
     protected void catBed(Supplier<? extends Block> blockIn) {
         BlockModelBuilder model = this.models()
@@ -170,6 +170,16 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //
 //        this.simpleBlock(blockIn.get(), model);
 //    }
+
+    public void stageBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
+        getVariantBuilder(block)
+                .forAllStatesExcept(state -> {
+                    int ageSuffix = state.getValue(ageProperty);
+                    String stageName = blockName(block) + "_stage" + ageSuffix;
+                    return ConfiguredModel.builder()
+                                          .modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+                }, ignored);
+    }
 
     public void customStageBlock(Block block, @Nullable ResourceLocation parent, String textureKey, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
         getVariantBuilder(block)

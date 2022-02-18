@@ -91,7 +91,8 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         try {
             stream = this.getResourceStream(loc);
             return IOUtils.toByteArray(stream);
-        } finally  {
+        }
+        finally  {
             IOUtils.closeQuietly(stream);
         }
     }
@@ -113,7 +114,6 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
 
         return Resources.ENTITY_VANILLA_CAT;
     }
-
 
     public AbstractTexture getOrLoadTexture(File baseFolder, String hash) {
         Minecraft mc = Minecraft.getInstance();
