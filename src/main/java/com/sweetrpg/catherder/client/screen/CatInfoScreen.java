@@ -1,7 +1,6 @@
 package com.sweetrpg.catherder.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel.Type;
@@ -9,10 +8,11 @@ import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.client.CatTextureManager;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.network.packet.data.*;
+import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.common.util.Util;
-import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -41,27 +41,19 @@ public class CatInfoScreen extends Screen {
 
     public final CatEntity cat;
     public final Player player;
-
+    public int textureIndex;
     private int currentPage = 0;
     private int maxPages = 1;
-    private List<AbstractWidget> talentWidgets = new ArrayList<>(16);
-
+    private final List<AbstractWidget> talentWidgets = new ArrayList<>(16);
     private Button leftBtn, rightBtn;
-
-    private List<Talent> talentList;
-    private List<ResourceLocation> customSkinList;
-
-    public int textureIndex;
+    private final List<Talent> talentList;
+    private final List<ResourceLocation> customSkinList;
 
     public CatInfoScreen(CatEntity cat, Player player) {
         super(new TranslatableComponent("catherder.screen.cat.title"));
         this.cat = cat;
         this.player = player;
-        this.talentList = CatHerderAPI.TALENTS
-                .getValues()
-                .stream()
-                .sorted(Comparator.comparing((t) -> I18n.get(t.getTranslationKey())))
-                .collect(Collectors.toList());
+        this.talentList = CatHerderAPI.TALENTS.getValues().stream().sorted(Comparator.comparing((t) -> I18n.get(t.getTranslationKey()))).collect(Collectors.toList());
 
         this.customSkinList = CatTextureManager.INSTANCE.getAll();
         this.textureIndex = this.customSkinList.indexOf(CatTextureManager.INSTANCE.getTextureLoc(cat.getSkinHash()));
@@ -80,22 +72,20 @@ public class CatInfoScreen extends Screen {
         int topX = this.width / 2;
         int topY = this.height / 2;
 
-        EditBox nameTextField = new EditBox(this.font, topX - 100, topY + 50, 200, 20,  new TranslatableComponent("catInfo.enterName"));
-        nameTextField.setResponder(text ->  {
+        EditBox nameTextField = new EditBox(this.font, topX - 100, topY + 50, 200, 20, new TranslatableComponent("catInfo.enterName"));
+        nameTextField.setResponder(text -> {
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatNameData(CatInfoScreen.this.cat.getId(), text));
         });
         nameTextField.setFocus(false);
         nameTextField.setMaxLength(32);
 
-        if (this.cat.hasCustomName()) {
+        if(this.cat.hasCustomName()) {
             nameTextField.setValue(this.cat.getCustomName().getContents());
         }
 
         this.addRenderableWidget(nameTextField);
 
-
-
-        if (this.cat.isOwnedBy(this.player)) {
+        if(this.cat.isOwnedBy(this.player)) {
             Button obeyBtn = new Button(this.width - 64, topY + 77, 42, 20, new TextComponent(String.valueOf(this.cat.willObeyOthers())), (btn) -> {
                 btn.setMessage(new TextComponent(String.valueOf(!this.cat.willObeyOthers())));
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatObeyData(this.cat.getId(), !this.cat.willObeyOthers()));
@@ -112,31 +102,31 @@ public class CatInfoScreen extends Screen {
         this.addRenderableWidget(attackPlayerBtn);
 
         //if (ConfigHandler.CLIENT.USE_DT_TEXTURES.get()) {
-            Button addBtn = new Button(this.width - 42, topY + 30, 20, 20, new TextComponent("+"), (btn) -> {
-                this.textureIndex += 1;
-                this.textureIndex %= this.customSkinList.size();
-                ResourceLocation rl = this.customSkinList.get(this.textureIndex);
+        Button addBtn = new Button(this.width - 42, topY + 30, 20, 20, new TextComponent("+"), (btn) -> {
+            this.textureIndex += 1;
+            this.textureIndex %= this.customSkinList.size();
+            ResourceLocation rl = this.customSkinList.get(this.textureIndex);
 
-                this.setCatTexture(rl);
-            });
-            Button lessBtn = new Button(this.width - 64, topY + 30, 20, 20, new TextComponent("-"), (btn) -> {
-                this.textureIndex += this.customSkinList.size() - 1;
-                this.textureIndex %= this.customSkinList.size();
-                ResourceLocation rl = this.customSkinList.get(this.textureIndex);
-                this.setCatTexture(rl);
-            });
+            this.setCatTexture(rl);
+        });
+        Button lessBtn = new Button(this.width - 64, topY + 30, 20, 20, new TextComponent("-"), (btn) -> {
+            this.textureIndex += this.customSkinList.size() - 1;
+            this.textureIndex %= this.customSkinList.size();
+            ResourceLocation rl = this.customSkinList.get(this.textureIndex);
+            this.setCatTexture(rl);
+        });
 
-            this.addRenderableWidget(addBtn);
-            this.addRenderableWidget(lessBtn);
+        this.addRenderableWidget(addBtn);
+        this.addRenderableWidget(lessBtn);
         //}
-
 
         Button modeBtn = new Button(topX + 40, topY + 25, 60, 20, new TranslatableComponent(this.cat.getMode().getUnlocalisedName()), button -> {
             EnumMode mode = CatInfoScreen.this.cat.getMode().nextMode();
 
-            if (mode == EnumMode.WANDERING && !CatInfoScreen.this.cat.getBowlPos().isPresent()) {
+            if(mode == EnumMode.WANDERING && !CatInfoScreen.this.cat.getBowlPos().isPresent()) {
                 button.setMessage(new TranslatableComponent(mode.getUnlocalisedName()).withStyle(ChatFormatting.RED));
-            } else {
+            }
+            else {
                 button.setMessage(new TranslatableComponent(mode.getUnlocalisedName()));
             }
 
@@ -147,18 +137,20 @@ public class CatInfoScreen extends Screen {
                 List<Component> list = new ArrayList<>();
                 String str = I18n.get(cat.getMode().getUnlocalisedInfo());
                 list.addAll(ScreenUtil.splitInto(str, 150, CatInfoScreen.this.font));
-                if (CatInfoScreen.this.cat.getMode() == EnumMode.WANDERING) {
+                if(CatInfoScreen.this.cat.getMode() == EnumMode.WANDERING) {
 
 
-                    if (CatInfoScreen.this.cat.getBowlPos().isPresent()) {
+                    if(CatInfoScreen.this.cat.getBowlPos().isPresent()) {
                         double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBowlPos().get());
 
-                        if (distance > 256D) {
+                        if(distance > 256D) {
                             list.add(new TranslatableComponent("cat.mode.docile.distance", (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
-                        } else {
+                        }
+                        else {
                             list.add(new TranslatableComponent("cat.mode.docile.bowl", (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
                         }
-                    } else {
+                    }
+                    else {
                         list.add(new TranslatableComponent("cat.mode.docile.nobowl").withStyle(ChatFormatting.RED));
                     }
                 }
@@ -176,7 +168,7 @@ public class CatInfoScreen extends Screen {
         this.recalculatePage(perPage);
 
 
-        if (perPage < size) {
+        if(perPage < size) {
             this.leftBtn = new Button(25, perPage * 21 + 10, 20, 20, new TextComponent("<"), (btn) -> {
                 this.currentPage = Math.max(0, this.currentPage - 1);
                 btn.active = this.currentPage > 0;
@@ -208,14 +200,16 @@ public class CatInfoScreen extends Screen {
     }
 
     private void setCatTexture(ResourceLocation rl) {
-        if (ConfigHandler.SEND_SKIN) {
+        if(ConfigHandler.SEND_SKIN) {
             try {
                 byte[] data = CatTextureManager.INSTANCE.getResourceBytes(rl);
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new SendSkinData(this.cat.getId(), data));
-            } catch (IOException e) {
+            }
+            catch(IOException e) {
                 CatHerder.LOGGER.error("Was unable to get resource data for {}, {}", rl, e);
             }
-        } else {
+        }
+        else {
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTextureData(this.cat.getId(), CatTextureManager.INSTANCE.getTextureHash(rl)));
         }
     }
@@ -226,15 +220,15 @@ public class CatInfoScreen extends Screen {
 
         this.maxPages = Mth.ceil(this.talentList.size() / (double) perPage);
 
-        for (int i = 0; i < perPage; ++i) {
+        for(int i = 0; i < perPage; ++i) {
 
             int index = this.currentPage * perPage + i;
-            if (index >= this.talentList.size()) break;
+            if(index >= this.talentList.size()) {break;}
             Talent talent = this.talentList.get(index);
 
             Button button = new TalentButton(25, 10 + i * 21, 20, 20, new TextComponent("+"), talent, (btn) -> {
                 int level = CatInfoScreen.this.cat.getCatLevel(talent);
-                if (level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
+                if(level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
                     PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
                 }
 
@@ -244,11 +238,12 @@ public class CatInfoScreen extends Screen {
                     List<Component> list = new ArrayList<>();
 
                     list.add(new TranslatableComponent(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
-                    if (this.active) {
+                    if(this.active) {
                         list.add(new TextComponent("Level: " + CatInfoScreen.this.cat.getCatLevel(talent)));
                         list.add(new TextComponent("--------------------------------").withStyle(ChatFormatting.GRAY));
                         list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, CatInfoScreen.this.font));
-                    } else {
+                    }
+                    else {
                         list.add(new TextComponent("Talent disabled").withStyle(ChatFormatting.RED));
                     }
 
@@ -280,10 +275,11 @@ public class CatInfoScreen extends Screen {
         String ageString = ageValue + " " + ageRel;
 
         String tamedString = "";
-        if (this.cat.isTame()) {
-            if (this.cat.isOwnedBy(this.player)) {
+        if(this.cat.isTame()) {
+            if(this.cat.isOwnedBy(this.player)) {
                 tamedString = I18n.get("catgui.owner.you");
-            } else if (this.cat.getOwnersName().isPresent()) {
+            }
+            else if(this.cat.getOwnersName().isPresent()) {
                 tamedString = this.cat.getOwnersName().get().getString();
             }
         }
@@ -293,33 +289,33 @@ public class CatInfoScreen extends Screen {
         this.font.draw(stack, I18n.get("catgui.owner") + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
         this.font.draw(stack, I18n.get("catgui.age") + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
         this.font.draw(stack, I18n.get("catgui.armor") + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
-        if (ConfigHandler.SERVER.CAT_GENDER.get()) {
-            this.font.draw(stack, I18n.get("catgui.gender") + " "+ I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
+        if(ConfigHandler.SERVER.CAT_GENDER.get()) {
+            this.font.draw(stack, I18n.get("catgui.gender") + " " + I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
         }
 
         this.font.draw(stack, I18n.get("catgui.newname"), topX - 100, topY + 38, 4210752);
         this.font.draw(stack, I18n.get("catgui.level") + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
         this.font.draw(stack, I18n.get("catgui.leveldire") + " " + this.cat.getCatLevel().getLevel(Type.DIRE), topX, topY + 75, 0xFF10F9);
-        if (this.cat.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent()) {
+        if(this.cat.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent()) {
             this.font.draw(stack, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
-        } else {
+        }
+        else {
             this.font.draw(stack, I18n.get("catgui.pointsleft") + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
         }
-       // if (ConfigHandler.CLIENT.USE_DT_TEXTURES.get()) {
-            this.font.draw(stack, I18n.get("catgui.textureindex"), this.width - 80, topY + 20, 0xFFFFFF);
-            this.font.draw(stack, this.cat.getSkinHash().substring(0, Math.min(this.cat.getSkinHash().length(), 10)), this.width - 73, topY + 54, 0xFFFFFF);
-       // }
+        // if (ConfigHandler.CLIENT.USE_DT_TEXTURES.get()) {
+        this.font.draw(stack, I18n.get("catgui.textureindex"), this.width - 80, topY + 20, 0xFFFFFF);
+        this.font.draw(stack, this.cat.getSkinHash().substring(0, Math.min(this.cat.getSkinHash().length(), 10)), this.width - 73, topY + 54, 0xFFFFFF);
+        // }
 
-        if (this.cat.isOwnedBy(this.player)) {
+        if(this.cat.isOwnedBy(this.player)) {
             this.font.draw(stack, I18n.get("catgui.obeyothers"), this.width - 76, topY + 67, 0xFFFFFF);
         }
 
         this.font.draw(stack, I18n.get("catgui.friendlyfire"), this.width - 76, topY - 15, 0xFFFFFF);
 
-
         this.renderables.forEach(widget -> {
-            if (widget instanceof TalentButton) {
-                TalentButton talBut = (TalentButton)widget;
+            if(widget instanceof TalentButton) {
+                TalentButton talBut = (TalentButton) widget;
                 this.font.draw(stack, I18n.get(talBut.talent.getTranslationKey()), talBut.x + 25, talBut.y + 7, 0xFFFFFF);
             }
         });
@@ -327,14 +323,14 @@ public class CatInfoScreen extends Screen {
         super.render(stack, mouseX, mouseY, partialTicks);
         //RenderHelper.disableStandardItemLighting(); // 1.14 enableGUIStandardItemLighting
 
-        for (Widget widget : this.renderables) {
-            if (widget instanceof AbstractWidget w && w.isHoveredOrFocused()) {
-               w.renderToolTip(stack, mouseX, mouseY);
-               break;
+        for(Widget widget : this.renderables) {
+            if(widget instanceof AbstractWidget w && w.isHoveredOrFocused()) {
+                w.renderToolTip(stack, mouseX, mouseY);
+                break;
             }
-         }
+        }
 
-       // RenderHelper.enableStandardItemLighting();
+        // RenderHelper.enableStandardItemLighting();
     }
 
     @Override
@@ -351,6 +347,7 @@ public class CatInfoScreen extends Screen {
     private static class TalentButton extends Button {
 
         protected Talent talent;
+
         private TalentButton(int x, int y, int widthIn, int heightIn, Component buttonText, Talent talent, Consumer<TalentButton> onPress) {
             super(x, y, widthIn, heightIn, buttonText, button -> onPress.accept((TalentButton) button));
             this.talent = talent;

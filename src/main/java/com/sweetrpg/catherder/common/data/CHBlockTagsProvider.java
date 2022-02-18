@@ -34,6 +34,8 @@ public class CHBlockTagsProvider extends BlockTagsProvider {
     protected void registerMinecraftTags() {
         tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS)
                 .add(ModBlocks.WILD_CATNIP.get());
+        tag(net.minecraft.tags.BlockTags.CROPS).add(
+                ModBlocks.CATNIP_CROP.get());
     }
 
     protected void registerForgeTags() {
