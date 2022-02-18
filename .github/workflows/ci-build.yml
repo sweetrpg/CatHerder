@@ -54,9 +54,9 @@ jobs:
         placeholder: ${{ steps.tag-version.outputs.semantic-version }}
     - name: Commit version file
       run: |
+        cat .VERSION
         git config --global user.email "ci@sweetrpg.com"
         git config --global user.name "SweetRPG Version Updater"
-        git checkout develop
         git add .VERSION
         git commit -m "Update .VERSION"
         git push origin
