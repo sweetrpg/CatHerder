@@ -39,9 +39,15 @@ jobs:
       uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
       with:
         arguments: build
-    - uses: SOLIDSoftworks/semver-tags@1.0.1
+    - id: tag-version
+      uses: SOLIDSoftworks/semver-tags@1.0.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         tag-prefix: ''
         default-version: '0.0.1'
         prerelease: 'alpha'
+    - name: Update version
+      uses: brettdorrans/write-version-to-file@master
+      with:
+        filename: '/.VERSION'
+        placeholder: ${{ steps.tag-version.outputs.semantic-version }}
