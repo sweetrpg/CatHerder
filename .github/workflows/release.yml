@@ -15,13 +15,6 @@ on:
       - 'test/**'
       - build.gradle
       - gradle.properties
-  pull_request:
-    branches: [ master ]
-    paths:
-      - 'src/**'
-      - 'test/**'
-      - build.gradle
-      - gradle.properties
 
 jobs:
   build:
