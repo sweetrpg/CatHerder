@@ -43,6 +43,9 @@
    "item.catherder.big_catnip": "Bundle of Catnip",
    "item.catherder.owner_change": "Change Cat Owner",
    "item.catherder.guard_suit" : "Guard Suit",
+   "item.catherder.catnip_seeds": "Catnip Seeds",
+   "item.catherder.wild_catnip": "Catnip",
+   "block.catherder.wild_catnip": "Catnip",
 
    "item.catherder.cape_coloured.tooltip": "Color: %s",
    "item.catherder.wool_collar.tooltip": "Color: %s",
