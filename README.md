@@ -21,7 +21,7 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 # Installation Instructions
 
 ## Client
-- 
+
 - Download **Minecraft Forge** from the [official site](https://files.minecraftforge.net/).
 - Run the Installer jar and select the 'Install client' option and click OK. **Minecraft Forge** should now be installed!
 - Now open up the launcher and in the profile selector select ```Forge```, login and run Minecraft (*this may take a while*).
@@ -37,17 +37,17 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 
 # FAQ
 
- - **Q:** Will there be a Fabric version?  
-   **A:** Probably not.
- - **Q:** Which Minecraft versions are supported?  
-   **A:** It is normally the most current release, currently `1.18.x`.
- - **Q:** I have a cat, how to get started?  
-   **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
+- **Q:** Will there be a Fabric version?  
+  **A:** Probably not.
+- **Q:** Which Minecraft versions are supported?  
+  **A:** It is normally the most current release, currently `1.18.x`.
+- **Q:** I have a cat, how to get started?  
+  **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
 -----------------
 
 # Licenses
 
 CatHerder API
- - 2022
- - [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+- 2022
+- [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)
