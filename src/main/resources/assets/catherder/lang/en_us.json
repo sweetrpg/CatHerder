@@ -5,6 +5,8 @@
    "block.catherder.food_bowl": "Food Bowl",
    "block.catherder.cat_bath": "Cat Bath",
    "block.catherder.litter_box": "Litter Box",
+   "block.catherder.wild_catnip": "Catnip",
+   "block.catherder.cardboard_box": "Cardboard Box",
 
    "item.catherder.throw_bone": "Throw Bone",
    "item.catherder.throw_bone_wet": "Drool Throw Bone",
@@ -43,6 +45,10 @@
    "item.catherder.big_catnip": "Bundle of Catnip",
    "item.catherder.owner_change": "Change Cat Owner",
    "item.catherder.guard_suit" : "Guard Suit",
+   "item.catherder.catnip_seeds": "Catnip Seeds",
+   "item.catherder.wild_catnip": "Catnip",
+   "item.catherder.catnip": "Catnip",
+   "item.catherder.yarn": "Yarn",
 
    "item.catherder.cape_coloured.tooltip": "Color: %s",
    "item.catherder.wool_collar.tooltip": "Color: %s",

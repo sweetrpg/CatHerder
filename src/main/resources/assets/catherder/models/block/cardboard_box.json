@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "catherder:block/litter_box",
-		"particle": "catherder:block/litter_box"
+		"0": "catherder:block/cardboard_box",
+		"particle": "catherder:block/cardboard_box"
 	},
 	"elements": [
 		{

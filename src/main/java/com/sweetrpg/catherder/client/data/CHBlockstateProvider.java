@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.client.data;
 
 import com.sweetrpg.catherder.common.block.CatnipBlock;
-import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.lib.Constants;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -16,13 +16,15 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class CHBlockstateProvider extends BlockStateProvider {
+
+    // Applies texture to all faces and for the input face culls that direction
+    private static final BiFunction<String, Direction, BiConsumer<Direction, ModelBuilder<BlockModelBuilder>.ElementBuilder.FaceBuilder>> cullFaceFactory = (texture, input) -> (d, b) -> b.texture(texture).cullface(d == input ? d : null);
 
     public CHBlockstateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
         super(gen, Constants.MOD_ID, exFileHelper);
@@ -57,73 +59,34 @@ public class CHBlockstateProvider extends BlockStateProvider {
     }
 
     public void wildCropBlock(Block block) {
-            this.simpleBlock(block, models().cross(blockName(block), resourceBlock(blockName(block))));
+        this.simpleBlock(block, models().cross(blockName(block), resourceBlock(blockName(block))));
     }
 
-    // Applies texture to all faces and for the input face culls that direction
-    private static BiFunction<String, Direction, BiConsumer<Direction, ModelBuilder<BlockModelBuilder>.ElementBuilder.FaceBuilder>> cullFaceFactory = (texture, input) -> (d, b) -> b.texture(texture).cullface(d == input ? d : null);
-
     protected void createFromShape(Supplier<? extends Block> blockIn, AABB bb) {
-        BlockModelBuilder model = this.models()
-                .getBuilder(name(blockIn))
-                .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                .texture("particle", extend(blockTexture(blockIn), "_bottom"))
-                .texture("bottom", extend(blockTexture(blockIn), "_bottom"))
-                .texture("top", extend(blockTexture(blockIn), "_top"))
-                .texture("side", extend(blockTexture(blockIn), "_side"));
+        BlockModelBuilder model = this.models().getBuilder(name(blockIn)).parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block"))).texture("particle", extend(blockTexture(blockIn), "_bottom")).texture("bottom", extend(blockTexture(blockIn), "_bottom")).texture("top", extend(blockTexture(blockIn), "_top")).texture("side", extend(blockTexture(blockIn), "_side"));
 
-        model.element()
-          .from((float) bb.minX, (float) bb.minY, (float) bb.minZ)
-            .to((float) bb.maxX, (float) bb.maxY, (float) bb.maxZ)
-            .allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null).texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
+        model.element().from((float) bb.minX, (float) bb.minY, (float) bb.minZ).to((float) bb.maxX, (float) bb.maxY, (float) bb.maxZ).allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null).texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
 
         this.simpleBlock(blockIn.get(), model);
     }
 
     protected void catBed(Supplier<? extends Block> blockIn) {
-        BlockModelBuilder model = this.models()
-                .getBuilder(name(blockIn))
-                .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                .texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate))
-                .texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate))
-                .texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate))
-                .ao(false);
+        BlockModelBuilder model = this.models().getBuilder(name(blockIn)).parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block"))).texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate)).texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate)).texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
 
-        model.element()
-          .from(1.6F, 3.2F, 1.6F)
-          .to(14.4F, 6.4F, 14.4F)
-          .face(Direction.UP).texture("#bedding").end()
-          .face(Direction.NORTH).texture("#bedding");
+        model.element().from(1.6F, 3.2F, 1.6F).to(14.4F, 6.4F, 14.4F).face(Direction.UP).texture("#bedding").end().face(Direction.NORTH).texture("#bedding");
 
         model.element() //base
-          .from(0, 0, 0)
-          .to(16, 3.2F, 16)
-          .allFaces(cullFaceFactory.apply("#casing", Direction.DOWN));
+             .from(0, 0, 0).to(16, 3.2F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.DOWN));
 
-        model.element()
-          .from(11.2F, 3.2F, 0)
-          .to(16, 9.6F, 1.6F)
-          .allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
+        model.element().from(11.2F, 3.2F, 0).to(16, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
 
-        model.element()
-          .from(0, 3.2F, 0)
-          .to(4.8F, 9.6F, 1.6F)
-          .allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
+        model.element().from(0, 3.2F, 0).to(4.8F, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
 
-        model.element()
-          .from(14.4F, 3.2F, 0)
-          .to(16, 9.6F, 16)
-          .allFaces(cullFaceFactory.apply("#casing", Direction.EAST));
+        model.element().from(14.4F, 3.2F, 0).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.EAST));
 
-        model.element()
-          .from(0, 3.2F, 14.4F)
-          .to(16, 9.6F, 16)
-          .allFaces(cullFaceFactory.apply("#casing", Direction.SOUTH));
+        model.element().from(0, 3.2F, 14.4F).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.SOUTH));
 
-        model.element()
-          .from(0, 3.2F, 0)
-          .to(1.6F, 9.6F, 16)
-          .allFaces(cullFaceFactory.apply("#casing", Direction.WEST));
+        model.element().from(0, 3.2F, 0).to(1.6F, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.WEST));
 
         this.simpleBlock(blockIn.get(), model);
     }
@@ -172,28 +135,23 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //    }
 
     public void stageBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
-        getVariantBuilder(block)
-                .forAllStatesExcept(state -> {
-                    int ageSuffix = state.getValue(ageProperty);
-                    String stageName = blockName(block) + "_stage" + ageSuffix;
-                    return ConfiguredModel.builder()
-                                          .modelFile(models().cross(stageName, resourceBlock(stageName))).build();
-                }, ignored);
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            int ageSuffix = state.getValue(ageProperty);
+            String stageName = blockName(block) + "_stage" + ageSuffix;
+            return ConfiguredModel.builder().modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+        }, ignored);
     }
 
     public void customStageBlock(Block block, @Nullable ResourceLocation parent, String textureKey, IntegerProperty ageProperty, List<Integer> suffixes, Property<?>... ignored) {
-        getVariantBuilder(block)
-                .forAllStatesExcept(state -> {
-                    int ageSuffix = state.getValue(ageProperty);
-                    String stageName = blockName(block) + "_stage";
-                    stageName += suffixes.isEmpty() ? ageSuffix : suffixes.get(Math.min(suffixes.size(), ageSuffix));
-                    if (parent == null) {
-                        return ConfiguredModel.builder()
-                                              .modelFile(models().cross(stageName, resourceBlock(stageName))).build();
-                    }
-                    return ConfiguredModel.builder()
-                                          .modelFile(models().singleTexture(stageName, parent, textureKey, resourceBlock(stageName))).build();
-                }, ignored);
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            int ageSuffix = state.getValue(ageProperty);
+            String stageName = blockName(block) + "_stage";
+            stageName += suffixes.isEmpty() ? ageSuffix : suffixes.get(Math.min(suffixes.size(), ageSuffix));
+            if(parent == null) {
+                return ConfiguredModel.builder().modelFile(models().cross(stageName, resourceBlock(stageName))).build();
+            }
+            return ConfiguredModel.builder().modelFile(models().singleTexture(stageName, parent, textureKey, resourceBlock(stageName))).build();
+        }, ignored);
     }
 
     private String name(Supplier<? extends IForgeRegistryEntry<?>> block) {

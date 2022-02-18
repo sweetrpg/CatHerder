@@ -3,18 +3,18 @@ Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.s
 
 [![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
 
-**Cat Herder** is a **Minecraft mod** made for **Minecraft Forge**
+**Cat Herder** is a **Minecraft** mod made for **Minecraft Forge**.
 
 * Special talents for your cats
 * Improved AI making cats smarter than cats
-* Cat statistics, kills etc
+* Cat statistics, kills, etc.
 * Accessory system to give your cats some style
 * A cat tracking and revival system
 
 Thanks to everyone that has contributed. This includes but is not limited to...
 * **DoggyTalents** -- from which this mod borrows heavily 
 
-Want to know more about the mod? Take a gander at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
+Want to know more about the mod? Take a peek at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
 
 -----------------
 
@@ -24,12 +24,12 @@ Want to know more about the mod? Take a gander at the [wiki](https://github.com/
 - 
 - Download **Minecraft Forge** from the [official site](https://files.minecraftforge.net/).
 - Run the Installer jar and select the 'Install client' option and click OK. **Minecraft Forge** should now be installed!
-- Now open up the launcher and in the profile selector select ```Forge```, login and run Minecraft (*This may take a while*).
-- Close Minecraft once it is open and find your Minecraft installation directory
+- Now open up the launcher and in the profile selector select ```Forge```, login and run Minecraft (*this may take a while*).
+- Close Minecraft once it is open and find your Minecraft installation directory.
   - For **Windows**, it is located at ```%appadata%/.minecraft```
   - For **Mac**, it is located at ````~/Library/Application Support/minecraft````
   - For **Linux**, it is located at ```~/.minecraft``` 
-- In this directory, there will be a new folder called ```mods``` (*create one if there isn't one*)
+- In this directory, there will be a new folder called ```mods``` (*create one if there isn't one*).
 - Download the mod from [here](https://www.curseforge.com/minecraft/mc-mods/cat-herder/files), then drag n' drop the mod into the ```mods``` folder.
 - *Run Minecraft and enjoy!*
 
