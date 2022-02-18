@@ -40,6 +40,7 @@ jobs:
       with:
         arguments: build
     - id: tag-version
+      name: Create tag
       uses: SOLIDSoftworks/semver-tags@1.0.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
@@ -51,3 +52,11 @@ jobs:
       with:
         filename: '.VERSION'
         placeholder: ${{ steps.tag-version.outputs.semantic-version }}
+    - name: Commit version file
+      run: |
+        git config --global user.email "ci@sweetrpg.com"
+        git config --global user.name "SweetRPG Version Updater"
+        git checkout develop
+        git add .VERSION
+        git commit -m "Update .VERSION"
+        git push origin
