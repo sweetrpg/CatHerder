@@ -274,12 +274,14 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public float getTailRotation() {
-        return this.isTame() ? (0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * (float) Math.PI : ((float) Math.PI / 5F);
+//        return this.isTame() ? (0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * (float) Math.PI : ((float) Math.PI / 5F);
+        return ((float) Math.PI / 5F);
     }
 
     @Override
     public float getWagAngle(float limbSwing, float limbSwingAmount, float partialTickTime) {
-        return Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+//        return Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        return Mth.cos(limbSwing * 0.6662F) * 0.9F * limbSwingAmount;
     }
 
     @Override
