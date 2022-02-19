@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.client.entity.model;
 
 import com.google.common.collect.ImmutableList;
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import net.minecraft.client.model.ColorableAgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -19,12 +20,14 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
     public ModelPart legBackLeft;
     public ModelPart legFrontRight;
     public ModelPart legFrontLeft;
-    public ModelPart tail;
-    public ModelPart realTail; //
+    public ModelPart upperTail;
+    public ModelPart lowerTail; //
 //    public ModelPart realTail2; //
 //    public ModelPart realTail3; //
 
     public CatModel(ModelPart box) {
+        CatHerder.LOGGER.debug("Creating CatModel with box: {}", box);
+
 //        this.realHead = this.head.getChild("real_head");
         this.body = box.getChild("body");
         this.head = this.body.getChild("head");
@@ -33,8 +36,8 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
         this.legBackLeft = this.body.getChild("left_hind_leg");
         this.legFrontRight = this.body.getChild("right_front_leg");
         this.legFrontLeft = this.body.getChild("left_front_leg");
-        this.tail = this.body.getChild("tail");
-        this.realTail = this.tail.getChild("real_tail");
+        this.upperTail = this.body.getChild("upperTail");
+        this.lowerTail = this.upperTail.getChild("lowerTail");
 //        this.realTail2 = this.tail.getChild("real_tail_2");
 //        this.realTail3 = this.tail.getChild("real_tail_bushy");
         // TODO
@@ -109,6 +112,8 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
     }
 
     private static LayerDefinition createBodyLayerInternal(CubeDeformation scale) {
+        CatHerder.LOGGER.debug("Creating body layer with scale: {}", scale);
+
         MeshDefinition meshDefinition = new MeshDefinition();
         PartDefinition partDefinition = meshDefinition.getRoot();
 
@@ -129,11 +134,11 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
                                                                             .addBox(1.0F, -3.0F, 0.0F, 1.0F, 1.0F, 2.0F, scale),
                                                      PartPose.offset(0.0F, -2.0F, -10.0F));
 
-        PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 15)
+        PartDefinition upperTail = body.addOrReplaceChild("upperTail", CubeListBuilder.create().texOffs(0, 15)
                                                                             .addBox(-0.5F, 0.0F, 0.0F, 1.0F, 8.0F, 1.0F, scale),
                                                      PartPose.offsetAndRotation(0.0F, -2.0F, 7.0F, 0.7854F, 0.0F, 0.0F));
 
-        PartDefinition realTail = tail.addOrReplaceChild("real_tail", CubeListBuilder.create().texOffs(4, 15)
+        PartDefinition lowerTail = upperTail.addOrReplaceChild("lowerTail", CubeListBuilder.create().texOffs(4, 15)
                                                                                      .addBox(-0.5F, 0.0F, 0.0F, 1.0F, 8.0F, 1.0F, scale),
                                                          PartPose.offsetAndRotation(0.0F, 8.0F, 0.0F, 0.7854F, 0.0F, 0.0F));
 
@@ -190,15 +195,21 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 
     @Override
     protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of(this.body, this.legBackRight, this.legBackLeft, this.legFrontRight, this.legFrontLeft, this.tail, this.belly);
+        return ImmutableList.of(this.body, this.legBackRight, this.legBackLeft, this.legFrontRight, this.legFrontLeft, this.upperTail, this.belly);
     }
 
     @Override
     public void prepareMobModel(T cat, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        this.realTail.xRot = cat.getWagAngle(limbSwing, limbSwingAmount, partialTickTime);
+        CatHerder.LOGGER.debug("Preparing mob model: {}, limbSwing {}, limgSwingAmount {}, partialTickTime {}", cat, limbSwing, limbSwingAmount, partialTickTime);
+
+        this.lowerTail.xRot = cat.getWagAngle(limbSwing, limbSwingAmount, partialTickTime);
 
         if(cat.isInSittingPose()) {
+            CatHerder.LOGGER.debug("Cat is sitting");
+
             if(cat.isLying()) {
+                CatHerder.LOGGER.debug("Cat is lying (like a Persian rug)");
+
 //                this.head.setPos(-1, 19.5F, -7);
 //                this.body.setPos(0, 20, 2);
 //                this.body.xRot = (float) Math.PI / 2F;
@@ -235,6 +246,8 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 ////                this.legFrontLeft.rotateAngleY = -(float)Math.PI / 10;
             }
             else if(cat.isLying()) {
+                CatHerder.LOGGER.debug("Cat is lying (like a dog)");
+
 //                this.body.setPos(0.0F, 19.0F, 2.0F);
 //                this.body.xRot = ((float) Math.PI / 2F);
 //                this.belly.setPos(-1.0F, 19.0F, -3.0F);
@@ -256,6 +269,8 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 //                this.legFrontLeft.yRot = -(float) Math.PI / 10;
             }
             else {
+                CatHerder.LOGGER.debug("Cat is something?");
+
 //                this.head.setPos(-1.0F, 13.5F, -7.0F);
 //                this.belly.setPos(-1.0F, 16.0F, -3.0F);
 //                this.belly.xRot = ((float) Math.PI * 2F / 5F);
@@ -272,12 +287,14 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 //                this.legFrontLeft.xRot = 5.811947F;
 //                this.legFrontLeft.setPos(0.51F, 17.0F, -4.0F);
 //
-//                this.head.setPos(-1.0F, 13.5F, -7.0F);
-//                this.legFrontRight.yRot = 0;
-//                this.legFrontLeft.yRot = 0;
+                this.body.setPos(0, 17F, 0);
+                this.legFrontRight.yRot = 0;
+                this.legFrontLeft.yRot = 0;
             }
         }
         else {
+            CatHerder.LOGGER.debug("Cat isn't something");
+
 //            this.body.setPos(0.0F, 14.0F, 2.0F);
 //            this.body.xRot = ((float) Math.PI / 2F);
 //            this.belly.setPos(-1.0F, 14.0F, -3.0F);
@@ -287,12 +304,17 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 //            this.legBackLeft.setPos(0.5F, 16.0F, 7.0F);
 //            this.legFrontRight.setPos(-2.5F, 16.0F, -4.0F);
 //            this.legFrontLeft.setPos(0.5F, 16.0F, -4.0F);
-            this.legBackRight.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-            this.legBackLeft.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-            this.legFrontRight.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-            this.legFrontLeft.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+//            this.legBackRight.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+//            this.legBackLeft.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+//            this.legFrontRight.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+//            this.legFrontLeft.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+            this.legBackRight.xRot = Mth.cos(limbSwing * 0.6662F) * 0.9F * limbSwingAmount;
+            this.legBackLeft.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.9F * limbSwingAmount;
+            this.legFrontRight.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.9F * limbSwingAmount;
+            this.legFrontLeft.xRot = Mth.cos(limbSwing * 0.6662F) * 0.9F * limbSwingAmount;
 //
-//            this.head.setPos(-1.0F, 13.5F, -7.0F);
+//            this.body.setPos(-1.0F, 13.5F, -7.0F);
+            this.body.setPos(0, 17F, 0);
             this.legFrontRight.yRot = 0.0F;
             this.legFrontLeft.yRot = 0.0F;
         }
@@ -307,9 +329,11 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 
     @Override
     public void setupAnim(T catIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        CatHerder.LOGGER.debug("Setup cat animation: {}, limbSwing {}, limbSwingAmount {}, ageInTicks {}, netHeadYaw {}, headPitch {}", catIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+
         this.head.xRot = headPitch * ((float) Math.PI / 180F);
         this.head.yRot = netHeadYaw * (catIn.isInSittingPose() && catIn.isLying() ? 0.005F : (float) Math.PI / 180F);
-        this.realTail.xRot = ageInTicks;
+        this.lowerTail.xRot = ageInTicks;
     }
 
     public void setVisible(boolean visible) {
@@ -319,7 +343,7 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
         this.legBackLeft.visible = visible;
         this.legFrontRight.visible = visible;
         this.legFrontLeft.visible = visible;
-        this.tail.visible = visible;
+        this.upperTail.visible = visible;
         this.belly.visible = visible;
     }
 }

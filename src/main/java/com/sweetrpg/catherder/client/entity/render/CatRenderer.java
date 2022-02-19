@@ -56,7 +56,6 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
             }
         }
 
-
         if(entityIn.isCatWet()) {
             this.model.setColor(1.0F, 1.0F, 1.0F);
         }

@@ -64,7 +64,7 @@ public class ArmorAccessoryRenderer extends RenderLayer<CatEntity, CatModel<CatE
                     this.model.belly.visible = true;
                 }
                 else if(accessoryInst.ofType(ModAccessoryTypes.TAIL)) {
-                    this.model.tail.visible = true;
+                    this.model.upperTail.visible = true;
                 }
 
                 if(accessoryInst instanceof IColoredObject) {
