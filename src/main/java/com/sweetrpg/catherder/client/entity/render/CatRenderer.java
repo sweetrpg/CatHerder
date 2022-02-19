@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.sweetrpg.catherder.client.CatTextureManager;
 import com.sweetrpg.catherder.client.ClientSetup;
 import com.sweetrpg.catherder.client.entity.model.CatModel;
+//import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
 import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
 import com.sweetrpg.catherder.client.entity.render.layer.LayerFactory;
 import com.sweetrpg.catherder.common.config.ConfigHandler;

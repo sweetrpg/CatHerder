@@ -15,9 +15,9 @@ public class Resources {
     public static final ResourceLocation SMALL_WIDGETS = getGui("small_widgets");
 
     // Vanilla cat
-    public static final ResourceLocation ENTITY_VANILLA_CAT = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/siamese.png");
-    public static final ResourceLocation ENTITY_VANILLA_CAT_WILD = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat.png");
-    public static final ResourceLocation ENTITY_VANILLA_CAT_COLLAR = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat_collar.png");
+    public static final ResourceLocation ENTITY_VANILLA_CAT = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/tabby.png");
+//    public static final ResourceLocation ENTITY_VANILLA_CAT_WILD = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat.png");
+//    public static final ResourceLocation ENTITY_VANILLA_CAT_COLLAR = Util.getResource(Constants.VANILLA_ID, "textures/entity/cat/cat_collar.png");
 
     public static final ResourceLocation COLLAR_DEFAULT = getEntity("cat", "cat_collar");
     public static final ResourceLocation COLLAR_GOLDEN = getEntity("cat", "cat_collar_0");
