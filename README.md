@@ -1,5 +1,5 @@
-Cat Herder [![Curseforge](http://cf.way2muchnoise.eu/full_cat-herder_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/cat-herder) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20cat-herder_all.svg)](https://minecraft.curseforge.com/projects/cat-herder)
-===========
+Cat Herder
+==========
 
 [![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
 
