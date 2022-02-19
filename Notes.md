@@ -44,14 +44,15 @@
 * Doggy torch -> ???
 * Pack puppy -> Pack cat
 * Pest fighter: keep
-* Pillow paw: remove
+* Pillow paw -> Super jump
 * Poison fang: keep
 * Quick healer: keep
 * Rescue dog: ???
-* Roaring gale: ???
+* Roaring gale -> Razor-sharp claws
 * Shepherd dog: remove
 * Swimmer dog: remove
 * Wolf mount -> Mount
+* Pounce: new
 
 # Integrations
 

@@ -15,6 +15,8 @@ import com.sweetrpg.catherder.client.screen.CatInfoScreen;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.ai.BreedGoal;
 import com.sweetrpg.catherder.common.entity.ai.*;
+import com.sweetrpg.catherder.common.entity.ai.CatLieOnBedGoal;
+import com.sweetrpg.catherder.common.entity.ai.CatSitOnBlockGoal;
 import com.sweetrpg.catherder.common.entity.serializers.DimensionDependantArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -193,6 +195,8 @@ public class CatEntity extends AbstractCatEntity {
         this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
         this.targetSelector.addGoal(6, new BerserkerModeGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
+        this.targetSelector.addGoal(2, new CatSitOnBlockGoal(this, 0F));
+        this.targetSelector.addGoal(2, new CatLieOnBedGoal(this, 0F, 16));
     }
 
     @Override

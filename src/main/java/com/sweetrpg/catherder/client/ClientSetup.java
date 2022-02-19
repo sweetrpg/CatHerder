@@ -10,7 +10,7 @@ import com.sweetrpg.catherder.client.entity.model.CatRescueModel;
 import com.sweetrpg.catherder.client.entity.render.CollarRenderManager;
 import com.sweetrpg.catherder.client.entity.render.CatScreenOverlays;
 import com.sweetrpg.catherder.client.entity.render.CatRenderer;
-import com.sweetrpg.catherder.client.entity.render.CatBeamRenderer;
+//import com.sweetrpg.catherder.client.entity.render.CatBeamRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.PackCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.RescueCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.ArmorAccessoryRenderer;
@@ -37,7 +37,7 @@ public class ClientSetup {
     public static final ModelLayerLocation CAT_ARMOR = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "armor");
     public static final ModelLayerLocation CAT_BACKPACK = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat_backpack"), "main");
     public static final ModelLayerLocation CAT_RESCUE_BOX = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat_rescue_box"), "main");
-    public static final ModelLayerLocation CAT_BEAM = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "main");
+//    public static final ModelLayerLocation CAT_BEAM = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "main");
 
     public static void setupScreenManagers(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CATNIP.get(), RenderType.cutout());
@@ -59,7 +59,7 @@ public class ClientSetup {
 
     public static void setupTileEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.CAT.get(), CatRenderer::new);
-        event.registerEntityRenderer(ModEntityTypes.CAT_BEAM.get(), CatBeamRenderer::new);
+//        event.registerEntityRenderer(ModEntityTypes.CAT_BEAM.get(), CatBeamRenderer::new);
         event.registerBlockEntityRenderer(ModTileEntityTypes.CAT_BED.get(), CatBedRenderer::new);
     }
 
