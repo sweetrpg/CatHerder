@@ -2,14 +2,14 @@ package com.sweetrpg.catherder.common.entity;
 
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.enu.WetSource;
 import com.sweetrpg.catherder.api.feature.*;
 import com.sweetrpg.catherder.api.feature.CatLevel.Type;
-import com.sweetrpg.catherder.api.inferface.IThrowableItem;
-import com.sweetrpg.catherder.*;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatAlteration;
 import com.sweetrpg.catherder.api.inferface.ICatFoodHandler;
+import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.api.registry.*;
 import com.sweetrpg.catherder.client.screen.CatInfoScreen;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
@@ -113,6 +113,31 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    public final Map<Integer, Object> objects = new HashMap<>();
+    public final StatsTracker statsTracker = new StatsTracker();
+    // Cached values
+    private final Cache<Integer> spendablePoints = Cache.make(this::getSpendablePointsInternal);
+    private final List<ICatAlteration> alterations = new ArrayList<>(4);
+    private final List<ICatFoodHandler> foodHandlers = new ArrayList<>(4);
+    protected boolean catJumping;
+    protected float jumpPower;
+    protected BlockPos targetBlock;
+    private int hungerTick;
+    private int prevHungerTick;
+    private int healingTick;
+    private int prevHealingTick;
+    private float headRotationCourse;
+    private float headRotationCourseOld;
+    private WetSource wetSource;
+    private boolean isShaking;
+    private float timeCatIsShaking;
+    private float prevTimeCatIsShaking;
+
+    public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
+        super(type, worldIn);
+        this.setTame(false);
+        this.setGender(EnumGender.random(this.getRandom()));
+    }
 
     public static void initDataParameters() {
         ACCESSORIES.get();
@@ -122,37 +147,6 @@ public class CatEntity extends AbstractCatEntity {
         MODE.get();
         CAT_BED_LOCATION.get();
         CAT_BOWL_LOCATION.get();
-    }
-
-    // Cached values
-    private final Cache<Integer> spendablePoints = Cache.make(this::getSpendablePointsInternal);
-    private final List<ICatAlteration> alterations = new ArrayList<>(4);
-    private final List<ICatFoodHandler> foodHandlers = new ArrayList<>(4);
-    public final Map<Integer, Object> objects = new HashMap<>();
-
-    public final StatsTracker statsTracker = new StatsTracker();
-
-    private int hungerTick;
-    private int prevHungerTick;
-    private int healingTick;
-    private int prevHealingTick;
-
-    private float headRotationCourse;
-    private float headRotationCourseOld;
-    private WetSource wetSource;
-    private boolean isShaking;
-    private float timeCatIsShaking;
-    private float prevTimeCatIsShaking;
-
-    protected boolean catJumping;
-    protected float jumpPower;
-
-    protected BlockPos targetBlock;
-
-    public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
-        super(type, worldIn);
-        this.setTame(false);
-        this.setGender(EnumGender.random(this.getRandom()));
     }
 
     @Override
@@ -208,11 +202,11 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        if (this.random.nextInt(3) == 0) {
+        if(this.random.nextInt(3) == 0) {
             return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.CAT_BEG_FOR_FOOD : SoundEvents.CAT_PURREOW;
         }
         else {
-        return SoundEvents.CAT_AMBIENT;
+            return SoundEvents.CAT_AMBIENT;
         }
     }
 
@@ -319,7 +313,7 @@ public class CatEntity extends AbstractCatEntity {
 
             boolean inWater = this.isInWater();
             // If inWater is false then isInRain is true in the or statement
-            boolean inRain = inWater ? false : this.isInWaterOrRain();
+            boolean inRain = !inWater && this.isInWaterOrRain();
             boolean inBubbleColumn = this.isInBubbleColumn();
 
             if(inWater || inRain || inBubbleColumn) {
@@ -462,7 +456,7 @@ public class CatEntity extends AbstractCatEntity {
         ItemStack stack = player.getItemInHand(hand);
 
         if(this.isTame()) {
-            if(stack.getItem() == Items.STICK && this.canInteract(player)) {
+            if(stack.getItem() == Items.STRING && this.canInteract(player)) {
 
                 if(this.level.isClientSide) {
                     CatInfoScreen.open(this);
@@ -480,7 +474,7 @@ public class CatEntity extends AbstractCatEntity {
                     if(stack.getItem() == ModItems.TRAINING_TREAT.get() || this.random.nextInt(3) == 0) {
                         this.tame(player);
                         this.navigation.stop();
-                        this.setTarget((LivingEntity) null);
+                        this.setTarget(null);
                         this.setOrderedToSit(true);
                         this.setHealth(20.0F);
                         this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_HEARTS);
@@ -1599,7 +1593,6 @@ public class CatEntity extends AbstractCatEntity {
                 this.foodHandlers.add((ICatFoodHandler) inst);
             }
         }
-        ;
 
         List<TalentInstance> talents = this.getTalentMap();
         this.alterations.addAll(talents);
@@ -1715,6 +1708,10 @@ public class CatEntity extends AbstractCatEntity {
         return this.entityData.get(MODE.get());
     }
 
+    public void setMode(EnumMode collar) {
+        this.entityData.set(MODE.get(), collar);
+    }
+
     public boolean isMode(EnumMode... modes) {
         EnumMode mode = this.getMode();
         for(EnumMode test : modes) {
@@ -1726,20 +1723,16 @@ public class CatEntity extends AbstractCatEntity {
         return false;
     }
 
-    public void setMode(EnumMode collar) {
-        this.entityData.set(MODE.get(), collar);
-    }
-
     public Optional<BlockPos> getBedPos() {
         return this.getBedPos(this.level.dimension());
     }
 
-    public Optional<BlockPos> getBedPos(ResourceKey<Level> registryKey) {
-        return this.entityData.get(CAT_BED_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
-    }
-
     public void setBedPos(@Nullable BlockPos pos) {
         this.setBedPos(this.level.dimension(), pos);
+    }
+
+    public Optional<BlockPos> getBedPos(ResourceKey<Level> registryKey) {
+        return this.entityData.get(CAT_BED_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
     }
 
     public void setBedPos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
@@ -1754,12 +1747,12 @@ public class CatEntity extends AbstractCatEntity {
         return this.getBowlPos(this.level.dimension());
     }
 
-    public Optional<BlockPos> getBowlPos(ResourceKey<Level> registryKey) {
-        return this.entityData.get(CAT_BOWL_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
-    }
-
     public void setBowlPos(@Nullable BlockPos pos) {
         this.setBowlPos(this.level.dimension(), pos);
+    }
+
+    public Optional<BlockPos> getBowlPos(ResourceKey<Level> registryKey) {
+        return this.entityData.get(CAT_BOWL_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
     }
 
     public void setBowlPos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
@@ -1791,11 +1784,6 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     @Override
-    public void addHunger(float add) {
-        this.setCatHunger(this.getCatHunger() + add);
-    }
-
-    @Override
     public void setCatHunger(float hunger) {
         float diff = hunger - this.getCatHunger();
 
@@ -1809,6 +1797,11 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         this.setHungerDirectly(Mth.clamp(hunger, 0, this.getMaxHunger()));
+    }
+
+    @Override
+    public void addHunger(float add) {
+        this.setCatHunger(this.getCatHunger() + add);
     }
 
     private void setHungerDirectly(float hunger) {
@@ -1846,21 +1839,21 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     @Override
-    public void setCatSize(int value) {
-        this.entityData.set(SIZE, (byte) Math.min(5, Math.max(1, value)));
-    }
-
-    @Override
     public int getCatSize() {
         return this.entityData.get(SIZE);
     }
 
-    public void setBoneVariant(ItemStack stack) {
-        this.entityData.set(BONE_VARIANT, stack);
+    @Override
+    public void setCatSize(int value) {
+        this.entityData.set(SIZE, (byte) Math.min(5, Math.max(1, value)));
     }
 
     public ItemStack getBoneVariant() {
         return this.entityData.get(BONE_VARIANT);
+    }
+
+    public void setBoneVariant(ItemStack stack) {
+        this.entityData.set(BONE_VARIANT, stack);
     }
 
     @Nullable
@@ -1882,12 +1875,12 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(CAT_FLAGS, (byte) (flag ? c | bits : c & ~bits));
     }
 
-    public void setBegging(boolean begging) {
-        this.setCatFlag(1, begging);
-    }
-
     public boolean isBegging() {
         return this.getCatFlag(1);
+    }
+
+    public void setBegging(boolean begging) {
+        this.setCatFlag(1, begging);
     }
 
     public void setWillObeyOthers(boolean obeyOthers) {
@@ -1906,12 +1899,12 @@ public class CatEntity extends AbstractCatEntity {
         return this.getCatFlag(4);
     }
 
-    public void set8Flag(boolean collar) {
-        this.setCatFlag(8, collar);
-    }
-
     public boolean get8Flag() {
         return this.getCatFlag(8);
+    }
+
+    public void set8Flag(boolean collar) {
+        this.setCatFlag(8, collar);
     }
 
     public void setHasSunglasses(boolean sunglasses) {
@@ -1922,20 +1915,20 @@ public class CatEntity extends AbstractCatEntity {
         return this.getCatFlag(16);
     }
 
-    public void setLyingDown(boolean lying) {
-        this.setCatFlag(32, lying);
-    }
-
     public boolean isLyingDown() {
         return this.getCatFlag(32);
     }
 
-    public void set64Flag(boolean lying) {
-        this.setCatFlag(64, lying);
+    public void setLyingDown(boolean lying) {
+        this.setCatFlag(32, lying);
     }
 
     public boolean get64Flag() {
         return this.getCatFlag(64);
+    }
+
+    public void set64Flag(boolean lying) {
+        this.setCatFlag(64, lying);
     }
 
     public List<TalentInstance> getTalentMap() {
@@ -2112,7 +2105,7 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     public Entity getControllingPassenger() {
         // Gets the first passenger which is the controlling passenger
-        return this.getPassengers().isEmpty() ? null : (Entity) this.getPassengers().get(0);
+        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
     }
 
     @Override
@@ -2315,11 +2308,7 @@ public class CatEntity extends AbstractCatEntity {
 
         Block blockBelow = this.level.getBlockState(this.blockPosition().below()).getBlock();
         boolean onBed = blockBelow == ModBlocks.CAT_BED.get() || BlockTags.BEDS.contains(blockBelow);
-        if(onBed) {
-            return true;
-        }
-
-        return false;
+        return onBed;
     }
 
     @Override
@@ -2327,11 +2316,11 @@ public class CatEntity extends AbstractCatEntity {
         return this.foodHandlers;
     }
 
-    public void setTargetBlock(BlockPos pos) {
-        this.targetBlock = pos;
-    }
-
     public BlockPos getTargetBlock() {
         return this.targetBlock;
+    }
+
+    public void setTargetBlock(BlockPos pos) {
+        this.targetBlock = pos;
     }
 }
