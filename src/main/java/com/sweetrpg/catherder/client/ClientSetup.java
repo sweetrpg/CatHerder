@@ -41,7 +41,7 @@ public class ClientSetup {
 
     public static void setupScreenManagers(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CATNIP.get(), RenderType.cutout());
-//        ItemBlockRenderTypes.setRenderLayer(CatBlocks.CATNIP_CROP.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CATNIP_CROP.get(), RenderType.cutout());
 
         MenuScreens.register(ModContainerTypes.FOOD_BOWL.get(), FoodBowlScreen::new);
         MenuScreens.register(ModContainerTypes.PACK_CAT.get(), PackCatScreen::new);
