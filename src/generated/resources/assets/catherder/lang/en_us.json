@@ -94,7 +94,7 @@
   "catbed.casing.minecraft.warped_planks": "Warped Plank Casing",
   "catbed.casing.missing": "Missing: %s",
   "catbed.casing.null": "Casing material not set",
-  "catbed.explain.missing": "This item has likely be spawned in directly!",
+  "catbed.explain.missing": "This item has likely been spawned in directly!",
   "catcommand.come": "Come!",
   "catcommand.ok": "Okay!",
   "catcommand.stay": "Stay!",
