@@ -3,8 +3,7 @@ package com.sweetrpg.catherder;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.client.ClientSetup;
-import com.sweetrpg.catherder.client.data.CHBlockstateProvider;
-import com.sweetrpg.catherder.client.data.CHItemModelProvider;
+import com.sweetrpg.catherder.data.*;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
 import com.sweetrpg.catherder.client.event.ClientEventHandler;
 import com.sweetrpg.catherder.common.Capabilities;
@@ -12,7 +11,6 @@ import com.sweetrpg.catherder.common.CommonSetup;
 import com.sweetrpg.catherder.common.addon.AddonManager;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
-import com.sweetrpg.catherder.common.data.*;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
@@ -173,6 +171,14 @@ public class CatHerder {
             CHBlockstateProvider blockstates = new CHBlockstateProvider(gen, event.getExistingFileHelper());
             gen.addProvider(blockstates);
             gen.addProvider(new CHItemModelProvider(gen, blockstates.getExistingHelper()));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_EN_US));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_EN_GB));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_DE_DE));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_KO_KR));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_RU_RU));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_VI_VN));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_ZH_CN));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_ZH_TW));
         }
 
         if (event.includeServer()) {

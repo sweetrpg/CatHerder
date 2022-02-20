@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.client.data;
+package com.sweetrpg.catherder.data;
 
 import com.sweetrpg.catherder.common.block.CatnipBlock;
 import com.sweetrpg.catherder.common.lib.Constants;

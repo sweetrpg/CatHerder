@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.data;
+package com.sweetrpg.catherder.data;
 
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;

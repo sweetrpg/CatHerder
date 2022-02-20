@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.data;
+package com.sweetrpg.catherder.data;
 
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModTags;
