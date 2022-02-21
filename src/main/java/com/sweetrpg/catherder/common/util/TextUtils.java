@@ -11,8 +11,8 @@ public class TextUtils {
     /**
      * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
      */
-    public static MutableComponent getTranslation(String key, Object... args) {
-        return new TranslatableComponent(Constants.MOD_ID + "." + key, args);
+    public static MutableComponent getTranslation(String type, String key, Object... args) {
+        return new TranslatableComponent(type + "." + Constants.MOD_ID + "." + key, args);
     }
 
 }
