@@ -93,6 +93,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "Your cat is too high level to gain anything from these treats.");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "Tomcat");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "Improves critical hit rate 1/2 a heart for every level plus an extra heart when you master it.");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "Pounce");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "Super Jump");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "Catlike Reflexes");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "Increases the chance that your cat, will completely block a physical attack.");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "Bird Catcher");
@@ -101,6 +105,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "Allows your cat set things on fire while attacking. The higher the level, the longer the fire lasts. Mastering the skill grants your cat immunity to fire.");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "Allows you to ride your cat anywhere at speed. Every level allows your cat to jump higher. To get on your cat have an empty hand and jump and click on the cat to get on it.");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "%s: Meooowww, meow, meow mrrrrawwww (Food please!)");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "Pack Cat");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "Each level gives your cat 3 inventory slots in its, Packcat GUI. To open the GUI right click on your while sneaking! At level 5, your cat will, also automatically pick up any nearby items if, it has space in its inventory.");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "Quick Healer");
@@ -128,9 +133,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "Nermal");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "Pounce");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "%s: Meooowww, meow, meow mrrrrawwww (Food please!)");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
@@ -174,9 +176,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "Guard");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "(G)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "Cats follow closely and attack any monsters that come close.");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "Pounce");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "(P)");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "(I)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "%s is incapacitated and requires a cake to revive %s.");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "Female");
@@ -201,7 +200,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "Level:");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "Dire level:");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "Points left:");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "Texture Index");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "Texture Index");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "Obey Others?");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "Friendly Fire?");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "Health:");
@@ -225,6 +224,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_RADAR_ERROR_NO_RADIO, "**** Remember to put radio collar on your cat ****");
         add(Constants.TRANSLATION_KEY_RADAR_ERROR_NULL, "**** No cats found in %s! ****");
         add(Constants.TRANSLATION_KEY_RADAR_ERROR_OWN, "**** You do not own %s! Please ensure you have permission to interact with %d! ****");
+        add(Constants.TRANSLATION_KEY_GUI_CATINFO_TITLE, "Cat Info");
+        add(Constants.TRANSLATION_KEY_GUI_CATINFO_ENTER_NAME, "Enter name:");
         add(Constants.TRANSLATION_KEY_GUI_CONFIG_TITLE, "Cat Herder Configuration");
         add(Constants.TRANSLATION_KEY_GUI_CONFIG_CAT_SETTINGS, "Cat Behavior Settings");
         add(Constants.TRANSLATION_KEY_GUI_CONFIG_CAT_SETTINGS_TOOLTIP, "Change certain behaviors of cats.");
@@ -348,6 +349,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "Your cat is too high level to gain anything from these treats.");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "Tomcat");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "Improves critical hit rate 1/2 a heart for every level plus an extra heart when you master it.");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "Pounce");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "Super Jump");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "Catlike Reflexes");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "Increases the chance that your cat, will completely block a physical attack.");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "Bird Catcher");
@@ -356,6 +361,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "Allows your cat set things on fire while attacking. The higher the level, the longer the fire lasts. Mastering the skill grants your cat immunity to fire.");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "Allows you to ride your cat anywhere at speed. Every level allows your cat to jump higher. To get on your cat have an empty hand and jump and click on the cat to get on it.");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "%s: Meooowww, meow, meow mrrrrawwww (Food please!)");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "Pack Cat");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "Each level gives your cat 3 inventory slots in its, Packcat GUI. To open the GUI right click on your while sneaking! At level 5, your cat will, also automatically pick up any nearby items if, it has space in its inventory.");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "Quick Healer");
@@ -383,9 +389,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "Nermal");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "Pounce");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "%s: Meooowww, meow, meow mrrrrawwww (Food please!)");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
@@ -429,9 +432,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "Guard");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "(G)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "Cats follow closely and attack any monsters that come close.");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "Pounce");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "(P)");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "(I)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "%s is incapacitated and requires a cake to revive %s.");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "Female");
@@ -456,7 +456,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "Level:");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "Dire level:");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "Points left:");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "Texture Index");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "Texture Index");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "Obey Others?");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "Friendly Fire?");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "Health:");
@@ -603,6 +603,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
@@ -611,6 +615,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "TODO");
@@ -638,9 +643,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "TODO");
@@ -684,9 +686,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "TODO");
@@ -711,7 +710,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
@@ -858,6 +857,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
@@ -866,6 +869,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "TODO");
@@ -893,9 +897,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "TODO");
@@ -939,9 +940,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "TODO");
@@ -966,7 +964,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
@@ -1113,6 +1111,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
@@ -1121,6 +1123,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "TODO");
@@ -1148,9 +1151,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "TODO");
@@ -1194,9 +1194,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "TODO");
@@ -1221,7 +1218,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
@@ -1368,6 +1365,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
@@ -1376,6 +1377,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "TODO");
@@ -1403,9 +1405,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "TODO");
@@ -1449,9 +1448,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "TODO");
@@ -1476,7 +1472,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
@@ -1623,6 +1619,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
@@ -1631,6 +1631,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "TODO");
@@ -1658,9 +1659,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "TODO");
@@ -1704,9 +1702,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "TODO");
@@ -1731,7 +1726,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
@@ -1878,6 +1873,10 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_TOMCAT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
@@ -1886,6 +1885,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "TODO");
@@ -1913,9 +1913,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS, "");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_POUNCE_DESCRIPTION, "");
-        add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "TODO");
@@ -1959,9 +1956,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_POUNCE_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_INCAPACITATED_HELP, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_GENDER_FEMALE, "TODO");
@@ -1986,7 +1980,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
+//        add(Constants.TRANSLATION_KEY_GUI_TEXTURE_INDEX, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
