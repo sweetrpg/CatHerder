@@ -48,7 +48,7 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
 
                 this.level.getEntitiesOfClass(CatEntity.class, this.getBoundingBox().inflate(64D, 16D, 64D)).stream()
                     .filter(Predicates.not(CatEntity::isInSittingPose))
-                    .filter(d -> d.isMode(EnumMode.AGGRESIVE, EnumMode.TACTICAL, EnumMode.BERSERKER))
+                    .filter(d -> d.isMode(EnumMode.ATTACK, EnumMode.TACTICAL))
                     .filter(d -> d.canInteract(livingThrower))
                     .filter(d -> d != livingEntity && d.wantsToAttack(livingEntity, d.getOwner()))
                     .filter(d -> d.distanceTo(entityHit) < EntityUtil.getFollowRange(d))

@@ -9,11 +9,11 @@ public enum EnumMode {
 
     DOCILE(0, "docile"),
     WANDERING(1, "wandering"),
-    AGGRESIVE(2, "aggressive"),
-    BERSERKER(3, "berserker"),
-    TACTICAL(4, "tactical"),
-    PATROL(5, "patrol"),
-    GUARD(6, "guard");
+    ATTACK(2, "attack"),
+    TACTICAL(3, "tactical"),
+    PATROL(4, "patrol"),
+    GUARD(5, "guard"),
+    SKITTISH(6, "skittish");
 
     private int index;
     private String saveName;
