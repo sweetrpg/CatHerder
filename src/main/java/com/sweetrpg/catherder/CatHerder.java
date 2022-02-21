@@ -3,8 +3,7 @@ package com.sweetrpg.catherder;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.client.ClientSetup;
-import com.sweetrpg.catherder.client.data.CHBlockstateProvider;
-import com.sweetrpg.catherder.client.data.CHItemModelProvider;
+import com.sweetrpg.catherder.data.*;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
 import com.sweetrpg.catherder.client.event.ClientEventHandler;
 import com.sweetrpg.catherder.common.Capabilities;
@@ -12,7 +11,6 @@ import com.sweetrpg.catherder.common.CommonSetup;
 import com.sweetrpg.catherder.common.addon.AddonManager;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
-import com.sweetrpg.catherder.common.data.*;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
@@ -60,17 +58,14 @@ public class CatHerder {
     public static final RegistryObject<Talent> BIRDCATCHER = registerInst("birdcatcher", null);
     public static final RegistryObject<Talent> PACK_CAT = registerInst("pack_cat", PackCatTalent::new);
     public static final RegistryObject<Talent> PEST_FIGHTER = registerInst("pest_fighter", PestFighterTalent::new);
-    //    public static final RegistryObject<Talent> PILLOW_PAW = registerInst("pillow_paw", PillowPawTalent::new);
     public static final RegistryObject<Talent> POISON_FANG = registerInst("poison_fang", PoisonFangTalent::new);
     public static final RegistryObject<Talent> NERMAL = registerInst("nermal", NermalTalent::new);
     public static final RegistryObject<Talent> QUICK_HEALER = registerInst("quick_healer", QuickHealerTalent::new);
-    //public static final RegistryObject<Talent> RANGED_ATTACKER = registerInst("ranged_attacker", RangedAttacker::new);
     public static final RegistryObject<Talent> RESCUE_CAT = registerInst("rescue_cat", RescueCatTalent::new);
-    public static final RegistryObject<Talent> ROARING_GALE = registerInst("roaring_gale", RoaringGaleTalent::new);
-    //    public static final RegistryObject<Talent> SHEPHERD_CAT = registerInst("shepherd_cat", ShepherdCatTalent::new);
-//    public static final RegistryObject<Talent> SWIMMER_CAT = registerInst("swimmer_cat", SwimmerCatTalent::new);
     public static final RegistryObject<Talent> MOUNT = registerInst("mount", MountTalent::new);
-    public static final RegistryObject<Talent> CAT_TORCH = registerInst("cat_torch", CatTorchTalent::new);
+    public static final RegistryObject<Talent> SUPER_JUMP = registerInst("super_jump", SuperJumpTalent::new);
+    public static final RegistryObject<Talent> POUNCE = registerInst("pounce", PounceTalent::new);
+    public static final RegistryObject<Talent> RAZORSHARP_CLAWS = registerInst("razorsharp_claws", RazorsharpClawsTalent::new);
 
     private static <T extends Talent> RegistryObject<Talent> registerInst(final String name, final BiFunction<Talent, Integer, TalentInstance> sup) {
         return register(name, () -> new Talent(sup));
@@ -173,6 +168,14 @@ public class CatHerder {
             CHBlockstateProvider blockstates = new CHBlockstateProvider(gen, event.getExistingFileHelper());
             gen.addProvider(blockstates);
             gen.addProvider(new CHItemModelProvider(gen, blockstates.getExistingHelper()));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_EN_US));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_EN_GB));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_DE_DE));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_KO_KR));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_RU_RU));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_VI_VN));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_ZH_CN));
+            gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_ZH_TW));
         }
 
         if (event.includeServer()) {

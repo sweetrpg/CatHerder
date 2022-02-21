@@ -182,9 +182,9 @@
    "cat.gender.male.subject": "he",
    "cat.gender.male.title": "boy",
 
-   "entity.catherder.cat": "Cat",
-   "entity.catherder.cat.unknown_owner": "Owner Unknown",
-   "entity.catherder.cat.untamed": "Untamed",
+   "entity.catherder.katze": "Cat",
+   "entity.catherder.katze.unknown_owner": "Owner Unknown",
+   "entity.catherder.katze.untamed": "Untamed",
 
    "catcommand.come": "Stand!",
    "catcommand.stay": "Stay!",

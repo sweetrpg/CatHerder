@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.data;
+package com.sweetrpg.catherder.data;
 
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.advancements.FrameType;
