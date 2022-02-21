@@ -21,6 +21,7 @@ public class ModSerializers {
     public static final RegistryObject<DataSerializerEntry> MODE_SERIALIZER = register2("mode", ModeSerializer::new);
     public static final RegistryObject<DataSerializerEntry> CAT_LEVEL_SERIALIZER = register2("cat_level", CatLevelSerializer::new);
     public static final RegistryObject<DataSerializerEntry> BED_LOC_SERIALIZER = register2("cat_bed_location", BedLocationsSerializer::new);
+    public static final RegistryObject<DataSerializerEntry> ORIGINAL_BREED_SERIALIZER = register2("original_breed", BedLocationsSerializer::new);
 
     private static <X extends EntityDataSerializer<?>> RegistryObject<DataSerializerEntry> register2(final String name, final Supplier<X> factory) {
         return register(name, () -> new DataSerializerEntry(factory.get()));

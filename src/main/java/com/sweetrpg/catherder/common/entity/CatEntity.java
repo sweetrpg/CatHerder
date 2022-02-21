@@ -103,9 +103,10 @@ public class CatEntity extends AbstractCatEntity {
 
     private static final EntityDataAccessor<Float> HUNGER_INT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<String> CUSTOM_SKIN = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Integer> ORIGINAL_BREED_INT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.INT);
 
     private static final EntityDataAccessor<Byte> SIZE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BYTE);
-    private static final EntityDataAccessor<ItemStack> BONE_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<ItemStack> TOY_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
     private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
@@ -115,6 +116,8 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER.get().getSerializer()));
+
     public final Map<Integer, Object> objects = new HashMap<>();
     public final StatsTracker statsTracker = new StatsTracker();
     // Cached values
@@ -149,6 +152,7 @@ public class CatEntity extends AbstractCatEntity {
         MODE.get();
         CAT_BED_LOCATION.get();
         CAT_BOWL_LOCATION.get();
+        ORIGINAL_BREED.get();
     }
 
     @Override
@@ -164,7 +168,8 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(CUSTOM_SKIN, "");
         this.entityData.define(CAT_LEVEL.get(), new CatLevel(0, 0));
         this.entityData.define(SIZE, (byte) 3);
-        this.entityData.define(BONE_VARIANT, ItemStack.EMPTY);
+        this.entityData.define(ORIGINAL_BREED_INT, 0);
+        this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_BED_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
     }
@@ -263,7 +268,7 @@ public class CatEntity extends AbstractCatEntity {
         if(id == Constants.EntityState.CAT_START_SHAKING) {
             this.startShaking();
         }
-        else if(id == Constants.EntityState.CAT_INTERUPT_SHAKING) {
+        else if(id == Constants.EntityState.CAT_INTERRUPT_SHAKING) {
             this.finishShaking();
         }
         else {
@@ -326,7 +331,7 @@ public class CatEntity extends AbstractCatEntity {
                 }
                 if(this.isShaking && !this.level.isClientSide) {
                     this.finishShaking();
-                    this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_INTERUPT_SHAKING);
+                    this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_INTERRUPT_SHAKING);
                 }
             }
             else if((this.wetSource != null || this.isShaking) && this.isShaking) {
@@ -1853,16 +1858,16 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public ItemStack getBoneVariant() {
-        return this.entityData.get(BONE_VARIANT);
+        return this.entityData.get(TOY_VARIANT);
     }
 
     public void setBoneVariant(ItemStack stack) {
-        this.entityData.set(BONE_VARIANT, stack);
+        this.entityData.set(TOY_VARIANT, stack);
     }
 
     @Nullable
     public IThrowableItem getThrowableItem() {
-        Item item = this.entityData.get(BONE_VARIANT).getItem();
+        Item item = this.entityData.get(TOY_VARIANT).getItem();
         return item instanceof IThrowableItem ? (IThrowableItem) item : null;
     }
 
@@ -2327,4 +2332,13 @@ public class CatEntity extends AbstractCatEntity {
     public void setTargetBlock(BlockPos pos) {
         this.targetBlock = pos;
     }
+
+    public int getOriginalBreed() {
+        return this.entityData.get(ORIGINAL_BREED_INT);
+    }
+
+    public void setOriginalBreed(int originalBreed) {
+        this.entityData.set(ORIGINAL_BREED_INT, originalBreed);
+    }
+
 }

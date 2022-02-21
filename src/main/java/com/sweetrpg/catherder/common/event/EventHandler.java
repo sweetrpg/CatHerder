@@ -1,10 +1,10 @@
 package com.sweetrpg.catherder.common.event;
 
+import com.sweetrpg.catherder.common.config.ConfigHandler;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.talent.BirdCatcherTalent;
-import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
@@ -29,24 +29,31 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class EventHandler {
 
     @SubscribeEvent
-    public void rightClickEntity(final PlayerInteractEvent.EntityInteract event) {
+    public static void onBiomeLoad(BiomeLoadingEvent event) {
+        BiomeGenerationSettingsBuilder builder = event.getGeneration();
+        Biome.ClimateSettings climate = event.getClimate();
+        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) || event.getCategory().equals(Biome.BiomeCategory.TAIGA) || event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) || event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) && (climate.temperature > 0.3F && climate.temperature < 1.0F)) {
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
+        }
+    }
 
+    @SubscribeEvent
+    public void rightClickEntity(final PlayerInteractEvent.EntityInteract event) {
         Level world = event.getWorld();
 
         ItemStack stack = event.getItemStack();
         Entity target = event.getTarget();
 
-        if (target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == ModItems.TRAINING_TREAT.get()) {
+        if(target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == ModItems.TRAINING_TREAT.get()) {
             event.setCanceled(true);
 
             TamableAnimal vanillaCat = (TamableAnimal) target;
 
             Player player = event.getPlayer();
 
-            if (vanillaCat.isAlive() && vanillaCat.isTame() && vanillaCat.isOwnedBy(player)) {
-
-                if (!world.isClientSide) {
-                    if (!player.getAbilities().instabuild) {
+            if(vanillaCat.isAlive() && vanillaCat.isTame() && vanillaCat.isOwnedBy(player)) {
+                if(!world.isClientSide) {
+                    if(!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }
 
@@ -56,6 +63,7 @@ public class EventHandler {
                     cat.setOrderedToSit(false);
                     cat.setAge(vanillaCat.getAge());
                     cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
+                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType());
 
                     world.addFreshEntity(cat);
 
@@ -63,22 +71,10 @@ public class EventHandler {
                 }
 
                 event.setCancellationResult(InteractionResult.SUCCESS);
-            } else {
+            }
+            else {
                 event.setCancellationResult(InteractionResult.FAIL);
             }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onBiomeLoad(BiomeLoadingEvent event) {
-        BiomeGenerationSettingsBuilder builder = event.getGeneration();
-        Biome.ClimateSettings climate = event.getClimate();
-        if ((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
-                event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
-                event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
-                event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
-                (climate.temperature > 0.3F && climate.temperature < 1.0F)) {
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
         }
     }
 
@@ -86,7 +82,7 @@ public class EventHandler {
     public void onEntitySpawn(final EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
 
-        if (entity instanceof AbstractSkeleton) {
+        if(entity instanceof AbstractSkeleton) {
             AbstractSkeleton skeleton = (AbstractSkeleton) entity;
             skeleton.goalSelector.addGoal(3, new AvoidEntityGoal<>(skeleton, CatEntity.class, 6.0F, 1.0D, 1.2D)); // Same goal as in AbstractSkeletonEntity
         }
@@ -94,19 +90,19 @@ public class EventHandler {
 
     @SubscribeEvent
     public void playerLoggedIn(final PlayerLoggedInEvent event) {
-        if (ConfigHandler.SERVER.STARTING_ITEMS.get()) {
+        if(ConfigHandler.SERVER.STARTING_ITEMS.get()) {
 
             Player player = event.getPlayer();
 
             CompoundTag tag = player.getPersistentData();
 
-            if (!tag.contains(Player.PERSISTED_NBT_TAG)) {
+            if(!tag.contains(Player.PERSISTED_NBT_TAG)) {
                 tag.put(Player.PERSISTED_NBT_TAG, new CompoundTag());
             }
 
             CompoundTag persistTag = tag.getCompound(Player.PERSISTED_NBT_TAG);
 
-            if (!persistTag.getBoolean("gotDTStartingItems")) {
+            if(!persistTag.getBoolean("gotDTStartingItems")) {
                 persistTag.putBoolean("gotDTStartingItems", true);
 
                 player.getInventory().add(new ItemStack(ModItems.CAT_CHARM.get()));
