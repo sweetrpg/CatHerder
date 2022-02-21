@@ -152,7 +152,6 @@
   "item.catherder.creative_collar.tooltip": "Gives Unlimited points to spend",
   "item.catherder.creative_radar": "Creative Radar",
   "item.catherder.creative_radar.tooltip": "Finds ANY owned cats",
-  "item.catherder.dire_treat": "Dire Treat",
   "item.catherder.guard_suit": "Guard Suit",
   "item.catherder.leather_jacket": "Leather Jacket",
   "item.catherder.master_treat": "Master Treat",
@@ -170,6 +169,7 @@
   "item.catherder.treat_bag": "Treat Bag",
   "item.catherder.treat_bag.contents": "%d %s",
   "item.catherder.wild_catnip": "Catnip",
+  "item.catherder.wild_treat": "Dire Treat",
   "item.catherder.wool_collar": "Wool Collar",
   "item.catherder.wool_collar.tooltip": "Color: %s",
   "item.catherder.yarn": "Yarn",
@@ -243,11 +243,11 @@
   "talent.catherder.tomcat": "Tomcat",
   "talent.catherder.tomcat.description": "Improves critical hit rate 1/2 a heart for every level plus an extra heart when you master it.",
   "title.catherder.config": "Cat Herder Configuration",
-  "treat.dire_treat.level_up": "Level up!",
-  "treat.dire_treat.low_level": "Your cat can't possibly handle the awesome power contained in these treats.",
-  "treat.dire_treat.max_level": "CONGRATULATIONS! Your cat has reached the ultimate level!",
-  "treat.dire_treat.too_young": "This cat's a bit too young to be learning skills just yet.",
   "treat.normal_treat.level_up": "Level up!",
   "treat.normal_treat.max_level": "Your cat is too high level to gain anything from these treats.",
-  "treat.normal_treat.too_young": "This cat's a bit too young to be learning skills just yet."
+  "treat.normal_treat.too_young": "This cat's a bit too young to be learning skills just yet.",
+  "treat.wild_treat.level_up": "Level up!",
+  "treat.wild_treat.low_level": "Your cat can't possibly handle the awesome power contained in these treats.",
+  "treat.wild_treat.max_level": "CONGRATULATIONS! Your cat has reached the ultimate level!",
+  "treat.wild_treat.too_young": "This cat's a bit too young to be learning skills just yet."
 }

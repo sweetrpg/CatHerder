@@ -1222,7 +1222,7 @@ public class CatEntity extends AbstractCatEntity {
         compound.putBoolean("friendlyFire", this.canPlayersAttack());
         compound.putInt("catSize", this.getCatSize());
         compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
-        compound.putInt("level_dire", this.getCatLevel().getLevel(Type.DIRE));
+        compound.putInt("level_dire", this.getCatLevel().getLevel(Type.WILD));
         compound.putInt("original_breed", this.getOriginalBreed());
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
@@ -1480,7 +1480,7 @@ public class CatEntity extends AbstractCatEntity {
             }
 
             if(compound.contains("level_dire", Tag.TAG_ANY_NUMERIC)) {
-                this.getCatLevel().setLevel(Type.DIRE, compound.getInt("level_dire"));
+                this.getCatLevel().setLevel(Type.WILD, compound.getInt("level_dire"));
                 this.markDataParameterDirty(CAT_LEVEL.get());
             }
         }
@@ -2097,7 +2097,7 @@ public class CatEntity extends AbstractCatEntity {
 
     // When this method is changed the cache may need to be updated at certain points
     private final int getSpendablePointsInternal() {
-        int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.DIRE);
+        int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.WILD);
         for(TalentInstance entry : this.getTalentMap()) {
             totalPoints -= entry.getTalent().getCummulativeCost(entry.level());
         }

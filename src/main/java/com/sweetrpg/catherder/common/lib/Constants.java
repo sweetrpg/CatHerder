@@ -42,7 +42,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_TRAINING_TREAT = "item.catherder.training_treat";
     public static final String TRANSLATION_KEY_ITEM_SUPER_TREAT = "item.catherder.super_treat";
     public static final String TRANSLATION_KEY_ITEM_MASTER_TREAT = "item.catherder.master_treat";
-    public static final String TRANSLATION_KEY_ITEM_DIRE_TREAT = "item.catherder.dire_treat";
+    public static final String TRANSLATION_KEY_ITEM_wild_treat = "item.catherder.wild_treat";
     public static final String TRANSLATION_KEY_ITEM_BREEDING_TREAT = "item.catherder.breeding_treat";
     public static final String TRANSLATION_KEY_ITEM_CAT_CHARM = "item.catherder.cat_charm";
     public static final String TRANSLATION_KEY_ITEM_COLLAR_SHEARS = "item.catherder.collar_shears";
@@ -81,10 +81,10 @@ public class Constants {
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES = "container.catherder.cat_inventories";
     public static final String TRANSLATION_KEY_ITEMGROUP_MAIN = "itemGroup.catherder";
     public static final String TRANSLATION_KEY_ITEMGROUP_CATBED = "itemGroup.catherder.catbed";
-    public static final String TRANSLATION_KEY_DIRE_TREAT_LOW_LEVEL = "treat.dire_treat.low_level";
-    public static final String TRANSLATION_KEY_DIRE_TREAT_LEVEL_UP = "treat.dire_treat.level_up";
-    public static final String TRANSLATION_KEY_DIRE_TREAT_TOO_YOUNG = "treat.dire_treat.too_young";
-    public static final String TRANSLATION_KEY_DIRE_TREAT_MAX_LEVEL = "treat.dire_treat.max_level";
+    public static final String TRANSLATION_KEY_wild_treat_LOW_LEVEL = "treat.wild_treat.low_level";
+    public static final String TRANSLATION_KEY_wild_treat_LEVEL_UP = "treat.wild_treat.level_up";
+    public static final String TRANSLATION_KEY_wild_treat_TOO_YOUNG = "treat.wild_treat.too_young";
+    public static final String TRANSLATION_KEY_wild_treat_MAX_LEVEL = "treat.wild_treat.max_level";
     public static final String TRANSLATION_KEY_NORMAL_TREAT_LEVEL_UP = "treat.normal_treat.level_up";
     public static final String TRANSLATION_KEY_NORMAL_TREAT_TOO_YOUNG = "treat.normal_treat.too_young";
     public static final String TRANSLATION_KEY_NORMAL_TREAT_MAX_LEVEL = "treat.normal_treat.max_level";

@@ -7,7 +7,7 @@ public class CatLevel {
 
     public static enum Type {
         NORMAL("normal_treat"),
-        DIRE("dire_treat");
+        WILD("wild_treat");
 
         String n;
 
@@ -26,16 +26,16 @@ public class CatLevel {
     }
 
     public int getLevel(Type type) {
-        return type == Type.DIRE ? this.direLevel : this.level;
+        return type == Type.WILD ? this.direLevel : this.level;
     }
 
     public boolean canIncrease(Type type) {
-        return type == Type.DIRE ? this.level >= 60 : true;
+        return type == Type.WILD ? this.level >= 60 : true;
     }
 
     @Deprecated
     public void setLevel(Type type, int level) {
-        if (type == Type.DIRE) {
+        if (type == Type.WILD) {
             this.direLevel = level;
         } else {
             this.level = level;

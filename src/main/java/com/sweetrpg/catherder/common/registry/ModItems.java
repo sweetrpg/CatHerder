@@ -37,7 +37,7 @@ public class ModItems {
     public static final RegistryObject<Item> TRAINING_TREAT = registerTreat("training_treat", CatLevel.Type.NORMAL, 20);
     public static final RegistryObject<Item> SUPER_TREAT = registerTreat("super_treat", CatLevel.Type.NORMAL, 40);
     public static final RegistryObject<Item> MASTER_TREAT = registerTreat("master_treat", CatLevel.Type.NORMAL, 60);
-    public static final RegistryObject<Item> DIRE_TREAT = registerTreat("dire_treat", CatLevel.Type.DIRE, 30);
+    public static final RegistryObject<Item> WILD_TREAT = registerTreat("wild_treat", CatLevel.Type.WILD, 30);
     public static final RegistryObject<Item> BREEDING_TREAT = register("breeding_treat");
     public static final RegistryObject<Item> COLLAR_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
     public static final RegistryObject<Item> CAT_CHARM = registerWith("cat_charm", CatCharmItem::new, 1);

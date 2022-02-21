@@ -36,7 +36,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         handheld(ModItems.TRAINING_TREAT);
         handheld(ModItems.SUPER_TREAT);
         handheld(ModItems.MASTER_TREAT);
-        handheld(ModItems.DIRE_TREAT);
+        handheld(ModItems.WILD_TREAT);
         handheld(ModItems.BREEDING_TREAT);
         handheld(ModItems.CAT_TOY);
 

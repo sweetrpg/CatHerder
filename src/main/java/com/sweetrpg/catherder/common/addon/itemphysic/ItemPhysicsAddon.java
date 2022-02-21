@@ -28,14 +28,14 @@ public class ItemPhysicsAddon implements Addon {
         Method addMethod = ReflectionUtil.getMethod(API_CLASS, methodName, paramTypes);
 
         ReflectionUtil.invokeStaticMethod(addMethod, swimmingItems,
-                                          ModItems.BREEDING_TREAT, ModItems.DIRE_TREAT, ModItems.MASTER_TREAT,
+                                          ModItems.BREEDING_TREAT, ModItems.WILD_TREAT, ModItems.MASTER_TREAT,
                                           ModItems.SUPER_TREAT, ModItems.TRAINING_TREAT, ModItems.COLLAR_SHEARS,
 //                                          CatItems.THROW_BONE,
                                           ModItems.WOOL_COLLAR, ModItems.TREAT_BAG,
                                           ModItems.CAT_TOY);
 
         ReflectionUtil.invokeStaticMethod(addMethod, burningItems,
-                                          ModBlocks.CAT_BED, ModItems.BREEDING_TREAT, ModItems.DIRE_TREAT,
+                                          ModBlocks.CAT_BED, ModItems.BREEDING_TREAT, ModItems.WILD_TREAT,
                                           ModItems.MASTER_TREAT, ModItems.SUPER_TREAT, ModItems.TRAINING_TREAT,
                                           ModItems.COLLAR_SHEARS,
 //                                          CatItems.THROW_BONE,
