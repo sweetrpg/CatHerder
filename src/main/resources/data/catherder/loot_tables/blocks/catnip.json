@@ -15,7 +15,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "catherder:catnip",
                   "properties": {
-                    "age": "7"
+                    "age": "5"
                   }
                 }
               ],
@@ -54,7 +54,7 @@
           "condition": "minecraft:block_state_property",
           "block": "catherder:catnip",
           "properties": {
-            "age": "7"
+            "age": "5"
           }
         }
       ]
