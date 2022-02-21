@@ -31,6 +31,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> CARDBOARD = register("cardboard");
     public static final RegistryObject<Item> YARN = register("yarn");
+    public static final RegistryObject<Item> RODENT = register("mouse");
+    public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge");
+    public static final RegistryObject<Item> LASAGNA = register("lasagna");
     //    public static final RegistryObject<Item> THROW_BONE_WET = registerThrowBoneWet("throw_bone_wet");
 //    public static final RegistryObject<Item> THROW_STICK = registerThrowStick("throw_stick");
 //    public static final RegistryObject<Item> THROW_STICK_WET = registerThrowStickWet("throw_stick_wet");

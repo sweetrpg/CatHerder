@@ -66,6 +66,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.CATNIP_SEEDS);
         generated(ModItems.CARDBOARD);
         generated(ModItems.YARN);
+//        generated(ModItems.RODENT);
 
 //        blockItem(CatBlocks.CAT_BATH);
         blockItem(ModBlocks.CAT_BED);
@@ -73,6 +74,8 @@ public class CHItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.LITTER_BOX);
         blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
+        blockItem(ModBlocks.CHEESE_WHEEL);
+        blockItem(ModBlocks.MOUSE_TRAP);
     }
 
     private ResourceLocation itemTexture(Supplier<? extends ItemLike> item) {

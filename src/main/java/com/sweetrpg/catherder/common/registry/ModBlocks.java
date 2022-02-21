@@ -31,6 +31,10 @@ public class ModBlocks {
     public static final RegistryObject<FoodBowlBlock> FOOD_BOWL = registerWithItem("food_bowl", FoodBowlBlock::new);
 
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
+    public static final RegistryObject<Block> MOUSE_TRAP = registerWithItem("mouse_trap", MouseTrapBlock::new);
+    //    public static final RegistryObject<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel", CheeseWheelBlock::new);
+    public static final RegistryObject<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel",
+                                                                             () -> new CheeseWheelBlock(Block.Properties.copy(Blocks.CAKE), ModItems.CHEESE_WEDGE, true));
 
     public static final RegistryObject<WildCatnipBlock> WILD_CATNIP = BLOCKS.register("wild_catnip",
                                                                               () -> new WildCatnipBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS)));

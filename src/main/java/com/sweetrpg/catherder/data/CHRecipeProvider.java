@@ -54,16 +54,104 @@ public class CHRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1).pattern("WBW").pattern("BCB").pattern("WSW").define('C', ModItems.WOOL_COLLAR.get()).define('B', Items.BLACK_DYE).define('W', Items.WHITE_DYE).define('S', Items.STRING).unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get())).save(consumer, Util.getResource("spotted_collar_alt"));
         ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLOURED_COLLAR.get(), 1).requires(ModItems.WOOL_COLLAR.get()).requires(Items.STRING).requires(Items.BLUE_DYE).requires(Items.LIME_DYE).requires(Items.YELLOW_DYE).requires(Items.ORANGE_DYE).requires(Items.RED_DYE).requires(Items.PURPLE_DYE).unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get())).save(consumer);
 
+        ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1)
+                           .pattern("S S")
+                           .pattern("GSG")
+                           .define('S', Items.STICK).define('G', Blocks.GLASS_PANE)
+                           .unlockedBy("has_stick", has(Items.STICK))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
+                           .pattern("MI")
+                           .pattern("IM")
+                           .define('M', ModItems.RODENT.get()).define('I', Items.IRON_INGOT)
+                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
+                           .pattern("MI")
+                           .pattern("IM")
+                           .pattern("MI")
+                           .define('M', ModItems.RODENT.get()).define('I', Items.IRON_INGOT)
+                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
+                           .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1).pattern("S S").pattern("GSG").define('S', Items.STICK).define('G', Blocks.GLASS_PANE).unlockedBy("has_stick", has(Items.STICK)).save(consumer);
 //        ShapedRecipeBuilder.shaped(CatItems.tiny_catnip.get(), 1).pattern("BI").pattern("IB").define('B', Items.BONE).define('I', Items.IRON_INGOT).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
 //        ShapedRecipeBuilder.shaped(CatItems.big_catnip.get(), 1).pattern("BI").pattern("IB").pattern("BI").define('B', Items.BONE).define('I', Items.IRON_INGOT).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
 
-        ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1).pattern("XX").pattern("YX").define('X', Items.IRON_INGOT).define('Y', Items.REDSTONE).unlockedBy("has_redstone", has(Items.REDSTONE)).save(consumer);
-        ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1).requires(Items.MAP, 1).requires(Items.REDSTONE, 1).requires(ModItems.RADIO_COLLAR.get(), 1).unlockedBy("has_redstone", has(Items.REDSTONE)).save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
+                           .pattern("XX")
+                           .pattern("YX")
+                           .define('X', Items.IRON_INGOT).define('Y', Items.REDSTONE)
+                           .unlockedBy("has_redstone", has(Items.REDSTONE))
+                           .save(consumer);
+        ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1)
+                              .requires(Items.MAP, 1).requires(Items.REDSTONE, 1).requires(ModItems.RADIO_COLLAR.get(), 1)
+                              .unlockedBy("has_redstone", has(Items.REDSTONE))
+                              .save(consumer);
 
-        ShapedRecipeBuilder.shaped(ModBlocks.LITTER_BOX.get(), 1).pattern("ISI").pattern("III").define('I', Items.IRON_INGOT).define('S', Items.SAND).unlockedBy("has_sand", has(Items.SAND)).unlockedBy("has_iron", has(Items.IRON_INGOT)).save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.CARDBOARD_BOX.get(), 1).pattern("CCC").pattern("C C").pattern("CCC").define('C', ModItems.CARDBOARD.get()).unlockedBy("has_cardboard", has(ModItems.CARDBOARD.get())).save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9).pattern("PPP").pattern("PPP").pattern("PPP").define('P', Items.PAPER).unlockedBy("has_paper", has(Items.PAPER)).save(consumer);
+        ShapedRecipeBuilder.shaped(ModBlocks.LITTER_BOX.get(), 1)
+                           .pattern("ISI")
+                           .pattern("III")
+                           .define('I', Items.IRON_INGOT).define('S', Items.SAND)
+                           .unlockedBy("has_sand", has(Items.SAND)).unlockedBy("has_iron", has(Items.IRON_INGOT))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModBlocks.CARDBOARD_BOX.get(), 1)
+                           .pattern("CCC")
+                           .pattern("C C")
+                           .pattern("CCC")
+                           .define('C', ModItems.CARDBOARD.get())
+                           .unlockedBy("has_cardboard", has(ModItems.CARDBOARD.get()))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9)
+                           .pattern("PPP")
+                           .pattern("PPP")
+                           .pattern("PPP")
+                           .define('P', Items.PAPER)
+                           .unlockedBy("has_paper", has(Items.PAPER))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.YARN.get(), 1)
+                           .pattern("WW ")
+                           .pattern("WW ")
+                           .pattern("  W")
+                           .define('W', ItemTags.WOOL)
+                           .unlockedBy("has_wool", has(ItemTags.WOOL))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModBlocks.MOUSE_TRAP.get(), 1)
+                           .pattern("CIT")
+                           .pattern("PPP")
+                           .define('C', ModItems.CHEESE_WEDGE.get())
+                           .define('I', Items.IRON_INGOT)
+                           .define('T', Items.TRIPWIRE_HOOK)
+                           .define('P', ItemTags.PLANKS)
+                           .unlockedBy("has_cheese", has(ModItems.CHEESE_WEDGE.get()))
+                           .unlockedBy("has_iron", has(Items.IRON_INGOT))
+                           .unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
+                           .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                           .save(consumer);
+        ShapedRecipeBuilder.shaped(ModBlocks.CHEESE_WHEEL.get(), 1)
+                           .pattern("MSM")
+                           .pattern(" B ")
+                           .define('M', Items.MILK_BUCKET)
+                           .define('S', Items.SLIME_BALL)
+                           .define('B', Items.BOWL)
+                           .unlockedBy("has_milk", has(Items.MILK_BUCKET))
+                           .unlockedBy("has_slime", has(Items.SLIME_BALL))
+                           .unlockedBy("has_bowl", has(Items.BOWL))
+                           .save(consumer);
+//        ShapedRecipeBuilder.shaped(ModItems.LASAGNA.get(), 1)
+//                .pattern("PPP")
+//                .pattern("SCM")
+//                .pattern("PPP")
+//                .define('P', PASTA.get())
+//                .define('S', TOMATO_SAUCE.get())
+//                .define('C', ModItems.CHEESE_WEDGE.get())
+//                .define('M', Items.BEEF)
+//                           .unlockedBy("has_pasta", has(PASTA.get()))
+//                           .unlockedBy("has_sauce", has(SAUCE.get()))
+//                           .unlockedBy("has_cheese", has(ModItems.CHEESE_WEDGE.get()))
+//                           .unlockedBy("has_meat", has(Items.BEEF))
+//                           .save(consumer);
 
         SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_BED.get()).save(consumer, Util.getResourcePath("cat_bed"));
     }
