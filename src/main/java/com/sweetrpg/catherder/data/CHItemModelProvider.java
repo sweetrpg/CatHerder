@@ -65,6 +65,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.CATNIP);
         generated(ModItems.CATNIP_SEEDS);
         generated(ModItems.CARDBOARD);
+        generated(ModItems.YARN);
 
 //        blockItem(CatBlocks.CAT_BATH);
         blockItem(ModBlocks.CAT_BED);

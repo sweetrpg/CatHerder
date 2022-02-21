@@ -1223,7 +1223,8 @@ public class CatEntity extends AbstractCatEntity {
         compound.putInt("catSize", this.getCatSize());
         compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
         compound.putInt("level_dire", this.getCatLevel().getLevel(Type.DIRE));
-        NBTUtil.writeItemStack(compound, "fetchItem", this.getBoneVariant());
+        compound.putInt("original_breed", this.getOriginalBreed());
+        NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
         DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_BED_LOCATION.get());
 
@@ -1465,9 +1466,10 @@ public class CatEntity extends AbstractCatEntity {
             if(compound.contains("catSize", Tag.TAG_ANY_NUMERIC)) {
                 this.setCatSize(compound.getInt("catSize"));
             }
+            this.setOriginalBreed(compound.getInt("original_breed"));
         }
         catch(Exception e) {
-            CatHerder.LOGGER.error("Failed to load levels: " + e.getMessage());
+            CatHerder.LOGGER.error("Failed to load info: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -1857,7 +1859,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(SIZE, (byte) Math.min(5, Math.max(1, value)));
     }
 
-    public ItemStack getBoneVariant() {
+    public ItemStack getToyVariant() {
         return this.entityData.get(TOY_VARIANT);
     }
 
@@ -1872,7 +1874,7 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public boolean hasBone() {
-        return !this.getBoneVariant().isEmpty();
+        return !this.getToyVariant().isEmpty();
     }
 
     private boolean getCatFlag(int bit) {

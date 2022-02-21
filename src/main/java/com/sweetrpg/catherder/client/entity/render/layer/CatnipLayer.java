@@ -35,7 +35,7 @@ public class CatnipLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
             matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 
             IThrowableItem throwableItem = cat.getThrowableItem();
-            Minecraft.getInstance().getItemInHandRenderer().renderItem(cat, throwableItem != null ? throwableItem.getRenderStack(cat.getBoneVariant()) : cat.getBoneVariant(), ItemTransforms.TransformType.GROUND, false, matrixStack, bufferSource, packedLight);
+            Minecraft.getInstance().getItemInHandRenderer().renderItem(cat, throwableItem != null ? throwableItem.getRenderStack(cat.getToyVariant()) : cat.getToyVariant(), ItemTransforms.TransformType.GROUND, false, matrixStack, bufferSource, packedLight);
             matrixStack.popPose();
         }
     }

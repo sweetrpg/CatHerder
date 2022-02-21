@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModItems;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.EntityLoot;
@@ -11,6 +14,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -18,7 +22,9 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
+import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.List;
@@ -41,10 +47,7 @@ public class CHLootTableProvider extends LootTableProvider {
 
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return ImmutableList.of(
-                Pair.of(Blocks::new, LootContextParamSets.BLOCK),
-                Pair.of(Entities::new, LootContextParamSets.ENTITY)
-               );
+        return ImmutableList.of(Pair.of(Blocks::new, LootContextParamSets.BLOCK), Pair.of(Entities::new, LootContextParamSets.ENTITY));
     }
 
     @Override
@@ -59,23 +62,43 @@ public class CHLootTableProvider extends LootTableProvider {
             dropsSelf(ModBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTER_BOX);
             dropsSelf(ModBlocks.WILD_CATNIP);
-            dropsSelf(ModBlocks.CATNIP_CROP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
+            dropsSelf(ModBlocks.CATNIP_CROP);
+//            dropCatnipCrop(ModBlocks.CATNIP_CROP);
         }
 
+//        private void dropCatnipCrop(Supplier<? extends Block> block) {
+//            LootTable.Builder builder = LootTable.lootTable()
+//                                                 .withPool(LootPool.lootPool()
+//                                                                   .setRolls(ConstantValue.exactly(1))
+//                                                                   .add(LootItem.lootTableItem(ModItems.CATNIP_SEEDS.get()))
+//                                                                   .add(LootItem.lootTableItem(ModItems.CATNIP.get())
+//                                                                                .when(() -> { return new LootItemBlockStatePropertyCondition.Builder(block.get())
+//                                                                                              .setProperties(StatePropertiesPredicate.Builder.properties()
+//                                                                                                                     .hasProperty(BlockStateProperties.AGE_7)); })))
+//                                                 .withPool(LootPool.lootPool()
+//                                                                   .setRolls(ConstantValue.exactly(1))
+//                                                                   .add(LootItem.lootTableItem(ModItems.CATNIP_SEEDS.get()))
+//                                                                   .apply(EnchantmentPredicate()
+//                                                                          BinomialDistributionGenerator.binomial(3, 0.5714286F)
+//                                                                   )
+//                                                                   .when());
+//
+//            this.add(block.get(), builder);
+//        }
+
         private void dropCatbed(Supplier<? extends Block> block) {
-            LootTable.Builder lootTableBuilder = LootTable.lootTable().withPool(applyExplosionCondition(block.get(),
-                       LootPool.lootPool()
-                         .setRolls(ConstantValue.exactly(1)))
-                         .add(LootItem.lootTableItem(block.get())
-                                 .apply(
-                                         CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                         .copy("casingId", "catherder.casingId")
-                                         .copy("beddingId", "catherder.beddingId")
-                                         .copy("ownerId", "catherder.ownerId")
-                                         .copy("name", "catherder.name")
-                                         .copy("ownerName", "catherder.ownerName")
-                                 )));
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                                                          .withPool(applyExplosionCondition(block.get(),
+                                                                                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                                                                            .add(LootItem.lootTableItem(block.get())
+                                                                                         .apply(
+                                                                                                 CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                                                                                                .copy("casingId", "catherder.casingId")
+                                                                                                                .copy("beddingId", "catherder.beddingId")
+                                                                                                                .copy("ownerId", "catherder.ownerId")
+                                                                                                                .copy("name", "catherder.name")
+                                                                                                                .copy("ownerName", "catherder.ownerName"))));
 
             this.add(block.get(), lootTableBuilder);
         }
@@ -98,7 +121,7 @@ public class CHLootTableProvider extends LootTableProvider {
         }
 
         protected void registerNoLoot(Supplier<? extends EntityType<?>> type) {
-           this.add(type.get(), LootTable.lootTable());
+            this.add(type.get(), LootTable.lootTable());
         }
 
         @Override
