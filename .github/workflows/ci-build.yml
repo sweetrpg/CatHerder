@@ -50,7 +50,7 @@ jobs:
     - name: Commit version file
       run: |
         git config --global user.email "ci@sweetrpg.com"
-        git config --global user.name "SweetRPG Version Updater"
+        git config --global user.name "SweetRPG CI"
         echo "${{ steps.tag-version.outputs.semantic-version }}" > .VERSION
         git add .VERSION
         git commit -m "Update .VERSION"

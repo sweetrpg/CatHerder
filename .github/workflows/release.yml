@@ -34,3 +34,13 @@ jobs:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         with:
           arguments: curseforge
+      - name: Commit hash file
+        run: |
+          git config --global user.email "ci@sweetrpg.com"
+          git config --global user.name "SweetRPG CI"
+          echo "${{ github.sha }}" > .RELEASE_HASH
+          git add .RELEASE_HASH
+          git commit -m "Update .RELEASE_HASH"
+          version=$(cat .VERSION)
+          git tag "release-${version}"
+          git push origin --tags
