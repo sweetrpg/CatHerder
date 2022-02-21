@@ -23,18 +23,18 @@ import java.util.function.Supplier;
  **/
 public class ThrowableItem extends Item implements IThrowableItem {
 
-    public Supplier<? extends Item> altBone;
-    public Supplier<? extends Item> renderBone;
+    public Supplier<? extends Item> altItem;
+    public Supplier<? extends Item> renderItem;
 
-    public ThrowableItem(Supplier<? extends Item> altBone, Supplier<? extends Item> renderBone, Properties properties) {
+    public ThrowableItem(Supplier<? extends Item> altItem, Supplier<? extends Item> renderItem, Properties properties) {
         super(properties);
-        this.altBone = altBone;
-        this.renderBone = renderBone;
+        this.altItem = altItem;
+        this.renderItem = renderItem;
     }
 
     @Override
     public ItemStack getReturnStack(ItemStack stack) {
-        ItemStack returnStack = new ItemStack(this.altBone.get());
+        ItemStack returnStack = new ItemStack(this.altItem.get());
         if (stack.hasTag()) {
             returnStack.setTag(stack.getTag().copy());
         }
@@ -44,7 +44,7 @@ public class ThrowableItem extends Item implements IThrowableItem {
 
     @Override
     public ItemStack getRenderStack(ItemStack stack) {
-        return new ItemStack(this.renderBone.get());
+        return new ItemStack(this.renderItem.get());
     }
 
     public void setHeadingFromThrower(ItemEntity entityItem, Entity entityThrower, float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy) {

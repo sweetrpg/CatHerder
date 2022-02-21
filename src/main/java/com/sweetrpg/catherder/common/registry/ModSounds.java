@@ -15,9 +15,6 @@ public class ModSounds {
 
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Constants.MOD_ID);
 
-    public static final RegistryObject<SoundEvent> WHISTLE_SHORT = register("whistle_short");
-    public static final RegistryObject<SoundEvent> WHISTLE_LONG = register("whistle_long");
-
     private static RegistryObject<SoundEvent> register(final String name) {
         return register(name, SoundEvent::new);
     }

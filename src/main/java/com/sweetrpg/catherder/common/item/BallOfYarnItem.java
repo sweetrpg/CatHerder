@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.item;
 
+import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,23 +11,20 @@ import net.minecraft.world.level.Level;
 
 import java.util.function.Supplier;
 
-public class BallOfYarnItem extends Item {
+public class BallOfYarnItem extends ThrowableItem {
 
-    public Supplier<? extends Item> altBone;
 
     public BallOfYarnItem(Supplier<? extends Item> altBone, Properties properties) {
-        super(properties);
-        this.altBone = altBone;
+        super(altBone, ModItems.YARN, properties);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemStackIn = playerIn.getItemInHand(handIn);
 
-        if (itemStackIn.getItem() == this) {
-
-            ItemStack returnStack = new ItemStack(this.altBone.get());
-            if (itemStackIn.hasTag()) {
+        if(itemStackIn.getItem() == this) {
+            ItemStack returnStack = new ItemStack(this.altItem.get());
+            if(itemStackIn.hasTag()) {
                 returnStack.setTag(itemStackIn.getTag().copy());
             }
 
