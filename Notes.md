@@ -23,7 +23,6 @@
 * Wander
 * Guard
 * Skittish
-* Pounce
 * Attack (nee Berserker)
 * Tactical
 * Patrol
