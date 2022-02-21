@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.data;
 
 import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.data.DataGenerator;
