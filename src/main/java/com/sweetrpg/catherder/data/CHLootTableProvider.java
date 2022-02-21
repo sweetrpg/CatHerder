@@ -63,6 +63,7 @@ public class CHLootTableProvider extends LootTableProvider {
             dropsSelf(ModBlocks.LITTER_BOX);
             dropsSelf(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
+            dropsSelf(ModBlocks.CATNIP_CROP);
 //            dropCatnipCrop(ModBlocks.CATNIP_CROP);
         }
 
