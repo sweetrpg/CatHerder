@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MI",
+    "IM"
+  ],
+  "key": {
+    "M": {
+      "item": "catherder:mouse"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "catherder:small_catsizer"
+  }
+}

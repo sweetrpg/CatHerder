@@ -56,9 +56,8 @@ public class ModItems {
     public static final RegistryObject<AccessoryItem> SUNGLASSES = registerAccessory("sunglasses", ModAccessories.SUNGLASSES);
     //    public static final RegistryObject<AccessoryItem> GUARD_SUIT = registerAccessory("guard_suit", CatAccessories.GUARD_SUIT);
 //    public static final RegistryObject<AccessoryItem> LEATHER_JACKET = registerAccessory("leather_jacket", CatAccessories.LEATHER_JACKET_CLOTHING);
-    public static final RegistryObject<Item> SPRIG_OF_CATNIP = registerSizeCatnip("tiny_catnip", BundleOfCatnipItem.Type.TINY);
-    public static final RegistryObject<Item> SOME_CATNIP = registerSizeCatnip("medium_catnip", BundleOfCatnipItem.Type.MEDIUM);
-    public static final RegistryObject<Item> BUNDLE_OF_CATNIP = registerSizeCatnip("big_catnip", BundleOfCatnipItem.Type.BIG);
+    public static final RegistryObject<Item> CAT_SMALLERER = registerSizer("small_catsizer", CatSizerItem.Type.SMALL);
+    public static final RegistryObject<Item> CAT_BIGGERER = registerSizer("big_catsizer", CatSizerItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
 //    public static final RegistryObject<Item> LITTER_BOX = register("litter_box", LitterBoxItem::new);
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
@@ -83,8 +82,8 @@ public class ModItems {
 //        return register(name, () -> new BallOfYarnItem(THROW_STICK, createInitialProp().stacksTo(1)));
 //    }
 
-    private static RegistryObject<Item> registerSizeCatnip(final String name, final BundleOfCatnipItem.Type typeIn) {
-        return register(name, () -> new BundleOfCatnipItem(typeIn, createInitialProp()));
+    private static RegistryObject<Item> registerSizer(final String name, final CatSizerItem.Type typeIn) {
+        return register(name, () -> new CatSizerItem(typeIn, createInitialProp()));
     }
 
     private static RegistryObject<Item> registerTreat(final String name, final CatLevel.Type typeIn, int maxLevel) {

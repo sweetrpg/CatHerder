@@ -64,9 +64,8 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_CAPE_COLORED = "item.catherder.cape_coloured";
     public static final String TRANSLATION_KEY_ITEM_CAPE_COLORED_TOOLTIP = "item.catherder.cape_coloured.tooltip";
     public static final String TRANSLATION_KEY_ITEM_LEATHER_JACKET = "item.catherder.leather_jacket";
-    public static final String TRANSLATION_KEY_ITEM_TINY_CATNIP = "item.catherder.tiny_catnip";
-    public static final String TRANSLATION_KEY_ITEM_MEDIUM_CATNIP = "item.catherder.medium_catnip";
-    public static final String TRANSLATION_KEY_ITEM_BIG_CATNIP = "item.catherder.big_catnip";
+    public static final String TRANSLATION_KEY_ITEM_SMALL_CATSIZER = "item.catherder.small_catsizer";
+    public static final String TRANSLATION_KEY_ITEM_BIG_CATSIZER = "item.catherder.big_catsizer";
     public static final String TRANSLATION_KEY_ITEM_OWNER_CHANGE = "item.catherder.owner_change";
     public static final String TRANSLATION_KEY_OWNER_CHANGE_TOOLTIP = "item.catherder.owner_change.tooltip";
     public static final String TRANSLATION_KEY_ITEM_GUARD_SUIT = "item.catherder.guard_suit";

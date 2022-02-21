@@ -30,8 +30,8 @@ public class CHItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-//        handheld(CatItems.tiny_catnip);
-//        handheld(CatItems.big_catnip);
+        handheld(ModItems.CAT_SMALLERER);
+        handheld(ModItems.CAT_BIGGERER);
 
         handheld(ModItems.TRAINING_TREAT);
         handheld(ModItems.SUPER_TREAT);
