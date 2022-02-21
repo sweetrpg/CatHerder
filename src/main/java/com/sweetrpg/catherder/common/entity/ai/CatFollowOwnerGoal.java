@@ -79,7 +79,7 @@ public class CatFollowOwnerGoal extends Goal {
             double distanceToOwner = this.owner.distanceToSqr(this.cat);
             if (distanceToOwner <= this.stopDist * this.stopDist) {
                 IThrowableItem throwableItem = this.cat.getThrowableItem();
-                ItemStack fetchItem = throwableItem != null ? throwableItem.getReturnStack(this.cat.getBoneVariant()) : this.cat.getBoneVariant();
+                ItemStack fetchItem = throwableItem != null ? throwableItem.getReturnStack(this.cat.getToyVariant()) : this.cat.getToyVariant();
 
                 this.cat.spawnAtLocation(fetchItem, 0.0F);
                 this.cat.setBoneVariant(ItemStack.EMPTY);
