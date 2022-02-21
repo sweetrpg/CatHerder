@@ -191,7 +191,7 @@ task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
     file = new File("build/changelog.html")
     fromRepo = file(".")
     untaggedName = "Current release ${project.version}"
-    fromCommit = new File(".RELEASE_HASH").text
+    fromCommit = new File(".RELEASE_HASH").text.trim()
     toRef = 'HEAD'
 
     templateContent = file('changelog.mustache').getText('UTF-8')
