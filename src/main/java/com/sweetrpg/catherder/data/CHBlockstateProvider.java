@@ -48,6 +48,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //        this.customStageBlock(ModBlocks.CATNIP_CROP.get(), resourceBlock("crop_cross"), "cross", CatnipBlock.AGE, new ArrayList<>());
         this.wildCropBlock(ModBlocks.WILD_CATNIP.get());
         makeSimple(ModBlocks.CARDBOARD_BOX);
+//        makeSimple(ModBlocks.MOUSE_TRAP);
+        makeSimple(ModBlocks.CHEESE_WHEEL);
     }
 
     private String blockName(Block block) {
@@ -63,15 +65,29 @@ public class CHBlockstateProvider extends BlockStateProvider {
     }
 
     protected void createFromShape(Supplier<? extends Block> blockIn, AABB bb) {
-        BlockModelBuilder model = this.models().getBuilder(name(blockIn)).parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block"))).texture("particle", extend(blockTexture(blockIn), "_bottom")).texture("bottom", extend(blockTexture(blockIn), "_bottom")).texture("top", extend(blockTexture(blockIn), "_top")).texture("side", extend(blockTexture(blockIn), "_side"));
+        BlockModelBuilder model = this.models()
+                                      .getBuilder(name(blockIn))
+                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+                                      .texture("particle", extend(blockTexture(blockIn), "_bottom"))
+                                      .texture("bottom", extend(blockTexture(blockIn), "_bottom"))
+                                      .texture("top", extend(blockTexture(blockIn), "_top"))
+                                      .texture("side", extend(blockTexture(blockIn), "_side"));
 
-        model.element().from((float) bb.minX, (float) bb.minY, (float) bb.minZ).to((float) bb.maxX, (float) bb.maxY, (float) bb.maxZ).allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null).texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
+        model.element()
+             .from((float) bb.minX, (float) bb.minY, (float) bb.minZ)
+             .to((float) bb.maxX, (float) bb.maxY, (float) bb.maxZ)
+             .allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null).texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
 
         this.simpleBlock(blockIn.get(), model);
     }
 
     protected void catBed(Supplier<? extends Block> blockIn) {
-        BlockModelBuilder model = this.models().getBuilder(name(blockIn)).parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block"))).texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate)).texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate)).texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
+        BlockModelBuilder model = this.models()
+                                      .getBuilder(name(blockIn))
+                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+                                      .texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate))
+                                      .texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate))
+                                      .texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
 
         model.element().from(1.6F, 3.2F, 1.6F).to(14.4F, 6.4F, 14.4F).face(Direction.UP).texture("#bedding").end().face(Direction.NORTH).texture("#bedding");
 

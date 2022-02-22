@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "block/cheese_wheel",
-		"particle": "block/cheese_wheel"
+		"0": "catherder:block/cheese_wheel",
+		"particle": "catherder:block/cheese_wheel"
 	},
 	"elements": [
 		{

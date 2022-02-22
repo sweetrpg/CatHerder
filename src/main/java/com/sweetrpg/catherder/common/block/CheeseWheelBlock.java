@@ -1,11 +1,10 @@
 package com.sweetrpg.catherder.common.block;
 
+import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +16,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,25 +30,24 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import com.sweetrpg.catherder.common.util.TextUtils;
-
-import java.util.function.Supplier;
 
 public class CheeseWheelBlock extends Block {
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 8);
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
     protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR);
-
+    //    public final Supplier<Item> servingItem;
+    public final boolean hasLeftovers;
     /**
      * This block provides up to 8 servings of food to players who interact with it.
      * If a leftover item is specified, the block lingers at 0 servings, and is destroyed on right-click.
      *
      * @param properties   Block properties.
-     * @param servingItem  The meal to be served.
      * @param hasLeftovers Whether the block remains when out of servings. If false, the block vanishes once it runs out.
      */
-    public CheeseWheelBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
+    public CheeseWheelBlock(Properties properties, boolean hasLeftovers) {
         super(properties);
-        this.servingItem = servingItem;
+//        this.servingItem = servingItem;
         this.hasLeftovers = hasLeftovers;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SERVINGS, 8));
     }
@@ -58,11 +57,6 @@ public class CheeseWheelBlock extends Block {
         return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
     }
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 8);
-    public final Supplier<Item> servingItem;
-    public final boolean hasLeftovers;
-
 //    protected static final VoxelShape[] SHAPES = new VoxelShape[]{
 //            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D),
 //            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D),
@@ -71,24 +65,27 @@ public class CheeseWheelBlock extends Block {
 //            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D),
 //    };
 
-    public ItemStack getServingItem() {
-        return new ItemStack(this.servingItem.get());
-    }
+//    public ItemStack getServingItem() {
+//        return new ItemStack(this.servingItem.get());
+//    }
 
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        ItemStack itemstack = player.getItemInHand(handIn);
-        Item item = itemstack.getItem();
-        if (itemstack.is(Items.SHEARS)) {
-                worldIn.playSound((Player)null, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+        ItemStack itemStack = player.getItemInHand(handIn);
+        Item item = itemStack.getItem();
+        if(itemStack.is(Items.SHEARS)) {
+            worldIn.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 //                pLevel.setBlockAndUpdate(pos, CandleCakeBlock.byCandle(block));
-                worldIn.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+            worldIn.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 //                player.awardStat(Stats.ITEM_USED.get(item));
-                return InteractionResult.SUCCESS;
+            player.getInventory().add(new ItemStack(ModItems.CHEESE_WEDGE.get(), state.getValue(SERVINGS)));
+            player.getInventory().add(new ItemStack(Items.BOWL));
+            worldIn.removeBlock(pos, false);
+            return InteractionResult.SUCCESS;
         }
 
-        if (worldIn.isClientSide) {
-            if (this.takeServing(worldIn, pos, state, player, handIn).consumesAction()) {
+        if(worldIn.isClientSide) {
+            if(this.takeServing(worldIn, pos, state, player, handIn).consumesAction()) {
                 return InteractionResult.SUCCESS;
             }
         }
@@ -99,33 +96,34 @@ public class CheeseWheelBlock extends Block {
     private InteractionResult takeServing(LevelAccessor worldIn, BlockPos pos, BlockState state, Player player, InteractionHand handIn) {
         int servings = state.getValue(SERVINGS);
 
-        if (servings == 0) {
+        if(servings == 0) {
             worldIn.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
             worldIn.destroyBlock(pos, true);
             return InteractionResult.SUCCESS;
         }
 
-        ItemStack serving = this.getServingItem();
-        ItemStack heldStack = player.getItemInHand(handIn);
+//        ItemStack serving = this.getServingItem();
+//        ItemStack heldStack = player.getItemInHand(handIn);
 
-        if (servings > 0) {
-            if (heldStack.sameItem(serving.getContainerItem())) {
-                worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
-                if (!player.getAbilities().instabuild) {
-                    heldStack.shrink(1);
-                }
-                if (!player.getInventory().add(serving)) {
-                    player.drop(serving, false);
-                }
-                if (worldIn.getBlockState(pos).getValue(SERVINGS) == 0 && !this.hasLeftovers) {
-                    worldIn.removeBlock(pos, false);
-                }
-                worldIn.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
-                return InteractionResult.SUCCESS;
+        if(servings > 0) {
+//            if (heldStack.sameItem(serving.getContainerItem())) {
+            worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
+//                if (!player.getAbilities().instabuild) {
+//                    heldStack.shrink(1);
+//                }
+            player.getInventory().add(new ItemStack(ModItems.CHEESE_WEDGE.get()));
+//                if (!player.getInventory().add(serving)) {
+//                    player.drop(serving, false);
+//                }
+            if(worldIn.getBlockState(pos).getValue(SERVINGS) == 0 && !this.hasLeftovers) {
+                worldIn.removeBlock(pos, false);
             }
-            else {
-                player.displayClientMessage(TextUtils.getTranslation("block.cheese_wheel.use_container", serving.getContainerItem().getHoverName()), true);
-            }
+            worldIn.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+            return InteractionResult.SUCCESS;
+//            }
+//            else {
+//                player.displayClientMessage(TextUtils.getTranslation("block", "cheese_wheel.use_container", serving.getContainerItem().getHoverName()), true);
+//            }
         }
         return InteractionResult.PASS;
     }
@@ -156,7 +154,7 @@ public class CheeseWheelBlock extends Block {
     }
 
     public int getMaxServings() {
-        return 4;
+        return 8;
     }
 
     @Override
