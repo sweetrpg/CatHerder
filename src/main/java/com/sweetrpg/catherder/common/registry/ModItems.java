@@ -7,10 +7,7 @@ import com.sweetrpg.catherder.common.item.*;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeableLeatherItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,7 +22,7 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
 
     public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
-    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new Item(new Item.Properties()./*food(FoodValues.CATNIP).*/tab(ModItemGroups.GENERAL)));
+    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()./*food(FoodValues.CATNIP).*/tab(ModItemGroups.GENERAL)));
     public static final RegistryObject<Item> CATNIP_SEEDS = ITEMS.register("catnip_seeds", () -> new ItemNameBlockItem(ModBlocks.CATNIP_CROP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
     public static final RegistryObject<Item> CARDBOARD = register("cardboard");
@@ -68,20 +65,8 @@ public class ModItems {
         return new Item.Properties().tab(ModItemGroups.GENERAL);
     }
 
-//    private static RegistryObject<Item> registerThrowBone(final String name) {
-//        return register(name, () -> new ThrowableItem(THROW_BONE_WET, Items.BONE.delegate, createInitialProp().stacksTo(2)));
-//    }
-//
-//    private static RegistryObject<Item> registerThrowStick(final String name) {
-//        return register(name, () -> new ThrowableItem(THROW_STICK_WET, THROW_STICK, createInitialProp().stacksTo(8)));
-//    }
-//
-//    private static RegistryObject<Item> registerThrowBoneWet(final String name) {
-//        return register(name, () -> new BallOfYarnItem(THROW_BONE, createInitialProp().stacksTo(1)));
-//    }
-//
-//    private static RegistryObject<Item> registerThrowStickWet(final String name) {
-//        return register(name, () -> new BallOfYarnItem(THROW_STICK, createInitialProp().stacksTo(1)));
+//    private static RegistryObject<Item> registerThrowToy(final String name) {
+//        return register(name, () -> new ThrowableItem(CAT_TOY, Items..delegate, createInitialProp().stacksTo(2)));
 //    }
 
     private static RegistryObject<Item> registerSizer(final String name, final CatSizerItem.Type typeIn) {

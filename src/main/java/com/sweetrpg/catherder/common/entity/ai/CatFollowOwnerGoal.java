@@ -41,15 +41,20 @@ public class CatFollowOwnerGoal extends Goal {
         LivingEntity owner = this.cat.getOwner();
         if (owner == null) {
             return false;
-        } else if (this.cat.getMode() == EnumMode.PATROL) {
+        }
+        else if (this.cat.getMode() == EnumMode.PATROL) {
             return false;
-        } else if (owner.isSpectator()) {
+        }
+        else if (owner.isSpectator()) {
             return false;
-        } else if (this.cat.isInSittingPose()) {
+        }
+        else if (this.cat.isInSittingPose()) {
             return false;
-        } else if (!this.cat.hasBone() && this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq()) {
+        }
+        else if (!this.cat.hasToy() && this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq()) {
             return false;
-        } else {
+        }
+        else {
             this.owner = owner;
             return true;
         }
@@ -59,9 +64,11 @@ public class CatFollowOwnerGoal extends Goal {
     public boolean canContinueToUse() {
         if (this.navigator.isDone()) {
             return false;
-        } else if (this.cat.isInSittingPose()) {
+        }
+        else if (this.cat.isInSittingPose()) {
             return false;
-        } else {
+        }
+        else {
             return this.cat.distanceToSqr(this.owner) > this.stopDist * this.stopDist;
         }
     }
@@ -75,14 +82,14 @@ public class CatFollowOwnerGoal extends Goal {
 
     @Override
     public void stop() {
-        if (this.cat.hasBone()) {
+        if (this.cat.hasToy()) {
             double distanceToOwner = this.owner.distanceToSqr(this.cat);
             if (distanceToOwner <= this.stopDist * this.stopDist) {
                 IThrowableItem throwableItem = this.cat.getThrowableItem();
                 ItemStack fetchItem = throwableItem != null ? throwableItem.getReturnStack(this.cat.getToyVariant()) : this.cat.getToyVariant();
 
                 this.cat.spawnAtLocation(fetchItem, 0.0F);
-                this.cat.setBoneVariant(ItemStack.EMPTY);
+                this.cat.setToyVariant(ItemStack.EMPTY);
             }
         }
 
@@ -99,7 +106,8 @@ public class CatFollowOwnerGoal extends Goal {
             if (!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
                 if (this.cat.distanceToSqr(this.owner) >= 144.0D) { // Further than 12 blocks away teleport
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
-                } else {
+                }
+                else {
                     this.navigator.moveTo(this.owner, this.followSpeed);
                 }
             }
