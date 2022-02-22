@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.entity.CatBeamEntity;
-import com.sweetrpg.catherder.common.entity.RodentEntity;
+//import com.sweetrpg.catherder.common.entity.RodentEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.world.entity.Entity;
@@ -28,11 +28,11 @@ public class ModEntityTypes {
             .setTrackingRange(16)
             .setShouldReceiveVelocityUpdates(true));
 
-    public static final RegistryObject<EntityType<RodentEntity>> RODENT = register("rodent", RodentEntity::new, MobCategory.CREATURE, (b) -> b
-            .sized(0.2F, 0.35F)
-            .setUpdateInterval(3)
-            .setTrackingRange(16)
-            .setShouldReceiveVelocityUpdates(true));
+//    public static final RegistryObject<EntityType<RodentEntity>> RODENT = register("rodent", RodentEntity::new, MobCategory.CREATURE, (b) -> b
+//            .sized(0.2F, 0.35F)
+//            .setUpdateInterval(3)
+//            .setTrackingRange(16)
+//            .setShouldReceiveVelocityUpdates(true));
 
     public static final RegistryObject<EntityType<CatBeamEntity>> CAT_BEAM = register("cat_beam", CatBeamEntity::new, MobCategory.MISC, (b) -> b
             .sized(0.25F, 0.25F)
@@ -63,12 +63,12 @@ public class ModEntityTypes {
                  .build()
          );
 
-        e.put(RODENT.get(),
-              Mob.createMobAttributes()
-                 .add(Attributes.MAX_HEALTH, 2.0D)
-                 .add(Attributes.MOVEMENT_SPEED, 0.8D)
-                 .add(Attributes.ATTACK_DAMAGE, 0.1D)
-                 .build()
-        );
+//        e.put(RODENT.get(),
+//              Mob.createMobAttributes()
+//                 .add(Attributes.MAX_HEALTH, 2.0D)
+//                 .add(Attributes.MOVEMENT_SPEED, 0.8D)
+//                 .add(Attributes.ATTACK_DAMAGE, 0.1D)
+//                 .build()
+//        );
      }
 }

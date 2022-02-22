@@ -19,7 +19,7 @@ public class CatnipLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
 
     @Override
     public void render(PoseStack matrixStack, MultiBufferSource bufferSource, int packedLight, CatEntity cat, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (cat.hasBone()) {
+        if (cat.hasToy()) {
 
             matrixStack.pushPose();
             CatModel<CatEntity> model = this.getParentModel();

@@ -31,8 +31,8 @@ public class ItemPhysicsAddon implements Addon {
                                           ModItems.BREEDING_TREAT, ModItems.WILD_TREAT, ModItems.MASTER_TREAT,
                                           ModItems.SUPER_TREAT, ModItems.TRAINING_TREAT, ModItems.COLLAR_SHEARS,
 //                                          CatItems.THROW_BONE,
-                                          ModItems.WOOL_COLLAR, ModItems.TREAT_BAG,
-                                          ModItems.CAT_TOY);
+                                          ModItems.WOOL_COLLAR, ModItems.TREAT_BAG /*,
+                                          ModItems.CAT_TOY */);
 
         ReflectionUtil.invokeStaticMethod(addMethod, burningItems,
                                           ModBlocks.CAT_BED, ModItems.BREEDING_TREAT, ModItems.WILD_TREAT,
@@ -40,7 +40,7 @@ public class ItemPhysicsAddon implements Addon {
                                           ModItems.COLLAR_SHEARS,
 //                                          CatItems.THROW_BONE,
                                           ModItems.RADAR,
-                                          ModItems.WOOL_COLLAR, ModItems.TREAT_BAG, ModItems.CAT_TOY);
+                                          ModItems.WOOL_COLLAR, ModItems.TREAT_BAG /*, ModItems.CAT_TOY */);
     }
 
     @Override

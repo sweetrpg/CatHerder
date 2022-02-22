@@ -29,12 +29,12 @@ public class CHItemTagsProvider extends ItemTagsProvider {
     @Override
     public void addTags() {
         createTag(ModTags.BEG_ITEMS_TAMED, ModItems.BREEDING_TREAT,
-//                  CatItems.THROW_STICK, CatItems.THROW_BONE,
-                  Items.BONE.delegate);
+                  ModItems.CAT_TOY,
+                  Items.STRING.delegate);
         appendToTag(ModTags.TREATS);
-        createTag(ModTags.BEG_ITEMS_UNTAMED, ModItems.TRAINING_TREAT, Items.BONE.delegate);
+        createTag(ModTags.BEG_ITEMS_UNTAMED, ModItems.TRAINING_TREAT, Items.STRING.delegate);
         createTag(ModTags.BREEDING_ITEMS, ModItems.BREEDING_TREAT);
-        createTag(ModTags.PACK_CAT_BLACKLIST /*, CatItems.THROW_BONE, CatItems.THROW_BONE_WET, CatItems.THROW_STICK, CatItems.THROW_STICK_WET */);
+        createTag(ModTags.PACK_CAT_BLACKLIST, ModItems.CAT_TOY);
         createTag(ModTags.TREATS, ModItems.TRAINING_TREAT, ModItems.SUPER_TREAT, ModItems.MASTER_TREAT, ModItems.WILD_TREAT);
     }
 

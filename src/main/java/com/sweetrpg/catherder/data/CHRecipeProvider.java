@@ -120,24 +120,21 @@ public class CHRecipeProvider extends RecipeProvider {
                            .define('S', Items.STICK).define('G', Blocks.GLASS_PANE)
                            .unlockedBy("has_stick", has(Items.STICK))
                            .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
-                           .pattern("MI")
-                           .pattern("IM")
-                           .define('M', ModItems.RODENT.get()).define('I', Items.IRON_INGOT)
-                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
-                           .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
-                           .pattern("MI")
-                           .pattern("IM")
-                           .pattern("MI")
-                           .define('M', ModItems.RODENT.get()).define('I', Items.IRON_INGOT)
-                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
-                           .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1).pattern("S S").pattern("GSG").define('S', Items.STICK).define('G', Blocks.GLASS_PANE).unlockedBy("has_stick", has(Items.STICK)).save(consumer);
-//        ShapedRecipeBuilder.shaped(CatItems.tiny_catnip.get(), 1).pattern("BI").pattern("IB").define('B', Items.BONE).define('I', Items.IRON_INGOT).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
-//        ShapedRecipeBuilder.shaped(CatItems.big_catnip.get(), 1).pattern("BI").pattern("IB").pattern("BI").define('B', Items.BONE).define('I', Items.IRON_INGOT).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
+//        ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
+//                           .pattern("MI")
+//                           .pattern("IM")
+//                           .define('M', ModItems.RODENT.get()).define('I', Items.IRON_INGOT)
+//                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+//                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
+//                           .save(consumer);
+//        ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
+//                           .pattern("MI")
+//                           .pattern("IM")
+//                           .pattern("MI")
+//                           .define('M', ModItems.RODENT.get()).define('I', Items.IRON_INGOT)
+//                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+//                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
+//                           .save(consumer);
 
         ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
                            .pattern("XX")
@@ -177,18 +174,18 @@ public class CHRecipeProvider extends RecipeProvider {
                            .define('W', ItemTags.WOOL)
                            .unlockedBy("has_wool", has(ItemTags.WOOL))
                            .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.MOUSE_TRAP.get(), 1)
-                           .pattern("CIT")
-                           .pattern("PPP")
-                           .define('C', ModItems.CHEESE_WEDGE.get())
-                           .define('I', Items.IRON_INGOT)
-                           .define('T', Items.TRIPWIRE_HOOK)
-                           .define('P', ItemTags.PLANKS)
-                           .unlockedBy("has_cheese", has(ModItems.CHEESE_WEDGE.get()))
-                           .unlockedBy("has_iron", has(Items.IRON_INGOT))
-                           .unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
-                           .unlockedBy("has_planks", has(ItemTags.PLANKS))
-                           .save(consumer);
+//        ShapedRecipeBuilder.shaped(ModBlocks.MOUSE_TRAP.get(), 1)
+//                           .pattern("CIT")
+//                           .pattern("PPP")
+//                           .define('C', ModItems.CHEESE_WEDGE.get())
+//                           .define('I', Items.IRON_INGOT)
+//                           .define('T', Items.TRIPWIRE_HOOK)
+//                           .define('P', ItemTags.PLANKS)
+//                           .unlockedBy("has_cheese", has(ModItems.CHEESE_WEDGE.get()))
+//                           .unlockedBy("has_iron", has(Items.IRON_INGOT))
+//                           .unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
+//                           .unlockedBy("has_planks", has(ItemTags.PLANKS))
+//                           .save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.CHEESE_WHEEL.get(), 1)
                            .pattern("MSM")
                            .pattern(" B ")

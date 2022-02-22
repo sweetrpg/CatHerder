@@ -55,12 +55,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.RADIO_COLLAR);
         generated(ModItems.SPOTTED_COLLAR);
         generated(ModItems.SUNGLASSES);
-//        generated(CatItems.THROW_BONE);
-//        generated(CatItems.THROW_BONE_WET);
-//        generated(CatItems.THROW_STICK);
-//        generated(CatItems.THROW_STICK_WET);
         generated(ModItems.TREAT_BAG);
-//        generated(CatItems.WHISTLE);
         generated(ModItems.WOOL_COLLAR);
         generated(ModItems.CATNIP);
         generated(ModItems.CATNIP_SEEDS);
@@ -70,14 +65,13 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.CHEESE_WEDGE);
 //        generated(ModItems.LASAGNA);
 
-//        blockItem(CatBlocks.CAT_BATH);
         blockItem(ModBlocks.CAT_BED);
         blockItem(ModBlocks.FOOD_BOWL);
         blockItem(ModBlocks.LITTER_BOX);
         blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
         blockItem(ModBlocks.CHEESE_WHEEL);
-        blockItem(ModBlocks.MOUSE_TRAP);
+//        blockItem(ModBlocks.MOUSE_TRAP);
     }
 
     private ResourceLocation itemTexture(Supplier<? extends ItemLike> item) {

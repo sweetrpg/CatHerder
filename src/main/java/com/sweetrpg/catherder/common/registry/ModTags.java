@@ -17,7 +17,7 @@ public class ModTags {
     public static Tag.Named<Item> PACK_CAT_BLACKLIST = modItemTag("pack_cat_blacklist");
     public static Tag.Named<Item> TREATS = modItemTag("treats");
     public static final Tag.Named<Block> WILD_CROPS = modBlockTag("wild_crops");
-    public static Tag.Named<EntityType<?>> PESTS = modEntityTag("rodent");
+//    public static Tag.Named<EntityType<?>> PESTS = modEntityTag("pests");
 
     private static Tag.Named<Item> modItemTag(String path) {
         return ItemTags.bind(Util.getResourcePath(path));

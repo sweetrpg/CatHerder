@@ -41,11 +41,9 @@ public class CHBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-//        catBath(CatBlocks.CAT_BATH);
         catBed(ModBlocks.CAT_BED);
         createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
         this.stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
-//        this.customStageBlock(ModBlocks.CATNIP_CROP.get(), resourceBlock("crop_cross"), "cross", CatnipBlock.AGE, new ArrayList<>());
         this.wildCropBlock(ModBlocks.WILD_CATNIP.get());
         makeSimple(ModBlocks.CARDBOARD_BOX);
 //        makeSimple(ModBlocks.MOUSE_TRAP);
@@ -182,7 +180,6 @@ public class CHBlockstateProvider extends BlockStateProvider {
     public ModelFile cross(Supplier<? extends Block> block) {
         return this.models().cross(name(block), blockTexture(block));
     }
-
 
     protected void makeSimple(Supplier<? extends Block> blockIn) {
         this.simpleBlock(blockIn.get());

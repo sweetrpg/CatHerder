@@ -27,12 +27,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> CARDBOARD = register("cardboard");
     public static final RegistryObject<Item> YARN = register("yarn");
-    public static final RegistryObject<Item> RODENT = register("mouse");
+//    public static final RegistryObject<Item> RODENT = register("rodent");
     public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge");
-    public static final RegistryObject<Item> LASAGNA = register("lasagna");
-    //    public static final RegistryObject<Item> THROW_BONE_WET = registerThrowBoneWet("throw_bone_wet");
-//    public static final RegistryObject<Item> THROW_STICK = registerThrowStick("throw_stick");
-//    public static final RegistryObject<Item> THROW_STICK_WET = registerThrowStickWet("throw_stick_wet");
+//    public static final RegistryObject<Item> LASAGNA = register("lasagna");
     public static final RegistryObject<Item> TRAINING_TREAT = registerTreat("training_treat", CatLevel.Type.NORMAL, 20);
     public static final RegistryObject<Item> SUPER_TREAT = registerTreat("super_treat", CatLevel.Type.NORMAL, 40);
     public static final RegistryObject<Item> MASTER_TREAT = registerTreat("master_treat", CatLevel.Type.NORMAL, 60);
@@ -47,7 +44,6 @@ public class ModItems {
     public static final RegistryObject<AccessoryItem> MULTICOLOURED_COLLAR = registerAccessory("multicoloured_collar", ModAccessories.MULTICOLORED_COLLAR);
     public static final RegistryObject<Item> RADAR = registerWith("radar", RadarItem::new, 1);
     public static final RegistryObject<Item> CREATIVE_RADAR = registerWith("creative_radar", RadarItem::new, 1);
-    //    public static final RegistryObject<Item> WHISTLE = registerWith("whistle", WhistleItem::new, 1);
     public static final RegistryObject<Item> TREAT_BAG = registerWith("treat_bag", TreatBagItem::new, 1);
     public static final RegistryObject<Item> CAT_TOY = register("cat_toy", CatToyItem::new);
     public static final RegistryObject<AccessoryItem> CAPE = registerAccessory("cape", ModAccessories.CAPE);

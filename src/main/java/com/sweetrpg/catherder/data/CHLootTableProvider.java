@@ -60,16 +60,14 @@ public class CHLootTableProvider extends LootTableProvider {
 
         @Override
         protected void addTables() {
-//            dropsSelf(CatBlocks.CAT_BATH);
             dropCatbed(ModBlocks.CAT_BED);
             dropsSelf(ModBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTER_BOX);
             dropsSelf(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
             dropsSelf(ModBlocks.CATNIP_CROP);
-            dropsSelf(ModBlocks.MOUSE_TRAP);
+//            dropsSelf(ModBlocks.MOUSE_TRAP);
             dropsSelf(ModBlocks.CHEESE_WHEEL);
-//            dropCatnipCrop(ModBlocks.CATNIP_CROP);
         }
 
 //        private void dropCatnipCrop(Supplier<? extends Block> block) {
@@ -123,11 +121,11 @@ public class CHLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             this.registerNoLoot(ModEntityTypes.CAT);
-            this.add(ModEntityTypes.RODENT.get(), LootTable.lootTable()
-                                                     .withPool(LootPool.lootPool()
-                                                                       .setRolls(ConstantValue.exactly(1.0F))
-                                                                       .add(LootItem.lootTableItem(ModItems.RODENT.get())
-                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
+//            this.add(ModEntityTypes.RODENT.get(), LootTable.lootTable()
+//                                                     .withPool(LootPool.lootPool()
+//                                                                       .setRolls(ConstantValue.exactly(1.0F))
+//                                                                       .add(LootItem.lootTableItem(ModItems.RODENT.get())
+//                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
         }
 
         protected void registerNoLoot(Supplier<? extends EntityType<?>> type) {
