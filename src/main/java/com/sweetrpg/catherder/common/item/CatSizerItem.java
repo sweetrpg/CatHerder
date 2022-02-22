@@ -9,14 +9,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
-public class BundleOfCatnipItem extends Item implements ICatItem {
+public class CatSizerItem extends Item implements ICatItem {
 
-    private final BundleOfCatnipItem.Type type;
+    private final CatSizerItem.Type type;
 
     public static enum Type {
-        TINY("tiny_catnip"),
-        MEDIUM("medium_catnip"),
-        BIG("big_catnip");
+        SMALL("small_catsizer"),
+        BIG("big_catsizer");
 
         String n;
 
@@ -29,7 +28,7 @@ public class BundleOfCatnipItem extends Item implements ICatItem {
         }
     }
 
-    public BundleOfCatnipItem(BundleOfCatnipItem.Type typeIn, Properties properties) {
+    public CatSizerItem(CatSizerItem.Type typeIn, Properties properties) {
         super(properties);
         this.type = typeIn;
     }

@@ -70,7 +70,8 @@ public abstract class AbstractCatEntity extends TamableAnimal implements ICat {
         if (entity instanceof Player) {
             // Review: super.usePlayerItem((Player) entity, stack);
             stack.shrink(1);
-        } else {
+        }
+        else {
             stack.shrink(1);
         }
     }

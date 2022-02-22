@@ -30,13 +30,13 @@ public class CHItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-//        handheld(CatItems.tiny_catnip);
-//        handheld(CatItems.big_catnip);
+        handheld(ModItems.CAT_SMALLERER);
+        handheld(ModItems.CAT_BIGGERER);
 
         handheld(ModItems.TRAINING_TREAT);
         handheld(ModItems.SUPER_TREAT);
         handheld(ModItems.MASTER_TREAT);
-        handheld(ModItems.DIRE_TREAT);
+        handheld(ModItems.WILD_TREAT);
         handheld(ModItems.BREEDING_TREAT);
         handheld(ModItems.CAT_TOY);
 
@@ -55,24 +55,23 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.RADIO_COLLAR);
         generated(ModItems.SPOTTED_COLLAR);
         generated(ModItems.SUNGLASSES);
-//        generated(CatItems.THROW_BONE);
-//        generated(CatItems.THROW_BONE_WET);
-//        generated(CatItems.THROW_STICK);
-//        generated(CatItems.THROW_STICK_WET);
         generated(ModItems.TREAT_BAG);
-//        generated(CatItems.WHISTLE);
         generated(ModItems.WOOL_COLLAR);
         generated(ModItems.CATNIP);
         generated(ModItems.CATNIP_SEEDS);
         generated(ModItems.CARDBOARD);
         generated(ModItems.YARN);
+//        generated(ModItems.RODENT);
+        generated(ModItems.CHEESE_WEDGE);
+//        generated(ModItems.LASAGNA);
 
-//        blockItem(CatBlocks.CAT_BATH);
         blockItem(ModBlocks.CAT_BED);
         blockItem(ModBlocks.FOOD_BOWL);
         blockItem(ModBlocks.LITTER_BOX);
         blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
+        blockItem(ModBlocks.CHEESE_WHEEL);
+//        blockItem(ModBlocks.MOUSE_TRAP);
     }
 
     private ResourceLocation itemTexture(Supplier<? extends ItemLike> item) {

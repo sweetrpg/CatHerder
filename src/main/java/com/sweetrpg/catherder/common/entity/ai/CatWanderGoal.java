@@ -49,9 +49,12 @@ public class CatWanderGoal extends Goal {
     public void tick() {
         if (this.cat.getNoActionTime() >= 100) {
             return;
-        } else if (this.cat.getRandom().nextInt(this.executionChance) != 0) {
+        }
+        else if (this.cat.getRandom().nextInt(this.executionChance) != 0) {
             return;
-        } if (this.cat.isPathFinding()) {
+        }
+
+        if (this.cat.isPathFinding()) {
             return;
         }
 

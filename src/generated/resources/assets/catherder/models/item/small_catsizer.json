@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "catherder:item/dire_treat"
+    "layer0": "catherder:item/small_catsizer"
   }
 }

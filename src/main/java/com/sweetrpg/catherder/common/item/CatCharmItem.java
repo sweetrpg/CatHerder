@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.item;
 
-import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -33,9 +33,10 @@ public class CatCharmItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
-        if (world.isClientSide || !(world instanceof ServerLevel)) {
+        if(world.isClientSide || !(world instanceof ServerLevel)) {
             return InteractionResult.SUCCESS;
-        } else {
+        }
+        else {
             Player player = context.getPlayer();
             ItemStack itemstack = context.getItemInHand();
             BlockPos blockpos = context.getClickedPos();
@@ -43,55 +44,61 @@ public class CatCharmItem extends Item {
             BlockState iblockstate = world.getBlockState(blockpos);
 
             BlockPos blockpos1;
-            if (iblockstate.getCollisionShape(world, blockpos).isEmpty()) {
+            if(iblockstate.getCollisionShape(world, blockpos).isEmpty()) {
                 blockpos1 = blockpos;
-            } else {
+            }
+            else {
                 blockpos1 = blockpos.relative(enumfacing);
             }
 
+            Entity entity = ModEntityTypes.CAT.get()
+                                              .spawn((ServerLevel) world, itemstack, context.getPlayer(), blockpos1, MobSpawnType.SPAWN_EGG, !Objects.equals(blockpos, blockpos1) && enumfacing == Direction.UP, false);
+            if(entity instanceof CatEntity) {
+                CatEntity cat = (CatEntity) entity;
+                if(player != null) {
+                    cat.setTame(true);
+                    cat.setOwnerUUID(player.getUUID());
+                }
+                itemstack.shrink(1);
+            }
 
-            Entity entity = ModEntityTypes.CAT.get().spawn((ServerLevel) world, itemstack, context.getPlayer(), blockpos1, MobSpawnType.SPAWN_EGG, !Objects.equals(blockpos, blockpos1) && enumfacing == Direction.UP, false);
-            if (entity instanceof CatEntity) {
-               CatEntity cat = (CatEntity)entity;
-               if (player != null) {
-                   cat.setTame(true);
-                   cat.setOwnerUUID(player.getUUID());
-               }
-               itemstack.shrink(1);
-           }
-
-           return InteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemstack = playerIn.getItemInHand(handIn);
-        if (worldIn.isClientSide || !(worldIn instanceof ServerLevel)) {
+        if(worldIn.isClientSide || !(worldIn instanceof ServerLevel)) {
             return new InteractionResultHolder<>(InteractionResult.PASS, itemstack);
-        } else {
+        }
+        else {
             HitResult raytraceresult = Item.getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.SOURCE_ONLY);
-            if (raytraceresult != null && raytraceresult.getType() == HitResult.Type.BLOCK) {
-                BlockPos blockpos = ((BlockHitResult)raytraceresult).getBlockPos();
-                if (!(worldIn.getBlockState(blockpos).getBlock() instanceof LiquidBlock)) {
+            if(raytraceresult != null && raytraceresult.getType() == HitResult.Type.BLOCK) {
+                BlockPos blockpos = ((BlockHitResult) raytraceresult).getBlockPos();
+                if(!(worldIn.getBlockState(blockpos).getBlock() instanceof LiquidBlock)) {
                     return new InteractionResultHolder<>(InteractionResult.PASS, itemstack);
-                } else if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, ((BlockHitResult)raytraceresult).getDirection(), itemstack)) {
+                }
+                else if(worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, ((BlockHitResult) raytraceresult).getDirection(), itemstack)) {
                     Entity entity = ModEntityTypes.CAT.get().spawn((ServerLevel) worldIn, itemstack, playerIn, blockpos, MobSpawnType.SPAWN_EGG, false, false);
-                    if (entity instanceof CatEntity) {
-                        CatEntity cat = (CatEntity)entity;
-                           cat.setTame(true);
-                           cat.setOwnerUUID(playerIn.getUUID());
-                           itemstack.shrink(1);
+                    if(entity instanceof CatEntity) {
+                        CatEntity cat = (CatEntity) entity;
+                        cat.setTame(true);
+                        cat.setOwnerUUID(playerIn.getUUID());
+                        itemstack.shrink(1);
 
                         playerIn.awardStat(Stats.ITEM_USED.get(this));
                         return new InteractionResultHolder<>(InteractionResult.SUCCESS, itemstack);
-                    } else {
+                    }
+                    else {
                         return new InteractionResultHolder<>(InteractionResult.PASS, itemstack);
                     }
-                } else {
+                }
+                else {
                     return new InteractionResultHolder<>(InteractionResult.FAIL, itemstack);
                 }
-            } else {
+            }
+            else {
                 return new InteractionResultHolder<>(InteractionResult.PASS, itemstack);
             }
         }

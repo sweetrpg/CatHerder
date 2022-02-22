@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "catherder:breeding_treat",
-    "minecraft:bone"
+    "catherder:cat_toy",
+    "minecraft:string"
   ]
 }

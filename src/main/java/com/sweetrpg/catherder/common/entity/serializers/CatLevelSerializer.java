@@ -10,7 +10,7 @@ public class CatLevelSerializer implements EntityDataSerializer<CatLevel> {
     @Override
     public void write(FriendlyByteBuf buf, CatLevel value) {
         buf.writeInt(value.getLevel(Type.NORMAL));
-        buf.writeInt(value.getLevel(Type.DIRE));
+        buf.writeInt(value.getLevel(Type.WILD));
     }
 
     @Override

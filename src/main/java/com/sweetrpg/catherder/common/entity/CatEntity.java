@@ -49,6 +49,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -62,11 +63,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
@@ -75,6 +74,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -137,6 +137,9 @@ public class CatEntity extends AbstractCatEntity {
     private boolean isShaking;
     private float timeCatIsShaking;
     private float prevTimeCatIsShaking;
+    private int catnipTick;
+    private int catnipCooldown;
+    private Goal catnipGoal;
 
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -177,19 +180,23 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new FindWaterGoal(this));
+//        this.goalSelector.addGoal(1, new FindWaterGoal(this));
         //this.goalSelector.addGoal(1, new PatrolAreaGoal(this));
+        this.targetSelector.addGoal(2, new CatSitOnBlockGoal<>(this, 0F));
+        this.targetSelector.addGoal(2, new CatLieOnBedGoal<>(this, 0F, 16));
         this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
-        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
+//        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
         this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new FetchGoal(this, 1.0D, 32.0F));
+//        this.goalSelector.addGoal(6, new FetchGoal(this, 1.0D, 32.0F));
         this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
+//        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
@@ -197,11 +204,9 @@ public class CatEntity extends AbstractCatEntity {
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         //this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, TARGET_ENTITIES));
         //this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.TARGET_DRY_BABY));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
+//        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Creeper.class, false));
         this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
-        this.targetSelector.addGoal(2, new CatSitOnBlockGoal(this, 0F));
-        this.targetSelector.addGoal(2, new CatLieOnBedGoal(this, 0F, 16));
     }
 
     @Override
@@ -369,6 +374,19 @@ public class CatEntity extends AbstractCatEntity {
 
             // On server side
             if(!this.level.isClientSide) {
+                if(this.catnipTick > 0) {
+                    this.catnipTick--;
+                }
+                else {
+                    if(this.catnipGoal != null) {
+                        this.goalSelector.removeGoal(this.catnipGoal);
+                        this.catnipGoal = null;
+                        // TODO: add goal to nap afterward
+                    }
+                }
+                if(this.catnipCooldown > 0) {
+                    this.catnipCooldown--;
+                }
 
                 // Every 2 seconds
                 if(this.tickCount % 40 == 0) {
@@ -457,6 +475,23 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         this.alterations.forEach((alter) -> alter.livingTick(this));
+    }
+
+    public InteractionResult consumeCatnip(Player player, InteractionHand hand) {
+        if(this.catnipTick > 0 || this.catnipCooldown > 0) {
+            this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_SMOKE);
+            return InteractionResult.FAIL;
+        }
+
+        this.catnipCooldown = 4000;
+        this.catnipTick = 400;
+//        this.setSpeed(2);
+//        this.setSprinting(true);
+//        this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_HEARTS);
+        this.catnipGoal = new CatnipGoal(this, 4);
+        this.goalSelector.addGoal(1, this.catnipGoal);
+
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -562,44 +597,45 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource source) {
-        for(ICatAlteration alter : this.alterations) {
-            InteractionResult result = alter.onLivingFall(this, distance, damageMultiplier); // TODO pass source
-
-            if(result.shouldSwing()) {
-                return true;
-            }
-            else if(result == InteractionResult.FAIL) {
-                return false;
-            }
-        }
-
-        // Start: Logic copied from the super call and altered to apply the reduced fall damage to passengers too. #358
-        float[] ret = net.minecraftforge.common.ForgeHooks.onLivingFall(this, distance, damageMultiplier);
-        if(ret == null) {
-            return false;
-        }
-        distance = ret[0];
-        damageMultiplier = ret[1];
-
-        int i = this.calculateFallDamage(distance, damageMultiplier);
-
-        if(i > 0) {
-            if(this.isVehicle()) {
-                for(Entity e : this.getPassengers()) {
-                    e.hurt(DamageSource.FALL, i);
-                }
-            }
-
-            // Sound selection is copied from Entity#getFallDamageSound()
-            this.playSound(i > 4 ? this.getFallSounds().big() : this.getFallSounds().small(), 1.0F, 1.0F);
-            this.playBlockFallSound();
-            this.hurt(DamageSource.FALL, (float) i);
-            return true;
-        }
-        else {
-            return false;
-        }
-        // End: Logic copied from the super call and altered to apply the reduced fall damage to passengers too. #358
+//        for(ICatAlteration alter : this.alterations) {
+//            InteractionResult result = alter.onLivingFall(this, distance, damageMultiplier); // TODO pass source
+//
+//            if(result.shouldSwing()) {
+//                return true;
+//            }
+//            else if(result == InteractionResult.FAIL) {
+//                return false;
+//            }
+//        }
+//
+//        // Start: Logic copied from the super call and altered to apply the reduced fall damage to passengers too. #358
+//        float[] ret = net.minecraftforge.common.ForgeHooks.onLivingFall(this, distance, damageMultiplier);
+//        if(ret == null) {
+//            return false;
+//        }
+//        distance = ret[0];
+//        damageMultiplier = ret[1];
+//
+//        int i = this.calculateFallDamage(distance, damageMultiplier);
+//
+//        if(i > 0) {
+//            if(this.isVehicle()) {
+//                for(Entity e : this.getPassengers()) {
+//                    e.hurt(DamageSource.FALL, i);
+//                }
+//            }
+//
+//            // Sound selection is copied from Entity#getFallDamageSound()
+//            this.playSound(i > 4 ? this.getFallSounds().big() : this.getFallSounds().small(), 1.0F, 1.0F);
+//            this.playBlockFallSound();
+//            this.hurt(DamageSource.FALL, (float) i);
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//        // End: Logic copied from the super call and altered to apply the reduced fall damage to passengers too. #358
+        return false;
     }
 
     // TODO
@@ -1222,7 +1258,7 @@ public class CatEntity extends AbstractCatEntity {
         compound.putBoolean("friendlyFire", this.canPlayersAttack());
         compound.putInt("catSize", this.getCatSize());
         compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
-        compound.putInt("level_dire", this.getCatLevel().getLevel(Type.DIRE));
+        compound.putInt("level_dire", this.getCatLevel().getLevel(Type.WILD));
         compound.putInt("original_breed", this.getOriginalBreed());
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
@@ -1453,7 +1489,7 @@ public class CatEntity extends AbstractCatEntity {
 //            }
 
             if(compound.contains("fetchItem", Tag.TAG_COMPOUND)) {
-                this.setBoneVariant(NBTUtil.readItemStack(compound, "fetchItem"));
+                this.setToyVariant(NBTUtil.readItemStack(compound, "fetchItem"));
             }
 //            else {
 //                BackwardsComp.readHasBone(compound, this::setBoneVariant);
@@ -1480,7 +1516,7 @@ public class CatEntity extends AbstractCatEntity {
             }
 
             if(compound.contains("level_dire", Tag.TAG_ANY_NUMERIC)) {
-                this.getCatLevel().setLevel(Type.DIRE, compound.getInt("level_dire"));
+                this.getCatLevel().setLevel(Type.WILD, compound.getInt("level_dire"));
                 this.markDataParameterDirty(CAT_LEVEL.get());
             }
         }
@@ -1863,7 +1899,7 @@ public class CatEntity extends AbstractCatEntity {
         return this.entityData.get(TOY_VARIANT);
     }
 
-    public void setBoneVariant(ItemStack stack) {
+    public void setToyVariant(ItemStack stack) {
         this.entityData.set(TOY_VARIANT, stack);
     }
 
@@ -1873,7 +1909,7 @@ public class CatEntity extends AbstractCatEntity {
         return item instanceof IThrowableItem ? (IThrowableItem) item : null;
     }
 
-    public boolean hasBone() {
+    public boolean hasToy() {
         return !this.getToyVariant().isEmpty();
     }
 
@@ -2097,7 +2133,7 @@ public class CatEntity extends AbstractCatEntity {
 
     // When this method is changed the cache may need to be updated at certain points
     private final int getSpendablePointsInternal() {
-        int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.DIRE);
+        int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.WILD);
         for(TalentInstance entry : this.getTalentMap()) {
             totalPoints -= entry.getTalent().getCummulativeCost(entry.level());
         }

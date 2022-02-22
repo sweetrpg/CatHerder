@@ -1,6 +1,5 @@
 package com.sweetrpg.catherder.common.registry;
 
-//import com.sweetrpg.catherder.common.block.CatBathBlock;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.block.*;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -10,11 +9,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.function.Function;
@@ -26,16 +24,18 @@ public class ModBlocks {
     public static final DeferredRegister<Item> ITEMS = ModItems.ITEMS;
 
     public static final RegistryObject<CatBedBlock> CAT_BED = registerWithItem("cat_bed", CatBedBlock::new, (prop) -> prop.tab(ModItemGroups.CAT_BED));
-//    public static final RegistryObject<CatBathBlock> CAT_BATH = registerWithItem("cat_bath", CatBathBlock::new);
     public static final RegistryObject<LitterBoxBlock> LITTER_BOX = registerWithItem("litter_box", LitterBoxBlock::new);
     public static final RegistryObject<FoodBowlBlock> FOOD_BOWL = registerWithItem("food_bowl", FoodBowlBlock::new);
 
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
+//    public static final RegistryObject<Block> MOUSE_TRAP = registerWithItem("mouse_trap", MouseTrapBlock::new);
+    public static final RegistryObject<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel",
+                                                                             () -> new CheeseWheelBlock(Block.Properties.copy(Blocks.CAKE), true));
 
     public static final RegistryObject<WildCatnipBlock> WILD_CATNIP = BLOCKS.register("wild_catnip",
-                                                                              () -> new WildCatnipBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
+                                                                                      () -> new WildCatnipBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
     public static final RegistryObject<CatnipBlock> CATNIP_CROP = BLOCKS.register("catnip",
-                                                                             () -> new CatnipBlock(Block.Properties.copy(Blocks.WHEAT)));
+                                                                                  () -> new CatnipBlock(Block.Properties.copy(Blocks.WHEAT)));
 
     private static Item.Properties createInitialProp() {
         return new Item.Properties().tab(ModItemGroups.GENERAL);
@@ -83,6 +83,6 @@ public class ModBlocks {
         // Trying to avoid as reports like CatHerder#242, where it says
         // CatHerder crashed but is not the CAUSE of the crash
 
-         CatHerder.LOGGER.info("Items/Blocks were not registered for some reason... probably beacuse we are c...r..a..s.hing");
+        CatHerder.LOGGER.info("Items/Blocks were not registered for some reason... probably beacuse we are c...r..a..s.hing");
     }
 }

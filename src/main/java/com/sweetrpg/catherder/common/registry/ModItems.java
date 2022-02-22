@@ -7,11 +7,7 @@ import com.sweetrpg.catherder.common.item.*;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeableLeatherItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.*;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,18 +22,18 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
 
     public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
-    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new Item(new Item.Properties()./*food(FoodValues.CATNIP).*/tab(ModItemGroups.GENERAL)));
+    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()./*food(FoodValues.CATNIP).*/tab(ModItemGroups.GENERAL)));
     public static final RegistryObject<Item> CATNIP_SEEDS = ITEMS.register("catnip_seeds", () -> new ItemNameBlockItem(ModBlocks.CATNIP_CROP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
     public static final RegistryObject<Item> CARDBOARD = register("cardboard");
     public static final RegistryObject<Item> YARN = register("yarn");
-    //    public static final RegistryObject<Item> THROW_BONE_WET = registerThrowBoneWet("throw_bone_wet");
-//    public static final RegistryObject<Item> THROW_STICK = registerThrowStick("throw_stick");
-//    public static final RegistryObject<Item> THROW_STICK_WET = registerThrowStickWet("throw_stick_wet");
+//    public static final RegistryObject<Item> RODENT = register("rodent");
+    public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge");
+//    public static final RegistryObject<Item> LASAGNA = register("lasagna");
     public static final RegistryObject<Item> TRAINING_TREAT = registerTreat("training_treat", CatLevel.Type.NORMAL, 20);
     public static final RegistryObject<Item> SUPER_TREAT = registerTreat("super_treat", CatLevel.Type.NORMAL, 40);
     public static final RegistryObject<Item> MASTER_TREAT = registerTreat("master_treat", CatLevel.Type.NORMAL, 60);
-    public static final RegistryObject<Item> DIRE_TREAT = registerTreat("dire_treat", CatLevel.Type.DIRE, 30);
+    public static final RegistryObject<Item> WILD_TREAT = registerTreat("wild_treat", CatLevel.Type.WILD, 30);
     public static final RegistryObject<Item> BREEDING_TREAT = register("breeding_treat");
     public static final RegistryObject<Item> COLLAR_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
     public static final RegistryObject<Item> CAT_CHARM = registerWith("cat_charm", CatCharmItem::new, 1);
@@ -48,7 +44,6 @@ public class ModItems {
     public static final RegistryObject<AccessoryItem> MULTICOLOURED_COLLAR = registerAccessory("multicoloured_collar", ModAccessories.MULTICOLORED_COLLAR);
     public static final RegistryObject<Item> RADAR = registerWith("radar", RadarItem::new, 1);
     public static final RegistryObject<Item> CREATIVE_RADAR = registerWith("creative_radar", RadarItem::new, 1);
-    //    public static final RegistryObject<Item> WHISTLE = registerWith("whistle", WhistleItem::new, 1);
     public static final RegistryObject<Item> TREAT_BAG = registerWith("treat_bag", TreatBagItem::new, 1);
     public static final RegistryObject<Item> CAT_TOY = register("cat_toy", CatToyItem::new);
     public static final RegistryObject<AccessoryItem> CAPE = registerAccessory("cape", ModAccessories.CAPE);
@@ -56,9 +51,8 @@ public class ModItems {
     public static final RegistryObject<AccessoryItem> SUNGLASSES = registerAccessory("sunglasses", ModAccessories.SUNGLASSES);
     //    public static final RegistryObject<AccessoryItem> GUARD_SUIT = registerAccessory("guard_suit", CatAccessories.GUARD_SUIT);
 //    public static final RegistryObject<AccessoryItem> LEATHER_JACKET = registerAccessory("leather_jacket", CatAccessories.LEATHER_JACKET_CLOTHING);
-    public static final RegistryObject<Item> SPRIG_OF_CATNIP = registerSizeCatnip("tiny_catnip", BundleOfCatnipItem.Type.TINY);
-    public static final RegistryObject<Item> SOME_CATNIP = registerSizeCatnip("medium_catnip", BundleOfCatnipItem.Type.MEDIUM);
-    public static final RegistryObject<Item> BUNDLE_OF_CATNIP = registerSizeCatnip("big_catnip", BundleOfCatnipItem.Type.BIG);
+    public static final RegistryObject<Item> CAT_SMALLERER = registerSizer("small_catsizer", CatSizerItem.Type.SMALL);
+    public static final RegistryObject<Item> CAT_BIGGERER = registerSizer("big_catsizer", CatSizerItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
 //    public static final RegistryObject<Item> LITTER_BOX = register("litter_box", LitterBoxItem::new);
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
@@ -67,24 +61,12 @@ public class ModItems {
         return new Item.Properties().tab(ModItemGroups.GENERAL);
     }
 
-//    private static RegistryObject<Item> registerThrowBone(final String name) {
-//        return register(name, () -> new ThrowableItem(THROW_BONE_WET, Items.BONE.delegate, createInitialProp().stacksTo(2)));
-//    }
-//
-//    private static RegistryObject<Item> registerThrowStick(final String name) {
-//        return register(name, () -> new ThrowableItem(THROW_STICK_WET, THROW_STICK, createInitialProp().stacksTo(8)));
-//    }
-//
-//    private static RegistryObject<Item> registerThrowBoneWet(final String name) {
-//        return register(name, () -> new BallOfYarnItem(THROW_BONE, createInitialProp().stacksTo(1)));
-//    }
-//
-//    private static RegistryObject<Item> registerThrowStickWet(final String name) {
-//        return register(name, () -> new BallOfYarnItem(THROW_STICK, createInitialProp().stacksTo(1)));
+//    private static RegistryObject<Item> registerThrowToy(final String name) {
+//        return register(name, () -> new ThrowableItem(CAT_TOY, Items..delegate, createInitialProp().stacksTo(2)));
 //    }
 
-    private static RegistryObject<Item> registerSizeCatnip(final String name, final BundleOfCatnipItem.Type typeIn) {
-        return register(name, () -> new BundleOfCatnipItem(typeIn, createInitialProp()));
+    private static RegistryObject<Item> registerSizer(final String name, final CatSizerItem.Type typeIn) {
+        return register(name, () -> new CatSizerItem(typeIn, createInitialProp()));
     }
 
     private static RegistryObject<Item> registerTreat(final String name, final CatLevel.Type typeIn, int maxLevel) {
