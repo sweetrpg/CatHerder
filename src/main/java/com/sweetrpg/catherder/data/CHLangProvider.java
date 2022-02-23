@@ -74,9 +74,9 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_OWNER_CHANGE_TOOLTIP, "Sets ANY cat to be yours");
         add(Constants.TRANSLATION_KEY_ITEM_GUARD_SUIT, "Guard Suit");
         add(Constants.TRANSLATION_KEY_ITEM_CATNIP_SEEDS, "Catnip Seeds");
-        add(Constants.TRANSLATION_KEY_ITEM_WILD_CATNIP, "Catnip");
+        add(Constants.TRANSLATION_KEY_ITEM_WILD_CATNIP, "Wild Catnip");
         add(Constants.TRANSLATION_KEY_ITEM_CATNIP, "Catnip");
-        add(Constants.TRANSLATION_KEY_ITEM_YARN, "Yarn");
+        add(Constants.TRANSLATION_KEY_ITEM_YARN, "Ball of Yarn");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "%d %s");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "Pack Cat");
         add(Constants.TRANSLATION_KEY_CONTAINER_FOOD_BOWL, "Food Bowl");
@@ -295,7 +295,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_FOOD_BOWL, "Food Bowl");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_BATH, "Cat Bath");
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "Litter Box");
-        add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Catnip");
+        add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Wild Catnip");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "Cardboard Box");
 //        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "Throw Toy");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "Training Treat");
@@ -331,7 +331,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_CATNIP_SEEDS, "Catnip Seeds");
         add(Constants.TRANSLATION_KEY_ITEM_WILD_CATNIP, "Catnip");
         add(Constants.TRANSLATION_KEY_ITEM_CATNIP, "Catnip");
-        add(Constants.TRANSLATION_KEY_ITEM_YARN, "Yarn");
+        add(Constants.TRANSLATION_KEY_ITEM_YARN, "Ball of Yarn");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "%d %s");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "Pack Cat");
         add(Constants.TRANSLATION_KEY_CONTAINER_FOOD_BOWL, "Food Bowl");
