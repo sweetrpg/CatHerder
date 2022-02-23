@@ -40,7 +40,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_BLOCK_CARDBOARD_BOX = "block.catherder.cardboard_box";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL = "block.catherder.cheese_wheel";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL_USE = "block.catherder.cheese_wheel.use_container";
-    public static final String TRANSLATION_KEY_ITEM_THROW_TOY = "item.catherder.throw_toy";
+//    public static final String TRANSLATION_KEY_ITEM_THROW_TOY = "item.catherder.throw_toy";
     public static final String TRANSLATION_KEY_ITEM_CHEESE_WEDGE = "item.catherder.cheese_wedge";
     public static final String TRANSLATION_KEY_ITEM_TRAINING_TREAT = "item.catherder.training_treat";
     public static final String TRANSLATION_KEY_ITEM_SUPER_TREAT = "item.catherder.super_treat";

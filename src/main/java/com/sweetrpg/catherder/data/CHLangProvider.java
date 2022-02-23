@@ -41,7 +41,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Catnip");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "Cardboard Box");
         add(Constants.TRANSLATION_KEY_BLOCK_CHEESE_WHEEL, "Cheese Wheel");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "Throw Toy");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "Throw Toy");
         add(Constants.TRANSLATION_KEY_ITEM_CHEESE_WEDGE, "Cheese Wedge");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "Training Treat");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "Super Treat");
@@ -297,7 +297,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "Litter Box");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Catnip");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "Cardboard Box");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "Throw Toy");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "Throw Toy");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "Training Treat");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "Super Treat");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "Master Treat");
@@ -550,7 +550,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "TODO");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "TODO");
@@ -803,7 +803,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "TODO");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "TODO");
@@ -1056,7 +1056,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "TODO");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "TODO");
@@ -1309,7 +1309,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "TODO");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "TODO");
@@ -1562,7 +1562,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "TODO");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "TODO");
@@ -1815,7 +1815,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "TODO");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "TODO");
-        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
+//        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TRAINING_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_SUPER_TREAT, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MASTER_TREAT, "TODO");
