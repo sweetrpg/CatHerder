@@ -16,26 +16,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.function.Supplier;
-
 /**
- * @author ProPercivalalb
+ * @author paulyhedral, ProPercivalalb
  **/
 public class ThrowableItem extends Item implements IThrowableItem {
 
-    public Supplier<? extends Item> altItem;
-    public Supplier<? extends Item> renderItem;
+//    public Supplier<? extends Item> altItem;
+//    public Supplier<? extends Item> renderItem;
 
-    public ThrowableItem(Supplier<? extends Item> altItem, Supplier<? extends Item> renderItem, Properties properties) {
+    public ThrowableItem(Properties properties) {
         super(properties);
-        this.altItem = altItem;
-        this.renderItem = renderItem;
+//        this.altItem = altItem;
+//        this.renderItem = renderItem;
     }
 
     @Override
     public ItemStack getReturnStack(ItemStack stack) {
-        ItemStack returnStack = new ItemStack(this.altItem.get());
-        if (stack.hasTag()) {
+        ItemStack returnStack = new ItemStack(this);
+        if(stack.hasTag()) {
             returnStack.setTag(stack.getTag().copy());
         }
 
@@ -44,13 +42,13 @@ public class ThrowableItem extends Item implements IThrowableItem {
 
     @Override
     public ItemStack getRenderStack(ItemStack stack) {
-        return new ItemStack(this.renderItem.get());
+        return new ItemStack(this);
     }
 
     public void setHeadingFromThrower(ItemEntity entityItem, Entity entityThrower, float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy) {
-        float f = -Mth.sin(rotationYawIn * ((float)Math.PI / 180F)) * Mth.cos(rotationPitchIn * ((float)Math.PI / 180F));
-        float f1 = -Mth.sin((rotationPitchIn + pitchOffset) * ((float)Math.PI / 180F));
-        float f2 = Mth.cos(rotationYawIn * ((float)Math.PI / 180F)) * Mth.cos(rotationPitchIn * ((float)Math.PI / 180F));
+        float f = -Mth.sin(rotationYawIn * ((float) Math.PI / 180F)) * Mth.cos(rotationPitchIn * ((float) Math.PI / 180F));
+        float f1 = -Mth.sin((rotationPitchIn + pitchOffset) * ((float) Math.PI / 180F));
+        float f2 = Mth.cos(rotationYawIn * ((float) Math.PI / 180F)) * Mth.cos(rotationPitchIn * ((float) Math.PI / 180F));
         this.setThrowableHeading(entityItem, f, f1, f2, velocity, inaccuracy);
         Vec3 vec3d = entityThrower.getDeltaMovement();
         entityItem.setDeltaMovement(entityItem.getDeltaMovement().add(vec3d.x, entityThrower.isOnGround() ? 0.0D : vec3d.y, vec3d.z));
@@ -60,9 +58,9 @@ public class ThrowableItem extends Item implements IThrowableItem {
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemStackIn = playerIn.getItemInHand(handIn);
 
-        worldIn.playSound((Player)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.NEUTRAL, 0.5F, 0.4F / (worldIn.random.nextFloat() * 0.4F + 0.8F));
+        worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.NEUTRAL, 0.5F, 0.4F / (worldIn.random.nextFloat() * 0.4F + 0.8F));
 
-        if (!worldIn.isClientSide) {
+        if(!worldIn.isClientSide) {
             ItemStack stack = itemStackIn.copy();
             stack.setCount(1);
             ItemEntity entityitem = new ItemEntity(playerIn.level, playerIn.getX(), (playerIn.getY() - 0.30000001192092896D) + playerIn.getEyeHeight(), playerIn.getZ(), stack);
@@ -71,8 +69,9 @@ public class ThrowableItem extends Item implements IThrowableItem {
             worldIn.addFreshEntity(entityitem);
         }
 
-        if (!playerIn.getAbilities().instabuild)
+        if(!playerIn.getAbilities().instabuild) {
             itemStackIn.shrink(1);
+        }
 
         playerIn.awardStat(Stats.ITEM_USED.get(this));
         return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, itemStackIn);
@@ -83,9 +82,9 @@ public class ThrowableItem extends Item implements IThrowableItem {
         Vec3 vec3d = (new Vec3(x, y, z)).normalize().add(entityItem.level.random.nextGaussian() * 0.0075F * inaccuracy, entityItem.level.random.nextGaussian() * 0.0075F * inaccuracy, entityItem.level.random.nextGaussian() * 0.0075F * inaccuracy).scale(velocity);
         entityItem.setDeltaMovement(vec3d);
         float f = Mth.sqrt((float) (vec3d.x * vec3d.x + vec3d.z * vec3d.z));
-        entityItem.setYRot((float)(Mth.atan2(vec3d.x, vec3d.z) * (180F / (float)Math.PI)));
-        entityItem.setXRot((float)(Mth.atan2(vec3d.y, f) * (180F / (float)Math.PI)));
-        entityItem.yRotO =  entityItem.getYRot();
+        entityItem.setYRot((float) (Mth.atan2(vec3d.x, vec3d.z) * (180F / (float) Math.PI)));
+        entityItem.setXRot((float) (Mth.atan2(vec3d.y, f) * (180F / (float) Math.PI)));
+        entityItem.yRotO = entityItem.getYRot();
         entityItem.xRotO = entityItem.getXRot();
     }
 }
