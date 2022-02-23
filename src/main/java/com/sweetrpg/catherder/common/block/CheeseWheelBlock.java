@@ -31,11 +31,26 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class CheeseWheelBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 8);
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
-    protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR);
+    protected static final List<VoxelShape> SHAPES = Arrays.asList(
+            PLATE_SHAPE,
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 3.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 3.0D, 2.0D, 14.0D, 4.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 4.0D, 2.0D, 14.0D, 5.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 5.0D, 2.0D, 14.0D, 6.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 6.0D, 2.0D, 14.0D, 7.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 7.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 8.0D, 2.0D, 14.0D, 9.0D, 14.0D), BooleanOp.OR),
+            Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 9.0D, 2.0D, 14.0D, 10.0D, 14.0D), BooleanOp.OR)
+    );
+//    protected static final VoxelShape PIE_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0D, 2.0D, 2.0D, 14.0D, 8.0D, 14.0D), BooleanOp.OR);
     //    public final Supplier<Item> servingItem;
     public final boolean hasLeftovers;
     /**
@@ -53,8 +68,13 @@ public class CheeseWheelBlock extends Block {
     }
 
     @Override
+    public boolean hasDynamicShape() {
+        return true;
+    }
+
+    @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
+        return SHAPES.get(state.getValue(SERVINGS));
     }
 
 //    protected static final VoxelShape[] SHAPES = new VoxelShape[]{
