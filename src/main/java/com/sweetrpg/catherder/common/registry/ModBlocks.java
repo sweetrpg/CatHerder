@@ -23,15 +23,20 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = ModItems.ITEMS;
 
+    // cat items
     public static final RegistryObject<CatBedBlock> CAT_BED = registerWithItem("cat_bed", CatBedBlock::new, (prop) -> prop.tab(ModItemGroups.CAT_BED));
     public static final RegistryObject<LitterBoxBlock> LITTER_BOX = registerWithItem("litter_box", LitterBoxBlock::new);
     public static final RegistryObject<FoodBowlBlock> FOOD_BOWL = registerWithItem("food_bowl", FoodBowlBlock::new);
-
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
+
+    // miscellaneous items
 //    public static final RegistryObject<Block> MOUSE_TRAP = registerWithItem("mouse_trap", MouseTrapBlock::new);
+
+    // food
     public static final RegistryObject<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel",
                                                                              () -> new CheeseWheelBlock(Block.Properties.copy(Blocks.CAKE), true));
 
+    // crops
     public static final RegistryObject<WildCatnipBlock> WILD_CATNIP = BLOCKS.register("wild_catnip",
                                                                                       () -> new WildCatnipBlock(MobEffects.DIG_SLOWDOWN, 6, Block.Properties.copy(Blocks.TALL_GRASS)));
     public static final RegistryObject<CatnipBlock> CATNIP_CROP = BLOCKS.register("catnip",

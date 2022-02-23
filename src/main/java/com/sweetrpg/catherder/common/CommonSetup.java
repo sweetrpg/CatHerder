@@ -1,6 +1,5 @@
 package com.sweetrpg.catherder.common;
 
-import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.api.feature.InteractHandler;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;
@@ -9,6 +8,7 @@ import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.entity.HelmetInteractHandler;
 import com.sweetrpg.catherder.common.entity.MeatFoodHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.HappyEaterTalent;
 import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -27,10 +27,11 @@ public class CommonSetup {
             CatRespawnCommand.registerSerilizers();
             CatEntity.initDataParameters();
 
+            WildCropGeneration.registerWildCropGeneration();
+
             registerCompostables();
             registerDispenserBehaviors();
             registerAnimalFeeds();
-            WildCropGeneration.registerWildCropGeneration();
         });
     }
 
@@ -39,7 +40,7 @@ public class CommonSetup {
     }
 
     public static void registerCompostables() {
-//            ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP.get(), 0.65F);
+        ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP.get(), 0.65F);
         ComposterBlock.COMPOSTABLES.put(ModItems.WILD_CATNIP.get(), 0.65F);
     }
 
