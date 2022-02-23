@@ -39,7 +39,7 @@ public class CommonSetup {
     }
 
     public static void registerCompostables() {
-//            ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP.get(), 0.65F);
+        ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP.get(), 0.65F);
         ComposterBlock.COMPOSTABLES.put(ModItems.WILD_CATNIP.get(), 0.65F);
     }
 
