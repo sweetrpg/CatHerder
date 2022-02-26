@@ -38,7 +38,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_FOOD_BOWL, "Food Bowl");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_BATH, "Cat Bath");
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "Litter Box");
-        add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Catnip");
+        add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Wild Catnip");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "Cardboard Box");
         add(Constants.TRANSLATION_KEY_BLOCK_CHEESE_WHEEL, "Cheese Wheel");
 //        add(Constants.TRANSLATION_KEY_ITEM_THROW_TOY, "Throw Toy");
