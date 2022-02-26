@@ -182,9 +182,8 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(1, new FloatGoal(this));
 //        this.goalSelector.addGoal(1, new FindWaterGoal(this));
         //this.goalSelector.addGoal(1, new PatrolAreaGoal(this));
-        this.targetSelector.addGoal(2, new CatSitOnBlockGoal<>(this, 0F));
-        this.targetSelector.addGoal(2, new CatLieOnBedGoal<>(this, 0F, 16));
-        this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
+        this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+        this.targetSelector.addGoal(2, new CatLieOnBedGoal<>(this, 1.1F, 16));
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
@@ -192,8 +191,9 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
         this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new FetchGoal(this, 1.0D, 32.0F));
+        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.targetSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
         this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
@@ -201,9 +201,9 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
-        //this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, TARGET_ENTITIES));
-        //this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.TARGET_DRY_BABY));
+//        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
+//        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, TARGET_ENTITIES));
+//        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.TARGET_DRY_BABY));
 //        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Creeper.class, false));
         this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
@@ -216,12 +216,19 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        if(this.random.nextInt(3) == 0) {
-            return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.CAT_BEG_FOR_FOOD : SoundEvents.CAT_PURREOW;
+        if(this.catnipTick > 0) {
+            return SoundEvents.CAT_PURR;
+        }
+        else if(this.random.nextInt(3) == 0) {
+            return this.getHealth() < 10.0F ? SoundEvents.CAT_BEG_FOR_FOOD : SoundEvents.CAT_PURREOW;
         }
         else {
             return SoundEvents.CAT_AMBIENT;
         }
+    }
+
+    public void hiss() {
+        this.playSound(SoundEvents.CAT_HISS, this.getSoundVolume(), this.getVoicePitch());
     }
 
     @Override
@@ -581,18 +588,19 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean canTrample(BlockState state, BlockPos pos, float fallDistance) {
-        for(ICatAlteration alter : this.alterations) {
-            InteractionResult result = alter.canTrample(this, state, pos, fallDistance);
-
-            if(result.shouldSwing()) {
-                return true;
-            }
-            else if(result == InteractionResult.FAIL) {
-                return false;
-            }
-        }
-
-        return super.canTrample(state, pos, fallDistance);
+        return false;
+//        for(ICatAlteration alter : this.alterations) {
+//            InteractionResult result = alter.canTrample(this, state, pos, fallDistance);
+//
+//            if(result.shouldSwing()) {
+//                return true;
+//            }
+//            else if(result == InteractionResult.FAIL) {
+//                return false;
+//            }
+//        }
+//
+//        return super.canTrample(state, pos, fallDistance);
     }
 
     @Override
@@ -793,9 +801,9 @@ public class CatEntity extends AbstractCatEntity {
         else if(target instanceof Player && owner instanceof Player && !((Player) owner).canHarmPlayer((Player) target)) {
             return false;
         }
-        else if(target instanceof AbstractHorse && ((AbstractHorse) target).isTamed()) {
-            return false;
-        }
+//        else if(target instanceof AbstractHorse && ((AbstractHorse) target).isTamed()) {
+//            return false;
+//        }
         else {
             return !(target instanceof TamableAnimal) || !((TamableAnimal) target).isTame();
         }
@@ -1431,10 +1439,6 @@ public class CatEntity extends AbstractCatEntity {
                 TalentInstance.readInstance(this, talentList.getCompound(i)).ifPresent(talentMap::add);
             }
         }
-//        else {
-//            // Try to read old talent format if new one doesn't exist
-//            BackwardsComp.readTalentMapping(compound, talentMap);
-//        }
 
         this.markDataParameterDirty(TALENTS.get(), false); // Mark dirty so data is synced to client
 
@@ -1449,10 +1453,6 @@ public class CatEntity extends AbstractCatEntity {
                 AccessoryInstance.readInstance(accessoryList.getCompound(i)).ifPresent(accessories::add);
             }
         }
-//        else {
-//            // Try to read old accessories from their individual format
-//            BackwardsComp.readAccessories(compound, accessories);
-//        }
 
         this.markDataParameterDirty(ACCESSORIES.get(), false); // Mark dirty so data is synced to client
 
@@ -1476,24 +1476,14 @@ public class CatEntity extends AbstractCatEntity {
             if(compound.contains("mode", Tag.TAG_STRING)) {
                 this.setMode(EnumMode.bySaveName(compound.getString("mode")));
             }
-//            else {
-//                // Read old mode id
-//                BackwardsComp.readMode(compound, this::setMode);
-//            }
 
             if(compound.contains("customSkinHash", Tag.TAG_STRING)) {
                 this.setSkinHash(compound.getString("customSkinHash"));
             }
-//            else {
-//                BackwardsComp.readCatTexture(compound, this::setSkinHash);
-//            }
 
             if(compound.contains("fetchItem", Tag.TAG_COMPOUND)) {
                 this.setToyVariant(NBTUtil.readItemStack(compound, "fetchItem"));
             }
-//            else {
-//                BackwardsComp.readHasBone(compound, this::setBoneVariant);
-//            }
 
             this.setHungerDirectly(compound.getFloat("catHunger"));
             this.setOwnersName(NBTUtil.getTextComponent(compound, "lastKnownOwnerName"));
@@ -1539,9 +1529,6 @@ public class CatEntity extends AbstractCatEntity {
                     bedsData.put(type, pos);
                 }
             }
-//            else {
-//                BackwardsComp.readBedLocations(compound, bedsData);
-//            }
         }
         catch(Exception e) {
             CatHerder.LOGGER.error("Failed to load beds: " + e.getMessage());
@@ -1564,9 +1551,6 @@ public class CatEntity extends AbstractCatEntity {
                     bowlsData.put(type, pos);
                 }
             }
-//            else {
-//                BackwardsComp.readBowlLocations(compound, bowlsData);
-//            }
         }
         catch(Exception e) {
             CatHerder.LOGGER.error("Failed to load bowls: " + e.getMessage());
