@@ -63,11 +63,20 @@ public class CHLootTableProvider extends LootTableProvider {
             dropCatbed(ModBlocks.CAT_BED);
             dropsSelf(ModBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTER_BOX);
-            dropsSelf(ModBlocks.WILD_CATNIP);
+            dropCatnip(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
             dropsSelf(ModBlocks.CATNIP_CROP);
 //            dropsSelf(ModBlocks.MOUSE_TRAP);
             dropsSelf(ModBlocks.CHEESE_WHEEL);
+        }
+
+        private void dropCatnip(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                    .withPool(applyExplosionCondition(block.get(),
+                                                      LootPool.lootPool().setRolls(UniformGenerator.between(0, 2)))
+                                                              .add(LootItem.lootTableItem(ModItems.CATNIP_SEEDS.get())));
+
+            this.add(block.get(), lootTableBuilder);
         }
 
 //        private void dropCatnipCrop(Supplier<? extends Block> block) {

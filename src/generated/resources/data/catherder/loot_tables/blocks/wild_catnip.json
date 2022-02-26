@@ -2,12 +2,16 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 0.0,
+        "max": 2.0
+      },
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "catherder:wild_catnip"
+          "name": "catherder:catnip_seeds"
         }
       ],
       "conditions": [
