@@ -3,7 +3,7 @@ loaderVersion="${fml_version_range}"
 license="MIT"
 issueTrackerURL="https://github.com/sweetrpg/CatHerder/issues"
 displayURL="https://minecraft.curseforge.com/projects/cat-herder/"
-logoFile= "../ch_logo.png"
+logoFile= "ch_logo.png"
 [[mods]] #mandatory
     modId="catherder"
     version="${version}"
