@@ -91,8 +91,8 @@ public class ClientEventHandler {
             int height = mc.getWindow().getGuiScaledHeight();
             int sizeX = creative ? 195 : 176;
             int sizeY = creative ? 136 : 166;
-            int guiLeft = (width - sizeX) / 2;
-            int guiTop = (height - sizeY) / 2 - (dtLoaded ? 15 : 0);
+            int guiLeft = (width - sizeX) / 2 - ((dtLoaded && creative) ? 15 : 0);
+            int guiTop = (height - sizeY) / 2 - ((dtLoaded && !creative) ? 13 : 0);
 
             int x = guiLeft + (creative ? 36 : sizeX / 2 - 10);
             int y = guiTop + (creative ? 7 : 48);
