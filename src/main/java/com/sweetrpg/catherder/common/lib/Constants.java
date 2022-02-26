@@ -37,6 +37,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_BLOCK_CAT_BATH = "block.catherder.cat_bath";
     public static final String TRANSLATION_KEY_BLOCK_LITTER_BOX = "block.catherder.litter_box";
     public static final String TRANSLATION_KEY_BLOCK_WILD_CATNIP = "block.catherder.wild_catnip";
+    public static final String TRANSLATION_KEY_BLOCK_CATNIP = "block.catherder.catnip";
     public static final String TRANSLATION_KEY_BLOCK_CARDBOARD_BOX = "block.catherder.cardboard_box";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL = "block.catherder.cheese_wheel";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL_USE = "block.catherder.cheese_wheel.use_container";
