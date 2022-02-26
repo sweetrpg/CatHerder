@@ -1,0 +1,35 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "catherder:block/cheese_wheel",
+		"particle": "catherder:block/cheese_wheel"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 0.5], "texture": "#0"},
+				"east": {"uv": [4, 0.5, 8, 1], "texture": "#0"},
+				"south": {"uv": [4, 1, 8, 1.5], "texture": "#0"},
+				"west": {"uv": [4, 1.5, 8, 2], "texture": "#0"},
+				"up": {"uv": [4, 4, 0, 0], "texture": "#0"},
+				"down": {"uv": [4, 0, 0, 4], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"ground": {
+			"scale": [0.18, 0.18, 0.18]
+		}
+	},
+	"groups": [
+		{
+			"name": "plate",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

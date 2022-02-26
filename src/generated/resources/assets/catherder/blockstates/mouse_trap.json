@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": {
+      "model": "catherder:block/mouse_trap_armed"
+    },
+    "triggered=true": {
+      "model": "catherder:block/mouse_trap_sprung"
+    }
+  }
+}

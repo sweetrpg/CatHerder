@@ -71,20 +71,20 @@ public class PackCatTalent extends TalentInstance {
 
     @Override
     public InteractionResult processInteract(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack stack = playerIn.getItemInHand(handIn);
-
-        if (catIn.isTame() && this.level() > 0) { // Cat requirements
-            if (playerIn.isShiftKeyDown() && stack.isEmpty()) { // Player requirements
-
-                if (catIn.canInteract(playerIn)) {
-
-                    if (!playerIn.level.isClientSide) {
-                        playerIn.displayClientMessage(new TranslatableComponent("talent.catherder.pack_cat.version_migration"), false);
-                    }
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
+//        ItemStack stack = playerIn.getItemInHand(handIn);
+//
+//        if (catIn.isTame() && this.level() > 0) { // Cat requirements
+//            if (playerIn.isShiftKeyDown() && stack.isEmpty()) { // Player requirements
+//
+//                if (catIn.canInteract(playerIn)) {
+//
+//                    if (!playerIn.level.isClientSide) {
+//                        playerIn.displayClientMessage(new TranslatableComponent("talent.catherder.pack_cat.version_migration"), false);
+//                    }
+//                    return InteractionResult.SUCCESS;
+//                }
+//            }
+//        }
 
         return InteractionResult.PASS;
     }

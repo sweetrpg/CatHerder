@@ -102,7 +102,7 @@ public class ConfigHandler {
                 //DEBUG_MODE = builder
                 //        .comment("Enables debugging mode, which would output values for the sake of finding issues in the mod.")
                 //        .define("debugMode", false);
-                CHANCE_WILD_CATNIP = builder.comment("Chance that catnip appears in the wild").translation("catherder.config.cat.chance_wild_catnip").defineInRange("chance_wild_catnip", 20, 1, 100);
+                CHANCE_WILD_CATNIP = builder.comment("Chance that catnip appears in the wild").translation("catherder.config.cat.chance_wild_catnip").defineInRange("chance_wild_catnip", 50, 1, 100);
 
                 builder.pop();
             }
