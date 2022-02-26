@@ -31,7 +31,7 @@ public class MouseTrapBlock extends Block {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return super.getStateForPlacement(context)
-                    .setValue(SPRUNG, false);
+                    .setValue(SPRUNG, true);
     }
 
     @Override
