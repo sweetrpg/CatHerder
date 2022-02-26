@@ -109,7 +109,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "Allows you to ride your cat anywhere at speed. Every level allows your cat to jump higher. To get on your cat have an empty hand and jump and click on the cat to get on it.");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "%s: Meooowww, meow, meow mrrrrawwww (Food please!)");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "Pack Cat");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "Each level gives your cat 3 inventory slots in its, Packcat GUI. To open the GUI right click on your while sneaking! At level 5, your cat will, also automatically pick up any nearby items if, it has space in its inventory.");
+        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "Each level gives your cat 3 inventory slots in its, Pack Cat GUI. At level 5, your cat will, also automatically pick up any nearby items if, it has space in its inventory.");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "Quick Healer");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_DESCRIPTION, "Improves the rate at which your cat heals without needing to rest Mastering the skill will heal your cat 50%% faster when sitting.");
         add(Constants.TRANSLATION_KEY_TALENT_CREEPERSWEEPER_NAME, "Creeper Sweeper");
@@ -153,7 +153,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "AAAAAAAAAAAAAAAAAAAaaaaaaaaaa");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "aaaaaaaaaAAAAAAAAWWWWWWWWW!");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "Click to make %s dismount");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "The cat inventory is no longer accessed this way. Open your inventory and click on the cat inventories button.");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "Wandering");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "(W)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "In this mode your cat so stay near it's bowl and wait for your next command. To set you cat's bowl bring your cat within a few blocks of it.");
@@ -365,7 +364,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_DESCRIPTION, "Allows you to ride your cat anywhere at speed. Every level allows your cat to jump higher. To get on your cat have an empty hand and jump and click on the cat to get on it.");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_EXHAUSTED, "%s: Meooowww, meow, meow mrrrrawwww (Food please!)");
         add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_NAME, "Pack Cat");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "Each level gives your cat 3 inventory slots in its, Packcat GUI. To open the GUI right click on your while sneaking! At level 5, your cat will, also automatically pick up any nearby items if, it has space in its inventory.");
+        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_DESCRIPTION, "Each level gives your cat 3 inventory slots in its, Packcat GUI. At level 5, your cat will, also automatically pick up any nearby items if, it has space in its inventory.");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_NAME, "Quick Healer");
         add(Constants.TRANSLATION_KEY_TALENT_QUICKHEALER_DESCRIPTION, "Improves the rate at which your cat heals without needing to rest Mastering the skill will heal your cat 50%% faster when sitting.");
         add(Constants.TRANSLATION_KEY_TALENT_CREEPERSWEEPER_NAME, "Creeper Sweeper");
@@ -409,7 +408,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "AAAAAAAAAAAAAAAAAAAaaaaaaaaaa");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "aaaaaaaaaAAAAAAAAWWWWWWWWW!");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "Click to make %s dismount");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "The cat inventory is no longer accessed this way. Open your inventory and click on the cat inventories button.");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "Wandering");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "(W)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "In this mode your cat so stay near it's bowl and wait for your next command. To set you cat's bowl bring your cat within a few blocks of it.");
@@ -664,7 +662,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "TODO");
@@ -919,7 +916,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "TODO");
@@ -1174,7 +1170,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "TODO");
@@ -1429,7 +1424,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "TODO");
@@ -1684,7 +1678,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "TODO");
@@ -1939,7 +1932,6 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION, "TODO");

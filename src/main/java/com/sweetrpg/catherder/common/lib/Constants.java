@@ -153,7 +153,6 @@ public class Constants {
     public static final String TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_2 = "talent.catherder.nermal.msg.6.line.2";
     public static final String TRANSLATION_KEY_TALENT_NERMAL_MSG_6_LINE_3 = "talent.catherder.nermal.msg.6.line.3";
     public static final String TRANSLATION_KEY_TALENT_BEDFINDER_MOUNT = "talent.catherder.bed_finder.mount";
-    public static final String TRANSLATION_KEY_TALENT_PACKCAT_VERSION_MIGRATION = "talent.catherder.pack_cat.version_migration";
     public static final String TRANSLATION_KEY_CAT_MODE_WANDERING = "cat.mode.wandering";
     public static final String TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR = "cat.mode.wandering.indicator";
     public static final String TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION = "cat.mode.wandering.description";
