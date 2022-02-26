@@ -32,21 +32,22 @@ public class WorldUtil {
     @Nullable
     public static <T extends BlockEntity> T getTileEntity(BlockGetter worldIn, BlockPos posIn, Class<T> type) {
         BlockEntity tileEntity = worldIn.getBlockEntity(posIn);
-        if (tileEntity != null && tileEntity.getClass().isAssignableFrom(type)) {
+        if(tileEntity != null && tileEntity.getClass().isAssignableFrom(type)) {
             return (T) tileEntity;
         }
 
         return null;
     }
 
-    @SuppressWarnings({ "unchecked", "deprecation" })
+    @SuppressWarnings({"unchecked", "deprecation"})
     @Nullable
     public static <T extends Entity> T getCachedEntity(@Nullable Level worldIn, Class<T> type, @Nullable T cached, @Nullable UUID uuid) {
-        if ((cached == null || cached.isRemoved()) && uuid != null && worldIn instanceof ServerLevel) {
+        if((cached == null || cached.isRemoved()) && uuid != null && worldIn instanceof ServerLevel) {
             Entity entity = ((ServerLevel) worldIn).getEntity(uuid);
-            if (entity != null && entity.getClass().isAssignableFrom(type)) {
+            if(entity != null && entity.getClass().isAssignableFrom(type)) {
                 return (T) entity;
-            } else {
+            }
+            else {
                 return null;
             }
         }
@@ -60,5 +61,15 @@ public class WorldUtil {
 
     public static Optional<BlockPos> toImmutable(Optional<BlockPos> pos) {
         return pos.map(BlockPos::immutable);
+    }
+
+    public class SetBlockFlags {
+        public static final int BLOCK_UPDATE = 1;
+        public static final int SEND_TO_CLIENT = 2;
+        public static final int PREVENT_RERENDER = 4;
+        public static final int RENDER_ON_MAIN_THREAD = 8;
+        public static final int PREVENT_NEIGHBOR_REACTIONS = 16;
+        public static final int PREVENT_NEIGHBOR_DROPS = 32;
+        public static final int BLOCK_IS_BEING_MOVED = 64;
     }
 }
