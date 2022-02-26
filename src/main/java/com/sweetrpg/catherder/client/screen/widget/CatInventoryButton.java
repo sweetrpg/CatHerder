@@ -3,9 +3,9 @@ package com.sweetrpg.catherder.client.screen.widget;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Resources;
 import com.sweetrpg.catherder.common.talent.PackCatTalent;
-import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -23,8 +23,8 @@ import java.util.List;
 
 public class CatInventoryButton extends Button {
 
-    private Screen parent;
-    private int baseX;
+    private final Screen parent;
+    private final int baseX;
 
     public CatInventoryButton(int x, int y, Screen parentIn, OnPress onPress) {
         super(x, y, 13, 10, new TextComponent(""), onPress);
@@ -35,26 +35,27 @@ public class CatInventoryButton extends Button {
     @Override
     public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 
-        if (this.parent instanceof CreativeModeInventoryScreen) {
+        if(this.parent instanceof CreativeModeInventoryScreen) {
             int tabIndex = ((CreativeModeInventoryScreen) this.parent).getSelectedTab();
             this.visible = tabIndex == CreativeModeTab.TAB_INVENTORY.getId();
             this.active = this.visible;
         }
 
-        if (this.parent instanceof InventoryScreen) {
+        if(this.parent instanceof InventoryScreen) {
             RecipeBookComponent recipeBook = ((InventoryScreen) this.parent).getRecipeBookComponent();
-            if (recipeBook.isVisible()) {
+            if(recipeBook.isVisible()) {
                 this.x = this.baseX + 77;
-            } else {
+            }
+            else {
                 this.x = this.baseX;
             }
         }
 
-        if (this.visible) {
+        if(this.visible) {
             Minecraft mc = Minecraft.getInstance();
             List<CatEntity> cats = mc.level.getEntitiesOfClass(CatEntity.class, mc.player.getBoundingBox().inflate(12D, 12D, 12D),
                                                                (cat) -> cat.canInteract(mc.player) && PackCatTalent.hasInventory(cat)
-            );
+                                                              );
             this.active = !cats.isEmpty();
         }
 
@@ -66,21 +67,22 @@ public class CatInventoryButton extends Button {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
         RenderSystem.setShaderTexture(0, Resources.SMALL_WIDGETS);
-       Minecraft mc = Minecraft.getInstance();
-       int i = this.getYImage(this.isHoveredOrFocused());
-       RenderSystem.enableBlend();
-       RenderSystem.defaultBlendFunc();
-       RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-       this.blit(stack, this.x, this.y, 0, 36 + i * 10, this.width, this.height);
-       this.renderBg(stack, mc, mouseX, mouseY);
+        Minecraft mc = Minecraft.getInstance();
+        int i = this.getYImage(this.isHoveredOrFocused());
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        this.blit(stack, this.x, this.y, 0, 36 + i * 10, this.width, this.height);
+        this.renderBg(stack, mc, mouseX, mouseY);
     }
 
     @Override
     public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
-        if (this.active) {
+        if(this.active) {
             Component msg = new TranslatableComponent("container.catherder.cat_inventories.link");
             this.parent.renderTooltip(stack, msg, mouseX, mouseY);
-        } else {
+        }
+        else {
             Component msg = new TranslatableComponent("container.catherder.cat_inventories.link").withStyle(ChatFormatting.RED);
             this.parent.renderTooltip(stack, msg, mouseX, mouseY);
         }
