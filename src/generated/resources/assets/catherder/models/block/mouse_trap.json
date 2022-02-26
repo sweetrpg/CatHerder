@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "": "catherder:block/mouse_trap_armed",
+    "triggered": "catherder:block/mouse_trap_sprung"
+  }
+}

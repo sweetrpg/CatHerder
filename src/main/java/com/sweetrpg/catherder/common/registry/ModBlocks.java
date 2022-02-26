@@ -30,7 +30,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
 
     // miscellaneous items
-//    public static final RegistryObject<Block> MOUSE_TRAP = registerWithItem("mouse_trap", MouseTrapBlock::new);
+    public static final RegistryObject<Block> MOUSE_TRAP = registerWithItem("mouse_trap", MouseTrapBlock::new);
 
     // food
     public static final RegistryObject<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel",
