@@ -1,13 +1,13 @@
 package com.sweetrpg.catherder.common.talent;
 
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class BedFinderTalent extends TalentInstance {
@@ -23,12 +23,12 @@ public class BedFinderTalent extends TalentInstance {
 
     @Override
     public InteractionResult processInteract(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (this.level() > 0) {
-            if (!playerIn.hasPassenger(catIn)) {
-                if (playerIn.getItemInHand(handIn).getItem() == Items.BONE && catIn.canInteract(playerIn)) {
+        if(this.level() > 0) {
+            if(!playerIn.hasPassenger(catIn)) {
+                if(playerIn.getItemInHand(handIn).getItem() == ModItems.YARN.get() && catIn.canInteract(playerIn)) {
 
-                    if (catIn.startRiding(playerIn)) {
-                        if (!catIn.level.isClientSide) {
+                    if(catIn.startRiding(playerIn)) {
+                        if(!catIn.level.isClientSide) {
                             catIn.setOrderedToSit(true);
                         }
 
@@ -36,11 +36,13 @@ public class BedFinderTalent extends TalentInstance {
                         return InteractionResult.SUCCESS;
                     }
                 }
-            } else {
+            }
+            else {
                 catIn.stopRiding();
                 return InteractionResult.SUCCESS;
             }
         }
+
         return InteractionResult.PASS;
     }
 }
