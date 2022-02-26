@@ -33,6 +33,7 @@ import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -84,13 +85,14 @@ public class ClientEventHandler {
         Screen screen = event.getScreen();
         if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             boolean creative = screen instanceof CreativeModeInventoryScreen;
+            boolean dtLoaded = ModList.get().isLoaded("doggytalents");
             Minecraft mc = Minecraft.getInstance();
             int width = mc.getWindow().getGuiScaledWidth();
             int height = mc.getWindow().getGuiScaledHeight();
             int sizeX = creative ? 195 : 176;
             int sizeY = creative ? 136 : 166;
             int guiLeft = (width - sizeX) / 2;
-            int guiTop = (height - sizeY) / 2;
+            int guiTop = (height - sizeY) / 2 - (dtLoaded ? 15 : 0);
 
             int x = guiLeft + (creative ? 36 : sizeX / 2 - 10);
             int y = guiTop + (creative ? 7 : 48);
