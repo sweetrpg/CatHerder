@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.data;
 
 import com.sweetrpg.catherder.common.block.CatnipBlock;
+import com.sweetrpg.catherder.common.block.CheeseWheelBlock;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.core.Direction;
@@ -46,8 +47,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
         this.stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
         this.wildCropBlock(ModBlocks.WILD_CATNIP.get());
         makeSimple(ModBlocks.CARDBOARD_BOX);
-//        makeSimple(ModBlocks.MOUSE_TRAP);
-        makeSimple(ModBlocks.CHEESE_WHEEL);
+        mouseTrapBlock(ModBlocks.MOUSE_TRAP);
+        cheeseWheelBlock(ModBlocks.CHEESE_WHEEL.get(), CheeseWheelBlock.SERVINGS);
     }
 
     private String blockName(Block block) {
@@ -60,6 +61,24 @@ public class CHBlockstateProvider extends BlockStateProvider {
 
     public void wildCropBlock(Block block) {
         this.simpleBlock(block, models().cross(blockName(block), resourceBlock(blockName(block))));
+    }
+
+    protected void cheeseWheelBlock(Block block, IntegerProperty suffixProperty) {
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            int suffix = state.getValue(suffixProperty);
+            String stageName = blockName(block) + "_servings" + suffix;
+            return ConfiguredModel.builder().modelFile(this.models().getExistingFile(resourceBlock(stageName))).build();
+        });
+    }
+
+    protected void mouseTrapBlock(Supplier<? extends Block> block) {
+        BlockModelBuilder model = this.models()
+                                      .getBuilder(name(block))
+                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+                                      .texture("", extend(blockTexture(block), "_armed"))
+                                      .texture("triggered", extend(blockTexture(block), "_sprung"));
+
+        this.simpleBlock(block.get(), model);
     }
 
     protected void createFromShape(Supplier<? extends Block> blockIn, AABB bb) {
