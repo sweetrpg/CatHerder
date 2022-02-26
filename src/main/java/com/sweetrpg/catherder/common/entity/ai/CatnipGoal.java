@@ -81,15 +81,16 @@ public class CatnipGoal extends Goal {
         int yRange = 3;
 
         float bestWeight = Float.MIN_VALUE;
-        Optional<BlockPos> bowlPos = this.cat.getBowlPos();
-        BlockPos bestPos = bowlPos.get();
+//        Optional<BlockPos> bowlPos = this.cat.getBowlPos();
+//        BlockPos bestPos = bowlPos.get();
+        BlockPos bestPos = this.cat.blockPosition();
 
         for(int attempt = 0; attempt < 5; ++attempt) {
             int l = random.nextInt(2 * xzRange + 1) - xzRange;
             int i1 = random.nextInt(2 * yRange + 1) - yRange;
             int j1 = random.nextInt(2 * xzRange + 1) - xzRange;
 
-            BlockPos testPos = bowlPos.get().offset(l, i1, j1);
+            BlockPos testPos = bestPos.offset(l, i1, j1);
 
             if(pathNavigate.isStableDestination(testPos)) {
                 float weight = this.cat.getWalkTargetValue(testPos);
