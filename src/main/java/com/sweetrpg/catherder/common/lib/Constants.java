@@ -40,8 +40,10 @@ public class Constants {
     public static final String TRANSLATION_KEY_BLOCK_CARDBOARD_BOX = "block.catherder.cardboard_box";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL = "block.catherder.cheese_wheel";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL_USE = "block.catherder.cheese_wheel.use_container";
+    public static final String TRANSLATION_KEY_BLOCK_MOUSE_TRAP = "block.catherder.mouse_trap";
 //    public static final String TRANSLATION_KEY_ITEM_THROW_TOY = "item.catherder.throw_toy";
     public static final String TRANSLATION_KEY_ITEM_CHEESE_WEDGE = "item.catherder.cheese_wedge";
+    public static final String TRANSLATION_KEY_ITEM_MOUSE_TRAP = "item.catherder.mouse_trap";
     public static final String TRANSLATION_KEY_ITEM_TRAINING_TREAT = "item.catherder.training_treat";
     public static final String TRANSLATION_KEY_ITEM_SUPER_TREAT = "item.catherder.super_treat";
     public static final String TRANSLATION_KEY_ITEM_MASTER_TREAT = "item.catherder.master_treat";
@@ -54,12 +56,12 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_WOOL_COLLAR = "item.catherder.wool_collar";
     public static final String TRANSLATION_KEY_ITEM_WOOL_COLLAR_TOOLTIP = "item.catherder.wool_collar.tooltip";
     public static final String TRANSLATION_KEY_ITEM_CREATIVE_COLLAR = "item.catherder.creative_collar";
-    public static final String TRANSLATION_KEY_CREATIVE_COLLAR_TOOLTIP = "item.catherder.creative_collar.tooltip";
+    public static final String TRANSLATION_KEY_ITEM_CREATIVE_COLLAR_TOOLTIP = "item.catherder.creative_collar.tooltip";
     public static final String TRANSLATION_KEY_ITEM_SPOTTED_COLLAR = "item.catherder.spotted_collar";
     public static final String TRANSLATION_KEY_ITEM_MULTICOLORED_COLLAR = "item.catherder.multicoloured_collar";
     public static final String TRANSLATION_KEY_ITEM_RADAR = "item.catherder.radar";
     public static final String TRANSLATION_KEY_ITEM_CREATIVE_RADAR = "item.catherder.creative_radar";
-    public static final String TRANSLATION_KEY_CREATIVE_RADAR_TOOLTIP = "item.catherder.creative_radar.tooltip";
+    public static final String TRANSLATION_KEY_ITEM_CREATIVE_RADAR_TOOLTIP = "item.catherder.creative_radar.tooltip";
     public static final String TRANSLATION_KEY_ITEM_TREAT_BAG = "item.catherder.treat_bag";
     public static final String TRANSLATION_KEY_ITEM_CAT_TOY = "item.catherder.cat_toy";
     public static final String TRANSLATION_KEY_ITEM_CAPE = "item.catherder.cape";
@@ -70,7 +72,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_SMALL_CATSIZER = "item.catherder.small_catsizer";
     public static final String TRANSLATION_KEY_ITEM_BIG_CATSIZER = "item.catherder.big_catsizer";
     public static final String TRANSLATION_KEY_ITEM_OWNER_CHANGE = "item.catherder.owner_change";
-    public static final String TRANSLATION_KEY_OWNER_CHANGE_TOOLTIP = "item.catherder.owner_change.tooltip";
+    public static final String TRANSLATION_KEY_ITEM_OWNER_CHANGE_TOOLTIP = "item.catherder.owner_change.tooltip";
     public static final String TRANSLATION_KEY_ITEM_GUARD_SUIT = "item.catherder.guard_suit";
     public static final String TRANSLATION_KEY_ITEM_CATNIP_SEEDS = "item.catherder.catnip_seeds";
     public static final String TRANSLATION_KEY_ITEM_WILD_CATNIP = "item.catherder.wild_catnip";

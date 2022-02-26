@@ -104,7 +104,8 @@ public class FoodBowlBlock extends BaseEntityBlock {
                 ItemStack remaining = InventoryUtil.addItem(bowlInventory, entityItem.getItem());
                 if (!remaining.isEmpty()) {
                     entityItem.setItem(remaining);
-                } else {
+                }
+                else {
                     entityItem.discard();
                     worldIn.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 0.25F, ((worldIn.random.nextFloat() - worldIn.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                 }
@@ -161,7 +162,8 @@ public class FoodBowlBlock extends BaseEntityBlock {
                     IItemHandler bowlInventory = foodBowl.getInventory();
 
                     InventoryUtil.transferStacks((IItemHandlerModifiable) bagInventory, bowlInventory);
-                } else if (playerIn instanceof ServerPlayer && !(playerIn instanceof FakePlayer)) {
+                }
+                else if (playerIn instanceof ServerPlayer && !(playerIn instanceof FakePlayer)) {
                     ServerPlayer serverPlayer = (ServerPlayer)playerIn;
 
                     Screens.openFoodBowlScreen(serverPlayer, foodBowl);

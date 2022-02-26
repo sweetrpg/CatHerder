@@ -44,8 +44,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         catBed(ModBlocks.CAT_BED);
         createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
-        this.stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
-        this.wildCropBlock(ModBlocks.WILD_CATNIP.get());
+        stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
+        wildCropBlock(ModBlocks.WILD_CATNIP.get());
         makeSimple(ModBlocks.CARDBOARD_BOX);
         mouseTrapBlock(ModBlocks.MOUSE_TRAP);
         cheeseWheelBlock(ModBlocks.CHEESE_WHEEL.get(), CheeseWheelBlock.SERVINGS);
@@ -59,7 +59,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
         return new ResourceLocation(Constants.MOD_ID, "block/" + path);
     }
 
-    public void wildCropBlock(Block block) {
+    protected void wildCropBlock(Block block) {
         this.simpleBlock(block, models().cross(blockName(block), resourceBlock(blockName(block))));
     }
 
