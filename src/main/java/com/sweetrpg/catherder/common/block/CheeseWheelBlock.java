@@ -115,7 +115,7 @@ public class CheeseWheelBlock extends Block {
 
         if(servings > 0) {
 //            if (heldStack.sameItem(serving.getContainerItem())) {
-            worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
+            worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), Block.UPDATE_ALL);
 //                if (!player.getAbilities().instabuild) {
 //                    heldStack.shrink(1);
 //                }

@@ -5,28 +5,21 @@ import com.mojang.datafixers.util.Pair;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import net.minecraft.advancements.critereon.EnchantmentPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
-import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -60,7 +53,7 @@ public class CHLootTableProvider extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            dropCatbed(ModBlocks.CAT_BED);
+            dropCattree(ModBlocks.CAT_TREE);
             dropsSelf(ModBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTER_BOX);
             dropCatnip(ModBlocks.WILD_CATNIP);
@@ -99,7 +92,7 @@ public class CHLootTableProvider extends LootTableProvider {
 //            this.add(block.get(), builder);
 //        }
 
-        private void dropCatbed(Supplier<? extends Block> block) {
+        private void dropCattree(Supplier<? extends Block> block) {
             LootTable.Builder lootTableBuilder = LootTable.lootTable()
                                                           .withPool(applyExplosionCondition(block.get(),
                                                                                             LootPool.lootPool().setRolls(ConstantValue.exactly(1)))

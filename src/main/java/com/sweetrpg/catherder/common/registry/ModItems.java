@@ -21,6 +21,8 @@ public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
 
+//    public static final RegistryObject<Item> CAT_TREE = register("cat_tree", () -> new BlockItem(ModBlocks.CAT_TREE.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
+
     // catnip
     public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
     public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()./*food(FoodValues.CATNIP).*/tab(ModItemGroups.GENERAL)));

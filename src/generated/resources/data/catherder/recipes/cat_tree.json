@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sWs",
+    "SF ",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "tag": "minecraft:slabs"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "F": {
+      "tag": "minecraft:wooden_fences"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "catherder:cat_tree"
+  }
+}

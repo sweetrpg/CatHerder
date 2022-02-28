@@ -19,7 +19,7 @@ import com.sweetrpg.catherder.client.screen.CatInventoriesScreen;
 import com.sweetrpg.catherder.client.screen.FoodBowlScreen;
 import com.sweetrpg.catherder.client.screen.PackCatScreen;
 import com.sweetrpg.catherder.client.screen.TreatBagScreen;
-import com.sweetrpg.catherder.client.tileentity.renderer.CatBedRenderer;
+//import com.sweetrpg.catherder.client.tileentity.renderer.CattreeRenderer;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -60,7 +60,7 @@ public class ClientSetup {
     public static void setupTileEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.CAT.get(), CatRenderer::new);
 //        event.registerEntityRenderer(ModEntityTypes.CAT_BEAM.get(), CatBeamRenderer::new);
-        event.registerBlockEntityRenderer(ModTileEntityTypes.CAT_BED.get(), CatBedRenderer::new);
+//        event.registerBlockEntityRenderer(ModTileEntityTypes.CAT_TREE.get(), CattreeRenderer::new);
     }
 
     public static void setupCollarRenderers(final FMLClientSetupEvent event) {

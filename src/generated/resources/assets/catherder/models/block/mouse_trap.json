@@ -1,7 +1,20 @@
 {
-  "parent": "minecraft:block/block",
   "textures": {
-    "": "catherder:block/mouse_trap_armed",
-    "triggered": "catherder:block/mouse_trap_sprung"
-  }
+    "triggered\u003dfalse": "catherder:block/mouse_trap_armed",
+    "triggered\u003dtrue": "catherder:block/mouse_trap_sprung"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        4,
+        15
+      ]
+    }
+  ]
 }

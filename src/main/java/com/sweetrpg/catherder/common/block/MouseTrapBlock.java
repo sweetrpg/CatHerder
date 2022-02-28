@@ -1,7 +1,10 @@
 package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.common.registry.ModItems;
+import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +30,10 @@ public class MouseTrapBlock extends Block {
         super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
     }
 
+    public boolean hasDynamicShape() {
+        return true;
+    }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -46,8 +53,11 @@ public class MouseTrapBlock extends Block {
                 if(!level.isClientSide) {
                     if(!player.getAbilities().instabuild) {
                         stack.shrink(1);
-                        state.setValue(SPRUNG, false);
                     }
+
+                    level.playSound(null, pos, SoundEvents.CHEST_LOCKED, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    level.setBlock(pos, state.setValue(SPRUNG, false), Block.UPDATE_ALL);
+//                    state.setValue(SPRUNG, false);
                 }
             }
         }

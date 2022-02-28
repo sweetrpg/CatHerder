@@ -42,7 +42,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        catBed(ModBlocks.CAT_BED);
+        catTree(ModBlocks.CAT_TREE);
         createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
         stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
         wildCropBlock(ModBlocks.WILD_CATNIP.get());
@@ -74,9 +74,15 @@ public class CHBlockstateProvider extends BlockStateProvider {
     protected void mouseTrapBlock(Supplier<? extends Block> block) {
         BlockModelBuilder model = this.models()
                                       .getBuilder(name(block))
-                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                                      .texture("", extend(blockTexture(block), "_armed"))
-                                      .texture("triggered", extend(blockTexture(block), "_sprung"));
+//                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+                                      .texture("triggered=false", extend(blockTexture(block), "_armed"))
+                                      .texture("triggered=true", extend(blockTexture(block), "_sprung"));
+
+        model.element()
+                .from(1.0f, 0.0f, 1.0f)
+                .to(15.0f, 4.0f, 15.0f);
+//                .allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null)
+//                        .texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
 
         this.simpleBlock(block.get(), model);
     }
@@ -98,7 +104,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(blockIn.get(), model);
     }
 
-    protected void catBed(Supplier<? extends Block> blockIn) {
+    protected void catTree(Supplier<? extends Block> blockIn) {
         BlockModelBuilder model = this.models()
                                       .getBuilder(name(blockIn))
                                       .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
