@@ -1,24 +1,17 @@
 package com.sweetrpg.catherder.common.block;
 
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.CatHerder;
-import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
-//import com.sweetrpg.catherder.common.block.tileentity.CattreeTileEntity;
-//import com.sweetrpg.catherder.common.util.CattreeUtil;
+import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -48,13 +41,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class CatTreeBlock extends /*BaseEntity*/Block {
+public class CatTreeBlock extends BaseEntityBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
-    protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
+    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 30.0D, 16.0D);
+    protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 30.0D, 16.0D);
 
     public CatTreeBlock() {
         super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
@@ -76,16 +69,16 @@ public class CatTreeBlock extends /*BaseEntity*/Block {
         return SHAPE_COLLISION;
     }
 
-//    @Override
-//    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-//        return new CatTreeBlockEntity(pos, blockState);
-//    }
-//
-//    @Nullable
-//    @Override
-//    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-//        return null;
-//    }
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
+        return new CatTreeBlockEntity(pos, blockState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        return null;
+    }
 
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
@@ -101,18 +94,18 @@ public class CatTreeBlock extends /*BaseEntity*/Block {
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         state = state.setValue(FACING, placer.getDirection().getOpposite());
 
-        CatTreeBlockEntity cattreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
+        CatTreeBlockEntity catTreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
 
-        if (cattreeTileEntity != null) {
-//            CatTreeUtil.setBedVariant(cattreeTileEntity, stack);
+        if(catTreeTileEntity != null) {
+//            CatTreeUtil.setBedVariant(catTreeTileEntity, stack);
 
-            cattreeTileEntity.setPlacer(placer);
+            catTreeTileEntity.setPlacer(placer);
             CompoundTag tag = stack.getTagElement("catherder");
-            if (tag != null) {
+            if(tag != null) {
                 Component name = NBTUtil.getTextComponent(tag, "name");
                 UUID ownerId = NBTUtil.getUniqueId(tag, "ownerId");
-                cattreeTileEntity.setBedName(name);
-                cattreeTileEntity.setOwner(ownerId);
+                catTreeTileEntity.setBedName(name);
+                catTreeTileEntity.setOwner(ownerId);
             }
         }
 
@@ -121,9 +114,10 @@ public class CatTreeBlock extends /*BaseEntity*/Block {
 
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.getValue(WATERLOGGED)) {
+        if(stateIn.getValue(WATERLOGGED)) {
             worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
+
         return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
@@ -145,9 +139,9 @@ public class CatTreeBlock extends /*BaseEntity*/Block {
     @Override
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-//        if (worldIn.isClientSide) {
-            return InteractionResult.SUCCESS;
-//        } else {
+        if (worldIn.isClientSide) {
+        return InteractionResult.SUCCESS;
+        } else {
 //            CattreeTileEntity cattreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CattreeTileEntity.class);
 //
 //            if (cattreeTileEntity != null) {
@@ -203,8 +197,8 @@ public class CatTreeBlock extends /*BaseEntity*/Block {
 //                    return InteractionResult.SUCCESS;
 //                }
 //            }
-//            return InteractionResult.SUCCESS;
-//        }
+            return InteractionResult.SUCCESS;
+        }
     }
 
     @Override
@@ -263,7 +257,7 @@ public class CatTreeBlock extends /*BaseEntity*/Block {
 //            return CattreeUtil.createItemStack(cattreeTileEntity.getCasing(), cattreeTileEntity.getBedding());
 //        }
 
-        CatHerder.LOGGER.debug("Unable to pick block on cat Tree.");
+        CatHerder.LOGGER.debug("Unable to pick block on cat tree.");
         return ItemStack.EMPTY;
     }
 }

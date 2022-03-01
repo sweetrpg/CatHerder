@@ -2,10 +2,10 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "oak_planks",
-		"1": "white_wool",
-		"2": "block/cat_tree",
-		"particle": "oak_planks"
+		"0": "block/oak_planks",
+		"1": "block/white_wool",
+		"2": "catherder:block/cat_tree_rope",
+		"particle": "block/oak_planks"
 	},
 	"elements": [
 		{
