@@ -32,8 +32,9 @@ public class ModItems {
     public static final RegistryObject<Item> YARN = registerThrowToy("yarn");
     public static final RegistryObject<Item> CAT_TOY = registerThrowToy("cat_toy");
 
-    // mobs
+    // mobs and related
 //    public static final RegistryObject<Item> RODENT = register("rodent");
+    public static final RegistryObject<Item> CAT_GUT = register("cat_gut");
 
     // food
     public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge");

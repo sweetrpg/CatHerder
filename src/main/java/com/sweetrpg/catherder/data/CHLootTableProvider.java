@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
@@ -53,7 +54,7 @@ public class CHLootTableProvider extends LootTableProvider {
 
         @Override
         protected void addTables() {
-            dropCattree(ModBlocks.CAT_TREE);
+            dropCatTree(ModBlocks.CAT_TREE);
             dropsSelf(ModBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTER_BOX);
             dropCatnip(ModBlocks.WILD_CATNIP);
@@ -92,7 +93,7 @@ public class CHLootTableProvider extends LootTableProvider {
 //            this.add(block.get(), builder);
 //        }
 
-        private void dropCattree(Supplier<? extends Block> block) {
+        private void dropCatTree(Supplier<? extends Block> block) {
             LootTable.Builder lootTableBuilder = LootTable.lootTable()
                                                           .withPool(applyExplosionCondition(block.get(),
                                                                                             LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
@@ -123,6 +124,11 @@ public class CHLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             this.registerNoLoot(ModEntityTypes.CAT);
+            this.add(EntityType.CAT, LootTable.lootTable()
+                                                     .withPool(LootPool.lootPool()
+                                                                       .setRolls(ConstantValue.exactly(1.0F))
+                                                                       .add(LootItem.lootTableItem(ModItems.CAT_GUT.get())
+                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
 //            this.add(ModEntityTypes.RODENT.get(), LootTable.lootTable()
 //                                                     .withPool(LootPool.lootPool()
 //                                                                       .setRolls(ConstantValue.exactly(1.0F))
