@@ -14,12 +14,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class PlacedTileEntity extends BlockEntity {
+public class PlacedBlockEntity extends BlockEntity {
 
     private @Deprecated @Nullable LivingEntity placer;
     private @Nullable UUID placerUUID;
 
-    public PlacedTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState blockState) {
+    public PlacedBlockEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState blockState) {
         super(tileEntityTypeIn, pos, blockState);
     }
 

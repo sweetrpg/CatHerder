@@ -77,18 +77,6 @@ public class CheeseWheelBlock extends Block {
         return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
     }
 
-//    protected static final VoxelShape[] SHAPES = new VoxelShape[]{
-//            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D),
-//            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D),
-//            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
-//            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
-//            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D),
-//    };
-
-//    public ItemStack getServingItem() {
-//        return new ItemStack(this.servingItem.get());
-//    }
-
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         ItemStack itemStack = player.getItemInHand(handIn);
@@ -127,7 +115,7 @@ public class CheeseWheelBlock extends Block {
 
         if(servings > 0) {
 //            if (heldStack.sameItem(serving.getContainerItem())) {
-            worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
+            worldIn.setBlock(pos, state.setValue(SERVINGS, servings - 1), Block.UPDATE_ALL);
 //                if (!player.getAbilities().instabuild) {
 //                    heldStack.shrink(1);
 //                }
@@ -137,8 +125,12 @@ public class CheeseWheelBlock extends Block {
 //                }
             if(worldIn.getBlockState(pos).getValue(SERVINGS) == 0 && !this.hasLeftovers) {
                 worldIn.removeBlock(pos, false);
+                worldIn.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
-            worldIn.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+            else {
+                worldIn.playSound(null, pos, SoundEvents.GENERIC_EAT, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+
             return InteractionResult.SUCCESS;
 //            }
 //            else {

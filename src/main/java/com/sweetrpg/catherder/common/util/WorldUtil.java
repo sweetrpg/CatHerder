@@ -32,21 +32,22 @@ public class WorldUtil {
     @Nullable
     public static <T extends BlockEntity> T getTileEntity(BlockGetter worldIn, BlockPos posIn, Class<T> type) {
         BlockEntity tileEntity = worldIn.getBlockEntity(posIn);
-        if (tileEntity != null && tileEntity.getClass().isAssignableFrom(type)) {
+        if(tileEntity != null && tileEntity.getClass().isAssignableFrom(type)) {
             return (T) tileEntity;
         }
 
         return null;
     }
 
-    @SuppressWarnings({ "unchecked", "deprecation" })
+    @SuppressWarnings({"unchecked", "deprecation"})
     @Nullable
     public static <T extends Entity> T getCachedEntity(@Nullable Level worldIn, Class<T> type, @Nullable T cached, @Nullable UUID uuid) {
-        if ((cached == null || cached.isRemoved()) && uuid != null && worldIn instanceof ServerLevel) {
+        if((cached == null || cached.isRemoved()) && uuid != null && worldIn instanceof ServerLevel) {
             Entity entity = ((ServerLevel) worldIn).getEntity(uuid);
-            if (entity != null && entity.getClass().isAssignableFrom(type)) {
+            if(entity != null && entity.getClass().isAssignableFrom(type)) {
                 return (T) entity;
-            } else {
+            }
+            else {
                 return null;
             }
         }

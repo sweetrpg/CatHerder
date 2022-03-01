@@ -8,7 +8,7 @@ import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.client.screen.widget.CatInventoryButton;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.network.packet.data.OpenCatScreenData;
-import com.sweetrpg.catherder.client.block.model.CatBedModel;
+//import com.sweetrpg.catherder.client.block.model.CattreeModel;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Widget;
@@ -45,23 +45,23 @@ public class ClientEventHandler {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModelRegistry();
 
         try {
-            ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_BED.get());
+            ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
 
-            BlockModel model = (BlockModel) event.getModelLoader().getModel(unbakedModelLoc);
-            BakedModel customModel = new CatBedModel(event.getModelLoader(), model, model.bake(event.getModelLoader(), model, ForgeModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
-
-            // Replace all valid block states
-            ModBlocks.CAT_BED.get().getStateDefinition().getPossibleStates().forEach(state -> {
-                modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
-            });
+//            BlockModel model = (BlockModel) event.getModelLoader().getModel(unbakedModelLoc);
+//            BakedModel customModel = new CattreeModel(event.getModelLoader(), model, model.bake(event.getModelLoader(), model, ForgeModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
+//
+//            // Replace all valid block states
+//            ModBlocks.CAT_TREE.get().getStateDefinition().getPossibleStates().forEach(state -> {
+//                modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
+//            });
 
             // Replace inventory model
-            modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
+//            modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
 
         }
         catch(Exception e) {
-            CatHerder.LOGGER.warn("Could not get base Cat Bed model. Reverting to default textures...");
+            CatHerder.LOGGER.warn("Could not get base Cat Tree model. Reverting to default textures...");
             e.printStackTrace();
         }
     }

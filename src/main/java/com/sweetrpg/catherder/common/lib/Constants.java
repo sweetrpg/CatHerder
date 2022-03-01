@@ -30,9 +30,9 @@ public class Constants {
     public static final String LOCALE_ZH_TW = "zh_tw";
 
     // Translation keys
-    public static final String TRANSLATION_KEY_BLOCK_CAT_BED = "block.catherder.cat_bed";
-    public static final String TRANSLATION_KEY_BLOCK_CAT_BED_SET_OWNER_HELP = "block.catherder.cat_bed.set_owner_help";
-    public static final String TRANSLATION_KEY_BLOCK_CAT_BED_OWNER = "block.catherder.cat_bed.owner";
+    public static final String TRANSLATION_KEY_BLOCK_CAT_TREE = "block.catherder.cat_tree";
+    public static final String TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP = "block.catherder.cat_tree.set_owner_help";
+    public static final String TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER = "block.catherder.cat_tree.owner";
     public static final String TRANSLATION_KEY_BLOCK_FOOD_BOWL = "block.catherder.food_bowl";
     public static final String TRANSLATION_KEY_BLOCK_CAT_BATH = "block.catherder.cat_bath";
     public static final String TRANSLATION_KEY_BLOCK_LITTER_BOX = "block.catherder.litter_box";
@@ -86,7 +86,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES_LINK = "container.catherder.cat_inventories.link";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES = "container.catherder.cat_inventories";
     public static final String TRANSLATION_KEY_ITEMGROUP_MAIN = "itemGroup.catherder";
-    public static final String TRANSLATION_KEY_ITEMGROUP_CATBED = "itemGroup.catherder.catbed";
+    public static final String TRANSLATION_KEY_ITEMGROUP_CATTREE = "itemGroup.catherder.cattree";
     public static final String TRANSLATION_KEY_WILD_TREAT_LOW_LEVEL = "treat.wild_treat.low_level";
     public static final String TRANSLATION_KEY_WILD_TREAT_LEVEL_UP = "treat.wild_treat.level_up";
     public static final String TRANSLATION_KEY_WILD_TREAT_TOO_YOUNG = "treat.wild_treat.too_young";
@@ -240,56 +240,13 @@ public class Constants {
     public static final String TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS = "commands.catrespawn.uuid.success";
     public static final String TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE = "commands.catrespawn.uuid.failure";
     public static final String TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE = "command.catrespawn.imprecise";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_NULL = "catbed.bedding.null";
-    public static final String TRANSLATION_KEY_CATBED_CASING_NULL = "catbed.casing.null";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MISSING = "catbed.bedding.missing";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MISSING = "catbed.casing.missing";
-    public static final String TRANSLATION_KEY_CATBED_EXPLAIN_MISSING = "catbed.explain.missing";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_WHITE_WOOL = "catbed.bedding.minecraft.white_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_ORANGE_WOOL = "catbed.bedding.minecraft.orange_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_MAGENTA_WOOL = "catbed.bedding.minecraft.magenta_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_LTBLUE_WOOL = "catbed.bedding.minecraft.light_blue_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_YELLOW_WOOL = "catbed.bedding.minecraft.yellow_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_LIME_WOOL = "catbed.bedding.minecraft.lime_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_PINK_WOOL = "catbed.bedding.minecraft.pink_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_GRAY_WOOL = "catbed.bedding.minecraft.gray_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_LTGRAY_WOOL = "catbed.bedding.minecraft.light_gray_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_CYAN_WOOL = "catbed.bedding.minecraft.cyan_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_PURPLE_WOOL = "catbed.bedding.minecraft.purple_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_BLUE_WOOL = "catbed.bedding.minecraft.blue_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_BROWN_WOOL = "catbed.bedding.minecraft.brown_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_GREEN_WOOL = "catbed.bedding.minecraft.green_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_RED_WOOL = "catbed.bedding.minecraft.red_wool";
-    public static final String TRANSLATION_KEY_CATBED_BEDDING_MC_BLACK_WOOL = "catbed.bedding.minecraft.black_wool";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_OAK_PLANKS = "catbed.casing.minecraft.oak_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_SPRUCE_PLANKS = "catbed.casing.minecraft.spruce_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_BIRCH_PLANKS = "catbed.casing.minecraft.birch_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_JUNGLE_PLANKS = "catbed.casing.minecraft.jungle_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_ACACIA_PLANKS = "catbed.casing.minecraft.acacia_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_DARKOAK_PLANKS = "catbed.casing.minecraft.dark_oak_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_CRIMSON_PLANKS = "catbed.casing.minecraft.crimson_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_MC_WARPED_PLANKS = "catbed.casing.minecraft.warped_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_AUT_MAPLE_PLANKS = "catbed.casing.autumnity.maple_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_CHERRY_PLANKS = "catbed.casing.biomesoplenty.cherry_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_UMBRAN_PLANKS = "catbed.casing.biomesoplenty.umbran_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_FIR_PLANKS = "catbed.casing.biomesoplenty.fir_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_PALM_PLANKS = "catbed.casing.biomesoplenty.palm_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_REDWOOD_PLANKS = "catbed.casing.biomesoplenty.redwood_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_WILLOW_PLANKS = "catbed.casing.biomesoplenty.willow_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_HELLBARK_PLANKS = "catbed.casing.biomesoplenty.hellbark_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_JACARANDA_PLANKS = "catbed.casing.biomesoplenty.jacaranda_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_MAHOGANY_PLANKS = "catbed.casing.biomesoplenty.mahogany_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_EBONY_PLANKS = "catbed.casing.biomesoplenty.ebony_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_MAGIC_PLANKS = "catbed.casing.biomesoplenty.magic_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOP_DEAD_PLANKS = "catbed.casing.biomesoplenty.dead_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOTANIA_SHIMMERWOOD_PLANKS = "catbed.casing.botania.shimmerwood_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOTANIA_LIVINGWOOD_PLANKS = "catbed.casing.botania.livingwood_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOTANIA_MOSSY_LIVINGWOOD_PLANKS = "catbed.casing.botania.mossy_livingwood_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOTANIA_DREAMWOOD_PLANKS = "catbed.casing.botania.dreamwood_planks";
-    public static final String TRANSLATION_KEY_CATBED_CASING_BOTANIA_MOSSY_DREAMWOOD_PLANKS = "catbed.casing.botania.mossy_dreamwood_planks";
+    public static final String TRANSLATION_KEY_CATTREE_BEDDING_NULL = "cattree.bedding.null";
+    public static final String TRANSLATION_KEY_CATTREE_CASING_NULL = "cattree.casing.null";
+    public static final String TRANSLATION_KEY_CATTREE_BEDDING_MISSING = "cattree.bedding.missing";
+    public static final String TRANSLATION_KEY_CATTREE_CASING_MISSING = "cattree.casing.missing";
+    public static final String TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING = "cattree.explain.missing";
 
     public static class EntityState {
-
         public static final byte DEATH = 3;
         public static final byte CAT_SMOKE = 6;
         public static final byte CAT_HEARTS = 7;

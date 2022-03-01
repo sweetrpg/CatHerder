@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
-import com.sweetrpg.catherder.common.util.CatBedUtil;
+//import com.sweetrpg.catherder.common.util.CattreeUtil;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public class ModItemGroups {
 
     public static final CreativeModeTab GENERAL = new CustomItemGroup("catherder", () -> new ItemStack(ModItems.TRAINING_TREAT.get()));
-    public static final CreativeModeTab CAT_BED = new CustomItemGroup("catherder.catbed", CatBedUtil::createRandomBed);
+//    public static final CreativeModeTab CAT_TREE = new CustomItemGroup("catherder.cattree", CattreeUtil::createRandomBed);
 
     public static class CustomItemGroup extends CreativeModeTab {
 

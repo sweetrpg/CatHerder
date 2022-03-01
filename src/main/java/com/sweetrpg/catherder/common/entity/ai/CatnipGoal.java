@@ -22,7 +22,7 @@ public class CatnipGoal extends Goal {
     public CatnipGoal(CatEntity catIn, float speedIn) {
         this.cat = catIn;
         this.speed = speedIn;
-        this.executionChance = 95;
+        this.executionChance = 5;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 
@@ -51,10 +51,10 @@ public class CatnipGoal extends Goal {
 
     @Override
     public void tick() {
-        if(this.cat.getNoActionTime() >= 20) {
-            return;
-        }
-        else if(this.cat.getRandom().nextInt(this.executionChance) != 0) {
+//        if(this.cat.getNoActionTime() >= 20) {
+//            return;
+//        }
+        /*else*/ if(this.cat.getRandom().nextInt(this.executionChance) != 0) {
             return;
         }
 

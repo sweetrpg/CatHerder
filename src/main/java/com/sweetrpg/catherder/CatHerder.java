@@ -99,12 +99,12 @@ public class CatHerder {
         ModContainerTypes.CONTAINERS.register(modEventBus);
         ModSerializers.SERIALIZERS.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
-        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+//        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
         CatHerder.TALENTS.register(modEventBus);
         ModAccessories.ACCESSORIES.register(modEventBus);
         ModAccessoryTypes.ACCESSORY_TYPES.register(modEventBus);
-        CatBedMaterials.BEDDINGS.register(modEventBus);
-        CatBedMaterials.CASINGS.register(modEventBus);
+//        CattreeMaterials.BEDDINGS.register(modEventBus);
+//        CattreeMaterials.CASINGS.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
 
         modEventBus.addListener(ModRegistries::newRegistry);

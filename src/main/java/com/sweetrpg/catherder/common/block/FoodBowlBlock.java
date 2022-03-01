@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.block;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.common.Screens;
-import com.sweetrpg.catherder.common.block.tileentity.FoodBowlTileEntity;
+import com.sweetrpg.catherder.common.block.tileentity.FoodBowlBlockEntity;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
@@ -57,13 +57,13 @@ public class FoodBowlBlock extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return new FoodBowlTileEntity(pos, blockState);
+        return new FoodBowlBlockEntity(pos, blockState);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModTileEntityTypes.FOOD_BOWL.get(), FoodBowlTileEntity::tick);
+        return createTickerHelper(blockEntityType, ModTileEntityTypes.FOOD_BOWL.get(), FoodBowlBlockEntity::tick);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        FoodBowlTileEntity foodBowlTileEntity = WorldUtil.getTileEntity(worldIn, pos, FoodBowlTileEntity.class);
+        FoodBowlBlockEntity foodBowlTileEntity = WorldUtil.getTileEntity(worldIn, pos, FoodBowlBlockEntity.class);
 
         if (foodBowlTileEntity != null) {
             foodBowlTileEntity.setPlacer(placer);
@@ -95,7 +95,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (entityIn instanceof ItemEntity) {
-            FoodBowlTileEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, FoodBowlTileEntity.class);
+            FoodBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, FoodBowlBlockEntity.class);
 
             if (foodBowl != null) {
                 ItemEntity entityItem = (ItemEntity) entityIn;
@@ -116,7 +116,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            FoodBowlTileEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, FoodBowlTileEntity.class);
+            FoodBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, FoodBowlBlockEntity.class);
             if (foodBowl != null) {
                 IItemHandler bowlInventory = foodBowl.getInventory();
                 for (int i = 0; i < bowlInventory.getSlots(); ++i) {
@@ -136,7 +136,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        FoodBowlTileEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, FoodBowlTileEntity.class);
+        FoodBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, FoodBowlBlockEntity.class);
 
         if (foodBowl != null) {
             IItemHandler bowlInventory = foodBowl.getInventory();
@@ -152,7 +152,7 @@ public class FoodBowlBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
         else {
-            FoodBowlTileEntity foodBowl = WorldUtil.getTileEntity(worldIn, posIn, FoodBowlTileEntity.class);
+            FoodBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, posIn, FoodBowlBlockEntity.class);
 
             if (foodBowl != null) {
                 ItemStack stack = playerIn.getItemInHand(handIn);
