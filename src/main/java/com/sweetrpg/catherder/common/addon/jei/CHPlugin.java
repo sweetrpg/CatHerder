@@ -1,28 +1,28 @@
 package com.sweetrpg.catherder.common.addon.jei;
 
-//import com.sweetrpg.catherder.common.registry.ModBlocks;
-//import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
-//import com.sweetrpg.catherder.api.registry.ICasingMaterial;
-////import com.sweetrpg.catherder.common.util.CattreeUtil;
-//import mezz.jei.api.IModPlugin;
-//import mezz.jei.api.JeiPlugin;
-//import mezz.jei.api.constants.ModIds;
-//import mezz.jei.api.constants.VanillaRecipeCategoryUid;
-//import mezz.jei.api.registration.IRecipeRegistration;
-//import mezz.jei.api.registration.ISubtypeRegistration;
-//import net.minecraft.resources.ResourceLocation;
-//import org.apache.commons.lang3.tuple.Pair;
-//
-//@JeiPlugin
-//public class CHPlugin implements IModPlugin {
-//
-//    @Override
-//    public ResourceLocation getPluginUid() {
-//        return new ResourceLocation(ModIds.JEI_ID, "catherder");
-//    }
-//
-//    @Override
-//    public void registerItemSubtypes(ISubtypeRegistration registration) {
+import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
+import com.sweetrpg.catherder.api.registry.ICasingMaterial;
+//import com.sweetrpg.catherder.common.util.CattreeUtil;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.ModIds;
+import mezz.jei.api.constants.VanillaRecipeCategoryUid;
+import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
+import net.minecraft.resources.ResourceLocation;
+import org.apache.commons.lang3.tuple.Pair;
+
+@JeiPlugin
+public class CHPlugin implements IModPlugin {
+
+    @Override
+    public ResourceLocation getPluginUid() {
+        return new ResourceLocation(ModIds.JEI_ID, "catherder");
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
 //        registration.registerSubtypeInterpreter(ModBlocks.CAT_TREE.get().asItem(), (stack, ctx) -> {
 //            Pair<ICasingMaterial, IBeddingMaterial> materials = CattreeUtil.getMaterials(stack);
 //
@@ -36,10 +36,10 @@ package com.sweetrpg.catherder.common.addon.jei;
 //
 //            return casingKey + "+" + beddingKey;
 //        });
-//    }
-//
-//    @Override
-//    public void registerRecipes(IRecipeRegistration registration) {
+    }
+
+    @Override
+    public void registerRecipes(IRecipeRegistration registration) {
 //        registration.addRecipes(CattreeRecipeMaker.createCattreeRecipes(), VanillaRecipeCategoryUid.CRAFTING);
-//    }
-//}
+    }
+}
