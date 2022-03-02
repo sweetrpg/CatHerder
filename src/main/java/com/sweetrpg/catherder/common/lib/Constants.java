@@ -33,7 +33,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_BLOCK_CAT_TREE = "block.catherder.cat_tree";
     public static final String TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP = "block.catherder.cat_tree.set_owner_help";
     public static final String TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER = "block.catherder.cat_tree.owner";
-    public static final String TRANSLATION_KEY_BLOCK_FOOD_BOWL = "block.catherder.food_bowl";
+    public static final String TRANSLATION_KEY_BLOCK_CAT_BOWL = "block.catherder.cat_bowl";
     public static final String TRANSLATION_KEY_BLOCK_CAT_BATH = "block.catherder.cat_bath";
     public static final String TRANSLATION_KEY_BLOCK_LITTER_BOX = "block.catherder.litter_box";
     public static final String TRANSLATION_KEY_BLOCK_WILD_CATNIP = "block.catherder.wild_catnip";
@@ -81,7 +81,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_YARN = "item.catherder.yarn";
     public static final String TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS = "item.catherder.treat_bag.contents";
     public static final String TRANSLATION_KEY_CONTAINER_PACK_CAT = "container.catherder.pack_cat";
-    public static final String TRANSLATION_KEY_CONTAINER_FOOD_BOWL = "container.catherder.food_bowl";
+    public static final String TRANSLATION_KEY_CONTAINER_CAT_BOWL = "container.catherder.cat_bowl";
     public static final String TRANSLATION_KEY_CONTAINER_TREAT_BAG = "container.catherder.treat_bag";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES_LINK = "container.catherder.cat_inventories.link";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES = "container.catherder.cat_inventories";
