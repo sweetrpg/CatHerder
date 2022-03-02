@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class Resources {
 
-    public static final ResourceLocation GUI_FOOD_BOWL = getGui("food_bowl");
+    public static final ResourceLocation GUI_CAT_BOWL = getGui("cat_bowl");
     public static final ResourceLocation GUI_PACK_CAT = getGui("pack_cat");
     public static final ResourceLocation GUI_TREAT_BAG = getGui("treat_bag");
     public static final ResourceLocation GUI_RADAR = getGui("radar");

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "block/cat_bowl",
-		"particle": "block/cat_bowl"
+		"0": "catherder:block/cat_bowl",
+		"particle": "catherder:block/cat_bowl"
 	},
 	"elements": [
 		{

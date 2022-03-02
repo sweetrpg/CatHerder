@@ -2,7 +2,7 @@
    "block.catherder.cat_tree": "Собачья кровать",
    "block.catherder.cat_tree.set_owner_help": "Shift click with your cat nearby and they will come and make the bed their own. If the unimaginable happens and they do die right click the bed to revive them.",
    "block.catherder.cat_tree.owner": "This bed is owned by %s.",
-   "block.catherder.food_bowl": "Миска для еды",
+   "block.catherder.cat_bowl": "Миска для еды",
    "block.catherder.cat_bath": "Собачья ванна",
    "block.catherder.litter_box": "Litter Box",
 
@@ -51,7 +51,7 @@
    "item.catherder.treat_bag.contents": "%d %s",
 
    "container.catherder.pack_cat": "Рюкзак пёсика",
-   "container.catherder.food_bowl": "Миска для еды",
+   "container.catherder.cat_bowl": "Миска для еды",
    "container.catherder.treat_bag": "Мешочек с пряностями",
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",

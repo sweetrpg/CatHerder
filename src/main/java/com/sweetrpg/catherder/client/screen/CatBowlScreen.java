@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class FoodBowlScreen extends AbstractContainerScreen<FoodBowlContainer> {
+public class CatBowlScreen extends AbstractContainerScreen<FoodBowlContainer> {
 
-    public FoodBowlScreen(FoodBowlContainer foodBowl, Inventory playerInventory, Component displayName) {
+    public CatBowlScreen(FoodBowlContainer foodBowl, Inventory playerInventory, Component displayName) {
         super(foodBowl, playerInventory, displayName);
         this.imageHeight = 127;
     }
@@ -32,7 +32,7 @@ public class FoodBowlScreen extends AbstractContainerScreen<FoodBowlContainer> {
     protected void renderBg(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, Resources.GUI_FOOD_BOWL);
+        RenderSystem.setShaderTexture(0, Resources.GUI_CAT_BOWL);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
         this.blit(stack, x, y, 0, 0, this.imageWidth, this.imageHeight);

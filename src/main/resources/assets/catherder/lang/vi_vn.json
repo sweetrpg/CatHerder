@@ -2,7 +2,7 @@
    "block.catherder.cat_tree": "Giường Cún",
    "block.catherder.cat_tree.set_owner_help": "Giữ Shift và nhấp Chuột Phải khi cún bạn đang ở gần và nó sẽ đến và nhận giường. Nếu chuyện không tưởng xảy ra và nó chết, nhấp Chuột Phải vào giường để Hồi Sinh nó.",
    "block.catherder.cat_tree.owner": "Giường này của %s.",
-   "block.catherder.food_bowl": "Tô Đồ ăn",
+   "block.catherder.cat_bowl": "Tô Đồ ăn",
    "block.catherder.cat_bath": "Bồn Tắm cún",
    "block.catherder.litter_box": "Litter Box",
 
@@ -51,7 +51,7 @@
    "item.catherder.treat_bag.contents": "%d %s",
 
    "container.catherder.pack_cat": "Cún Giữ đồ",
-   "container.catherder.food_bowl": "Tô Đồ ăn",
+   "container.catherder.cat_bowl": "Tô Đồ ăn",
    "container.catherder.treat_bag": "Túi đựng Xương",
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",

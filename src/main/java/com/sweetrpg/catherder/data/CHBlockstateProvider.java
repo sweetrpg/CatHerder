@@ -43,7 +43,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 //        catTree(ModBlocks.CAT_TREE);
-        createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
+//        createFromShape(ModBlocks.CAT_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
         stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
         wildCropBlock(ModBlocks.WILD_CATNIP.get());
         makeSimple(ModBlocks.CARDBOARD_BOX);

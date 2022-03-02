@@ -30,13 +30,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class FoodBowlBlockEntity extends PlacedBlockEntity implements MenuProvider {
+public class CatBowlBlockEntity extends PlacedBlockEntity implements MenuProvider {
 
     private final ItemStackHandler inventory = new ItemStackHandler(5) {
         @Override
         protected void onContentsChanged(int slot) {
             // When contents change mark needs save to disc
-            FoodBowlBlockEntity.this.setChanged();
+            CatBowlBlockEntity.this.setChanged();
         }
 
         @Override
@@ -48,12 +48,12 @@ public class FoodBowlBlockEntity extends PlacedBlockEntity implements MenuProvid
 
     public int timeoutCounter;
 
-    public FoodBowlBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModTileEntityTypes.FOOD_BOWL.get(), pos, blockState);
+    public CatBowlBlockEntity(BlockPos pos, BlockState blockState) {
+        super(ModTileEntityTypes.CAT_BOWL.get(), pos, blockState);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState blockState, BlockEntity blockEntity) {
-        if(!(blockEntity instanceof FoodBowlBlockEntity bowl)) {
+        if(!(blockEntity instanceof CatBowlBlockEntity bowl)) {
             return;
         }
 
@@ -104,7 +104,7 @@ public class FoodBowlBlockEntity extends PlacedBlockEntity implements MenuProvid
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent(Constants.TRANSLATION_KEY_CONTAINER_FOOD_BOWL);
+        return new TranslatableComponent(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL);
     }
 
     @Override

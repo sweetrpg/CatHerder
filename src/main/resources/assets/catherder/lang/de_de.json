@@ -2,7 +2,7 @@
    "block.catherder.cat_tree": "Katzenbett",
    "block.catherder.cat_tree.set_owner_help": "Klicken Sie das Bett Umschalt anhaltend während dein Hund in der Nähe ist, damit sie kommen und das Bett zu ihrem eigenen machen. Wenn das Unvorstellbare passiert und sie sterben, klicken Sie einfach auf das Bett, um sie wiederzubeleben.",
    "block.catherder.cat_tree.owner": "Dieses Bett gehört zu %s.",
-   "block.catherder.food_bowl": "Futternapf",
+   "block.catherder.cat_bowl": "Futternapf",
    "block.catherder.cat_bath": "Katzenbad",
    "block.catherder.litter_box": "Katzenklo",
 
@@ -51,7 +51,7 @@
    "item.catherder.treat_bag.contents": "%d %s",
 
    "container.catherder.pack_cat": "Katzerucksack",
-   "container.catherder.food_bowl": "Futternapf",
+   "container.catherder.cat_bowl": "Futternapf",
    "container.catherder.treat_bag": "Leckerlistasche",
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",
