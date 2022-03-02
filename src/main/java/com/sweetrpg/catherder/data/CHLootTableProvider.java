@@ -55,7 +55,7 @@ public class CHLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             dropCatTree(ModBlocks.CAT_TREE);
-            dropsSelf(ModBlocks.FOOD_BOWL); // Drop with the name of the cat bowl
+            dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTER_BOX);
             dropCatnip(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);

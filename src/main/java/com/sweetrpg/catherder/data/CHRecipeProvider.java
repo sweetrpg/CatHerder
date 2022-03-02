@@ -58,7 +58,7 @@ public class CHRecipeProvider extends RecipeProvider {
                            .define('X', Items.BONE).define('Y', Items.SHEARS)
                            .unlockedBy("has_shears", has(Items.SHEARS))
                            .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.FOOD_BOWL.get(), 1)
+        ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
                            .pattern("XXX")
                            .pattern("XYX")
                            .pattern("XXX")
