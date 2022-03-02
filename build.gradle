@@ -117,6 +117,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
     runtimeOnly fg.deobf("curse.maven:doggytalents-271050:3616930")
+//    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
