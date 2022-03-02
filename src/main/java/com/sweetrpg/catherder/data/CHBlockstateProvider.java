@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.AABB;
@@ -43,10 +42,10 @@ public class CHBlockstateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 //        catTree(ModBlocks.CAT_TREE);
-        createFromShape(ModBlocks.FOOD_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
+//        createFromShape(ModBlocks.CAT_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
         stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
         wildCropBlock(ModBlocks.WILD_CATNIP.get());
-        makeSimple(ModBlocks.CARDBOARD_BOX);
+//        makeSimple(ModBlocks.CARDBOARD_BOX);
         mouseTrapBlock(ModBlocks.MOUSE_TRAP);
         cheeseWheelBlock(ModBlocks.CHEESE_WHEEL.get(), CheeseWheelBlock.SERVINGS);
     }
@@ -104,31 +103,31 @@ public class CHBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(blockIn.get(), model);
     }
 
-    protected void catTree(Supplier<? extends Block> blockIn) {
-        BlockModelBuilder model = this.models()
-                                      .getBuilder(name(blockIn))
-                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                                      .texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate))
-                                      .texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate))
-                                      .texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
-
-        model.element().from(1.6F, 3.2F, 1.6F).to(14.4F, 6.4F, 14.4F).face(Direction.UP).texture("#bedding").end().face(Direction.NORTH).texture("#bedding");
-
-        model.element() //base
-             .from(0, 0, 0).to(16, 3.2F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.DOWN));
-
-        model.element().from(11.2F, 3.2F, 0).to(16, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
-
-        model.element().from(0, 3.2F, 0).to(4.8F, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
-
-        model.element().from(14.4F, 3.2F, 0).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.EAST));
-
-        model.element().from(0, 3.2F, 14.4F).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.SOUTH));
-
-        model.element().from(0, 3.2F, 0).to(1.6F, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.WEST));
-
-        this.simpleBlock(blockIn.get(), model);
-    }
+//    protected void catTree(Supplier<? extends Block> blockIn) {
+//        BlockModelBuilder model = this.models()
+//                                      .getBuilder(name(blockIn))
+//                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+//                                      .texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate))
+//                                      .texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate))
+//                                      .texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
+//
+//        model.element().from(1.6F, 3.2F, 1.6F).to(14.4F, 6.4F, 14.4F).face(Direction.UP).texture("#bedding").end().face(Direction.NORTH).texture("#bedding");
+//
+//        model.element() //base
+//             .from(0, 0, 0).to(16, 3.2F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.DOWN));
+//
+//        model.element().from(11.2F, 3.2F, 0).to(16, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
+//
+//        model.element().from(0, 3.2F, 0).to(4.8F, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
+//
+//        model.element().from(14.4F, 3.2F, 0).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.EAST));
+//
+//        model.element().from(0, 3.2F, 14.4F).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.SOUTH));
+//
+//        model.element().from(0, 3.2F, 0).to(1.6F, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.WEST));
+//
+//        this.simpleBlock(blockIn.get(), model);
+//    }
 
 //    protected void catBath(Supplier<? extends Block> blockIn) {
 //        BlockModelBuilder model = this.models()

@@ -472,9 +472,9 @@ public class CatEntity extends AbstractCatEntity {
             ResourceKey<Level> dimKey = this.level.dimension();
             Optional<BlockPos> bowlPos = this.getBowlPos(dimKey);
 
-            // If the cat has a food bowl in this dimension then check if it is still there
+            // If the cat has a cat bowl in this dimension then check if it is still there
             // Only check if the chunk it is in is loaded
-            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.FOOD_BOWL.get())) {
+            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.CAT_BOWL.get())) {
                 this.setBowlPos(dimKey, Optional.empty());
             }
         }

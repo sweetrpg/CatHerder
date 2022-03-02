@@ -25,7 +25,7 @@ public class ModContainerTypes {
 
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, Constants.MOD_ID);
 
-    public static final RegistryObject<MenuType<FoodBowlContainer>> FOOD_BOWL = register("food_bowl", (windowId, inv, data) -> {
+    public static final RegistryObject<MenuType<FoodBowlContainer>> CAT_BOWL = register("cat_bowl", (windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
         return new FoodBowlContainer(windowId, inv.player.level, pos, inv, inv.player);
     });

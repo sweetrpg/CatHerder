@@ -2,7 +2,7 @@
    "block.catherder.cat_tree": "狗窝",
    "block.catherder.cat_tree.set_owner_help": "Shift click with your cat nearby and they will come and make the bed their own. If the unimaginable happens and they do die right click the bed to revive them.",
    "block.catherder.cat_tree.owner": "This bed is owned by %s.",
-   "block.catherder.food_bowl": "狗食盆",
+   "block.catherder.cat_bowl": "狗食盆",
    "block.catherder.cat_bath": "狗浴缸",
    "block.catherder.litter_box": "Litter Box",
 
@@ -51,7 +51,7 @@
    "item.catherder.treat_bag.contents": "%d %s",
 
    "container.catherder.pack_cat": "小狗背包",
-   "container.catherder.food_bowl": "狗食盆",
+   "container.catherder.cat_bowl": "狗食盆",
    "container.catherder.treat_bag": "口粮袋子",
    "container.catherder.cat_inventories.link": "Cat Inventories",
    "container.catherder.cat_inventories": "Cat Inventories",
