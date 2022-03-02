@@ -103,31 +103,31 @@ public class CHBlockstateProvider extends BlockStateProvider {
         this.simpleBlock(blockIn.get(), model);
     }
 
-    protected void catTree(Supplier<? extends Block> blockIn) {
-        BlockModelBuilder model = this.models()
-                                      .getBuilder(name(blockIn))
-                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                                      .texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate))
-                                      .texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate))
-                                      .texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
-
-        model.element().from(1.6F, 3.2F, 1.6F).to(14.4F, 6.4F, 14.4F).face(Direction.UP).texture("#bedding").end().face(Direction.NORTH).texture("#bedding");
-
-        model.element() //base
-             .from(0, 0, 0).to(16, 3.2F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.DOWN));
-
-        model.element().from(11.2F, 3.2F, 0).to(16, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
-
-        model.element().from(0, 3.2F, 0).to(4.8F, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
-
-        model.element().from(14.4F, 3.2F, 0).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.EAST));
-
-        model.element().from(0, 3.2F, 14.4F).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.SOUTH));
-
-        model.element().from(0, 3.2F, 0).to(1.6F, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.WEST));
-
-        this.simpleBlock(blockIn.get(), model);
-    }
+//    protected void catTree(Supplier<? extends Block> blockIn) {
+//        BlockModelBuilder model = this.models()
+//                                      .getBuilder(name(blockIn))
+//                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+//                                      .texture("particle", blockTexture(Blocks.OAK_PLANKS.delegate))
+//                                      .texture("bedding", blockTexture(Blocks.WHITE_WOOL.delegate))
+//                                      .texture("casing", blockTexture(Blocks.OAK_PLANKS.delegate)).ao(false);
+//
+//        model.element().from(1.6F, 3.2F, 1.6F).to(14.4F, 6.4F, 14.4F).face(Direction.UP).texture("#bedding").end().face(Direction.NORTH).texture("#bedding");
+//
+//        model.element() //base
+//             .from(0, 0, 0).to(16, 3.2F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.DOWN));
+//
+//        model.element().from(11.2F, 3.2F, 0).to(16, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
+//
+//        model.element().from(0, 3.2F, 0).to(4.8F, 9.6F, 1.6F).allFaces(cullFaceFactory.apply("#casing", Direction.NORTH));
+//
+//        model.element().from(14.4F, 3.2F, 0).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.EAST));
+//
+//        model.element().from(0, 3.2F, 14.4F).to(16, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.SOUTH));
+//
+//        model.element().from(0, 3.2F, 0).to(1.6F, 9.6F, 16).allFaces(cullFaceFactory.apply("#casing", Direction.WEST));
+//
+//        this.simpleBlock(blockIn.get(), model);
+//    }
 
 //    protected void catBath(Supplier<? extends Block> blockIn) {
 //        BlockModelBuilder model = this.models()
