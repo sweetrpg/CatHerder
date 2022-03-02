@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "catherder:food_bowl"
+          "name": "catherder:cat_bowl"
         }
       ],
       "conditions": [

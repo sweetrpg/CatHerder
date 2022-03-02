@@ -13,6 +13,11 @@ Cat Herder
 
 Thanks to everyone that has contributed. This includes but is not limited to...
 * **DoggyTalents** -- from which this mod borrows heavily 
+* **Katy Schifferer** -- graphics and textures
+* **Beth Schifferer** -- models and textures
+* **Michelle Schifferer** -- testing and ideas
+
+Download it from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cat-herder).
 
 Want to know more about the mod? Take a peek at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
 

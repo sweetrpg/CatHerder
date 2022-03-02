@@ -8,6 +8,5 @@ import net.minecraft.world.entity.Entity;
 
 @FunctionalInterface
 public interface LayerFactory<T extends Entity, M extends EntityModel<T>> {
-
     RenderLayer<T, M> createLayer(RenderLayerParent<T, M> rendererIn, EntityRendererProvider.Context ctx);
 }

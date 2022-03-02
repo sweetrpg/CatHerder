@@ -24,9 +24,9 @@ public class ModBlocks {
     public static final DeferredRegister<Item> ITEMS = ModItems.ITEMS;
 
     // cat items
-    public static final RegistryObject<CatBedBlock> CAT_BED = registerWithItem("cat_bed", CatBedBlock::new, (prop) -> prop.tab(ModItemGroups.CAT_BED));
+    public static final RegistryObject<CatTreeBlock> CAT_TREE = registerWithItem("cat_tree", CatTreeBlock::new);
     public static final RegistryObject<LitterBoxBlock> LITTER_BOX = registerWithItem("litter_box", LitterBoxBlock::new);
-    public static final RegistryObject<FoodBowlBlock> FOOD_BOWL = registerWithItem("food_bowl", FoodBowlBlock::new);
+    public static final RegistryObject<CatBowlBlock> CAT_BOWL = registerWithItem("cat_bowl", CatBowlBlock::new);
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
 
     // miscellaneous items
@@ -88,6 +88,6 @@ public class ModBlocks {
         // Trying to avoid as reports like CatHerder#242, where it says
         // CatHerder crashed but is not the CAUSE of the crash
 
-        CatHerder.LOGGER.info("Items/Blocks were not registered for some reason... probably beacuse we are c...r..a..s.hing");
+        CatHerder.LOGGER.info("Items/Blocks were not registered for some reason... probably because we are c...r..a..s.hing");
     }
 }

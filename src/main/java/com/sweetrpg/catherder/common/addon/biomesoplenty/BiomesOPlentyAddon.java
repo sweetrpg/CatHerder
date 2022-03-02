@@ -20,15 +20,18 @@ public class BiomesOPlentyAddon implements Addon {
 
     public static final String MOD_ID = "biomesoplenty";
 
-    public static final String[] BLOCKS = {"cherry_planks", "umbran_planks",
+    public static final String[] BLOCKS = {
+            "cherry_planks", "umbran_planks",
             "fir_planks", "dead_planks", "magic_planks", "palm_planks", "redwood_planks",
-            "willow_planks", "hellbark_planks", "jacaranda_planks", "mahogany_planks"};
+            "willow_planks", "hellbark_planks", "jacaranda_planks", "mahogany_planks"
+    };
 
     public final void registerCasings(final RegistryEvent.Register<ICasingMaterial> event) {
-        if (!this.shouldLoad()) { return; }
+        if(!this.shouldLoad()) {return;}
+
         IForgeRegistry<ICasingMaterial> casingRegistry = event.getRegistry();
 
-        for (String block : BLOCKS) {
+        for(String block : BLOCKS) {
             ResourceLocation rl = Util.getResource(MOD_ID, block);
             Supplier<Block> blockGet = () -> ForgeRegistries.BLOCKS.getValue(rl);
 

@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.data;
 import com.google.gson.JsonObject;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
+//import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
@@ -58,7 +58,7 @@ public class CHRecipeProvider extends RecipeProvider {
                            .define('X', Items.BONE).define('Y', Items.SHEARS)
                            .unlockedBy("has_shears", has(Items.SHEARS))
                            .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.FOOD_BOWL.get(), 1)
+        ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
                            .pattern("XXX")
                            .pattern("XYX")
                            .pattern("XXX")
@@ -210,8 +210,21 @@ public class CHRecipeProvider extends RecipeProvider {
 //                           .unlockedBy("has_meat", has(Items.BEEF))
 //                           .save(consumer);
 
-        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_BED.get())
-                            .save(consumer, Util.getResourcePath("cat_bed"));
+        ShapedRecipeBuilder.shaped(ModBlocks.CAT_TREE.get(), 1)
+                .pattern("sWs")
+                .pattern("SF ")
+                .pattern("sss")
+                .define('s', ItemTags.SLABS)
+                .define('S', Items.STRING)
+                .define('F', ItemTags.WOODEN_FENCES)
+                .define('W', ItemTags.WOOL)
+                .unlockedBy("has_slabs", has(ItemTags.SLABS))
+                .unlockedBy("has_string", has(Items.STRING))
+                .unlockedBy("has_fences", has(ItemTags.WOODEN_FENCES))
+                .unlockedBy("has_wood", has(ItemTags.WOOL))
+                .save(consumer);
+//        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
+//                            .save(consumer, Util.getResourcePath("cat_tree"));
     }
 
     @Override

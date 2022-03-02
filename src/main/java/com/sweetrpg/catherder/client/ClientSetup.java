@@ -3,7 +3,6 @@ package com.sweetrpg.catherder.client;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.client.entity.model.CatBackpackModel;
 import com.sweetrpg.catherder.client.entity.model.CatModel;
 import com.sweetrpg.catherder.client.entity.model.CatRescueModel;
@@ -16,10 +15,10 @@ import com.sweetrpg.catherder.client.entity.render.layer.RescueCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.ArmorAccessoryRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.DefaultAccessoryRenderer;
 import com.sweetrpg.catherder.client.screen.CatInventoriesScreen;
-import com.sweetrpg.catherder.client.screen.FoodBowlScreen;
+import com.sweetrpg.catherder.client.screen.CatBowlScreen;
 import com.sweetrpg.catherder.client.screen.PackCatScreen;
 import com.sweetrpg.catherder.client.screen.TreatBagScreen;
-import com.sweetrpg.catherder.client.tileentity.renderer.CatBedRenderer;
+//import com.sweetrpg.catherder.client.tileentity.renderer.CattreeRenderer;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -43,7 +42,7 @@ public class ClientSetup {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CATNIP.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.CATNIP_CROP.get(), RenderType.cutout());
 
-        MenuScreens.register(ModContainerTypes.FOOD_BOWL.get(), FoodBowlScreen::new);
+        MenuScreens.register(ModContainerTypes.CAT_BOWL.get(), CatBowlScreen::new);
         MenuScreens.register(ModContainerTypes.PACK_CAT.get(), PackCatScreen::new);
         MenuScreens.register(ModContainerTypes.TREAT_BAG.get(), TreatBagScreen::new);
         MenuScreens.register(ModContainerTypes.CAT_INVENTORIES.get(), CatInventoriesScreen::new);
@@ -60,7 +59,7 @@ public class ClientSetup {
     public static void setupTileEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.CAT.get(), CatRenderer::new);
 //        event.registerEntityRenderer(ModEntityTypes.CAT_BEAM.get(), CatBeamRenderer::new);
-        event.registerBlockEntityRenderer(ModTileEntityTypes.CAT_BED.get(), CatBedRenderer::new);
+//        event.registerBlockEntityRenderer(ModTileEntityTypes.CAT_TREE.get(), CattreeRenderer::new);
     }
 
     public static void setupCollarRenderers(final FMLClientSetupEvent event) {

@@ -24,7 +24,7 @@ public class FoodBowlContainer extends AbstractContainerMenu {
 
     //Server method
     public FoodBowlContainer(int windowId, Level world, BlockPos pos, Inventory playerInventory, Player player) {
-        super(ModContainerTypes.FOOD_BOWL.get(), windowId);
+        super(ModContainerTypes.CAT_BOWL.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
         IItemHandler inventory = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
 
@@ -47,7 +47,7 @@ public class FoodBowlContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(this.tileEntity.getLevel(), this.tileEntity.getBlockPos()), player, ModBlocks.FOOD_BOWL.get());
+        return stillValid(ContainerLevelAccess.create(this.tileEntity.getLevel(), this.tileEntity.getBlockPos()), player, ModBlocks.CAT_BOWL.get());
     }
 
     @Override

@@ -62,10 +62,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
@@ -114,7 +112,7 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BED_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<Integer>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER.get().getSerializer()));
 
@@ -153,7 +151,7 @@ public class CatEntity extends AbstractCatEntity {
         CAT_LEVEL.get();
         GENDER.get();
         MODE.get();
-        CAT_BED_LOCATION.get();
+        CAT_TREE_LOCATION.get();
         CAT_BOWL_LOCATION.get();
         ORIGINAL_BREED.get();
     }
@@ -173,7 +171,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(SIZE, (byte) 3);
         this.entityData.define(ORIGINAL_BREED_INT, 0);
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
-        this.entityData.define(CAT_BED_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
     }
 
@@ -474,9 +472,9 @@ public class CatEntity extends AbstractCatEntity {
             ResourceKey<Level> dimKey = this.level.dimension();
             Optional<BlockPos> bowlPos = this.getBowlPos(dimKey);
 
-            // If the cat has a food bowl in this dimension then check if it is still there
+            // If the cat has a cat bowl in this dimension then check if it is still there
             // Only check if the chunk it is in is loaded
-            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.FOOD_BOWL.get())) {
+            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.CAT_BOWL.get())) {
                 this.setBowlPos(dimKey, Optional.empty());
             }
         }
@@ -1270,7 +1268,7 @@ public class CatEntity extends AbstractCatEntity {
         compound.putInt("original_breed", this.getOriginalBreed());
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
-        DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_BED_LOCATION.get());
+        DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
 
         if(!bedsData.isEmpty()) {
             ListTag bedsList = new ListTag();
@@ -1515,7 +1513,7 @@ public class CatEntity extends AbstractCatEntity {
             e.printStackTrace();
         }
 
-        DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_BED_LOCATION.get()).copyEmpty();
+        DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
 
         try {
             if(compound.contains("beds", Tag.TAG_LIST)) {
@@ -1535,7 +1533,7 @@ public class CatEntity extends AbstractCatEntity {
             e.printStackTrace();
         }
 
-        this.entityData.set(CAT_BED_LOCATION.get(), bedsData);
+        this.entityData.set(CAT_TREE_LOCATION.get(), bedsData);
 
         DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
 
@@ -1763,7 +1761,7 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public Optional<BlockPos> getBedPos(ResourceKey<Level> registryKey) {
-        return this.entityData.get(CAT_BED_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
+        return this.entityData.get(CAT_TREE_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
     }
 
     public void setBedPos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
@@ -1771,7 +1769,7 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public void setBedPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
-        this.entityData.set(CAT_BED_LOCATION.get(), this.entityData.get(CAT_BED_LOCATION.get()).copy().set(registryKey, pos));
+        this.entityData.set(CAT_TREE_LOCATION.get(), this.entityData.get(CAT_TREE_LOCATION.get()).copy().set(registryKey, pos));
     }
 
     public Optional<BlockPos> getBowlPos() {
@@ -2338,7 +2336,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         Block blockBelow = this.level.getBlockState(this.blockPosition().below()).getBlock();
-        boolean onBed = blockBelow == ModBlocks.CAT_BED.get() || BlockTags.BEDS.contains(blockBelow);
+        boolean onBed = blockBelow == ModBlocks.CAT_TREE.get() || BlockTags.BEDS.contains(blockBelow);
         return onBed;
     }
 

@@ -1,9 +1,10 @@
 package com.sweetrpg.catherder.common.block.tileentity;
 
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.inventory.container.FoodBowlContainer;
+import com.sweetrpg.catherder.common.lib.Constants;
+import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,13 +30,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider {
+public class CatBowlBlockEntity extends PlacedBlockEntity implements MenuProvider {
 
     private final ItemStackHandler inventory = new ItemStackHandler(5) {
         @Override
         protected void onContentsChanged(int slot) {
             // When contents change mark needs save to disc
-            FoodBowlTileEntity.this.setChanged();
+            CatBowlBlockEntity.this.setChanged();
         }
 
         @Override
@@ -45,11 +46,35 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
     };
     private final LazyOptional<ItemStackHandler> itemStackHandler = LazyOptional.of(() -> this.inventory);
 
-
     public int timeoutCounter;
 
-    public FoodBowlTileEntity(BlockPos pos, BlockState blockState) {
-        super(ModTileEntityTypes.FOOD_BOWL.get(), pos, blockState);
+    public CatBowlBlockEntity(BlockPos pos, BlockState blockState) {
+        super(ModTileEntityTypes.CAT_BOWL.get(), pos, blockState);
+    }
+
+    public static void tick(Level level, BlockPos pos, BlockState blockState, BlockEntity blockEntity) {
+        if(!(blockEntity instanceof CatBowlBlockEntity bowl)) {
+            return;
+        }
+
+        //Only run update code every 5 ticks (0.25s)
+        if(++bowl.timeoutCounter < 5) {return;}
+
+        List<CatEntity> catList = bowl.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
+
+        for(CatEntity cat : catList) {
+            //TODO make cat bowl remember who placed and only their cats can attach to the bowl
+            UUID placerId = bowl.getPlacerId();
+            if(placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getBowlPos().isPresent()) {
+                cat.setBowlPos(bowl.worldPosition);
+            }
+
+            if(cat.getCatHunger() < cat.getMaxHunger() / 2) {
+                InventoryUtil.feedCatFrom(cat, null, bowl.inventory);
+            }
+        }
+
+        bowl.timeoutCounter = 0;
     }
 
     @Override
@@ -64,31 +89,6 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
         compound.merge(this.inventory.serializeNBT());
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState blockState, BlockEntity blockEntity) {
-        if (!(blockEntity instanceof FoodBowlTileEntity bowl)) {
-            return;
-        }
-
-        //Only run update code every 5 ticks (0.25s)
-        if (++bowl.timeoutCounter < 5) { return; }
-
-        List<CatEntity> catList = bowl.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
-
-        for (CatEntity cat : catList) {
-            //TODO make cat bowl remember who placed and only their cats can attach to the bowl
-            UUID placerId = bowl.getPlacerId();
-            if (placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getBowlPos().isPresent()) {
-                cat.setBowlPos(bowl.worldPosition);
-            }
-
-            if (cat.getCatHunger() < cat.getMaxHunger() / 2) {
-               InventoryUtil.feedCatFrom(cat, null, bowl.inventory);
-            }
-        }
-
-        bowl.timeoutCounter = 0;
-    }
-
     public ItemStackHandler getInventory() {
         return this.inventory;
     }
@@ -96,7 +96,7 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (LazyOptional<T>) this.itemStackHandler;
         }
         return super.getCapability(cap, side);
@@ -104,7 +104,7 @@ public class FoodBowlTileEntity extends PlacedTileEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("container.catherder.food_bowl");
+        return new TranslatableComponent(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL);
     }
 
     @Override
