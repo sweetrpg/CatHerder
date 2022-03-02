@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.AABB;
@@ -46,7 +45,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //        createFromShape(ModBlocks.CAT_BOWL, new AABB(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D));
         stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
         wildCropBlock(ModBlocks.WILD_CATNIP.get());
-        makeSimple(ModBlocks.CARDBOARD_BOX);
+//        makeSimple(ModBlocks.CARDBOARD_BOX);
         mouseTrapBlock(ModBlocks.MOUSE_TRAP);
         cheeseWheelBlock(ModBlocks.CHEESE_WHEEL.get(), CheeseWheelBlock.SERVINGS);
     }

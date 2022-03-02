@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "block/cardboard_box",
-		"particle": "block/cardboard_box"
+		"0": "catherder:block/cardboard_box",
+		"particle": "catherder:block/cardboard_box"
 	},
 	"elements": [
 		{
@@ -133,7 +133,7 @@
 	"groups": [
 		{
 			"name": "box",
-			"origin": [-8, 0, -8],
+			"origin": [0, 0, 0],
 			"color": 0,
 			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 		}
