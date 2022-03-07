@@ -33,6 +33,10 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
      * method as well.
      */
     public boolean canUse() {
+        if(this.cat.getLitterboxCooldown() > 0) {
+            return false;
+        }
+
         return this.cat.isTame() && !this.cat.isOrderedToSit() && !this.cat.isLying() && super.canUse();
     }
 
@@ -41,6 +45,7 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
      */
     public void start() {
         super.start();
+        this.cat.setLitterboxCooldown(0);
         this.cat.setInSittingPose(false);
     }
 
@@ -57,16 +62,13 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
         this.cat.setInSittingPose(false);
         this.cat.setSprinting(false);
         this.usingLitterboxCounter = 0;
+        this.cat.setLitterboxCooldown(LITTERBOX_USE_DELAY);
     }
 
     /**
      * Keep ticking a continuous task that has already been started
      */
     public void tick() {
-        if(this.cat.isPathFinding()) {
-            return;
-        }
-
         super.tick();
 
         if(this.cat.getLitterboxCooldown() > 0) {

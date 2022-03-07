@@ -199,8 +199,8 @@ public class CatEntity extends AbstractCatEntity {
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(2, new UseLitterboxGoal<>(this, 16));
-        this.targetSelector.addGoal(2, new PlayInCardboardBoxGoal<>(this, 16));
+        this.targetSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
+        this.targetSelector.addGoal(2, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
 //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 //        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
@@ -2017,6 +2017,13 @@ public class CatEntity extends AbstractCatEntity {
         return InteractionResult.SUCCESS;
     }
 
+    public int getLitterboxCooldown() {
+        return litterboxCooldown;
+    }
+
+    public void setLitterboxCooldown(int litterboxCooldown) {
+        this.litterboxCooldown = litterboxCooldown;
+    }
 
     public <T> void markDataParameterDirty(EntityDataAccessor<T> key) {
         this.markDataParameterDirty(key, true);
