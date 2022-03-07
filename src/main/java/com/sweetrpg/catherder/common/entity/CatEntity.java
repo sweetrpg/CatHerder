@@ -138,6 +138,7 @@ public class CatEntity extends AbstractCatEntity {
     private int catnipTick;
     private int catnipCooldown;
     private Goal catnipGoal;
+    private int litterboxCooldown;
 
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -193,10 +194,13 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.targetSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
         this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
+        this.targetSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(2, new UseLitterboxGoal<>(this, 16));
+        this.targetSelector.addGoal(2, new PlayInCardboardBoxGoal<>(this, 16));
 //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 //        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
@@ -391,6 +395,9 @@ public class CatEntity extends AbstractCatEntity {
                 }
                 if(this.catnipCooldown > 0) {
                     this.catnipCooldown--;
+                }
+                if(this.litterboxCooldown > 0) {
+                    this.litterboxCooldown--;
                 }
 
                 // Every 2 seconds
