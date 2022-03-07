@@ -1,7 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -13,15 +12,17 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 
 import java.util.EnumSet;
+import java.util.Random;
 
 public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockGoal {
     private final CatEntity cat;
+    private int usingCounter = 0;
 
     public static final int MAX_CARDBOARDBOX_USE_COUNT = 40;
     public static final int CARDBOARDBOX_USE_DELAY = 10000;
 
-    public PlayInCardboardBoxGoal(CatEntity cat, int searchRange) {
-        super(cat, 1, searchRange, 6);
+    public PlayInCardboardBoxGoal(CatEntity cat, float speedModifier, int searchRange) {
+        super(cat, speedModifier, searchRange, 6);
         this.cat = cat;
         this.verticalSearchStart = -2;
         this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
@@ -61,18 +62,18 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
      * Keep ticking a continuous task that has already been started
      */
     public void tick() {
-//        if(this.cat.isPathFinding()) {
-//            return;
-//        }
-//
         super.tick();
-//
+
 //        if(this.cat.getLitterboxCooldown() > 0) {
 //            return;
 //        }
 //
-//        if(this.isReachedTarget()) {
-//            if(this.cat.isInSittingPose()) {
+        if(this.isReachedTarget()) {
+            if(this.cat.isInSittingPose()) {
+                this.cat.level.playSound(null, this.cat, SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1, 1);
+
+            }
+            else if(this.cat.isLyingDown()) {
 //                if(this.usingLitterboxCounter % 10 == 0) {
 //                    this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
 //                }
@@ -80,25 +81,38 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
 //                    this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
 //                }
 //                this.usingLitterboxCounter++;
-//            }
-//            else {
-//                // TODO this.cat.setLying(true);
+                this.cat.level.playSound(null, this.cat, SoundEvents.CAT_PURREOW, SoundSource.AMBIENT, 2, 1);
+            }
+            else {
+                int what = new Random().nextInt(100);
+                // 50% to lie down
+                if(what > 50) {
+                    this.cat.setLyingDown(true);
 //                this.cat.setInSittingPose(true);
 //                this.cat.setSprinting(true);
-//                this.usingLitterboxCounter = 0;
-//            }
-//
-//            if(this.usingLitterboxCounter > MAX_LITTERBOX_USE_COUNT) {
-//                this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
-//                this.cat.setInSittingPose(false);
-//                this.cat.setSprinting(false);
-//                this.cat.setLitterboxCooldown(LITTERBOX_USE_DELAY);
-//                this.stop();
-//            }
-//        }
-//        else {
-////            this.cat.setInSittingPose(false);
-//        }
+                }
+                // 30% chance to sit down
+                else if(what > 20) {
+                    this.cat.setInSittingPose(true);
+                }
+                // 20% chance to just make some noise
+                else {
+                    this.cat.level.playSound(null, this.cat, SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1, 1);
+                    this.usingCounter = MAX_CARDBOARDBOX_USE_COUNT;
+                }
+            }
+
+            this.usingCounter++;
+
+            if(this.usingCounter > MAX_CARDBOARDBOX_USE_COUNT) {
+                this.cat.setInSittingPose(false);
+                this.cat.setLyingDown(false);
+                this.stop();
+            }
+        }
+        else {
+//            this.cat.setInSittingPose(false);
+        }
     }
 
 //    @Override
