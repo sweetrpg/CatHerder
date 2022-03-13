@@ -4,6 +4,7 @@ import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 
 import java.util.EnumSet;
+import java.util.Random;
 
 public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
     private final CatEntity cat;
@@ -69,8 +71,6 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
      * Keep ticking a continuous task that has already been started
      */
     public void tick() {
-        super.tick();
-
         if(this.cat.getLitterboxCooldown() > 0) {
             return;
         }
@@ -81,7 +81,13 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
                     this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
                 }
                 if(this.usingLitterboxCounter % 5 == 0) {
-                    this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
+                    SoundEvent sound = switch(new Random().nextInt()) {
+                        case 0 -> SoundEvents.GRASS_STEP;
+                        case 1 -> SoundEvents.GRAVEL_STEP;
+                        case 2 -> SoundEvents.TUFF_STEP;
+                        default -> SoundEvents.SAND_STEP;
+                    };
+                    this.cat.level.playSound(null, this.cat, sound, SoundSource.AMBIENT, 1, 1);
                 }
                 this.usingLitterboxCounter++;
             }
@@ -101,6 +107,7 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
             }
         }
         else {
+            super.tick();
 //            this.cat.setInSittingPose(false);
         }
     }
