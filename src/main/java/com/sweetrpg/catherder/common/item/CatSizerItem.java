@@ -38,7 +38,7 @@ public class CatSizerItem extends Item implements ICatItem {
         if (catIn.getAge() < 0) {
 
             if (!playerIn.level.isClientSide){
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".too_young"), catIn.getUUID());
+                playerIn.sendMessage(new TranslatableComponent("treat.catherder."+this.type.getName()+".too_young"), catIn.getUUID());
             }
 
             return InteractionResult.FAIL;
