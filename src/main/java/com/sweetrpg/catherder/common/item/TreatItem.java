@@ -24,31 +24,31 @@ public class TreatItem extends Item implements ICatItem {
 
     @Override
     public InteractionResult processInteract(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
-        if (!catIn.isTame() || !catIn.canInteract(playerIn)) {
+        if(!catIn.isTame() || !catIn.canInteract(playerIn)) {
             return InteractionResult.FAIL;
         }
 
         CatLevel catLevel = catIn.getCatLevel();
 
-        if (catIn.getAge() < 0) {
-            if (!worldIn.isClientSide) {
+        if(catIn.getAge() < 0) {
+            if(!worldIn.isClientSide) {
                 worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".too_young"), catIn.getUUID());
+                playerIn.sendMessage(new TranslatableComponent("treat.catherder." + this.type.getName() + ".too_young"), catIn.getUUID());
             }
 
             return InteractionResult.CONSUME;
         }
-        else if (!catLevel.canIncrease(this.type)) {
-            if (!worldIn.isClientSide) {
+        else if(!catLevel.canIncrease(this.type)) {
+            if(!worldIn.isClientSide) {
                 worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".low_level"), catIn.getUUID());
+                playerIn.sendMessage(new TranslatableComponent("treat.catherder." + this.type.getName() + ".low_level"), catIn.getUUID());
             }
 
             return InteractionResult.CONSUME;
         }
-        else if (catLevel.getLevel(this.type) < this.maxLevel) {
-            if (!playerIn.level.isClientSide) {
-                if (!playerIn.getAbilities().instabuild) {
+        else if(catLevel.getLevel(this.type) < this.maxLevel) {
+            if(!playerIn.level.isClientSide) {
+                if(!playerIn.getAbilities().instabuild) {
                     playerIn.getItemInHand(handIn).shrink(1);
                 }
 
@@ -56,15 +56,15 @@ public class TreatItem extends Item implements ICatItem {
                 catIn.setHealth(catIn.getMaxHealth());
                 catIn.setOrderedToSit(true);
                 worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_HEARTS);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".level_up"), catIn.getUUID());
+                playerIn.sendMessage(new TranslatableComponent("treat.catherder." + this.type.getName() + ".level_up"), catIn.getUUID());
             }
 
             return InteractionResult.SUCCESS;
         }
         else {
-            if (!worldIn.isClientSide) {
+            if(!worldIn.isClientSide) {
                 worldIn.broadcastEntityEvent(catIn, Constants.EntityState.CAT_SMOKE);
-                playerIn.sendMessage(new TranslatableComponent("treat."+this.type.getName()+".max_level"), catIn.getUUID());
+                playerIn.sendMessage(new TranslatableComponent("treat.catherder." + this.type.getName() + ".max_level"), catIn.getUUID());
             }
 
             return InteractionResult.CONSUME;
