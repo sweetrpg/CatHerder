@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
-//import com.sweetrpg.catherder.common.inventory.recipe.CattreeRecipe;
+import com.sweetrpg.catherder.common.inventory.recipe.CatTreeRecipe;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
@@ -17,7 +17,7 @@ public class ModRecipeSerializers {
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Constants.MOD_ID);
 
-//    public static final RegistryObject<SimpleRecipeSerializer<CattreeRecipe>> CAT_TREE = register("cat_tree", CattreeRecipe::new);
+    public static final RegistryObject<SimpleRecipeSerializer<CatTreeRecipe>> CAT_TREE = register("cat_tree", CatTreeRecipe::new);
 ////    public static final RegistryObject<SpecialRecipeSerializer<CatCollarRecipe>> COLLAR_COLOURING = register("collar_colouring", CatCollarRecipe::new);
 ////    public static final RegistryObject<SpecialRecipeSerializer<CatCapeRecipe>> CAPE_COLOURING = register("cape_colouring", CatCapeRecipe::new);
 

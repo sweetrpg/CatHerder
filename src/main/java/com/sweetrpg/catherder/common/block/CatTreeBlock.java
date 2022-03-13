@@ -48,6 +48,7 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
     protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
+    protected static final VoxelShape SHAPE_OCCLUSION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
     public CatTreeBlock() {
         super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
@@ -70,6 +71,23 @@ public class CatTreeBlock extends BaseEntityBlock {
     }
 
     @Override
+    public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return SHAPE_OCCLUSION;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    public boolean useShapeForLightOcclusion(BlockState pState) {
+        return false;
+    }
+
+
+
+    @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
         return new CatTreeBlockEntity(pos, blockState);
     }
@@ -78,11 +96,6 @@ public class CatTreeBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         return null;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState blockState) {
-        return RenderShape.MODEL;
     }
 
     @Override
