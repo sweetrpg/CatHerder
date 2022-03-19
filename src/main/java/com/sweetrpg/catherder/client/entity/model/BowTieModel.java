@@ -34,9 +34,9 @@ public class BowTieModel extends ListModel<CatEntity> {
     @Override
     public void prepareMobModel(CatEntity catIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
 
-        this.rightChest.xRot += 0.1;
-        this.middleChest.xRot += 0.1;
-        this.leftChest.xRot += 0.1;
+        this.rightChest.xRot += 0.1f;
+        this.middleChest.xRot += 0.1f;
+        this.leftChest.xRot += 0.1f;
         this.rightChest.zRot = catIn.getShakeAngle(partialTickTime, -0.16F);
         this.leftChest.zRot = this.rightChest.zRot;
     }
