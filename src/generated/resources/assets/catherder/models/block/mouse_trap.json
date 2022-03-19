@@ -1,4 +1,5 @@
 {
+  "parent": "minecraft:block/cube",
   "textures": {
     "triggered\u003dfalse": "catherder:block/mouse_trap_armed",
     "triggered\u003dtrue": "catherder:block/mouse_trap_sprung"
