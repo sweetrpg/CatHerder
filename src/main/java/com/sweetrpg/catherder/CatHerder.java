@@ -115,7 +115,7 @@ public class CatHerder {
         forgeEventBus.addListener(this::serverStarting);
         forgeEventBus.addListener(this::registerCommands);
 
-        forgeEventBus.register(new EventHandler());
+//        forgeEventBus.register(new EventHandler());
 //        forgeEventBus.register(new BackwardsComp());
 
         // Client Events

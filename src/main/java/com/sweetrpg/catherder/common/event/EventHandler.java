@@ -2,6 +2,7 @@ package com.sweetrpg.catherder.common.event;
 
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.BirdCatcherTalent;
@@ -25,14 +26,25 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = Constants.MOD_ID)
 public class EventHandler {
 
     @SubscribeEvent
     public static void onBiomeLoad(BiomeLoadingEvent event) {
         BiomeGenerationSettingsBuilder builder = event.getGeneration();
         Biome.ClimateSettings climate = event.getClimate();
-        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) || event.getCategory().equals(Biome.BiomeCategory.TAIGA) || event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) || event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) && (climate.temperature > 0.3F && climate.temperature < 1.0F)) {
+
+        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
+                    event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
+                    event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
+                    event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
+                    event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
+                    event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
+                    event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
+                    event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
+                   (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
         }
     }
