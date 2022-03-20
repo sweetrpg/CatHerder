@@ -112,6 +112,14 @@ public class Util {
         return getResourcePath(Constants.MOD_ID, name);
     }
 
+    public static ResourceLocation modLoc(String name) {
+        return new ResourceLocation(Constants.MOD_ID, name);
+    }
+
+    public static ResourceLocation mcLoc(String name) {
+        return new ResourceLocation(name);
+    }
+
     /**
      * @param modId The namespace
      * @param name The path

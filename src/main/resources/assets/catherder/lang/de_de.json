@@ -71,7 +71,7 @@
 
    "talent.catherder.tomcat": "Kater",
    "talent.catherder.catlike_reflexes": "Katzenartige Reflexe",
-   "talent.catherder.birdcatcher": "Vogelfänger",
+   "talent.catherder.bird_catcher": "Vogelfänger",
    "talent.catherder.hell_beast": "Höllenkatze",
    "talent.catherder.mount": "Reittier",
    "talent.catherder.pack_cat": "Katzerucksack",
@@ -91,7 +91,7 @@
    "talent.catherder.bed_finder.description": "Während ein Hund mit dieser Fähigkeit auf deinem Kopf ist, wird dein Bett hervorgehoben. Um den Hund auf den Kopf zu bekommen, halte einen Knochen in der Hand und klicke mit der rechten Maustaste darauf. Der Bereich, in dem dies möglich ist, entspricht 200 Blöcken pro Stufe, wird jedoch bei Stufe 5 unbegrenzt.",
    "talent.catherder.tomcat.description": "Verbessert die kritische Trefferquote um 1/2 Herz für jedes Level sowie ein zusätzliches Herz auf Stufe 5.",
    "talent.catherder.catlike_reflexes.description": "Erhöht die Wahrscheinlichkeit, dass dein Hund einen physischen Angriff vollständig blockiert",
-   "talent.catherder.birdcatcher.description": "Jede Stufe gewährt eine Chance von 10%%, dass alles, was dein Hund tötet, seine Beute zweimal fallen lässt. Stufe 5 gewährt eine zusätzliche Chance von 20%% und damit eine Chance von 60%%",
+   "talent.catherder.bird_catcher.description": "Jede Stufe gewährt eine Chance von 10%%, dass alles, was dein Hund tötet, seine Beute zweimal fallen lässt. Stufe 5 gewährt eine zusätzliche Chance von 20%% und damit eine Chance von 60%%",
    "talent.catherder.hell_beast.description": "Ermöglicht es deinem Hund, Dinge in Brand zu setzen, während er angreift. Je höher der Level, desto länger dauert das Feuer. Auf Stufe 5 ist dein Hund immun gegen Feuer",
    "talent.catherder.mount.description": "Ermöglicht es dir, deinen Hund zu reiten. Mit jeder Stufe kann dein Hund höher springen. Um auf deinen Hund zu Reiten, mit leerer Hand springen und Rechtsklick.",
    "talent.catherder.pack_cat.description": "Jede Stufe bietet deinem Hund 3 Inventarplätze in seinem Rucksack. Um die GUI zu öffnen, klicke mit der rechten Maustaste auf den Hund während du schleichst! Ab Stufe 5 nimmt der Hund auch automatisch Gegenstände in der Nähe auf.",

@@ -16,7 +16,7 @@ public class BirdCatcherTalent {
             Entity trueSource = damageSource.getEntity();
             if (trueSource instanceof CatEntity) {
                 CatEntity cat = (CatEntity) trueSource;
-                int level = cat.getCatLevel(CatHerder.BIRDCATCHER);
+                int level = cat.getCatLevel(CatHerder.BIRD_CATCHER);
 
                 if (cat.getRandom().nextInt(6) < level + (level >= 5 ? 1 : 0)) {
                     event.setLootingLevel(event.getLootingLevel() + level / 2);

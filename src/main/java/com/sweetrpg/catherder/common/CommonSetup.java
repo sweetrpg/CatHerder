@@ -27,7 +27,7 @@ public class CommonSetup {
             CatRespawnCommand.registerSerilizers();
             CatEntity.initDataParameters();
 
-            WildCropGeneration.registerWildCropGeneration();
+            WildCropGeneration.registerWildCatnipGeneration();
 
             registerCompostables();
             registerDispenserBehaviors();

@@ -102,8 +102,8 @@ public class Constants {
     public static final String TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION = "talent.catherder.super_jump.description";
     public static final String TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME = "talent.catherder.catlike_reflexes";
     public static final String TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION = "talent.catherder.catlike_reflexes.description";
-    public static final String TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME = "talent.catherder.birdcatcher";
-    public static final String TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION = "talent.catherder.birdcatcher.description";
+    public static final String TRANSLATION_KEY_TALENT_bird_catcher_NAME = "talent.catherder.bird_catcher";
+    public static final String TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION = "talent.catherder.bird_catcher.description";
     public static final String TRANSLATION_KEY_TALENT_HELLBEAST_NAME = "talent.catherder.hell_beast";
     public static final String TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION = "talent.catherder.hell_beast.description";
     public static final String TRANSLATION_KEY_TALENT_MOUNT_NAME = "talent.catherder.mount";
@@ -129,11 +129,11 @@ public class Constants {
     public static final String TRANSLATION_KEY_TALENT_POISONFANG_DESCRIPTION = "talent.catherder.poison_fang.description";
     public static final String TRANSLATION_KEY_TALENT_RESCUECAT_NAME = "talent.catherder.rescue_cat";
     public static final String TRANSLATION_KEY_TALENT_RESCUECAT_DESCRIPTION = "talent.catherder.rescue_cat.description";
-    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_NAME = "talent.catherder.razorsharp_claws";
-    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_DESCRIPTION = "talent.catherder.razorsharp_claws.description";
-    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_COOLDOWN = "talent.catherder.razorsharp_claws.cooldown";
-    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_LEVEL = "talent.catherder.razorsharp_claws.level";
-    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS = "talent.catherder.razorsharp_claws.miss";
+    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_NAME = "talent.catherder.razor_sharp_claws";
+    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_DESCRIPTION = "talent.catherder.razor_sharp_claws.description";
+    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_COOLDOWN = "talent.catherder.razor_sharp_claws.cooldown";
+    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_LEVEL = "talent.catherder.razor_sharp_claws.level";
+    public static final String TRANSLATION_KEY_TALENT_RAZORSHARPCLAWS_MISS = "talent.catherder.razor_sharp_claws.miss";
     public static final String TRANSLATION_KEY_TALENT_NERMAL_NAME = "talent.catherder.nermal";
     public static final String TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION = "talent.catherder.nermal.description";
     public static final String TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1 = "talent.catherder.nermal.msg.1.line.1";

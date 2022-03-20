@@ -71,7 +71,7 @@
 
    "talent.catherder.tomcat": "검은띠급 싸움꾼",
    "talent.catherder.catlike_reflexes": "튼튼 경호원",
-   "talent.catherder.birdcatcher": "사냥꾼 파트너",
+   "talent.catherder.bird_catcher": "사냥꾼 파트너",
    "talent.catherder.hell_beast": "지옥견 주의",
    "talent.catherder.mount": "말 대신 멍",
    "talent.catherder.pack_cat": "멍멍이 가방",
@@ -91,7 +91,7 @@
    "talent.catherder.bed_finder.description": "이 스킬을 가진 개를 머리 위에 올린 동안, 당신의 침대가 검은 테두리로 표시됩니다. 개를 머리 위에 올리려면, 손에 뼈를 든 채로 우클릭 하세요. 유효범위는 레벨 당 200 블록 이며, 레벨 5 때 무제한이 됩니다.",
    "talent.catherder.tomcat.description": "치명타의 위력이 레벨 당 1/2 하트 만큼, 마스터 시 추가로 하트 하나 만큼 높아집니다.",
    "talent.catherder.catlike_reflexes.description": "당신의 개가 물리 공격을 완벽히 막아낼 확률을 증가시킵니다.",
-   "talent.catherder.birdcatcher.description": "당신의 개가 무언가를 죽였을 때, 스킬 레벨 당 10%% 만큼 전리품을 두 배 발견할 가능성을 가지게 됩니다. 레벨 5 때는 추가로 10 %% 올라, 총 60%% 확률이 됩니다.",
+   "talent.catherder.bird_catcher.description": "당신의 개가 무언가를 죽였을 때, 스킬 레벨 당 10%% 만큼 전리품을 두 배 발견할 가능성을 가지게 됩니다. 레벨 5 때는 추가로 10 %% 올라, 총 60%% 확률이 됩니다.",
    "talent.catherder.hell_beast.description": "당신의 개가 공격할 때 불을 붙일 수 있게 됩니다. 스킬 레벨에 따라 불이 더 오래 붙습니다. 마스터 시 당신의 개는 불에 면역을 가집니다.",
    "talent.catherder.mount.description": "어디서든 당신의 개에 올라탈 수 있게 됩니다. 매 레벨 마다 더 높이 점프할 수 있게 합니다. 개에 올라 타려면, 점프 중에 빈 손으로 개를 클릭하세요.",
    "talent.catherder.pack_cat.description": "레벨 당 인벤토리 슬롯 3 칸을 가진 멍멍이 가방 GUI를 가집니다. GUI를 열려면 웅크린 채로 개를 우클릭하세요! 레벨 5 가 되면, 당신의 개는 가방이 꽉 찰 때 까지 주변에 떨어진 아이템을 자동으로 줍습니다.",

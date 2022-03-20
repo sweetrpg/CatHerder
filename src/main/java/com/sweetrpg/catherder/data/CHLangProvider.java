@@ -102,8 +102,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "Catlike Reflexes");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "Increases the chance that your cat, will completely block a physical attack.");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "Bird Catcher");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "Every level grants a 10%% chance to make anything your cat kills drop its loot twice, Level 5 grants an extra 10%%, bringing it up to a 60%% chance.");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "Bird Catcher");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "Every level grants a 10%% chance to make anything your cat kills drop its loot twice, Level 5 grants an extra 10%%, bringing it up to a 60%% chance.");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "Hell Beast");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "Allows your cat set things on fire while attacking. The higher the level, the longer the fire lasts. Mastering the skill grants your cat immunity to fire.");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
@@ -316,8 +316,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "Catlike Reflexes");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "Increases the chance that your cat, will completely block a physical attack.");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "Bird Catcher");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "Every level grants a 10%% chance to make anything your cat kills drop its loot twice, Level 5 grants an extra 10%%, bringing it up to a 60%% chance.");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "Bird Catcher");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "Every level grants a 10%% chance to make anything your cat kills drop its loot twice, Level 5 grants an extra 10%%, bringing it up to a 60%% chance.");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "Hell Beast");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "Allows your cat set things on fire while attacking. The higher the level, the longer the fire lasts. Mastering the skill grants your cat immunity to fire.");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
@@ -529,8 +529,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
@@ -742,8 +742,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
@@ -955,8 +955,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
@@ -1168,8 +1168,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
@@ -1381,8 +1381,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
@@ -1594,8 +1594,8 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_NAME, "TODO");
-        add(Constants.TRANSLATION_KEY_TALENT_BIRDCATCHER_DESCRIPTION, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_NAME, "TODO");
+        add(Constants.TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "TODO");
