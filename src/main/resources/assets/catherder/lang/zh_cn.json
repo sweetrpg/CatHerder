@@ -71,7 +71,7 @@
 
    "talent.catherder.tomcat": "黑色打击",
    "talent.catherder.catlike_reflexes": "护卫犬",
-   "talent.catherder.birdcatcher": "猎犬",
+   "talent.catherder.bird_catcher": "猎犬",
    "talent.catherder.hell_beast": "地狱犬",
    "talent.catherder.mount": "骑乘犬",
    "talent.catherder.pack_cat": "背包犬",
@@ -91,7 +91,7 @@
    "talent.catherder.bed_finder.description": "当拥有该技能的狗在你头上时，你的床就会黑色高亮突出显示。要让你的狗爬到你的头上，你需要拿着骨头右击它们。每提升一级，有效范围半径增加200格，当升到5级时，有效范围无限大。",
    "talent.catherder.tomcat.description": "增加致命一击的发生几率，每提升一级增加半颗心的伤害，精通后额外增加1颗心得伤害。",
    "talent.catherder.catlike_reflexes.description": "提升该技能，可以让你的狗增加完全格挡一次物理攻击的几率。",
-   "talent.catherder.birdcatcher.description": "每提升一级，可以增加10%%的几率，让你的狗在杀死生物后获得两倍的掉落物，5级可以额外增加10%%的几率，总共会达到60%%。",
+   "talent.catherder.bird_catcher.description": "每提升一级，可以增加10%%的几率，让你的狗在杀死生物后获得两倍的掉落物，5级可以额外增加10%%的几率，总共会达到60%%。",
    "talent.catherder.hell_beast.description": "让你的狗在攻击时带有火焰附加的效果。等级越高，火焰燃烧时间越长。精通（达到5级）这项技能会让你的狗对火焰伤害免疫。",
    "talent.catherder.mount.description": "让你可以在任何地方骑着你的小狗，速度快慢由冲刺技能决定。想要骑到它身上需要空手在跳跃的过程中右击它，你自己慢慢试。",
    "talent.catherder.pack_cat.description": "每升一级会给你的狗在背包GUI增加3个物品槽。用木板右击它打开GUI。5级的时候，你的狗会自动捡起周围的掉落物（如果它的物品栏还有空间的话）。",
