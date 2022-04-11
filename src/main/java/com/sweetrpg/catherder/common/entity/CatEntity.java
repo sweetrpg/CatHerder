@@ -14,9 +14,9 @@ import com.sweetrpg.catherder.api.registry.*;
 import com.sweetrpg.catherder.client.screen.CatInfoScreen;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.ai.BreedGoal;
-import com.sweetrpg.catherder.common.entity.ai.*;
 import com.sweetrpg.catherder.common.entity.ai.CatLieOnBedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatSitOnBlockGoal;
+import com.sweetrpg.catherder.common.entity.ai.*;
 import com.sweetrpg.catherder.common.entity.serializers.DimensionDependantArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -113,7 +113,7 @@ public class CatEntity extends AbstractCatEntity {
 
     private static final EntityDataAccessor<Byte> SIZE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<ItemStack> TOY_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
-//    private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
+    //    private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> RELAX_STATE_ONE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
@@ -2416,24 +2416,25 @@ public class CatEntity extends AbstractCatEntity {
             /* if (!this.cat.isTame()) {
                 return false;
             }
-            else */ if (this.cat.isOrderedToSit()) {
+            else */
+            if(this.cat.isOrderedToSit()) {
                 return false;
             }
             else {
                 LivingEntity livingentity = this.cat.getOwner();
-                if (livingentity instanceof Player) {
-                    this.ownerPlayer = (Player)livingentity;
-                    if (!livingentity.isSleeping()) {
+                if(livingentity instanceof Player) {
+                    this.ownerPlayer = (Player) livingentity;
+                    if(!livingentity.isSleeping()) {
                         return false;
                     }
 
-                    if (this.cat.distanceToSqr(this.ownerPlayer) > 100.0D) {
+                    if(this.cat.distanceToSqr(this.ownerPlayer) > 100.0D) {
                         return false;
                     }
 
                     BlockPos blockPos = this.ownerPlayer.blockPosition();
                     BlockState blockState = this.cat.level.getBlockState(blockPos);
-                    if (blockState.is(BlockTags.BEDS)) {
+                    if(blockState.is(BlockTags.BEDS)) {
                         this.goalPos = blockState.getOptionalValue(BedBlock.FACING).map((p_28209_) -> {
                             return blockPos.relative(p_28209_.getOpposite());
                         }).orElseGet(() -> {
@@ -2449,7 +2450,7 @@ public class CatEntity extends AbstractCatEntity {
 
         private boolean spaceIsOccupied() {
             for(CatEntity cat : this.cat.level.getEntitiesOfClass(CatEntity.class, (new AABB(this.goalPos)).inflate(2.0D))) {
-                if (cat != this.cat && (cat.isLying() || cat.isRelaxStateOne())) {
+                if(cat != this.cat && (cat.isLying() || cat.isRelaxStateOne())) {
                     return true;
                 }
             }
@@ -2472,9 +2473,9 @@ public class CatEntity extends AbstractCatEntity {
          * Execute a one shot task or start executing a continuous task
          */
         public void start() {
-            if (this.goalPos != null) {
+            if(this.goalPos != null) {
                 this.cat.setInSittingPose(false);
-                this.cat.getNavigation().moveTo((double)this.goalPos.getX(), (double)this.goalPos.getY(), (double)this.goalPos.getZ(), (double)1.1F);
+                this.cat.getNavigation().moveTo(this.goalPos.getX(), this.goalPos.getY(), this.goalPos.getZ(), 1.1F);
             }
 
         }
@@ -2485,7 +2486,7 @@ public class CatEntity extends AbstractCatEntity {
         public void stop() {
 //            this.cat.setLying(false);
             float f = this.cat.level.getTimeOfDay(1.0F);
-            if (this.ownerPlayer.getSleepTimer() >= 100 && (double)f > 0.77D && (double)f < 0.8D && (double)this.cat.level.getRandom().nextFloat() < 0.7D) {
+            if(this.ownerPlayer.getSleepTimer() >= 100 && (double) f > 0.77D && (double) f < 0.8D && (double) this.cat.level.getRandom().nextFloat() < 0.7D) {
                 this.giveMorningGift();
             }
 
@@ -2498,13 +2499,13 @@ public class CatEntity extends AbstractCatEntity {
             Random random = this.cat.getRandom();
             BlockPos.MutableBlockPos blockPos$mutableBlockPos = new BlockPos.MutableBlockPos();
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
-            this.cat.randomTeleport((double)(blockPos$mutableBlockPos.getX() + random.nextInt(11) - 5), (double)(blockPos$mutableBlockPos.getY() + random.nextInt(5) - 2), (double)(blockPos$mutableBlockPos.getZ() + random.nextInt(11) - 5), false);
+            this.cat.randomTeleport(blockPos$mutableBlockPos.getX() + random.nextInt(11) - 5, blockPos$mutableBlockPos.getY() + random.nextInt(5) - 2, blockPos$mutableBlockPos.getZ() + random.nextInt(11) - 5, false);
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
             LootTable loottable = this.cat.level.getServer().getLootTables().get(BuiltInLootTables.CAT_MORNING_GIFT);
-            LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.cat.level)).withParameter(LootContextParams.ORIGIN, this.cat.position()).withParameter(LootContextParams.THIS_ENTITY, this.cat).withRandom(random);
+            LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel) this.cat.level)).withParameter(LootContextParams.ORIGIN, this.cat.position()).withParameter(LootContextParams.THIS_ENTITY, this.cat).withRandom(random);
 
             for(ItemStack itemstack : loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.GIFT))) {
-                this.cat.level.addFreshEntity(new ItemEntity(this.cat.level, (double)blockPos$mutableBlockPos.getX() - (double)Mth.sin(this.cat.yBodyRot * ((float)Math.PI / 180F)), (double)blockPos$mutableBlockPos.getY(), (double)blockPos$mutableBlockPos.getZ() + (double)Mth.cos(this.cat.yBodyRot * ((float)Math.PI / 180F)), itemstack));
+                this.cat.level.addFreshEntity(new ItemEntity(this.cat.level, (double) blockPos$mutableBlockPos.getX() - (double) Mth.sin(this.cat.yBodyRot * ((float) Math.PI / 180F)), blockPos$mutableBlockPos.getY(), (double) blockPos$mutableBlockPos.getZ() + (double) Mth.cos(this.cat.yBodyRot * ((float) Math.PI / 180F)), itemstack));
             }
 
         }
@@ -2513,12 +2514,12 @@ public class CatEntity extends AbstractCatEntity {
          * Keep ticking a continuous task that has already been started
          */
         public void tick() {
-            if (this.ownerPlayer != null && this.goalPos != null) {
+            if(this.ownerPlayer != null && this.goalPos != null) {
                 this.cat.setInSittingPose(false);
-                this.cat.getNavigation().moveTo((double)this.goalPos.getX(), (double)this.goalPos.getY(), (double)this.goalPos.getZ(), (double)1.1F);
-                if (this.cat.distanceToSqr(this.ownerPlayer) < 2.5D) {
+                this.cat.getNavigation().moveTo(this.goalPos.getX(), this.goalPos.getY(), this.goalPos.getZ(), 1.1F);
+                if(this.cat.distanceToSqr(this.ownerPlayer) < 2.5D) {
                     ++this.onBedTicks;
-                    if (this.onBedTicks > this.adjustedTickDelay(16)) {
+                    if(this.onBedTicks > this.adjustedTickDelay(16)) {
 //                        this.cat.setLying(true);
                         this.cat.setRelaxStateOne(false);
                     }
