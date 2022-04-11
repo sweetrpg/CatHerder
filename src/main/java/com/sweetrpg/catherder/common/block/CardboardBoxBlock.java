@@ -49,7 +49,8 @@ public class CardboardBoxBlock extends Block {
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(handIn);
 
-        if (stack.isEmpty()) {
+        if(stack.isEmpty()) {
+            // TODO: attract a nearby cat
             return InteractionResult.SUCCESS;
         }
 //        else {
@@ -82,7 +83,7 @@ public class CardboardBoxBlock extends Block {
 
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.getValue(WATERLOGGED)) {
+        if(stateIn.getValue(WATERLOGGED)) {
             worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
@@ -93,7 +94,9 @@ public class CardboardBoxBlock extends Block {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
 
-        return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
+        return this.defaultBlockState()
+                .setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER))
+                .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
 
     @Override

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -44,19 +45,18 @@ import java.util.UUID;
 public class CatTreeBlock extends BaseEntityBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
     protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
 
     public CatTreeBlock() {
         super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
+        builder.add(BlockStateProperties.FACING, WATERLOGGED);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        state = state.setValue(FACING, placer.getDirection().getOpposite());
+        state = state.setValue(BlockStateProperties.FACING, placer.getDirection().getOpposite());
 
         CatTreeBlockEntity catTreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
 
@@ -128,20 +128,21 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+        return state.setValue(BlockStateProperties.FACING, rot.rotate(state.getValue(BlockStateProperties.FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.FACING)));
     }
 
     @Override
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if (worldIn.isClientSide) {
-        return InteractionResult.SUCCESS;
-        } else {
+        if(worldIn.isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
+        else {
 //            CattreeTileEntity cattreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CattreeTileEntity.class);
 //
 //            if (cattreeTileEntity != null) {
@@ -260,4 +261,10 @@ public class CatTreeBlock extends BaseEntityBlock {
         CatHerder.LOGGER.debug("Unable to pick block on cat tree.");
         return ItemStack.EMPTY;
     }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+    }
+
 }
