@@ -64,6 +64,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
@@ -74,8 +75,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -105,6 +113,8 @@ public class CatEntity extends AbstractCatEntity {
 
     private static final EntityDataAccessor<Byte> SIZE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<ItemStack> TOY_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
+//    private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> RELAX_STATE_ONE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
     private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
@@ -146,6 +156,14 @@ public class CatEntity extends AbstractCatEntity {
         this.setGender(EnumGender.random(this.getRandom()));
     }
 
+    public void setRelaxStateOne(boolean p_28186_) {
+        this.entityData.set(RELAX_STATE_ONE, p_28186_);
+    }
+
+    public boolean isRelaxStateOne() {
+        return this.entityData.get(RELAX_STATE_ONE);
+    }
+
     public static void initDataParameters() {
         ACCESSORIES.get();
         TALENTS.get();
@@ -174,6 +192,8 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+//        this.entityData.define(IS_LYING, false);
+        this.entityData.define(RELAX_STATE_ONE, false);
     }
 
     @Override
@@ -182,7 +202,8 @@ public class CatEntity extends AbstractCatEntity {
 //        this.goalSelector.addGoal(1, new FindWaterGoal(this));
         //this.goalSelector.addGoal(1, new PatrolAreaGoal(this));
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
-        this.targetSelector.addGoal(2, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(2, new CatEntity.CatRelaxOnOwnerGoal(this));
+        this.goalSelector.addGoal(2, new CatLieOnBedGoal<>(this, 1.1F, 16));
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
@@ -192,15 +213,15 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-        this.targetSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
+        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
         this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
         this.targetSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
-        this.targetSelector.addGoal(2, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
+        this.goalSelector.addGoal(2, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
 //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 //        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
@@ -2373,6 +2394,145 @@ public class CatEntity extends AbstractCatEntity {
 
     public void setOriginalBreed(int originalBreed) {
         this.entityData.set(ORIGINAL_BREED_INT, originalBreed);
+    }
+
+    static class CatRelaxOnOwnerGoal extends Goal {
+        private final CatEntity cat;
+        @Nullable
+        private Player ownerPlayer;
+        @Nullable
+        private BlockPos goalPos;
+        private int onBedTicks;
+
+        public CatRelaxOnOwnerGoal(CatEntity cat) {
+            this.cat = cat;
+        }
+
+        /**
+         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
+         * method as well.
+         */
+        public boolean canUse() {
+            /* if (!this.cat.isTame()) {
+                return false;
+            }
+            else */ if (this.cat.isOrderedToSit()) {
+                return false;
+            }
+            else {
+                LivingEntity livingentity = this.cat.getOwner();
+                if (livingentity instanceof Player) {
+                    this.ownerPlayer = (Player)livingentity;
+                    if (!livingentity.isSleeping()) {
+                        return false;
+                    }
+
+                    if (this.cat.distanceToSqr(this.ownerPlayer) > 100.0D) {
+                        return false;
+                    }
+
+                    BlockPos blockPos = this.ownerPlayer.blockPosition();
+                    BlockState blockState = this.cat.level.getBlockState(blockPos);
+                    if (blockState.is(BlockTags.BEDS)) {
+                        this.goalPos = blockState.getOptionalValue(BedBlock.FACING).map((p_28209_) -> {
+                            return blockPos.relative(p_28209_.getOpposite());
+                        }).orElseGet(() -> {
+                            return new BlockPos(blockPos);
+                        });
+                        return !this.spaceIsOccupied();
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        private boolean spaceIsOccupied() {
+            for(CatEntity cat : this.cat.level.getEntitiesOfClass(CatEntity.class, (new AABB(this.goalPos)).inflate(2.0D))) {
+                if (cat != this.cat && (cat.isLying() || cat.isRelaxStateOne())) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean canContinueToUse() {
+            return this.cat.isTame() &&
+                           !this.cat.isOrderedToSit() &&
+                           this.ownerPlayer != null &&
+                           this.ownerPlayer.isSleeping() &&
+                           this.goalPos != null && !this.spaceIsOccupied();
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        public void start() {
+            if (this.goalPos != null) {
+                this.cat.setInSittingPose(false);
+                this.cat.getNavigation().moveTo((double)this.goalPos.getX(), (double)this.goalPos.getY(), (double)this.goalPos.getZ(), (double)1.1F);
+            }
+
+        }
+
+        /**
+         * Reset the task's internal state. Called when this task is interrupted by another one
+         */
+        public void stop() {
+//            this.cat.setLying(false);
+            float f = this.cat.level.getTimeOfDay(1.0F);
+            if (this.ownerPlayer.getSleepTimer() >= 100 && (double)f > 0.77D && (double)f < 0.8D && (double)this.cat.level.getRandom().nextFloat() < 0.7D) {
+                this.giveMorningGift();
+            }
+
+            this.onBedTicks = 0;
+            this.cat.setRelaxStateOne(false);
+            this.cat.getNavigation().stop();
+        }
+
+        private void giveMorningGift() {
+            Random random = this.cat.getRandom();
+            BlockPos.MutableBlockPos blockPos$mutableBlockPos = new BlockPos.MutableBlockPos();
+            blockPos$mutableBlockPos.set(this.cat.blockPosition());
+            this.cat.randomTeleport((double)(blockPos$mutableBlockPos.getX() + random.nextInt(11) - 5), (double)(blockPos$mutableBlockPos.getY() + random.nextInt(5) - 2), (double)(blockPos$mutableBlockPos.getZ() + random.nextInt(11) - 5), false);
+            blockPos$mutableBlockPos.set(this.cat.blockPosition());
+            LootTable loottable = this.cat.level.getServer().getLootTables().get(BuiltInLootTables.CAT_MORNING_GIFT);
+            LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.cat.level)).withParameter(LootContextParams.ORIGIN, this.cat.position()).withParameter(LootContextParams.THIS_ENTITY, this.cat).withRandom(random);
+
+            for(ItemStack itemstack : loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.GIFT))) {
+                this.cat.level.addFreshEntity(new ItemEntity(this.cat.level, (double)blockPos$mutableBlockPos.getX() - (double)Mth.sin(this.cat.yBodyRot * ((float)Math.PI / 180F)), (double)blockPos$mutableBlockPos.getY(), (double)blockPos$mutableBlockPos.getZ() + (double)Mth.cos(this.cat.yBodyRot * ((float)Math.PI / 180F)), itemstack));
+            }
+
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void tick() {
+            if (this.ownerPlayer != null && this.goalPos != null) {
+                this.cat.setInSittingPose(false);
+                this.cat.getNavigation().moveTo((double)this.goalPos.getX(), (double)this.goalPos.getY(), (double)this.goalPos.getZ(), (double)1.1F);
+                if (this.cat.distanceToSqr(this.ownerPlayer) < 2.5D) {
+                    ++this.onBedTicks;
+                    if (this.onBedTicks > this.adjustedTickDelay(16)) {
+//                        this.cat.setLying(true);
+                        this.cat.setRelaxStateOne(false);
+                    }
+                    else {
+                        this.cat.lookAt(this.ownerPlayer, 45.0F, 45.0F);
+                        this.cat.setRelaxStateOne(true);
+                    }
+                }
+                else {
+//                    this.cat.setLying(false);
+                }
+            }
+
+        }
     }
 
 }
