@@ -85,6 +85,7 @@ public class ConfigHandler {
     public static class ServerConfig {
 
         public ForgeConfigSpec.IntValue CHANCE_WILD_CATNIP;
+        public ForgeConfigSpec.IntValue WILD_CATNIP_SPREAD;
         public ForgeConfigSpec.BooleanValue DISABLE_HUNGER;
         public ForgeConfigSpec.BooleanValue STARTING_ITEMS;
         public ForgeConfigSpec.BooleanValue CAT_GENDER;
@@ -103,6 +104,7 @@ public class ConfigHandler {
                 //        .comment("Enables debugging mode, which would output values for the sake of finding issues in the mod.")
                 //        .define("debugMode", false);
                 CHANCE_WILD_CATNIP = builder.comment("Chance that catnip appears in the wild").translation("catherder.config.cat.chance_wild_catnip").defineInRange("chance_wild_catnip", 50, 1, 100);
+                WILD_CATNIP_SPREAD = builder.comment("Horizontal spread of patches of catnip").translation("catherder.config.cat.wild_catnip_spread").defineInRange("wild_catnip_spread", 6, 1, 20);
 
                 builder.pop();
             }

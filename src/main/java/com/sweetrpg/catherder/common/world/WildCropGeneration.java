@@ -38,7 +38,7 @@ public class WildCropGeneration {
     public static void registerWildCatnipGeneration() {
         FEATURE_PATCH_WILD_CATNIP = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,
                                                       Util.modLoc("patch_wild_catnip"),
-                                                      Feature.RANDOM_PATCH.configured(getWildCropConfiguration(ModBlocks.WILD_CATNIP.get(), 64, 6, 3,
+                                                      Feature.RANDOM_PATCH.configured(getWildCropConfiguration(ModBlocks.WILD_CATNIP.get(), 64, ConfigHandler.SERVER.WILD_CATNIP_SPREAD.get(), 3,
                                                                                                                BlockPredicate.matchesBlocks(Arrays.asList(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.PODZOL), BLOCK_BELOW))));
 
         PATCH_WILD_CATNIP = Registry.register(BuiltinRegistries.PLACED_FEATURE,
