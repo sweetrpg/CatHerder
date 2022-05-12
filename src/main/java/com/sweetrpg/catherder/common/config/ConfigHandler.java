@@ -3,6 +3,7 @@ package com.sweetrpg.catherder.common.config;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.Talent;
+import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -103,8 +104,8 @@ public class ConfigHandler {
                 //DEBUG_MODE = builder
                 //        .comment("Enables debugging mode, which would output values for the sake of finding issues in the mod.")
                 //        .define("debugMode", false);
-                CHANCE_WILD_CATNIP = builder.comment("Chance that catnip appears in the wild").translation("catherder.config.cat.chance_wild_catnip").defineInRange("chance_wild_catnip", 50, 1, 100);
-                WILD_CATNIP_SPREAD = builder.comment("Horizontal spread of patches of catnip").translation("catherder.config.cat.wild_catnip_spread").defineInRange("wild_catnip_spread", 6, 1, 20);
+                CHANCE_WILD_CATNIP = builder.comment("Chance that catnip appears in the wild").translation(Constants.TRANSLATION_KEY_CONFIG_CHANCE_WILD_CATNIP).defineInRange("chance_wild_catnip", 50, 1, 100);
+                WILD_CATNIP_SPREAD = builder.comment("Horizontal spread of patches of catnip").translation(Constants.TRANSLATION_KEY_CONFIG_WILD_CATNIP_SPREAD).defineInRange("wild_catnip_spread", 6, 1, 20);
 
                 builder.pop();
             }
@@ -112,13 +113,12 @@ public class ConfigHandler {
             {
                 builder.push("Cat Constants");
 
-                DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation("catherder.config.cat.disable_hunger").define("disable_hunger", false);
-                STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation("catherder.config.enable_starting_items").define("enable_starting_items", false);
-                CAT_GENDER = builder.comment("When enabled, cats will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation("catherder.config.enable_gender").define("enable_gender", true);
-                KITTENS_GET_PARENT_LEVELS = builder.comment("When enabled, kittens get some levels from parents. When disabled, kittens start at 0 points.").translation("catherder.config.enable_kitten_get_parent_levels").define("enable_kitten_get_parent_levels", false);
-                TIME_TO_MATURE = builder.comment("The time in ticks it takes for a baby cat to become an adult, default 48000 (2 Minecraft days) and minimum 0").translation("catherder.config.cat.time_to_mature").defineInRange("time_to_mature", 48000, 0, Integer.MAX_VALUE);
-                CAT_WHINE_WHEN_HUNGER_LOW = builder.comment("Determines if cats should whine when hunger reaches below 20 DP.").translation("catherder.config.whine_when_hungry").define("whine_when_hungry", true);
-                EAT_FOOD_ON_FLOOR = builder.comment("When enabled cats will path and eat editable items in the world.").translation("catherder.config.eat_food_on_floor").define("eat_food_on_floor", true);
+                DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation(Constants.TRANSLATION_KEY_CONFIG_DISABLE_HUNGER).define("disable_hunger", false);
+                STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS).define("enable_starting_items", false);
+                CAT_GENDER = builder.comment("When enabled, cats will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_GENDER).define("enable_gender", true);
+                KITTENS_GET_PARENT_LEVELS = builder.comment("When enabled, kittens get some levels from parents. When disabled, kittens start at 0 points.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_KITTEN_PARENT_LEVELS).define("enable_kitten_get_parent_levels", false);
+                TIME_TO_MATURE = builder.comment("The time in ticks it takes for a baby cat to become an adult, default 48000 (2 Minecraft days) and minimum 0").translation(Constants.TRANSLATION_KEY_CONFIG_TIME_TO_MATURE).defineInRange("time_to_mature", 48000, 0, Integer.MAX_VALUE);
+                EAT_FOOD_ON_FLOOR = builder.comment("When enabled cats will path and eat editable items in the world.").translation(Constants.TRANSLATION_KEY_CONFIG_EAT_FOOD_ON_FLOOR).define("eat_food_on_floor", true);
 
                 builder.pop();
             }

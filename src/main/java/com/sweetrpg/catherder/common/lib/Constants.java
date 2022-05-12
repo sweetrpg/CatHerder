@@ -245,6 +245,14 @@ public class Constants {
     public static final String TRANSLATION_KEY_CATTREE_BEDDING_MISSING = "cattree.bedding.missing";
     public static final String TRANSLATION_KEY_CATTREE_CASING_MISSING = "cattree.casing.missing";
     public static final String TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING = "cattree.explain.missing";
+    public static final String TRANSLATION_KEY_CONFIG_CHANCE_WILD_CATNIP = "catherder.config.cat.chance_wild_catnip";
+    public static final String TRANSLATION_KEY_CONFIG_WILD_CATNIP_SPREAD = "catherder.config.cat.wild_catnip_spread";
+    public static final String TRANSLATION_KEY_CONFIG_DISABLE_HUNGER = "catherder.config.cat.disable_hunger";
+    public static final String TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS = "catherder.config.enable_starting_items";
+    public static final String TRANSLATION_KEY_CONFIG_ENABLE_GENDER = "catherder.config.enable_gender";
+    public static final String TRANSLATION_KEY_CONFIG_ENABLE_KITTEN_PARENT_LEVELS = "catherder.config.enable_kitten_get_parent_levels";
+    public static final String TRANSLATION_KEY_CONFIG_TIME_TO_MATURE = "catherder.config.cat.time_to_mature";
+    public static final String TRANSLATION_KEY_CONFIG_EAT_FOOD_ON_FLOOR = "catherder.config.eat_food_on_floor";
 
     public static class EntityState {
         public static final byte DEATH = 3;
