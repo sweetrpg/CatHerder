@@ -18,7 +18,7 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
+// apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
@@ -75,8 +75,8 @@ repositories {
 }
 
 minecraft {
-//    mappings channel: project.mcp_channel, version: project.mcp_mappings
-    mappings channel: 'parchment', version: '2022.01.23-1.18.1'
+    mappings channel: project.mcp_channel, version: project.mcp_mappings
+//    mappings channel: 'parchment', version: '2022.01.23-1.16.5'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
