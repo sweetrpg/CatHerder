@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class ModSounds {
 
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Constants.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.Keys.SOUND_EVENTS, Constants.MOD_ID);
 
     private static RegistryObject<SoundEvent> register(final String name) {
         return register(name, SoundEvent::new);

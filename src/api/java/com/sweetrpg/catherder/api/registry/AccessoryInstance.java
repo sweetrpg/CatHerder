@@ -83,8 +83,8 @@ public class AccessoryInstance {
         ResourceLocation rl = null;
         try {
             rl = ResourceLocation.tryParse(compound.getString("type"));
-            if (CatHerderAPI.ACCESSORIES.containsKey(rl)) {
-                Accessory type = CatHerderAPI.ACCESSORIES.getValue(rl);
+            if (CatHerderAPI.ACCESSORIES.get().containsKey(rl)) {
+                Accessory type = CatHerderAPI.ACCESSORIES.get().getValue(rl);
                 return Optional.of(type.read(compound));
             } else {
                 CatHerderAPI.LOGGER.warn("Failed to load accessory {}", compound);

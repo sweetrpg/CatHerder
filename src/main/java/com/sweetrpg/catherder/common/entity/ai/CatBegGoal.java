@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -32,16 +32,18 @@ public class CatBegGoal extends Goal {
     @Override
     public boolean canUse() {
         this.player = this.world.getNearestPlayer(this.playerPredicate, this.cat);
-        return this.player == null ? false : this.hasTemptationItemInHand(this.player);
+        return this.player != null && this.hasTemptationItemInHand(this.player);
     }
 
     @Override
     public boolean canContinueToUse() {
-        if (!this.player.isAlive()) {
+        if(!this.player.isAlive()) {
             return false;
-        } else if (this.cat.distanceToSqr(this.player) > this.minPlayerDistance * this.minPlayerDistance) {
+        }
+        else if(this.cat.distanceToSqr(this.player) > this.minPlayerDistance * this.minPlayerDistance) {
             return false;
-        } else {
+        }
+        else {
             return this.timeoutCounter > 0 && this.hasTemptationItemInHand(this.player);
         }
     }
@@ -65,21 +67,21 @@ public class CatBegGoal extends Goal {
     }
 
     private boolean hasTemptationItemInHand(Player player) {
-        for (InteractionHand hand : InteractionHand.values()) {
+        for(InteractionHand hand : InteractionHand.values()) {
             ItemStack itemstack = player.getItemInHand(hand);
-            if ((this.cat.isTame() ? ModTags.BEG_ITEMS_TAMED : ModTags.BEG_ITEMS_UNTAMED).contains(itemstack.getItem())) {
+            if(itemstack.is(this.cat.isTame() ? ModTags.BEG_ITEMS_TAMED : ModTags.BEG_ITEMS_UNTAMED)) {
                 return true;
             }
 
-            if (ModTags.TREATS.contains(itemstack.getItem())) {
+            if(itemstack.is(ModTags.TREATS)) {
                 return true;
             }
 
-            if (FoodHandler.isFood(itemstack).isPresent()) {
+            if(FoodHandler.isFood(itemstack).isPresent()) {
                 return true;
             }
 
-            if (this.cat.isFood(itemstack)) {
+            if(this.cat.isFood(itemstack)) {
                 return true;
             }
         }

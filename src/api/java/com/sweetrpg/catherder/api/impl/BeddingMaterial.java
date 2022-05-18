@@ -49,7 +49,7 @@ public class BeddingMaterial extends IBeddingMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("cattree.bedding", CatHerderAPI.BEDDING_MATERIAL.getKey(this));
+            this.translationKey = Util.makeDescriptionId("cattree.bedding", CatHerderAPI.BEDDING_MATERIAL.get().getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);

@@ -133,7 +133,7 @@ public class ConfigHandler {
 
             DISABLED_TALENTS = new HashMap<>();
 
-            CatHerderAPI.TALENTS.forEach((loc) ->
+            CatHerderAPI.TALENTS.get().forEach((loc) ->
                 DISABLED_TALENTS.put(loc.delegate, builder.define(loc.getRegistryName().toString(), true))
             );
             builder.pop();

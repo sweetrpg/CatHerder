@@ -50,7 +50,7 @@ public class CatInfoScreen extends Screen {
         super(new TranslatableComponent(Constants.TRANSLATION_KEY_GUI_CATINFO_TITLE));
         this.cat = cat;
         this.player = player;
-        this.talentList = CatHerderAPI.TALENTS.getValues().stream().sorted(Comparator.comparing((t) -> I18n.get(t.getTranslationKey()))).collect(Collectors.toList());
+        this.talentList = CatHerderAPI.TALENTS.get().getValues().stream().sorted(Comparator.comparing((t) -> I18n.get(t.getTranslationKey()))).collect(Collectors.toList());
 
 //        this.customSkinList = CatTextureManager.INSTANCE.getAll();
 //        this.textureIndex = this.customSkinList.indexOf(CatTextureManager.INSTANCE.getTextureLoc(cat.getSkinHash()));
@@ -159,7 +159,7 @@ public class CatInfoScreen extends Screen {
         this.addRenderableWidget(modeBtn);
 
         // Talent level-up buttons
-        int size = CatHerderAPI.TALENTS.getKeys().size();
+        int size = CatHerderAPI.TALENTS.get().getKeys().size();
         int perPage = Math.max(Mth.floor((this.height - 10) / (double) 21) - 2, 1);
         this.currentPage = 0;
         this.recalculatePage(perPage);

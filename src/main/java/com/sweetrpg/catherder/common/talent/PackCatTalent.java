@@ -35,7 +35,7 @@ public class PackCatTalent extends TalentInstance {
     private LazyOptional<?> lazyPackCatHandler;
 
     public static Predicate<ItemEntity> SHOULD_PICKUP_ENTITY_ITEM = (entity) -> {
-        return entity.isAlive() && !entity.hasPickUpDelay() && !ModTags.PACK_CAT_BLACKLIST.contains(entity.getItem().getItem());// && !EntityAIFetch.BONE_PREDICATE.test(entity.getItem());
+        return entity.isAlive() && !entity.hasPickUpDelay() && !entity.getItem().is(ModTags.PACK_CAT_BLACKLIST);// && !EntityAIFetch.BONE_PREDICATE.test(entity.getItem());
     };
 
     public PackCatTalent(Talent talentIn, int levelIn) {

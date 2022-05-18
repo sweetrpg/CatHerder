@@ -15,7 +15,7 @@ public class CollarSerializer implements EntityDataSerializer<Optional<Accessory
     public void write(FriendlyByteBuf buf, Optional<AccessoryInstance> value) {
         Util.acceptOrElse(value, (inst) -> {
             buf.writeBoolean(true);
-            buf.writeRegistryIdUnsafe(CatHerderAPI.ACCESSORIES, inst.getAccessory());
+            buf.writeRegistryIdUnsafe(CatHerderAPI.ACCESSORIES.get(), inst.getAccessory());
             inst.getAccessory().write(inst, buf);
         }, () -> {
             buf.writeBoolean(false);
@@ -26,7 +26,7 @@ public class CollarSerializer implements EntityDataSerializer<Optional<Accessory
     @Override
     public Optional<AccessoryInstance> read(FriendlyByteBuf buf) {
         if (buf.readBoolean()) {
-            Accessory type = buf.readRegistryIdUnsafe(CatHerderAPI.ACCESSORIES);
+            Accessory type = buf.readRegistryIdUnsafe(CatHerderAPI.ACCESSORIES.get());
             return Optional.of(type.createInstance(buf));
         } else {
             return Optional.empty();

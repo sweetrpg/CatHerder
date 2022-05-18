@@ -16,7 +16,7 @@ public class TalentListSerializer implements EntityDataSerializer<List<TalentIns
         buf.writeInt(value.size());
 
         for (TalentInstance inst : value) {
-            buf.writeRegistryIdUnsafe(CatHerderAPI.TALENTS, inst.getTalent());
+            buf.writeRegistryIdUnsafe(CatHerderAPI.TALENTS.get(), inst.getTalent());
             inst.writeToBuf(buf);
         }
     }
@@ -26,7 +26,7 @@ public class TalentListSerializer implements EntityDataSerializer<List<TalentIns
         int size = buf.readInt();
         List<TalentInstance> newInst = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            TalentInstance inst = buf.readRegistryIdUnsafe(CatHerderAPI.TALENTS).getDefault();
+            TalentInstance inst = buf.readRegistryIdUnsafe(CatHerderAPI.TALENTS.get()).getDefault();
             inst.readFromBuf(buf);
             newInst.add(inst);
         }

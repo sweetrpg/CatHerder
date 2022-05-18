@@ -9,20 +9,29 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
 
 public class ModRegistries {
 
-    public static void newRegistry(RegistryEvent.NewRegistry event) {
-        CatHerderAPI.TALENTS = makeRegistry("talents", Talent.class).create();
-        CatHerderAPI.ACCESSORIES = makeRegistry("accessories", Accessory.class).create();
-        CatHerderAPI.ACCESSORY_TYPE = makeRegistry("accessory_type", AccessoryType.class).disableSync().create();
-        CatHerderAPI.BEDDING_MATERIAL = makeRegistry("bedding", IBeddingMaterial.class).addCallback(BeddingCallbacks.INSTANCE).create();
-        CatHerderAPI.CASING_MATERIAL = makeRegistry("casing", ICasingMaterial.class).addCallback(CasingCallbacks.INSTANCE).create(); //TODO ADD holder object
+    protected class Keys {
+    public static final ResourceLocation TALENTS_REGISTRY = Util.getResource("talents");
+    public static final ResourceLocation ACCESSORY_REGISTRY = Util.getResource("accessories");
+    public static final ResourceLocation ACCESSORY_TYPE_REGISTRY = Util.getResource("accessory_type");
+    public static final ResourceLocation BEDDING_REGISTRY = Util.getResource("bedding");
+    public static final ResourceLocation CASING_REGISTRY = Util.getResource("casing");
     }
 
-    private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(final String name, Class<T> type) {
-        return new RegistryBuilder<T>().setName(Util.getResource(name)).setType(type);
+    public static void newRegistry(NewRegistryEvent event) {
+        CatHerderAPI.TALENTS = event.create(makeRegistry(Keys.TALENTS_REGISTRY, Talent.class));
+        CatHerderAPI.ACCESSORIES = event.create(makeRegistry(Keys.ACCESSORY_REGISTRY, Accessory.class));
+        CatHerderAPI.ACCESSORY_TYPE = event.create(makeRegistry(Keys.ACCESSORY_TYPE_REGISTRY, AccessoryType.class).disableSync());
+        CatHerderAPI.BEDDING_MATERIAL = event.create(makeRegistry(Keys.BEDDING_REGISTRY, IBeddingMaterial.class).addCallback(BeddingCallbacks.INSTANCE));
+        CatHerderAPI.CASING_MATERIAL = event.create(makeRegistry(Keys.CASING_REGISTRY, ICasingMaterial.class).addCallback(CasingCallbacks.INSTANCE)); //TODO ADD holder object
+    }
+
+    private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(final ResourceLocation rl, Class<T> type) {
+        return new RegistryBuilder<T>().setName(rl).setType(type);
     }
 
     private static class BeddingCallbacks implements IForgeRegistry.DummyFactory<IBeddingMaterial> {

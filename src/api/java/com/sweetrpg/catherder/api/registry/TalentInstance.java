@@ -85,8 +85,8 @@ public class TalentInstance implements ICatAlteration {
 
     public static Optional<TalentInstance> readInstance(AbstractCatEntity catIn, CompoundTag compound) {
         ResourceLocation rl = ResourceLocation.tryParse(compound.getString("type"));
-        if (CatHerderAPI.TALENTS.containsKey(rl)) {
-            TalentInstance inst = CatHerderAPI.TALENTS.getValue(rl).getDefault();
+        if (CatHerderAPI.TALENTS.get().containsKey(rl)) {
+            TalentInstance inst = CatHerderAPI.TALENTS.get().getValue(rl).getDefault();
             inst.readFromNBT(catIn, compound);
             return Optional.of(inst);
         } else {

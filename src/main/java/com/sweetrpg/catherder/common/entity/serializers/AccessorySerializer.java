@@ -16,7 +16,7 @@ public class AccessorySerializer implements EntityDataSerializer<List<AccessoryI
         buf.writeInt(value.size());
 
         for (AccessoryInstance inst : value) {
-            buf.writeRegistryIdUnsafe(CatHerderAPI.ACCESSORIES, inst.getAccessory());
+            buf.writeRegistryIdUnsafe(CatHerderAPI.ACCESSORIES.get(), inst.getAccessory());
             inst.getAccessory().write(inst, buf);
         }
     }
@@ -27,7 +27,7 @@ public class AccessorySerializer implements EntityDataSerializer<List<AccessoryI
         List<AccessoryInstance> newInst = new ArrayList<>(size);
 
         for (int i = 0; i < size; i++) {
-            Accessory type = buf.readRegistryIdUnsafe(CatHerderAPI.ACCESSORIES);
+            Accessory type = buf.readRegistryIdUnsafe(CatHerderAPI.ACCESSORIES.get());
             newInst.add(type.createInstance(buf));
         }
 

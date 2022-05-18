@@ -49,46 +49,7 @@ public class EventHandler {
         }
     }
 
-    @SubscribeEvent
-    public void rightClickEntity(final PlayerInteractEvent.EntityInteract event) {
-        Level world = event.getWorld();
 
-        ItemStack stack = event.getItemStack();
-        Entity target = event.getTarget();
-
-        if(target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == ModItems.TRAINING_TREAT.get()) {
-            event.setCanceled(true);
-
-            TamableAnimal vanillaCat = (TamableAnimal) target;
-
-            Player player = event.getPlayer();
-
-            if(vanillaCat.isAlive() && vanillaCat.isTame() && vanillaCat.isOwnedBy(player)) {
-                if(!world.isClientSide) {
-                    if(!player.getAbilities().instabuild) {
-                        stack.shrink(1);
-                    }
-
-                    CatEntity cat = ModEntityTypes.CAT.get().create(world);
-                    cat.tame(player);
-                    cat.setHealth(cat.getMaxHealth());
-                    cat.setOrderedToSit(false);
-                    cat.setAge(vanillaCat.getAge());
-                    cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
-                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType());
-
-                    world.addFreshEntity(cat);
-
-                    vanillaCat.discard();
-                }
-
-                event.setCancellationResult(InteractionResult.SUCCESS);
-            }
-            else {
-                event.setCancellationResult(InteractionResult.FAIL);
-            }
-        }
-    }
 
     @SubscribeEvent
     public void onEntitySpawn(final EntityJoinWorldEvent event) {

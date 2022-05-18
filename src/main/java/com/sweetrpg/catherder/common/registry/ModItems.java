@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, Constants.MOD_ID);
 
 //    public static final RegistryObject<Item> CAT_TREE = register("cat_tree", () -> new BlockItem(ModBlocks.CAT_TREE.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
