@@ -1096,7 +1096,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return ModTags.BREEDING_ITEMS.contains(stack.getItem());
+        return stack.is(ModTags.BREEDING_ITEMS);
     }
 
     @Override
@@ -2370,8 +2370,8 @@ public class CatEntity extends AbstractCatEntity {
             return true;
         }
 
-        Block blockBelow = this.level.getBlockState(this.blockPosition().below()).getBlock();
-        boolean onBed = blockBelow == ModBlocks.CAT_TREE.get() || BlockTags.BEDS.contains(blockBelow);
+        BlockState blockBelow = this.level.getBlockState(this.blockPosition().below());
+        boolean onBed = blockBelow.is(ModBlocks.CAT_TREE.get()) || blockBelow.is(BlockTags.BEDS);
         return onBed;
     }
 

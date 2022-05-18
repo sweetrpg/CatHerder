@@ -76,7 +76,7 @@ repositories {
 
 minecraft {
 //    mappings channel: project.mcp_channel, version: project.mcp_mappings
-    mappings channel: 'parchment', version: '2022.01.23-1.18.1'
+    mappings channel: 'parchment', version: project.parchment_version
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -116,13 +116,13 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
-    runtimeOnly fg.deobf("curse.maven:doggytalents-271050:3616930")
+    runtimeOnly fg.deobf("curse.maven:doggytalents-271050:${dt_file_id}")
 //    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
 
-    implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
+    implementation fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
 }
 
 task sourcesJar(type: Jar) {

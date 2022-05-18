@@ -32,24 +32,6 @@ import net.minecraftforge.fml.common.Mod;
 public class EventHandler {
 
     @SubscribeEvent
-    public static void onBiomeLoad(BiomeLoadingEvent event) {
-        BiomeGenerationSettingsBuilder builder = event.getGeneration();
-        Biome.ClimateSettings climate = event.getClimate();
-
-        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
-                    event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
-                    event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
-                    event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
-                    event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
-                    event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
-                    event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
-                    event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
-                   (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
-        }
-    }
-
-    @SubscribeEvent
     public void rightClickEntity(final PlayerInteractEvent.EntityInteract event) {
         Level world = event.getWorld();
 
@@ -89,6 +71,26 @@ public class EventHandler {
             }
         }
     }
+
+    @SubscribeEvent
+    public static void onBiomeLoad(BiomeLoadingEvent event) {
+        BiomeGenerationSettingsBuilder builder = event.getGeneration();
+        Biome.ClimateSettings climate = event.getClimate();
+
+        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
+                    event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
+                    event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
+                    event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
+                    event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
+                    event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
+                    event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
+                    event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
+                   (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
+            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
+        }
+    }
+
+
 
     @SubscribeEvent
     public void onEntitySpawn(final EntityJoinWorldEvent event) {

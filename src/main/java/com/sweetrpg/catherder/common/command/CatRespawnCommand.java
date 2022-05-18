@@ -11,10 +11,10 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.sweetrpg.catherder.common.command.arguments.UUIDArgument;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.item.RadarItem;
 import com.sweetrpg.catherder.common.storage.*;
 import com.sweetrpg.catherder.common.util.Util;
-import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -48,26 +48,26 @@ public class CatRespawnCommand {
     public static void register(final CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 literal("cat")
-                    .requires(s -> s.hasPermission(2))
-                    .then(Commands.literal("locate")
-                        .then(Commands.literal("byuuid")
-                          .then(Commands.argument("cat_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsLocate())
-                                        .then(Commands.argument("cat_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getCatIdSuggestionsLocate())
-                          .executes(c -> locate(c)))))
-                        .then(Commands.literal("byname")
-                           .then(Commands.argument("owner_name", StringArgumentType.string()).suggests(CatRespawnCommand.getOwnerNameSuggestionsLocate())
-                           .then(Commands.argument("cat_name", StringArgumentType.string()).suggests(CatRespawnCommand.getCatNameSuggestionsLocate())
-                           .executes(c -> locate2(c))))))
-                    .then(Commands.literal("revive")
-                      .then(Commands.literal("byuuid")
-                        .then(Commands.argument("cat_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsRevive())
-                        .then(Commands.argument("cat_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getCatIdSuggestionsRevive())
-                        .executes(c -> respawn(c)))))
-                      .then(Commands.literal("byname")
-                        .then(Commands.argument("owner_name", StringArgumentType.string()).suggests(CatRespawnCommand.getOwnerNameSuggestionsRevive())
-                         .then(Commands.argument("cat_name", StringArgumentType.string()).suggests(CatRespawnCommand.getCatNameSuggestionsRevive())
-                         .executes(c -> respawn2(c))))))
-        );
+                        .requires(s -> s.hasPermission(2))
+                        .then(Commands.literal("locate")
+                                      .then(Commands.literal("byuuid")
+                                                    .then(Commands.argument("cat_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsLocate())
+                                                                  .then(Commands.argument("cat_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getCatIdSuggestionsLocate())
+                                                                                .executes(c -> locate(c)))))
+                                      .then(Commands.literal("byname")
+                                                    .then(Commands.argument("owner_name", StringArgumentType.string()).suggests(CatRespawnCommand.getOwnerNameSuggestionsLocate())
+                                                                  .then(Commands.argument("cat_name", StringArgumentType.string()).suggests(CatRespawnCommand.getCatNameSuggestionsLocate())
+                                                                                .executes(c -> locate2(c))))))
+                        .then(Commands.literal("revive")
+                                      .then(Commands.literal("byuuid")
+                                                    .then(Commands.argument("cat_owner", UUIDArgument.uuid()).suggests(CatRespawnCommand.getOwnerIdSuggestionsRevive())
+                                                                  .then(Commands.argument("cat_uuid", UUIDArgument.uuid()).suggests(CatRespawnCommand.getCatIdSuggestionsRevive())
+                                                                                .executes(c -> respawn(c)))))
+                                      .then(Commands.literal("byname")
+                                                    .then(Commands.argument("owner_name", StringArgumentType.string()).suggests(CatRespawnCommand.getOwnerNameSuggestionsRevive())
+                                                                  .then(Commands.argument("cat_name", StringArgumentType.string()).suggests(CatRespawnCommand.getCatNameSuggestionsRevive())
+                                                                                .executes(c -> respawn2(c))))))
+                           );
     }
 
     public static void registerSerilizers() {
@@ -75,110 +75,118 @@ public class CatRespawnCommand {
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getOwnerIdSuggestionsLocate() {
-        return (context, builder) -> getOwnerIdSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getOwnerIdSuggestions(CatLocationStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getOwnerIdSuggestionsRevive() {
-        return (context, builder) -> getOwnerIdSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getOwnerIdSuggestions(CatRespawnStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     private static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getOwnerIdSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
-        if (context.getSource() instanceof CommandSourceStack) {
+        if(context.getSource() instanceof CommandSourceStack) {
 
             return SharedSuggestionProvider.suggest(possibilities.stream()
-                    .map(ICatData::getOwnerId)
-                    .filter(Objects::nonNull)
-                    .map(Object::toString)
-                    .collect(Collectors.toSet()),
-                   builder);
+                                                            .map(ICatData::getOwnerId)
+                                                            .filter(Objects::nonNull)
+                                                            .map(Object::toString)
+                                                            .collect(Collectors.toSet()),
+                                                    builder);
 
-        } else if (context.getSource() instanceof SharedSuggestionProvider) {
-            return context.getSource().customSuggestion((CommandContext<SharedSuggestionProvider>) context, builder);
-        } else {
+        }
+        else if(context.getSource() instanceof SharedSuggestionProvider) {
+            return context.getSource().customSuggestion(context);
+        }
+        else {
             return Suggestions.empty();
         }
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatIdSuggestionsLocate() {
-        return (context, builder) -> getCatIdSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getCatIdSuggestions(CatLocationStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatIdSuggestionsRevive() {
-        return (context, builder) -> getCatIdSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getCatIdSuggestions(CatRespawnStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     private static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getCatIdSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
-        if (context.getSource() instanceof CommandSourceStack) {
+        if(context.getSource() instanceof CommandSourceStack) {
             UUID ownerId = context.getArgument("cat_owner", UUID.class);
-            if (ownerId == null) {
+            if(ownerId == null) {
                 return Suggestions.empty();
             }
 
             return SharedSuggestionProvider.suggest(possibilities.stream()
-                     .filter(data -> ownerId.equals(data.getOwnerId()))
-                     .map(ICatData::getCatId)
-                     .map(Object::toString)
-                     .collect(Collectors.toSet()),
-                    builder);
-        } else if (context.getSource() instanceof SharedSuggestionProvider) {
-             return context.getSource().customSuggestion((CommandContext<SharedSuggestionProvider>) context, builder);
-        } else {
-             return Suggestions.empty();
+                                                            .filter(data -> ownerId.equals(data.getOwnerId()))
+                                                            .map(ICatData::getCatId)
+                                                            .map(Object::toString)
+                                                            .collect(Collectors.toSet()),
+                                                    builder);
+        }
+        else if(context.getSource() instanceof SharedSuggestionProvider) {
+            return context.getSource().customSuggestion(context);
+        }
+        else {
+            return Suggestions.empty();
         }
     }
 
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getOwnerNameSuggestionsLocate() {
-        return (context, builder) -> getOwnerNameSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getOwnerNameSuggestions(CatLocationStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getOwnerNameSuggestionsRevive() {
-        return (context, builder) -> getOwnerNameSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getOwnerNameSuggestions(CatRespawnStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     public static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getOwnerNameSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
-        if (context.getSource() instanceof CommandSourceStack) {
+        if(context.getSource() instanceof CommandSourceStack) {
             return SharedSuggestionProvider.suggest(possibilities.stream()
-                    .map(ICatData::getOwnerName)
-                    .filter(Objects::nonNull)
-                    .map(Object::toString)
-                    .collect(Collectors.toSet()),
-                   builder);
+                                                            .map(ICatData::getOwnerName)
+                                                            .filter(Objects::nonNull)
+                                                            .map(Object::toString)
+                                                            .collect(Collectors.toSet()),
+                                                    builder);
 
-        } else if (context.getSource() instanceof SharedSuggestionProvider) {
-            return context.getSource().customSuggestion((CommandContext<SharedSuggestionProvider>) context, builder);
-        } else {
+        }
+        else if(context.getSource() instanceof SharedSuggestionProvider) {
+            return context.getSource().customSuggestion(context);
+        }
+        else {
             return Suggestions.empty();
         }
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatNameSuggestionsLocate() {
-        return (context, builder) -> getCatNameSuggestions(CatLocationStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getCatNameSuggestions(CatLocationStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getCatNameSuggestionsRevive() {
-        return (context, builder) -> getCatNameSuggestions(CatRespawnStorage.get(((CommandSourceStack)context.getSource()).getLevel()).getAll(), context, builder);
+        return (context, builder) -> getCatNameSuggestions(CatRespawnStorage.get(((CommandSourceStack) context.getSource()).getLevel()).getAll(), context, builder);
     }
 
     public static <S extends SharedSuggestionProvider> CompletableFuture<Suggestions> getCatNameSuggestions(Collection<? extends ICatData> possibilities, final CommandContext<S> context, final SuggestionsBuilder builder) {
-        if (context.getSource() instanceof CommandSourceStack) {
+        if(context.getSource() instanceof CommandSourceStack) {
             String ownerName = context.getArgument("owner_name", String.class);
 
-            if (ownerName == null) {
+            if(ownerName == null) {
                 return Suggestions.empty();
             }
 
             return SharedSuggestionProvider.suggest(possibilities.stream()
-                    .filter(data -> ownerName.equals(data.getOwnerName()))
-                    .map(ICatData::getCatName)
-                    .filter((str) -> !Strings.isNullOrEmpty(str))
-                     .collect(Collectors.toList()),
-                     builder);
+                                                            .filter(data -> ownerName.equals(data.getOwnerName()))
+                                                            .map(ICatData::getCatName)
+                                                            .filter((str) -> !Strings.isNullOrEmpty(str))
+                                                            .collect(Collectors.toList()),
+                                                    builder);
 
-        } else if (context.getSource() instanceof SharedSuggestionProvider) {
-             return context.getSource().customSuggestion((CommandContext<SharedSuggestionProvider>)context, builder);
-        } else {
-             return Suggestions.empty();
+        }
+        else if(context.getSource() instanceof SharedSuggestionProvider) {
+            return context.getSource().customSuggestion(context);
+        }
+        else {
+            return Suggestions.empty();
         }
     }
 
@@ -194,7 +202,7 @@ public class CatRespawnCommand {
         CatRespawnStorage respawnStorage = CatRespawnStorage.get(world);
         CatRespawnData respawnData = respawnStorage.getData(uuid);
 
-        if (respawnData == null) {
+        if(respawnData == null) {
             throw COLOR_INVALID.create(uuid.toString());
         }
 
@@ -212,13 +220,13 @@ public class CatRespawnCommand {
         CatRespawnStorage respawnStorage = CatRespawnStorage.get(world);
         List<CatRespawnData> respawnData = respawnStorage.getCats(ownerName).filter((data) -> data.getCatName().equalsIgnoreCase(catName)).collect(Collectors.toList());
 
-        if (respawnData.isEmpty()) {
+        if(respawnData.isEmpty()) {
             throw COLOR_INVALID.create(catName);
         }
 
-        if (respawnData.size() > 1) {
+        if(respawnData.size() > 1) {
             StringJoiner joiner = new StringJoiner(", ");
-            for (CatRespawnData data : respawnData) {
+            for(CatRespawnData data : respawnData) {
                 joiner.add(Objects.toString(data.getCatId()));
             }
             throw TOO_MANY_OPTIONS.create(joiner.toString(), respawnData.size());
@@ -230,7 +238,7 @@ public class CatRespawnCommand {
     private static int respawn(CatRespawnStorage respawnStorage, CatRespawnData respawnData, final CommandSourceStack source) throws CommandSyntaxException {
         CatEntity cat = respawnData.respawn(source.getLevel(), source.getPlayerOrException(), source.getPlayerOrException().blockPosition().above());
 
-        if (cat != null) {
+        if(cat != null) {
             respawnStorage.remove(respawnData.getCatId());
             source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.success", respawnData.getCatName()), false);
             return 1;
@@ -252,7 +260,7 @@ public class CatRespawnCommand {
         CatLocationStorage locationStorage = CatLocationStorage.get(world);
         CatLocationData locationData = locationStorage.getData(uuid);
 
-        if (locationData == null) {
+        if(locationData == null) {
             throw COLOR_INVALID.create(uuid.toString());
         }
 
@@ -269,15 +277,15 @@ public class CatRespawnCommand {
         String catName = ctx.getArgument("cat_name", String.class);
         CatLocationStorage locationStorage = CatLocationStorage.get(world);
         List<CatLocationData> locationData = locationStorage.getAll().stream()
-                                                            .filter(data -> ownerName.equals(data.getOwnerName())).filter((data) -> data.getCatName().equalsIgnoreCase(catName)).collect(Collectors.toList());
+                                                     .filter(data -> ownerName.equals(data.getOwnerName())).filter((data) -> data.getCatName().equalsIgnoreCase(catName)).collect(Collectors.toList());
 
-        if (locationData.isEmpty()) {
+        if(locationData.isEmpty()) {
             throw COLOR_INVALID.create(catName);
         }
 
-        if (locationData.size() > 1) {
+        if(locationData.size() > 1) {
             StringJoiner joiner = new StringJoiner(", ");
-            for (CatLocationData data : locationData) {
+            for(CatLocationData data : locationData) {
                 joiner.add(Objects.toString(data.getCatId()));
             }
             throw TOO_MANY_OPTIONS.create(joiner.toString(), locationData.size());
@@ -289,12 +297,13 @@ public class CatRespawnCommand {
     private static int locate(CatLocationStorage respawnStorage, CatLocationData locationData, final CommandSourceStack source) throws CommandSyntaxException {
         Player player = source.getPlayerOrException();
 
-        if (locationData.getDimension().equals(player.level.dimension())) {
+        if(locationData.getDimension().equals(player.level.dimension())) {
             String translateStr = RadarItem.getDirectionTranslationKey(locationData, player);
             int distance = Mth.ceil(locationData.getPos() != null ? locationData.getPos().distanceTo(player.position()) : -1);
 
             source.sendSuccess(new TranslatableComponent(translateStr, locationData.getName(player.level), distance), false);
-        } else {
+        }
+        else {
             source.sendSuccess(new TranslatableComponent("catradar.notindim", locationData.getDimension()), false); // TODO change message
         }
         return 1;

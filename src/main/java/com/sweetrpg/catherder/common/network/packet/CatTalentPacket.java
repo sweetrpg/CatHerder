@@ -16,13 +16,13 @@ public class CatTalentPacket extends CatPacket<CatTalentData> {
     @Override
     public void encode(CatTalentData data, FriendlyByteBuf buf) {
         super.encode(data, buf);
-        buf.writeRegistryIdUnsafe(CatHerderAPI.TALENTS, data.talent);
+        buf.writeRegistryIdUnsafe(CatHerderAPI.TALENTS.get(), data.talent);
     }
 
     @Override
     public CatTalentData decode(FriendlyByteBuf buf) {
         int entityId = buf.readInt();
-        Talent talent = buf.readRegistryIdUnsafe(CatHerderAPI.TALENTS);
+        Talent talent = buf.readRegistryIdUnsafe(CatHerderAPI.TALENTS.get());
         return new CatTalentData(entityId, talent);
     }
 

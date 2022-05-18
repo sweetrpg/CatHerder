@@ -25,7 +25,7 @@ public class MoveToBlockGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.cat.isPathFinding() && !this.cat.getTargetBlock().closerThan(this.cat.position(), 0.5);
+        return this.cat.isPathFinding() && !this.cat.getTargetBlock().closerToCenterThan(this.cat.position(), 0.5);
     }
 
     @Override
