@@ -72,7 +72,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
         blockItem(ModBlocks.CHEESE_WHEEL);
-        blockItem(ModBlocks.MOUSE_TRAP);
+        blockItem(ModBlocks.MOUSE_TRAP, "_sprung");
     }
 
     private ResourceLocation itemTexture(Supplier<? extends ItemLike> item) {
