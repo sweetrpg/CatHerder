@@ -80,6 +80,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "Ball of Yarn");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "%d %s");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "Mouse Trap");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "Cardboard");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "Pack Cat");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "Cat bowl");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "Treat Bag");
@@ -294,6 +295,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "Ball of Yarn");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "%d %s");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "Mouse Trap");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "Cardboard");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "Pack Cat");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "Cat bowl");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "Treat Bag");
@@ -507,6 +509,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "TODO");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "TODO");
@@ -720,6 +723,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "TODO");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "TODO");
@@ -933,6 +937,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "TODO");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "TODO");
@@ -1146,6 +1151,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "TODO");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "TODO");
@@ -1359,6 +1365,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "TODO");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "TODO");
@@ -1572,6 +1579,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_YARN, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS, "TODO");
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "TODO");
+        add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "TODO");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "TODO");
