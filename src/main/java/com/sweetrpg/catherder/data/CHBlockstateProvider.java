@@ -83,7 +83,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
 //                .allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null)
 //                        .texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
 
-        this.simpleBlock(block.get(), model);
+        horizontalBlock(block.get(), model);
+//        this.simpleBlock(block.get(), model);
     }
 
     protected void createFromShape(Supplier<? extends Block> blockIn, AABB bb) {
