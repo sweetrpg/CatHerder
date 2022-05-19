@@ -62,7 +62,7 @@ public class CatTreeBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
 
     public CatTreeBlock() {
-        super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
+        super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 

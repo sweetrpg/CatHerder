@@ -32,7 +32,7 @@ public class CardboardBoxBlock extends Block {
 //    protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public CardboardBoxBlock() {
-        super(Block.Properties.of(Material.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
+        super(Block.Properties.of(Material.METAL).strength(1.0F, 5.0F).sound(SoundType.METAL));
     }
 
     @Override

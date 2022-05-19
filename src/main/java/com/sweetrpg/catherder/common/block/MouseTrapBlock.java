@@ -34,7 +34,7 @@ public class MouseTrapBlock extends Block {
     protected static final VoxelShape SHAPE_EAST_WEST = Block.box(0.0D, 0.0D, 1.0D, 16.0D, 2.0D, 15.0D);
 
     public MouseTrapBlock() {
-        super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
+        super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
     }
 
     public boolean hasDynamicShape() {

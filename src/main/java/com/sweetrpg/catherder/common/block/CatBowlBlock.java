@@ -53,7 +53,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 4.0D, 16.0D, 5.0D, 12.0D);
 
     public CatBowlBlock() {
-        super(Block.Properties.of(Material.METAL).strength(5.0F, 5.0F).sound(SoundType.METAL));
+        super(Block.Properties.of(Material.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
     }
 
     @Override
