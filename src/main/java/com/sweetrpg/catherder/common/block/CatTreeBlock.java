@@ -2,17 +2,26 @@ package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
+import com.sweetrpg.catherder.common.storage.CatRespawnData;
+import com.sweetrpg.catherder.common.storage.CatRespawnStorage;
+import com.sweetrpg.catherder.common.util.EntityUtil;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -27,18 +36,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -149,61 +160,66 @@ public class CatTreeBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
         else {
-//            CattreeTileEntity cattreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CattreeTileEntity.class);
-//
-//            if (cattreeTileEntity != null) {
-//
-//                ItemStack stack = player.getItemInHand(handIn);
-//                if (stack.getItem() == Items.NAME_TAG && stack.hasCustomHoverName()) {
-//                    cattreeTileEntity.setBedName(stack.getHoverName());
-//
-//                    if (!player.getAbilities().instabuild) {
-//                        stack.shrink(1);
-//                    }
-//
-//                    worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
-//                    return InteractionResult.SUCCESS;
-//                } else if (player.isShiftKeyDown() && cattreeTileEntity.getOwnerUUID() == null) {
-//                    List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
-//                    Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
-//
-//                    CatEntity closestStanding = null;
-//                    CatEntity closestSitting = null;
-//                    for (CatEntity cat : cats) {
-//                        if (closestSitting != null && closestSitting != null) {
-//                            break;
-//                        }
-//
-//                        if (closestSitting == null && cat.isInSittingPose()) {
-//                            closestSitting = cat;
-//                        } else if (closestStanding == null && !cat.isInSittingPose()) {
-//                            closestStanding = cat;
-//                        }
-//                    }
-//
-//                    CatEntity closests = closestStanding != null ? closestStanding : closestSitting;
-//                    if (closests != null) {
-//                        closests.setTargetBlock(pos);
-//                    }
-//                } else if (cattreeTileEntity.getOwnerUUID() != null) {
-//                    CatRespawnData storage = CatRespawnStorage.get(worldIn).remove(cattreeTileEntity.getOwnerUUID());
-//
-//                    if (storage != null) {
-//                        CatEntity cat = storage.respawn((ServerLevel) worldIn, player, pos.above());
-//
-//                        cattreeTileEntity.setOwner(cat);
-//                        cat.setBedPos(cat.level.dimension(), pos);
-//                        return InteractionResult.SUCCESS;
-//                    } else {
-//                        Component name = cattreeTileEntity.getOwnerName();
-//                        player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
-//                        return InteractionResult.FAIL;
-//                    }
-//                } else {
-//                    player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
-//                    return InteractionResult.SUCCESS;
-//                }
-//            }
+            CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
+
+            if(catTreeEntity != null) {
+                ItemStack stack = player.getItemInHand(handIn);
+                if(stack.getItem() == Items.NAME_TAG && stack.hasCustomHoverName()) {
+                    catTreeEntity.setBedName(stack.getHoverName());
+
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+
+                    worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+                    return InteractionResult.SUCCESS;
+                }
+                else if(player.isShiftKeyDown() && catTreeEntity.getOwnerUUID() == null) {
+                    List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
+                    Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
+
+                    CatEntity closestStanding = null;
+                    CatEntity closestSitting = null;
+                    for(CatEntity cat : cats) {
+                        if(closestSitting != null && closestSitting != null) {
+                            break;
+                        }
+
+                        if(closestSitting == null && cat.isInSittingPose()) {
+                            closestSitting = cat;
+                        }
+                        else if(closestStanding == null && !cat.isInSittingPose()) {
+                            closestStanding = cat;
+                        }
+                    }
+
+                    CatEntity closests = closestStanding != null ? closestStanding : closestSitting;
+                    if(closests != null) {
+                        closests.setTargetBlock(pos);
+                    }
+                }
+                else if(catTreeEntity.getOwnerUUID() != null) {
+                    CatRespawnData storage = CatRespawnStorage.get(worldIn).remove(catTreeEntity.getOwnerUUID());
+
+                    if(storage != null) {
+                        CatEntity cat = storage.respawn((ServerLevel) worldIn, player, pos.above());
+
+                        catTreeEntity.setOwner(cat);
+                        cat.setBedPos(cat.level.dimension(), pos);
+                        return InteractionResult.SUCCESS;
+                    }
+                    else {
+                        Component name = catTreeEntity.getOwnerName();
+                        player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
+                        return InteractionResult.FAIL;
+                    }
+                }
+                else {
+                    player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
+                    return InteractionResult.SUCCESS;
+                }
+            }
+
             return InteractionResult.SUCCESS;
         }
     }
@@ -272,5 +288,4 @@ public class CatTreeBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
-
 }
