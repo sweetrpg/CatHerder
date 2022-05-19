@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RN",
+    "NR"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "N": {
+      "tag": "forge:nuggets"
+    }
+  },
+  "result": {
+    "item": "catherder:small_catsizer"
+  }
+}
