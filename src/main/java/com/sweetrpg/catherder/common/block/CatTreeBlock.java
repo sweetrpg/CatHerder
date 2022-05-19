@@ -47,6 +47,7 @@ public class CatTreeBlock extends BaseEntityBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
+    protected static final VoxelShape SHAPE_OCCLUSION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
     protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
 
     public CatTreeBlock() {
@@ -62,6 +63,11 @@ public class CatTreeBlock extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return SHAPE_OCCLUSION;
     }
 
     @Override

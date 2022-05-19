@@ -30,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 public class MouseTrapBlock extends Block {
 
     public static final BooleanProperty SPRUNG = BlockStateProperties.TRIGGERED;
-    protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
-    protected static final VoxelShape SHAPE_COLLISION = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
+    protected static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
+    protected static final VoxelShape SHAPE_EAST_WEST = Block.box(0.0D, 0.0D, 1.0D, 16.0D, 2.0D, 15.0D);
 
     public MouseTrapBlock() {
         super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
@@ -42,18 +42,27 @@ public class MouseTrapBlock extends Block {
     }
 
     @Override
-    public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return SHAPE;
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter pLevel, BlockPos pPos) {
+        return switch (state.getValue(BlockStateProperties.FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> SHAPE_NORTH_SOUTH;
+            case WEST, EAST -> SHAPE_EAST_WEST;
+        };
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return switch (state.getValue(BlockStateProperties.FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> SHAPE_NORTH_SOUTH;
+            case WEST, EAST -> SHAPE_EAST_WEST;
+        };
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
-        return SHAPE_COLLISION;
+        return switch (state.getValue(BlockStateProperties.FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> SHAPE_NORTH_SOUTH;
+            case WEST, EAST -> SHAPE_EAST_WEST;
+        };
     }
 
     @Nullable
