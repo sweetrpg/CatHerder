@@ -75,7 +75,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
                                       .getBuilder(name(block))
 //                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
                                       .texture("triggered=false", extend(blockTexture(block), "_armed"))
-                                      .texture("triggered=true", extend(blockTexture(block), "_sprung"));
+                                      .texture("triggered=true", extend(blockTexture(block), "_triggered"));
 
         model.element()
                 .from(1.0f, 0.0f, 1.0f)

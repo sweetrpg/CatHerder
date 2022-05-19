@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube",
   "textures": {
     "triggered=false": "catherder:block/mouse_trap_armed",
-    "triggered=true": "catherder:block/mouse_trap_sprung"
+    "triggered=true": "catherder:block/mouse_trap_triggered"
   },
   "elements": [
     {
