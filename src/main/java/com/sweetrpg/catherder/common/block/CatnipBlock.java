@@ -59,7 +59,7 @@ public class CatnipBlock extends CropBlock {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-		pBuilder.add(CATNIP_AGE);
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(CATNIP_AGE);
 	}
 }
