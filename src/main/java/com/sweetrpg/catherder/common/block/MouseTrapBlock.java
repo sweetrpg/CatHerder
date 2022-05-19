@@ -90,6 +90,6 @@ public class MouseTrapBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SPRUNG);
+        builder.add(BlockStateProperties.FACING, SPRUNG);
     }
 }

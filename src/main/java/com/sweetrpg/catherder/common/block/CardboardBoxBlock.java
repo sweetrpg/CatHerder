@@ -92,10 +92,10 @@ public class CardboardBoxBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 
         return this.defaultBlockState()
-                .setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER))
+                .setValue(WATERLOGGED, Boolean.valueOf(fluidState.getType() == Fluids.WATER))
                 .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
 
@@ -106,6 +106,6 @@ public class CardboardBoxBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(BlockStateProperties.FACING, WATERLOGGED);
     }
 }

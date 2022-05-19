@@ -97,9 +97,9 @@ public class LitterBoxBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 
-        return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
+        return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(fluidState.getType() == Fluids.WATER));
     }
 
     @Override
@@ -109,6 +109,6 @@ public class LitterBoxBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+        builder.add(BlockStateProperties.FACING, WATERLOGGED);
     }
 }
