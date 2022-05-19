@@ -24,8 +24,12 @@ public class CatnipItem extends Item implements ICatItem {
         if(catIn.canInteract(playerIn)) {
             if(!worldIn.isClientSide) {
                 if(catIn instanceof CatEntity cat) {
-                    catIn.consumeItemFromStack(playerIn, playerIn.getItemInHand(handIn));
-                    return cat.consumeCatnip(playerIn, handIn);
+                    InteractionResult result = cat.consumeCatnip(playerIn, handIn);
+                    // check if cat took the catnip, otherwise, don't consume it
+                    if(result == InteractionResult.SUCCESS) {
+                        catIn.consumeItemFromStack(playerIn, playerIn.getItemInHand(handIn));
+                    }
+                    return result;
                 }
 
 //                int cooldownLeft = catIn.getDataOrDefault(COOLDOWN, catIn.tickCount) - catIn.tickCount;
