@@ -22,8 +22,8 @@ eclipse
 run
 run-server
 logs
+/misc-files/
 
 # Files from Forge MDK
 forge*changelog.txt
 /src/generated/resources/.cache/cache
-/misc-files/

@@ -13,6 +13,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;
@@ -69,7 +70,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .pattern(" X ")
                 .pattern("XYX")
                 .pattern(" X ")
-                .define('X', Items.BONE)
+                .define('X', ModItems.YARN.get())
                 .define('Y', Items.SHEARS)
                 .unlockedBy("has_shears", has(Items.SHEARS))
                 .save(consumer);
@@ -78,7 +79,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .pattern("XYX")
                 .pattern("XXX")
                 .define('X', Items.IRON_INGOT)
-                .define('Y', Items.BONE)
+                .define('Y', ItemTags.FISHES)
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.CAT_TOY.get(), 1)
@@ -154,23 +155,24 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('G', Blocks.GLASS_PANE)
                 .unlockedBy("has_stick", has(Items.STICK))
                 .save(consumer);
-//        ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
-//                           .pattern("MI")
-//                           .pattern("IM")
-//                           .define('M', ModItems.RODENT.get()) // TODO: ???
-//                .define('I', ItemTags.N) // TODO: nugget
-//                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-//                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
-//                           .save(consumer);
-//        ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
-//                           .pattern("MI")
-//                           .pattern("IM")
-//                           .pattern("MI")
-//                           .define('M', ModItems.RODENT.get()) // TODO: ???
-//                .define('I', Items.IRON_INGOT) // TODO: block
-//                           .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-//                           .unlockedBy("has_mouse", has(ModItems.RODENT.get()))
-//                           .save(consumer);
+
+        ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
+                .pattern("RN")
+                .pattern("NR")
+                .define('R', Tags.Items.RODS_WOODEN)
+                .define('N', Tags.Items.NUGGETS)
+                .unlockedBy("has_rod", has(Tags.Items.RODS_WOODEN))
+                .unlockedBy("has_nuggets", has(Tags.Items.NUGGETS))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
+                .pattern("SN")
+                .pattern("NS")
+                .pattern("SN")
+                .define('S', Tags.Items.STONE)
+                .define('N', Tags.Items.STORAGE_BLOCKS)
+                .unlockedBy("has_blocks", has(Tags.Items.STORAGE_BLOCKS))
+                .unlockedBy("has_stone", has(Tags.Items.STONE))
+                .save(consumer);
 
         ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
                 .pattern("XX")
