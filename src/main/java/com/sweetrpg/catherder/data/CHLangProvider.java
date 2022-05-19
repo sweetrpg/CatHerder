@@ -35,7 +35,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE, "Cat Tree");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP, "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die right click the tree to revive them.");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER, "This bed is owned by %s.");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Cat bowl");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Cat Bowl");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_BATH, "Cat Bath");
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "Litter Box");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Wild Catnip");
@@ -82,7 +82,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "Mouse Trap");
         add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "Cardboard");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "Pack Cat");
-        add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "Cat bowl");
+        add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "Cat Bowl");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "Treat Bag");
         add(Constants.TRANSLATION_KEY_CONTAINER_INVENTORIES_LINK, "Cat Inventories");
         add(Constants.TRANSLATION_KEY_CONTAINER_INVENTORIES, "Cat Inventories");
@@ -252,7 +252,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE, "Cat Tree");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP, "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die right click the tree to revive them.");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER, "This bed is owned by %s.");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Cat bowl");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Cat Bowl");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_BATH, "Cat Bath");
         add(Constants.TRANSLATION_KEY_BLOCK_LITTER_BOX, "Litter Box");
         add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Wild Catnip");
@@ -297,7 +297,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_ITEM_MOUSE_TRAP, "Mouse Trap");
         add(Constants.TRANSLATION_KEY_ITEM_CARDBOARD, "Cardboard");
         add(Constants.TRANSLATION_KEY_CONTAINER_PACK_CAT, "Pack Cat");
-        add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "Cat bowl");
+        add(Constants.TRANSLATION_KEY_CONTAINER_CAT_BOWL, "Cat Bowl");
         add(Constants.TRANSLATION_KEY_CONTAINER_TREAT_BAG, "Treat Bag");
         add(Constants.TRANSLATION_KEY_CONTAINER_INVENTORIES_LINK, "Cat Inventories");
         add(Constants.TRANSLATION_KEY_CONTAINER_INVENTORIES, "Cat Inventories");
