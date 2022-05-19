@@ -159,7 +159,6 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if(worldIn.isClientSide) {
             return InteractionResult.SUCCESS;
