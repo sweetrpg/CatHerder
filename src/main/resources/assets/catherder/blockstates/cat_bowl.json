@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "catherder:block/cat_bowl"
+    },
+    "facing=south": {
+      "model": "catherder:block/cat_bowl",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "catherder:block/cat_bowl",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "catherder:block/cat_bowl",
+      "y": 270
     }
   }
 }

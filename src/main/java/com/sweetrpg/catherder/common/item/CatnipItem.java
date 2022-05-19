@@ -4,7 +4,6 @@ import com.sweetrpg.catherder.api.feature.DataKey;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatItem;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +23,14 @@ public class CatnipItem extends Item implements ICatItem {
         if(catIn.canInteract(playerIn)) {
             if(!worldIn.isClientSide) {
                 if(catIn instanceof CatEntity cat) {
-                    return cat.consumeCatnip(playerIn, handIn);
+                    InteractionResult result = cat.consumeCatnip(playerIn, handIn);
+                    // check if cat took the catnip, otherwise, don't consume it
+                    if(result == InteractionResult.SUCCESS) {
+                        catIn.consumeItemFromStack(playerIn, playerIn.getItemInHand(handIn));
+                    }
+                    return result;
                 }
+
 //                int cooldownLeft = catIn.getDataOrDefault(COOLDOWN, catIn.tickCount) - catIn.tickCount;
 //
 //                if(cooldownLeft <= 0) {

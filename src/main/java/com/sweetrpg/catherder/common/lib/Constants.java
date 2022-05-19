@@ -79,6 +79,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_WILD_CATNIP = "item.catherder.wild_catnip";
     public static final String TRANSLATION_KEY_ITEM_CATNIP = "item.catherder.catnip";
     public static final String TRANSLATION_KEY_ITEM_YARN = "item.catherder.yarn";
+    public static final String TRANSLATION_KEY_ITEM_CARDBOARD = "item.catherder.cardboard";
     public static final String TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS = "item.catherder.treat_bag.contents";
     public static final String TRANSLATION_KEY_CONTAINER_PACK_CAT = "container.catherder.pack_cat";
     public static final String TRANSLATION_KEY_CONTAINER_CAT_BOWL = "container.catherder.cat_bowl";

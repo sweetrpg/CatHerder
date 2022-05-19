@@ -10,7 +10,7 @@
       "item": "minecraft:iron_ingot"
     },
     "Y": {
-      "item": "minecraft:bone"
+      "tag": "minecraft:fishes"
     }
   },
   "result": {

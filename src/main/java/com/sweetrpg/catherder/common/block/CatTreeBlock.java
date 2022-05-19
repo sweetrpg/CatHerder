@@ -2,17 +2,26 @@ package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
+import com.sweetrpg.catherder.common.storage.CatRespawnData;
+import com.sweetrpg.catherder.common.storage.CatRespawnStorage;
+import com.sweetrpg.catherder.common.util.EntityUtil;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -27,18 +36,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,23 +58,29 @@ public class CatTreeBlock extends BaseEntityBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
+    protected static final VoxelShape SHAPE_OCCLUSION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
     protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
 
     public CatTreeBlock() {
-        super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
-        this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+        super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
+        this.registerDefaultState(this.stateDefinition.any()
+                                          .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+                                          .setValue(WATERLOGGED, false));
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.FACING, WATERLOGGED);
-    }
-
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return SHAPE_OCCLUSION;
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
         return SHAPE_COLLISION;
@@ -80,11 +97,13 @@ public class CatTreeBlock extends BaseEntityBlock {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return Block.canSupportCenter(worldIn, pos.below(), Direction.UP);
@@ -92,7 +111,7 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        state = state.setValue(BlockStateProperties.FACING, placer.getDirection().getOpposite());
+        state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, placer.getDirection().getOpposite());
 
         CatTreeBlockEntity catTreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
 
@@ -112,6 +131,7 @@ public class CatTreeBlock extends BaseEntityBlock {
         worldIn.setBlock(pos, state, Block.UPDATE_CLIENTS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if(stateIn.getValue(WATERLOGGED)) {
@@ -121,83 +141,91 @@ public class CatTreeBlock extends BaseEntityBlock {
         return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(BlockStateProperties.FACING, rot.rotate(state.getValue(BlockStateProperties.FACING)));
+        return state.setValue(BlockStateProperties.HORIZONTAL_FACING, rot.rotate(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if(worldIn.isClientSide) {
             return InteractionResult.SUCCESS;
         }
         else {
-//            CattreeTileEntity cattreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CattreeTileEntity.class);
-//
-//            if (cattreeTileEntity != null) {
-//
-//                ItemStack stack = player.getItemInHand(handIn);
-//                if (stack.getItem() == Items.NAME_TAG && stack.hasCustomHoverName()) {
-//                    cattreeTileEntity.setBedName(stack.getHoverName());
-//
-//                    if (!player.getAbilities().instabuild) {
-//                        stack.shrink(1);
-//                    }
-//
-//                    worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
-//                    return InteractionResult.SUCCESS;
-//                } else if (player.isShiftKeyDown() && cattreeTileEntity.getOwnerUUID() == null) {
-//                    List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
-//                    Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
-//
-//                    CatEntity closestStanding = null;
-//                    CatEntity closestSitting = null;
-//                    for (CatEntity cat : cats) {
-//                        if (closestSitting != null && closestSitting != null) {
-//                            break;
-//                        }
-//
-//                        if (closestSitting == null && cat.isInSittingPose()) {
-//                            closestSitting = cat;
-//                        } else if (closestStanding == null && !cat.isInSittingPose()) {
-//                            closestStanding = cat;
-//                        }
-//                    }
-//
-//                    CatEntity closests = closestStanding != null ? closestStanding : closestSitting;
-//                    if (closests != null) {
-//                        closests.setTargetBlock(pos);
-//                    }
-//                } else if (cattreeTileEntity.getOwnerUUID() != null) {
-//                    CatRespawnData storage = CatRespawnStorage.get(worldIn).remove(cattreeTileEntity.getOwnerUUID());
-//
-//                    if (storage != null) {
-//                        CatEntity cat = storage.respawn((ServerLevel) worldIn, player, pos.above());
-//
-//                        cattreeTileEntity.setOwner(cat);
-//                        cat.setBedPos(cat.level.dimension(), pos);
-//                        return InteractionResult.SUCCESS;
-//                    } else {
-//                        Component name = cattreeTileEntity.getOwnerName();
-//                        player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
-//                        return InteractionResult.FAIL;
-//                    }
-//                } else {
-//                    player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
-//                    return InteractionResult.SUCCESS;
-//                }
-//            }
+            CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
+
+            if(catTreeEntity != null) {
+                ItemStack stack = player.getItemInHand(handIn);
+                if(stack.getItem() == Items.NAME_TAG && stack.hasCustomHoverName()) {
+                    catTreeEntity.setBedName(stack.getHoverName());
+
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+
+                    worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+                    return InteractionResult.SUCCESS;
+                }
+                else if(player.isShiftKeyDown() && catTreeEntity.getOwnerUUID() == null) {
+                    List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
+                    Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
+
+                    CatEntity closestStanding = null;
+                    CatEntity closestSitting = null;
+                    for(CatEntity cat : cats) {
+                        if(closestSitting != null && closestSitting != null) {
+                            break;
+                        }
+
+                        if(closestSitting == null && cat.isInSittingPose()) {
+                            closestSitting = cat;
+                        }
+                        else if(closestStanding == null && !cat.isInSittingPose()) {
+                            closestStanding = cat;
+                        }
+                    }
+
+                    CatEntity closests = closestStanding != null ? closestStanding : closestSitting;
+                    if(closests != null) {
+                        closests.setTargetBlock(pos);
+                    }
+                }
+                else if(catTreeEntity.getOwnerUUID() != null) {
+                    CatRespawnData storage = CatRespawnStorage.get(worldIn).remove(catTreeEntity.getOwnerUUID());
+
+                    if(storage != null) {
+                        CatEntity cat = storage.respawn((ServerLevel) worldIn, player, pos.above());
+
+                        catTreeEntity.setOwner(cat);
+                        cat.setBedPos(cat.level.dimension(), pos);
+                        return InteractionResult.SUCCESS;
+                    }
+                    else {
+                        Component name = catTreeEntity.getOwnerName();
+                        player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
+                        return InteractionResult.FAIL;
+                    }
+                }
+                else {
+                    player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
+                    return InteractionResult.SUCCESS;
+                }
+            }
+
             return InteractionResult.SUCCESS;
         }
     }
@@ -264,7 +292,12 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getNearestLookingDirection().getOpposite());
     }
 
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(BlockStateProperties.HORIZONTAL_FACING, WATERLOGGED);
+    }
 }

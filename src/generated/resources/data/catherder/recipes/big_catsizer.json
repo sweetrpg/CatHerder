@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SN",
+    "NS",
+    "SN"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stone"
+    },
+    "N": {
+      "tag": "forge:storage_blocks"
+    }
+  },
+  "result": {
+    "item": "catherder:big_catsizer"
+  }
+}

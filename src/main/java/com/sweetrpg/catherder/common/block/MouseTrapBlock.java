@@ -1,26 +1,21 @@
 package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -29,46 +24,58 @@ import org.jetbrains.annotations.Nullable;
 
 public class MouseTrapBlock extends Block {
 
-    public static final BooleanProperty SPRUNG = BlockStateProperties.TRIGGERED;
-    protected static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
-    protected static final VoxelShape SHAPE_COLLISION = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
+    protected static final VoxelShape NORTH_SOUTH_SHAPE = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
+    protected static final VoxelShape EAST_WEST_SHAPE = Block.box(0.0D, 0.0D, 1.0D, 16.0D, 2.0D, 15.0D);
 
     public MouseTrapBlock() {
-        super(Block.Properties.of(Material.WOOD).strength(3.0F, 5.0F).sound(SoundType.WOOD));
+        super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
     }
 
     public boolean hasDynamicShape() {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return SHAPE;
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter pLevel, BlockPos pPos) {
+        return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
+        };
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
+        };
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
-        return SHAPE_COLLISION;
+        return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
+        };
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return super.getStateForPlacement(context)
-                    .setValue(SPRUNG, true)
-                .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+                       .setValue(BlockStateProperties.TRIGGERED, true)
+                       .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getNearestLookingDirection().getOpposite());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (stack.isEmpty()) {
+        if(stack.isEmpty()) {
             return InteractionResult.SUCCESS;
         }
         else {
@@ -79,8 +86,8 @@ public class MouseTrapBlock extends Block {
                     }
 
                     level.playSound(null, pos, SoundEvents.CHEST_LOCKED, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    level.setBlock(pos, state.setValue(SPRUNG, false), Block.UPDATE_ALL);
-//                    state.setValue(SPRUNG, false);
+                    level.setBlock(pos, state.setValue(BlockStateProperties.TRIGGERED, false), Block.UPDATE_ALL);
+//                    state.setValue(BlockStateProperties.TRIGGERED, false);
                 }
             }
         }
@@ -90,6 +97,7 @@ public class MouseTrapBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SPRUNG);
+        super.createBlockStateDefinition(builder);
+        builder.add(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.TRIGGERED);
     }
 }

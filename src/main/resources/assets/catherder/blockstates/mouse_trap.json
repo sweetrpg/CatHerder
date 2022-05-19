@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,triggered=false": {
+      "model": "catherder:block/mouse_trap_armed"
+    },
+    "facing=south,triggered=false": {
+      "model": "catherder:block/mouse_trap_armed",
+      "y": 180
+    },
+    "facing=west,triggered=false": {
+      "model": "catherder:block/mouse_trap_armed",
+      "y": 270
+    },
+    "facing=east,triggered=false": {
+      "model": "catherder:block/mouse_trap_armed",
+      "y": 90
+    },
+    "facing=north,triggered=true": {
+      "model": "catherder:block/mouse_trap_triggered"
+    },
+    "facing=south,triggered=true": {
+      "model": "catherder:block/mouse_trap_triggered",
+      "y": 180
+    },
+    "facing=west,triggered=true": {
+      "model": "catherder:block/mouse_trap_triggered",
+      "y": 270
+    },
+    "facing=east,triggered=true": {
+      "model": "catherder:block/mouse_trap_triggered",
+      "y": 90
+    }
+  }
+}

@@ -46,7 +46,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
         stageBlock(ModBlocks.CATNIP_CROP.get(), CatnipBlock.CATNIP_AGE);
         wildCropBlock(ModBlocks.WILD_CATNIP.get());
 //        makeSimple(ModBlocks.CARDBOARD_BOX);
-        mouseTrapBlock(ModBlocks.MOUSE_TRAP);
+//        mouseTrapBlock(ModBlocks.MOUSE_TRAP);
         cheeseWheelBlock(ModBlocks.CHEESE_WHEEL.get(), CheeseWheelBlock.SERVINGS);
     }
 
@@ -70,21 +70,22 @@ public class CHBlockstateProvider extends BlockStateProvider {
         });
     }
 
-    protected void mouseTrapBlock(Supplier<? extends Block> block) {
-        BlockModelBuilder model = this.models()
-                                      .getBuilder(name(block))
-//                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                                      .texture("triggered=false", extend(blockTexture(block), "_armed"))
-                                      .texture("triggered=true", extend(blockTexture(block), "_sprung"));
-
-        model.element()
-                .from(1.0f, 0.0f, 1.0f)
-                .to(15.0f, 4.0f, 15.0f);
-//                .allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null)
-//                        .texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
-
-        this.simpleBlock(block.get(), model);
-    }
+//    protected void mouseTrapBlock(Supplier<? extends Block> block) {
+//        BlockModelBuilder model = this.models()
+//                                      .getBuilder(name(block))
+////                                      .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
+//                                      .texture("triggered=false", extend(blockTexture(block), "_armed"))
+//                                      .texture("triggered=true", extend(blockTexture(block), "_triggered"));
+//
+//        model.element()
+//                .from(1.0f, 0.0f, 1.0f)
+//                .to(15.0f, 4.0f, 15.0f);
+////                .allFaces((d, f) -> f.cullface(d == Direction.DOWN ? d : null)
+////                        .texture(d.getAxis().isHorizontal() ? "#side" : d == Direction.DOWN ? "#bottom" : "#top"));
+//
+//        horizontalBlock(block.get(), model);
+////        this.simpleBlock(block.get(), model);
+//    }
 
     protected void createFromShape(Supplier<? extends Block> blockIn, AABB bb) {
         BlockModelBuilder model = this.models()

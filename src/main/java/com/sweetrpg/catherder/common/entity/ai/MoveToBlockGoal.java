@@ -1,9 +1,11 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
 //import com.sweetrpg.catherder.common.block.tileentity.CattreeTileEntity;
+
+import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.WorldUtil;
-import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 
@@ -32,15 +34,15 @@ public class MoveToBlockGoal extends Goal {
     public void stop() {
         BlockPos target = this.cat.getTargetBlock();
 
-//        CattreeTileEntity cattreeTileEntity = WorldUtil.getTileEntity(cat.level, target, CattreeTileEntity.class);
-//
-//        if (cattreeTileEntity != null) {
-//            // Double check the bed still has no owner
-//            if (cattreeTileEntity.getOwnerUUID() == null) {
-//                cattreeTileEntity.setOwner(this.cat);
-//                this.cat.setBedPos(this.cat.level.dimension(), target);
-//            }
-//        }
+        CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(cat.level, target, CatTreeBlockEntity.class);
+
+        if(catTreeEntity != null) {
+            // Double-check the bed still has no owner
+            if(catTreeEntity.getOwnerUUID() == null) {
+                catTreeEntity.setOwner(this.cat);
+                this.cat.setBedPos(this.cat.level.dimension(), target);
+            }
+        }
 
         this.cat.setTargetBlock(null);
         this.cat.setOrderedToSit(true);
