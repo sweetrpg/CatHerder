@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CheeseWheelBlock extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
     public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 8);
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
 //    protected static final List<VoxelShape> SHAPES = Arrays.asList(
@@ -64,7 +64,9 @@ public class CheeseWheelBlock extends Block {
         super(properties);
 //        this.servingItem = servingItem;
         this.hasLeftovers = hasLeftovers;
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SERVINGS, 8));
+        this.registerDefaultState(this.stateDefinition.any()
+                                          .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+                                          .setValue(SERVINGS, 8));
     }
 
     @Override
@@ -144,7 +146,7 @@ public class CheeseWheelBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @SuppressWarnings("deprecation")
@@ -157,12 +159,6 @@ public class CheeseWheelBlock extends Block {
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(FACING, SERVINGS);
     }
 
     @SuppressWarnings("deprecation")
@@ -185,5 +181,11 @@ public class CheeseWheelBlock extends Block {
     @Override
     public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
         return false;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(BlockStateProperties.HORIZONTAL_FACING, SERVINGS);
     }
 }

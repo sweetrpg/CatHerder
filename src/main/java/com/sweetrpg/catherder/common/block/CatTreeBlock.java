@@ -63,7 +63,9 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     public CatTreeBlock() {
         super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
-        this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any()
+                                          .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+                                          .setValue(WATERLOGGED, false));
     }
 
     @SuppressWarnings("deprecation")
@@ -109,7 +111,7 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        state = state.setValue(BlockStateProperties.FACING, placer.getDirection().getOpposite());
+        state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, placer.getDirection().getOpposite());
 
         CatTreeBlockEntity catTreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
 
@@ -148,13 +150,13 @@ public class CatTreeBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(BlockStateProperties.FACING, rot.rotate(state.getValue(BlockStateProperties.FACING)));
+        return state.setValue(BlockStateProperties.HORIZONTAL_FACING, rot.rotate(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
     }
 
     @SuppressWarnings("deprecation")
@@ -290,12 +292,12 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getNearestLookingDirection().getOpposite());
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.FACING, WATERLOGGED);
+        builder.add(BlockStateProperties.HORIZONTAL_FACING, WATERLOGGED);
     }
 }

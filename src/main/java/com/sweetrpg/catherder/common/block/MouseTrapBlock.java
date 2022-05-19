@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -25,8 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class MouseTrapBlock extends Block {
 
-    protected static final VoxelShape SHAPE_NORTH_SOUTH = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
-    protected static final VoxelShape SHAPE_EAST_WEST = Block.box(0.0D, 0.0D, 1.0D, 16.0D, 2.0D, 15.0D);
+    protected static final VoxelShape NORTH_SOUTH_SHAPE = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
+    protected static final VoxelShape EAST_WEST_SHAPE = Block.box(0.0D, 0.0D, 1.0D, 16.0D, 2.0D, 15.0D);
 
     public MouseTrapBlock() {
         super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
@@ -40,8 +39,8 @@ public class MouseTrapBlock extends Block {
     @Override
     public VoxelShape getOcclusionShape(BlockState state, BlockGetter pLevel, BlockPos pPos) {
         return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case UP, DOWN, NORTH, SOUTH -> SHAPE_NORTH_SOUTH;
-            case WEST, EAST -> SHAPE_EAST_WEST;
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
         };
     }
 
@@ -49,8 +48,8 @@ public class MouseTrapBlock extends Block {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case UP, DOWN, NORTH, SOUTH -> SHAPE_NORTH_SOUTH;
-            case WEST, EAST -> SHAPE_EAST_WEST;
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
         };
     }
 
@@ -58,8 +57,8 @@ public class MouseTrapBlock extends Block {
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
         return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
-            case UP, DOWN, NORTH, SOUTH -> SHAPE_NORTH_SOUTH;
-            case WEST, EAST -> SHAPE_EAST_WEST;
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
         };
     }
 

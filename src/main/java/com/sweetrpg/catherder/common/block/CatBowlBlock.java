@@ -50,7 +50,8 @@ import javax.annotation.Nullable;
 public class CatBowlBlock extends BaseEntityBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 4.0D, 16.0D, 5.0D, 12.0D);
+    protected static final VoxelShape NORTH_SOUTH_SHAPE = Block.box(0.0D, 0.0D, 4.0D, 16.0D, 5.0D, 12.0D);
+    protected static final VoxelShape EAST_WEST_SHAPE = Block.box(4.0D, 0.0D, 0.0D, 12.0D, 5.0D, 16.0D);
 
     public CatBowlBlock() {
         super(Block.Properties.of(Material.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
@@ -70,7 +71,10 @@ public class CatBowlBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
-        return SHAPE;
+        return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> NORTH_SOUTH_SHAPE;
+            case WEST, EAST -> EAST_WEST_SHAPE;
+        };
     }
 
     @SuppressWarnings("deprecation")
@@ -209,6 +213,6 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(WATERLOGGED);
+        builder.add(BlockStateProperties.HORIZONTAL_FACING, WATERLOGGED);
     }
 }

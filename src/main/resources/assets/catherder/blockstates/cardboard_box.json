@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "catherder:block/cardboard_box"
+    },
+    "facing=south": {
+      "model": "catherder:block/cardboard_box",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "catherder:block/cardboard_box",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "catherder:block/cardboard_box",
+      "y": 270
     }
   }
 }
