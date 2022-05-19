@@ -161,6 +161,7 @@ public class CheeseWheelBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FACING, SERVINGS);
     }
 
