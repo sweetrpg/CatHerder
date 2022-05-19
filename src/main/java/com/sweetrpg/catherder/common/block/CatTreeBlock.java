@@ -66,21 +66,19 @@ public class CatTreeBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.FACING, WATERLOGGED);
-    }
-
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return SHAPE_OCCLUSION;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
         return SHAPE_COLLISION;
@@ -97,11 +95,13 @@ public class CatTreeBlock extends BaseEntityBlock {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return Block.canSupportCenter(worldIn, pos.below(), Direction.UP);
@@ -129,6 +129,7 @@ public class CatTreeBlock extends BaseEntityBlock {
         worldIn.setBlock(pos, state, Block.UPDATE_CLIENTS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if(stateIn.getValue(WATERLOGGED)) {
@@ -138,21 +139,25 @@ public class CatTreeBlock extends BaseEntityBlock {
         return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(BlockStateProperties.FACING, rot.rotate(state.getValue(BlockStateProperties.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     @Deprecated
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {

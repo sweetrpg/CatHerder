@@ -41,6 +41,7 @@ public class MouseTrapBlock extends Block {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getOcclusionShape(BlockState state, BlockGetter pLevel, BlockPos pPos) {
         return switch (state.getValue(BlockStateProperties.FACING)) {
@@ -49,6 +50,7 @@ public class MouseTrapBlock extends Block {
         };
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(BlockStateProperties.FACING)) {
@@ -57,6 +59,7 @@ public class MouseTrapBlock extends Block {
         };
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
         return switch (state.getValue(BlockStateProperties.FACING)) {
@@ -73,6 +76,7 @@ public class MouseTrapBlock extends Block {
                 .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);

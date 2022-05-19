@@ -72,11 +72,13 @@ public class CheeseWheelBlock extends Block {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : PIE_SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         ItemStack itemStack = player.getItemInHand(handIn);
@@ -145,11 +147,13 @@ public class CheeseWheelBlock extends Block {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
@@ -160,6 +164,7 @@ public class CheeseWheelBlock extends Block {
         builder.add(FACING, SERVINGS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
         return blockState.getValue(SERVINGS);
@@ -169,11 +174,13 @@ public class CheeseWheelBlock extends Block {
         return 8;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
         return false;

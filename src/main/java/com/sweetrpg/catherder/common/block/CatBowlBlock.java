@@ -67,16 +67,19 @@ public class CatBowlBlock extends BaseEntityBlock {
         return createTickerHelper(blockEntityType, ModTileEntityTypes.CAT_BOWL.get(), CatBowlBlockEntity::tick);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
         return SHAPE;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return Block.canSupportCenter(worldIn, pos.below(), Direction.UP);
@@ -93,6 +96,7 @@ public class CatBowlBlock extends BaseEntityBlock {
         worldIn.setBlock(pos, state, Block.UPDATE_CLIENTS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (entityIn instanceof ItemEntity) {
@@ -114,6 +118,7 @@ public class CatBowlBlock extends BaseEntityBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
@@ -130,11 +135,13 @@ public class CatBowlBlock extends BaseEntityBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
         CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
@@ -147,6 +154,7 @@ public class CatBowlBlock extends BaseEntityBlock {
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState blockStateIn, Level worldIn, BlockPos posIn, Player playerIn, InteractionHand handIn, BlockHitResult result) {
         if (worldIn.isClientSide) {
@@ -175,6 +183,7 @@ public class CatBowlBlock extends BaseEntityBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
@@ -191,6 +200,7 @@ public class CatBowlBlock extends BaseEntityBlock {
         return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(FluidState.getType() == Fluids.WATER));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
