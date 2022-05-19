@@ -9,9 +9,11 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.models.blockstates.Condition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -60,11 +62,25 @@ public class CHLootTableProvider extends LootTableProvider {
             dropCatnip(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
             dropsSelf(ModBlocks.CATNIP_CROP);
-            dropsSelf(ModBlocks.MOUSE_TRAP);
+            dropsMouseTrap(ModBlocks.MOUSE_TRAP);
             dropsSelf(ModBlocks.CHEESE_WHEEL);
         }
 
-        private void dropCatnip(Supplier<? extends Block> block) {
+        private void dropsMouseTrap(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+//                                                         .withPool(applyExplosionCondition(block.get(),
+//                                                                                           LootPool.lootPool().when(() -> {
+//                                                                                               BlockStateProperties.TRIGGERED.getValue()
+//                                                                                           }))
+//                                                                           .add(LootItem.lootTableItem(ModBlocks.CHEESE_WHEEL.get())))
+                                                         .withPool(applyExplosionCondition(block.get(),
+                                                                                           LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                                                                           .add(LootItem.lootTableItem(block.get())));
+            
+            this.add(block.get(), lootTableBuilder);
+        }
+
+            private void dropCatnip(Supplier<? extends Block> block) {
             LootTable.Builder lootTableBuilder = LootTable.lootTable()
                     .withPool(applyExplosionCondition(block.get(),
                                                       LootPool.lootPool().setRolls(UniformGenerator.between(0, 2)))
@@ -110,7 +126,7 @@ public class CHLootTableProvider extends LootTableProvider {
         }
 
         private void dropsSelf(Supplier<? extends Block> block) {
-            this.dropSelf(block.get());
+            dropSelf(block.get());
         }
 
         @Override
