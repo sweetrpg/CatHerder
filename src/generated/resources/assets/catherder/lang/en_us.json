@@ -40,7 +40,7 @@
   "cat.mode.patrol.description": "In this mode your cat will patrol between 2-4 points (set using a command emblem) and attack monsters that try come into view.",
   "cat.mode.patrol.indicator": "(P)",
   "cat.mode.skittish": "Skittish",
-  "cat.mode.skittish.description": "",
+  "cat.mode.skittish.description": "The cat will avoid all other creatures, and sometimes its owner.",
   "cat.mode.skittish.indicator": "(S)",
   "cat.mode.tactical": "Tactical",
   "cat.mode.tactical.description": "In this mode your cat will follow you but will not attack anything unless you use the command beam",
