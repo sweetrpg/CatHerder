@@ -292,7 +292,7 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getNearestLookingDirection().getOpposite());
+        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override

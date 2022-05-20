@@ -163,7 +163,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "In this mode your cat will follow you but will not attack anything unless you use the command beam");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "Skittish");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "(S)");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "The cat will avoid all other creatures, and sometimes its owner.");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "Attack");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "(A)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "In this mode your cat will follow you and attack anything that attacks you or that you attack.");
@@ -378,7 +378,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "In this mode your cat will follow you but will not attack anything unless you use the command beam");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "Skittish");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "(S)");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "The cat will avoid all other creatures, and sometimes its owner.");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "Attack");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "(A)");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "In this mode your cat will follow you and attack anything that attacks you or that you attack.");
@@ -592,7 +592,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "TODO");
@@ -806,7 +806,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "TODO");
@@ -1020,7 +1020,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "TODO");
@@ -1234,7 +1234,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "TODO");
@@ -1448,7 +1448,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "TODO");
@@ -1662,7 +1662,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_CAT_MODE_TACTICAL_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_INDICATOR, "TODO");
-        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "");
+        add(Constants.TRANSLATION_KEY_CAT_MODE_SKITTISH_DESCRIPTION, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_INDICATOR, "TODO");
         add(Constants.TRANSLATION_KEY_CAT_MODE_ATTACK_DESCRIPTION, "TODO");

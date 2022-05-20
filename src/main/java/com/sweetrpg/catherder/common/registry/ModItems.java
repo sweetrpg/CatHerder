@@ -2,6 +2,7 @@ package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.api.feature.CatLevel;
 import com.sweetrpg.catherder.api.registry.Accessory;
+import com.sweetrpg.catherder.common.FoodValues;
 import com.sweetrpg.catherder.common.entity.accessory.DyeableAccessory;
 import com.sweetrpg.catherder.common.item.*;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -37,7 +38,8 @@ public class ModItems {
     public static final RegistryObject<Item> CAT_GUT = register("cat_gut");
 
     // food
-    public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge");
+    public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge",
+                                                                     () -> new Item(new Item.Properties().food(FoodValues.CHEESE).tab(ModItemGroups.GENERAL)));
 //    public static final RegistryObject<Item> LASAGNA = register("lasagna");
 
     // treats

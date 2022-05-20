@@ -101,7 +101,7 @@ public class CardboardBoxBlock extends Block {
 
         return this.defaultBlockState()
                 .setValue(WATERLOGGED, Boolean.valueOf(fluidState.getType() == Fluids.WATER))
-                .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getNearestLookingDirection().getOpposite());
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @SuppressWarnings("deprecation")

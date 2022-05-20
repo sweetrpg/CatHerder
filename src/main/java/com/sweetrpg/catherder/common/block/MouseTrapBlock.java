@@ -67,7 +67,7 @@ public class MouseTrapBlock extends Block {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return super.getStateForPlacement(context)
                        .setValue(BlockStateProperties.TRIGGERED, true)
-                       .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getNearestLookingDirection().getOpposite());
+                       .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @SuppressWarnings("deprecation")
