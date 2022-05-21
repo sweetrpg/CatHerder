@@ -66,3 +66,11 @@
 * Boots
   * Normal
   * Special boots (drop only), make cat stand on hind legs (Puss 'n Boots)   
+
+# Run Configurations
+
+```xml
+    <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/Library/Application Support/minecraft/runtime/java-runtime-beta/mac-os/java-runtime-beta/jre.bundle/Contents/Home" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+```
+

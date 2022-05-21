@@ -1,0 +1,16 @@
+{
+  "name": "Treats",
+  "icon": "catherder:training_treat",
+  "category": "catherder:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Training Treat",
+      "recipe": "catherder:training_treat"
+    }
+  ]
+}
