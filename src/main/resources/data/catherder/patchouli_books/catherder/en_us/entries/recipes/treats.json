@@ -1,0 +1,31 @@
+{
+  "name": "Treats",
+  "icon": "catherder:training_treat",
+  "category": "catherder:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Training Treat",
+      "recipe": "catherder:training_treat"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Super Treat",
+      "recipe": "catherder:super_treat"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Master Treat",
+      "recipe": "catherder:master_treat"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Wild Treat",
+      "recipe": "catherder:wild_treat"
+    }
+  ]
+}

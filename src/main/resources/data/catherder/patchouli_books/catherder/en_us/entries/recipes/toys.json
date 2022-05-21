@@ -1,0 +1,21 @@
+{
+  "name": "Toys",
+  "icon": "catherder:cat_toy",
+  "category": "catherder:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cat Toy",
+      "recipe": "catherder:cat_toy"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Yarn",
+      "recipe": "catherder:yarn"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Accessories",
+  "icon": "catherder:training_treat",
+  "category": "catherder:recipes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cape",
+      "recipe": "catherder:cape"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Multi-colored Collar",
+      "recipe": "catherder:multicoloured_collar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Radio Collar",
+      "recipe": "catherder:radio_collar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Spotted Collar",
+      "recipe": "catherder:spotted_collar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Wool Collar",
+      "recipe": "catherder:wool_collar"
+    }
+  ]
+}

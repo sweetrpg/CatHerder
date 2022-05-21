@@ -1,0 +1,31 @@
+{
+  "name": "Personal Items",
+  "icon": "catherder:training_treat",
+  "category": "catherder:recipes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are a number of items that you can make for your cats that will enrich their lives."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cardboard Box",
+      "recipe": "catherder:cardboard_box"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Food Bowl",
+      "recipe": "catherder:cat_bowl"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cat Tree",
+      "recipe": "catherder:cat_tree"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Litterbox",
+      "recipe": "catherder:litter_box"
+    }
+  ]
+}

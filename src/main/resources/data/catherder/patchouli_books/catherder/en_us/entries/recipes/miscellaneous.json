@@ -1,0 +1,21 @@
+{
+  "name": "Miscellaneous",
+  "icon": "catherder:training_treat",
+  "category": "catherder:recipes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cheese Wheel",
+      "recipe": "catherder:cheese_wheel"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cheese Wedge",
+      "recipe": "catherder:cheese_wedge"
+    }
+  ]
+}
