@@ -5,6 +5,7 @@ import com.sweetrpg.catherder.api.feature.InteractHandler;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.entity.FishFoodHandler;
 import com.sweetrpg.catherder.common.entity.HelmetInteractHandler;
 import com.sweetrpg.catherder.common.entity.MeatFoodHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
@@ -19,9 +20,11 @@ public class CommonSetup {
         event.enqueueWork(() -> {
             PacketHandler.init();
             //TODO CriteriaTriggers.register(criterion)
-            FoodHandler.registerHandler(new MeatFoodHandler());
 
+//            FoodHandler.registerHandler(new MeatFoodHandler());
+            FoodHandler.registerHandler(new FishFoodHandler());
             FoodHandler.registerDynPredicate(HappyEaterTalent.INNER_DYN_PRED);
+
             InteractHandler.registerHandler(new HelmetInteractHandler());
             ConfigHandler.initTalentConfig();
             CatRespawnCommand.registerSerilizers();
