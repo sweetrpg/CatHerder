@@ -203,7 +203,7 @@ public class CatEntity extends AbstractCatEntity {
         //this.goalSelector.addGoal(1, new PatrolAreaGoal(this));
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(2, new CatEntity.CatRelaxOnOwnerGoal(this));
-        this.goalSelector.addGoal(2, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(10, new CatLieOnBedGoal<>(this, 1.1F, 16));
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
