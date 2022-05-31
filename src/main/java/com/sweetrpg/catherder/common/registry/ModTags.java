@@ -13,6 +13,7 @@ public class ModTags {
     public static TagKey<Item> BREEDING_ITEMS = modItemTag("breeding_items");
     public static TagKey<Item> PACK_CAT_BLACKLIST = modItemTag("pack_cat_blacklist");
     public static TagKey<Item> TREATS = modItemTag("treats");
+    public static TagKey<Item> MEAT = modItemTag("meat");
     public static final TagKey<Block> WILD_CROPS = modBlockTag("wild_crops");
 //    public static Tag.Named<EntityType<?>> PESTS = modEntityTag("pests");
 

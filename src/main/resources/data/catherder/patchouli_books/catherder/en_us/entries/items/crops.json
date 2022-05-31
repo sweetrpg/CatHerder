@@ -1,0 +1,11 @@
+{
+  "name": "Crops",
+  "icon": "catherder:catnip",
+  "category": "catherder:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    }
+  ]
+}

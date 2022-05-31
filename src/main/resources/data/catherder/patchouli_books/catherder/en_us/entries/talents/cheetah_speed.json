@@ -1,0 +1,11 @@
+{
+  "name": "Cheetah Speed",
+  "icon": "catherder:training_treat",
+  "category": "catherder:talents",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    }
+  ]
+}

@@ -37,6 +37,11 @@ public class CHItemTagsProvider extends ItemTagsProvider {
         createTag(ModTags.BREEDING_ITEMS, ModItems.BREEDING_TREAT);
         createTag(ModTags.PACK_CAT_BLACKLIST, ModItems.CAT_TOY);
         createTag(ModTags.TREATS, ModItems.TRAINING_TREAT, ModItems.SUPER_TREAT, ModItems.MASTER_TREAT, ModItems.WILD_TREAT);
+        createTag(ModTags.MEAT, Items.BEEF.delegate, Items.COOKED_BEEF.delegate,
+                  Items.CHICKEN.delegate, Items.COOKED_CHICKEN.delegate,
+                  Items.PORKCHOP.delegate, Items.COOKED_PORKCHOP.delegate,
+                  Items.MUTTON.delegate, Items.COOKED_MUTTON.delegate,
+                  Items.COOKED_RABBIT.delegate, Items.RABBIT.delegate);
     }
 
     @SafeVarargs

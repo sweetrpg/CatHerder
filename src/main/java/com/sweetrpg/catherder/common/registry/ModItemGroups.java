@@ -1,6 +1,5 @@
 package com.sweetrpg.catherder.common.registry;
 
-//import com.sweetrpg.catherder.common.util.CattreeUtil;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 

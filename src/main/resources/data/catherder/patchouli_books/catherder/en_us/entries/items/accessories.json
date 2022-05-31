@@ -1,0 +1,11 @@
+{
+  "name": "Accessories",
+  "icon": "catherder:cat_toy",
+  "category": "catherder:items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    }
+  ]
+}
