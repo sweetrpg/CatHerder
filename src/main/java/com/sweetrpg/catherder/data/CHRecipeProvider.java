@@ -73,6 +73,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('X', ModItems.YARN.get())
                 .define('Y', Items.SHEARS)
                 .unlockedBy("has_shears", has(Items.SHEARS))
+                .unlockedBy("has_yarn", has(ModItems.YARN.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
                 .pattern("XXX")
@@ -81,13 +82,15 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('X', Items.IRON_INGOT)
                 .define('Y', ItemTags.FISHES)
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .unlockedBy("has_fishes", has(ItemTags.FISHES))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.CAT_TOY.get(), 1)
                 .pattern("SW")
                 .pattern("WS")
-                .define('W', Items.WHEAT)
+                .define('W', ModItems.CATNIP.get())
                 .define('S', Items.SUGAR)
                 .unlockedBy("has_sugar", has(Items.SUGAR))
+                .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.WOOL_COLLAR.get(), 1)
                 .pattern("SSS")
