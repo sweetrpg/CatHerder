@@ -1,16 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
-    "XYX",
+    "FXW",
     "XXX"
   ],
   "key": {
     "X": {
       "item": "minecraft:iron_ingot"
     },
-    "Y": {
+    "F": {
       "tag": "minecraft:fishes"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
     }
   },
   "result": {
