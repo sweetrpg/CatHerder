@@ -149,6 +149,8 @@ public class CatEntity extends AbstractCatEntity {
     private int catnipCooldown;
     private Goal catnipGoal;
     private int litterboxCooldown;
+    public static final int MIN_CAT_SIZE = 1;
+    public static final int MAX_CAT_SIZE = 5;
 
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -1903,7 +1905,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public void setCatSize(int value) {
-        this.entityData.set(SIZE, (byte) Math.min(5, Math.max(1, value)));
+        this.entityData.set(SIZE, (byte) Math.min(MAX_CAT_SIZE, Math.max(MIN_CAT_SIZE, value)));
     }
 
     public ItemStack getToyVariant() {
