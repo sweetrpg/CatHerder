@@ -60,7 +60,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_CREATIVE_COLLAR = "item.catherder.creative_collar";
     public static final String TRANSLATION_KEY_ITEM_CREATIVE_COLLAR_TOOLTIP = "item.catherder.creative_collar.tooltip";
     public static final String TRANSLATION_KEY_ITEM_SPOTTED_COLLAR = "item.catherder.spotted_collar";
-    public static final String TRANSLATION_KEY_ITEM_MULTICOLORED_COLLAR = "item.catherder.multicoloured_collar";
+    public static final String TRANSLATION_KEY_ITEM_MULTICOLORED_COLLAR = "item.catherder.multicolored_collar";
     public static final String TRANSLATION_KEY_ITEM_RADAR = "item.catherder.radar";
     public static final String TRANSLATION_KEY_ITEM_CREATIVE_RADAR = "item.catherder.creative_radar";
     public static final String TRANSLATION_KEY_ITEM_CREATIVE_RADAR_TOOLTIP = "item.catherder.creative_radar.tooltip";
