@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,locked=false": {
+      "model": "catherder:block/pet_door"
+    },
+    "facing=south,locked=false": {
+      "model": "catherder:block/pet_door",
+      "y": 180
+    },
+    "facing=west,locked=false": {
+      "model": "catherder:block/pet_door",
+      "y": 270
+    },
+    "facing=east,locked=false": {
+      "model": "catherder:block/pet_door",
+      "y": 90
+    },
+    "facing=north,locked=true": {
+      "model": "catherder:block/pet_door"
+    },
+    "facing=south,locked=true": {
+      "model": "catherder:block/pet_door",
+      "y": 180
+    },
+    "facing=west,locked=true": {
+      "model": "catherder:block/pet_door",
+      "y": 270
+    },
+    "facing=east,locked=true": {
+      "model": "catherder:block/pet_door",
+      "y": 90
+    }
+  }
+}
