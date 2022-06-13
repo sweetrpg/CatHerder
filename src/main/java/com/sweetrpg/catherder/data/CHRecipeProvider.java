@@ -271,6 +271,16 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 //        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
 //                            .save(consumer, Util.getResourcePath("cat_tree"));
+
+        ShapedRecipeBuilder.shaped(ModBlocks.PET_DOOR.get(), 1)
+                .pattern("WWW")
+                .pattern("WDW")
+                .pattern("WWW")
+                .define('W', ItemTags.PLANKS)
+                .define('D', ItemTags.WOODEN_DOORS)
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .unlockedBy("has_door", has(ItemTags.WOODEN_DOORS))
+                .save(consumer);
     }
 
     @Override

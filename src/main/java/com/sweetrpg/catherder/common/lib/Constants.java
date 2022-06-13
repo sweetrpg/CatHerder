@@ -42,6 +42,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL = "block.catherder.cheese_wheel";
     public static final String TRANSLATION_KEY_BLOCK_CHEESE_WHEEL_USE = "block.catherder.cheese_wheel.use_container";
     public static final String TRANSLATION_KEY_BLOCK_MOUSE_TRAP = "block.catherder.mouse_trap";
+    public static final String TRANSLATION_KEY_BLOCK_PET_DOOR = "block.catherder.pet_door";
 //    public static final String TRANSLATION_KEY_ITEM_THROW_TOY = "item.catherder.throw_toy";
     public static final String TRANSLATION_KEY_ITEM_CHEESE_WEDGE = "item.catherder.cheese_wedge";
     public static final String TRANSLATION_KEY_ITEM_MOUSE_TRAP = "item.catherder.mouse_trap";
