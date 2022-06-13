@@ -1,11 +1,11 @@
 {
-  "name": "Fisher Cat",
+  "name": "Cheetah Speed",
   "icon": "catherder:training_treat",
   "category": "catherder:talents",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "This talent makes your cat the fastest cat ever!"
     }
   ]
 }

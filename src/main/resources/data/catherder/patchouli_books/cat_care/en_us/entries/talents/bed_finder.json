@@ -1,11 +1,11 @@
 {
-  "name": "Nermal",
+  "name": "Bed Finder",
   "icon": "catherder:training_treat",
   "category": "catherder:talents",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "The Bed Finder talent will make it so your cat can help you find where your bed is located."
     }
   ]
 }

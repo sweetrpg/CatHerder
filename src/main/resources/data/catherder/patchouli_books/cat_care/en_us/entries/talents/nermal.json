@@ -1,11 +1,11 @@
 {
-  "name": "Poison Fang",
+  "name": "Nermal",
   "icon": "catherder:training_treat",
   "category": "catherder:talents",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "You know your cat is already cute, but this will make everybody love your cat!"
     }
   ]
 }

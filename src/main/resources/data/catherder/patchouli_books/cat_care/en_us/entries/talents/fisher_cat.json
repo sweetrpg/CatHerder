@@ -1,11 +1,11 @@
 {
-  "name": "Pack Cat",
+  "name": "Fisher Cat",
   "icon": "catherder:training_treat",
   "category": "catherder:talents",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "With this talent, your cat will catch fish for you."
     }
   ]
 }

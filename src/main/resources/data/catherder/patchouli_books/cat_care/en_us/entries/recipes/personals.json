@@ -26,6 +26,11 @@
       "type": "patchouli:crafting",
       "title": "Litterbox",
       "recipe": "catherder:litter_box"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Pet Door",
+      "recipe": "catherder:pet_door"
     }
   ]
 }
