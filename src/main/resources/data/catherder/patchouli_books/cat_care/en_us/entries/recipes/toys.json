@@ -8,9 +8,22 @@
       "text": "Cats love to play with toys. Here you will find some toys to make for them."
     },
     {
+      "type": "patchouli:empty"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
+    },
+    {
       "type": "patchouli:crafting",
       "title": "Cat Toy",
       "recipe": "catherder:cat_toy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
     },
     {
       "type": "patchouli:crafting",
