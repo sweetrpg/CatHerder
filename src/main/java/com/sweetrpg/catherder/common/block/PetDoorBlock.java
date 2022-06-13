@@ -24,8 +24,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class PetDoorBlock extends Block {
 
-    protected static final VoxelShape UNLOCKED_SHAPE = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
-    protected static final VoxelShape LOCKED_SHAPE = Block.box(1.0D, 0.0D, 0.0D, 15.0D, 2.0D, 16.0D);
+    protected static final VoxelShape UNLOCKED_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+    protected static final VoxelShape LOCKED_SHAPE_NORTH_SOUTH = Block.box(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
+    protected static final VoxelShape LOCKED_SHAPE_EAST_WEST = Block.box(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
 
     public PetDoorBlock() {
         super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
@@ -33,30 +34,30 @@ public class PetDoorBlock extends Block {
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter pLevel, BlockPos pPos) {
-        if(state.getValue(BlockStateProperties.LOCKED)) {
-            return LOCKED_SHAPE;
-        }
-        else {
-            return UNLOCKED_SHAPE;
-        }
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pPos) {
+        return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+            case UP, DOWN, NORTH, SOUTH -> LOCKED_SHAPE_NORTH_SOUTH;
+            case WEST, EAST -> LOCKED_SHAPE_EAST_WEST;
+        };
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-            return LOCKED_SHAPE;
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return getOcclusionShape(state, level, pos);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext selectionContext) {
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext selectionContext) {
         if(state.getValue(BlockStateProperties.LOCKED)) {
-            return LOCKED_SHAPE;
+            return switch(state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
+                case UP, DOWN, NORTH, SOUTH -> LOCKED_SHAPE_NORTH_SOUTH;
+                case WEST, EAST -> LOCKED_SHAPE_EAST_WEST;
+            };
         }
-        else {
-            return UNLOCKED_SHAPE;
-        }
+
+        return UNLOCKED_SHAPE;
     }
 
     @Nullable
@@ -70,24 +71,12 @@ public class PetDoorBlock extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand);
 
-        if(stack.isEmpty()) {
-            return InteractionResult.SUCCESS;
-        }
-        else {
-//            if(stack.getItem() == ModItems.CHEESE_WEDGE.get()) {
-//                if(!level.isClientSide) {
-//                    if(!player.getAbilities().instabuild) {
-//                        stack.shrink(1);
-//                    }
-//
-//                    level.playSound(null, pos, SoundEvents.CHEST_LOCKED, SoundSource.BLOCKS, 1.0F, 1.0F);
-//                    level.setBlock(pos, state.setValue(BlockStateProperties.TRIGGERED, false), Block.UPDATE_ALL);
-////                    state.setValue(BlockStateProperties.TRIGGERED, false);
-//                }
-//            }
-        }
+        boolean locked = state.getValue(BlockStateProperties.LOCKED);
+
+        level.playSound(null, pos, SoundEvents.CHEST_LOCKED, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.setBlock(pos, state.setValue(BlockStateProperties.LOCKED, !locked), Block.UPDATE_ALL);
+        state.setValue(BlockStateProperties.LOCKED, !locked);
 
         return InteractionResult.SUCCESS;
     }
