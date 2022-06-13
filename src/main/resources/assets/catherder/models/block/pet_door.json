@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "parent": "minecraft:block/cube",
   "textures": {
-    "0": "white_wool",
-    "1": "oak_planks",
-    "particle": "white_wool"
+    "0": "block/white_wool",
+    "1": "block/oak_planks",
+    "particle": "block/white_wool"
   },
   "elements": [
     {
