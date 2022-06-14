@@ -1,7 +1,7 @@
 {
   "name": "Resizers",
   "icon": "catherder:training_treat",
-  "category": "catherder:misc",
+  "category": "catherder:recipes",
   "pages": [
     {
       "type": "patchouli:text",

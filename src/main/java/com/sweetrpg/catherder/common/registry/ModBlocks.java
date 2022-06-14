@@ -31,6 +31,7 @@ public class ModBlocks {
 
     // miscellaneous items
     public static final RegistryObject<Block> MOUSE_TRAP = registerWithItem("mouse_trap", MouseTrapBlock::new);
+    public static final RegistryObject<Block> PET_DOOR = registerWithItem("pet_door", PetDoorBlock::new);
 
     // food
     public static final RegistryObject<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel",

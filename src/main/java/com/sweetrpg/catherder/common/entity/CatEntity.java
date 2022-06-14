@@ -62,8 +62,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
@@ -99,6 +101,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -149,6 +152,8 @@ public class CatEntity extends AbstractCatEntity {
     private int catnipCooldown;
     private Goal catnipGoal;
     private int litterboxCooldown;
+    public static final int MIN_CAT_SIZE = 1;
+    public static final int MAX_CAT_SIZE = 5;
 
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -210,7 +215,7 @@ public class CatEntity extends AbstractCatEntity {
 //        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
+//        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.goalSelector.addGoal(6, new CatLieOnBedGoal<>(this, 1.1F, 16));
@@ -219,24 +224,25 @@ public class CatEntity extends AbstractCatEntity {
 //        this.goalSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
+        this.goalSelector.addGoal(9, new UseLitterboxGoal<>(this, 10));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
 
         //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
 //        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
 //        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, TARGET_ENTITIES));
-//        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.TARGET_DRY_BABY));
+        this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>)null));
+        //        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.TARGET_DRY_BABY));
 //        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Creeper.class, false));
         this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
     }
 
-    @Override
-    public void playStepSound(BlockPos pos, BlockState blockIn) {
-        // this.playSound(SoundEvents.CATWOLF_STEP, 0.15F, 1.0F);
-    }
+//    @Override
+//    public void playStepSound(BlockPos pos, BlockState blockIn) {
+//        // this.playSound(SoundEvents.CATWOLF_STEP, 0.15F, 1.0F);
+//    }
 
     @Override
     protected SoundEvent getAmbientSound() {
@@ -1903,7 +1909,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public void setCatSize(int value) {
-        this.entityData.set(SIZE, (byte) Math.min(5, Math.max(1, value)));
+        this.entityData.set(SIZE, (byte) Math.min(MAX_CAT_SIZE, Math.max(MIN_CAT_SIZE, value)));
     }
 
     public ItemStack getToyVariant() {

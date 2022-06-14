@@ -5,6 +5,14 @@
   "pages": [
     {
       "type": "patchouli:text",
+      "text": "You can outfit your cat with accessories to make them look stylish and cool."
+    },
+    {
+      "type": "patchouli:empty"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
       "text": "TODO"
     },
     {
@@ -13,9 +21,19 @@
       "recipe": "catherder:cape"
     },
     {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
+    },
+    {
       "type": "patchouli:crafting",
       "title": "Multi-colored Collar",
-      "recipe": "catherder:multicoloured_collar"
+      "recipe": "catherder:multicolored_collar"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
     },
     {
       "type": "patchouli:crafting",
@@ -23,9 +41,19 @@
       "recipe": "catherder:radio_collar"
     },
     {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
+    },
+    {
       "type": "patchouli:crafting",
       "title": "Spotted Collar",
       "recipe": "catherder:spotted_collar"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
     },
     {
       "type": "patchouli:crafting",

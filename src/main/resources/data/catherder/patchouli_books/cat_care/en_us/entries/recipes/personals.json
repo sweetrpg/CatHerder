@@ -8,9 +8,22 @@
       "text": "There are a number of items that you can make for your cats that will enrich their lives."
     },
     {
+      "type": "patchouli:empty"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cardboard Box",
+      "text": "The cardboard box is one of your cat's favorite things to play with. It doesn't matter what came in it, it's a box!"
+    },
+    {
       "type": "patchouli:crafting",
       "title": "Cardboard Box",
       "recipe": "catherder:cardboard_box"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
     },
     {
       "type": "patchouli:crafting",
@@ -18,14 +31,34 @@
       "recipe": "catherder:cat_bowl"
     },
     {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
+    },
+    {
       "type": "patchouli:crafting",
       "title": "Cat Tree",
       "recipe": "catherder:cat_tree"
     },
     {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
+    },
+    {
       "type": "patchouli:crafting",
       "title": "Litterbox",
       "recipe": "catherder:litter_box"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Item",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Pet Door",
+      "recipe": "catherder:pet_door"
     }
   ]
 }

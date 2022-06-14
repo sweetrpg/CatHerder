@@ -64,6 +64,7 @@ public class CHLootTableProvider extends LootTableProvider {
             dropsSelf(ModBlocks.CATNIP_CROP);
             dropsMouseTrap(ModBlocks.MOUSE_TRAP);
             dropsSelf(ModBlocks.CHEESE_WHEEL);
+            dropsSelf(ModBlocks.PET_DOOR);
         }
 
         private void dropsMouseTrap(Supplier<? extends Block> block) {

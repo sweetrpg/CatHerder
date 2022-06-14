@@ -69,7 +69,7 @@ public class ModItems {
     public static final RegistryObject<DyeableAccessoryItem> WOOL_COLLAR = registerAccessoryDyed("wool_collar", ModAccessories.DYEABLE_COLLAR);
     public static final RegistryObject<AccessoryItem> CREATIVE_COLLAR = registerAccessory("creative_collar", ModAccessories.GOLDEN_COLLAR);
     public static final RegistryObject<AccessoryItem> SPOTTED_COLLAR = registerAccessory("spotted_collar", ModAccessories.SPOTTED_COLLAR);
-    public static final RegistryObject<AccessoryItem> MULTICOLOURED_COLLAR = registerAccessory("multicoloured_collar", ModAccessories.MULTICOLORED_COLLAR);
+    public static final RegistryObject<AccessoryItem> MULTICOLOURED_COLLAR = registerAccessory("multicolored_collar", ModAccessories.MULTICOLORED_COLLAR);
     public static final RegistryObject<AccessoryItem> CAPE = registerAccessory("cape", ModAccessories.CAPE);
     //    public static final RegistryObject<DyeableAccessoryItem> CAPE_COLOURED = registerAccessoryDyed("cape_coloured", CatAccessories.DYEABLE_CAPE);
     public static final RegistryObject<AccessoryItem> SUNGLASSES = registerAccessory("sunglasses", ModAccessories.SUNGLASSES);

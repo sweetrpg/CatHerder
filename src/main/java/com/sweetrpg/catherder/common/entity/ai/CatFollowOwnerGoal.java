@@ -26,13 +26,13 @@ public class CatFollowOwnerGoal extends Goal {
     private int timeToRecalcPath;
     private float oldWaterCost;
 
-    public CatFollowOwnerGoal(CatEntity catIn, double speedIn, float minDistIn, float maxDistIn) {
+    public CatFollowOwnerGoal(CatEntity catIn, double speedIn, float startMoveDist, float stopMoveDist) {
         this.cat = catIn;
         this.world = catIn.level;
         this.followSpeed = speedIn;
         this.navigator = catIn.getNavigation();
-        this.startDist = minDistIn;
-        this.stopDist = maxDistIn;
+        this.startDist = startMoveDist;
+        this.stopDist = stopMoveDist;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 

@@ -97,6 +97,8 @@ minecraft {
             taskName 'catherder_server'
             workingDirectory file('run-server')
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
             }
@@ -106,6 +108,8 @@ minecraft {
             taskName 'catherder_data'
             workingDirectory file('run')
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             args '--mod', 'catherder', '--all', '--output', '"' + file('src/generated/resources/') + '"', '--existing', '"' + sourceSets.main.resources.srcDirs[0] + '"'
             mods {
                 catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])

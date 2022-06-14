@@ -76,13 +76,15 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_yarn", has(ModItems.YARN.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
-                .pattern("XXX")
-                .pattern("XYX")
+//                .pattern("XXX")
+                .pattern("FXW")
                 .pattern("XXX")
                 .define('X', Items.IRON_INGOT)
-                .define('Y', ItemTags.FISHES)
+                .define('F', ItemTags.FISHES)
+                .define('W', Items.WATER_BUCKET)
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .unlockedBy("has_fishes", has(ItemTags.FISHES))
+                .unlockedBy("has_water", has(Items.WATER_BUCKET))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.CAT_TOY.get(), 1)
                 .pattern("SW")
@@ -271,6 +273,16 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 //        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
 //                            .save(consumer, Util.getResourcePath("cat_tree"));
+
+        ShapedRecipeBuilder.shaped(ModBlocks.PET_DOOR.get(), 1)
+                .pattern("WWW")
+                .pattern("WDW")
+                .pattern("WWW")
+                .define('W', ItemTags.PLANKS)
+                .define('D', ItemTags.WOODEN_DOORS)
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .unlockedBy("has_door", has(ItemTags.WOODEN_DOORS))
+                .save(consumer);
     }
 
     @Override

@@ -33,14 +33,14 @@ public class CommonSetup {
             WildCropGeneration.registerWildCatnipGeneration();
 
             registerCompostables();
-            registerDispenserBehaviors();
-            registerAnimalFeeds();
+//            registerDispenserBehaviors();
+//            registerAnimalFeeds();
         });
     }
 
-    public static void registerDispenserBehaviors() {
-
-    }
+//    public static void registerDispenserBehaviors() {
+//
+//    }
 
     public static void registerCompostables() {
         ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP.get(), 0.65F);
@@ -48,7 +48,7 @@ public class CommonSetup {
         ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP_SEEDS.get(), 1.0F);
     }
 
-    public static void registerAnimalFeeds() {
-
-    }
+//    public static void registerAnimalFeeds() {
+//
+//    }
 }

@@ -40,7 +40,7 @@ import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**
- * @author Paulyhedral,ProPercivalalb
+ * @author Paulyhedral, ProPercivalalb
  */
 @Mod(Constants.MOD_ID)
 public class CatHerder {
@@ -78,10 +78,10 @@ public class CatHerder {
     public static final Logger LOGGER = LogManager.getLogger(Constants.MOD_ID);
 
     public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder.named(Constants.CHANNEL_NAME)
-            .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
-            .serverAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
-            .networkProtocolVersion(Constants.PROTOCOL_VERSION::toString)
-            .simpleChannel();
+                                                        .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
+                                                        .serverAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
+                                                        .networkProtocolVersion(Constants.PROTOCOL_VERSION::toString)
+                                                        .simpleChannel();
 
     public CatHerder() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -164,7 +164,7 @@ public class CatHerder {
     private void gatherData(final GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
 
-        if (event.includeClient()) {
+        if(event.includeClient()) {
             CHBlockstateProvider blockstates = new CHBlockstateProvider(gen, event.getExistingFileHelper());
             gen.addProvider(blockstates);
             gen.addProvider(new CHItemModelProvider(gen, blockstates.getExistingHelper()));
@@ -178,7 +178,7 @@ public class CatHerder {
             gen.addProvider(new CHLangProvider(gen, Constants.LOCALE_ZH_TW));
         }
 
-        if (event.includeServer()) {
+        if(event.includeServer()) {
             // gen.addProvider(new DTBlockTagsProvider(gen));
             gen.addProvider(new CHAdvancementProvider(gen));
             CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(gen, event.getExistingFileHelper());

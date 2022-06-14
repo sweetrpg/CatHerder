@@ -67,6 +67,7 @@ public class CHItemModelProvider extends ItemModelProvider {
 //        generated(ModItems.LASAGNA);
 
         blockItem(ModBlocks.CAT_TREE);
+        blockItem(ModBlocks.PET_DOOR);
         blockItem(ModBlocks.CAT_BOWL);
         blockItem(ModBlocks.LITTER_BOX);
         blockItem(ModBlocks.WILD_CATNIP);
