@@ -1,16 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SN",
-    "NS",
-    "SN"
+    "MC"
   ],
   "key": {
-    "S": {
-      "tag": "forge:stone"
+    "M": {
+      "item": "minecraft:red_mushroom"
     },
-    "N": {
-      "tag": "forge:storage_blocks"
+    "C": {
+      "item": "minecraft:cake"
     }
   },
   "result": {

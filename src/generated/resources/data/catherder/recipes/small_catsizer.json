@@ -1,15 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "RN",
-    "NR"
+    "WM"
   ],
   "key": {
-    "R": {
-      "tag": "forge:rods/wooden"
+    "W": {
+      "item": "minecraft:potion"
     },
-    "N": {
-      "tag": "forge:nuggets"
+    "M": {
+      "item": "minecraft:brown_mushroom"
     }
   },
   "result": {
