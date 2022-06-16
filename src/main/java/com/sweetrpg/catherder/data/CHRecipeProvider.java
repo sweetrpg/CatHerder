@@ -162,21 +162,18 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
-                .pattern("RN")
-                .pattern("NR")
-                .define('R', Tags.Items.RODS_WOODEN)
-                .define('N', Tags.Items.NUGGETS)
-                .unlockedBy("has_rod", has(Tags.Items.RODS_WOODEN))
-                .unlockedBy("has_nuggets", has(Tags.Items.NUGGETS))
+                .pattern("WM")
+                .define('W', Items.POTION)
+                .define('M', Items.BROWN_MUSHROOM)
+                .unlockedBy("has_potion", has(Items.POTION))
+                .unlockedBy("has_mushroom", has(Items.BROWN_MUSHROOM))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
-                .pattern("SN")
-                .pattern("NS")
-                .pattern("SN")
-                .define('S', Tags.Items.STONE)
-                .define('N', Tags.Items.STORAGE_BLOCKS)
-                .unlockedBy("has_blocks", has(Tags.Items.STORAGE_BLOCKS))
-                .unlockedBy("has_stone", has(Tags.Items.STONE))
+                .pattern("MC")
+                .define('M', Items.RED_MUSHROOM)
+                .define('C', Items.CAKE)
+                .unlockedBy("has_mushroom", has(Items.RED_MUSHROOM))
+                .unlockedBy("has_cake", has(Items.CAKE))
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
