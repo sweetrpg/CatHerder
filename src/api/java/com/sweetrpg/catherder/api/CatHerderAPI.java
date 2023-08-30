@@ -13,8 +13,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.function.Supplier;
 
 /**
- * @author ProPercivalalb
- * @author paulyhedral
+ * @author Paulyhedral, ProPercivalalb
  */
 public class CatHerderAPI {
 
