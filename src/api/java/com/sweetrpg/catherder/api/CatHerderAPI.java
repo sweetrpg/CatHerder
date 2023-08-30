@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 
 /**
  * @author ProPercivalalb
+ * @author paulyhedral
  */
 public class CatHerderAPI {
 
