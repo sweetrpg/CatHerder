@@ -52,7 +52,7 @@ public class BeddingMaterial extends IBeddingMaterial {
             this.translationKey = Util.makeDescriptionId("cattree.bedding", CatHerderAPI.BEDDING_MATERIAL.get().getKey(this));
         }
 
-        return new Component.translatable(this.translationKey);
+        return Component.translatable(this.translationKey);
     }
 
     /**

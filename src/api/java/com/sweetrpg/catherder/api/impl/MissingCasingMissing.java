@@ -17,7 +17,7 @@ public class MissingCasingMissing extends ICasingMaterial {
 
     @Override
     public Component getTooltip() {
-        return new Component.translatable("cattree.casing.missing", "//TODO" /*ForgeRegistries.BLOCKS.getKey(this)*/);
+        return Component.translatable("cattree.casing.missing", "//TODO" /*ForgeRegistries.BLOCKS.getKey(this)*/);
     }
 
     @Override

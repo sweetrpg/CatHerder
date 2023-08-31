@@ -18,7 +18,7 @@ public class MissingBeddingMaterial extends IBeddingMaterial {
 
     @Override
     public Component getTooltip() {
-        return new Component.translatable("cattree.bedding.missing", "//TODO" /*ForgeRegistries.BLOCKS.getKey(this)*/);
+        return Component.translatable("cattree.bedding.missing", "//TODO" /*ForgeRegistries.BLOCKS.getKey(this)*/);
     }
 
     @Override

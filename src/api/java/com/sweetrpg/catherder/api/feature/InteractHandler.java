@@ -24,14 +24,14 @@ public class InteractHandler {
     public static InteractionResult getMatch(@Nullable AbstractCatEntity catIn, ItemStack stackIn, Player playerIn, InteractionHand handIn) {
         if (stackIn.getItem() instanceof ICatItem) {
             ICatItem item = (ICatItem) stackIn.getItem();
-            InteractionResult result = item.processInteract(catIn, catIn.level, playerIn, handIn);
+            InteractionResult result = item.processInteract(catIn, catIn.level(), playerIn, handIn);
             if (result != InteractionResult.PASS) {
                 return result;
             }
         }
 
         for (ICatItem handler : HANDLERS) {
-            InteractionResult result = handler.processInteract(catIn, catIn.level, playerIn, handIn);
+            InteractionResult result = handler.processInteract(catIn, catIn.level(), playerIn, handIn);
             if (result != InteractionResult.PASS) {
                 return result;
             }

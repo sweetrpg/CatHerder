@@ -51,7 +51,7 @@ public class CasingMaterial extends ICasingMaterial {
             this.translationKey = Util.makeDescriptionId("cattree.casing", CatHerderAPI.CASING_MATERIAL.get().getKey(this));
         }
 
-        return new Component.translatable(this.translationKey);
+        return Component.translatable(this.translationKey);
     }
 
     /**
