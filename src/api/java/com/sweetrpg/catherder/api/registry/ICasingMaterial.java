@@ -3,9 +3,8 @@ package com.sweetrpg.catherder.api.registry;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public abstract class ICasingMaterial extends ForgeRegistryEntry<ICasingMaterial> {
+public abstract class ICasingMaterial {
 
     /**
      * Texture location that for material, eg 'minecraft:block/white_wool'

@@ -6,12 +6,11 @@ import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import net.minecraft.Util;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
  * @author ProPercivalalb
  */
-public class Talent extends ForgeRegistryEntry<Talent> {
+public class Talent {
 
     @Nullable
     private String translationKey, translationInfoKey;

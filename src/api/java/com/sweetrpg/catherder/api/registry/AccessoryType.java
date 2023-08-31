@@ -4,9 +4,8 @@ import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import net.minecraft.Util;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class AccessoryType extends ForgeRegistryEntry<AccessoryType> {
+public class AccessoryType {
 
     @Nullable
     private String translationKey;

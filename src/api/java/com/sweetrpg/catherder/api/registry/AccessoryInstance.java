@@ -9,7 +9,6 @@ import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.IRegistryDelegate;
 
 public class AccessoryInstance {
 
@@ -37,20 +36,16 @@ public class AccessoryInstance {
         return this.accessory.of(accessoryIn);
     }
 
-    public <T extends Accessory> boolean of(IRegistryDelegate<T> accessoryDelegateIn) {
-        return this.accessory.of(accessoryDelegateIn);
-    }
-
     public <T extends AccessoryType> boolean ofType(Supplier<T> accessoryTypeIn) {
         return this.ofType(accessoryTypeIn.get());
     }
 
     public <T extends AccessoryType> boolean ofType(T accessoryTypeIn) {
-        return this.ofType(accessoryTypeIn.delegate);
+        return this.ofType(CatHerderAPI.ACCESSORY_TYPE.get().getKey(accessoryTypeIn));
     }
 
-    public <T extends AccessoryType> boolean ofType(IRegistryDelegate<T> accessoryTypeDelegateIn) {
-        return accessoryTypeDelegateIn.equals(this.accessory.getType().delegate);
+    public <T extends AccessoryType> boolean ofType(ResourceLocation accessoryTypeDelegateIn) {
+        return CatHerderAPI.ACCESSORY_TYPE.get().getKey(this.accessory.getType()).equals(accessoryTypeDelegateIn);
     }
 
     public AccessoryInstance copy() {
@@ -66,7 +61,7 @@ public class AccessoryInstance {
     }
 
     public final void writeInstance(CompoundTag compound) {
-        ResourceLocation rl = this.getAccessory().getRegistryName();
+        ResourceLocation rl = CatHerderAPI.ACCESSORIES.get().getKey(this.accessory);
         if (rl != null) {
             compound.putString("type", rl.toString());
         }
