@@ -8,7 +8,6 @@ import com.sweetrpg.catherder.api.registry.ICasingMaterial;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;

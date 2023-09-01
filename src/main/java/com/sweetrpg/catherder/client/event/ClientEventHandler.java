@@ -11,7 +11,6 @@ import com.sweetrpg.catherder.common.network.packet.data.OpenCatScreenData;
 //import com.sweetrpg.catherder.client.block.model.CattreeModel;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -28,10 +27,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
@@ -41,8 +39,20 @@ import java.util.Map;
 
 public class ClientEventHandler {
 
-    public static void onModelBakeEvent(final ModelBakeEvent event) {
-        Map<ResourceLocation, BakedModel> modelRegistry = event.getModelRegistry();
+    public static void onRegisterAdditionalModel(final ModelEvent.RegisterAdditional event) {
+        try {
+            ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
+            ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
+            event.register(unbakedModelLoc);
+        }
+        catch(Exception e) {
+            CatHerder.LOGGER.warn("Could not get base Dog Bed model. Reverting to default textures...");
+            e.printStackTrace();
+        }
+    }
+
+    public static void onModelBakeEvent(final ModelEvent.ModifyBakingResult event) {
+        Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
 
         try {
             ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
@@ -69,8 +79,8 @@ public class ClientEventHandler {
     @SubscribeEvent
     public void onInputEvent(final MovementInputUpdateEvent event) {
         if (event.getInput().jumping) {
-            Entity entity = event.getPlayer().getVehicle();
-            if (event.getPlayer().isPassenger() && entity instanceof CatEntity) {
+            Entity entity = event.getEntity().getVehicle();
+            if (event.getEntity().isPassenger() && entity instanceof CatEntity) {
                 CatEntity cat = (CatEntity) entity;
 
                 if (cat.canJump()) {
@@ -81,18 +91,17 @@ public class ClientEventHandler {
     }
 
     @SubscribeEvent
-    public void onScreenInit(final ScreenEvent.InitScreenEvent.Post event) {
+    public void onScreenInit(final ScreenEvent.Init.Post event) {
         Screen screen = event.getScreen();
         if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             boolean creative = screen instanceof CreativeModeInventoryScreen;
-            boolean dtLoaded = ModList.get().isLoaded("doggytalents");
             Minecraft mc = Minecraft.getInstance();
             int width = mc.getWindow().getGuiScaledWidth();
             int height = mc.getWindow().getGuiScaledHeight();
             int sizeX = creative ? 195 : 176;
             int sizeY = creative ? 136 : 166;
-            int guiLeft = (width - sizeX) / 2 - ((dtLoaded && creative) ? 15 : 0);
-            int guiTop = (height - sizeY) / 2 - ((dtLoaded && !creative) ? 13 : 0);
+            int guiLeft = (width - sizeX) / 2;
+            int guiTop = (height - sizeY) / 2;
 
             int x = guiLeft + (creative ? 36 : sizeX / 2 - 10);
             int y = guiTop + (creative ? 7 : 48);
@@ -104,42 +113,42 @@ public class ClientEventHandler {
         }
     }
 
-    @SubscribeEvent
-    public void onScreenDrawForeground(final ScreenEvent.DrawScreenEvent event) {
-        Screen screen = event.getScreen();
-        if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
-            boolean creative = screen instanceof CreativeModeInventoryScreen;
-            CatInventoryButton btn = null;
-
-            //TODO just create a static variable in this class
-            for (Widget widget : screen.renderables) {
-                if (widget instanceof CatInventoryButton) {
-                    btn = (CatInventoryButton) widget;
-                    break;
-                }
-            }
-
-            if (btn.visible && btn.isHoveredOrFocused()) {
-                Minecraft mc = Minecraft.getInstance();
-                int width = mc.getWindow().getGuiScaledWidth();
-                int height = mc.getWindow().getGuiScaledHeight();
-                int sizeX = creative ? 195 : 176;
-                int sizeY = creative ? 136 : 166;
-                int guiLeft = (width - sizeX) / 2;
-                int guiTop = (height - sizeY) / 2;
-                if (!creative) {
-                    RecipeBookComponent recipeBook = ((InventoryScreen) screen).getRecipeBookComponent();
-                    if (recipeBook.isVisible()) {
-                        guiLeft += 76;
-                    }
-                }
-
-                //event.getPoseStack().translate(-guiLeft, -guiTop, 0);
-                btn.renderToolTip(event.getPoseStack(), event.getMouseX(), event.getMouseY());
-                //event.getPoseStack().translate(guiLeft, guiTop, 0);
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public void onScreenDrawForeground(final ScreenEvent.DrawScreenEvent event) {
+//        Screen screen = event.getScreen();
+//        if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
+//            boolean creative = screen instanceof CreativeModeInventoryScreen;
+//            CatInventoryButton btn = null;
+//
+//            //TODO just create a static variable in this class
+//            for (Widget widget : screen.renderables) {
+//                if (widget instanceof CatInventoryButton) {
+//                    btn = (CatInventoryButton) widget;
+//                    break;
+//                }
+//            }
+//
+//            if (btn.visible && btn.isHoveredOrFocused()) {
+//                Minecraft mc = Minecraft.getInstance();
+//                int width = mc.getWindow().getGuiScaledWidth();
+//                int height = mc.getWindow().getGuiScaledHeight();
+//                int sizeX = creative ? 195 : 176;
+//                int sizeY = creative ? 136 : 166;
+//                int guiLeft = (width - sizeX) / 2;
+//                int guiTop = (height - sizeY) / 2;
+//                if (!creative) {
+//                    RecipeBookComponent recipeBook = ((InventoryScreen) screen).getRecipeBookComponent();
+//                    if (recipeBook.isVisible()) {
+//                        guiLeft += 76;
+//                    }
+//                }
+//
+//                //event.getPoseStack().translate(-guiLeft, -guiTop, 0);
+//                btn.renderToolTip(event.getPoseStack(), event.getMouseX(), event.getMouseY());
+//                //event.getPoseStack().translate(guiLeft, guiTop, 0);
+//            }
+//        }
+//    }
 
 // TODO Implement patrol item
 //    @SubscribeEvent
@@ -182,8 +191,7 @@ public class ClientEventHandler {
         //TODO Used when drawing outline of bounding box
         RenderSystem.lineWidth(2.0F);
 
-
-        RenderSystem.disableTexture();
+//        RenderSystem.disableTexture();
         Vec3 vec3d = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         double d0 = vec3d.x();
         double d1 = vec3d.y();
@@ -195,7 +203,7 @@ public class ClientEventHandler {
         Tesselator.getInstance().end();
         RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 0.3F);
         RenderSystem.depthMask(true);
-        RenderSystem.enableTexture();
+//        RenderSystem.enableTexture();
         RenderSystem.disableBlend();
         //RenderSystem.enableAlphaTest();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

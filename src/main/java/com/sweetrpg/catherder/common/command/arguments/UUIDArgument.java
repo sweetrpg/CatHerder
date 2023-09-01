@@ -4,18 +4,18 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.UUID;
 
 public class UUIDArgument implements ArgumentType<UUID> {
 
     public static final DynamicCommandExceptionType UUID_SECTION_INVALID = new DynamicCommandExceptionType((arg) -> {
-        return new TranslatableComponent("argument.catherder.uuid.section.invalid", arg);
+        return Component.translatable("argument.catherder.uuid.section.invalid", arg);
     });
 
     public static final DynamicCommandExceptionType UUID_FORMAT_INVALID = new DynamicCommandExceptionType((arg) -> {
-        return new TranslatableComponent("argument.catherder.uuid.format.invalid", arg);
+        return Component.translatable("argument.catherder.uuid.format.invalid", arg);
     });
 
     public static UUIDArgument uuid() {

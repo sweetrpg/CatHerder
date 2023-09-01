@@ -14,7 +14,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,7 +37,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -216,12 +214,12 @@ public class CatTreeBlock extends BaseEntityBlock {
                     }
                     else {
                         Component name = catTreeEntity.getOwnerName();
-                        player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
+                        player.sendMessage(Component.translatable("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
                         return InteractionResult.FAIL;
                     }
                 }
                 else {
-                    player.sendMessage(new TranslatableComponent("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
+                    player.sendMessage(Component.translatable("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -239,13 +237,13 @@ public class CatTreeBlock extends BaseEntityBlock {
 //
 //        tooltip.add(materials.getLeft() != null
 //                ? materials.getLeft().getTooltip()
-//                : new TranslatableComponent("cattree.casing.null").withStyle(ChatFormatting.RED));
+//                : Component.translatable("cattree.casing.null").withStyle(ChatFormatting.RED));
 //        tooltip.add(materials.getRight() != null
 //                ? materials.getRight().getTooltip()
-//                : new TranslatableComponent("cattree.bedding.null").withStyle(ChatFormatting.RED));
+//                : Component.translatable("cattree.bedding.null").withStyle(ChatFormatting.RED));
 //
 //        if (materials.getLeft() == null && materials.getRight() == null) {
-//            tooltip.add(new TranslatableComponent("cattree.explain.missing").withStyle(ChatFormatting.ITALIC));
+//            tooltip.add(Component.translatable("cattree.explain.missing").withStyle(ChatFormatting.ITALIC));
 //        }
 //
 //        CompoundTag tag = stack.getTagElement("catherder");

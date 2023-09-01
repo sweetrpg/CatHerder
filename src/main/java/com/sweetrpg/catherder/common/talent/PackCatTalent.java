@@ -10,7 +10,6 @@ import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -79,7 +78,7 @@ public class PackCatTalent extends TalentInstance {
 //                if (catIn.canInteract(playerIn)) {
 //
 //                    if (!playerIn.level.isClientSide) {
-//                        playerIn.displayClientMessage(new TranslatableComponent("talent.catherder.pack_cat.version_migration"), false);
+//                        playerIn.displayClientMessage(Component.translatable("talent.catherder.pack_cat.version_migration"), false);
 //                    }
 //                    return InteractionResult.SUCCESS;
 //                }

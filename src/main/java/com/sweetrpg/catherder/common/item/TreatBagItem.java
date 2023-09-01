@@ -10,7 +10,6 @@ import com.sweetrpg.catherder.common.util.ItemUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,7 +27,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.EmptyHandler;
@@ -72,7 +70,7 @@ public class TreatBagItem extends Item implements ICatFoodHandler {
         List<ItemStack> condensedContents = ItemUtil.getContentOverview(bagInventory);
 
         condensedContents.forEach((food) -> {
-            tooltip.add(new TranslatableComponent(this.contentsTranslationKey.get(), food.getCount(), new TranslatableComponent(food.getDescriptionId())));
+            tooltip.add(Component.translatable(this.contentsTranslationKey.get(), food.getCount(), Component.translatable(food.getDescriptionId())));
         });
     }
 

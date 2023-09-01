@@ -34,15 +34,15 @@ import static net.minecraft.commands.Commands.literal;
 public class CatRespawnCommand {
 
     public static final DynamicCommandExceptionType COLOR_INVALID = new DynamicCommandExceptionType((arg) -> {
-        return new TranslatableComponent("command.catrespawn.invalid", arg);
+        return Component.translatable("command.catrespawn.invalid", arg);
     });
 
     public static final DynamicCommandExceptionType SPAWN_EXCEPTION = new DynamicCommandExceptionType((arg) -> {
-        return new TranslatableComponent("command.catrespawn.exception", arg);
+        return Component.translatable("command.catrespawn.exception", arg);
     });
 
     public static final Dynamic2CommandExceptionType TOO_MANY_OPTIONS = new Dynamic2CommandExceptionType((arg1, arg2) -> {
-        return new TranslatableComponent("command.catrespawn.imprecise", arg1, arg2);
+        return Component.translatable("command.catrespawn.imprecise", arg1, arg2);
     });
 
     public static void register(final CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -240,11 +240,11 @@ public class CatRespawnCommand {
 
         if(cat != null) {
             respawnStorage.remove(respawnData.getCatId());
-            source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.success", respawnData.getCatName()), false);
+            source.sendSuccess(Component.translatable("commands.catrespawn.uuid.success", respawnData.getCatName()), false);
             return 1;
         }
 
-        source.sendSuccess(new TranslatableComponent("commands.catrespawn.uuid.failure", respawnData.getCatName()), false);
+        source.sendSuccess(Component.translatable("commands.catrespawn.uuid.failure", respawnData.getCatName()), false);
         return 0;
     }
 
@@ -301,10 +301,10 @@ public class CatRespawnCommand {
             String translateStr = RadarItem.getDirectionTranslationKey(locationData, player);
             int distance = Mth.ceil(locationData.getPos() != null ? locationData.getPos().distanceTo(player.position()) : -1);
 
-            source.sendSuccess(new TranslatableComponent(translateStr, locationData.getName(player.level), distance), false);
+            source.sendSuccess(Component.translatable(translateStr, locationData.getName(player.level), distance), false);
         }
         else {
-            source.sendSuccess(new TranslatableComponent("catradar.notindim", locationData.getDimension()), false); // TODO change message
+            source.sendSuccess(Component.translatable("catradar.notindim", locationData.getDimension()), false); // TODO change message
         }
         return 1;
 

@@ -2,6 +2,7 @@ package com.sweetrpg.catherder.common.util;
 
 import com.sweetrpg.catherder.CatHerder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -9,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -104,24 +104,26 @@ public class NBTUtil {
     }
 
     @Nullable
-    public static <T extends IForgeRegistryEntry<T>> T getRegistryValue(CompoundTag compound, String key, IForgeRegistry<T> registry) {
+    public static <T> T getRegistryValue(CompoundTag compound, String key, IForgeRegistry<T> registry) {
         ResourceLocation rl = NBTUtil.getResourceLocation(compound, key);
         if (rl != null) {
             if (registry.containsKey(rl)) {
                 return registry.getValue(rl);
-            } else {
+            }
+            else {
                 CatHerder.LOGGER.warn("Unable to load registry value in registry {} with resource location {}", registry.getRegistryName(), rl);
             }
-        } else {
+        }
+        else {
             CatHerder.LOGGER.warn("Unable to load resource location in NBT:{}, for {} registry", key, registry.getRegistryName());
         }
 
         return null;
     }
 
-    public static <T extends IForgeRegistryEntry<T>> void putRegistryValue(CompoundTag compound, String key, T value) {
+    public static <T> void putRegistryValue(CompoundTag compound, String key, Holder.Reference<T> value) {
         if (value != null) {
-            NBTUtil.putResourceLocation(compound, key, value.getRegistryName());
+            NBTUtil.putResourceLocation(compound, key, value.key().location());
         }
     }
 

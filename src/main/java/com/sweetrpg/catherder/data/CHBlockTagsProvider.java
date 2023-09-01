@@ -4,14 +4,19 @@ import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 public class CHBlockTagsProvider extends BlockTagsProvider {
 
-    public CHBlockTagsProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-        super(generatorIn, Constants.MOD_ID, existingFileHelper);
+    public CHBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, Constants.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -20,7 +25,7 @@ public class CHBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags() {
+    public void addTags(HolderLookup.Provider provider) {
         this.registerModTags();
         this.registerMinecraftTags();
         this.registerForgeTags();

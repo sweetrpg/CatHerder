@@ -131,8 +131,8 @@ dependencies {
 
     // runtimeOnly fg.deobf("curse.maven:doggytalents-271050:${dt_file_id}")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
+//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
+//    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
 
 //    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
 

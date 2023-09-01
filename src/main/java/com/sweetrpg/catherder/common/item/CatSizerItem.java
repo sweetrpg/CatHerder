@@ -3,7 +3,6 @@ package com.sweetrpg.catherder.common.item;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatItem;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +38,7 @@ public class CatSizerItem extends Item implements ICatItem {
         if(cat.getAge() < 0) {
 
             if(!player.level.isClientSide) {
-                player.sendMessage(new TranslatableComponent("treat.catherder." + this.type.getName() + ".too_young"), cat.getUUID());
+                player.sendMessage(Component.translatable("treat.catherder." + this.type.getName() + ".too_young"), cat.getUUID());
             }
 
             return InteractionResult.FAIL;

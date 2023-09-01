@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -47,7 +46,7 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
             double d0 = this.entityRenderDispatcher.distanceToSqr(entityIn);
             if(d0 <= 64 * 64) {
                 String tip = entityIn.getMode().getTip();
-                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", Component.translatable(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Component.translatable(entityIn.getGender().getUnlocalisedTip()).getString());
 
                 RenderUtil.renderLabelWithScale(entityIn, this, this.entityRenderDispatcher, label, matrixStackIn, bufferIn, packedLightIn, 0.01F, 0.12F);
 
@@ -64,7 +63,7 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
 
 
     private Component getNameUnknown(CatEntity catIn) {
-        return new TranslatableComponent(catIn.getOwnerUUID() != null ? "entity.catherder.cat.unknown_owner" : "entity.catherder.cat.untamed");
+        return Component.translatable(catIn.getOwnerUUID() != null ? "entity.catherder.cat.unknown_owner" : "entity.catherder.cat.untamed");
     }
 
     @Override

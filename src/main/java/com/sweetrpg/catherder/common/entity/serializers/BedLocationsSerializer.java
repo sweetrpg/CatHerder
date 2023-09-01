@@ -8,10 +8,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
-public class BedLocationsSerializer<D, T extends EntityDataSerializer<D>> implements EntityDataSerializer<DimensionDependantArg<D>> {
+public class BedLocationsSerializer<D, T extends EntityDataSerializer<D>> implements EntityDataSerializer<DimensionDependentArg<D>> {
 
     @Override
-    public void write(FriendlyByteBuf buf, DimensionDependantArg<D> value) {
+    public void write(FriendlyByteBuf buf, DimensionDependentArg<D> value) {
         EntityDataSerializer<D> ser = value.getSerializer();
         buf.writeInt(EntityDataSerializers.getSerializedId(ser));
         buf.writeInt(value.size());
@@ -22,9 +22,9 @@ public class BedLocationsSerializer<D, T extends EntityDataSerializer<D>> implem
     }
 
     @Override
-    public DimensionDependantArg<D> read(FriendlyByteBuf buf) {
+    public DimensionDependentArg<D> read(FriendlyByteBuf buf) {
         EntityDataSerializer<D> ser = (EntityDataSerializer<D>) EntityDataSerializers.getSerializer(buf.readInt());
-        DimensionDependantArg<D> value = new DimensionDependantArg<>(() -> ser);
+        DimensionDependentArg<D> value = new DimensionDependentArg<>(() -> ser);
         int size = buf.readInt();
 
         for (int i = 0; i < size; i++) {
@@ -38,7 +38,7 @@ public class BedLocationsSerializer<D, T extends EntityDataSerializer<D>> implem
     }
 
     @Override
-    public DimensionDependantArg<D> copy(DimensionDependantArg<D> value) {
+    public DimensionDependentArg<D> copy(DimensionDependentArg<D> value) {
         return value.copy();
     }
 }

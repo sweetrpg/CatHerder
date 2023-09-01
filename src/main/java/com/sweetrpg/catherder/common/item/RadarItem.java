@@ -4,8 +4,6 @@ import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import net.minecraft.Util;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -54,7 +52,7 @@ public class RadarItem extends Item {
             List<CatLocationData> ownCats = locationManager.getCats(playerIn, dimCurr).collect(Collectors.toList());
 
             if (ownCats.isEmpty()) {
-                playerIn.sendMessage(new TranslatableComponent("catradar.errornull", dimCurr.location()), Util.NIL_UUID);
+                playerIn.sendMessage(Component.translatable("catradar.errornull", dimCurr.location()), Util.NIL_UUID);
             } else {
                 boolean flag = false;
 
@@ -65,12 +63,12 @@ public class RadarItem extends Item {
                         String translateStr = RadarItem.getDirectionTranslationKey(loc, playerIn);
                         int distance = Mth.ceil(loc.getPos() != null ? loc.getPos().distanceTo(playerIn.position()) : -1);
 
-                        playerIn.sendMessage(new TranslatableComponent(translateStr, loc.getName(worldIn), distance), Util.NIL_UUID);
+                        playerIn.sendMessage(Component.translatable(translateStr, loc.getName(worldIn), distance), Util.NIL_UUID);
                     }
                 }
 
                 if (!flag) {
-                    playerIn.sendMessage(new TranslatableComponent("catradar.errornoradio"), Util.NIL_UUID);
+                    playerIn.sendMessage(Component.translatable("catradar.errornoradio"), Util.NIL_UUID);
                 }
             }
 
@@ -84,11 +82,11 @@ public class RadarItem extends Item {
             }
 
             if (otherCats.size() > 0) {
-                playerIn.sendMessage(new TranslatableComponent("catradar.notindim", otherCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+                playerIn.sendMessage(Component.translatable("catradar.notindim", otherCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
             }
 
             if (noCats.size() > 0 && stack.getItem() == ModItems.CREATIVE_RADAR.get()) {
-                playerIn.sendMessage(new TranslatableComponent("catradar.errornull", noCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+                playerIn.sendMessage(Component.translatable("catradar.errornull", noCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
             }
         }
         return new InteractionResultHolder<ItemStack>(InteractionResult.FAIL, stack);

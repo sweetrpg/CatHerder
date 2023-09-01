@@ -8,7 +8,6 @@ import com.sweetrpg.catherder.common.inventory.container.PackCatContainer;
 import com.sweetrpg.catherder.common.inventory.container.TreatBagContainer;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -37,7 +36,7 @@ public class Screens {
 
         @Override
         public Component getDisplayName() {
-            return new TranslatableComponent("container.catherder.pack_cat");
+            return Component.translatable("container.catherder.pack_cat");
         }
     }
 
@@ -60,7 +59,7 @@ public class Screens {
 
         @Override
         public Component getDisplayName() {
-            return new TranslatableComponent("container.catherder.cat_inventories");
+            return Component.translatable("container.catherder.cat_inventories");
         }
     }
 
@@ -81,7 +80,7 @@ public class Screens {
 
         @Override
         public Component getDisplayName() {
-            return new TranslatableComponent("container.catherder.treat_bag");
+            return Component.translatable("container.catherder.treat_bag");
         }
     }
 
