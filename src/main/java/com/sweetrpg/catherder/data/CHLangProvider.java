@@ -8,7 +8,7 @@ public class CHLangProvider extends LanguageProvider {
     private final String locale;
 
     public CHLangProvider(DataGenerator gen, String locale) {
-        super(gen, Constants.MOD_ID, locale);
+        super(gen, CatHerderAPI.MOD_ID, locale);
         this.locale = locale;
     }
 

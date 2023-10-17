@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 
 public class ModContainerTypes {
 
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.Keys.CONTAINER_TYPES, Constants.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.Keys.CONTAINER_TYPES, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<MenuType<FoodBowlContainer>> CAT_BOWL = register("cat_bowl", (windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();

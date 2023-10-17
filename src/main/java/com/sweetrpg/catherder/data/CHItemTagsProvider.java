@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 public class CHItemTagsProvider extends ItemTagsProvider {
 
     public CHItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> providers, TagsProvider<Block> tagProvider, ExistingFileHelper existingFileHelper) {
-        super(packOutput, providers, tagProvider, Constants.MOD_ID, existingFileHelper);
+        super(packOutput, providers, tagProvider, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +47,7 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
                 LivingEntity livingThrower = (LivingEntity) thrower;
                 LivingEntity livingEntity = (LivingEntity) entityHit;
 
-                this.level.getEntitiesOfClass(CatEntity.class, this.getBoundingBox().inflate(64D, 16D, 64D)).stream()
+                this.level().getEntitiesOfClass(CatEntity.class, this.getBoundingBox().inflate(64D, 16D, 64D)).stream()
                     .filter(Predicates.not(CatEntity::isInSittingPose))
                     .filter(d -> d.isMode(EnumMode.ATTACK, EnumMode.TACTICAL))
                     .filter(d -> d.canInteract(livingThrower))
@@ -56,18 +57,18 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
             }
 
             for (int j = 0; j < 8; ++j) {
-                this.level.addParticle(ParticleTypes.ITEM_SNOWBALL, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(ParticleTypes.ITEM_SNOWBALL, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
-        if (!this.level.isClientSide) {
-            this.level.broadcastEntityEvent(this, Constants.EntityState.DEATH);
+        if (!this.level().isClientSide) {
+            this.level().broadcastEntityEvent(this, Constants.EntityState.DEATH);
             this.discard();
         }
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

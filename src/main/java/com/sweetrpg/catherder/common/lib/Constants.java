@@ -1,12 +1,13 @@
 package com.sweetrpg.catherder.common.lib;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
 
 public class Constants {
 
-    public static final String MOD_ID = "catherder";
-    public static final String MOD_NAME = "Cat Talents";
+    public static final String MOD_ID = CatHerderAPI.MOD_ID;
+    public static final String MOD_NAME = "Cat Herder";
 
     public static final String VANILLA_ID = "minecraft";
     public static final String VANILLA_NAME = "Minecraft";

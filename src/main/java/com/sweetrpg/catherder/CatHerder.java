@@ -41,10 +41,10 @@ import java.util.function.Supplier;
 /**
  * @author Paulyhedral, ProPercivalalb
  */
-@Mod(Constants.MOD_ID)
+@Mod(CatHerderAPI.MOD_ID)
 public class CatHerder {
 
-    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(Talent.class, Constants.MOD_ID);
+    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(Talent.class, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<Talent> BED_FINDER = registerInst("bed_finder", BedFinderTalent::new);
     public static final RegistryObject<Talent> TOMCAT = registerInst("tomcat", TomcatTalent::new);
@@ -74,7 +74,7 @@ public class CatHerder {
         return TALENTS.register(name, sup);
     }
 
-    public static final Logger LOGGER = LogManager.getLogger(Constants.MOD_ID);
+    public static final Logger LOGGER = LogManager.getLogger(CatHerderAPI.MOD_ID);
 
     public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder.named(Constants.CHANNEL_NAME)
                                                         .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
 public class CHPlugin implements IModPlugin {
-    private static final ResourceLocation ID = new ResourceLocation(Constants.MOD_ID, "ch_plugin");
+    private static final ResourceLocation ID = new ResourceLocation(CatHerderAPI.MOD_ID, "ch_plugin");
     private static final Minecraft MC = Minecraft.getInstance();
 
     private static List<Recipe<?>> findRecipesByType(RecipeType<?> type) {

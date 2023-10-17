@@ -31,11 +31,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientSetup {
 
-    public static final ModelLayerLocation CAT = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "katze"), "main");
-    public static final ModelLayerLocation CAT_ARMOR = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "armor");
-    public static final ModelLayerLocation CAT_BACKPACK = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat_backpack"), "main");
-    public static final ModelLayerLocation CAT_RESCUE_BOX = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat_rescue_box"), "main");
-//    public static final ModelLayerLocation CAT_BEAM = new ModelLayerLocation(new ResourceLocation(Constants.MOD_ID, "cat"), "main");
+    public static final ModelLayerLocation CAT = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "katze"), "main");
+    public static final ModelLayerLocation CAT_ARMOR = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat"), "armor");
+    public static final ModelLayerLocation CAT_BACKPACK = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat_backpack"), "main");
+    public static final ModelLayerLocation CAT_RESCUE_BOX = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat_rescue_box"), "main");
+//    public static final ModelLayerLocation CAT_BEAM = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat"), "main");
 
     public static void setupScreenManagers(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.WILD_CATNIP.get(), RenderType.cutout());

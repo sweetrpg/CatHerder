@@ -129,7 +129,7 @@ package com.sweetrpg.catherder.client.block.model;
 //        String casingKey = beddingResource != null
 //                ? casingResource.name().toString().replace(':', '.')
 //                : "catherder.cattree.casing.missing";
-//        return new ModelResourceLocation(Constants.MOD_ID, "block/cat_tree#bedding=" + beddingKey + ",casing=" + casingKey + ",facing=" + facing.getName());
+//        return new ModelResourceLocation(CatHerderAPI.MOD_ID, "block/cat_tree#bedding=" + beddingKey + ",casing=" + casingKey + ",facing=" + facing.getName());
 //    }
 //
 //    private Either<Material, String> findCasingTexture(@Nullable IRegistryDelegate<ICasingMaterial> resource) {

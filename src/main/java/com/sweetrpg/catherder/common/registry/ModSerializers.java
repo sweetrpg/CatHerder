@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 
 public class ModSerializers {
 
-    public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.ENTITY_DATA_SERIALIZERS, Constants.MOD_ID);
+    public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.ENTITY_DATA_SERIALIZERS, CatHerderAPI.MOD_ID);
 
     public static final EntityDataSerializer<List<TalentInstance>> TALENT_SERIALIZER = new TalentListSerializer();
     public static final EntityDataSerializer<Optional<AccessoryInstance>> COLLAR_TYPE_SERIALIZER = new CollarSerializer();

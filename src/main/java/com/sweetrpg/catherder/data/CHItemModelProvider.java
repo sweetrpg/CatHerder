@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class CHItemModelProvider extends ItemModelProvider {
 
     public CHItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Constants.MOD_ID, existingFileHelper);
+        super(generator, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override

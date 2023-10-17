@@ -12,7 +12,7 @@ public class TextUtils {
      * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
      */
     public static MutableComponent getTranslation(String type, String key, Object... args) {
-        return Component.translatable(type + "." + Constants.MOD_ID + "." + key, args);
+        return Component.translatable(type + "." + CatHerderAPI.MOD_ID + "." + key, args);
     }
 
 }

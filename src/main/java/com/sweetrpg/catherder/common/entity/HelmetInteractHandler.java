@@ -6,6 +6,7 @@ import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatItem;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -13,14 +14,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.IRegistryDelegate;
 
 import java.util.Map;
 
 public class HelmetInteractHandler implements ICatItem {
 
-    private static final Map<IRegistryDelegate<? extends Item>, RegistryObject<? extends Accessory>> MAPPING = new ImmutableMap.Builder<IRegistryDelegate<? extends Item>, RegistryObject<? extends Accessory>>()
+    private static final Map<Holder.Reference<? extends Item>, RegistryObject<? extends Accessory>> MAPPING = new ImmutableMap.Builder<Holder.Reference<? extends Item>, RegistryObject<? extends Accessory>>()
 //        .put(Items.IRON_HELMET.delegate, CatAccessories.IRON_HELMET)
 //        .put(Items.DIAMOND_HELMET.delegate, CatAccessories.DIAMOND_HELMET)
 //        .put(Items.GOLDEN_HELMET.delegate, CatAccessories.GOLDEN_HELMET)
@@ -38,7 +39,7 @@ public class HelmetInteractHandler implements ICatItem {
 //        .put(Items.CHAINMAIL_CHESTPLATE.delegate, CatAccessories.CHAINMAIL_BODY_PIECE)
 //        .put(Items.NETHERITE_CHESTPLATE.delegate, CatAccessories.NETHERITE_BODY_PIECE)
 //        .put(Items.LEATHER_HELMET.delegate, CatAccessories.LEATHER_HELMET)
-        .put(Items.LEATHER_BOOTS.delegate, ModAccessories.LEATHER_BOOTS)
+        .put(ForgeRegistries.ITEMS.getDelegateOrThrow(Items.LEATHER_BOOTS), ModAccessories.LEATHER_BOOTS)
 //        .put(Items.LEATHER_CHESTPLATE.delegate, CatAccessories.LEATHER_BODY_PIECE)
        .build();
 
@@ -48,7 +49,7 @@ public class HelmetInteractHandler implements ICatItem {
             ItemStack stack = playerIn.getItemInHand(handIn);
 
             if (!stack.isEmpty()) {
-                RegistryObject<? extends Accessory> associatedAccessory = MAPPING.get(stack.getItem().delegate);
+                RegistryObject<? extends Accessory> associatedAccessory = MAPPING.get(ForgeRegistries.ITEMS.getDelegateOrThrow(stack.getItem()));
 
                 if (associatedAccessory != null) {
                     AccessoryInstance inst = associatedAccessory.get().createFromStack(stack.copy().split(1));

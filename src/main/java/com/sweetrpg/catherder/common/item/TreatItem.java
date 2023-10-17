@@ -32,7 +32,7 @@ public class TreatItem extends Item implements ICatItem {
         this.type = typeIn;
     }
 
-//    @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//    @Mod.EventBusSubscriber(modid = CatHerderAPI.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 //    public static class CatTrainEvent {
 //
 //    }
