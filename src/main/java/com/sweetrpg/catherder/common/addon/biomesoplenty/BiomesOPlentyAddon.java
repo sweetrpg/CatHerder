@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.common.addon.biomesoplenty;
 
 import com.google.common.collect.Lists;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.impl.CasingMaterial;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
 import com.sweetrpg.catherder.common.addon.Addon;
@@ -9,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -19,29 +21,24 @@ public class BiomesOPlentyAddon implements Addon {
 
     public static final String MOD_ID = "biomesoplenty";
 
-    public static final String[] BLOCKS = {
-            "cherry_planks", "umbran_planks",
+    public static final String[] BLOCKS = {"cherry_planks", "umbran_planks",
             "fir_planks", "dead_planks", "magic_planks", "palm_planks", "redwood_planks",
-            "willow_planks", "hellbark_planks", "jacaranda_planks", "mahogany_planks"
-    };
-
-    public final void registerCasings(final RegistryEvent.Register<ICasingMaterial> event) {
-        if(!this.shouldLoad()) {return;}
-
-        IForgeRegistry<ICasingMaterial> casingRegistry = event.getRegistry();
-
-        for(String block : BLOCKS) {
-            ResourceLocation rl = Util.getResource(MOD_ID, block);
-            Supplier<Block> blockGet = () -> ForgeRegistries.BLOCKS.getValue(rl);
-
-            casingRegistry.register(new CasingMaterial(blockGet).setRegistryName(rl));
-        }
-    }
+            "willow_planks", "hellbark_planks", "jacaranda_planks", "mahogany_planks"};
+    public static final DeferredRegister<ICasingMaterial> CASINGS = DeferredRegister.create(CatHerderAPI.RegistryKeys.CASING_REGISTRY, MOD_ID);
 
     @Override
     public void init() {
+        if (!this.shouldLoad()) { return; }
+
+        for (String block : BLOCKS) {
+            ResourceLocation rl = Util.getResource(MOD_ID, block);
+            Supplier<Block> blockGet = () -> ForgeRegistries.BLOCKS.getValue(rl);
+
+            CASINGS.register(rl.getPath(), () -> new CasingMaterial(blockGet.get().builtInRegistryHolder()));
+        }
+
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addGenericListener(ICasingMaterial.class, this::registerCasings);
+        modEventBus.register(CASINGS);
     }
 
     @Override

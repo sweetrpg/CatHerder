@@ -78,10 +78,10 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
         if(this.isReachedTarget()) {
             if(this.cat.isInSittingPose()) {
                 if(this.usingLitterboxCounter % 10 == 0) {
-                    this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
+                    this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
                 }
                 if(this.usingLitterboxCounter % 5 == 0) {
-                    this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
+                    this.cat.level().playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
                 }
                 this.usingLitterboxCounter++;
             }
@@ -93,7 +93,7 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
             }
 
             if(this.usingLitterboxCounter > MAX_LITTERBOX_USE_COUNT) {
-                this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
+                this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
                 this.cat.setInSittingPose(false);
                 this.cat.setSprinting(false);
                 this.cat.setLitterboxCooldown(LITTERBOX_USE_DELAY);

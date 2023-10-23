@@ -37,6 +37,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 
 /**
  * @author Paulyhedral, ProPercivalalb

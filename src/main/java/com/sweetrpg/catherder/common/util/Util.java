@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.common.util;
 
 import com.google.common.collect.Lists;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.lib.Constants;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;

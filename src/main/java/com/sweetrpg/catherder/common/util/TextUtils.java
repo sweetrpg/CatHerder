@@ -4,6 +4,7 @@ import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 
 public class TextUtils {
     private static final MutableComponent NO_EFFECTS = (Component.translatable("effect.none")).withStyle(ChatFormatting.GRAY);

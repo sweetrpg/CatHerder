@@ -24,7 +24,7 @@ public class FishFoodHandler implements ICatFoodHandler {
     public InteractionResult consume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
 
         if (catIn.getCatHunger() < catIn.getMaxHunger()) {
-            if (!catIn.level.isClientSide) {
+            if (!catIn.level().isClientSide) {
                 int heal = stackIn.getItem().getFoodProperties().getNutrition() * 5;
 
                 catIn.setCatHunger(catIn.getCatHunger() + heal);

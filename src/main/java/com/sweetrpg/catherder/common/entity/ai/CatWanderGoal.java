@@ -3,6 +3,7 @@ package com.sweetrpg.catherder.common.entity.ai;
 import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
@@ -65,7 +66,7 @@ public class CatWanderGoal extends Goal {
     @Nullable
     protected Vec3 getPosition() {
         PathNavigation pathNavigate = this.cat.getNavigation();
-        Random random = this.cat.getRandom();
+        RandomSource random = this.cat.getRandom();
 
         int xzRange = 5;
         int yRange = 3;

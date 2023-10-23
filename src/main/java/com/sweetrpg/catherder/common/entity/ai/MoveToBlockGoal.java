@@ -34,20 +34,20 @@ public class MoveToBlockGoal extends Goal {
     public void stop() {
         BlockPos target = this.cat.getTargetBlock();
 
-        CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(cat.level, target, CatTreeBlockEntity.class);
+        CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(cat.level(), target, CatTreeBlockEntity.class);
 
         if(catTreeEntity != null) {
             // Double-check the bed still has no owner
             if(catTreeEntity.getOwnerUUID() == null) {
                 catTreeEntity.setOwner(this.cat);
-                this.cat.setBedPos(this.cat.level.dimension(), target);
+                this.cat.setBedPos(this.cat.level().dimension(), target);
             }
         }
 
         this.cat.setTargetBlock(null);
         this.cat.setOrderedToSit(true);
 
-        this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
+        this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
     }
 
     @Override

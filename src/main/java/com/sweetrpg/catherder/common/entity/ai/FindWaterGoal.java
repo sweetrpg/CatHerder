@@ -31,13 +31,13 @@ public class FindWaterGoal extends Goal {
     public FindWaterGoal(PathfinderMob creatureIn) {
         this.creature = creatureIn;
         this.navigator = creatureIn.getNavigation();
-        this.world = creatureIn.level;
+        this.world = creatureIn.level();
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 
     @Override
     public boolean canUse() {
-        if (!this.creature.isOnGround() || (this.creature.tickCount % 5) != 0) {
+        if (!this.creature.getFirstPassenger().onGround() || (this.creature.tickCount % 5) != 0) {
             return false;
         }
 

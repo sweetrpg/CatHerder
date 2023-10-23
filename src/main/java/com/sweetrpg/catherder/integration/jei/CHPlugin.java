@@ -13,6 +13,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 
 @JeiPlugin
 @ParametersAreNonnullByDefault

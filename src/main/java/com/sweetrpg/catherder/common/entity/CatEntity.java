@@ -182,7 +182,7 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(ACCESSORIES.get(), new ArrayList<>(4));
+        this.entityData.define(ACCESSORIES, new ArrayList<>(4));
         this.entityData.define(TALENTS.get(), new ArrayList<>(4));
         this.entityData.define(LAST_KNOWN_NAME, Optional.empty());
         this.entityData.define(CAT_FLAGS, (byte) 0);
@@ -584,7 +584,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         for(ICatAlteration alter : this.alterations) {
-            InteractionResult result = alter.processInteract(this, this.level, player, hand);
+            InteractionResult result = alter.processInteract(this, this.level(), player, hand);
             if(result != InteractionResult.PASS) {
                 return result;
             }
@@ -1040,8 +1040,8 @@ public class CatEntity extends AbstractCatEntity {
         super.setUUID(uniqueIdIn);
 
         if(this.level != null && !this.level().isClientSide) {
-            CatLocationStorage.get(this.level).remove(oldUniqueId);
-            CatLocationStorage.get(this.level).getOrCreateData(this).update(this);
+            CatLocationStorage.get(this.level()).remove(oldUniqueId);
+            CatLocationStorage.get(this.level()).getOrCreateData(this).update(this);
         }
     }
 
@@ -1204,9 +1204,9 @@ public class CatEntity extends AbstractCatEntity {
         super.remove(removalReason);
 
         if(removalReason == RemovalReason.DISCARDED || removalReason == RemovalReason.KILLED) {
-            if(this.level != null && !this.level().isClientSide) {
-                CatRespawnStorage.get(this.level).putData(this);
-                CatLocationStorage.get(this.level).remove(this);
+            if(this.level() != null && !this.level().isClientSide) {
+                CatRespawnStorage.get(this.level()).putData(this);
+                CatLocationStorage.get(this.level()).remove(this);
             }
         }
     }
@@ -1214,7 +1214,7 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     protected void tickDeath() {
         if(this.deathTime == 19) { // 1 second after death
-            if(this.level != null && !this.level().isClientSide) {
+            if(this.level() != null && !this.level().isClientSide) {
 //                catrespawnStorage.get(this.world).putData(this);
 //                CatHerder.LOGGER.debug("Saved cat as they died {}", this);
 //
@@ -1486,7 +1486,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        this.markDataParameterDirty(ACCESSORIES.get(), false); // Mark dirty so data is synced to client
+        this.markDataParameterDirty(ACCESSORIES, false); // Mark dirty so data is synced to client
 
         // Does what notifyDataManagerChange would have done but this way only does it once
         this.recalculateAlterationsCache();
@@ -1718,7 +1718,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         this.getAccessories().clear();
-        this.markDataParameterDirty(ACCESSORIES.get());
+        this.markDataParameterDirty(ACCESSORIES);
         return removed;
     }
 

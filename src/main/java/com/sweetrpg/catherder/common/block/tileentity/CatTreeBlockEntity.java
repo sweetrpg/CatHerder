@@ -12,8 +12,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.IModelData;
-import net.minecraftforge.client.model.data.ModelDataMap;
+import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.data.ModelDataManager;
 import net.minecraftforge.client.model.data.ModelProperty;
 
 import javax.annotation.Nullable;
@@ -87,11 +87,11 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
 //    }
 
     @Override
-    public IModelData getModelData() {
-        return new ModelDataMap.Builder()
+    public ModelData getModelData() {
+        return ModelData.builder()
 //                .withInitial(CASING, this.casingType)
 //                .withInitial(BEDDING, this.beddingType)
-                .withInitial(FACING, Direction.NORTH)
+                .with(FACING, Direction.NORTH)
                 .build();
     }
 

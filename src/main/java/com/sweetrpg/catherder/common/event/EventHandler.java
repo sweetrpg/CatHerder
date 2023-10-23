@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.event;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -31,7 +32,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public void rightClickEntity(final PlayerInteractEvent.EntityInteract event) {
-        Level world = event.getWorld();
+        Level world = event.getLevel();
 
         ItemStack stack = event.getItemStack();
         Entity target = event.getTarget();
@@ -41,7 +42,7 @@ public class EventHandler {
 
             TamableAnimal vanillaCat = (TamableAnimal) target;
 
-            Player player = event.getPlayer();
+            Player player = event.getEntity();
 
             if(vanillaCat.isAlive() && vanillaCat.isTame() && vanillaCat.isOwnedBy(player)) {
                 if(!world.isClientSide) {
@@ -55,7 +56,7 @@ public class EventHandler {
                     cat.setOrderedToSit(false);
                     cat.setAge(vanillaCat.getAge());
                     cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
-                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType());
+                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getVariant().hashCode());
 
                     world.addFreshEntity(cat);
 
