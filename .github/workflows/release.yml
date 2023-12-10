@@ -9,7 +9,7 @@ name: Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 1.18-release ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -40,9 +40,9 @@ jobs:
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
-          echo "${{ github.sha }}" > .RELEASE_HASH
-          git add .RELEASE_HASH
-          git commit -m "Update .RELEASE_HASH"
-          version=$(cat .VERSION)
+          echo "${{ github.sha }}" > .release-info/1.18/RELEASE_HASH
+          git add .release-info/1.18/RELEASE_HASH
+          git commit -m "Update RELEASE_HASH"
+          version=$(cat .release-info/1.18/VERSION)
           git tag "release-${version}"
           git push origin --tags
