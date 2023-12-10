@@ -54,5 +54,5 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 # Licenses
 
 CatHerder API
-- 2022
+- 2022-3
 - [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)
