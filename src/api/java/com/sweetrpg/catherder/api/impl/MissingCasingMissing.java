@@ -1,10 +1,10 @@
 package com.sweetrpg.catherder.api.impl;
 
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 public class MissingCasingMissing extends ICasingMaterial {
 
@@ -18,7 +18,7 @@ public class MissingCasingMissing extends ICasingMaterial {
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("cattree.casing.missing", this.getRegistryName());
+        return new TranslatableComponent("cattree.casing.missing", "//TODO" /*ForgeRegistries.BLOCKS.getKey(this)*/);
     }
 
     @Override

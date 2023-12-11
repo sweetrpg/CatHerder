@@ -9,6 +9,7 @@ import com.google.common.base.Function;
 
 import com.sweetrpg.catherder.api.feature.EnumGender;
 import com.sweetrpg.catherder.api.feature.ICat;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
 
 public abstract class AbstractCatEntity extends TamableAnimal implements ICat {
@@ -76,25 +76,25 @@ public abstract class AbstractCatEntity extends TamableAnimal implements ICat {
         }
     }
 
-    public abstract TranslatableComponent getTranslationKey(Function<EnumGender, String> function);
+    public abstract Component getTranslationKey(Function<EnumGender, String> function);
 
-    public TranslatableComponent getGenderPronoun() {
+    public Component getGenderPronoun() {
         return this.getTranslationKey(EnumGender::getUnlocalisedPronoun);
     }
 
-    public TranslatableComponent getGenderSubject() {
+    public Component getGenderSubject() {
         return this.getTranslationKey(EnumGender::getUnlocalisedSubject);
     }
 
-    public TranslatableComponent getGenderTitle() {
+    public Component getGenderTitle() {
         return this.getTranslationKey(EnumGender::getUnlocalisedTitle);
     }
 
-    public TranslatableComponent getGenderTip() {
+    public Component getGenderTip() {
         return this.getTranslationKey(EnumGender::getUnlocalisedTip);
     }
 
-    public TranslatableComponent getGenderName() {
+    public Component getGenderName() {
         return this.getTranslationKey(EnumGender::getUnlocalisedName);
     }
 }

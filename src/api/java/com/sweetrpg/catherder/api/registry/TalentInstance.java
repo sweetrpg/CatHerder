@@ -9,29 +9,24 @@ import com.sweetrpg.catherder.api.inferface.ICatAlteration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.IRegistryDelegate;
 
 public class TalentInstance implements ICatAlteration {
 
-    protected final IRegistryDelegate<Talent> talentDelegate;
+    protected final Talent talentDelegate;
 
     protected int level;
 
-    public TalentInstance(Talent talentIn, int levelIn) {
-        this(talentIn.delegate, levelIn);
-    }
-
     public TalentInstance(Talent talentIn) {
-        this(talentIn.delegate, 1);
+        this(talentIn, 1);
     }
 
-    public TalentInstance(IRegistryDelegate<Talent> talentDelegateIn, int levelIn) {
+    public TalentInstance(Talent talentDelegateIn, int levelIn) {
         this.talentDelegate = talentDelegateIn;
         this.level = levelIn;
     }
 
     public Talent getTalent() {
-        return this.talentDelegate.get();
+        return this.talentDelegate;
     }
 
     public final int level() {
@@ -46,16 +41,12 @@ public class TalentInstance implements ICatAlteration {
         return this.of(talentIn.get());
     }
 
-    public boolean of(Talent talentIn) {
-        return this.of(talentIn.delegate);
-    }
-
-    public boolean of(IRegistryDelegate<Talent> talentDelegateIn) {
-        return talentDelegateIn.equals(this.talentDelegate);
+    public boolean of(Talent talentDelegateIn) {
+        return talentDelegateIn == this.talentDelegate;
     }
 
     public TalentInstance copy() {
-        return this.talentDelegate.get().getDefault(this.level);
+        return this.talentDelegate.getDefault(this.level);
     }
 
     public void writeToNBT(AbstractCatEntity catIn, CompoundTag compound) {
@@ -75,7 +66,7 @@ public class TalentInstance implements ICatAlteration {
     }
 
     public final void writeInstance(AbstractCatEntity catIn, CompoundTag compound) {
-        ResourceLocation rl = this.talentDelegate.name();
+        ResourceLocation rl = CatHerderAPI.TALENTS.get().getKey(this.talentDelegate);
         if (rl != null) {
             compound.putString("type", rl.toString());
         }
@@ -106,7 +97,7 @@ public class TalentInstance implements ICatAlteration {
 
     @Override
     public String toString() {
-        return String.format("%s [talent: %s, level: %d]", this.getClass().getSimpleName(), talentDelegate.name(), this.level);
+        return String.format("%s [talent: %s, level: %d]", this.getClass().getSimpleName(), CatHerderAPI.TALENTS.get().getKey(talentDelegate), this.level);
     }
 
     /**

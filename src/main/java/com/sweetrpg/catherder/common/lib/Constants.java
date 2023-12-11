@@ -1,11 +1,11 @@
 package com.sweetrpg.catherder.common.lib;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
 
 public class Constants {
 
-    public static final String MOD_ID = "catherder";
     public static final String MOD_NAME = "Cat Talents";
 
     public static final String VANILLA_ID = "minecraft";
@@ -16,7 +16,7 @@ public class Constants {
     public static final String PROTOCOL_VERSION = Integer.toString(3);
 
     // Storage
-    public static final String STORAGE_CAT_RESPAWN = MOD_ID + "DeadCats";
+    public static final String STORAGE_CAT_RESPAWN = CatHerderAPI.MOD_ID + "DeadCats";
     public static final String STORAGE_CAT_LOCATION = "cat_locations";
 
     // Language
