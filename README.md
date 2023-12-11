@@ -1,7 +1,8 @@
 Cat Herder
 ==========
 
-[![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
+[![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml)
+[![Build](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.20.yml/badge.svg)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.20.yml)
 
 **Cat Herder** is a **Minecraft** mod made for **Minecraft Forge**.
 
@@ -45,9 +46,9 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 - **Q:** Will there be a Fabric version?  
   **A:** Probably not.
 - **Q:** Which Minecraft versions are supported?  
-  **A:** It is normally the most current release, currently `1.18.x`.
+  **A:** It is normally the most current release. Currently `1.18.2`, with `1.20.1` in the works.
 - **Q:** I have a cat, how to get started?  
-  **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
+  **A:** Use a **Training Treat** to turn him/her into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
 -----------------
 
