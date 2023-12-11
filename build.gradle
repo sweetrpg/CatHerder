@@ -1,24 +1,30 @@
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        maven { url 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://maven.minecraftforge.net/' }
         maven { // PARCHMENT
-            url "https://maven.parchmentmc.org"
+            url = "https://maven.parchmentmc.org"
         }
-        maven { url 'https://maven.blamejared.com' }
         gradlePluginPortal()
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.6', changing: true
-        classpath "gradle.plugin.se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.71.4"
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        // classpath "gradle.plugin.se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.71.4"
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
         classpath "org.ajoberstar.grgit:grgit-gradle:4.1.0"
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
+
+// plugins {
+//     id 'eclipse'
+//     id 'maven-publish'
+//     id 'org.parchmentmc.librarian.forgegradle'
+//     id 'net.minecraftforge.gradle' version '5.1.+'
+//     id 'com.matthewprenger.cursegradle'
+//     id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
+//     id 'org.ajoberstar.grgit'
+// }
 
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -26,7 +32,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
-apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
+// apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
 apply plugin: 'org.ajoberstar.grgit'
 
 def branch = grgit.branch.current()
@@ -36,9 +42,9 @@ println "Pipeline branch: " + (System.getenv('CI_COMMIT_BRANCH') ?: 'NONE')
 group = 'com.sweetrpg'
 archivesBaseName = "CatHerder-${project.target_mc_version}"
 //version = (grgit.describe(longDescr: true, tags: true) ?: '0-0-0').split('-').with { it -> "${it[0]}.${it[1]}" }
-version = System.getenv("CATHERDER_VERSION") ?: new File(".VERSION").text.trim()
+version = System.getenv("CATHERDER_VERSION") ?: new File(".release-info/1.18/VERSION").text.trim()
 
-println "Version: ${version}"
+println "Project version: ${version}"
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
 sourceSets {
@@ -62,21 +68,23 @@ configurations {
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 repositories {
-    maven {
-        url "https://dvs1.progwml6.com/files/maven"
-        content { includeGroup "mezz.jei" }
-    }
-    maven {
-        url "https://modmaven.k-4u.nl"
-        content { includeGroup "mezz.jei" }
-    }
     maven { // JEI
         url "https://dvs1.progwml6.com/files/maven"
+        content { includeGroup "mezz.jei" }
     }
+    // maven { // JEI
+    //     url "https://modmaven.k-4u.nl"
+    //     content { includeGroup "mezz.jei" }
+    // }
+    // maven { // JEI
+    //     url "https://dvs1.progwml6.com/files/maven"
+    // }
     maven { // The One Probe
         url "https://cursemaven.com"
     }
-    maven { url 'https://maven.blamejared.com' }
+    maven { // ???
+        url 'https://maven.blamejared.com'
+    }
 }
 
 minecraft {
@@ -123,25 +131,22 @@ minecraft {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${target_mc_version}-${forge_version}"
+    minecraft "net.minecraftforge:forge:${project.forge_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-${target_mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${target_mc_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${target_mc_version}-forge:${jei_version}")
-
-    // runtimeOnly fg.deobf("curse.maven:doggytalents-271050:${dt_file_id}")
-
-//    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
-//    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
-
+    compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+    runtimeOnly fg.deobf("curse.maven:doggytalents-271050:${dt_file_id}")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
 //    implementation fg.deobf("curse.maven:farmers-delight-398521:3615366")
-
-//    implementation fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+
+    implementation fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
 }
 
+// Define a task to create a jar of project sources
 task sourcesJar(type: Jar) {
     duplicatesStrategy(DuplicatesStrategy.FAIL)
     archiveClassifier = 'sources'
@@ -149,6 +154,7 @@ task sourcesJar(type: Jar) {
     from sourceSets.api.allJava
 }
 
+// Define a task to create a jar for the API code
 task apiJar(type: Jar) {
     duplicatesStrategy(DuplicatesStrategy.FAIL)
     archiveClassifier = 'api'
@@ -156,6 +162,7 @@ task apiJar(type: Jar) {
     from sourceSets.api.allJava
 }
 
+// Add the sources and API jars to the list of generated artifacts
 artifacts {
     archives sourcesJar
     archives apiJar
@@ -206,21 +213,21 @@ test {
     useJUnitPlatform()
 }
 
-task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-    file = new File("build/changelog.md")
-    fromRepo = file(".")
-    untaggedName = "Current release ${project.version}"
-    fromCommit = new File(".RELEASE_HASH").text.trim()
-    toRef = 'HEAD'
+// task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+//     file = new File("build/changelog.md")
+//     fromRepo = file(".")
+//     untaggedName = "Current release ${project.version}"
+//     fromCommit = new File(".release-info/1.18/RELEASE_HASH").text.trim()
+//     toRef = 'HEAD'
 
-    templateContent = file('changelog.mustache').getText('UTF-8')
-}
+//     templateContent = file('changelog.mustache').getText('UTF-8')
+// }
 
 curseforge {
     apiKey = System.getenv('CURSEFORGE_API_KEY') ?: 0
     project {
         id = project.curseforge_project_id
-        changelog = file("build/changelog.md")
+        changelog = file("CHANGELOG.md")
         changelogType = 'markdown'
         releaseType = findProperty("curseforge_release_type") ?: 'beta'
         addGameVersion project.target_mc_version
@@ -239,7 +246,7 @@ curseforge {
 // Must be done in afterEvaluate as the specific curseforge$id
 // task is generated lazily
 afterEvaluate {
-    tasks.named("curseforge${project.curseforge_project_id}").get().dependsOn.add(makeChangelog)
+    // tasks.named("curseforge${project.curseforge_project_id}").get().dependsOn.add(makeChangelog)
 }
 
 if (project.hasProperty('UPDATE_MAPPINGS')) {
