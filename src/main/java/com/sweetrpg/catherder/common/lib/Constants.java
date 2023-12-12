@@ -6,8 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public class Constants {
 
-    public static final String MOD_NAME = "Cat Talents";
-
     public static final String VANILLA_ID = "minecraft";
     public static final String VANILLA_NAME = "Minecraft";
 

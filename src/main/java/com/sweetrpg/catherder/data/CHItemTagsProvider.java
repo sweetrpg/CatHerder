@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -19,7 +20,7 @@ import java.util.function.Supplier;
 public class CHItemTagsProvider extends ItemTagsProvider {
 
     public CHItemTagsProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
-        super(generatorIn, blockTagProvider, Constants.MOD_ID, existingFileHelper);
+        super(generatorIn, blockTagProvider, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override

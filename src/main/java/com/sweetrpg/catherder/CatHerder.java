@@ -46,7 +46,7 @@ import java.util.function.Supplier;
 @Mod(CatHerderAPI.MOD_ID)
 public class CatHerder {
 
-//    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(Talent.class, CatHerderAPI.MOD_ID);
+    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(Talent.class, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<Talent> BED_FINDER = registerInst("bed_finder", BedFinderTalent::new);
     public static final RegistryObject<Talent> TOMCAT = registerInst("tomcat", TomcatTalent::new);
@@ -72,9 +72,9 @@ public class CatHerder {
         return register(name, () -> new Talent(sup));
     }
 
-//    private static <T extends Talent> RegistryObject<T> register(final String name, final Supplier<T> sup) {
-//        return TALENTS.register(name, sup);
-//    }
+    private static <T extends Talent> RegistryObject<T> register(final String name, final Supplier<T> sup) {
+        return TALENTS.register(name, sup);
+    }
 
     public static final Logger LOGGER = LogManager.getLogger(CatHerderAPI.MOD_ID);
 

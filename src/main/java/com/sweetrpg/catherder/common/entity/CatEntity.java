@@ -153,7 +153,7 @@ public class CatEntity extends AbstractCatEntity {
     private Goal catnipGoal;
     private int litterboxCooldown;
     public static final int MIN_CAT_SIZE = 1;
-    public static final int MAX_CAT_SIZE = 7;
+    public static final int MAX_CAT_SIZE = 5;
 
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);

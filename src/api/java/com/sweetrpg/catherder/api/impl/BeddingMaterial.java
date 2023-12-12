@@ -6,13 +6,12 @@ import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class BeddingMaterial extends IBeddingMaterial {
 
@@ -37,7 +36,7 @@ public class BeddingMaterial extends IBeddingMaterial {
     @Override
     public ResourceLocation getTexture() {
         if (this.texture == null) {
-            ResourceLocation loc = ForgeRegistries.BLOCKS.getKey(this.block.get());
+            ResourceLocation loc = this.block.get().getRegistryName();
             this.texture = new ResourceLocation(loc.getNamespace(), "block/" + loc.getPath());
         }
 

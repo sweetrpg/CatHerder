@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel;
 import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.common.FoodValues;
@@ -20,7 +21,7 @@ import java.util.function.Supplier;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, Constants.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, CatHerderAPI.MOD_ID);
 
 //    public static final RegistryObject<Item> CAT_TREE = register("cat_tree", () -> new BlockItem(ModBlocks.CAT_TREE.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
@@ -77,7 +78,7 @@ public class ModItems {
 //    public static final RegistryObject<AccessoryItem> LEATHER_JACKET = registerAccessory("leather_jacket", CatAccessories.LEATHER_JACKET_CLOTHING);
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties(); // .tab(ModItemGroups.GENERAL);
+        return new Item.Properties();
     }
 
     private static RegistryObject<Item> registerThrowToy(final String name) {

@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -8,7 +9,7 @@ public class CHLangProvider extends LanguageProvider {
     private final String locale;
 
     public CHLangProvider(DataGenerator gen, String locale) {
-        super(gen, Constants.MOD_ID, locale);
+        super(gen, CatHerderAPI.MOD_ID, locale);
         this.locale = locale;
     }
 

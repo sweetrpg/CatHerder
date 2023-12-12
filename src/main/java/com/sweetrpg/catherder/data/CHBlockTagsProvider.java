@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModTags;
@@ -11,7 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class CHBlockTagsProvider extends BlockTagsProvider {
 
     public CHBlockTagsProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-        super(generatorIn, Constants.MOD_ID, existingFileHelper);
+        super(generatorIn, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override

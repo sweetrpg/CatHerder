@@ -13,6 +13,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.Util;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.IRegistryDelegate;
 
 public class Accessory extends ForgeRegistryEntry<Accessory> {
 
@@ -81,7 +82,11 @@ public class Accessory extends ForgeRegistryEntry<Accessory> {
     }
 
     public <T extends Accessory> boolean of(T accessoryIn) {
-        return CatHerderAPI.ACCESSORIES.get().getKey(accessoryIn).equals(CatHerderAPI.ACCESSORIES.get().getKey(this));
+        return this.of(accessoryIn.delegate);
+    }
+
+    public <T extends Accessory> boolean of(IRegistryDelegate<T> accessoryDelegateIn) {
+        return accessoryDelegateIn.equals(this.delegate);
     }
 
     private ResourceLocation modelTexture;

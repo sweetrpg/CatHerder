@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 
 public class ModTileEntityTypes {
 
-    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, Constants.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<CatTreeBlockEntity>> CAT_TREE = register("cat_tree", CatTreeBlockEntity::new, ModBlocks.CAT_TREE);
     public static final RegistryObject<BlockEntityType<CatBowlBlockEntity>> CAT_BOWL = register("cat_bowl", CatBowlBlockEntity::new, ModBlocks.CAT_BOWL);

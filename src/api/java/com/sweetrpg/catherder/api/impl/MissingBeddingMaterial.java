@@ -1,11 +1,10 @@
 package com.sweetrpg.catherder.api.impl;
 
 import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class MissingBeddingMaterial extends IBeddingMaterial {
 
@@ -19,7 +18,7 @@ public class MissingBeddingMaterial extends IBeddingMaterial {
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("cattree.bedding.missing", "//TODO" /*ForgeRegistries.BLOCKS.getKey(this)*/);
+        return new TranslatableComponent("cattree.bedding.missing", this.getRegistryName());
     }
 
     @Override

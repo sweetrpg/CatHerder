@@ -59,11 +59,11 @@ public enum EnumMode {
 
     public void onModeSet(AbstractCatEntity cat, EnumMode prev) {
         switch(prev) {
-            default:
-                cat.getNavigation().stop();
-                cat.setTarget(null);
-                cat.setLastHurtByMob(null);
-                break;
+        default:
+            cat.getNavigation().stop();
+            cat.setTarget(null);
+            cat.setLastHurtByMob(null);
+            break;
         }
     }
 

@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.CatHerder;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.block.*;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.client.color.block.BlockColors;
@@ -20,7 +21,7 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.Keys.BLOCKS, Constants.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.Keys.BLOCKS, CatHerderAPI.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = ModItems.ITEMS;
 
     // cat items

@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -19,7 +20,7 @@ import java.util.function.Supplier;
 public class CHItemModelProvider extends ItemModelProvider {
 
     public CHItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Constants.MOD_ID, existingFileHelper);
+        super(generator, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override

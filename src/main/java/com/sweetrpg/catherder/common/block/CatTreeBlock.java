@@ -55,7 +55,7 @@ import java.util.UUID;
 
 public class CatTreeBlock extends BaseEntityBlock {
 
-//    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
     protected static final VoxelShape SHAPE_OCCLUSION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
@@ -65,7 +65,7 @@ public class CatTreeBlock extends BaseEntityBlock {
         super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
         this.registerDefaultState(this.stateDefinition.any()
                                           .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
-                                          .setValue(BlockStateProperties.WATERLOGGED, false));
+                                          .setValue(WATERLOGGED, false));
     }
 
     @SuppressWarnings("deprecation")
@@ -134,7 +134,7 @@ public class CatTreeBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if(stateIn.getValue(BlockStateProperties.WATERLOGGED)) {
+        if(stateIn.getValue(WATERLOGGED)) {
             worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
@@ -144,7 +144,7 @@ public class CatTreeBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @SuppressWarnings("deprecation")
@@ -298,6 +298,6 @@ public class CatTreeBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.HORIZONTAL_FACING, WATERLOGGED);
     }
 }

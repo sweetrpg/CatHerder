@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.entity.serializers.*;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.commands.synchronization.brigadier.IntegerArgumentSerializer;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 
 public class ModSerializers {
 
-    public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.DATA_SERIALIZERS, Constants.MOD_ID);
+    public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.DATA_SERIALIZERS, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<DataSerializerEntry> TALENT_SERIALIZER = register2("talents", TalentListSerializer::new);
     public static final RegistryObject<DataSerializerEntry> COLLAR_TYPE_SERIALIZER = register2("collar", CollarSerializer::new);
