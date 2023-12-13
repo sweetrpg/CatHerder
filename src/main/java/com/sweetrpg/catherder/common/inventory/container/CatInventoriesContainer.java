@@ -4,6 +4,7 @@ import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
 import com.sweetrpg.catherder.common.inventory.container.slot.CatInventorySlot;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import com.sweetrpg.catherder.common.talent.PackCatTalent;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.util.Mth;
@@ -68,13 +69,13 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
             if (entity instanceof CatEntity) {
                 CatEntity cat = (CatEntity) entity;
 
-                PackCatItemHandler packInventory = cat.getTalent(CatHerder.PACK_CAT)
+                PackCatItemHandler packInventory = cat.getTalent(ModTalents.PACK_CAT)
                                                       .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
                 if (packInventory == null) {
                     continue;
                 }
 
-                int level = Mth.clamp(cat.getCatLevel(CatHerder.PACK_CAT), 0, 5); // Number of rows for this cat
+                int level = Mth.clamp(cat.getCatLevel(ModTalents.PACK_CAT), 0, 5); // Number of rows for this cat
                 int numCols = Mth.clamp(level, 0, Math.max(0, TOTAL_COLUMNS)); // Number of rows to draw
 
                 for (int row = 0; row < 3; row++) {

@@ -34,6 +34,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
 // apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
 apply plugin: 'org.ajoberstar.grgit'
+apply from: "https://moddingtutorials.org/applesilicon.gradle"
 
 def branch = grgit.branch.current()
 println "On branch: ${branch.fullName}"

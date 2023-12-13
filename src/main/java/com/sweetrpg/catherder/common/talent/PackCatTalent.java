@@ -7,6 +7,7 @@ import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -144,6 +145,6 @@ public class PackCatTalent extends TalentInstance {
     }
 
     public static boolean hasInventory(AbstractCatEntity catIn) {
-        return catIn.isAlive() && catIn.getTalent(CatHerder.PACK_CAT).isPresent();
+        return catIn.isAlive() && catIn.getTalent(ModTalents.PACK_CAT).isPresent();
     }
 }

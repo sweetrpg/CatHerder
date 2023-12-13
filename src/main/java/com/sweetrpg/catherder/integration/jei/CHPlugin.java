@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.integration.jei;
 
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.lib.Constants;
 import mezz.jei.api.IModPlugin;
@@ -24,6 +25,8 @@ public class CHPlugin implements IModPlugin {
     private static final Minecraft MC = Minecraft.getInstance();
 
     private static List<Recipe<?>> findRecipesByType(RecipeType<?> type) {
+        CatHerder.LOGGER.debug("JEI plugin: {}", type);
+
         return MC.level
                        .getRecipeManager()
                        .getRecipes()
@@ -34,6 +37,8 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
+        CatHerder.LOGGER.debug("Register categories: {}", registry);
+
 //		registry.addRecipeCategories(new CookingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 //		registry.addRecipeCategories(new CuttingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
 //		registry.addRecipeCategories(new DecompositionRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
@@ -41,6 +46,8 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        CatHerder.LOGGER.debug("Register recipes: {}", registration);
+
 //		registration.addRecipes(findRecipesByType(CookingPotRecipe.TYPE), CookingRecipeCategory.UID);
 //		registration.addRecipes(findRecipesByType(CuttingBoardRecipe.TYPE), CuttingRecipeCategory.UID);
 //		registration.addRecipes(ImmutableList.of(new DecompositionDummy()), DecompositionRecipeCategory.UID);
@@ -56,6 +63,8 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        CatHerder.LOGGER.debug("Register recipe catalysts: {}", registration);
+
 //		registration.addRecipeCatalyst(new ItemStack(ModItems.COOKING_POT.get()), CookingRecipeCategory.UID);
 //		registration.addRecipeCatalyst(new ItemStack(ModItems.CUTTING_BOARD.get()), CuttingRecipeCategory.UID);
 //		registration.addRecipeCatalyst(new ItemStack(ModItems.STOVE.get()), VanillaRecipeCategoryUid.CAMPFIRE);
@@ -65,11 +74,15 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        CatHerder.LOGGER.debug("Register GUI handlers: {}", registration);
+
 //		registration.addRecipeClickArea(CookingPotScreen.class, 89, 25, 24, 17, CookingRecipeCategory.UID);
     }
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        CatHerder.LOGGER.debug("Register recipe transfer handlers: {}", registration);
+
 //		registration.addRecipeTransferHandler(CookingPotContainer.class, CookingRecipeCategory.UID, 0, 6, 9, 36);
     }
 

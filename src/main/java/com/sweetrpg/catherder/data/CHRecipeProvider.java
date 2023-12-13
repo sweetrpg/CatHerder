@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.data;
 
 import com.google.gson.JsonObject;
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.util.Util;
@@ -31,6 +32,8 @@ public class CHRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+        CatHerder.LOGGER.debug("Build crafting recipes: {}", consumer);
+
         //TODO
         ShapelessRecipeBuilder.shapeless(ModItems.SUPER_TREAT.get(), 5)
                 .requires(ModItems.TRAINING_TREAT.get(), 5)

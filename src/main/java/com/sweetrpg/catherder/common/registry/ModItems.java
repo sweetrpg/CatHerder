@@ -78,7 +78,7 @@ public class ModItems {
 //    public static final RegistryObject<AccessoryItem> LEATHER_JACKET = registerAccessory("leather_jacket", CatAccessories.LEATHER_JACKET_CLOTHING);
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties();
+        return new Item.Properties().tab(ModItemGroups.GENERAL);
     }
 
     private static RegistryObject<Item> registerThrowToy(final String name) {

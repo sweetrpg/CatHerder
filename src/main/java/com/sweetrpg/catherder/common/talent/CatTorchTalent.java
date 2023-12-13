@@ -5,6 +5,7 @@ import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +28,7 @@ public class CatTorchTalent extends TalentInstance {
             BlockState torchState = Blocks.TORCH.defaultBlockState();
 
             if (catIn.level.getMaxLocalRawBrightness(catIn.blockPosition()) < 8 && catIn.level.isEmptyBlock(pos) && torchState.canSurvive(catIn.level, pos)) {
-                PackCatItemHandler inventory = catIn.getTalent(CatHerder.PACK_CAT)
+                PackCatItemHandler inventory = catIn.getTalent(ModTalents.PACK_CAT)
                                                     .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
 
                 // If null might be because no pack cat
