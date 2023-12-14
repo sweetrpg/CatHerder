@@ -1,9 +1,11 @@
 package com.sweetrpg.catherder.common.inventory.recipe;
 
-import com.sweetrpg.catherder.api.registry.IColorMaterial;
-import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
+import com.sweetrpg.catherder.api.registry.IStructureMaterial;
+import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
+import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -13,29 +15,30 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.IShapedRecipe;
 
-public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<CraftingContainer> {
+public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<CraftingContainer> {
 
-    public CatTreeRecipe(ResourceLocation resource) {
+    public PetDoorRecipe(ResourceLocation resource) {
         super(resource);
     }
 
     @Override
     public boolean matches(CraftingContainer inv, Level worldIn) {
-        IColorMaterial colorId = null;
+        IStructureMaterial structureId = null;
 
         for (int col = 0; col < 3; col++) {
             for (int row = 0; row < 3; row++) {
                 if (col == 1 && row == 0) {
-                    IColorMaterial id = CatTreeUtil.getColorFromStack(CatHerderAPI.COLOR_MATERIAL.get(), inv.getItem(row * inv.getWidth() + col));
+                    IStructureMaterial id = PetDoorUtil.getStructureFromStack(CatHerderAPI.STRUCTURE_MATERIAL.get(), inv.getItem(row * inv.getWidth() + col));
 
+                    // If the item is not structure material, then it doesn't match this recipe
                     if (id == null) {
                         return false;
                     }
 
-                    if (colorId == null) {
-                        colorId = id;
+                    if (structureId == null) {
+                        structureId = id;
                     }
-                    else if (colorId != id) {
+                    else if (structureId != id) {
                         return false;
                     }
                 }

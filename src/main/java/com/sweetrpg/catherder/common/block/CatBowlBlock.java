@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
@@ -91,7 +90,7 @@ public class CatBowlBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        CatBowlBlockEntity foodBowlTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+        CatBowlBlockEntity foodBowlTileEntity = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
 
         if (foodBowlTileEntity != null) {
             foodBowlTileEntity.setPlacer(placer);
@@ -104,7 +103,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (entityIn instanceof ItemEntity) {
-            CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+            CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
 
             if (foodBowl != null) {
                 ItemEntity entityItem = (ItemEntity) entityIn;
@@ -126,7 +125,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+            CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
             if (foodBowl != null) {
                 IItemHandler bowlInventory = foodBowl.getInventory();
                 for (int i = 0; i < bowlInventory.getSlots(); ++i) {
@@ -148,7 +147,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+        CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
 
         if (foodBowl != null) {
             IItemHandler bowlInventory = foodBowl.getInventory();
@@ -165,7 +164,7 @@ public class CatBowlBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
         else {
-            CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, posIn, CatBowlBlockEntity.class);
+            CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, posIn, CatBowlBlockEntity.class);
 
             if (foodBowl != null) {
                 ItemStack stack = playerIn.getItemInHand(handIn);

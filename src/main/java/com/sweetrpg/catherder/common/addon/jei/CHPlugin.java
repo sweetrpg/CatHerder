@@ -1,17 +1,12 @@
 package com.sweetrpg.catherder.common.addon.jei;
 
-import com.sweetrpg.catherder.common.registry.ModBlocks;
-import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
 //import com.sweetrpg.catherder.common.util.CattreeUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.ModIds;
-import mezz.jei.api.constants.VanillaRecipeCategoryUid;
-import mezz.jei.api.registration.IRecipeRegistration;
+        import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.resources.ResourceLocation;
-import org.apache.commons.lang3.tuple.Pair;
 
 @JeiPlugin
 public class CHPlugin implements IModPlugin {

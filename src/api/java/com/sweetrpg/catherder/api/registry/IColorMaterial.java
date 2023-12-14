@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public abstract class IBeddingMaterial extends ForgeRegistryEntry<IBeddingMaterial> {
+public abstract class IColorMaterial extends ForgeRegistryEntry<IColorMaterial> {
 
     /**
      * Texture location that for material, eg 'minecraft:block/white_wool'

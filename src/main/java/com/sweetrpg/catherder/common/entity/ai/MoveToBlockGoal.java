@@ -34,7 +34,7 @@ public class MoveToBlockGoal extends Goal {
     public void stop() {
         BlockPos target = this.cat.getTargetBlock();
 
-        CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(cat.level, target, CatTreeBlockEntity.class);
+        CatTreeBlockEntity catTreeEntity = WorldUtil.getBlockEntity(cat.level, target, CatTreeBlockEntity.class);
 
         if(catTreeEntity != null) {
             // Double-check the bed still has no owner

@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
-public class CasingMaterial extends ICasingMaterial {
+public class ColorMaterial extends IColorMaterial {
 
     private final Supplier<Block> block;
     protected ResourceLocation texture;
@@ -21,11 +21,11 @@ public class CasingMaterial extends ICasingMaterial {
     @Nullable
     private String translationKey;
 
-    public CasingMaterial(Supplier<Block> blockIn) {
+    public ColorMaterial(Supplier<Block> blockIn) {
         this.block = blockIn;
     }
 
-    public CasingMaterial(Supplier<Block> blockIn, ResourceLocation texture) {
+    public ColorMaterial(Supplier<Block> blockIn, ResourceLocation texture) {
         this.block = blockIn;
         this.texture = texture;
     }
@@ -49,7 +49,7 @@ public class CasingMaterial extends ICasingMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("cattree.casing", CatHerderAPI.CASING_MATERIAL.get().getKey(this));
+            this.translationKey = Util.makeDescriptionId("cattree.color", CatHerderAPI.COLOR_MATERIAL.get().getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);

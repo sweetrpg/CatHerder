@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
+import com.sweetrpg.catherder.api.registry.IStructureMaterial;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
-public class BeddingMaterial extends IBeddingMaterial {
+public class StructureMaterial extends IStructureMaterial {
 
     private final Supplier<Block> block;
     protected ResourceLocation texture;
@@ -21,11 +21,11 @@ public class BeddingMaterial extends IBeddingMaterial {
     @Nullable
     private String translationKey;
 
-    public BeddingMaterial(Supplier<Block> blockIn) {
+    public StructureMaterial(Supplier<Block> blockIn) {
         this.block = blockIn;
     }
 
-    public BeddingMaterial(Supplier<Block> blockIn, ResourceLocation texture) {
+    public StructureMaterial(Supplier<Block> blockIn, ResourceLocation texture) {
         this.block = blockIn;
         this.texture = texture;
     }
@@ -49,7 +49,7 @@ public class BeddingMaterial extends IBeddingMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("cattree.bedding", CatHerderAPI.BEDDING_MATERIAL.get().getKey(this));
+            this.translationKey = Util.makeDescriptionId("cattree.bedding", CatHerderAPI.STRUCTURE_MATERIAL.get().getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);

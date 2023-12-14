@@ -2,7 +2,9 @@ package com.sweetrpg.catherder.common.util;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IColorMaterial;
+import com.sweetrpg.catherder.api.registry.IStructureMaterial;
 import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -14,47 +16,45 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-public class CatTreeUtil {
+public class PetDoorUtil {
 
     private static final Random RANDOM = new Random(System.currentTimeMillis());
 
-    public static void setTreeVariant(CatTreeBlockEntity catTreeBlockEntity, ItemStack stack) {
-        IColorMaterial colorMaterial = CatTreeUtil.getColorMaterial(stack);
+    public static void setDoorVariant(PetDoorBlockEntity petDoorBlockEntity, ItemStack stack) {
+        IStructureMaterial structureMaterial = PetDoorUtil.getStructureMaterial(stack);
 
-        catTreeBlockEntity.setColor(colorMaterial);
-//        cattreeTileEntity.setBedding(materials.getRight());
+        petDoorBlockEntity.setStructure(structureMaterial);
     }
 
-    public static ItemStack createRandomTree() {
-        IColorMaterial color = pickRandom(CatHerderAPI.COLOR_MATERIAL.get());
+    public static ItemStack createRandomDoor() {
+        IStructureMaterial structure = pickRandom(CatHerderAPI.STRUCTURE_MATERIAL.get());
 //        IBeddingMaterial bedding = pickRandom(CatHerderAPI.BEDDING_MATERIAL);
-        return CatTreeUtil.createItemStack(color);
+        return PetDoorUtil.createItemStack(structure);
     }
 
-    public static IColorMaterial getColorMaterial(ItemStack stack) {
+    public static IStructureMaterial getStructureMaterial(ItemStack stack) {
         CompoundTag tag = stack.getTagElement("catherder");
         if (tag != null) {
-            IColorMaterial colorId = NBTUtil.getRegistryValue(tag, "colorId", CatHerderAPI.COLOR_MATERIAL.get());
-//            IBeddingMaterial beddingId = NBTUtil.getRegistryValue(tag, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
+            IStructureMaterial structureId = NBTUtil.getRegistryValue(tag, "structureId", CatHerderAPI.STRUCTURE_MATERIAL.get());
 
-            return colorId;
+            return structureId;
         }
 
         return null;
     }
 
-    public static ItemStack createItemStack(IColorMaterial colorId) {
-        ItemStack stack = new ItemStack(ModBlocks.CAT_TREE.get(), 1);
+    public static ItemStack createItemStack(IStructureMaterial structureId) {
+        ItemStack stack = new ItemStack(ModBlocks.PET_DOOR.get(), 1);
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
-        NBTUtil.putRegistryValue(tag, "colorId", colorId);
+        NBTUtil.putRegistryValue(tag, "structureId", structureId);
 //        NBTUtil.putRegistryValue(tag, "beddingId", beddingId);
 
         return stack;
     }
 
-    public static IColorMaterial getColorFromStack(IForgeRegistry<IColorMaterial> registry, ItemStack stack) {
-        for (IColorMaterial m : registry.getValues()) {
+    public static IStructureMaterial getStructureFromStack(IForgeRegistry<IStructureMaterial> registry, ItemStack stack) {
+        for (IStructureMaterial m : registry.getValues()) {
             if (m.getIngredient().test(stack)) {
                 return m;
             }

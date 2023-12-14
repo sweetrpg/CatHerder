@@ -26,6 +26,21 @@ public class ModBlocks {
 
     // cat items
     public static final RegistryObject<CatTreeBlock> CAT_TREE = registerWithItem("cat_tree", CatTreeBlock::new);
+//    public static final RegistryObject<CatTreeBlock> BLACK_CAT_TREE = registerWithItem("black_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.BLACK));
+//    public static final RegistryObject<CatTreeBlock> GREY_CAT_TREE = registerWithItem("grey_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.GREY));
+//    public static final RegistryObject<CatTreeBlock> LIGHT_GREY_CAT_TREE = registerWithItem("light_grey_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.LIGHT_GREY));
+//    public static final RegistryObject<CatTreeBlock> PINK_CAT_TREE = registerWithItem("pink_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.PINK));
+//    public static final RegistryObject<CatTreeBlock> MAGENTA_CAT_TREE = registerWithItem("magenta_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.MAGENTA));
+//    public static final RegistryObject<CatTreeBlock> RED_CAT_TREE = registerWithItem("red_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.RED));
+//    public static final RegistryObject<CatTreeBlock> BROWN_CAT_TREE = registerWithItem("brown_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.BROWN));
+//    public static final RegistryObject<CatTreeBlock> ORANGE_CAT_TREE = registerWithItem("orange_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.ORANGE));
+//    public static final RegistryObject<CatTreeBlock> YELLOW_CAT_TREE = registerWithItem("yellow_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.YELLOW));
+//    public static final RegistryObject<CatTreeBlock> GREEN_CAT_TREE = registerWithItem("green_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.GREEN));
+//    public static final RegistryObject<CatTreeBlock> LIME_CAT_TREE = registerWithItem("lime_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.LIME));
+//    public static final RegistryObject<CatTreeBlock> BLUE_CAT_TREE = registerWithItem("blue_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.BLUE));
+//    public static final RegistryObject<CatTreeBlock> LIGHT_BLUE_CAT_TREE = registerWithItem("light_blue_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.LIGHT_BLUE));
+//    public static final RegistryObject<CatTreeBlock> CYAN_CAT_TREE = registerWithItem("cyan_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.CYAN));
+//    public static final RegistryObject<CatTreeBlock> PURPLE_CAT_TREE = registerWithItem("purple_cat_tree", () -> new CatTreeBlock(CatTreeBlock.Type.PURPLE));
     public static final RegistryObject<LitterboxBlock> LITTER_BOX = registerWithItem("litter_box", LitterboxBlock::new);
     public static final RegistryObject<CatBowlBlock> CAT_BOWL = registerWithItem("cat_bowl", CatBowlBlock::new);
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);

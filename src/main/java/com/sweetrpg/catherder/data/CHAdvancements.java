@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class CatHerderAdvancements implements Consumer<Consumer<Advancement>> {
+public class CHAdvancements implements Consumer<Consumer<Advancement>> {
 
     @Override
     public void accept(Consumer<Advancement> register) {
@@ -48,38 +48,38 @@ public class CatHerderAdvancements implements Consumer<Consumer<Advancement>> {
         private Builder() {
         }
 
-        public static CatHerderAdvancements.Builder builder() {
-           return new CatHerderAdvancements.Builder();
+        public static CHAdvancements.Builder builder() {
+           return new CHAdvancements.Builder();
         }
 
-        public CatHerderAdvancements.Builder withParent(Advancement parentIn) {
+        public CHAdvancements.Builder withParent(Advancement parentIn) {
            this.parent = parentIn;
            return this;
         }
 
-        public CatHerderAdvancements.Builder withParentId(ResourceLocation parentIdIn) {
+        public CHAdvancements.Builder withParentId(ResourceLocation parentIdIn) {
            this.parentId = parentIdIn;
            return this;
         }
 
-        public CatHerderAdvancements.Builder withDisplay(ItemStack stack, Component title, Component description, @Nullable ResourceLocation background, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
+        public CHAdvancements.Builder withDisplay(ItemStack stack, Component title, Component description, @Nullable ResourceLocation background, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
            return this.withDisplay(new DisplayInfo(stack, title, description, background, frame, showToast, announceToChat, hidden));
         }
 
-        public CatHerderAdvancements.Builder withDisplay(ItemLike itemIn, Component title, Component description, @Nullable ResourceLocation background, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
+        public CHAdvancements.Builder withDisplay(ItemLike itemIn, Component title, Component description, @Nullable ResourceLocation background, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
            return this.withDisplay(new DisplayInfo(new ItemStack(itemIn.asItem()), title, description, background, frame, showToast, announceToChat, hidden));
         }
 
-        public CatHerderAdvancements.Builder withDisplay(DisplayInfo displayIn) {
+        public CHAdvancements.Builder withDisplay(DisplayInfo displayIn) {
            this.display = displayIn;
            return this;
         }
 
-        public CatHerderAdvancements.Builder withRewards(AdvancementRewards.Builder rewardsBuilder) {
+        public CHAdvancements.Builder withRewards(AdvancementRewards.Builder rewardsBuilder) {
            return this.withRewards(rewardsBuilder.build());
         }
 
-        public CatHerderAdvancements.Builder withRewards(AdvancementRewards rewards) {
+        public CHAdvancements.Builder withRewards(AdvancementRewards rewards) {
            this.rewards = rewards;
            return this;
         }
@@ -87,14 +87,14 @@ public class CatHerderAdvancements implements Consumer<Consumer<Advancement>> {
         /**
          * Adds a criterion to the list of criteria
          */
-        public CatHerderAdvancements.Builder withCriterion(String key, CriterionTriggerInstance criterionIn) {
+        public CHAdvancements.Builder withCriterion(String key, CriterionTriggerInstance criterionIn) {
            return this.withCriterion(key, new Criterion(criterionIn));
         }
 
         /**
          * Adds a criterion to the list of criteria
          */
-        public CatHerderAdvancements.Builder withCriterion(String key, Criterion criterionIn) {
+        public CHAdvancements.Builder withCriterion(String key, Criterion criterionIn) {
            if (this.criteria.containsKey(key)) {
               throw new IllegalArgumentException("Duplicate criterion " + key);
            } else {
@@ -103,7 +103,7 @@ public class CatHerderAdvancements implements Consumer<Consumer<Advancement>> {
            }
         }
 
-        public CatHerderAdvancements.Builder withRequirementsStrategy(RequirementsStrategy strategy) {
+        public CHAdvancements.Builder withRequirementsStrategy(RequirementsStrategy strategy) {
            this.requirementsStrategy = strategy;
            return this;
         }

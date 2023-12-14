@@ -1,5 +1,7 @@
 package com.sweetrpg.catherder.common.block.tileentity;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
@@ -21,10 +23,10 @@ import java.util.UUID;
 
 public class CatTreeBlockEntity extends PlacedBlockEntity {
 
-//    private ICasingMaterial casingType = null;
+    private IColorMaterial colorType = null;
 //    private IBeddingMaterial beddingType = null;
 //
-//    public static ModelProperty<ICasingMaterial> CASING = new ModelProperty<>();
+    public static ModelProperty<IColorMaterial> COLOR = new ModelProperty<>();
 //    public static ModelProperty<IBeddingMaterial> BEDDING = new ModelProperty<>();
     public static ModelProperty<Direction> FACING = new ModelProperty<>();
 
@@ -45,7 +47,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     public void load(CompoundTag compound) {
         super.load(compound);
 
-//        this.casingType = NBTUtil.getRegistryValue(compound, "casingId", CatHerderAPI.CASING_MATERIAL);
+        this.colorType = NBTUtil.getRegistryValue(compound, "colorId", CatHerderAPI.COLOR_MATERIAL.get());
 //        this.beddingType = NBTUtil.getRegistryValue(compound, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
 
         this.catUUID = NBTUtil.getUniqueId(compound, "ownerId");
@@ -58,7 +60,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
 
-//        NBTUtil.putRegistryValue(compound, "casingId", this.casingType);
+        NBTUtil.putRegistryValue(compound, "colorId", this.colorType);
 //        NBTUtil.putRegistryValue(compound, "beddingId", this.beddingType);
 
         NBTUtil.putUniqueId(compound, "ownerId", this.catUUID);
@@ -66,22 +68,22 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
         NBTUtil.putTextComponent(compound, "ownerName", this.ownerName);
     }
 
-//    public void setCasing(ICasingMaterial casingType) {
-//        this.casingType = casingType;
-//        this.setChanged();
-//        this.requestModelDataUpdate();
-//    }
-//
+    public void setColor(IColorMaterial colorType) {
+        this.colorType = colorType;
+        this.setChanged();
+        this.requestModelDataUpdate();
+    }
+
 //    public void setBedding(IBeddingMaterial beddingType) {
 //        this.beddingType = beddingType;
 //        this.setChanged();
 //        this.requestModelDataUpdate();
 //    }
-//
-//    public ICasingMaterial getCasing() {
-//        return this.casingType;
-//    }
-//
+
+    public IColorMaterial getColor() {
+        return this.colorType;
+    }
+
 //    public IBeddingMaterial getBedding() {
 //        return this.beddingType;
 //    }
@@ -89,7 +91,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     @Override
     public IModelData getModelData() {
         return new ModelDataMap.Builder()
-//                .withInitial(CASING, this.casingType)
+                .withInitial(COLOR, this.colorType)
 //                .withInitial(BEDDING, this.beddingType)
                 .withInitial(FACING, Direction.NORTH)
                 .build();

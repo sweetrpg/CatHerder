@@ -1,24 +1,24 @@
 package com.sweetrpg.catherder.api.impl;
 
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
+import com.sweetrpg.catherder.api.registry.IStructureMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
-public class MissingCasingMissing extends ICasingMaterial {
+public class MissingStructureMaterial extends IStructureMaterial {
 
-    public static final ICasingMaterial NULL = new MissingCasingMissing();
+    public static final IStructureMaterial NULL = new MissingStructureMaterial();
     private static final ResourceLocation MISSING_TEXTURE = new ResourceLocation("missingno");
 
     @Override
     public ResourceLocation getTexture() {
-        return MissingCasingMissing.MISSING_TEXTURE;
+        return MissingStructureMaterial.MISSING_TEXTURE;
     }
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("cattree.casing.missing", this.getRegistryName());
+        return new TranslatableComponent("cattree.bedding.missing", this.getRegistryName());
     }
 
     @Override

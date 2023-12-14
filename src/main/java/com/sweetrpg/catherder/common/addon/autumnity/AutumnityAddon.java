@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.addon.autumnity;
 
 import com.google.common.collect.Lists;
-import com.sweetrpg.catherder.api.impl.CasingMaterial;
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
+import com.sweetrpg.catherder.api.impl.ColorMaterial;
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.common.addon.Addon;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -22,22 +22,22 @@ public class AutumnityAddon implements Addon {
 
     public static final String[] BLOCKS = {"maple_planks"};
 
-    public final void registerCasings(final RegistryEvent.Register<ICasingMaterial> event) {
+    public final void registerCasings(final RegistryEvent.Register<IColorMaterial> event) {
         if (!this.shouldLoad()) { return; }
-        IForgeRegistry<ICasingMaterial> casingRegistry = event.getRegistry();
+        IForgeRegistry<IColorMaterial> casingRegistry = event.getRegistry();
 
         for (String block : BLOCKS) {
             ResourceLocation rl = Util.getResource(MOD_ID, block);
             Supplier<Block> blockGet = () -> ForgeRegistries.BLOCKS.getValue(rl);
 
-            casingRegistry.register(new CasingMaterial(blockGet).setRegistryName(rl));
+            casingRegistry.register(new ColorMaterial(blockGet).setRegistryName(rl));
         }
     }
 
     @Override
     public void init() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addGenericListener(ICasingMaterial.class, this::registerCasings);
+        modEventBus.addGenericListener(IColorMaterial.class, this::registerCasings);
     }
 
     @Override

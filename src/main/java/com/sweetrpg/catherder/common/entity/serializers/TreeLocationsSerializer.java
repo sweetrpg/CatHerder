@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
-public class BedLocationsSerializer<D, T extends EntityDataSerializer<D>> implements EntityDataSerializer<DimensionDependantArg<D>> {
+public class TreeLocationsSerializer<D, T extends EntityDataSerializer<D>> implements EntityDataSerializer<DimensionDependantArg<D>> {
 
     @Override
     public void write(FriendlyByteBuf buf, DimensionDependantArg<D> value) {

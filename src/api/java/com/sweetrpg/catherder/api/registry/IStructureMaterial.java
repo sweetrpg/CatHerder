@@ -5,10 +5,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public abstract class ICasingMaterial extends ForgeRegistryEntry<ICasingMaterial> {
+/**
+ * Used for pet doors (and possibly others) that can be made from multiple material types.
+ */
+public abstract class IStructureMaterial extends ForgeRegistryEntry<IStructureMaterial> {
 
     /**
-     * Texture location that for material, eg 'minecraft:block/white_wool'
+     * Texture location for that material, eg 'minecraft:block/oak_planks'
      */
     public abstract ResourceLocation getTexture();
 
@@ -18,7 +21,7 @@ public abstract class ICasingMaterial extends ForgeRegistryEntry<ICasingMaterial
     public abstract Component getTooltip();
 
     /**
-     * The ingredient used in the crafting recipe of the bed
+     * The ingredient used in the crafting recipe of the item
      */
     public abstract Ingredient getIngredient();
 }
