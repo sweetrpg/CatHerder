@@ -22,7 +22,7 @@ on:
       - gradle.properties
 
 jobs:
-  build:
+  datagen:
 
     runs-on: ubuntu-latest
 
