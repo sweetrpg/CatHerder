@@ -243,11 +243,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "Summoned %s from the dead");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "Failed to raise %s from the dead");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "Too many cats (%d) for this owner under this name, use `byuuid` for %s");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "Bedding material not set");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "Casing material not set");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "Missing: %s");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Color material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
         add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
     }
 
     private void processENGB() {
@@ -457,12 +482,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "Summoned %s from the dead");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "Failed to raise %s from the dead");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "Too many cats (%d) for this owner under this name, use `byuuid` for %s");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "Bedding material not set");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "Casing material not set");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "Missing: %s");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
         add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
-    }
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");    }
 
     private void processDEDE() {
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE, "TODO");
@@ -672,11 +721,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "TODO");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "TODO");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "TODO");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
+        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
     }
 
     private void processKOKR() {
@@ -887,11 +961,37 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "TODO");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "TODO");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "TODO");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
+        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+
     }
 
     private void processRURU() {
@@ -1102,11 +1202,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "TODO");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "TODO");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "TODO");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
+        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
     }
 
     private void processVIVN() {
@@ -1317,11 +1442,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "TODO");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "TODO");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "TODO");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
+        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
     }
 
     private void processZHCN() {
@@ -1532,11 +1682,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "TODO");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "TODO");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "TODO");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
+        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
     }
 
     private void processZHTW() {
@@ -1747,11 +1922,36 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS, "TODO");
         add(Constants.TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE, "TODO");
         add(Constants.TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_NULL, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_BEDDING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_CASING_MISSING, "TODO");
-        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "TODO");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_WHITE, "White");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLACK, "Black");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREY, "Grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_GREY, "Light grey");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PURPLE, "Purple");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_PINK, "Pink");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BROWN, "Brown");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_ORANGE, "Orange");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_YELLOW, "Yellow");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_GREEN, "Green");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIME, "Lime");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_BLUE, "Bue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_LIGHT_BLUE, "Light blue");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MAGENTA, "Magenta");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_RED, "Red");
+        add(Constants.TRANSLATION_KEY_CATTREE_COLOR_CYAN, "Cyan");
+        add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL, "Structure material not set");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING, "Missing: %s");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_OAK, "Oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_DARK_OAK, "Dark oak");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_BIRCH, "Birch");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_SPRUCE, "Spruce");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_ACACIA, "Acacia");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_JUNGLE, "Jungle");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_CRIMSON, "Crimson");
+        add(Constants.TRANSLATION_KEY_PETDOOR_STRUCTURE_WARPED, "Warped");
+        add(Constants.TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
     }
 
 }
