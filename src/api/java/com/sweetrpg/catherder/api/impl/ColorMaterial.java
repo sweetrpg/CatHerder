@@ -49,7 +49,7 @@ public class ColorMaterial extends IColorMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("cattree.color", CatHerderAPI.COLOR_MATERIAL.get().getKey(this));
+            this.translationKey = Util.makeDescriptionId("color", CatHerderAPI.COLOR_MATERIAL.get().getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);

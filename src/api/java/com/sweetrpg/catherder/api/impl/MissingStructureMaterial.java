@@ -18,7 +18,7 @@ public class MissingStructureMaterial extends IStructureMaterial {
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("cattree.bedding.missing", this.getRegistryName());
+        return new TranslatableComponent("structure.missing", this.getRegistryName());
     }
 
     @Override

@@ -49,7 +49,7 @@ public class StructureMaterial extends IStructureMaterial {
     @Override
     public Component getTooltip() {
         if (this.translationKey == null) {
-            this.translationKey = Util.makeDescriptionId("cattree.bedding", CatHerderAPI.STRUCTURE_MATERIAL.get().getKey(this));
+            this.translationKey = Util.makeDescriptionId("structure", CatHerderAPI.STRUCTURE_MATERIAL.get().getKey(this));
         }
 
         return new TranslatableComponent(this.translationKey);
