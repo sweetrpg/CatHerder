@@ -3,6 +3,7 @@ package com.sweetrpg.catherder.client.event;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.sweetrpg.catherder.client.block.model.CatTreeModel;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.client.screen.widget.CatInventoryButton;
@@ -48,17 +49,16 @@ public class ClientEventHandler {
             ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
 
-//            BlockModel model = (BlockModel) event.getModelLoader().getModel(unbakedModelLoc);
-//            BakedModel customModel = new CattreeModel(event.getModelLoader(), model, model.bake(event.getModelLoader(), model, ForgeModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
-//
-//            // Replace all valid block states
-//            ModBlocks.CAT_TREE.get().getStateDefinition().getPossibleStates().forEach(state -> {
-//                modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
-//            });
+            BlockModel model = (BlockModel) event.getModelLoader().getModel(unbakedModelLoc);
+            BakedModel customModel = new CatTreeModel(event.getModelLoader(), model, model.bake(event.getModelLoader(), model, ForgeModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
 
-            // Replace inventory model
-//            modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
+            // Replace all valid block states
+            ModBlocks.CAT_TREE.get().getStateDefinition().getPossibleStates().forEach(state -> {
+                modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
+            });
 
+// Replace inventory model
+            modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
         }
         catch(Exception e) {
             CatHerder.LOGGER.warn("Could not get base Cat Tree model. Reverting to default textures...");
