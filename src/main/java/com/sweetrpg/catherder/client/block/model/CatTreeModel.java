@@ -123,9 +123,6 @@ public class CatTreeModel implements BakedModel {
     }
 
     private ResourceLocation createResourceVariant(@Nonnull IRegistryDelegate<IColorMaterial> colorResource, @Nonnull Direction facing) {
-//        String beddingKey = beddingResource != null
-//                ? beddingResource.name().toString().replace(':', '.')
-//                : "catherder.cattree.bedding.missing";
         String colorKey = colorResource != null
                 ? colorResource.name().toString().replace(':', '.')
                 : "catherder.cattree.color.missing";
@@ -135,10 +132,6 @@ public class CatTreeModel implements BakedModel {
     private Either<Material, String> findColorTexture(@Nullable IRegistryDelegate<IColorMaterial> resource) {
         return findTexture(resource != null ? resource.get().getTexture() : null);
     }
-
-//    private Either<Material, String> findBeddingTexture(@Nullable IRegistryDelegate<IBeddingMaterial> resource) {
-//        return findTexture(resource != null ? resource.get().getTexture() : null);
-//    }
 
     private Either<Material, String> findTexture(@Nullable ResourceLocation resource) {
         if (resource == null) {

@@ -122,9 +122,6 @@ public class PetDoorModel implements BakedModel {
     }
 
     private ResourceLocation createResourceVariant(@Nonnull IRegistryDelegate<IStructureMaterial> structureResource, @Nonnull Direction facing) {
-//        String beddingKey = beddingResource != null
-//                ? beddingResource.name().toString().replace(':', '.')
-//                : "catherder.cattree.bedding.missing";
         String structureKey = structureResource != null
                 ? structureResource.name().toString().replace(':', '.')
                 : "catherder.petdoor.structure.missing";
@@ -134,10 +131,6 @@ public class PetDoorModel implements BakedModel {
     private Either<Material, String> findStructureTexture(@Nullable IRegistryDelegate<IStructureMaterial> resource) {
         return findTexture(resource != null ? resource.get().getTexture() : null);
     }
-
-//    private Either<Material, String> findBeddingTexture(@Nullable IRegistryDelegate<IBeddingMaterial> resource) {
-//        return findTexture(resource != null ? resource.get().getTexture() : null);
-//    }
 
     private Either<Material, String> findTexture(@Nullable ResourceLocation resource) {
         if (resource == null) {
