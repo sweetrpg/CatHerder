@@ -5,9 +5,13 @@ import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -25,6 +29,7 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
 
         for (int col = 0; col < 3; col++) {
             for (int row = 0; row < 3; row++) {
+                // color (wool)
                 if (col == 1 && row == 0) {
                     IColorMaterial id = CatTreeUtil.getColorFromStack(CatHerderAPI.COLOR_MATERIAL.get(), inv.getItem(row * inv.getWidth() + col));
 
@@ -39,7 +44,33 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
                         return false;
                     }
                 }
-//                else {
+                // empty
+                else if(row == 1 && col == 2) {
+                    Item item = inv.getItem(row * inv.getWidth() + col).getItem();
+                    if(item != null) {
+                        return false;
+                    }
+                }
+                // string
+                else if(row == 1 && col == 0) {
+                    Item item = inv.getItem(row * inv.getWidth() + col).getItem();
+                    if(item != Items.STRING) {
+                        return false;
+                    }
+                }
+                // fence
+                else if(row == 1 && col == 1) {
+                    ItemStack stack = inv.getItem(row * inv.getWidth() + col);
+                    if(!stack.is(ItemTags.FENCES)) {
+                        return false;
+                    }
+                }
+                // slabs
+                else {
+                    ItemStack stack = inv.getItem(row * inv.getWidth() + col);
+                    if(!stack.is(ItemTags.SLABS)) {
+                        return false;
+                    }
 //                    ICasingMaterial id = CattreeUtil.getCasingFromStack(CatHerderAPI.CASING_MATERIAL, inv.getItem(row * inv.getWidth() + col));
 //
 //                    if (id == null) {
@@ -51,7 +82,7 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
 //                    } else if (casingId != id) {
 //                        return false;
 //                    }
-//                }
+                }
             }
         }
 
