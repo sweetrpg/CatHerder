@@ -47,7 +47,7 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
                 // empty
                 else if(row == 1 && col == 2) {
                     Item item = inv.getItem(row * inv.getWidth() + col).getItem();
-                    if(item != null) {
+                    if(item != null && item != Items.AIR) {
                         return false;
                     }
                 }
@@ -97,17 +97,17 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
         return CatTreeUtil.createItemStack(colorId);
     }
 
-    @Override
-    public NonNullList<ItemStack> getRemainingItems(CraftingContainer inv) {
-        NonNullList<ItemStack> nonNullList = NonNullList.<ItemStack>withSize(inv.getContainerSize(), ItemStack.EMPTY);
-
-        for (int i = 0; i < nonNullList.size(); ++i) {
-            ItemStack itemstack = inv.getItem(i);
-            nonNullList.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
-        }
-
-        return nonNullList;
-    }
+//    @Override
+//    public NonNullList<ItemStack> getRemainingItems(CraftingContainer inv) {
+//        NonNullList<ItemStack> nonNullList = NonNullList.<ItemStack>withSize(inv.getContainerSize(), ItemStack.EMPTY);
+//
+//        for (int i = 0; i < nonNullList.size(); ++i) {
+//            ItemStack itemstack = inv.getItem(i);
+//            nonNullList.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
+//        }
+//
+//        return nonNullList;
+//    }
 
     //Is on a 3x3 grid or bigger
     @Override
