@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.data;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -44,8 +45,8 @@ public class CHItemTagsProvider extends ItemTagsProvider {
                   Items.PORKCHOP.delegate, Items.COOKED_PORKCHOP.delegate,
                   Items.MUTTON.delegate, Items.COOKED_MUTTON.delegate,
                   Items.COOKED_RABBIT.delegate, Items.RABBIT.delegate);
-//        createTag(ModTags.CAT_TREES, ModItems.CAT_TREE);
-//        createTag(ModTags.PET_DOORS, ModItems.PET_DOOR);
+        createTag(ModTags.CAT_TREES, ModBlocks.CAT_TREE);
+//        createTag(ModTags.PET_DOORS, ModBlocks.PET_DOOR);
     }
 
     @SafeVarargs
