@@ -64,7 +64,7 @@ public class CHLootTableProvider extends LootTableProvider {
             dropsSelf(ModBlocks.CATNIP_CROP);
             dropsMouseTrap(ModBlocks.MOUSE_TRAP);
             dropsSelf(ModBlocks.CHEESE_WHEEL);
-            dropsSelf(ModBlocks.PET_DOOR);
+            dropPetDoor(ModBlocks.PET_DOOR);
         }
 
         private void dropsMouseTrap(Supplier<? extends Block> block) {
@@ -117,11 +117,23 @@ public class CHLootTableProvider extends LootTableProvider {
                                                                             .add(LootItem.lootTableItem(block.get())
                                                                                          .apply(
                                                                                                  CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                                                                                                .copy("casingId", "catherder.casingId")
-                                                                                                                .copy("beddingId", "catherder.beddingId")
+                                                                                                                .copy("colorId", "catherder.colorId")
+//                                                                                                                .copy("beddingId", "catherder.beddingId")
                                                                                                                 .copy("ownerId", "catherder.ownerId")
                                                                                                                 .copy("name", "catherder.name")
                                                                                                                 .copy("ownerName", "catherder.ownerName"))));
+
+            this.add(block.get(), lootTableBuilder);
+        }
+
+        private void dropPetDoor(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                                                          .withPool(applyExplosionCondition(block.get(),
+                                                                                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                                                                            .add(LootItem.lootTableItem(block.get())
+                                                                                         .apply(
+                                                                                                 CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                                                                                                .copy("structureId", "catherder.structureId"))));
 
             this.add(block.get(), lootTableBuilder);
         }

@@ -127,7 +127,7 @@ public class CatTreeBlock extends BaseEntityBlock {
         CatTreeBlockEntity catTreeBlockEntity = WorldUtil.getBlockEntity(worldIn, pos, CatTreeBlockEntity.class);
 
         if(catTreeBlockEntity != null) {
-//            CatTreeUtil.setBedVariant(catTreeTileEntity, stack);
+            CatTreeUtil.setTreeVariant(catTreeBlockEntity, stack);
 
             catTreeBlockEntity.setPlacer(placer);
             CompoundTag tag = stack.getTagElement("catherder");

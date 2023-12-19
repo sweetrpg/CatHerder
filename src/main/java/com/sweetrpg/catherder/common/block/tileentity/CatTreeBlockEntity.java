@@ -6,6 +6,7 @@ import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
+import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
@@ -48,6 +49,9 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
         super.load(compound);
 
         this.colorType = NBTUtil.getRegistryValue(compound, "colorId", CatHerderAPI.COLOR_MATERIAL.get());
+        if(this.colorType == null) {
+            this.colorType = CatTreeUtil.pickRandom(CatHerderAPI.COLOR_MATERIAL.get());
+        }
 //        this.beddingType = NBTUtil.getRegistryValue(compound, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
 
         this.catUUID = NBTUtil.getUniqueId(compound, "ownerId");
