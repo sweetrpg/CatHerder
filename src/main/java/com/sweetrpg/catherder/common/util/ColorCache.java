@@ -1,13 +1,13 @@
 package com.sweetrpg.catherder.common.util;
 
-public class ColourCache {
+public class ColorCache {
 
-    public static final ColourCache WHITE = new ColourCache(16632255);
+    public static final ColorCache WHITE = new ColorCache(16632255);
 
     private final int color;
     private float[] floatArray;
 
-    protected ColourCache(int color) {
+    protected ColorCache(int color) {
         this.color = color;
     }
 
@@ -23,8 +23,8 @@ public class ColourCache {
         return this.floatArray;
     }
 
-    public static ColourCache make(int color) {
-        return new ColourCache(color);
+    public static ColorCache make(int color) {
+        return new ColorCache(color);
     }
 
     @Override
@@ -34,15 +34,15 @@ public class ColourCache {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj.getClass() == ColourCache.class)) {
+        if (!(obj.getClass() == ColorCache.class)) {
             return false;
         }
 
-        if (!(obj instanceof ColourCache)) {
+        if (!(obj instanceof ColorCache)) {
             return false;
         }
 
-        ColourCache other = (ColourCache) obj;
+        ColorCache other = (ColorCache) obj;
         return other.color == this.color;
     }
 
