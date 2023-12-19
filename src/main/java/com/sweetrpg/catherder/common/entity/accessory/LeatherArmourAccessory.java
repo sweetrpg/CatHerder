@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.entity.accessory;
 import com.sweetrpg.catherder.api.inferface.IColoredObject;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.api.registry.AccessoryType;
-import com.sweetrpg.catherder.common.util.ColourCache;
+import com.sweetrpg.catherder.common.util.ColorCache;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
@@ -53,13 +53,13 @@ public class LeatherArmourAccessory extends ArmourAccessory {
 
     public class Instance extends ArmourAccessory.Instance implements IColoredObject {
 
-        private ColourCache color = ColourCache.WHITE;
+        private ColorCache color = ColorCache.WHITE;
 
         public Instance(ItemStack armourStack) {
             super(armourStack);
 
             if (armourStack.getItem() instanceof DyeableLeatherItem) {
-                this.color = ColourCache.make(((DyeableLeatherItem) armourStack.getItem()).getColor(armourStack));
+                this.color = ColorCache.make(((DyeableLeatherItem) armourStack.getItem()).getColor(armourStack));
             }
         }
 
