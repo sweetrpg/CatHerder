@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.api.impl.MissingDyeMaterial;
 import com.sweetrpg.catherder.api.impl.MissingStructureMaterial;
 import com.sweetrpg.catherder.api.impl.MissingColorMaterial;
 import com.sweetrpg.catherder.api.registry.*;
@@ -17,8 +18,9 @@ public class ModRegistries {
         public static final ResourceLocation TALENTS_REGISTRY = Util.getResource("talents");
         public static final ResourceLocation ACCESSORY_REGISTRY = Util.getResource("accessories");
         public static final ResourceLocation ACCESSORY_TYPE_REGISTRY = Util.getResource("accessory_type");
-        public static final ResourceLocation STRUCTURE_REGISTRY = Util.getResource("structure");
+        public static final ResourceLocation STRUCTURE_REGISTRY = Util.getResource("structures");
         public static final ResourceLocation COLOR_REGISTRY = Util.getResource("colors");
+        public static final ResourceLocation DYE_REGISTRY = Util.getResource("dyes");
     }
 
     public static void newRegistry(NewRegistryEvent event) {
@@ -26,7 +28,8 @@ public class ModRegistries {
         CatHerderAPI.ACCESSORIES = event.create(makeRegistry(Keys.ACCESSORY_REGISTRY, Accessory.class));
         CatHerderAPI.ACCESSORY_TYPE = event.create(makeRegistry(Keys.ACCESSORY_TYPE_REGISTRY, AccessoryType.class).disableSync());
         CatHerderAPI.STRUCTURE_MATERIAL = event.create(makeRegistry(Keys.STRUCTURE_REGISTRY, IStructureMaterial.class).addCallback(StructureCallbacks.INSTANCE));
-        CatHerderAPI.COLOR_MATERIAL = event.create(makeRegistry(Keys.COLOR_REGISTRY, IColorMaterial.class).addCallback(ColorCallbacks.INSTANCE)); //TODO ADD holder object
+        CatHerderAPI.COLOR_MATERIAL = event.create(makeRegistry(Keys.COLOR_REGISTRY, IColorMaterial.class).addCallback(ColorCallbacks.INSTANCE));
+        CatHerderAPI.DYE_MATERIAL = event.create(makeRegistry(Keys.DYE_REGISTRY, IDyeMaterial.class).addCallback(DyeCallbacks.INSTANCE));
     }
 
     private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(final ResourceLocation rl, Class<T> type) {
@@ -50,6 +53,16 @@ public class ModRegistries {
         @Override
         public IColorMaterial createDummy(ResourceLocation key) {
             return new MissingColorMaterial().setRegistryName(key);
+        }
+    }
+
+    private static class DyeCallbacks implements IForgeRegistry.DummyFactory<IDyeMaterial> {
+
+        static final DyeCallbacks INSTANCE = new DyeCallbacks();
+
+        @Override
+        public IDyeMaterial createDummy(ResourceLocation key) {
+            return new MissingDyeMaterial().setRegistryName(key);
         }
     }
 

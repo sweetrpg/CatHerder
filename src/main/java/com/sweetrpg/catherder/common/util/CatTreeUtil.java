@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.common.util;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.api.registry.IDyeMaterial;
 import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
@@ -55,6 +56,16 @@ public class CatTreeUtil {
 
     public static IColorMaterial getColorFromStack(IForgeRegistry<IColorMaterial> registry, ItemStack stack) {
         for (IColorMaterial m : registry.getValues()) {
+            if (m.getIngredient().test(stack)) {
+                return m;
+            }
+        }
+
+        return null;
+    }
+
+    public static IDyeMaterial getDyeFromStack(IForgeRegistry<IDyeMaterial> registry, ItemStack stack) {
+        for (IDyeMaterial m : registry.getValues()) {
             if (m.getIngredient().test(stack)) {
                 return m;
             }

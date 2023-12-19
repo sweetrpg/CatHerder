@@ -302,6 +302,8 @@ public class CHRecipeProvider extends RecipeProvider {
 //        }
         SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
                             .save(consumer, Util.getResourcePath("cat_tree"));
+        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE_DYED.get())
+                            .save(consumer, Util.getResourcePath("cat_tree_dyed"));
 
         // dyeable cat trees
 //        List<Tuple<RegistryObject<CatTreeBlock>, Item>> itemDyeTreeTuple = Arrays.asList(

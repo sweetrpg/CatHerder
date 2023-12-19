@@ -76,6 +76,7 @@ public class CatHerder {
         ModAccessoryTypes.ACCESSORY_TYPES.register(modEventBus);
         ModMaterials.STRUCTURES.register(modEventBus);
         ModMaterials.COLORS.register(modEventBus);
+        ModMaterials.DYES.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
 
         modEventBus.addListener(ModRegistries::newRegistry);

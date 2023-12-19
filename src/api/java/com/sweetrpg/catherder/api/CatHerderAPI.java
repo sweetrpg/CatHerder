@@ -21,6 +21,7 @@ public class CatHerderAPI {
     public static Supplier<IForgeRegistry<AccessoryType>> ACCESSORY_TYPE;
     public static Supplier<IForgeRegistry<IStructureMaterial>> STRUCTURE_MATERIAL;
     public static Supplier<IForgeRegistry<IColorMaterial>> COLOR_MATERIAL;
+    public static Supplier<IForgeRegistry<IDyeMaterial>> DYE_MATERIAL;
 
     public static final Logger LOGGER = LogManager.getLogger("catherder");
 }

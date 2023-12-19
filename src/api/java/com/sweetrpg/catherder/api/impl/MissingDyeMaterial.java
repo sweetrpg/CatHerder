@@ -1,24 +1,24 @@
 package com.sweetrpg.catherder.api.impl;
 
-import com.sweetrpg.catherder.api.registry.IColorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.resources.ResourceLocation;
+import com.sweetrpg.catherder.api.registry.IDyeMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 
-public class MissingColorMaterial extends IColorMaterial {
+public class MissingDyeMaterial extends IDyeMaterial {
 
-    public static final IColorMaterial NULL = new MissingColorMaterial();
+    public static final IDyeMaterial NULL = new MissingDyeMaterial();
     private static final ResourceLocation MISSING_TEXTURE = new ResourceLocation("missingno");
 
     @Override
     public ResourceLocation getTexture() {
-        return MissingColorMaterial.MISSING_TEXTURE;
+        return MissingDyeMaterial.MISSING_TEXTURE;
     }
 
     @Override
     public Component getTooltip() {
-        return new TranslatableComponent("cattree.color.missing", this.getRegistryName());
+        return new TranslatableComponent("cattree.dye.missing", this.getRegistryName());
     }
 
     @Override

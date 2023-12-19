@@ -7,7 +7,7 @@ import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.api.registry.AccessoryType;
 import com.sweetrpg.catherder.api.inferface.ICatAlteration;
-import com.sweetrpg.catherder.common.util.ColourCache;
+import com.sweetrpg.catherder.common.util.ColorCache;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -86,13 +86,13 @@ public class DyeableAccessory extends Accessory {
 
     public class DyeableAccessoryInstance extends AccessoryInstance implements ICatAlteration, IColoredObject {
 
-        private ColourCache color;
+        private ColorCache color;
 
         public DyeableAccessoryInstance(int colorIn) {
-            this(ColourCache.make(colorIn));
+            this(ColorCache.make(colorIn));
         }
 
-        public DyeableAccessoryInstance(ColourCache colorIn) {
+        public DyeableAccessoryInstance(ColorCache colorIn) {
             super(DyeableAccessory.this);
             this.color = colorIn;
         }
@@ -124,7 +124,7 @@ public class DyeableAccessory extends Accessory {
                     return InteractionResult.FAIL;
                 }
 
-                this.color = ColourCache.make(colorNew);
+                this.color = ColorCache.make(colorNew);
                 catIn.consumeItemFromStack(playerIn, stack);
                 // Make sure to sync change with client
                 catIn.markAccessoriesDirty();
