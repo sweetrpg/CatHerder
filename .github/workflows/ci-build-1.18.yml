@@ -39,7 +39,7 @@ jobs:
       uses: SOLIDSoftworks/semver-tags@1.0.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        tag-prefix: ''
+        tag-prefix: '1.18.2-'
         default-version: '0.0.1'
         prerelease: 'alpha'
     - name: Commit version file
@@ -54,7 +54,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
-        tag_name: "${{ steps.tag-version.outputs.semantic-version }}"
+        tag_name: "1.18.2-${{ steps.tag-version.outputs.semantic-version }}"
         files: |
           build/libs/*.jar
       env:
