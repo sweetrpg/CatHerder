@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 
-public class CatnipLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
+public class CatToyLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
 
-    public CatnipLayer(CatRenderer catRendererIn) {
+    public CatToyLayer(CatRenderer catRendererIn) {
         super(catRendererIn);
     }
 

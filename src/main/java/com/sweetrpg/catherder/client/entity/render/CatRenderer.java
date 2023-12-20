@@ -5,7 +5,7 @@ import com.sweetrpg.catherder.client.CatTextureManager;
 import com.sweetrpg.catherder.client.ClientSetup;
 import com.sweetrpg.catherder.client.entity.model.CatModel;
 //import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
-import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
+import com.sweetrpg.catherder.client.entity.render.layer.CatToyLayer;
 import com.sweetrpg.catherder.client.entity.render.layer.LayerFactory;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -23,7 +23,7 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
         super(ctx, new CatModel(ctx.bakeLayer(ClientSetup.CAT)), 0.5F);
 //        this.addLayer(new CatTalentLayer(this, ctx));
 //        this.addLayer(new CatAccessoryLayer(this, ctx));
-        this.addLayer(new CatnipLayer(this));
+        this.addLayer(new CatToyLayer(this));
         for(LayerFactory<CatEntity, CatModel<CatEntity>> layer : CollarRenderManager.getLayers()) {
             this.addLayer(layer.createLayer(this, ctx));
         }

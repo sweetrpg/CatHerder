@@ -23,7 +23,7 @@ public class ModEntityTypes {
 
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.Keys.ENTITY_TYPES, CatHerderAPI.MOD_ID);
 
-    public static final RegistryObject<EntityType<CatEntity>> CAT = register("katze", CatEntity::new, MobCategory.CREATURE, (b) -> b
+    public static final RegistryObject<EntityType<CatEntity>> CAT = register("cat", CatEntity::new, MobCategory.CREATURE, (b) -> b
             .sized(0.6F, 0.85F)
             .setUpdateInterval(3)
             .setTrackingRange(16)

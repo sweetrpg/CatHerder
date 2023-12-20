@@ -38,7 +38,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
 
     public static final CatTextureManager INSTANCE = new CatTextureManager();
     private static final Gson GSON = new Gson();
-    private static final ResourceLocation OVERRIDE_RESOURCE_LOCATION = Util.getResource("textures/entity/katze/custom/overrides.json");
+    private static final ResourceLocation OVERRIDE_RESOURCE_LOCATION = Util.getResource("textures/entity/cat/custom/overrides.json");
     protected final Map<String, ResourceLocation> skinHashToLoc = Maps.newHashMap();
     protected final Map<ResourceLocation, String> locToSkinHash = Maps.newHashMap();
     protected final List<ResourceLocation> customSkinLoc = new ArrayList<>(20);
@@ -246,7 +246,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
 
         profiler.startTick();
 
-        Collection<ResourceLocation> resources = resourceManager.listResources("textures/entity/katze/custom", (fileName) -> {
+        Collection<ResourceLocation> resources = resourceManager.listResources("textures/entity/cat/custom", (fileName) -> {
             return fileName.endsWith(".png");
         });
         for(ResourceLocation rl : resources) {

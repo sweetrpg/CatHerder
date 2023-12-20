@@ -190,9 +190,9 @@ public class Constants {
     public static final String TRANSLATION_KEY_CAT_GENDER_MALE_PRONOUN = "cat.gender.male.pronoun";
     public static final String TRANSLATION_KEY_CAT_GENDER_MALE_SUBJECT = "cat.gender.male.subject";
     public static final String TRANSLATION_KEY_CAT_GENDER_MALE_TITLE = "cat.gender.male.title";
-    public static final String TRANSLATION_KEY_ENTITY_CAT = "entity.catherder.katze";
-    public static final String TRANSLATION_KEY_ENTITY_CAT_UNKNOWN_OWNER = "entity.catherder.katze.unknown_owner";
-    public static final String TRANSLATION_KEY_ENTITY_CAT_UNTAMED = "entity.catherder.katze.untamed";
+    public static final String TRANSLATION_KEY_ENTITY_CAT = "entity.catherder.cat";
+    public static final String TRANSLATION_KEY_ENTITY_CAT_UNKNOWN_OWNER = "entity.catherder.cat.unknown_owner";
+    public static final String TRANSLATION_KEY_ENTITY_CAT_UNTAMED = "entity.catherder.cat.untamed";
     public static final String TRANSLATION_KEY_COMMAND_COME = "catcommand.come";
     public static final String TRANSLATION_KEY_COMMAND_STAY = "catcommand.stay";
     public static final String TRANSLATION_KEY_COMMAND_OKAY = "catcommand.ok";
