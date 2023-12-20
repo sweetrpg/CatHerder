@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.sweetrpg.catherder.client.block.model.CatTreeModel;
+import com.sweetrpg.catherder.client.block.model.PetDoorModel;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.client.screen.widget.CatInventoryButton;
@@ -45,6 +46,7 @@ public class ClientEventHandler {
     public static void onModelBakeEvent(final ModelBakeEvent event) {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModelRegistry();
 
+        // cat tree
         try {
             ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
@@ -57,7 +59,28 @@ public class ClientEventHandler {
                 modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
             });
 
-// Replace inventory model
+            // Replace inventory model
+            modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
+        }
+        catch(Exception e) {
+            CatHerder.LOGGER.warn("Could not get base Cat Tree model. Reverting to default textures...");
+            e.printStackTrace();
+        }
+
+        // pet door
+        try {
+            ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.PET_DOOR.get());
+            ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
+
+            BlockModel model = (BlockModel) event.getModelLoader().getModel(unbakedModelLoc);
+            BakedModel customModel = new PetDoorModel(event.getModelLoader(), model, model.bake(event.getModelLoader(), model, ForgeModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
+
+            // Replace all valid block states
+            ModBlocks.PET_DOOR.get().getStateDefinition().getPossibleStates().forEach(state -> {
+                modelRegistry.put(BlockModelShaper.stateToModelLocation(state), customModel);
+            });
+
+            // Replace inventory model
             modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
         }
         catch(Exception e) {

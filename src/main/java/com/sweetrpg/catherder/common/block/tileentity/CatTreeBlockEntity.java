@@ -25,10 +25,8 @@ import java.util.UUID;
 public class CatTreeBlockEntity extends PlacedBlockEntity {
 
     private IColorMaterial colorType = null;
-//    private IBeddingMaterial beddingType = null;
-//
+
     public static ModelProperty<IColorMaterial> COLOR = new ModelProperty<>();
-//    public static ModelProperty<IBeddingMaterial> BEDDING = new ModelProperty<>();
     public static ModelProperty<Direction> FACING = new ModelProperty<>();
 
     private @Deprecated @Nullable

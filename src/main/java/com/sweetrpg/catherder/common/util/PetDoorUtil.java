@@ -28,7 +28,6 @@ public class PetDoorUtil {
 
     public static ItemStack createRandomDoor() {
         IStructureMaterial structure = pickRandom(CatHerderAPI.STRUCTURE_MATERIAL.get());
-//        IBeddingMaterial bedding = pickRandom(CatHerderAPI.BEDDING_MATERIAL);
         return PetDoorUtil.createItemStack(structure);
     }
 
@@ -48,7 +47,6 @@ public class PetDoorUtil {
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
         NBTUtil.putRegistryValue(tag, "structureId", structureId);
-//        NBTUtil.putRegistryValue(tag, "beddingId", beddingId);
 
         return stack;
     }
@@ -62,16 +60,6 @@ public class PetDoorUtil {
 
         return null;
     }
-
-//    public static IBeddingMaterial getBeddingFromStack(IForgeRegistry<IBeddingMaterial> registry, ItemStack stack) {
-//        for (IBeddingMaterial m : registry.getValues()) {
-//            if (m.getIngredient().test(stack)) {
-//                return m;
-//            }
-//        }
-//
-//        return null;
-//    }
 
     public static <T extends IForgeRegistryEntry<T>> T pickRandom(IForgeRegistry<T> registry) {
         Collection<T> values = registry.getValues();

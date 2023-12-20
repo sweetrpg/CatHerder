@@ -23,12 +23,10 @@ public class CatTreeUtil {
         IColorMaterial colorMaterial = CatTreeUtil.getColorMaterial(stack);
 
         catTreeBlockEntity.setColor(colorMaterial);
-//        cattreeTileEntity.setBedding(materials.getRight());
     }
 
     public static ItemStack createRandomTree() {
         IColorMaterial color = pickRandom(CatHerderAPI.COLOR_MATERIAL.get());
-//        IBeddingMaterial bedding = pickRandom(CatHerderAPI.BEDDING_MATERIAL);
         return CatTreeUtil.createItemStack(color);
     }
 
@@ -36,7 +34,6 @@ public class CatTreeUtil {
         CompoundTag tag = stack.getTagElement("catherder");
         if (tag != null) {
             IColorMaterial colorId = NBTUtil.getRegistryValue(tag, "colorId", CatHerderAPI.COLOR_MATERIAL.get());
-//            IBeddingMaterial beddingId = NBTUtil.getRegistryValue(tag, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
 
             return colorId;
         }

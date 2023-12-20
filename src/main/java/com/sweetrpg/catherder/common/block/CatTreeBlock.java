@@ -76,7 +76,6 @@ public class CatTreeBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any()
                                       .setValue(FACING, Direction.NORTH)
                                       .setValue(WATERLOGGED, false));
-//                                      .setValue(COLOR, type.ordinal()));
     }
 
     @SuppressWarnings("deprecation")
@@ -282,19 +281,17 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-//        for (IBeddingMaterial beddingId : CatHerderAPI.BEDDING_MATERIAL.getValues()) {
             for (IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
                 items.add(CatTreeUtil.createItemStack(colorId));
             }
-//        }
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-        CatTreeBlockEntity catTreeTileEntity = WorldUtil.getBlockEntity(world, pos, CatTreeBlockEntity.class);
+        CatTreeBlockEntity catTreeBlockEntity = WorldUtil.getBlockEntity(world, pos, CatTreeBlockEntity.class);
 
-        if (catTreeTileEntity != null) {
-            return CatTreeUtil.createItemStack(catTreeTileEntity.getColor());
+        if (catTreeBlockEntity != null) {
+            return CatTreeUtil.createItemStack(catTreeBlockEntity.getColor());
         }
 
         CatHerder.LOGGER.debug("Unable to pick block on cat tree.");

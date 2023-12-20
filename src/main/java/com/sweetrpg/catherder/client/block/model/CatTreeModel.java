@@ -80,13 +80,11 @@ public class CatTreeModel implements BakedModel {
     @Override
     public IModelData getModelData(@Nonnull BlockAndTintGetter world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
         IColorMaterial color = null;
-//        IBeddingMaterial bedding = null;
         Direction facing = Direction.NORTH;
 
         BlockEntity tile = world.getBlockEntity(pos);
         if (tile instanceof CatTreeBlockEntity) {
             color = ((CatTreeBlockEntity) tile).getColor();
-//            bedding = ((CatTreeBlockEntity) tile).getBedding();
         }
 
         if (state.hasProperty(CatTreeBlock.FACING)) {
@@ -94,7 +92,6 @@ public class CatTreeModel implements BakedModel {
         }
 
         tileData.setData(CatTreeBlockEntity.COLOR, color);
-//        tileData.setData(CatTreeBlockEntity.BEDDING, bedding);
         tileData.setData(CatTreeBlockEntity.FACING, facing);
 
         return tileData;

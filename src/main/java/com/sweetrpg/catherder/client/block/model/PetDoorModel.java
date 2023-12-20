@@ -4,8 +4,6 @@ import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Either;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IStructureMaterial;
-import com.sweetrpg.catherder.api.registry.IStructureMaterial;
-import com.sweetrpg.catherder.common.block.CatTreeBlock;
 import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -21,6 +19,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.ForgeModelBakery;
@@ -89,8 +88,8 @@ public class PetDoorModel implements BakedModel {
             structure = ((PetDoorBlockEntity) tile).getStructure();
         }
 
-        if (state.hasProperty(CatTreeBlock.FACING)) {
-            facing = state.getValue(CatTreeBlock.FACING);
+        if (state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         }
 
         tileData.setData(PetDoorBlockEntity.STRUCTURE, structure);
@@ -124,7 +123,7 @@ public class PetDoorModel implements BakedModel {
     private ResourceLocation createResourceVariant(@Nonnull IRegistryDelegate<IStructureMaterial> structureResource, @Nonnull Direction facing) {
         String structureKey = structureResource != null
                 ? structureResource.name().toString().replace(':', '.')
-                : "catherder.petdoor.structure.missing";
+                : "petdoor.structure.missing";
         return new ModelResourceLocation(CatHerderAPI.MOD_ID, "block/pet_door#structure=" + structureKey + ",facing=" + facing.getName());
     }
 

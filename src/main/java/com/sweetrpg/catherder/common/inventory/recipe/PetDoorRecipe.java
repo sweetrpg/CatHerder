@@ -8,6 +8,7 @@ import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CustomRecipe;
@@ -27,7 +28,12 @@ public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<Craftin
 
         for (int col = 0; col < 3; col++) {
             for (int row = 0; row < 3; row++) {
-                if (col == 1 && row == 0) {
+                if (col == 1 && row == 1) {
+                    if(!inv.getItem(row * inv.getWidth() + col).is(ItemTags.DOORS)) {
+                        return false;
+                    }
+                }
+                else {
                     IStructureMaterial id = PetDoorUtil.getStructureFromStack(CatHerderAPI.STRUCTURE_MATERIAL.get(), inv.getItem(row * inv.getWidth() + col));
 
                     // If the item is not structure material, then it doesn't match this recipe
@@ -42,19 +48,6 @@ public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<Craftin
                         return false;
                     }
                 }
-//                else {
-//                    ICasingMaterial id = CattreeUtil.getCasingFromStack(CatHerderAPI.CASING_MATERIAL, inv.getItem(row * inv.getWidth() + col));
-//
-//                    if (id == null) {
-//                        return false;
-//                    }
-//
-//                    if (casingId == null) {
-//                        casingId = id;
-//                    } else if (casingId != id) {
-//                        return false;
-//                    }
-//                }
             }
         }
 
@@ -63,10 +56,9 @@ public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<Craftin
 
     @Override
     public ItemStack assemble(CraftingContainer inv) {
-        IColorMaterial colorId = CatTreeUtil.getColorFromStack(CatHerderAPI.COLOR_MATERIAL.get(), inv.getItem(1));
-//        ICasingMaterial casingId = CattreeUtil.getCasingFromStack(CatHerderAPI.CASING_MATERIAL, inv.getItem(0));
+        IStructureMaterial structureId = PetDoorUtil.getStructureFromStack(CatHerderAPI.STRUCTURE_MATERIAL.get(), inv.getItem(1));
 
-        return CatTreeUtil.createItemStack(colorId);
+        return PetDoorUtil.createItemStack(structureId);
     }
 
     @Override
@@ -89,7 +81,7 @@ public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<Craftin
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.CAT_TREE.get();
+        return ModRecipeSerializers.PET_DOOR.get();
     }
 
     @Override
