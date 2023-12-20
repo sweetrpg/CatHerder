@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.0.??-alpha
+
+- `[NEW]` Cat trees now support different wool types to make different colored trees.
+- `[NEW]` Cat trees can be dyed to change their color.
+- `[NEW]` Pet doors now support different wood types.
+
 ## 0.0.75-alpha
 
 - `[FIX]` Update recipes for cat shrinker and enlarger.
