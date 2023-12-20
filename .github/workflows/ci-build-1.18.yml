@@ -52,6 +52,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         prerelease: true
+        tag_name: "${{ steps.tag-version.outputs.semantic-version }}"
         files: |
           build/libs/*.jar
       env:
