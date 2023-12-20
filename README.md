@@ -12,7 +12,7 @@ Cat Herder
 * A cat tracking and revival system
 
 Thanks to everyone that has contributed. This includes but is not limited to...
-* **DoggyTalents** -- from which this mod borrows heavily 
+* **DoggyTalents** -- from which this mod borrows heavily
 * **Katy Schifferer** -- graphics and textures
 * **Beth Schifferer** -- models and textures
 * **Michelle Schifferer** -- testing and ideas
@@ -33,7 +33,7 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 - Close Minecraft once it is open and find your Minecraft installation directory.
   - For **Windows**, it is located at ```%appadata%/.minecraft```
   - For **Mac**, it is located at ````~/Library/Application Support/minecraft````
-  - For **Linux**, it is located at ```~/.minecraft``` 
+  - For **Linux**, it is located at ```~/.minecraft```
 - In this directory, there will be a new folder called ```mods``` (*create one if there isn't one*).
 - Download the mod from [here](https://www.curseforge.com/minecraft/mc-mods/cat-herder/files), then drag n' drop the mod into the ```mods``` folder.
 - *Run Minecraft and enjoy!*
@@ -42,11 +42,11 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 
 # FAQ
 
-- **Q:** Will there be a Fabric version?  
+- **Q:** Will there be a Fabric version?
   **A:** Probably not.
-- **Q:** Which Minecraft versions are supported?  
+- **Q:** Which Minecraft versions are supported?
   **A:** It is normally the most current release, currently `1.18.x`.
-- **Q:** I have a cat, how to get started?  
+- **Q:** I have a cat, how to get started?
   **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
 -----------------
