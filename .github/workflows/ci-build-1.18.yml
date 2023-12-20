@@ -15,6 +15,8 @@ on:
       - 'test/**'
       - build.gradle
       - gradle.properties
+      - settings.gradle
+      - CHANGELOG.md
 
 jobs:
   build:
