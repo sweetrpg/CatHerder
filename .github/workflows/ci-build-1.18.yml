@@ -48,3 +48,11 @@ jobs:
         git add .release-info/1.18/VERSION
         git commit -m "Update VERSION"
         git push origin
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: |
+          build/libs/*.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
