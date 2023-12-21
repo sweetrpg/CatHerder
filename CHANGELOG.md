@@ -6,6 +6,7 @@
 - `[NEW]` Cat trees can be dyed to change their color.
 - `[NEW]` Pet doors now support different wood types.
 - `[FIX]` Fixed missing texture issue when putting a collar on the cat.
+- `[FIX]` Add cat tree and cat toy to Item Physics.
 
 ## 0.0.75-alpha
 
