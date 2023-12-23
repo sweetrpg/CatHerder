@@ -2,29 +2,18 @@ package com.sweetrpg.catherder.data;
 
 import com.google.gson.JsonObject;
 import com.sweetrpg.catherder.CatHerder;
-import com.sweetrpg.catherder.common.block.CatTreeBlock;
-import com.sweetrpg.catherder.common.block.PetDoorBlock;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
-import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class CHRecipeProvider extends RecipeProvider {
@@ -201,13 +190,22 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_redstone", has(Items.REDSTONE))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(ModBlocks.LITTER_BOX.get(), 1)
+        ShapedRecipeBuilder.shaped(ModBlocks.LITTERBOX.get(), 1)
                 .pattern("ISI")
                 .pattern("III")
                 .define('I', Items.IRON_INGOT)
                 .define('S', Items.SAND)
                 .unlockedBy("has_sand", has(Items.SAND))
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.LITTER_SCOOP.get(), 1)
+                .pattern("IWI")
+                .pattern("III")
+                .pattern(" I ")
+                .define('I', Items.COPPER_INGOT)
+                .define('W', Items.IRON_BARS)
+                .unlockedBy("has_copper", has(Items.SAND))
+                .unlockedBy("has_iron_bars", has(Items.IRON_BARS))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.CARDBOARD_BOX.get(), 1)
                 .pattern("CCC")

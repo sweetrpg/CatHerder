@@ -114,7 +114,7 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
      * Return true to set given position as destination
      */
     protected boolean isValidTarget(LevelReader level, BlockPos pos) {
-        return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(ModBlocks.LITTER_BOX.get());
+        return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(ModBlocks.LITTERBOX.get());
     }
 }
 

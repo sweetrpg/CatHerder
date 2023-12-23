@@ -3,7 +3,6 @@ package com.sweetrpg.catherder.data;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
@@ -70,7 +69,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         blockItem(ModBlocks.CAT_TREE);
         blockItem(ModBlocks.PET_DOOR);
         blockItem(ModBlocks.CAT_BOWL);
-        blockItem(ModBlocks.LITTER_BOX);
+        blockItem(ModBlocks.LITTERBOX);
         blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
         blockItem(ModBlocks.CHEESE_WHEEL);

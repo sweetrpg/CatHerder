@@ -82,6 +82,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS = "item.catherder.treat_bag.contents";
     public static final String TRANSLATION_KEY_CONTAINER_PACK_CAT = "container.catherder.pack_cat";
     public static final String TRANSLATION_KEY_CONTAINER_CAT_BOWL = "container.catherder.cat_bowl";
+    public static final String TRANSLATION_KEY_CONTAINER_LITTERBOX = "container.catherder.litterbox";
     public static final String TRANSLATION_KEY_CONTAINER_TREAT_BAG = "container.catherder.treat_bag";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES_LINK = "container.catherder.cat_inventories.link";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES = "container.catherder.cat_inventories";
@@ -272,6 +273,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_STRUCTURE_WARPED = "structure.minecraft.warped_planks";
     public static final String TRANSLATION_KEY_CONFIG_CHANCE_WILD_CATNIP = "catherder.config.cat.chance_wild_catnip";
     public static final String TRANSLATION_KEY_CONFIG_WILD_CATNIP_SPREAD = "catherder.config.cat.wild_catnip_spread";
+    public static final String TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX = "catherder.config.cat.enable_litterbox";
     public static final String TRANSLATION_KEY_CONFIG_DISABLE_HUNGER = "catherder.config.cat.disable_hunger";
     public static final String TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS = "catherder.config.enable_starting_items";
     public static final String TRANSLATION_KEY_CONFIG_ENABLE_GENDER = "catherder.config.enable_gender";

@@ -126,6 +126,7 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<Integer>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER.get().getSerializer()));
 
     public final Map<Integer, Object> objects = new HashMap<>();
@@ -176,6 +177,7 @@ public class CatEntity extends AbstractCatEntity {
         MODE.get();
         CAT_TREE_LOCATION.get();
         CAT_BOWL_LOCATION.get();
+        LITTERBOX_LOCATION.get();
         ORIGINAL_BREED.get();
     }
 
@@ -196,6 +198,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(LITTERBOX_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
 //        this.entityData.define(IS_LYING, false);
         this.entityData.define(RELAX_STATE_ONE, false);
     }
@@ -211,6 +214,7 @@ public class CatEntity extends AbstractCatEntity {
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
 //        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
@@ -1547,6 +1551,7 @@ public class CatEntity extends AbstractCatEntity {
             e.printStackTrace();
         }
 
+        // cat tree
         DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
 
         try {
@@ -1569,6 +1574,7 @@ public class CatEntity extends AbstractCatEntity {
 
         this.entityData.set(CAT_TREE_LOCATION.get(), bedsData);
 
+        // cat bowl
         DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
 
         try {
@@ -1590,6 +1596,29 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         this.entityData.set(CAT_BOWL_LOCATION.get(), bowlsData);
+
+        // litterbox
+        DimensionDependantArg<Optional<BlockPos>> litterboxData = this.entityData.get(LITTERBOX_LOCATION.get()).copyEmpty();
+
+        try {
+            if(compound.contains("litterbox", Tag.TAG_LIST)) {
+                ListTag litterboxList = compound.getList("litterbox", Tag.TAG_COMPOUND);
+
+                for(int i = 0; i < litterboxList.size(); i++) {
+                    CompoundTag litterboxNBT = litterboxList.getCompound(i);
+                    ResourceLocation loc = NBTUtil.getResourceLocation(litterboxNBT, "dim");
+                    ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
+                    Optional<BlockPos> pos = NBTUtil.getBlockPos(litterboxNBT, "pos");
+                    litterboxData.put(type, pos);
+                }
+            }
+        }
+        catch(Exception e) {
+            CatHerder.LOGGER.error("Failed to load litterboxes: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        this.entityData.set(LITTERBOX_LOCATION.get(), litterboxData);
 
         try {
             this.statsTracker.readAdditional(compound);
@@ -1824,6 +1853,26 @@ public class CatEntity extends AbstractCatEntity {
 
     public void setBowlPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
         this.entityData.set(CAT_BOWL_LOCATION.get(), this.entityData.get(CAT_BOWL_LOCATION.get()).copy().set(registryKey, pos));
+    }
+
+    public Optional<BlockPos> getLitterboxPos() {
+        return this.getLitterboxPos(this.level.dimension());
+    }
+
+    public void setLitterboxPos(@Nullable BlockPos pos) {
+        this.setLitterboxPos(this.level.dimension(), pos);
+    }
+
+    public Optional<BlockPos> getLitterboxPos(ResourceKey<Level> registryKey) {
+        return this.entityData.get(LITTERBOX_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
+    }
+
+    public void setLitterboxPos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
+        this.setLitterboxPos(registryKey, WorldUtil.toImmutable(pos));
+    }
+
+    public void setLitterboxPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
+        this.entityData.set(LITTERBOX_LOCATION.get(), this.entityData.get(LITTERBOX_LOCATION.get()).copy().set(registryKey, pos));
     }
 
     @Override

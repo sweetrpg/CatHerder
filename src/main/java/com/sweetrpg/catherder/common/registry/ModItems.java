@@ -59,7 +59,7 @@ public class ModItems {
     public static final RegistryObject<Item> CAT_SMALLERER = registerSizer("small_catsizer", CatSizerItem.Type.SMALL);
     public static final RegistryObject<Item> CAT_BIGGERER = registerSizer("big_catsizer", CatSizerItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
-//    public static final RegistryObject<Item> LITTER_BOX = register("litter_box", LitterBoxItem::new);
+    public static final RegistryObject<Item> LITTER_SCOOP = register("litter_scoop", () -> new LitterScoopItem(new Item.Properties().durability(64).tab(ModItemGroups.GENERAL)));
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
 
     // other items
