@@ -22,7 +22,7 @@ public class ModTileEntityTypes {
     public static final RegistryObject<BlockEntityType<PetDoorBlockEntity>> PET_DOOR = register("pet_door", PetDoorBlockEntity::new, ModBlocks.PET_DOOR);
 
     public static final RegistryObject<BlockEntityType<CatBowlBlockEntity>> CAT_BOWL = register("cat_bowl", CatBowlBlockEntity::new, ModBlocks.CAT_BOWL);
-    public static final RegistryObject<BlockEntityType<LitterboxBlockEntity>> LITTERBOX = register("litterbox", LitterboxBlockEntity::new, ModBlocks.LITTERBOX);
+    public static final RegistryObject<BlockEntityType<LitterboxBlockEntity>> LITTERBOX = register("litter_box", LitterboxBlockEntity::new, ModBlocks.LITTERBOX);
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(final String name, final BlockEntityType.BlockEntitySupplier<T> sup, Supplier<? extends Block> validBlock) {
         return register(name, () -> BlockEntityType.Builder.of(sup, validBlock.get()).build(null));

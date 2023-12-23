@@ -286,7 +286,7 @@ public class CatInfoScreen extends Screen {
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_AGE) + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_ARMOR) + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
         if(ConfigHandler.SERVER.CAT_GENDER.get()) {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
+            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalizedName()), this.width - 160, topY - 60, 0xFFFFFF);
         }
 
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);

@@ -4,12 +4,15 @@ import com.sweetrpg.catherder.api.registry.IStructureMaterial;
 import com.sweetrpg.catherder.common.block.tileentity.LitterboxBlockEntity;
 import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -52,9 +55,14 @@ public class LitterboxBlock extends BaseEntityBlock {
         super(Block.Properties.of(Material.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
     }
 
-    public void clean() {
+    public void clean(BlockState state) {
+        state.setValue(CAT_WASTE, 0);
+
+        // remove odor particles
+        // TODO
+//        state.
     }
-}
+
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
         return new LitterboxBlockEntity(pos, blockState);
@@ -89,11 +97,24 @@ public class LitterboxBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(handIn);
 
-        if (stack.isEmpty()) {
+//        if (stack.isEmpty()) {
+//            return InteractionResult.SUCCESS;
+//        }
+
+        // check if litterbox maintenance is enabled
+        if(!ConfigHandler.SERVER.LITTERBOX.get()) {
+            return InteractionResult.FAIL;
+        }
+
+        if (player.getItemInHand(handIn).is(ModItems.LITTER_SCOOP.get())) {
+            this.clean(state);
+
+            worldIn.playSound(null, pos, SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+
             return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResult.FAIL;
     }
 
     @SuppressWarnings("deprecation")
@@ -117,7 +138,7 @@ public class LitterboxBlock extends BaseEntityBlock {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
 
         return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(fluidState.getType() == Fluids.WATER))
-                       .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(CAT_WASTE, 0);
     }
 
@@ -139,10 +160,10 @@ public class LitterboxBlock extends BaseEntityBlock {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
         if(ConfigHandler.SERVER.LITTERBOX.get()) {
-            BlockPos pos = worldIn.;
-            if(worldIn.getBlockState(pos).getValue(CAT_WASTE) > 0) {
-                tooltip.add(new TranslatableComponent("litterbox.explain.dirty").withStyle(ChatFormatting.ITALIC));
-            }
+//            BlockPos pos = worldIn.getBlockState(worldIn.);
+//            if(worldIn.getBlockState(pos).getValue(CAT_WASTE) > 0) {
+//                tooltip.add(new TranslatableComponent("litterbox.explain.dirty").withStyle(ChatFormatting.ITALIC));
+//            }
         }
     }
 }

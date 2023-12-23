@@ -47,7 +47,7 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
             double d0 = this.entityRenderDispatcher.distanceToSqr(entityIn);
             if(d0 <= 64 * 64) {
                 String tip = entityIn.getMode().getTip();
-                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalizedTip()).getString());
 
                 RenderUtil.renderLabelWithScale(entityIn, this, this.entityRenderDispatcher, label, matrixStackIn, bufferIn, packedLightIn, 0.01F, 0.12F);
 

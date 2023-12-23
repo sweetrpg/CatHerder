@@ -87,14 +87,14 @@ public abstract class AbstractCatEntity extends TamableAnimal implements ICat {
     }
 
     public TranslatableComponent getGenderTitle() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedTitle);
+        return this.getTranslationKey(EnumGender::getUnlocalizedTitle);
     }
 
     public TranslatableComponent getGenderTip() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedTip);
+        return this.getTranslationKey(EnumGender::getUnlocalizedTip);
     }
 
     public TranslatableComponent getGenderName() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedName);
+        return this.getTranslationKey(EnumGender::getUnlocalizedName);
     }
 }

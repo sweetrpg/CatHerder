@@ -1,5 +1,7 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
+import com.sweetrpg.catherder.common.block.LitterboxBlock;
+import com.sweetrpg.catherder.common.block.tileentity.LitterboxBlockEntity;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
@@ -33,7 +35,7 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
      * method as well.
      */
     public boolean canUse() {
-        if(this.cat.getLitterboxCooldown() > 0) {
+        if (this.cat.getLitterboxCooldown() > 0) {
             return false;
         }
 
@@ -71,16 +73,16 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
     public void tick() {
         super.tick();
 
-        if(this.cat.getLitterboxCooldown() > 0) {
+        if (this.cat.getLitterboxCooldown() > 0) {
             return;
         }
 
-        if(this.isReachedTarget()) {
-            if(this.cat.isInSittingPose()) {
-                if(this.usingLitterboxCounter % 10 == 0) {
+        if (this.isReachedTarget()) {
+            if (this.cat.isInSittingPose()) {
+                if (this.usingLitterboxCounter % 10 == 0) {
                     this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
                 }
-                if(this.usingLitterboxCounter % 5 == 0) {
+                if (this.usingLitterboxCounter % 5 == 0) {
                     this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
                 }
                 this.usingLitterboxCounter++;
@@ -92,11 +94,19 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
                 this.usingLitterboxCounter = 0;
             }
 
-            if(this.usingLitterboxCounter > MAX_LITTERBOX_USE_COUNT) {
+            if (this.usingLitterboxCounter > MAX_LITTERBOX_USE_COUNT) {
                 this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
                 this.cat.setInSittingPose(false);
                 this.cat.setSprinting(false);
                 this.cat.setLitterboxCooldown(LITTERBOX_USE_DELAY);
+
+                // leave something in the litterbox
+                // TODO
+//                LitterboxBlockEntity box = this.cat.level.getBlockEntity(this.cat.blockPosition().below(), LitterboxBlockEntity.class);
+//                if (blockState.is(ModBlocks.LITTERBOX.get())) {
+//                    ((LitterboxBlock) blockState).dirty();
+//                }
+
                 this.stop();
             }
         }

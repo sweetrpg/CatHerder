@@ -40,11 +40,11 @@ public enum EnumGender {
         return this.saveName;
     }
 
-    public String getUnlocalisedTip() {
+    public String getUnlocalizedTip() {
         return this.unlocalisedTip;
     }
 
-    public String getUnlocalisedName() {
+    public String getUnlocalizedName() {
         return this.unlocalisedName;
     }
 
@@ -56,7 +56,7 @@ public enum EnumGender {
         return this.unlocalisedSubject;
     }
 
-    public String getUnlocalisedTitle() {
+    public String getUnlocalizedTitle() {
         return this.unlocalisedTitle;
     }
 

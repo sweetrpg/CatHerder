@@ -32,19 +32,19 @@ import java.util.UUID;
 
 public class LitterboxBlockEntity extends PlacedBlockEntity {
 
-    private final ItemStackHandler inventory = new ItemStackHandler(5) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            // When contents change mark needs save to disc
-            LitterboxBlockEntity.this.setChanged();
-        }
-
-        @Override
-        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            return FoodHandler.isFood(stack).isPresent();
-        }
-    };
-    private final LazyOptional<ItemStackHandler> itemStackHandler = LazyOptional.of(() -> this.inventory);
+//    private final ItemStackHandler inventory = new ItemStackHandler(5) {
+//        @Override
+//        protected void onContentsChanged(int slot) {
+//            // When contents change mark needs save to disc
+//            LitterboxBlockEntity.this.setChanged();
+//        }
+//
+//        @Override
+//        public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+//            return FoodHandler.isFood(stack).isPresent();
+//        }
+//    };
+//    private final LazyOptional<ItemStackHandler> itemStackHandler = LazyOptional.of(() -> this.inventory);
 
     public int timeoutCounter;
 
@@ -57,13 +57,13 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
             return;
         }
 
-        //Only run update code every 5 ticks (0.25s)
-        if(++box.timeoutCounter < 5) {return;}
+        // Only run update code every 5 ticks (0.25s)
+        if(++box.timeoutCounter < 5) { return; }
 
         List<CatEntity> catList = box.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
 
         for(CatEntity cat : catList) {
-            //TODO make litterbox remember who placed and only their cats can attach to the bowl
+            //TODO make litterbox remember who placed and only their cats can attach to it
             UUID placerId = box.getPlacerId();
             if(placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getLitterboxPos().isPresent()) {
                 cat.setLitterboxPos(box.worldPosition);
@@ -76,26 +76,26 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
     @Override
     public void load(CompoundTag compound) {
         super.load(compound);
-        this.inventory.deserializeNBT(compound);
+//        this.inventory.deserializeNBT(compound);
     }
 
     @Override
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
-        compound.merge(this.inventory.serializeNBT());
+//        compound.merge(this.inventory.serializeNBT());
     }
 
-    public ItemStackHandler getInventory() {
-        return this.inventory;
-    }
+//    public ItemStackHandler getInventory() {
+//        return this.inventory;
+//    }
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return (LazyOptional<T>) this.itemStackHandler;
-        }
-        return super.getCapability(cap, side);
-    }
+//    @Nonnull
+//    @Override
+//    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+//        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+//            return (LazyOptional<T>) this.itemStackHandler;
+//        }
+//        return super.getCapability(cap, side);
+//    }
 
 }

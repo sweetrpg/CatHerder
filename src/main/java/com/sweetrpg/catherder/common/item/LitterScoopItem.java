@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 
 public class LitterScoopItem extends Item {
 
-
     public LitterScoopItem(Properties properties) {
         super(properties);
     }
@@ -29,19 +28,19 @@ public class LitterScoopItem extends Item {
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
 
         // check if litterbox maintenance is enabled
-        if(!ConfigHandler.SERVER.LITTERBOX.get()) {
-            return InteractionResult.FAIL;
-        }
+//        if(!ConfigHandler.SERVER.LITTERBOX.get()) {
+//            return InteractionResult.FAIL;
+//        }
 
         // check if we're using it on the litterbox
-        if(stack.is(ModBlocks.LITTERBOX.get().asItem())) {
-
-            if(stack.getItem() instanceof LitterboxBlock litterbox) {
-litterbox.clean();
-
-                context.getLevel().playSound(null, context.getClickedPos(), SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-        }
+//        if(stack.is(ModBlocks.LITTERBOX.get().asItem())) {
+//
+//            if(stack.getItem() instanceof ModBlocks.LITTERBOX.get) {
+//litterbox.clean();
+//
+//                context.getLevel().playSound(null, context.getClickedPos(), SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+//            }
+//        }
 
         return InteractionResult.FAIL;
     }

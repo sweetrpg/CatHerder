@@ -25,7 +25,7 @@ public class ModBlocks {
 
     // cat items
     public static final RegistryObject<CatTreeBlock> CAT_TREE = registerWithItem("cat_tree", CatTreeBlock::new);
-    public static final RegistryObject<LitterboxBlock> LITTERBOX = registerWithItem("litterbox", LitterboxBlock::new);
+    public static final RegistryObject<LitterboxBlock> LITTERBOX = registerWithItem("litter_box", LitterboxBlock::new);
     public static final RegistryObject<CatBowlBlock> CAT_BOWL = registerWithItem("cat_bowl", CatBowlBlock::new);
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
 
