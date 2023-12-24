@@ -133,7 +133,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "Gender:");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "Health:");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "Level:");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "Dire level:");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "Wild level:");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "New name:");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "Next Page");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "Obey Others?");
@@ -374,7 +374,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "Gender:");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "Health:");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "Level:");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "Dire level:");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "Wild level:");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "New name:");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "Next Page");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "Obey Others?");
@@ -614,7 +614,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
@@ -855,7 +855,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
@@ -1094,7 +1094,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
@@ -1335,7 +1335,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
@@ -1576,7 +1576,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");
@@ -1817,7 +1817,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_GENDER, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_HEALTH, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_LEVEL, "TODO");
-        add(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE, "TODO");
+        add(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEW_NAME, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE, "TODO");
         add(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS, "TODO");

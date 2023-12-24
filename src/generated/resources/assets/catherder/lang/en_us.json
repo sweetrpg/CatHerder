@@ -61,7 +61,7 @@
   "catgui.gender": "Gender:",
   "catgui.health": "Health:",
   "catgui.level": "Level:",
-  "catgui.leveldire": "Dire level:",
+  "catgui.level.wild": "Wild level:",
   "catgui.newname": "New name:",
   "catgui.nextpage": "Next Page",
   "catgui.obeyothers": "Obey Others?",
