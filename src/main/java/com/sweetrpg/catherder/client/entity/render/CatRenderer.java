@@ -50,10 +50,10 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
                 String label;
                 if(ConfigHandler.SERVER.CAT_GENDER.get()) {
                     if(this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
-                        label = String.format("%s(%d/%d)%s", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Mth.ceil(entityIn.getMaxHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                        label = String.format("%s(%d/%d)%s", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Mth.ceil(entityIn.getMaxHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalizedTip()).getString());
                     }
                     else {
-                        label = String.format("%s(%d)%s", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                        label = String.format("%s(%d)%s", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalizedTip()).getString());
                     }
                 }
                 else {

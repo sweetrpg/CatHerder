@@ -85,6 +85,7 @@ public class ConfigHandler {
 
     public static class ServerConfig {
 
+        public ForgeConfigSpec.BooleanValue LITTERBOX;
         public ForgeConfigSpec.IntValue CHANCE_WILD_CATNIP;
         public ForgeConfigSpec.IntValue WILD_CATNIP_SPREAD;
         public ForgeConfigSpec.BooleanValue DISABLE_HUNGER;
@@ -113,6 +114,7 @@ public class ConfigHandler {
             {
                 builder.push("Cat Constants");
 
+                LITTERBOX = builder.comment("Enables litterbox maintenance").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX).define("enable_litterbox", false);
                 DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation(Constants.TRANSLATION_KEY_CONFIG_DISABLE_HUNGER).define("disable_hunger", false);
                 STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS).define("enable_starting_items", false);
                 CAT_GENDER = builder.comment("When enabled, cats will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_GENDER).define("enable_gender", true);

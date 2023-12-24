@@ -117,14 +117,14 @@ public class CatInfoScreen extends Screen {
 //        this.addRenderableWidget(lessBtn);
         //}
 
-        Button modeBtn = new Button(topX + 40, topY + 25, 60, 20, new TranslatableComponent(this.cat.getMode().getUnlocalisedName()), button -> {
+        Button modeBtn = new Button(topX + 40, topY + 25, 60, 20, new TranslatableComponent(this.cat.getMode().getUnlocalizedName()), button -> {
             EnumMode mode = CatInfoScreen.this.cat.getMode().nextMode();
 
             if(mode == EnumMode.WANDERING && !CatInfoScreen.this.cat.getBowlPos().isPresent()) {
-                button.setMessage(new TranslatableComponent(mode.getUnlocalisedName()).withStyle(ChatFormatting.RED));
+                button.setMessage(new TranslatableComponent(mode.getUnlocalizedName()).withStyle(ChatFormatting.RED));
             }
             else {
-                button.setMessage(new TranslatableComponent(mode.getUnlocalisedName()));
+                button.setMessage(new TranslatableComponent(mode.getUnlocalizedName()));
             }
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatModeData(CatInfoScreen.this.cat.getId(), mode));
@@ -132,7 +132,7 @@ public class CatInfoScreen extends Screen {
             @Override
             public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
                 List<Component> list = new ArrayList<>();
-                String str = I18n.get(cat.getMode().getUnlocalisedInfo());
+                String str = I18n.get(cat.getMode().getUnlocalizedInfo());
                 list.addAll(ScreenUtil.splitInto(str, 150, CatInfoScreen.this.font));
                 if(CatInfoScreen.this.cat.getMode() == EnumMode.WANDERING) {
 
@@ -286,7 +286,7 @@ public class CatInfoScreen extends Screen {
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_AGE) + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_ARMOR) + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
         if(ConfigHandler.SERVER.CAT_GENDER.get()) {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
+            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalizedName()), this.width - 160, topY - 60, 0xFFFFFF);
         }
 
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);

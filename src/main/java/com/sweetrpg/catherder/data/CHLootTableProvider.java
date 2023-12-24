@@ -9,11 +9,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.models.blockstates.Condition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -58,7 +56,7 @@ public class CHLootTableProvider extends LootTableProvider {
         protected void addTables() {
             dropCatTree(ModBlocks.CAT_TREE);
             dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
-            dropsSelf(ModBlocks.LITTER_BOX);
+            dropsSelf(ModBlocks.LITTERBOX);
             dropCatnip(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
             dropsSelf(ModBlocks.CATNIP_CROP);

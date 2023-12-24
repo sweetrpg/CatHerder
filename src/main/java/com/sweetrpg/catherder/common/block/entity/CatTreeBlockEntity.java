@@ -1,9 +1,9 @@
-package com.sweetrpg.catherder.common.block.tileentity;
+package com.sweetrpg.catherder.common.block.entity;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
@@ -29,17 +29,19 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     public static ModelProperty<IColorMaterial> COLOR = new ModelProperty<>();
     public static ModelProperty<Direction> FACING = new ModelProperty<>();
 
-    private @Deprecated @Nullable
-    CatEntity cat;
-    private @Nullable
-    UUID catUUID;
+    @Deprecated
+    @Nullable
+    private CatEntity cat;
+    @Nullable
+    private UUID catUUID;
 
-    private @Nullable
-    Component name;
-    private @Nullable Component ownerName;
+    @Nullable
+    private Component name;
+    @Nullable
+    private Component ownerName;
 
     public CatTreeBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModTileEntityTypes.CAT_TREE.get(), pos, blockState);
+        super(ModBlockEntityTypes.CAT_TREE.get(), pos, blockState);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
         super.load(compound);
 
         this.colorType = NBTUtil.getRegistryValue(compound, "colorId", CatHerderAPI.COLOR_MATERIAL.get());
-        if(this.colorType == null) {
+        if (this.colorType == null) {
             this.colorType = CatTreeUtil.pickRandom(CatHerderAPI.COLOR_MATERIAL.get());
         }
 //        this.beddingType = NBTUtil.getRegistryValue(compound, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
@@ -120,7 +122,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
 
     @Nullable
     public CatEntity getOwner() {
-       return WorldUtil.getCachedEntity(this.level, CatEntity.class, this.cat, this.catUUID);
+        return WorldUtil.getCachedEntity(this.level, CatEntity.class, this.cat, this.catUUID);
     }
 
     @Nullable
@@ -130,7 +132,9 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
 
     @Nullable
     public Component getOwnerName() {
-        if (this.catUUID == null || this.level == null) { return null; }
+        if (this.catUUID == null || this.level == null) {
+            return null;
+        }
 
         CatLocationData locData = CatLocationStorage
                 .get(this.level)

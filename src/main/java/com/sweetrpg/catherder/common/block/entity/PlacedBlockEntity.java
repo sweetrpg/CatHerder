@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.block.tileentity;
+package com.sweetrpg.catherder.common.block.entity;
 
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;

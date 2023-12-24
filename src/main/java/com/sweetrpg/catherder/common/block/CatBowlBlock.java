@@ -1,9 +1,9 @@
 package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.Screens;
-import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
@@ -64,7 +64,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModTileEntityTypes.CAT_BOWL.get(), CatBowlBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntityTypes.CAT_BOWL.get(), CatBowlBlockEntity::tick);
     }
 
     @SuppressWarnings("deprecation")

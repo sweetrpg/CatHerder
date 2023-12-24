@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Either;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IStructureMaterial;
-import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.PetDoorBlockEntity;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
