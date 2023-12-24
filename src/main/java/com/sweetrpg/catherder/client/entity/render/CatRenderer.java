@@ -47,8 +47,23 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
             double d0 = this.entityRenderDispatcher.distanceToSqr(entityIn);
             if(d0 <= 64 * 64) {
                 String tip = entityIn.getMode().getTip();
-                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalizedTip()).getString());
-
+                String label;
+                if(ConfigHandler.SERVER.CAT_GENDER.get()) {
+                    if(this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
+                        label = String.format("%s(%d/%d)%s", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Mth.ceil(entityIn.getMaxHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                    }
+                    else {
+                        label = String.format("%s(%d)%s", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), new TranslatableComponent(entityIn.getGender().getUnlocalisedTip()).getString());
+                    }
+                }
+                else {
+                    if(this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
+                        label = String.format("%s(%d/%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Mth.ceil(entityIn.getMaxHunger()));
+                    }
+                    else {
+                        label = String.format("%s(%d)", new TranslatableComponent(tip).getString(), Mth.ceil(entityIn.getCatHunger()));
+                    }
+                }
                 RenderUtil.renderLabelWithScale(entityIn, this, this.entityRenderDispatcher, label, matrixStackIn, bufferIn, packedLightIn, 0.01F, 0.12F);
 
                 if(d0 <= 5 * 5 && this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
