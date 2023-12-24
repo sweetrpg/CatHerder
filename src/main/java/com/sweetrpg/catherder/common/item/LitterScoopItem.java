@@ -1,25 +1,10 @@
 package com.sweetrpg.catherder.common.item;
 
-import com.sweetrpg.catherder.api.feature.CatLevel;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
-import com.sweetrpg.catherder.api.inferface.ICatItem;
-import com.sweetrpg.catherder.common.block.LitterboxBlock;
-import com.sweetrpg.catherder.common.block.tileentity.LitterboxBlockEntity;
-import com.sweetrpg.catherder.common.config.ConfigHandler;
-import com.sweetrpg.catherder.common.lib.Constants;
-import com.sweetrpg.catherder.common.registry.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.function.Consumer;
 
 public class LitterScoopItem extends Item {
 
@@ -52,4 +37,11 @@ public class LitterScoopItem extends Item {
 //
 //        return InteractionResult.FAIL;
 //    }
+
+
+    @Override
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+
+        return amount;
+    }
 }

@@ -227,7 +227,7 @@ public class CatEntity extends AbstractCatEntity {
 //        this.goalSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
-        this.goalSelector.addGoal(9, new UseLitterboxGoal<>(this, 10));
+        this.goalSelector.addGoal(2, new UseLitterboxGoal<>(this, 10));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 

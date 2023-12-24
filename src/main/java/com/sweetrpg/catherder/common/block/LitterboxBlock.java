@@ -1,23 +1,18 @@
 package com.sweetrpg.catherder.common.block;
 
-import com.sweetrpg.catherder.api.registry.IStructureMaterial;
-import com.sweetrpg.catherder.common.block.tileentity.LitterboxBlockEntity;
-import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.LitterboxBlockEntity;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
+import com.sweetrpg.catherder.common.item.LitterScoopItem;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.util.PetDoorUtil;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -38,11 +33,8 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.Random;
 
 public class LitterboxBlock extends BaseEntityBlock {
 
@@ -53,14 +45,6 @@ public class LitterboxBlock extends BaseEntityBlock {
 
     public LitterboxBlock() {
         super(Block.Properties.of(Material.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
-    }
-
-    public void clean(BlockState state) {
-        state.setValue(CAT_WASTE, 0);
-
-        // remove odor particles
-        // TODO
-//        state.
     }
 
     @Override
@@ -102,20 +86,24 @@ public class LitterboxBlock extends BaseEntityBlock {
 //        }
 
         // check if litterbox maintenance is enabled
-        if(!ConfigHandler.SERVER.LITTERBOX.get()) {
-            return InteractionResult.FAIL;
-        }
-
-        if (player.getItemInHand(handIn).is(ModItems.LITTER_SCOOP.get())) {
-            if(state.getValue(CAT_WASTE) > 0) {
+        if(ConfigHandler.SERVER.LITTERBOX.get()) {
+            if(stack.is(ModItems.LITTER_SCOOP.get())) {
+                if(state.getValue(CAT_WASTE) > 0) {
 //                this.clean(state);
-                BlockState blockState = worldIn.getBlockState(pos);
-                BlockState newBlockState = blockState.setValue(LitterboxBlock.CAT_WASTE, 0);
-                worldIn.setBlockAndUpdate(pos, newBlockState);
+                    BlockState blockState = worldIn.getBlockState(pos);
+                    BlockState newBlockState = blockState.setValue(LitterboxBlock.CAT_WASTE, 0);
+                    worldIn.setBlockAndUpdate(pos, newBlockState);
 
-                worldIn.playSound(null, pos, SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    if(!player.getAbilities().instabuild) {
+                        if(stack.getItem() instanceof LitterScoopItem scoop) {
+                            scoop.damageItem(stack, 1, player, (entity) -> {});
+                        }
+                    }
 
-                return InteractionResult.SUCCESS;
+                    worldIn.playSound(null, pos, SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
 
@@ -131,7 +119,7 @@ public class LitterboxBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.getValue(WATERLOGGED)) {
+        if(stateIn.getValue(WATERLOGGED)) {
             worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
 
@@ -159,16 +147,19 @@ public class LitterboxBlock extends BaseEntityBlock {
         builder.add(BlockStateProperties.HORIZONTAL_FACING, WATERLOGGED, CAT_WASTE);
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, @javax.annotation.Nullable BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+//    @Override
+//    @OnlyIn(Dist.CLIENT)
+//    public void appendHoverText(ItemStack stack, @javax.annotation.Nullable BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+//        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+//    }
 
-        if(ConfigHandler.SERVER.LITTERBOX.get()) {
-//            BlockPos pos = worldIn.getBlockState(worldIn.);
-//            if(worldIn.getBlockState(pos).getValue(CAT_WASTE) > 0) {
-//                tooltip.add(new TranslatableComponent("litterbox.explain.dirty").withStyle(ChatFormatting.ITALIC));
-//            }
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRand) {
+
+        if(pState.getValue(CAT_WASTE) > 0) {
+            double d0 = (double) pPos.getX() + 0.5D;
+            double d1 = (double) pPos.getY() + 0.7D;
+            double d2 = (double) pPos.getZ() + 0.5D;
+            pLevel.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
 }

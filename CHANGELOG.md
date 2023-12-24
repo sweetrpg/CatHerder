@@ -7,6 +7,7 @@
 - `[NEW]` Pet doors now support different wood types.
 - `[FIX]` Fixed missing texture issue when putting a collar on the cat.
 - `[FIX]` Add cat tree and cat toy to Item Physics.
+- `[NEW]` Added litter scoop and new configuration option to enable litter box maintenance.
 
 ## 0.0.75-alpha
 
