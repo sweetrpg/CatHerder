@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.block;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.Screens;
-import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;

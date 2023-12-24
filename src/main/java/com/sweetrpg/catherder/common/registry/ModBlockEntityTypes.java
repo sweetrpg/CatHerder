@@ -1,10 +1,10 @@
 package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
-import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
-import com.sweetrpg.catherder.common.block.tileentity.LitterboxBlockEntity;
-import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.LitterboxBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.PetDoorBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

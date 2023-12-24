@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.util;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IDyeMaterial;
 import com.sweetrpg.catherder.api.registry.IColorMaterial;
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;

@@ -2,23 +2,15 @@ package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.api.registry.IStructureMaterial;
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
-import com.sweetrpg.catherder.common.block.tileentity.PetDoorBlockEntity;
-import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.util.CatTreeUtil;
-import com.sweetrpg.catherder.common.util.NBTUtil;
+import com.sweetrpg.catherder.common.block.entity.PetDoorBlockEntity;
 import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -53,7 +45,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class PetDoorBlock extends BaseEntityBlock {
 

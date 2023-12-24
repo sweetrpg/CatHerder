@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.block.tileentity;
+package com.sweetrpg.catherder.common.block.entity;
 
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
@@ -45,7 +45,7 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
         List<CatEntity> catList = box.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
 
         for(CatEntity cat : catList) {
-            //TODO make litterbox remember who placed and only their cats can attach to it
+            // TODO: make litterbox remember who placed and only their cats can attach to it
             UUID placerId = box.getPlacerId();
             if(placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getLitterboxPos().isPresent()) {
                 cat.setLitterboxPos(box.worldPosition);
@@ -79,8 +79,4 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
 //        }
 //        return super.getCapability(cap, side);
 //    }
-
-    public void useLitterbox(BlockState blockState) {
-
-    }
 }

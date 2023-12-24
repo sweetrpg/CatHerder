@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.block.tileentity;
+package com.sweetrpg.catherder.common.block.entity;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IStructureMaterial;

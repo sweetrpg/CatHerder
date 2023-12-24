@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.block;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IColorMaterial;
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.storage.CatRespawnData;

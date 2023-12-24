@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.block.tileentity;
+package com.sweetrpg.catherder.common.block.entity;
 
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
