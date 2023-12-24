@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.block.tileentity;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
@@ -41,7 +41,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     private Component ownerName;
 
     public CatTreeBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModTileEntityTypes.CAT_TREE.get(), pos, blockState);
+        super(ModBlockEntityTypes.CAT_TREE.get(), pos, blockState);
     }
 
     @Override
