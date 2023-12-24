@@ -107,11 +107,16 @@ public class LitterboxBlock extends BaseEntityBlock {
         }
 
         if (player.getItemInHand(handIn).is(ModItems.LITTER_SCOOP.get())) {
-            this.clean(state);
+            if(state.getValue(CAT_WASTE) > 0) {
+//                this.clean(state);
+                BlockState blockState = worldIn.getBlockState(pos);
+                BlockState newBlockState = blockState.setValue(LitterboxBlock.CAT_WASTE, 0);
+                worldIn.setBlockAndUpdate(pos, newBlockState);
 
-            worldIn.playSound(null, pos, SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+                worldIn.playSound(null, pos, SoundEvents.ROOTED_DIRT_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-            return InteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
+            }
         }
 
         return InteractionResult.FAIL;

@@ -2,9 +2,11 @@ package com.sweetrpg.catherder.common.entity.ai;
 
 import com.sweetrpg.catherder.common.block.LitterboxBlock;
 import com.sweetrpg.catherder.common.block.tileentity.LitterboxBlockEntity;
+import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,6 +17,9 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 
 import java.util.EnumSet;
+import java.util.Optional;
+
+import net.minecraft.world.level.block.state.BlockState;
 
 public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
     private final CatEntity cat;
@@ -100,12 +105,16 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
                 this.cat.setSprinting(false);
                 this.cat.setLitterboxCooldown(LITTERBOX_USE_DELAY);
 
-                // leave something in the litterbox
-                // TODO
-//                LitterboxBlockEntity box = this.cat.level.getBlockEntity(this.cat.blockPosition().below(), LitterboxBlockEntity.class);
-//                if (blockState.is(ModBlocks.LITTERBOX.get())) {
-//                    ((LitterboxBlock) blockState).dirty();
-//                }
+                if(ConfigHandler.SERVER.LITTERBOX.get()) {
+                    // leave something in the litterbox
+                    BlockPos catPos = this.cat.blockPosition();
+                    Optional<LitterboxBlockEntity> box = this.cat.level.getBlockEntity(catPos, ModBlockEntityTypes.LITTERBOX.get());
+                    if (box.isPresent()) {
+                        BlockState blockState = this.cat.level.getBlockState(catPos);
+                        BlockState newBlockState = blockState.setValue(LitterboxBlock.CAT_WASTE, blockState.getValue(LitterboxBlock.CAT_WASTE) + 1);
+                        this.cat.level.setBlockAndUpdate(catPos, newBlockState);
+                    }
+                }
 
                 this.stop();
             }

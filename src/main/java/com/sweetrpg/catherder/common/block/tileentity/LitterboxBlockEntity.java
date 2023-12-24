@@ -1,32 +1,14 @@
 package com.sweetrpg.catherder.common.block.tileentity;
 
-import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.inventory.container.FoodBowlContainer;
-import com.sweetrpg.catherder.common.lib.Constants;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
-import com.sweetrpg.catherder.common.util.InventoryUtil;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +31,7 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
     public int timeoutCounter;
 
     public LitterboxBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModTileEntityTypes.LITTERBOX.get(), pos, blockState);
+        super(ModBlockEntityTypes.LITTERBOX.get(), pos, blockState);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState blockState, BlockEntity blockEntity) {
@@ -98,4 +80,7 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
 //        return super.getCapability(cap, side);
 //    }
 
+    public void useLitterbox(BlockState blockState) {
+
+    }
 }
