@@ -17,32 +17,30 @@ public class CatTalentPacket extends CatPacket<CatTalentData> {
     public void encode(CatTalentData data, FriendlyByteBuf buf) {
         super.encode(data, buf);
         buf.writeRegistryIdUnsafe(CatHerderAPI.TALENTS.get(), data.talent);
+        buf.writeInt(data.adjustment);
     }
 
     @Override
     public CatTalentData decode(FriendlyByteBuf buf) {
         int entityId = buf.readInt();
         Talent talent = buf.readRegistryIdUnsafe(CatHerderAPI.TALENTS.get());
-        return new CatTalentData(entityId, talent);
+        int adjustment = buf.readInt();
+        return new CatTalentData(entityId, talent, adjustment);
     }
 
     @Override
     public void handleCat(CatEntity catIn, CatTalentData data, Supplier<Context> ctx) {
-        if (!catIn.canInteract(ctx.get().getSender())) {
+        if(!catIn.canInteract(ctx.get().getSender())) {
             return;
         }
 
-        if (!ConfigHandler.TALENT.getFlag(data.talent)) {
-            CatHerder.LOGGER.info("{} tried to level a disabled talent ({})",
+        if(!ConfigHandler.TALENT.getFlag(data.talent)) {
+            CatHerder.LOGGER.info("{} tried to adjust a disabled talent ({})",
                     ctx.get().getSender().getGameProfile().getName(),
                     data.talent.getRegistryName());
             return;
         }
 
-        int level = catIn.getCatLevel(data.talent);
-
-        if (level < data.talent.getMaxLevel() && catIn.canSpendPoints(data.talent.getLevelCost(level + 1))) {
-            catIn.setTalentLevel(data.talent, level + 1);
-        }
+        catIn.adjustTalentLevel(data.talent, data.adjustment);
     }
 }

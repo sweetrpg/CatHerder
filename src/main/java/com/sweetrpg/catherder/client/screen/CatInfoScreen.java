@@ -242,7 +242,7 @@ public class CatInfoScreen extends Screen {
                 Button button = new TalentButton(25, 10 + i * 21, 20, 20, new TextComponent("-"), talent, false, (btn) -> {
                     int level = CatInfoScreen.this.cat.getCatLevel(talent);
                     if(level > 0) {
-                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
+                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent, -1));
                     }
                 }) {
                     @Override
@@ -261,7 +261,7 @@ public class CatInfoScreen extends Screen {
                 Button button = new TalentButton(47, 10 + i * 21, 20, 20, new TextComponent("+"), talent, true, (btn) -> {
                     int level = CatInfoScreen.this.cat.getCatLevel(talent);
                     if(level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
-                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
+                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent, 1));
                     }
                 }) {
                     @Override
@@ -315,7 +315,7 @@ public class CatInfoScreen extends Screen {
 
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);
         this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL) + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE) + " " + this.cat.getCatLevel().getLevel(Type.WILD), topX, topY + 75, 0xFF10F9);
+        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD) + " " + this.cat.getCatLevel().getLevel(Type.WILD), topX, topY + 75, 0xFF10F9);
         if(this.cat.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent()) {
             this.font.draw(stack, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
         }
