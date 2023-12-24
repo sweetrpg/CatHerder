@@ -4,7 +4,7 @@ import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.inventory.container.FoodBowlContainer;
 import com.sweetrpg.catherder.common.lib.Constants;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,7 +49,7 @@ public class CatBowlBlockEntity extends PlacedBlockEntity implements MenuProvide
     public int timeoutCounter;
 
     public CatBowlBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModTileEntityTypes.CAT_BOWL.get(), pos, blockState);
+        super(ModBlockEntityTypes.CAT_BOWL.get(), pos, blockState);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState blockState, BlockEntity blockEntity) {

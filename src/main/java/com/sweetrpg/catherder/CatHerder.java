@@ -1,8 +1,6 @@
 package com.sweetrpg.catherder;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.api.registry.Talent;
-import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.client.ClientSetup;
 import com.sweetrpg.catherder.data.*;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
@@ -15,7 +13,6 @@ import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
-import com.sweetrpg.catherder.common.talent.*;
 //import com.sweetrpg.catherder.common.util.BackwardsComp;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,13 +29,8 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 /**
  * @author Paulyhedral, ProPercivalalb
@@ -64,7 +56,7 @@ public class CatHerder {
 
         // Registries
         ModBlocks.BLOCKS.register(modEventBus);
-        ModTileEntityTypes.TILE_ENTITIES.register(modEventBus);
+        ModBlockEntityTypes.TILE_ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModEntityTypes.ENTITIES.register(modEventBus);
         ModContainerTypes.CONTAINERS.register(modEventBus);
