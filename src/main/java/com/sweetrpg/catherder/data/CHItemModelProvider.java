@@ -30,26 +30,29 @@ public class CHItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        handheld(ModItems.CAT_SMALLERER);
         handheld(ModItems.CAT_BIGGERER);
+        handheld(ModItems.CAT_SMALLERER);
 
-        handheld(ModItems.TRAINING_TREAT);
-        handheld(ModItems.SUPER_TREAT);
-        handheld(ModItems.MASTER_TREAT);
-        handheld(ModItems.WILD_TREAT);
         handheld(ModItems.BREEDING_TREAT);
         handheld(ModItems.CAT_TOY);
+        handheld(ModItems.LITTER_SCOOP);
+        handheld(ModItems.MASTER_TREAT);
+        handheld(ModItems.SUPER_TREAT);
+        handheld(ModItems.TRAINING_TREAT);
+        handheld(ModItems.WILD_TREAT);
 
         radar(ModItems.CREATIVE_RADAR);
         radar(ModItems.RADAR);
 
         generated(ModItems.CAPE);
-//        generated(CatItems.CAPE_COLOURED);
+        generated(ModItems.CARDBOARD);
+        generated(ModItems.CATNIP);
+        generated(ModItems.CATNIP_SEEDS);
+        generated(ModItems.CAT_CHARM);
+        generated(ModItems.CAT_GUT);
+        generated(ModItems.CHEESE_WEDGE);
         generated(ModItems.COLLAR_SHEARS);
         generated(ModItems.CREATIVE_COLLAR);
-        generated(ModItems.CAT_CHARM);
-//        generated(CatItems.GUARD_SUIT);
-//        generated(CatItems.LEATHER_JACKET);
         generated(ModItems.MULTICOLOURED_COLLAR);
         generated(ModItems.OWNER_CHANGE);
         generated(ModItems.RADIO_COLLAR);
@@ -57,23 +60,21 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.SUNGLASSES);
         generated(ModItems.TREAT_BAG);
         generated(ModItems.WOOL_COLLAR);
-        generated(ModItems.CATNIP);
-        generated(ModItems.CATNIP_SEEDS);
-        generated(ModItems.CARDBOARD);
         generated(ModItems.YARN);
-//        generated(ModItems.RODENT);
-        generated(ModItems.CHEESE_WEDGE);
-        generated(ModItems.CAT_GUT);
+//        generated(CatItems.CAPE_COLOURED);
+//        generated(CatItems.GUARD_SUIT);
+//        generated(CatItems.LEATHER_JACKET);
 //        generated(ModItems.LASAGNA);
+//        generated(ModItems.RODENT);
 
-        blockItem(ModBlocks.CAT_TREE);
-        blockItem(ModBlocks.PET_DOOR);
-        blockItem(ModBlocks.CAT_BOWL);
-        blockItem(ModBlocks.LITTERBOX);
-        blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
+        blockItem(ModBlocks.CAT_BOWL);
+        blockItem(ModBlocks.CAT_TREE);
         blockItem(ModBlocks.CHEESE_WHEEL);
+        blockItem(ModBlocks.LITTERBOX);
         blockItem(ModBlocks.MOUSE_TRAP, "_triggered");
+        blockItem(ModBlocks.PET_DOOR);
+        blockItem(ModBlocks.WILD_CATNIP);
     }
 
     private ResourceLocation itemTexture(Supplier<? extends ItemLike> item) {
