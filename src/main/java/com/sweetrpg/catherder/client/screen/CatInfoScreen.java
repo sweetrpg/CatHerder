@@ -136,7 +136,6 @@ public class CatInfoScreen extends Screen {
                 list.addAll(ScreenUtil.splitInto(str, 150, CatInfoScreen.this.font));
                 if(CatInfoScreen.this.cat.getMode() == EnumMode.WANDERING) {
 
-
                     if(CatInfoScreen.this.cat.getBowlPos().isPresent()) {
                         double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBowlPos().get());
 
@@ -210,6 +209,22 @@ public class CatInfoScreen extends Screen {
 //        }
 //    }
 
+    public void renderTalentToolTip(Talent talent, Button button, PoseStack stack, int mouseX, int mouseY) {
+        List<Component> list = new ArrayList<>();
+
+        list.add(new TranslatableComponent(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
+        if(button.active) {
+            list.add(new TextComponent("Level: " + CatInfoScreen.this.cat.getCatLevel(talent)));
+            list.add(new TextComponent("--------------------------------").withStyle(ChatFormatting.GRAY));
+            list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, CatInfoScreen.this.font));
+        }
+        else {
+            list.add(new TextComponent("Talent disabled").withStyle(ChatFormatting.RED));
+        }
+
+        CatInfoScreen.this.renderComponentTooltip(stack, list, mouseX, mouseY);
+    }
+
     private void recalculatePage(int perPage) {
         this.talentWidgets.forEach(this::removeWidget);
         this.talentWidgets.clear();
@@ -222,34 +237,43 @@ public class CatInfoScreen extends Screen {
             if(index >= this.talentList.size()) {break;}
             Talent talent = this.talentList.get(index);
 
-            Button button = new TalentButton(25, 10 + i * 21, 20, 20, new TextComponent("+"), talent, (btn) -> {
-                int level = CatInfoScreen.this.cat.getCatLevel(talent);
-                if(level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
-                    PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
-                }
-
-            }) {
-                @Override
-                public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
-                    List<Component> list = new ArrayList<>();
-
-                    list.add(new TranslatableComponent(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
-                    if(this.active) {
-                        list.add(new TextComponent("Level: " + CatInfoScreen.this.cat.getCatLevel(talent)));
-                        list.add(new TextComponent("--------------------------------").withStyle(ChatFormatting.GRAY));
-                        list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, CatInfoScreen.this.font));
+            // decrease button (-)
+            {
+                Button button = new TalentButton(25, 10 + i * 21, 20, 20, new TextComponent("-"), talent, false, (btn) -> {
+                    int level = CatInfoScreen.this.cat.getCatLevel(talent);
+                    if(level > 0) {
+                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
                     }
-                    else {
-                        list.add(new TextComponent("Talent disabled").withStyle(ChatFormatting.RED));
+                }) {
+                    @Override
+                    public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
+                        renderTalentToolTip(talent, this, stack, mouseX, mouseY);
                     }
+                };
+                button.active = ConfigHandler.TALENT.getFlag(talent);
 
-                    CatInfoScreen.this.renderComponentTooltip(stack, list, mouseX, mouseY);
-                }
-            };
-            button.active = ConfigHandler.TALENT.getFlag(talent);
+                this.talentWidgets.add(button);
+                this.addRenderableWidget(button);
+            }
 
-            this.talentWidgets.add(button);
-            this.addRenderableWidget(button);
+            // increase button (+)
+            {
+                Button button = new TalentButton(47, 10 + i * 21, 20, 20, new TextComponent("+"), talent, true, (btn) -> {
+                    int level = CatInfoScreen.this.cat.getCatLevel(talent);
+                    if(level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
+                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
+                    }
+                }) {
+                    @Override
+                    public void renderToolTip(PoseStack stack, int mouseX, int mouseY) {
+                        renderTalentToolTip(talent, this, stack, mouseX, mouseY);
+                    }
+                };
+                button.active = ConfigHandler.TALENT.getFlag(talent);
+
+                this.talentWidgets.add(button);
+                this.addRenderableWidget(button);
+            }
         }
     }
 
@@ -312,7 +336,9 @@ public class CatInfoScreen extends Screen {
         this.renderables.forEach(widget -> {
             if(widget instanceof TalentButton) {
                 TalentButton talBut = (TalentButton) widget;
-                this.font.draw(stack, I18n.get(talBut.talent.getTranslationKey()), talBut.x + 25, talBut.y + 7, 0xFFFFFF);
+                if(talBut.showTalentName) {
+                    this.font.draw(stack, I18n.get(talBut.talent.getTranslationKey()), talBut.x + 25, talBut.y + 7, 0xFFFFFF);
+                }
             }
         });
 
@@ -343,10 +369,12 @@ public class CatInfoScreen extends Screen {
     private static class TalentButton extends Button {
 
         protected Talent talent;
+        protected boolean showTalentName;
 
-        private TalentButton(int x, int y, int widthIn, int heightIn, Component buttonText, Talent talent, Consumer<TalentButton> onPress) {
+        private TalentButton(int x, int y, int widthIn, int heightIn, Component buttonText, Talent talent, boolean showTalentName, Consumer<TalentButton> onPress) {
             super(x, y, widthIn, heightIn, buttonText, button -> onPress.accept((TalentButton) button));
             this.talent = talent;
+            this.showTalentName = showTalentName;
         }
 
     }
