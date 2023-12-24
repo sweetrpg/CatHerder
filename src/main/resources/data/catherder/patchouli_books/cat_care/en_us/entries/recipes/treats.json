@@ -1,7 +1,7 @@
 {
   "name": "Treats",
   "icon": "catherder:training_treat",
-  "category": "catherder:items",
+  "category": "catherder:recipes",
   "pages": [
     {
       "type": "patchouli:text",

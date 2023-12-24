@@ -5,12 +5,33 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "title": "Training Treat",
+      "text": "This is the first treat you use to level up your cat."
     },
     {
-      "type": "patchouli:crafting",
-      "title": "Training Treat",
-      "recipe": "catherder:training_treat"
+      "type": "patchouli:text",
+      "title": "Super Treat",
+      "text": "Once you've leveled your cat up to the maximum from the basic Training Treat, this is the treat you use."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Master Treat",
+      "text": "The last tier of training for your cat."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wild Treat",
+      "text": "This is a bonus leveling treat. Use this once you've leveled your cat all the way up."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Breeding Treat",
+      "text": "This is the treat you use to enable your cats to make more cats!"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Treat Bag",
+      "text": "A place to keep your treats, so they don't take up all your inventory space."
     }
   ]
 }

@@ -1,10 +1,91 @@
 {
   "name": "Miscellaneous Items",
-  "icon": "catherder:cat_toy",
+  "icon": "catherder:litter_scoop",
   "category": "catherder:items",
   "pages": [
     {
       "type": "patchouli:text",
+      "title": "Enlarger",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Shrinker",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cardboard",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cardboard Box",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cat Gut",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Catnip",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Catnip Seeds",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wild Catnip",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheese Wedge",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheese Wheel",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Collar Shears",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Creative Collar",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Creative Radar",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mousetrap",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Owner Change",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Radar",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Radio Collar",
       "text": "TODO"
     }
   ]

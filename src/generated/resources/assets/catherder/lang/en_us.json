@@ -217,7 +217,7 @@
   "talent.catherder.poison_fang": "Poison Fang",
   "talent.catherder.poison_fang.description": "Your cat's attacks will poison their target, and the poison's duration increases with level. At level 3 your cat becomes immune to poison, and mastering this skill allows you to cleanse yourself of all potion effects, including poison, by right-clicking on your cat with a spider eye, at the cost of 30 NP.",
   "talent.catherder.pounce": "Pounce",
-  "talent.catherder.pounce.description": "",
+  "talent.catherder.pounce.description": "Your cat can sneak up on mobs quietly and do extra damage on its first attack.",
   "talent.catherder.quick_healer": "Quick Healer",
   "talent.catherder.quick_healer.description": "Improves the rate at which your cat heals without needing to rest Mastering the skill will heal your cat 50%% faster when sitting.",
   "talent.catherder.razor_sharp_claws": "Razor-sharp Claws",

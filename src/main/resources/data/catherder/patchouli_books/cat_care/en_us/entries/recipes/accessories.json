@@ -1,6 +1,6 @@
 {
   "name": "Accessories",
-  "icon": "catherder:training_treat",
+  "icon": "catherder:cardboard_box",
   "category": "catherder:recipes",
   "pages": [
     {
@@ -12,52 +12,52 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Cape",
+      "text": "You can make a cape to put on your cat, using any color of wool. You'll love it; not sure the cat will...."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Cape",
+      "title": "Recipe",
       "recipe": "catherder:cape"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Multi-colored Collar",
+      "text": "Creates a colorful collar for your kitty!"
     },
     {
       "type": "patchouli:crafting",
-      "title": "Multi-colored Collar",
+      "title": "Recipe",
       "recipe": "catherder:multicolored_collar"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Radio Collar",
+      "text": "The radio collar will help you keep track of your cat when you're far away or get lost."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Radio Collar",
+      "title": "Recipe",
       "recipe": "catherder:radio_collar"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Spotted Collar",
+      "text": "Another type of collar for your cat."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Spotted Collar",
+      "title": "Recipe",
       "recipe": "catherder:spotted_collar"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Wool Collar",
+      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Wool Collar",
+      "title": "Recipe",
       "recipe": "catherder:wool_collar"
     }
   ]
