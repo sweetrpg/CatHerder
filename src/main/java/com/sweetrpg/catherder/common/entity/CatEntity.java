@@ -2051,13 +2051,30 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(TALENTS.get(), map);
     }
 
-    public InteractionResult setTalentLevel(Talent talent, int level) {
-        if(0 > level || level > talent.getMaxLevel()) {
-            return InteractionResult.FAIL;
+    public InteractionResult adjustTalentLevel(Talent talent, int adjustment) {
+
+        int currentLevel = this.getCatLevel(talent);
+int newLevel = currentLevel + adjustment;
+
+        int levelCost = 0;
+        if(adjustment < 0) {
+            // handle refund of points
+            levelCost = talent.getLevelCost(currentLevel);
+            if(newLevel < 0) {
+                return InteractionResult.FAIL;
+            }
+        }
+        else {
+            levelCost = talent.getLevelCost(newLevel);
+            if(newLevel > talent.getMaxLevel() ||
+            !this.canSpendPoints(levelCost)) {
+                return InteractionResult.FAIL;
+            }
         }
 
         List<TalentInstance> activeTalents = this.getTalentMap();
 
+        // find an instance of the talent
         TalentInstance inst = null;
         for(TalentInstance activeInst : activeTalents) {
             if(activeInst.of(talent)) {
@@ -2066,25 +2083,32 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
+        // if there is no instance...
         if(inst == null) {
-            if(level == 0) {
+            if(newLevel == 0) {
+                // ... do nothing, because the level is 0
                 return InteractionResult.PASS;
             }
 
-            inst = talent.getDefault(level);
+            // create the talent and add it to the list of active talents
+            inst = talent.getDefault(newLevel);
             activeTalents.add(inst);
             inst.init(this);
         }
         else {
+            // get the current level of the talent
             int previousLevel = inst.level();
-            if(previousLevel == level) {
+            if(previousLevel == newLevel) {
+                // if the level isn't changing, do nothing
                 return InteractionResult.PASS;
             }
 
-            inst.setLevel(level);
+            // set the new level
+            inst.setLevel(newLevel);
             inst.set(this, previousLevel);
 
-            if(level == 0) {
+            if(newLevel == 0) {
+                // remove the talent if the level becomes 0
                 activeTalents.remove(inst);
             }
         }
@@ -2207,7 +2231,7 @@ public class CatEntity extends AbstractCatEntity {
     private final int getSpendablePointsInternal() {
         int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.WILD);
         for(TalentInstance entry : this.getTalentMap()) {
-            totalPoints -= entry.getTalent().getCummulativeCost(entry.level());
+            totalPoints -= entry.getTalent().getCumulativeCost(entry.level());
         }
         return totalPoints;
     }

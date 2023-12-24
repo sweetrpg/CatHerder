@@ -202,7 +202,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_GUI_NEXT_PAGE = "catgui.nextpage";
     public static final String TRANSLATION_KEY_GUI_NEW_NAME = "catgui.newname";
     public static final String TRANSLATION_KEY_GUI_LEVEL = "catgui.level";
-    public static final String TRANSLATION_KEY_GUI_LEVEL_DIRE = "catgui.leveldire";
+    public static final String TRANSLATION_KEY_GUI_LEVEL_WILD = "catgui.level.wild";
     public static final String TRANSLATION_KEY_GUI_POINTS_LEFT = "catgui.pointsleft";
 //    public static final String TRANSLATION_KEY_GUI_TEXTURE_INDEX = "catgui.textureindex";
     public static final String TRANSLATION_KEY_GUI_OBEY_OTHERS = "catgui.obeyothers";

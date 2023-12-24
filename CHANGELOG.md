@@ -9,6 +9,7 @@
 - `[FIX]` Add cat tree and cat toy to Item Physics.
 - `[NEW]` Holding the shift key while looking at the cat will now show maximum hunger as well as current.
 - `[NEW]` Added litter scoop and new configuration option to enable litter box maintenance.
+- `[NEW]` Added ability to down-level talents from the cat info screen.
 
 ## 0.0.75-alpha
 
