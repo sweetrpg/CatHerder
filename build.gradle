@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         maven { // PARCHMENT
             url = "https://maven.parchmentmc.org"
         }
@@ -30,6 +31,7 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
 // apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
@@ -42,7 +44,7 @@ println "Pipeline branch: " + (System.getenv('CI_COMMIT_BRANCH') ?: 'NONE')
 group = 'com.sweetrpg'
 archivesBaseName = "CatHerder-${project.target_mc_version}"
 //version = (grgit.describe(longDescr: true, tags: true) ?: '0-0-0').split('-').with { it -> "${it[0]}.${it[1]}" }
-version = System.getenv("CATHERDER_VERSION") ?: new File(".release-info/1.20/VERSION").text.trim()
+version = System.getenv("CATHERDER_VERSION") ?: new File(".release-info/1.19/VERSION").text.trim()
 
 println "Project version: ${version}"
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
