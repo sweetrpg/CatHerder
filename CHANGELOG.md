@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.??-alpha
+## 0.1.0
 
 - `[NEW]` Cat trees now support different wool types to make different colored trees.
 - `[NEW]` Cat trees can be dyed to change their color.
@@ -10,6 +10,7 @@
 - `[NEW]` Holding the shift key while looking at the cat will now show maximum hunger as well as current.
 - `[NEW]` Added litter scoop and new configuration option to enable litter box maintenance.
 - `[NEW]` Added ability to down-level talents from the cat info screen.
+- `[DEV]` Remove alpha designation.
 
 ## 0.0.75-alpha
 
