@@ -1,0 +1,21 @@
+{
+  "name": "Cat Food",
+  "icon": "catherder:salmon",
+  "category": "catherder:food",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheese Wedge",
+      "text": "You get these from a Cheese Wheel. You can eat them, or you can use it as bait for a mouse trap."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheese Wheel",
+      "text": "It's cheese! Who doesn't like cheese?"
+    }
+  ]
+}

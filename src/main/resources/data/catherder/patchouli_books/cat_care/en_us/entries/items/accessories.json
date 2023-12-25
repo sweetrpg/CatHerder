@@ -5,7 +5,47 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "Various things you can make to customize your cat."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Radio Collar",
+      "text": "The radio collar will help you keep track of your cat when you're far away or get lost.",
+      "item": {
+        "item": "catherder:radio_collar"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cape",
+      "text": "You can make a cape to put on your cat, using any color of wool. You'll love it; not sure the cat will....",
+      "item": {
+        "item": "catherder:cape"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Multi-colored Collar",
+      "text": "Creates a colorful collar for your kitty!",
+      "item": {
+        "item": "catherder:multicolored_collar"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Spotted Collar",
+      "text": "Another type of collar for your cat.",
+      "item": {
+        "item": "catherder:spotted_collar"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wool Collar",
+      "item": {
+        "item": "catherder:wool_collar"
+      },
+      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars."
     }
   ]
 }

@@ -8,56 +8,28 @@
       "text": "You can outfit your cat with accessories to make them look stylish and cool."
     },
     {
-      "type": "patchouli:empty"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cape",
-      "text": "You can make a cape to put on your cat, using any color of wool. You'll love it; not sure the cat will...."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Cape",
       "recipe": "catherder:cape"
     },
     {
-      "type": "patchouli:text",
-      "title": "Multi-colored Collar",
-      "text": "Creates a colorful collar for your kitty!"
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Multi-colored Collar",
       "recipe": "catherder:multicolored_collar"
     },
     {
-      "type": "patchouli:text",
-      "title": "Radio Collar",
-      "text": "The radio collar will help you keep track of your cat when you're far away or get lost."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Radio Collar",
       "recipe": "catherder:radio_collar"
     },
     {
-      "type": "patchouli:text",
-      "title": "Spotted Collar",
-      "text": "Another type of collar for your cat."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Spotted Collar",
       "recipe": "catherder:spotted_collar"
     },
     {
-      "type": "patchouli:text",
-      "title": "Wool Collar",
-      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Wool Collar",
       "recipe": "catherder:wool_collar"
     }
   ]

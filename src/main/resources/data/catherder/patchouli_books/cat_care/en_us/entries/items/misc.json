@@ -21,37 +21,12 @@
     {
       "type": "patchouli:text",
       "title": "Cardboard Box",
-      "text": "TODO"
+      "text": "The cardboard box is one of your cat's favorite things to play with. It doesn't matter what came in it, it's a box!"
     },
     {
       "type": "patchouli:text",
       "title": "Cat Gut",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Catnip",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Catnip Seeds",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Wild Catnip",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cheese Wedge",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cheese Wheel",
-      "text": "TODO"
+      "text": "If your cat dies, this might drop."
     },
     {
       "type": "patchouli:text",

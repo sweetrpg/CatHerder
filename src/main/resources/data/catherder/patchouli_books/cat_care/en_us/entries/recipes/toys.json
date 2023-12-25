@@ -31,13 +31,8 @@
       "recipe": "catherder:yarn"
     },
     {
-      "type": "patchouli:text",
-      "title": "Cardboard Box",
-      "text": "The cardboard box is one of your cat's favorite things to play with. It doesn't matter what came in it, it's a box!"
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Cardboard Box",
       "recipe": "catherder:cardboard_box"
     }
   ]
