@@ -1,17 +1,15 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.common.registry.ModTags;
-import com.sweetrpg.catherder.CatHerder;
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
+import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.registry.ModTalents;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -30,7 +28,9 @@ import java.util.function.Predicate;
 
 public class PackCatTalent extends TalentInstance {
 
-    public static Capability<PackCatItemHandler> PACK_CAT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});;
+    public static Capability<PackCatItemHandler> PACK_CAT_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    });
+    ;
 
     private PackCatItemHandler packCatItemHandler;
     private LazyOptional<?> lazyPackCatHandler;
@@ -52,16 +52,17 @@ public class PackCatTalent extends TalentInstance {
 
     @Override
     public void tick(AbstractCatEntity catIn) {
-        if (catIn.isAlive() && !catIn.level.isClientSide && this.level() >= 5) {
+        if(catIn.isAlive() && !catIn.level.isClientSide && this.level() >= 5) {
             List<ItemEntity> list = catIn.level.getEntitiesOfClass(ItemEntity.class, catIn.getBoundingBox().inflate(2.5D, 1D, 2.5D), SHOULD_PICKUP_ENTITY_ITEM);
 
-            if (!list.isEmpty()) {
-                for (ItemEntity entityItem : list) {
+            if(!list.isEmpty()) {
+                for(ItemEntity entityItem : list) {
                     ItemStack remaining = InventoryUtil.addItem(this.packCatItemHandler, entityItem.getItem());
 
-                    if (!remaining.isEmpty()) {
+                    if(!remaining.isEmpty()) {
                         entityItem.setItem(remaining);
-                    } else {
+                    }
+                    else {
                         entityItem.discard();
                         catIn.playSound(SoundEvents.ITEM_PICKUP, 0.25F, ((catIn.level.random.nextFloat() - catIn.level.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                     }
@@ -93,7 +94,7 @@ public class PackCatTalent extends TalentInstance {
     @Override
     public void set(AbstractCatEntity cat, int preLevel) {
         // No need to drop anything if cat didn't have pack cat
-        if (preLevel > 0 && this.level == 0) {
+        if(preLevel > 0 && this.level == 0) {
             this.dropInventory(cat);
         }
     }
@@ -102,7 +103,7 @@ public class PackCatTalent extends TalentInstance {
     public void dropInventory(AbstractCatEntity catIn) {
         //TODO either drop inventory or save to respawn data, currently does both
         // No need to drop anything if cat didn't have pack cat
-        for (int i = 0; i < this.packCatItemHandler.getSlots(); ++i) {
+        for(int i = 0; i < this.packCatItemHandler.getSlots(); ++i) {
             Containers.dropItemStack(catIn.level, catIn.getX(), catIn.getY(), catIn.getZ(), this.packCatItemHandler.getStackInSlot(i));
             this.packCatItemHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
@@ -128,7 +129,7 @@ public class PackCatTalent extends TalentInstance {
 
     @Override
     public <T> LazyOptional<T> getCapability(AbstractCatEntity catIn, Capability<T> cap, Direction side) {
-        if (cap == PackCatTalent.PACK_CAT_CAPABILITY) {
+        if(cap == PackCatTalent.PACK_CAT_CAPABILITY) {
             return (LazyOptional<T>) this.lazyPackCatHandler;
         }
         return null;

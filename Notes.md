@@ -31,16 +31,16 @@
 # Talents
 
 * Bed finder: keep
-* Black pelt -> Tomcat
+* Black pelt -> Pounce
 * Creeper sweeper: keep
 * Fisher: keep
 * Guard dog -> Catlike reflexes: dodge attacks
 * Happy eater: remove rotten flesh, replace meat with cooked or raw fish, add chicken, rabbit
-* Hell hound -> ???
-* Hunter -> Bird catcher
+* Hell hound -> Hell beast
+* Hunter -> Tomcat
 * Doggy dash -> Cheetah speed
 * Puppy eyes -> Nermal
-* Doggy torch -> ???
+* Doggy torch -> Cat torch
 * Pack puppy -> Pack cat
 * Pest fighter: keep
 * Pillow paw -> Super jump
@@ -51,7 +51,6 @@
 * Shepherd dog: remove
 * Swimmer dog: remove
 * Wolf mount -> Mount
-* Pounce: new
 
 # Integrations
 

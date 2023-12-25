@@ -1,10 +1,10 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.api.registry.Talent;
-import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatFoodHandler;
 import com.sweetrpg.catherder.api.inferface.ICatFoodPredicate;
+import com.sweetrpg.catherder.api.registry.Talent;
+import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
@@ -38,15 +38,15 @@ public class HappyEaterTalent extends TalentInstance implements ICatFoodHandler 
 
     @Override
     public boolean canConsume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
-        if (this.level() >= 3) {
+        if(this.level() >= 3) {
 
             Item item = stackIn.getItem();
 
-            if (item == Items.ROTTEN_FLESH) {
+            if(item == Items.ROTTEN_FLESH) {
                 return true;
             }
 
-            if (this.level() >= 5 && item.isEdible() && (stackIn.is(ItemTags.FISHES) || stackIn.is(ModTags.MEAT))) {
+            if(this.level() >= 5 && item.isEdible() && (stackIn.is(ItemTags.FISHES) || stackIn.is(ModTags.MEAT))) {
                 return true;
             }
         }
@@ -56,17 +56,17 @@ public class HappyEaterTalent extends TalentInstance implements ICatFoodHandler 
 
     @Override
     public InteractionResult consume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
-        if (this.level() >= 3) {
+        if(this.level() >= 3) {
 
             Item item = stackIn.getItem();
 
-            if (item == Items.ROTTEN_FLESH) {
+            if(item == Items.ROTTEN_FLESH) {
                 catIn.addHunger(30);
                 catIn.consumeItemFromStack(entityIn, stackIn);
                 return InteractionResult.SUCCESS;
             }
 
-            if (this.level() >= 5 && item.isEdible() && (stackIn.is(ItemTags.FISHES) || stackIn.is(ModTags.MEAT))) {
+            if(this.level() >= 5 && item.isEdible() && (stackIn.is(ItemTags.FISHES) || stackIn.is(ModTags.MEAT))) {
                 catIn.addHunger(item.getFoodProperties().getNutrition() * 5);
                 catIn.consumeItemFromStack(entityIn, stackIn);
                 return InteractionResult.SUCCESS;

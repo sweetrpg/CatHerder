@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.talent;
 
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResultHolder;
@@ -44,18 +44,18 @@ public class CatlikeReflexesTalent extends TalentInstance {
 
     @Override
     public InteractionResultHolder<Float> attackEntityFrom(AbstractCatEntity catIn, DamageSource damageSource, float damage) {
-        if (catIn.level.isClientSide) {
+        if(catIn.level.isClientSide) {
             return InteractionResultHolder.pass(damage);
         }
 
         Entity entity = damageSource.getEntity();
 
-        if (entity != null) {
-            int timeLeft =  this.cooldown - catIn.tickCount;
-            if (timeLeft <= 0) {
+        if(entity != null) {
+            int timeLeft = this.cooldown - catIn.tickCount;
+            if(timeLeft <= 0) {
                 int blockChance = this.level() + (this.level() >= 5 ? 1 : 0);
 
-                if (catIn.getRandom().nextInt(12) < blockChance) {
+                if(catIn.getRandom().nextInt(12) < blockChance) {
                     this.cooldown = catIn.tickCount + 10;
                     catIn.playSound(SoundEvents.ITEM_BREAK, catIn.getSoundVolume() / 2, (catIn.getRandom().nextFloat() - catIn.getRandom().nextFloat()) * 0.2F + 1.0F);
                     return InteractionResultHolder.fail(0F);
