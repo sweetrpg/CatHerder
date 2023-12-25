@@ -18,7 +18,7 @@ on:
       - settings.gradle
 
 jobs:
-  build:
+  release:
 
     runs-on: ubuntu-latest
 
