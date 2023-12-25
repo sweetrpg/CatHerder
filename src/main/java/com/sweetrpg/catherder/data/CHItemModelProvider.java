@@ -53,7 +53,7 @@ public class CHItemModelProvider extends ItemModelProvider {
         generated(ModItems.CHEESE_WEDGE);
         generated(ModItems.COLLAR_SHEARS);
         generated(ModItems.CREATIVE_COLLAR);
-        generated(ModItems.MULTICOLOURED_COLLAR);
+        generated(ModItems.MULTICOLORED_COLLAR);
         generated(ModItems.OWNER_CHANGE);
         generated(ModItems.RADIO_COLLAR);
         generated(ModItems.SPOTTED_COLLAR);

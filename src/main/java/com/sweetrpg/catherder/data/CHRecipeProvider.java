@@ -141,7 +141,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('S', Items.STRING)
                 .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer, Util.getResource("spotted_collar_alt"));
-        ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLOURED_COLLAR.get(), 1)
+        ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLORED_COLLAR.get(), 1)
                 .requires(ModItems.WOOL_COLLAR.get())
                 .requires(Items.STRING)
                 .requires(Items.BLUE_DYE)
