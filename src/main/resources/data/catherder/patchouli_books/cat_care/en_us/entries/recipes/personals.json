@@ -1,6 +1,6 @@
 {
   "name": "Personal Items",
-  "icon": "catherder:training_treat",
+  "icon": "catherder:cat_tree",
   "category": "catherder:recipes",
   "pages": [
     {
@@ -12,52 +12,52 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Cardboard Box",
-      "text": "The cardboard box is one of your cat's favorite things to play with. It doesn't matter what came in it, it's a box!"
-    },
-    {
-      "type": "patchouli:crafting",
-      "title": "Cardboard Box",
-      "recipe": "catherder:cardboard_box"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:crafting",
       "title": "Food Bowl",
+      "text": "This is where you provide your cat some nourishment."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Recipe",
       "recipe": "catherder:cat_bowl"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Cat Tree",
+      "text": "This is your cat's personal place to sleep.$(br2)Right-click with an empty hand to assign your cat to the bed. After you do this, if your cat uses up one of its lives, you can revive it here."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Cat Tree",
+      "title": "Recipe",
       "recipe": "catherder:cat_tree"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Litterbox",
+      "text": "Give your cat a place to relieve itself.$(br2)If you have litterbox maintenance enabled, your cat will leave you a little something after it uses it."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Litterbox",
+      "title": "Recipe",
       "recipe": "catherder:litter_box"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Litter Scoop",
+      "text": "If you have litterbox maintenance enabled, the scoop will clean a dirty box."
     },
     {
       "type": "patchouli:crafting",
+      "title": "Recipe",
+      "recipe": "catherder:litter_scoop"
+    },
+    {
+      "type": "patchouli:text",
       "title": "Pet Door",
+      "text": "Add a pet door to your structure to give your pet access.$(br2)You can also lock/unlock it by right-clicking."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Recipe",
       "recipe": "catherder:pet_door"
     }
   ]

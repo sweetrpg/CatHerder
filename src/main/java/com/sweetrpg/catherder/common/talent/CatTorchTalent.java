@@ -1,10 +1,10 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.CatHerder;
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.common.inventory.PackCatItemHandler;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -21,22 +21,22 @@ public class CatTorchTalent extends TalentInstance {
 
     @Override
     public void tick(AbstractCatEntity catIn) {
-        if (catIn.tickCount % 10 == 0 && catIn.isTame()) {
+        if(catIn.tickCount % 10 == 0 && catIn.isTame()) {
 
             BlockPos pos = catIn.blockPosition();
             BlockState torchState = Blocks.TORCH.defaultBlockState();
 
-            if (catIn.level.getMaxLocalRawBrightness(catIn.blockPosition()) < 8 && catIn.level.isEmptyBlock(pos) && torchState.canSurvive(catIn.level, pos)) {
-                PackCatItemHandler inventory = catIn.getTalent(CatHerder.PACK_CAT)
-                                                    .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
+            if(catIn.level.getMaxLocalRawBrightness(catIn.blockPosition()) < 8 && catIn.level.isEmptyBlock(pos) && torchState.canSurvive(catIn.level, pos)) {
+                PackCatItemHandler inventory = catIn.getTalent(ModTalents.PACK_CAT)
+                        .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
 
                 // If null might be because no pack cat
-                if (this.level() >= 5) {
+                if(this.level() >= 5) {
                     catIn.level.setBlockAndUpdate(pos, torchState);
                 }
-                else if (inventory != null) { // If null might be because no pack cat
+                else if(inventory != null) { // If null might be because no pack cat
                     Pair<ItemStack, Integer> foundDetails = InventoryUtil.findStack(inventory, (stack) -> stack.getItem() == Items.TORCH);
-                    if (foundDetails != null && !foundDetails.getLeft().isEmpty()) {
+                    if(foundDetails != null && !foundDetails.getLeft().isEmpty()) {
                         ItemStack torchStack = foundDetails.getLeft();
                         catIn.consumeItemFromStack(catIn, torchStack);
                         inventory.setStackInSlot(foundDetails.getRight(), torchStack);

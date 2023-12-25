@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.talent;
 
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import net.minecraft.world.InteractionResultHolder;
 
 public class QuickHealerTalent extends TalentInstance {
@@ -13,14 +13,16 @@ public class QuickHealerTalent extends TalentInstance {
 
     @Override
     public InteractionResultHolder<Integer> healingTick(AbstractCatEntity catIn, int healingTick) {
-        if (this.level() > 0) {
-            if (catIn.isInSittingPose() && this.level() >= 5) {
-                if (catIn.getNoActionTime() > 100) {
+        if(this.level() > 0) {
+            if(catIn.isInSittingPose() && this.level() >= 5) {
+                if(catIn.getNoActionTime() > 100) {
                     healingTick *= 15;
-                } else {
+                }
+                else {
                     healingTick *= 10;
                 }
-            } else {
+            }
+            else {
                 healingTick *= this.level();
             }
 

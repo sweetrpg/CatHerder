@@ -17,9 +17,9 @@ public enum EnumMode {
 
     private int index;
     private String saveName;
-    private String unlocalisedTip;
-    private String unlocalisedName;
-    private String unlocalisedInfo;
+    private String unlocalizedTip;
+    private String unlocalizedName;
+    private String unlocalizedInfo;
 
     public static final EnumMode[] VALUES = Arrays.stream(EnumMode.values()).sorted(Comparator.comparingInt(EnumMode::getIndex)).toArray(size -> {
         return new EnumMode[size];
@@ -29,12 +29,12 @@ public enum EnumMode {
         this(index, name, "cat.mode." + name, "cat.mode." + name + ".indicator", "cat.mode." + name + ".description");
     }
 
-    private EnumMode(int index, String mode, String unlocalisedName, String tip, String info) {
+    private EnumMode(int index, String mode, String unlocalizedName, String tip, String info) {
         this.index = index;
         this.saveName = mode;
-        this.unlocalisedName = unlocalisedName;
-        this.unlocalisedTip = tip;
-        this.unlocalisedInfo = info;
+        this.unlocalizedName = unlocalizedName;
+        this.unlocalizedTip = tip;
+        this.unlocalizedInfo = info;
     }
 
     public int getIndex() {
@@ -46,15 +46,15 @@ public enum EnumMode {
     }
 
     public String getTip() {
-        return this.unlocalisedTip;
+        return this.unlocalizedTip;
     }
 
-    public String getUnlocalisedName() {
-        return this.unlocalisedName;
+    public String getUnlocalizedName() {
+        return this.unlocalizedName;
     }
 
-    public String getUnlocalisedInfo() {
-        return this.unlocalisedInfo;
+    public String getUnlocalizedInfo() {
+        return this.unlocalizedInfo;
     }
 
     public void onModeSet(AbstractCatEntity cat, EnumMode prev) {

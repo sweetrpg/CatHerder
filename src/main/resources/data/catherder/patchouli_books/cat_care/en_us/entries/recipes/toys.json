@@ -1,7 +1,7 @@
 {
   "name": "Toys",
   "icon": "catherder:cat_toy",
-  "category": "catherder:items",
+  "category": "catherder:recipes",
   "pages": [
     {
       "type": "patchouli:text",
@@ -12,23 +12,28 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Cat Toy",
+      "text": "Your cat loves to play with stuff. Make this toy and throw it around, and your cat will bring it back to you."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Cat Toy",
+      "title": "Recipe",
       "recipe": "catherder:cat_toy"
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "title": "Yarn",
+      "text": "A ball of yarn that your kitty will unravel."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Yarn",
+      "title": "Recipe",
       "recipe": "catherder:yarn"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cardboard Box",
+      "recipe": "catherder:cardboard_box"
     }
   ]
 }

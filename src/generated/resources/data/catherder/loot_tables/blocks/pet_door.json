@@ -7,6 +7,19 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "structureId",
+                  "target": "catherder.structureId",
+                  "op": "replace"
+                }
+              ]
+            }
+          ],
           "name": "catherder:pet_door"
         }
       ],

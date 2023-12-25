@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.addon.biomesoplenty;
 
 import com.google.common.collect.Lists;
-import com.sweetrpg.catherder.api.impl.CasingMaterial;
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
+import com.sweetrpg.catherder.api.impl.StructureMaterial;
+import com.sweetrpg.catherder.api.registry.IStructureMaterial;
 import com.sweetrpg.catherder.common.addon.Addon;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -26,23 +26,23 @@ public class BiomesOPlentyAddon implements Addon {
             "willow_planks", "hellbark_planks", "jacaranda_planks", "mahogany_planks"
     };
 
-    public final void registerCasings(final RegistryEvent.Register<ICasingMaterial> event) {
+    public final void registerStructures(final RegistryEvent.Register<IStructureMaterial> event) {
         if(!this.shouldLoad()) {return;}
 
-        IForgeRegistry<ICasingMaterial> casingRegistry = event.getRegistry();
+        IForgeRegistry<IStructureMaterial> structureRegistry = event.getRegistry();
 
         for(String block : BLOCKS) {
             ResourceLocation rl = Util.getResource(MOD_ID, block);
             Supplier<Block> blockGet = () -> ForgeRegistries.BLOCKS.getValue(rl);
 
-            casingRegistry.register(new CasingMaterial(blockGet).setRegistryName(rl));
+            structureRegistry.register(new StructureMaterial(blockGet).setRegistryName(rl));
         }
     }
 
     @Override
     public void init() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addGenericListener(ICasingMaterial.class, this::registerCasings);
+        modEventBus.addGenericListener(IStructureMaterial.class, this::registerStructures);
     }
 
     @Override

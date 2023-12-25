@@ -1,11 +1,11 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel;
 import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.common.FoodValues;
 import com.sweetrpg.catherder.common.entity.accessory.DyeableAccessory;
 import com.sweetrpg.catherder.common.item.*;
-import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.world.item.*;
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, Constants.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, CatHerderAPI.MOD_ID);
 
 //    public static final RegistryObject<Item> CAT_TREE = register("cat_tree", () -> new BlockItem(ModBlocks.CAT_TREE.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
@@ -58,7 +58,7 @@ public class ModItems {
     public static final RegistryObject<Item> CAT_SMALLERER = registerSizer("small_catsizer", CatSizerItem.Type.SMALL);
     public static final RegistryObject<Item> CAT_BIGGERER = registerSizer("big_catsizer", CatSizerItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
-//    public static final RegistryObject<Item> LITTER_BOX = register("litter_box", LitterBoxItem::new);
+    public static final RegistryObject<Item> LITTER_SCOOP = register("litter_scoop", () -> new LitterScoopItem(new Item.Properties().durability(64).tab(ModItemGroups.GENERAL)));
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
 
     // other items
@@ -69,7 +69,7 @@ public class ModItems {
     public static final RegistryObject<DyeableAccessoryItem> WOOL_COLLAR = registerAccessoryDyed("wool_collar", ModAccessories.DYEABLE_COLLAR);
     public static final RegistryObject<AccessoryItem> CREATIVE_COLLAR = registerAccessory("creative_collar", ModAccessories.GOLDEN_COLLAR);
     public static final RegistryObject<AccessoryItem> SPOTTED_COLLAR = registerAccessory("spotted_collar", ModAccessories.SPOTTED_COLLAR);
-    public static final RegistryObject<AccessoryItem> MULTICOLOURED_COLLAR = registerAccessory("multicolored_collar", ModAccessories.MULTICOLORED_COLLAR);
+    public static final RegistryObject<AccessoryItem> MULTICOLORED_COLLAR = registerAccessory("multicolored_collar", ModAccessories.MULTICOLORED_COLLAR);
     public static final RegistryObject<AccessoryItem> CAPE = registerAccessory("cape", ModAccessories.CAPE);
     //    public static final RegistryObject<DyeableAccessoryItem> CAPE_COLOURED = registerAccessoryDyed("cape_coloured", CatAccessories.DYEABLE_CAPE);
     public static final RegistryObject<AccessoryItem> SUNGLASSES = registerAccessory("sunglasses", ModAccessories.SUNGLASSES);

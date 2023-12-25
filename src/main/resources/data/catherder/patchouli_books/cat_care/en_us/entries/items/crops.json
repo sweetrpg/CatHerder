@@ -5,7 +5,18 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "title": "Catnip",
+      "text": "Feed this to your cat to make it go briefly crazy. You also need this to make some other items."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Catnip Seeds",
+      "text": "These are what you need to plant catnip in your farm."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wild Catnip",
+      "text": "You can find patches of catnip in the wild. When you break it, you'll get seeds and maybe some other stuff."
     }
   ]
 }

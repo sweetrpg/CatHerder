@@ -78,7 +78,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -125,8 +124,9 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.BED_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<Integer>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER.get().getSerializer()));
 
     public final Map<Integer, Object> objects = new HashMap<>();
@@ -153,7 +153,7 @@ public class CatEntity extends AbstractCatEntity {
     private Goal catnipGoal;
     private int litterboxCooldown;
     public static final int MIN_CAT_SIZE = 1;
-    public static final int MAX_CAT_SIZE = 7;
+    public static final int MAX_CAT_SIZE = 5;
 
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -177,6 +177,7 @@ public class CatEntity extends AbstractCatEntity {
         MODE.get();
         CAT_TREE_LOCATION.get();
         CAT_BOWL_LOCATION.get();
+        LITTERBOX_LOCATION.get();
         ORIGINAL_BREED.get();
     }
 
@@ -197,6 +198,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(LITTERBOX_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
 //        this.entityData.define(IS_LYING, false);
         this.entityData.define(RELAX_STATE_ONE, false);
     }
@@ -212,6 +214,7 @@ public class CatEntity extends AbstractCatEntity {
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
 //        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
@@ -523,8 +526,8 @@ public class CatEntity extends AbstractCatEntity {
             return InteractionResult.FAIL;
         }
 
-        this.catnipCooldown = 4000;
-        this.catnipTick = 400;
+        this.catnipCooldown = 4000 + ((this.getRandom().nextInt() % 10) * 100);
+        this.catnipTick = 400 + ((this.getRandom().nextInt() % 3) * 100);
 //        this.setSpeed(2);
 //        this.setSprinting(true);
 //        this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_HEARTS);
@@ -1548,6 +1551,7 @@ public class CatEntity extends AbstractCatEntity {
             e.printStackTrace();
         }
 
+        // cat tree
         DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
 
         try {
@@ -1570,6 +1574,7 @@ public class CatEntity extends AbstractCatEntity {
 
         this.entityData.set(CAT_TREE_LOCATION.get(), bedsData);
 
+        // cat bowl
         DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
 
         try {
@@ -1591,6 +1596,29 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         this.entityData.set(CAT_BOWL_LOCATION.get(), bowlsData);
+
+        // litterbox
+        DimensionDependantArg<Optional<BlockPos>> litterboxData = this.entityData.get(LITTERBOX_LOCATION.get()).copyEmpty();
+
+        try {
+            if(compound.contains("litterbox", Tag.TAG_LIST)) {
+                ListTag litterboxList = compound.getList("litterbox", Tag.TAG_COMPOUND);
+
+                for(int i = 0; i < litterboxList.size(); i++) {
+                    CompoundTag litterboxNBT = litterboxList.getCompound(i);
+                    ResourceLocation loc = NBTUtil.getResourceLocation(litterboxNBT, "dim");
+                    ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
+                    Optional<BlockPos> pos = NBTUtil.getBlockPos(litterboxNBT, "pos");
+                    litterboxData.put(type, pos);
+                }
+            }
+        }
+        catch(Exception e) {
+            CatHerder.LOGGER.error("Failed to load litterboxes: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        this.entityData.set(LITTERBOX_LOCATION.get(), litterboxData);
 
         try {
             this.statsTracker.readAdditional(compound);
@@ -1827,6 +1855,26 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(CAT_BOWL_LOCATION.get(), this.entityData.get(CAT_BOWL_LOCATION.get()).copy().set(registryKey, pos));
     }
 
+    public Optional<BlockPos> getLitterboxPos() {
+        return this.getLitterboxPos(this.level.dimension());
+    }
+
+    public void setLitterboxPos(@Nullable BlockPos pos) {
+        this.setLitterboxPos(this.level.dimension(), pos);
+    }
+
+    public Optional<BlockPos> getLitterboxPos(ResourceKey<Level> registryKey) {
+        return this.entityData.get(LITTERBOX_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
+    }
+
+    public void setLitterboxPos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
+        this.setLitterboxPos(registryKey, WorldUtil.toImmutable(pos));
+    }
+
+    public void setLitterboxPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
+        this.entityData.set(LITTERBOX_LOCATION.get(), this.entityData.get(LITTERBOX_LOCATION.get()).copy().set(registryKey, pos));
+    }
+
     @Override
     public float getMaxHunger() {
         float maxHunger = ConfigHandler.DEFAULT_MAX_HUNGER;
@@ -2003,13 +2051,30 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(TALENTS.get(), map);
     }
 
-    public InteractionResult setTalentLevel(Talent talent, int level) {
-        if(0 > level || level > talent.getMaxLevel()) {
-            return InteractionResult.FAIL;
+    public InteractionResult adjustTalentLevel(Talent talent, int adjustment) {
+
+        int currentLevel = this.getCatLevel(talent);
+int newLevel = currentLevel + adjustment;
+
+        int levelCost = 0;
+        if(adjustment < 0) {
+            // handle refund of points
+            levelCost = talent.getLevelCost(currentLevel);
+            if(newLevel < 0) {
+                return InteractionResult.FAIL;
+            }
+        }
+        else {
+            levelCost = talent.getLevelCost(newLevel);
+            if(newLevel > talent.getMaxLevel() ||
+            !this.canSpendPoints(levelCost)) {
+                return InteractionResult.FAIL;
+            }
         }
 
         List<TalentInstance> activeTalents = this.getTalentMap();
 
+        // find an instance of the talent
         TalentInstance inst = null;
         for(TalentInstance activeInst : activeTalents) {
             if(activeInst.of(talent)) {
@@ -2018,25 +2083,32 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
+        // if there is no instance...
         if(inst == null) {
-            if(level == 0) {
+            if(newLevel == 0) {
+                // ... do nothing, because the level is 0
                 return InteractionResult.PASS;
             }
 
-            inst = talent.getDefault(level);
+            // create the talent and add it to the list of active talents
+            inst = talent.getDefault(newLevel);
             activeTalents.add(inst);
             inst.init(this);
         }
         else {
+            // get the current level of the talent
             int previousLevel = inst.level();
-            if(previousLevel == level) {
+            if(previousLevel == newLevel) {
+                // if the level isn't changing, do nothing
                 return InteractionResult.PASS;
             }
 
-            inst.setLevel(level);
+            // set the new level
+            inst.setLevel(newLevel);
             inst.set(this, previousLevel);
 
-            if(level == 0) {
+            if(newLevel == 0) {
+                // remove the talent if the level becomes 0
                 activeTalents.remove(inst);
             }
         }
@@ -2159,7 +2231,7 @@ public class CatEntity extends AbstractCatEntity {
     private final int getSpendablePointsInternal() {
         int totalPoints = 15 + this.getCatLevel().getLevel(Type.NORMAL) + this.getCatLevel().getLevel(Type.WILD);
         for(TalentInstance entry : this.getTalentMap()) {
-            totalPoints -= entry.getTalent().getCummulativeCost(entry.level());
+            totalPoints -= entry.getTalent().getCumulativeCost(entry.level());
         }
         return totalPoints;
     }
@@ -2378,7 +2450,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         BlockState blockBelow = this.level.getBlockState(this.blockPosition().below());
-        boolean onBed = blockBelow.is(ModBlocks.CAT_TREE.get()) || blockBelow.is(BlockTags.BEDS);
+        boolean onBed = /* TODO: remove temporarily blockBelow.is(ModBlocks.CAT_TREE.get()) || */ blockBelow.is(BlockTags.BEDS);
         return onBed;
     }
 
@@ -2514,7 +2586,6 @@ public class CatEntity extends AbstractCatEntity {
             for(ItemStack itemstack : loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.GIFT))) {
                 this.cat.level.addFreshEntity(new ItemEntity(this.cat.level, (double) blockPos$mutableBlockPos.getX() - (double) Mth.sin(this.cat.yBodyRot * ((float) Math.PI / 180F)), blockPos$mutableBlockPos.getY(), (double) blockPos$mutableBlockPos.getZ() + (double) Mth.cos(this.cat.yBodyRot * ((float) Math.PI / 180F)), itemstack));
             }
-
         }
 
         /**

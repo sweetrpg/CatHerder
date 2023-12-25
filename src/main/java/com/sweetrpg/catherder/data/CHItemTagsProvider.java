@@ -1,5 +1,7 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -19,7 +21,7 @@ import java.util.function.Supplier;
 public class CHItemTagsProvider extends ItemTagsProvider {
 
     public CHItemTagsProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
-        super(generatorIn, blockTagProvider, Constants.MOD_ID, existingFileHelper);
+        super(generatorIn, blockTagProvider, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -36,12 +38,15 @@ public class CHItemTagsProvider extends ItemTagsProvider {
         createTag(ModTags.BEG_ITEMS_UNTAMED, ModItems.TRAINING_TREAT, Items.STRING.delegate);
         createTag(ModTags.BREEDING_ITEMS, ModItems.BREEDING_TREAT);
         createTag(ModTags.PACK_CAT_BLACKLIST, ModItems.CAT_TOY);
-        createTag(ModTags.TREATS, ModItems.TRAINING_TREAT, ModItems.SUPER_TREAT, ModItems.MASTER_TREAT, ModItems.WILD_TREAT);
+        createTag(ModTags.TREATS, ModItems.TRAINING_TREAT, ModItems.SUPER_TREAT, ModItems.MASTER_TREAT,
+                ModItems.WILD_TREAT);
         createTag(ModTags.MEAT, Items.BEEF.delegate, Items.COOKED_BEEF.delegate,
                   Items.CHICKEN.delegate, Items.COOKED_CHICKEN.delegate,
                   Items.PORKCHOP.delegate, Items.COOKED_PORKCHOP.delegate,
                   Items.MUTTON.delegate, Items.COOKED_MUTTON.delegate,
                   Items.COOKED_RABBIT.delegate, Items.RABBIT.delegate);
+        createTag(ModTags.CAT_TREES, ModBlocks.CAT_TREE);
+//        createTag(ModTags.PET_DOORS, ModBlocks.PET_DOOR);
     }
 
     @SafeVarargs

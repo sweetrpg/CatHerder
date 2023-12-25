@@ -1,6 +1,7 @@
 package com.sweetrpg.catherder.common.util;
 
 import com.google.common.collect.Lists;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.lib.Constants;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
@@ -101,7 +102,7 @@ public class Util {
      * @param name The path of the resource
      */
     public static ResourceLocation getResource(String name) {
-        return getResource(Constants.MOD_ID, name);
+        return getResource(CatHerderAPI.MOD_ID, name);
     }
 
     public static ResourceLocation getResource(String modId, String name) {
@@ -109,11 +110,11 @@ public class Util {
     }
 
     public static String getResourcePath(String name) {
-        return getResourcePath(Constants.MOD_ID, name);
+        return getResourcePath(CatHerderAPI.MOD_ID, name);
     }
 
     public static ResourceLocation modLoc(String name) {
-        return new ResourceLocation(Constants.MOD_ID, name);
+        return new ResourceLocation(CatHerderAPI.MOD_ID, name);
     }
 
     public static ResourceLocation mcLoc(String name) {

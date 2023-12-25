@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.AccessoryType;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraftforge.registries.RegistryObject;
@@ -9,7 +10,7 @@ import java.util.function.Supplier;
 
 public class ModAccessoryTypes {
 
-    public static final DeferredRegister<AccessoryType> ACCESSORY_TYPES = DeferredRegister.create(ModRegistries.Keys.ACCESSORY_TYPE_REGISTRY, Constants.MOD_ID);
+    public static final DeferredRegister<AccessoryType> ACCESSORY_TYPES = DeferredRegister.create(ModRegistries.Keys.ACCESSORY_TYPE_REGISTRY, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<AccessoryType> COLLAR = register("collar");
     public static final RegistryObject<AccessoryType> CLOTHING = register("clothing");

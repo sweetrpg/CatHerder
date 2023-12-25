@@ -1,12 +1,10 @@
 package com.sweetrpg.catherder.common.lib;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
 
 public class Constants {
-
-    public static final String MOD_ID = "catherder";
-    public static final String MOD_NAME = "Cat Talents";
 
     public static final String VANILLA_ID = "minecraft";
     public static final String VANILLA_NAME = "Minecraft";
@@ -16,7 +14,7 @@ public class Constants {
     public static final String PROTOCOL_VERSION = Integer.toString(3);
 
     // Storage
-    public static final String STORAGE_CAT_RESPAWN = MOD_ID + "DeadCats";
+    public static final String STORAGE_CAT_RESPAWN = CatHerderAPI.MOD_ID + "DeadCats";
     public static final String STORAGE_CAT_LOCATION = "cat_locations";
 
     // Language
@@ -35,7 +33,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER = "block.catherder.cat_tree.owner";
     public static final String TRANSLATION_KEY_BLOCK_CAT_BOWL = "block.catherder.cat_bowl";
     public static final String TRANSLATION_KEY_BLOCK_CAT_BATH = "block.catherder.cat_bath";
-    public static final String TRANSLATION_KEY_BLOCK_LITTER_BOX = "block.catherder.litter_box";
+    public static final String TRANSLATION_KEY_BLOCK_LITTERBOX = "block.catherder.litter_box";
     public static final String TRANSLATION_KEY_BLOCK_WILD_CATNIP = "block.catherder.wild_catnip";
     public static final String TRANSLATION_KEY_BLOCK_CATNIP = "block.catherder.catnip";
     public static final String TRANSLATION_KEY_BLOCK_CARDBOARD_BOX = "block.catherder.cardboard_box";
@@ -71,6 +69,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_CAPE_COLORED = "item.catherder.cape_coloured";
     public static final String TRANSLATION_KEY_ITEM_CAPE_COLORED_TOOLTIP = "item.catherder.cape_coloured.tooltip";
     public static final String TRANSLATION_KEY_ITEM_LEATHER_JACKET = "item.catherder.leather_jacket";
+    public static final String TRANSLATION_KEY_ITEM_LITTER_SCOOP = "item.catherder.litter_scoop";
     public static final String TRANSLATION_KEY_ITEM_SMALL_CATSIZER = "item.catherder.small_catsizer";
     public static final String TRANSLATION_KEY_ITEM_BIG_CATSIZER = "item.catherder.big_catsizer";
     public static final String TRANSLATION_KEY_ITEM_OWNER_CHANGE = "item.catherder.owner_change";
@@ -84,6 +83,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_ITEM_TREATBAG_CONTENTS = "item.catherder.treat_bag.contents";
     public static final String TRANSLATION_KEY_CONTAINER_PACK_CAT = "container.catherder.pack_cat";
     public static final String TRANSLATION_KEY_CONTAINER_CAT_BOWL = "container.catherder.cat_bowl";
+    public static final String TRANSLATION_KEY_CONTAINER_LITTERBOX = "container.catherder.litter_box";
     public static final String TRANSLATION_KEY_CONTAINER_TREAT_BAG = "container.catherder.treat_bag";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES_LINK = "container.catherder.cat_inventories.link";
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES = "container.catherder.cat_inventories";
@@ -192,9 +192,9 @@ public class Constants {
     public static final String TRANSLATION_KEY_CAT_GENDER_MALE_PRONOUN = "cat.gender.male.pronoun";
     public static final String TRANSLATION_KEY_CAT_GENDER_MALE_SUBJECT = "cat.gender.male.subject";
     public static final String TRANSLATION_KEY_CAT_GENDER_MALE_TITLE = "cat.gender.male.title";
-    public static final String TRANSLATION_KEY_ENTITY_CAT = "entity.catherder.katze";
-    public static final String TRANSLATION_KEY_ENTITY_CAT_UNKNOWN_OWNER = "entity.catherder.katze.unknown_owner";
-    public static final String TRANSLATION_KEY_ENTITY_CAT_UNTAMED = "entity.catherder.katze.untamed";
+    public static final String TRANSLATION_KEY_ENTITY_CAT = "entity.catherder.cat";
+    public static final String TRANSLATION_KEY_ENTITY_CAT_UNKNOWN_OWNER = "entity.catherder.cat.unknown_owner";
+    public static final String TRANSLATION_KEY_ENTITY_CAT_UNTAMED = "entity.catherder.cat.untamed";
     public static final String TRANSLATION_KEY_COMMAND_COME = "catcommand.come";
     public static final String TRANSLATION_KEY_COMMAND_STAY = "catcommand.stay";
     public static final String TRANSLATION_KEY_COMMAND_OKAY = "catcommand.ok";
@@ -202,7 +202,7 @@ public class Constants {
     public static final String TRANSLATION_KEY_GUI_NEXT_PAGE = "catgui.nextpage";
     public static final String TRANSLATION_KEY_GUI_NEW_NAME = "catgui.newname";
     public static final String TRANSLATION_KEY_GUI_LEVEL = "catgui.level";
-    public static final String TRANSLATION_KEY_GUI_LEVEL_DIRE = "catgui.leveldire";
+    public static final String TRANSLATION_KEY_GUI_LEVEL_WILD = "catgui.level.wild";
     public static final String TRANSLATION_KEY_GUI_POINTS_LEFT = "catgui.pointsleft";
 //    public static final String TRANSLATION_KEY_GUI_TEXTURE_INDEX = "catgui.textureindex";
     public static final String TRANSLATION_KEY_GUI_OBEY_OTHERS = "catgui.obeyothers";
@@ -242,13 +242,39 @@ public class Constants {
     public static final String TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_SUCCESS = "commands.catrespawn.uuid.success";
     public static final String TRANSLATION_KEY_COMMANDS_RESPAWN_UUID_FAILURE = "commands.catrespawn.uuid.failure";
     public static final String TRANSLATION_KEY_COMMAND_RESPAWN_IMPRECISE = "command.catrespawn.imprecise";
-    public static final String TRANSLATION_KEY_CATTREE_BEDDING_NULL = "cattree.bedding.null";
-    public static final String TRANSLATION_KEY_CATTREE_CASING_NULL = "cattree.casing.null";
-    public static final String TRANSLATION_KEY_CATTREE_BEDDING_MISSING = "cattree.bedding.missing";
-    public static final String TRANSLATION_KEY_CATTREE_CASING_MISSING = "cattree.casing.missing";
+    public static final String TRANSLATION_KEY_CATTREE_COLOR_NULL = "cattree.color.null";
+    public static final String TRANSLATION_KEY_CATTREE_COLOR_MISSING = "cattree.color.missing";
     public static final String TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING = "cattree.explain.missing";
+    public static final String TRANSLATION_KEY_PETDOOR_STRUCTURE_NULL = "petdoor.structure.null";
+    public static final String TRANSLATION_KEY_PETDOOR_STRUCTURE_MISSING = "petdoor.structure.missing";
+    public static final String TRANSLATION_KEY_PETDOOR_EXPLAIN_MISSING = "petdoor.explain.missing";
+    public static final String TRANSLATION_KEY_COLOR_WHITE = "color.minecraft.white_wool";
+    public static final String TRANSLATION_KEY_COLOR_BLACK = "color.minecraft.black_wool";
+    public static final String TRANSLATION_KEY_COLOR_GREY = "color.minecraft.gray_wool";
+    public static final String TRANSLATION_KEY_COLOR_LIGHT_GREY = "color.minecraft.light_gray_wool";
+    public static final String TRANSLATION_KEY_COLOR_PURPLE = "color.minecraft.purple_wool";
+    public static final String TRANSLATION_KEY_COLOR_PINK = "color.minecraft.pink_wool";
+    public static final String TRANSLATION_KEY_COLOR_BROWN = "color.minecraft.brown_wool";
+    public static final String TRANSLATION_KEY_COLOR_ORANGE = "color.minecraft.orange_wool";
+    public static final String TRANSLATION_KEY_COLOR_YELLOW = "color.minecraft.yellow_wool";
+    public static final String TRANSLATION_KEY_COLOR_GREEN = "color.minecraft.green_wool";
+    public static final String TRANSLATION_KEY_COLOR_LIME = "color.minecraft.lime_wool";
+    public static final String TRANSLATION_KEY_COLOR_BLUE = "color.minecraft.blue_wool";
+    public static final String TRANSLATION_KEY_COLOR_LIGHT_BLUE = "color.minecraft.light_blue_wool";
+    public static final String TRANSLATION_KEY_COLOR_MAGENTA = "color.minecraft.magenta_wool";
+    public static final String TRANSLATION_KEY_COLOR_RED = "color.minecraft.red_wool";
+    public static final String TRANSLATION_KEY_COLOR_CYAN = "color.minecraft.cyan_wool";
+    public static final String TRANSLATION_KEY_STRUCTURE_OAK = "structure.minecraft.oak_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_DARK_OAK = "structure.minecraft.dark_oak_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_BIRCH = "structure.minecraft.birch_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_SPRUCE = "structure.minecraft.spruce_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_ACACIA = "structure.minecraft.acacia_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_JUNGLE = "structure.minecraft.jungle_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_CRIMSON = "structure.minecraft.crimson_planks";
+    public static final String TRANSLATION_KEY_STRUCTURE_WARPED = "structure.minecraft.warped_planks";
     public static final String TRANSLATION_KEY_CONFIG_CHANCE_WILD_CATNIP = "catherder.config.cat.chance_wild_catnip";
     public static final String TRANSLATION_KEY_CONFIG_WILD_CATNIP_SPREAD = "catherder.config.cat.wild_catnip_spread";
+    public static final String TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX = "catherder.config.cat.enable_litterbox";
     public static final String TRANSLATION_KEY_CONFIG_DISABLE_HUNGER = "catherder.config.cat.disable_hunger";
     public static final String TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS = "catherder.config.enable_starting_items";
     public static final String TRANSLATION_KEY_CONFIG_ENABLE_GENDER = "catherder.config.enable_gender";

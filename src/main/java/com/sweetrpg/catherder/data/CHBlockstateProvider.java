@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.block.CatnipBlock;
 import com.sweetrpg.catherder.common.block.CheeseWheelBlock;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -27,7 +28,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
     private static final BiFunction<String, Direction, BiConsumer<Direction, ModelBuilder<BlockModelBuilder>.ElementBuilder.FaceBuilder>> cullFaceFactory = (texture, input) -> (d, b) -> b.texture(texture).cullface(d == input ? d : null);
 
     public CHBlockstateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, Constants.MOD_ID, exFileHelper);
+        super(gen, CatHerderAPI.MOD_ID, exFileHelper);
     }
 
     public ExistingFileHelper getExistingHelper() {
@@ -55,7 +56,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
     }
 
     public ResourceLocation resourceBlock(String path) {
-        return new ResourceLocation(Constants.MOD_ID, "block/" + path);
+        return new ResourceLocation(CatHerderAPI.MOD_ID, "block/" + path);
     }
 
     protected void wildCropBlock(Block block) {

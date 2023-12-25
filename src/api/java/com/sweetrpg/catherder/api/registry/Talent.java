@@ -30,11 +30,11 @@ public class Talent extends ForgeRegistryEntry<Talent> {
         return 5;
     }
 
-    public int getLevelCost(int toGoToLevel) {
-        return toGoToLevel;
+    public int getLevelCost(int forLevel) {
+        return forLevel;
     }
 
-    public int getCummulativeCost(int level) {
+    public int getCumulativeCost(int level) {
         return level * (level + 1) / 2;
     }
 

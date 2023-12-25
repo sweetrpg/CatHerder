@@ -9,11 +9,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.models.blockstates.Condition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -58,13 +56,13 @@ public class CHLootTableProvider extends LootTableProvider {
         protected void addTables() {
             dropCatTree(ModBlocks.CAT_TREE);
             dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
-            dropsSelf(ModBlocks.LITTER_BOX);
+            dropsSelf(ModBlocks.LITTERBOX);
             dropCatnip(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
             dropsSelf(ModBlocks.CATNIP_CROP);
             dropsMouseTrap(ModBlocks.MOUSE_TRAP);
             dropsSelf(ModBlocks.CHEESE_WHEEL);
-            dropsSelf(ModBlocks.PET_DOOR);
+            dropPetDoor(ModBlocks.PET_DOOR);
         }
 
         private void dropsMouseTrap(Supplier<? extends Block> block) {
@@ -117,11 +115,23 @@ public class CHLootTableProvider extends LootTableProvider {
                                                                             .add(LootItem.lootTableItem(block.get())
                                                                                          .apply(
                                                                                                  CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                                                                                                .copy("casingId", "catherder.casingId")
-                                                                                                                .copy("beddingId", "catherder.beddingId")
+                                                                                                                .copy("colorId", "catherder.colorId")
+//                                                                                                                .copy("beddingId", "catherder.beddingId")
                                                                                                                 .copy("ownerId", "catherder.ownerId")
                                                                                                                 .copy("name", "catherder.name")
                                                                                                                 .copy("ownerName", "catherder.ownerName"))));
+
+            this.add(block.get(), lootTableBuilder);
+        }
+
+        private void dropPetDoor(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                                                          .withPool(applyExplosionCondition(block.get(),
+                                                                                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                                                                            .add(LootItem.lootTableItem(block.get())
+                                                                                         .apply(
+                                                                                                 CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                                                                                                .copy("structureId", "catherder.structureId"))));
 
             this.add(block.get(), lootTableBuilder);
         }

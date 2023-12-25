@@ -1,10 +1,66 @@
 {
   "name": "Miscellaneous Items",
-  "icon": "catherder:cat_toy",
+  "icon": "catherder:litter_scoop",
   "category": "catherder:items",
   "pages": [
     {
       "type": "patchouli:text",
+      "title": "Enlarger",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Shrinker",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cardboard",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cardboard Box",
+      "text": "The cardboard box is one of your cat's favorite things to play with. It doesn't matter what came in it, it's a box!"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cat Gut",
+      "text": "If your cat dies, this might drop."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Collar Shears",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Creative Collar",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Creative Radar",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mousetrap",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Owner Change",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Radar",
+      "text": "TODO"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Radio Collar",
       "text": "TODO"
     }
   ]

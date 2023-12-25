@@ -1,11 +1,11 @@
 package com.sweetrpg.catherder.common.event;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.talent.BirdCatcherTalent;
+import com.sweetrpg.catherder.common.talent.TomcatTalent;
 import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -28,7 +28,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID)
+@Mod.EventBusSubscriber(modid = CatHerderAPI.MOD_ID)
 public class EventHandler {
 
     @SubscribeEvent
@@ -78,36 +78,32 @@ public class EventHandler {
         Biome.ClimateSettings climate = event.getClimate();
 
         if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
-                    event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
-                    event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
-                    event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
-                    event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
-                    event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
-                    event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
-                    event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
-                   (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
+                event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
+                event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
+                event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
+                event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
+                event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
+                event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
+                event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
+                (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
         }
     }
-
-
 
     @SubscribeEvent
     public void onEntitySpawn(final EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
 
-        if(entity instanceof AbstractSkeleton) {
-            AbstractSkeleton skeleton = (AbstractSkeleton) entity;
-            skeleton.goalSelector.addGoal(3, new AvoidEntityGoal<>(skeleton, CatEntity.class, 6.0F, 1.0D, 1.2D)); // Same goal as in AbstractSkeletonEntity
+        if(entity instanceof Creeper) {
+            Creeper creeper = (Creeper) entity;
+            creeper.goalSelector.addGoal(3, new AvoidEntityGoal<>(creeper, CatEntity.class, 6.0F, 1.0D, 1.2D)); // Same goal as in AbstractSkeletonEntity
         }
     }
 
     @SubscribeEvent
     public void playerLoggedIn(final PlayerLoggedInEvent event) {
         if(ConfigHandler.SERVER.STARTING_ITEMS.get()) {
-
             Player player = event.getPlayer();
-
             CompoundTag tag = player.getPersistentData();
 
             if(!tag.contains(Player.PERSISTED_NBT_TAG)) {
@@ -116,8 +112,8 @@ public class EventHandler {
 
             CompoundTag persistTag = tag.getCompound(Player.PERSISTED_NBT_TAG);
 
-            if(!persistTag.getBoolean("gotDTStartingItems")) {
-                persistTag.putBoolean("gotDTStartingItems", true);
+            if(!persistTag.getBoolean("gotCHStartingItems")) {
+                persistTag.putBoolean("gotCHStartingItems", true);
 
                 player.getInventory().add(new ItemStack(ModItems.CAT_CHARM.get()));
 //                player.getInventory().add(new ItemStack(CatItems.WHISTLE.get()));
@@ -127,6 +123,6 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onLootDrop(final LootingLevelEvent event) {
-        BirdCatcherTalent.onLootDrop(event);
+        TomcatTalent.onLootDrop(event);
     }
 }

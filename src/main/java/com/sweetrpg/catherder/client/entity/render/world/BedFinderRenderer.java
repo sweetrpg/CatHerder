@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -28,7 +29,7 @@ public class BedFinderRenderer {
 
                 if (bedPosOpt.isPresent()) {
                     BlockPos bedPos = bedPosOpt.get();
-                    int level = cat.getCatLevel(CatHerder.BED_FINDER);
+                    int level = cat.getCatLevel(ModTalents.BED_FINDER);
                     double distance = (level * 200D) - Math.sqrt(bedPos.distSqr(cat.blockPosition()));
                     if (level == 5 || distance >= 0.0D) {
                         PoseStack stack = event.getPoseStack();

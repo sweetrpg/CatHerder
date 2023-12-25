@@ -1,6 +1,6 @@
 {
   "name": "Miscellaneous",
-  "icon": "catherder:training_treat",
+  "icon": "catherder:litter_scoop",
   "category": "catherder:recipes",
   "pages": [
     {
@@ -12,23 +12,13 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
-    },
-    {
-      "type": "patchouli:crafting",
       "title": "Cheese Wheel",
-      "recipe": "catherder:cheese_wheel"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "text": "Cheese! Who doesn't like cheese?"
     },
     {
       "type": "patchouli:crafting",
-      "title": "Cheese Wedge",
-      "recipe": "catherder:cheese_wedge"
+      "title": "Recipe",
+      "recipe": "catherder:cheese_wheel"
     }
   ]
 }

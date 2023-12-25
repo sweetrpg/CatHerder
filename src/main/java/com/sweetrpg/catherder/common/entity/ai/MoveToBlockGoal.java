@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.entity.ai;
 
 //import com.sweetrpg.catherder.common.block.tileentity.CattreeTileEntity;
 
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.WorldUtil;
@@ -34,7 +34,7 @@ public class MoveToBlockGoal extends Goal {
     public void stop() {
         BlockPos target = this.cat.getTargetBlock();
 
-        CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(cat.level, target, CatTreeBlockEntity.class);
+        CatTreeBlockEntity catTreeEntity = WorldUtil.getBlockEntity(cat.level, target, CatTreeBlockEntity.class);
 
         if(catTreeEntity != null) {
             // Double-check the bed still has no owner

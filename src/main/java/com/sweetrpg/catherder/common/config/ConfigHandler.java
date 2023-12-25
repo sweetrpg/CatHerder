@@ -70,7 +70,7 @@ public class ConfigHandler {
             {
                 builder.push("Cat Render");
 
-                DIRE_PARTICLES = builder.comment("Enables the particle effect on Dire Level 30 cats.").translation("catherder.config.client.enable_dire_particles").define("enable_dire_particles", true);
+                DIRE_PARTICLES = builder.comment("Enables the particle effect on Wild Level 30 cats.").translation("catherder.config.client.enable_wild_particles").define("enable_wild_particles", true);
                 RENDER_CHEST = builder.comment("When enabled, cats with points in pack cat will have chests on their side.").translation("catherder.config.client.render_chest").define("render_chest", true);
                 USE_CH_TEXTURES = builder.comment("If disabled will use the default minecraft skin for all cat textures.").translation("catherder.config.client.enable_dt_textures").define("enable_ch_textures", true);
                 RENDER_ARMOUR = builder.comment("When enabled, cats with points in guard cat will have armour.").translation("catherder.config.client.render_armour").define("render_armour", false);
@@ -85,6 +85,7 @@ public class ConfigHandler {
 
     public static class ServerConfig {
 
+        public ForgeConfigSpec.BooleanValue LITTERBOX;
         public ForgeConfigSpec.IntValue CHANCE_WILD_CATNIP;
         public ForgeConfigSpec.IntValue WILD_CATNIP_SPREAD;
         public ForgeConfigSpec.BooleanValue DISABLE_HUNGER;
@@ -113,6 +114,7 @@ public class ConfigHandler {
             {
                 builder.push("Cat Constants");
 
+                LITTERBOX = builder.comment("Enables litterbox maintenance").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX).define("enable_litterbox", false);
                 DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation(Constants.TRANSLATION_KEY_CONFIG_DISABLE_HUNGER).define("disable_hunger", false);
                 STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS).define("enable_starting_items", false);
                 CAT_GENDER = builder.comment("When enabled, cats will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_GENDER).define("enable_gender", true);

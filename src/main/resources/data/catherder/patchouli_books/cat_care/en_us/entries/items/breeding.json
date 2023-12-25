@@ -1,0 +1,11 @@
+{
+  "name": "Breeding",
+  "icon": "catherder:breeding_treat",
+  "category": "catherder:misc",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "If you want to make more cats from your cats, you will need a $(l:breeding/breeding_treat)breeding$(/l) treat."
+    }
+  ]
+}

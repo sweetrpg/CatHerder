@@ -1,25 +1,33 @@
 package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.CatHerder;
-import com.sweetrpg.catherder.common.block.tileentity.CatTreeBlockEntity;
+import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
+import com.sweetrpg.catherder.common.block.entity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.storage.CatRespawnData;
 import com.sweetrpg.catherder.common.storage.CatRespawnStorage;
+import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
@@ -36,6 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
@@ -56,6 +65,7 @@ import java.util.UUID;
 public class CatTreeBlock extends BaseEntityBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
     protected static final VoxelShape SHAPE_OCCLUSION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
@@ -64,8 +74,8 @@ public class CatTreeBlock extends BaseEntityBlock {
     public CatTreeBlock() {
         super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
         this.registerDefaultState(this.stateDefinition.any()
-                                          .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
-                                          .setValue(WATERLOGGED, false));
+                                      .setValue(FACING, Direction.NORTH)
+                                      .setValue(WATERLOGGED, false));
     }
 
     @SuppressWarnings("deprecation")
@@ -111,20 +121,20 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, placer.getDirection().getOpposite());
+        state = state.setValue(FACING, placer.getDirection().getOpposite());
 
-        CatTreeBlockEntity catTreeTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
+        CatTreeBlockEntity catTreeBlockEntity = WorldUtil.getBlockEntity(worldIn, pos, CatTreeBlockEntity.class);
 
-        if(catTreeTileEntity != null) {
-//            CatTreeUtil.setBedVariant(catTreeTileEntity, stack);
+        if(catTreeBlockEntity != null) {
+            CatTreeUtil.setTreeVariant(catTreeBlockEntity, stack);
 
-            catTreeTileEntity.setPlacer(placer);
+            catTreeBlockEntity.setPlacer(placer);
             CompoundTag tag = stack.getTagElement("catherder");
             if(tag != null) {
                 Component name = NBTUtil.getTextComponent(tag, "name");
                 UUID ownerId = NBTUtil.getUniqueId(tag, "ownerId");
-                catTreeTileEntity.setBedName(name);
-                catTreeTileEntity.setOwner(ownerId);
+                catTreeBlockEntity.setBedName(name);
+                catTreeBlockEntity.setOwner(ownerId);
             }
         }
 
@@ -150,13 +160,13 @@ public class CatTreeBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(BlockStateProperties.HORIZONTAL_FACING, rot.rotate(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     @SuppressWarnings("deprecation")
@@ -166,7 +176,7 @@ public class CatTreeBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
         else {
-            CatTreeBlockEntity catTreeEntity = WorldUtil.getTileEntity(worldIn, pos, CatTreeBlockEntity.class);
+            CatTreeBlockEntity catTreeEntity = WorldUtil.getBlockEntity(worldIn, pos, CatTreeBlockEntity.class);
 
             if(catTreeEntity != null) {
                 ItemStack stack = player.getItemInHand(handIn);
@@ -235,56 +245,54 @@ public class CatTreeBlock extends BaseEntityBlock {
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
-//        Pair<ICasingMaterial, IBeddingMaterial> materials = CattreeUtil.getMaterials(stack);
-//
-//        tooltip.add(materials.getLeft() != null
-//                ? materials.getLeft().getTooltip()
-//                : new TranslatableComponent("cattree.casing.null").withStyle(ChatFormatting.RED));
+        IColorMaterial colorMaterial = CatTreeUtil.getColorMaterial(stack);
+
+        tooltip.add(colorMaterial != null
+                ? colorMaterial.getTooltip()
+                : new TranslatableComponent("cattree.color.null").withStyle(ChatFormatting.RED));
 //        tooltip.add(materials.getRight() != null
 //                ? materials.getRight().getTooltip()
 //                : new TranslatableComponent("cattree.bedding.null").withStyle(ChatFormatting.RED));
 //
-//        if (materials.getLeft() == null && materials.getRight() == null) {
-//            tooltip.add(new TranslatableComponent("cattree.explain.missing").withStyle(ChatFormatting.ITALIC));
-//        }
-//
-//        CompoundTag tag = stack.getTagElement("catherder");
-//        if (tag != null) {
-//            UUID ownerId = NBTUtil.getUniqueId(tag, "ownerId");
-//            Component name = NBTUtil.getTextComponent(tag, "name");
-//            Component ownerName = NBTUtil.getTextComponent(tag, "ownerName");
-//
-//            if (name != null) {
-//                tooltip.add(new TextComponent("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
-//            }
-//
-//            if (ownerName != null) {
-//                tooltip.add(new TextComponent("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
-//
-//            }
-//
-//            if (ownerId != null && (flagIn.isAdvanced() || Screen.hasShiftDown())) {
-//                tooltip.add(new TextComponent("UUID: ").withStyle(ChatFormatting.AQUA).append(new TextComponent(ownerId.toString())));
-//            }
-//        }
+        if (colorMaterial == null) {
+            tooltip.add(new TranslatableComponent("cattree.explain.missing").withStyle(ChatFormatting.ITALIC));
+        }
+
+        CompoundTag tag = stack.getTagElement("catherder");
+        if (tag != null) {
+            UUID ownerId = NBTUtil.getUniqueId(tag, "ownerId");
+            Component name = NBTUtil.getTextComponent(tag, "name");
+            Component ownerName = NBTUtil.getTextComponent(tag, "ownerName");
+
+            if (name != null) {
+                tooltip.add(new TextComponent("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
+            }
+
+            if (ownerName != null) {
+                tooltip.add(new TextComponent("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
+
+            }
+
+            if (ownerId != null && (flagIn.isAdvanced() || Screen.hasShiftDown())) {
+                tooltip.add(new TextComponent("UUID: ").withStyle(ChatFormatting.AQUA).append(new TextComponent(ownerId.toString())));
+            }
+        }
     }
 
-//    @Override
-//    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-//        for (IBeddingMaterial beddingId : CatHerderAPI.BEDDING_MATERIAL.getValues()) {
-//            for (ICasingMaterial casingId : CatHerderAPI.CASING_MATERIAL.getValues()) {
-////                items.add(CattreeUtil.createItemStack(casingId, beddingId));
-//            }
-//        }
-//    }
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+            for (IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+                items.add(CatTreeUtil.createItemStack(colorId));
+            }
+    }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-//        CattreeTileEntity cattreeTileEntity = WorldUtil.getTileEntity(world, pos, CattreeTileEntity.class);
-//
-//        if (cattreeTileEntity != null) {
-//            return CattreeUtil.createItemStack(cattreeTileEntity.getCasing(), cattreeTileEntity.getBedding());
-//        }
+        CatTreeBlockEntity catTreeBlockEntity = WorldUtil.getBlockEntity(world, pos, CatTreeBlockEntity.class);
+
+        if (catTreeBlockEntity != null) {
+            return CatTreeUtil.createItemStack(catTreeBlockEntity.getColor());
+        }
 
         CatHerder.LOGGER.debug("Unable to pick block on cat tree.");
         return ItemStack.EMPTY;
@@ -292,12 +300,12 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.HORIZONTAL_FACING, WATERLOGGED);
+        builder.add(FACING, WATERLOGGED);
     }
 }

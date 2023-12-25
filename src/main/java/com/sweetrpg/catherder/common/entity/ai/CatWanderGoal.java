@@ -37,12 +37,14 @@ public class CatWanderGoal extends Goal {
         }
 
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
+        Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
 
-        if (!bowlPos.isPresent()) {
+        if (!bowlPos.isPresent() && !litterboxPos.isPresent()) {
             return false;
         }
 
-        return bowlPos.get().distSqr(this.cat.blockPosition()) < 400.0D;
+        return (bowlPos.get().distSqr(this.cat.blockPosition()) < 400.0D) ||
+                (litterboxPos.get().distSqr(this.cat.blockPosition()) < 400.0D) ;
     }
 
     @Override
