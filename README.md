@@ -1,7 +1,7 @@
 Cat Herder
 ==========
 
-[![CI (1.20)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.20.yml/badge.svg?branch=1.20)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.20.yml)
+[![CI (1.19)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.19.yml/badge.svg?branch=1.19)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.19.yml)
 
 **Cat Herder** is a **Minecraft** mod made for **Minecraft Forge**.
 
@@ -45,7 +45,7 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 - **Q:** Will there be a Fabric version?  
   **A:** Probably not.
 - **Q:** Which Minecraft versions are supported?  
-  **A:** It is normally the most current release, currently `1.18.x`.
+  **A:** It is normally the most current release, currently `1.19.x`.
 - **Q:** I have a cat, how to get started?  
   **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
