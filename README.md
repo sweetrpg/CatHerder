@@ -45,8 +45,8 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 - **Q:** Will there be a Fabric version?  
   **A:** Probably not.
 - **Q:** Which Minecraft versions are supported?  
-  **A:** It is normally the most current release, currently `1.18.x`.
-- **Q:** I have a cat, how to get started?  
+  **A:** Currently `1.18.x`. Development is also progressing for 1.19 and 1.20, and possibly a backport to 1.16.
+- **Q:** I have a cat, how do I get started?  
   **A:** Use a **Training Treat** to turn him into a **CatHerder Cat**. Visit the [Getting Started wiki](https://github.com/sweetrpg/CatHerder/wiki/Getting-Started) for more info.
 
 -----------------
@@ -54,5 +54,6 @@ Want to know more about the mod? Take a peek at the [wiki](https://github.com/sw
 # Licenses
 
 CatHerder API
-- 2022
-- [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+- &copy; 2022-3
+- Portions derived from DoggyTalents: GPLv3
+- New code: [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](http://opensource.org/licenses/MIT)
