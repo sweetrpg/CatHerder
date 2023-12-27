@@ -17,7 +17,7 @@ on:
       - gradle.properties
       - settings.gradle
   pull_request:
-    branches: [ 1.15 ]
+    branches: [ 1.16 ]
     paths:
       - 'src/**'
       - 'test/**'
