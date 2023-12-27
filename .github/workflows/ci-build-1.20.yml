@@ -15,6 +15,7 @@ on:
       - 'test/**'
       - build.gradle
       - gradle.properties
+      - settings.gradle
   pull_request:
     branches: [ 1.20 ]
     paths:
@@ -22,6 +23,7 @@ on:
       - 'test/**'
       - build.gradle
       - gradle.properties
+      - settings.gradle
 
 jobs:
   build:
