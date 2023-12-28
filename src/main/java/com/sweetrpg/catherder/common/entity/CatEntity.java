@@ -210,15 +210,15 @@ public class CatEntity extends AbstractCatEntity {
         //this.goalSelector.addGoal(1, new PatrolAreaGoal(this));
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(2, new CatEntity.CatRelaxOnOwnerGoal(this));
-        this.goalSelector.addGoal(2, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
         //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
+        this.goalSelector.addGoal(5, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
 //        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-//        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
         this.goalSelector.addGoal(6, new CatLieOnBedGoal<>(this, 1.1F, 16));
