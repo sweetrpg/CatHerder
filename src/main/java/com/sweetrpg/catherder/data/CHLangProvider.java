@@ -220,7 +220,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_CREEPERSWEEPER_NAME, "Creeper Sweeper");
         add(Constants.TRANSLATION_KEY_TALENT_FISHERCAT_DESCRIPTION, "Whenever your cat enters the water, it may catch a fish which it will give to you when it shakes itself dry The chance of catching a fish increases with level, and any points in HellHound may cause the fish to be pre-cooked. Mastering this skill lets your cat breathe underwater.");
         add(Constants.TRANSLATION_KEY_TALENT_FISHERCAT_NAME, "Fisher Cat");
-        add(Constants.TRANSLATION_KEY_TALENT_HAPPYEATER_DESCRIPTION, "Increases the NP your cat gets from food items by 10%% per level. In addition, level 3 lets your cat eat rotten flesh, and level 5 lets your cat eat fish.");
+        add(Constants.TRANSLATION_KEY_TALENT_HAPPYEATER_DESCRIPTION, "Increases the NP your cat gets from food items by 10%% per level. Your cat normally eats fish. At level 3, your cat will eat any kind of meat, and at level 5, you cat will eat rotten flesh.");
         add(Constants.TRANSLATION_KEY_TALENT_HAPPYEATER_NAME, "Happy Eater");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION, "Allows your cat set things on fire while attacking. The higher the level, the longer the fire lasts. Mastering the skill grants your cat immunity to fire.");
         add(Constants.TRANSLATION_KEY_TALENT_HELLBEAST_NAME, "Hell Beast");
