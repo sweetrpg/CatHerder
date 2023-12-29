@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "Improves critical hit rate 1/2 a heart for every level plus an extra heart when you master it."
     }
   ]
 }

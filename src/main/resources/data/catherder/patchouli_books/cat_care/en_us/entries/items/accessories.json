@@ -42,10 +42,10 @@
     {
       "type": "patchouli:spotlight",
       "title": "Wool Collar",
+      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars.",
       "item": {
         "item": "catherder:wool_collar"
-      },
-      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars."
+      }
     }
   ]
 }

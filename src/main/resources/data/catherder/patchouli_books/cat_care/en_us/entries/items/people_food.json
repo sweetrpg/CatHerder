@@ -1,0 +1,27 @@
+{
+  "name": "People Food",
+  "icon": "catherder:beef",
+  "category": "catherder:food",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Food that you can eat."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cheese Wedge",
+      "text": "You get these from a Cheese Wheel. You can eat them, or you can use it as bait for a mouse trap.",
+      "item": {
+        "item": "catherder:cheese_wedge"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cheese Wheel",
+      "text": "It's cheese! Who doesn't like cheese?$(br2)The cheese wheel gives you 8 wedges of cheese. You can use them to make a mouse trap.",
+      "item": {
+        "item": "catherder:cheese_wheel"
+      }
+    }
+  ]
+}

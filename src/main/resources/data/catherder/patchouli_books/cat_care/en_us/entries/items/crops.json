@@ -4,19 +4,28 @@
   "category": "catherder:items",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Catnip",
-      "text": "Feed this to your cat to make it go briefly crazy. You also need this to make some other items."
+      "text": "Feed this to your cat to make it go briefly crazy. You also need this to make some other items.",
+      "item": {
+        "item": "catherder:catnip"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Catnip Seeds",
-      "text": "These are what you need to plant catnip in your farm."
+      "text": "These are what you need to plant catnip in your farm.",
+      "item": {
+        "item": "catherder:catnip_seeds"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Wild Catnip",
-      "text": "You can find patches of catnip in the wild. When you break it, you'll get seeds and maybe some other stuff."
+      "text": "You can find patches of catnip in the wild. When you break it, you'll get seeds and maybe some other stuff.",
+      "item": {
+        "item": "catherder:wild_catnip"
+      }
     }
   ]
 }
