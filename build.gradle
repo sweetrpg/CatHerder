@@ -61,13 +61,6 @@ repositories {
         url "https://dvs1.progwml6.com/files/maven"
         content { includeGroup "mezz.jei" }
     }
-    // maven { // JEI
-    //     url "https://modmaven.k-4u.nl"
-    //     content { includeGroup "mezz.jei" }
-    // }
-    // maven { // JEI
-    //     url "https://dvs1.progwml6.com/files/maven"
-    // }
     maven { // The One Probe
         url "https://cursemaven.com"
     }
@@ -77,7 +70,6 @@ repositories {
 }
 
 minecraft {
-//    mappings channel: project.mcp_channel, version: project.mcp_mappings
     mappings channel: 'parchment', version: project.parchment_version
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
