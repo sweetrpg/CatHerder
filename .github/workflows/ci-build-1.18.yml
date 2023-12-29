@@ -29,9 +29,13 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
@@ -41,18 +45,27 @@ jobs:
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
         with:
           arguments: build
-      - id: tag-version
-        name: Create tag
-        uses: SOLIDSoftworks/semver-tags@1.0.1
+      - id: get_last_version
+        name: Get last version
+        run: |
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+      - id: bump_version
+        uses: cbrgm/semver-bump-action@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-          tag-prefix: ''
-          default-version: '0.0.1'
+          current-version: ${{ env.latest_tag }}
+          bump-level: patch
+#      - id: tag-version
+#        name: Create tag
+#        uses: SOLIDSoftworks/semver-tags@1.0.1
+#        with:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+#          tag-prefix: ''
+#          default-version: '0.0.1'
       - name: Commit version file
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
-          echo "${{ steps.tag-version.outputs.semantic-version }}" > .release-info/1.18/VERSION
+          echo "${{ steps.bump_version.outputs.new_version }}" > .release-info/1.18/VERSION
           git add .release-info/1.18/VERSION
           git commit -m "Update 1.18 VERSION file"
           git push origin
