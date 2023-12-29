@@ -2,7 +2,6 @@ package com.sweetrpg.catherder;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.client.ClientSetup;
-import com.sweetrpg.catherder.data.*;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
 import com.sweetrpg.catherder.client.event.ClientEventHandler;
 import com.sweetrpg.catherder.common.Capabilities;
@@ -13,22 +12,22 @@ import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
-//import com.sweetrpg.catherder.common.util.BackwardsComp;
+import com.sweetrpg.catherder.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,10 +40,10 @@ public class CatHerder {
     public static final Logger LOGGER = LogManager.getLogger(CatHerderAPI.MOD_ID);
 
     public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder.named(Constants.CHANNEL_NAME)
-                                                        .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
-                                                        .serverAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
-                                                        .networkProtocolVersion(Constants.PROTOCOL_VERSION::toString)
-                                                        .simpleChannel();
+            .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
+            .serverAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
+            .networkProtocolVersion(Constants.PROTOCOL_VERSION::toString)
+            .simpleChannel();
 
     public CatHerder() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -104,7 +103,7 @@ public class CatHerder {
 //    }
 
     public void serverStarting(final ServerStartingEvent event) {
-LOGGER.debug("Server starting");
+        LOGGER.debug("Server starting");
     }
 
     public void registerCommands(final RegisterCommandsEvent event) {
