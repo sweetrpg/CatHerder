@@ -16,7 +16,7 @@
       "item": "minecraft:white_dye"
     },
     "S": {
-      "item": "minecraft:string"
+      "tag": "minecraft:wool"
     }
   },
   "result": {
