@@ -185,7 +185,7 @@
   "talent.catherder.fisher_cat": "Fisher Cat",
   "talent.catherder.fisher_cat.description": "Whenever your cat enters the water, it may catch a fish which it will give to you when it shakes itself dry The chance of catching a fish increases with level, and any points in HellHound may cause the fish to be pre-cooked. Mastering this skill lets your cat breathe underwater.",
   "talent.catherder.happy_eater": "Happy Eater",
-  "talent.catherder.happy_eater.description": "Increases the NP your cat gets from food items by 10%% per level. In addition, level 3 lets your cat eat rotten flesh, and level 5 lets your cat eat fish.",
+  "talent.catherder.happy_eater.description": "Increases the NP your cat gets from food items by 10%% per level. Your cat normally eats fish. At level 3, your cat will eat any kind of meat, and at level 5, you cat will eat rotten flesh.",
   "talent.catherder.hell_beast": "Hell Beast",
   "talent.catherder.hell_beast.description": "Allows your cat set things on fire while attacking. The higher the level, the longer the fire lasts. Mastering the skill grants your cat immunity to fire.",
   "talent.catherder.mount": "Mount",
