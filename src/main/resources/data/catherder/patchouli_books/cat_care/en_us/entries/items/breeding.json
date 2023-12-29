@@ -5,7 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "If you want to make more cats from your cats, you will need a $(l:breeding/breeding_treat)breeding$(/l) treat."
+      "text": "If you want to make more cats from your cats, you will need a breeding treat."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Breeding Treat",
+      "item": {
+        "item": "catherder:breeding_treat"
+      },
+      "text": "Feed this to a couple of your cats to put them in the mood to make more kitties!"
     }
   ]
 }

@@ -4,64 +4,92 @@
   "category": "catherder:items",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Enlarger",
-      "text": "TODO"
+      "text": "Makes your cat bigger.",
+      "item": {
+        "item": "catherder:big_catsizer"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Shrinker",
-      "text": "TODO"
+      "text": "Makes your cat smaller.",
+      "item": {
+        "item": "catherder:small_catsizer"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Cardboard",
-      "text": "TODO"
+      "text": "Use this to make a box that your cat will play in.",
+      "item": {
+        "item": "catherder:cardboard"
+      }
     },
     {
-      "type": "patchouli:text",
-      "title": "Cardboard Box",
-      "text": "The cardboard box is one of your cat's favorite things to play with. It doesn't matter what came in it, it's a box!"
-    },
-    {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Cat Gut",
-      "text": "If your cat dies, this might drop."
+      "text": "If your cat dies, this might drop. Gross.",
+      "item": {
+        "item": "catherder:cat_gut"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Collar Shears",
-      "text": "TODO"
+      "text": "Use these to remove a collar that you've placed on your cat.",
+      "item": {
+        "item": "catherder:collar_shears"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Creative Collar",
-      "text": "TODO"
+      "text": "Gives you unlimited points to spend on your cat's talents.",
+      "item": {
+        "item": "catherder:creative_collar"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Creative Radar",
-      "text": "TODO"
+      "text": "A creative-mode version of the standard radar. In addition to the radar's normal functions, TODO",
+      "item": {
+        "item": "catherder:creative_radar"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Mousetrap",
-      "text": "TODO"
+      "text": "Useful for catching mice.",
+      "item": {
+        "item": "catherder:mouse_trap"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Owner Change",
-      "text": "TODO"
+      "text": "This item will allow you to surrender ownership of your cat and give it to someone else.",
+      "item": {
+        "item": "catherder:owner_change"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Radar",
-      "text": "TODO"
+      "text": "Use this item to find your cats, if you forgot where they are. You will need to put a Radar Collar on the cats that you want to track.",
+      "item": {
+        "item": "catherder:radar"
+      }
     },
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
       "title": "Radio Collar",
-      "text": "TODO"
+      "text": "An item that you place on your cat so you keep track of them using the Radar.",
+      "item": {
+        "item": "catherder:radio_collar"
+      }
     }
   ]
 }

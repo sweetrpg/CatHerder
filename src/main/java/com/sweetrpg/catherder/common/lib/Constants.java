@@ -104,8 +104,8 @@ public class Constants {
     public static final String TRANSLATION_KEY_TALENT_SUPERJUMP_DESCRIPTION = "talent.catherder.super_jump.description";
     public static final String TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_NAME = "talent.catherder.catlike_reflexes";
     public static final String TRANSLATION_KEY_TALENT_CATLIKEREFLEXES_DESCRIPTION = "talent.catherder.catlike_reflexes.description";
-    public static final String TRANSLATION_KEY_TALENT_bird_catcher_NAME = "talent.catherder.bird_catcher";
-    public static final String TRANSLATION_KEY_TALENT_bird_catcher_DESCRIPTION = "talent.catherder.bird_catcher.description";
+    public static final String TRANSLATION_KEY_TALENT_BIRD_CATCHER_NAME = "talent.catherder.bird_catcher";
+    public static final String TRANSLATION_KEY_TALENT_BIRD_CATCHER_DESCRIPTION = "talent.catherder.bird_catcher.description";
     public static final String TRANSLATION_KEY_TALENT_HELLBEAST_NAME = "talent.catherder.hell_beast";
     public static final String TRANSLATION_KEY_TALENT_HELLBEAST_DESCRIPTION = "talent.catherder.hell_beast.description";
     public static final String TRANSLATION_KEY_TALENT_MOUNT_NAME = "talent.catherder.mount";

@@ -5,17 +5,23 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TODO"
+      "text": "Food that your cat will eat."
     },
     {
-      "type": "patchouli:text",
-      "title": "Cheese Wedge",
-      "text": "You get these from a Cheese Wheel. You can eat them, or you can use it as bait for a mouse trap."
+      "type": "patchouli:spotlight",
+      "title": "Canned Food",
+      "text": "",
+      "item": {
+        "item": "catherder:canned_food"
+      }
     },
     {
-      "type": "patchouli:text",
-      "title": "Cheese Wheel",
-      "text": "It's cheese! Who doesn't like cheese?"
+      "type": "patchouli:spotlight",
+      "title": "Kibble",
+      "text": "",
+      "item": {
+        "item": "catherder:kibble"
+      }
     }
   ]
 }
