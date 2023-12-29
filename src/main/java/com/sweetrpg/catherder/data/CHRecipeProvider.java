@@ -98,8 +98,8 @@ public class CHRecipeProvider extends RecipeProvider {
                 .pattern("SSS")
                 .pattern("S S")
                 .pattern("SSS")
-                .define('S', Items.STRING)
-                .unlockedBy("has_stick", has(Items.STRING))
+                .define('S', ItemTags.WOOL)
+                .unlockedBy("has_stick", has(ItemTags.WOOL))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.TREAT_BAG.get(), 1)
                 .pattern("LCL")
@@ -128,7 +128,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('C', ModItems.WOOL_COLLAR.get())
                 .define('B', Items.BLACK_DYE)
                 .define('W', Items.WHITE_DYE)
-                .define('S', Items.STRING)
+                .define('S', ItemTags.WOOL)
                 .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
@@ -138,7 +138,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('C', ModItems.WOOL_COLLAR.get())
                 .define('B', Items.BLACK_DYE)
                 .define('W', Items.WHITE_DYE)
-                .define('S', Items.STRING)
+                .define('S', ItemTags.WOOL)
                 .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer, Util.getResource("spotted_collar_alt"));
         ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLORED_COLLAR.get(), 1)
@@ -154,10 +154,13 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1)
+                .pattern(" s ")
                 .pattern("S S")
                 .pattern("GSG")
+                .define('s', Items.STRING)
                 .define('S', Items.STICK)
                 .define('G', Blocks.GLASS_PANE)
+                .unlockedBy("has_string", has(Items.STRING))
                 .unlockedBy("has_stick", has(Items.STICK))
                 .save(consumer);
 
@@ -178,7 +181,7 @@ public class CHRecipeProvider extends RecipeProvider {
 
         ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
                 .pattern("XX")
-                .pattern("YX")
+                .pattern("XY")
                 .define('X', Items.IRON_INGOT)
                 .define('Y', Items.REDSTONE)
                 .unlockedBy("has_redstone", has(Items.REDSTONE))
@@ -215,7 +218,6 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_cardboard", has(ModItems.CARDBOARD.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9)
-                .pattern("PPP")
                 .pattern("PPP")
                 .pattern("PPP")
                 .define('P', Items.PAPER)
