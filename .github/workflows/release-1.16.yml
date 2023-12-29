@@ -5,11 +5,11 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: PR (1.18 Release)
+name: Release (1.16)
 
 on:
-  pull_request:
-    branches: [ 1.18-release ]
+  push:
+    branches: [ 1.16-release ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -18,12 +18,14 @@ on:
       - settings.gradle
 
 jobs:
-  build:
+  release:
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
@@ -31,5 +33,17 @@ jobs:
           distribution: 'temurin'
       - name: Build with Gradle
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         with:
-          arguments: build --stacktrace
+          arguments: curseforge
+      - name: Commit hash file
+        run: |
+          git config --global user.email "ci@sweetrpg.com"
+          git config --global user.name "SweetRPG CI"
+          echo "${{ github.sha }}" > .release-info/1.16/RELEASE_HASH
+          git add .release-info/1.16/RELEASE_HASH
+          git commit -m "Update RELEASE_HASH"
+          version=$(cat .release-info/1.16/VERSION)
+          git tag "release-${version}"
+          git push origin --tags
