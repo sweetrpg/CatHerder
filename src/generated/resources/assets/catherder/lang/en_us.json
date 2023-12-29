@@ -6,7 +6,7 @@
   "block.catherder.cat_bowl": "Cat Bowl",
   "block.catherder.cat_tree": "Cat Tree",
   "block.catherder.cat_tree.owner": "This bed is owned by %s.",
-  "block.catherder.cat_tree.set_owner_help": "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die right click the tree to revive them.",
+  "block.catherder.cat_tree.set_owner_help": "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die, right click the tree to revive them.",
   "block.catherder.catnip": "Catnip",
   "block.catherder.cheese_wheel": "Cheese Wheel",
   "block.catherder.litter_box": "Litter Box",

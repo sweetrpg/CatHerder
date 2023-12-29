@@ -41,7 +41,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Cat Bowl");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE, "Cat Tree");
         add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER, "This bed is owned by %s.");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP, "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die right click the tree to revive them.");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP, "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die, right click the tree to revive them.");
         add(Constants.TRANSLATION_KEY_BLOCK_CHEESE_WHEEL, "Cheese Wheel");
         add(Constants.TRANSLATION_KEY_BLOCK_LITTERBOX, "Litter Box");
         add(Constants.TRANSLATION_KEY_BLOCK_MOUSE_TRAP, "Mouse Trap");
