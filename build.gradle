@@ -21,7 +21,6 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
-// apply plugin: 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
 apply plugin: 'org.ajoberstar.grgit'
 apply from: "https://moddingtutorials.org/applesilicon.gradle"
 
