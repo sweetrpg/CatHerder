@@ -9,22 +9,11 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        // classpath "gradle.plugin.se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.71.4"
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
         classpath "org.ajoberstar.grgit:grgit-gradle:4.1.0"
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
-
-// plugins {
-//     id 'eclipse'
-//     id 'maven-publish'
-//     id 'org.parchmentmc.librarian.forgegradle'
-//     id 'net.minecraftforge.gradle' version '5.1.+'
-//     id 'com.matthewprenger.cursegradle'
-//     id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin'
-//     id 'org.ajoberstar.grgit'
-// }
 
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -42,7 +31,6 @@ println "Pipeline branch: " + (System.getenv('CI_COMMIT_BRANCH') ?: 'NONE')
 
 group = 'com.sweetrpg'
 archivesBaseName = "CatHerder-${project.target_mc_version}"
-//version = (grgit.describe(longDescr: true, tags: true) ?: '0-0-0').split('-').with { it -> "${it[0]}.${it[1]}" }
 version = System.getenv("CATHERDER_VERSION") ?: new File(".release-info/1.18/VERSION").text.trim()
 
 println "Project version: ${version}"
@@ -213,16 +201,6 @@ jar {
 test {
     useJUnitPlatform()
 }
-
-// task makeChangelog(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
-//     file = new File("build/changelog.md")
-//     fromRepo = file(".")
-//     untaggedName = "Current release ${project.version}"
-//     fromCommit = new File(".release-info/1.18/RELEASE_HASH").text.trim()
-//     toRef = 'HEAD'
-
-//     templateContent = file('changelog.mustache').getText('UTF-8')
-// }
 
 curseforge {
     apiKey = System.getenv('CURSEFORGE_API_KEY') ?: 0
