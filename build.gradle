@@ -238,6 +238,10 @@ curseforge {
             }
         }
         addArtifact apiJar
+        relations {
+            optionalDependency 'Configured'
+            optionalDependency 'Patchouli'
+        }
     }
     options {
         detectNewerJava = true
