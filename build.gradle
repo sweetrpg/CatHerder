@@ -114,7 +114,7 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
-    runtimeOnly fg.deobf("curse.maven:doggytalents-271050:${dt_file_id}")
+    runtimeOnly fg.deobf("curse.maven:doggytalents-${dt_project_id}:${dt_file_id}")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
 //    implementation fg.deobf("curse.maven:farmers-delight-398521:${fd_file_id}")

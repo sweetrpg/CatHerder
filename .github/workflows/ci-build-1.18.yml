@@ -48,17 +48,17 @@ jobs:
       - id: get_last_version
         name: Get last version
         run: |
-          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+          echo "latest_version=$(cat .release-info/1.18/VERSION)" >> $GITHUB_ENV
       - id: bump_version
         uses: cbrgm/semver-bump-action@main
         with:
-          current-version: ${{ env.latest_tag }}
+          current-version: ${{ env.latest_version }}
           bump-level: patch
 #      - id: tag-version
 #        name: Create tag
 #        uses: SOLIDSoftworks/semver-tags@1.0.1
 #        with:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #          tag-prefix: ''
 #          default-version: '0.0.1'
       - name: Commit version file
