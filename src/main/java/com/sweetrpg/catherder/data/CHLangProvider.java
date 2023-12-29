@@ -517,19 +517,19 @@ public class CHLangProvider extends LanguageProvider {
     }
 
     private void processDEDE() {
-        add(Constants.TRANSLATION_KEY_ARG_UUID_FORMAT_INVALID, "%s is of the wrong format should contain 4 dashes");
+        add(Constants.TRANSLATION_KEY_ARG_UUID_FORMAT_INVALID, "%s is of the wrong format; should contain 4 dashes");
         add(Constants.TRANSLATION_KEY_ARG_UUID_SECTION_INVALID, "%s contains one or more invalid characters");
         add(Constants.TRANSLATION_KEY_BLOCK_CARDBOARD_BOX, "Cardboard Box");
-        add(Constants.TRANSLATION_KEY_BLOCK_CATNIP, "Catnip");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BATH, "Cat Bath");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Cat Bowl");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE, "Cat Tree");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER, "This bed is owned by %s.");
-        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP, "Shift click with your cat nearby and they will come and make the tree their own. If the unimaginable happens and they do die right click the tree to revive them.");
-        add(Constants.TRANSLATION_KEY_BLOCK_LITTERBOX, "Litter Box");
-        add(Constants.TRANSLATION_KEY_BLOCK_MOUSE_TRAP, "Mouse Trap");
-        add(Constants.TRANSLATION_KEY_BLOCK_PET_DOOR, "Pet Door");
-        add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Wild Catnip");
+        add(Constants.TRANSLATION_KEY_BLOCK_CATNIP, "Katzenminze");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BATH, "Katzenbad");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_BOWL, "Katzennapf");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE, "Kratzbaum");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_OWNER, "Dieses Bett gehört %s.");
+        add(Constants.TRANSLATION_KEY_BLOCK_CAT_TREE_SET_OWNER_HELP, "Wenn Sie bei gedrückter Umschalttaste Ihre Katze in der Nähe haben, kommt sie und macht sich den Baum zu eigen. Wenn das Unvorstellbare passiert und sie sterben, klicken Sie mit der rechten Maustaste auf den Baum, um sie wiederzubeleben.");
+        add(Constants.TRANSLATION_KEY_BLOCK_LITTERBOX, "Katzentoilette");
+        add(Constants.TRANSLATION_KEY_BLOCK_MOUSE_TRAP, "Mausefalle");
+        add(Constants.TRANSLATION_KEY_BLOCK_PET_DOOR, "Haustiertür");
+        add(Constants.TRANSLATION_KEY_BLOCK_WILD_CATNIP, "Wildkatzenminze");
         add(Constants.TRANSLATION_KEY_CATTREE_COLOR_MISSING, "Missing: %s");
         add(Constants.TRANSLATION_KEY_CATTREE_COLOR_NULL, "Colour material not set");
         add(Constants.TRANSLATION_KEY_CATTREE_EXPLAIN_MISSING, "This item has likely been spawned in directly!");
