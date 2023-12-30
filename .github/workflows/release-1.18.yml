@@ -50,7 +50,7 @@ jobs:
 
           echo "# $version" > CHANGELOG/1.18/${version}.md
           echo "" >> CHANGELOG/1.18/${version}.md
-          cat CHANGELOG/1.18/current.md > CHANGELOG/1.18/${version}.md
+          cat CHANGELOG/1.18/current.md >> CHANGELOG/1.18/${version}.md
           cat /dev/null > CHANGELOG/1.18/current.md
           git add CHANGELOG/1.18
           git commit -m "Reset 1.18 changelog"
