@@ -6,22 +6,6 @@
     {
       "type": "patchouli:text",
       "text": "Food that your cat will eat."
-    },
-    {
-      "type": "patchouli:spotlight",
-      "title": "Canned Food",
-      "text": "",
-      "item": {
-        "item": "catherder:canned_food"
-      }
-    },
-    {
-      "type": "patchouli:spotlight",
-      "title": "Kibble",
-      "text": "",
-      "item": {
-        "item": "catherder:kibble"
-      }
     }
   ]
 }
