@@ -4,6 +4,7 @@ import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
@@ -50,7 +51,7 @@ public class CatWanderGoal extends Goal {
             litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
         }
 
-        return (bowlDist < 400.0D || litterboxDist < 400.0D);
+        return (Math.min(bowlDist, litterboxDist) < 400.0D);
     }
 
     @Override
