@@ -77,17 +77,18 @@
 
 * "Anti-mouse House" -- when first mousetrap is placed
 * "You Drive Me Crazy" - give a cat catnip
-* "" - make a cheese wheel
+* "He Eats It By the Block" - make a cheese wheel
 * "Herding Cats" - train a cat
 * "Kitty Power" - max level a cat
 * "Cat From Outer Space" - make a cat space collar
 * "Unloseable" - put a radio collar on your cat
 * "Cool Cat" - put sunglasses on cat
-* "" - place a litterbox 
+* "It's Potty Time!" - place a litterbox 
 * "Who Cares What's Inside?" - place a cardboard box 
 * "Freedom!" - make a pet door
-* "" - pick up wild catnip or catnip seeds
+* "Green Peril" - pick up wild catnip or catnip seeds
 * "I'm Not a Dog" - throw a cat toy or yarn
 * "Adopt-A-Cat" - change owner
 * "Phew! That Stinks!" - clean a litterbox 
 * "Irresistible" - put points in Nermal talent
+* "Nine Lives" - place a cat tree
