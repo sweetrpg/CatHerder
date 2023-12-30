@@ -3,6 +3,8 @@ package com.sweetrpg.catherder.common.entity.ai;
 import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
@@ -28,35 +30,39 @@ public class CatWanderGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.cat.isTame() || this.cat.isVehicle()) {
+        if(!this.cat.isTame() || this.cat.isVehicle()) {
             return false;
         }
 
-        if (!this.cat.isMode(EnumMode.WANDERING)) {
+        if(!this.cat.isMode(EnumMode.WANDERING)) {
             return false;
         }
 
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
         Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
 
-        if (!bowlPos.isPresent() && !litterboxPos.isPresent()) {
-            return false;
+        double bowlDist = 0;
+        if(bowlPos.isPresent()) {
+            bowlDist = bowlPos.get().distSqr(this.cat.blockPosition());
+        }
+        double litterboxDist = 0;
+        if(litterboxPos.isPresent()) {
+            litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
         }
 
-        return (bowlPos.get().distSqr(this.cat.blockPosition()) < 400.0D) ||
-                (litterboxPos.get().distSqr(this.cat.blockPosition()) < 400.0D) ;
+        return (Math.min(bowlDist, litterboxDist) < 400.0D);
     }
 
     @Override
     public void tick() {
-        if (this.cat.getNoActionTime() >= 100) {
+        if(this.cat.getNoActionTime() >= 100) {
             return;
         }
-        else if (this.cat.getRandom().nextInt(this.executionChance) != 0) {
+        else if(this.cat.getRandom().nextInt(this.executionChance) != 0) {
             return;
         }
 
-        if (this.cat.isPathFinding()) {
+        if(this.cat.isPathFinding()) {
             return;
         }
 
@@ -76,17 +82,17 @@ public class CatWanderGoal extends Goal {
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
         BlockPos bestPos = bowlPos.get();
 
-        for (int attempt = 0; attempt < 5; ++attempt) {
+        for(int attempt = 0; attempt < 5; ++attempt) {
             int l = random.nextInt(2 * xzRange + 1) - xzRange;
             int i1 = random.nextInt(2 * yRange + 1) - yRange;
             int j1 = random.nextInt(2 * xzRange + 1) - xzRange;
 
             BlockPos testPos = bowlPos.get().offset(l, i1, j1);
 
-            if (pathNavigate.isStableDestination(testPos)) {
+            if(pathNavigate.isStableDestination(testPos)) {
                 float weight = this.cat.getWalkTargetValue(testPos);
 
-                if (weight > bestWeight) {
+                if(weight > bestWeight) {
                     bestWeight = weight;
                     bestPos = testPos;
                 }
