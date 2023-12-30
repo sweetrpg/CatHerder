@@ -3,6 +3,7 @@ package com.sweetrpg.catherder.common.entity.ai;
 import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
@@ -39,12 +40,17 @@ public class CatWanderGoal extends Goal {
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
         Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
 
-        if(bowlPos.isEmpty() && litterboxPos.isEmpty()) {
-            return false;
+        double bowlDist = 0;
+        double litterboxDist = 0;
+
+        if(bowlPos.isPresent()) {
+            bowlDist = bowlPos.get().distSqr(this.cat.blockPosition());
+        }
+        if(litterboxPos.isPresent()) {
+            litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
         }
 
-        return (bowlPos.orElseGet(() -> BlockPos.ZERO).distSqr(this.cat.blockPosition()) < 400.0D) ||
-                (litterboxPos.orElseGet(() -> BlockPos.ZERO).distSqr(this.cat.blockPosition()) < 400.0D);
+        return (bowlDist < 400.0D || litterboxDist < 400.0D);
     }
 
     @Override
