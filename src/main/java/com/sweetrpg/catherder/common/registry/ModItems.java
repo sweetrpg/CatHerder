@@ -40,6 +40,10 @@ public class ModItems {
     // food
     public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge",
                                                                      () -> new Item(new Item.Properties().food(FoodValues.CHEESE).tab(ModItemGroups.GENERAL)));
+    public static final RegistryObject<Item> KIBBLE = register("kibble",
+                                                                     () -> new Item(new Item.Properties().food(FoodValues.KIBBLE).tab(ModItemGroups.GENERAL)));
+    public static final RegistryObject<Item> CANNED_FOOD = register("canned_food",
+                                                                     () -> new Item(new Item.Properties().food(FoodValues.CANNED_FOOD).tab(ModItemGroups.GENERAL)));
 //    public static final RegistryObject<Item> LASAGNA = register("lasagna");
 
     // treats
