@@ -1,0 +1,2 @@
+- `[FIX]` Fix position of pack cat bags
+- `[FIX]` Fix position of rescue cat barrel
