@@ -1,4 +1,1 @@
-- `[FIX]` Replaced incomplete language translations with English instead of "TODO"
-- `[FIX]` Filled in a number of empty translation keys
-- `[NEW]` Enabled skittish mode
-- `[FIX]` Updated Patchouli book
+- `[FIX]` Removed items from Patchouli book that don't exist yet
