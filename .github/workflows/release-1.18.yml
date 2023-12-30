@@ -44,7 +44,7 @@ jobs:
           
           echo "${{ github.sha }}" > .release-info/1.18/RELEASE_HASH
           git add .release-info/1.18/RELEASE_HASH
-          git commit -m "Update RELEASE_HASH"
+          git commit -m "Update 1.18 RELEASE_HASH"
           version=$(cat .release-info/1.18/VERSION)
           git tag "release-${version}"
 
