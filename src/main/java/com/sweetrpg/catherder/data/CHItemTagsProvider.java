@@ -47,6 +47,7 @@ public class CHItemTagsProvider extends ItemTagsProvider {
                   Items.COOKED_RABBIT.delegate, Items.RABBIT.delegate);
         createTag(ModTags.CAT_TREES, ModBlocks.CAT_TREE);
 //        createTag(ModTags.PET_DOORS, ModBlocks.PET_DOOR);
+        createTag(ModTags.TOYS, ModItems.CAT_TOY, ModItems.YARN);
     }
 
     @SafeVarargs

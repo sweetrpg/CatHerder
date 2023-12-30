@@ -281,6 +281,43 @@ public class Constants {
     public static final String TRANSLATION_KEY_CONFIG_ENABLE_KITTEN_PARENT_LEVELS = "catherder.config.enable_kitten_get_parent_levels";
     public static final String TRANSLATION_KEY_CONFIG_TIME_TO_MATURE = "catherder.config.cat.time_to_mature";
     public static final String TRANSLATION_KEY_CONFIG_EAT_FOOD_ON_FLOOR = "catherder.config.eat_food_on_floor";
+    // Advancements
+    public static final String TRANSLATION_KEY_ADVANCEMENT_TRAIN_CAT_TITLE = "advancements.catherder.main.train_cat.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_TRAIN_CAT_DESCRIPTION = "advancements.catherder.main.train_cat.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_PLACE_LITTERBOX_TITLE = "advancements.catherder.main.place_litterbox.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_PLACE_LITTERBOX_DESCRIPTION = "advancements.catherder.main.place_litterbox.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CLEAN_LITTERBOX_TITLE = "advancements.catherder.main.clean_litterbox.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CLEAN_LITTERBOX_DESCRIPTION = "advancements.catherder.main.clean_litterbox.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_PLACE_CARDBOARD_BOX_TITLE = "advancements.catherder.main.place_cardboard_box.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_PLACE_CARDBOARD_BOX_DESCRIPTION = "advancements.catherder.main.place_cardboard_box.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_PLACE_MOUSETRAP_TITLE = "advancements.catherder.main.place_mousetrap.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_PLACE_MOUSETRAP_DESCRIPTION = "advancements.catherder.main.place_mousetrap.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CRAFT_PET_DOOR_TITLE = "advancements.catherder.main.craft_pet_door.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CRAFT_PET_DOOR_DESCRIPTION = "advancements.catherder.main.craft_pet_door.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_GIVE_CATNIP_TITLE = "advancements.catherder.main.give_catnip.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_GIVE_CATNIP_DESCRIPTION = "advancements.catherder.main.give_catnip.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_FIND_CATNIP_TITLE = "advancements.catherder.main.find_catnip.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_FIND_CATNIP_DESCRIPTION = "advancements.catherder.main.find_catnip.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CRAFT_CHEESEWHEEL_TITLE = "advancements.catherder.main.craft_cheesewheel.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CRAFT_CHEESEWHEEL_DESCRIPTION = "advancements.catherder.main.craft_cheesewheel.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CHANGE_OWNER_TITLE = "advancements.catherder.main.change_owner.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CHANGE_OWNER_DESCRIPTION = "advancements.catherder.main.change_owner.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_MAX_LEVEL_TITLE = "advancements.catherder.main.max_level.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_MAX_LEVEL_DESCRIPTION = "advancements.catherder.main.max_level.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CELESTIAL_EXPLORATION_TITLE = "advancements.catherder.main.ce.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CELESTIAL_EXPLORATION_DESCRIPTION = "advancements.catherder.main.ce.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_RADIO_COLLAR_TITLE = "advancements.catherder.main.radio_collar.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_RADIO_COLLAR_DESCRIPTION = "advancements.catherder.main.radio_collar.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CAT_TREE_TITLE = "advancements.catherder.main.cat_tree.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_CAT_TREE_DESCRIPTION = "advancements.catherder.main.cat_tree.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_SUNGLASSES_TITLE = "advancements.catherder.main.sunglasses.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_SUNGLASSES_DESCRIPTION = "advancements.catherder.main.sunglasses.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_THROW_TOY_TITLE = "advancements.catherder.main.toy.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_THROW_TOY_DESCRIPTION = "advancements.catherder.main.toy.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_NERMAL_TITLE = "advancements.catherder.main.nermal.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_NERMAL_DESCRIPTION = "advancements.catherder.main.nermal.description";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_LASAGNA_TITLE = "advancements.catherder.main.lasagna.title";
+    public static final String TRANSLATION_KEY_ADVANCEMENT_LASAGNA_DESCRIPTION = "advancements.catherder.main.lasagna.description";
 
     public static class EntityState {
         public static final byte DEATH = 3;
