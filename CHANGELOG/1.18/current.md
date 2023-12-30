@@ -1,1 +1,2 @@
-- `[FIX]` Removed items from Patchouli book that don't exist yet
+- `[FIX]` Cheese wheel now drops a bowl and wedges when broken
+- `[FIX]` Cheese wedges are now edible

@@ -146,7 +146,9 @@ public class CheeseWheelBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState()
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+//                .setValue(SERVINGS, context.);
     }
 
     @SuppressWarnings("deprecation")
