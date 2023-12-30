@@ -1,2 +1,4 @@
 - `[FIX]` Cheese wheel now drops a bowl and wedges when broken
 - `[FIX]` Cheese wedges are now edible
+- `[FIX]` Fixed wander mode to allow bowl OR litterbox
+- `[NEW]` Added advancements
