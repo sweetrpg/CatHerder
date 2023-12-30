@@ -37,13 +37,26 @@ jobs:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         with:
           arguments: curseforge
-      - name: Commit hash file
+      - name: Commit hash file and reset changelog
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
+          
           echo "${{ github.sha }}" > .release-info/1.18/RELEASE_HASH
           git add .release-info/1.18/RELEASE_HASH
           git commit -m "Update RELEASE_HASH"
-          version=$(cat .release-info/1.18/VERSION)
           git tag "release-${version}"
+
+          version=$(cat .release-info/1.18/VERSION)
+          echo "# $version" > CHANGELOG/1.18/${version}.md
+          echo "" >> CHANGELOG/1.18/${version}.md
+          cat CHANGELOG/1.18/current.md > CHANGELOG/1.18/${version}.md
+          cat /dev/null > CHANGELOG/1.18/current.md
+          git add CHANGELOG/1.18
+          git commit -m "Reset 1.18 changelog"
+
           git push origin --tags
+          
+          git checkout 1.18
+          git merge 1.18-release
+          git push origin
