@@ -1,0 +1,2 @@
+- `[FIX]` Cheese wheel now drops a bowl and wedges when broken
+- `[FIX]` Cheese wedges are now edible

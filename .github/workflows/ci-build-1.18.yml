@@ -16,14 +16,6 @@ on:
       - build.gradle
       - gradle.properties
       - settings.gradle
-  pull_request:
-    branches: [ 1.18 ]
-    paths:
-      - 'src/**'
-      - 'test/**'
-      - build.gradle
-      - gradle.properties
-      - settings.gradle
 
 jobs:
   build:
@@ -54,13 +46,6 @@ jobs:
         with:
           current-version: ${{ env.latest_version }}
           bump-level: patch
-#      - id: tag-version
-#        name: Create tag
-#        uses: SOLIDSoftworks/semver-tags@1.0.1
-#        with:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          tag-prefix: ''
-#          default-version: '0.0.1'
       - name: Commit version file
         run: |
           git config --global user.email "ci@sweetrpg.com"

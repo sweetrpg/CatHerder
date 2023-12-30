@@ -16,14 +16,6 @@ on:
       - build.gradle
       - gradle.properties
       - settings.gradle
-  pull_request:
-    branches: [ 1.16 ]
-    paths:
-      - 'src/**'
-      - 'test/**'
-      - build.gradle
-      - gradle.properties
-      - settings.gradle
 
 jobs:
   build:
@@ -41,18 +33,20 @@ jobs:
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
         with:
           arguments: build
-      - id: tag-version
-        name: Create tag
-        uses: SOLIDSoftworks/semver-tags@1.0.1
+      - id: get_last_version
+        name: Get last version
+        run: |
+          echo "latest_version=$(cat .release-info/1.16/VERSION)" >> $GITHUB_ENV
+      - id: bump_version
+        uses: cbrgm/semver-bump-action@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-          tag-prefix: ''
-          default-version: '0.0.1'
+          current-version: ${{ env.latest_version }}
+          bump-level: patch
       - name: Commit version file
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
-          echo "${{ steps.tag-version.outputs.semantic-version }}" > .release-info/1.16/VERSION
+          echo "${{ steps.bump_version.outputs.new_version }}" > .release-info/1.16/VERSION
           git add .release-info/1.16/VERSION
           git commit -m "Update 1.16 VERSION file"
           git push origin
