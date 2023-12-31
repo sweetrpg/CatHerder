@@ -1,10 +1,1 @@
-- `[FIX]` Fixed position of pack cat bags
-- `[FIX]` Fixed position of rescue cat barrel
-- `[NEW]` Cat shears can now be used on the cat tree to clear the current owner
-- `[NEW]` Updated the book with cat management information
-- `[FIX]` Fixed placement of accessory textures
-- `[FIX]` Fixed some icons in the book
-- `[MSC]` Updated some item textures
-- `[FIX]` Added some missing language strings
-- `[FIX]` (Hopefully) fixed an occasional crash when rendering cat trees
-- `[NEW]` Updated loot tables of some vanilla mobs because ... reasons
+- `[FIX]` Fixed NPE in cat wander goal

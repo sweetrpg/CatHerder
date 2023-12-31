@@ -3,8 +3,6 @@ package com.sweetrpg.catherder.common.entity.ai;
 import com.sweetrpg.catherder.api.feature.EnumMode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
@@ -67,7 +65,9 @@ public class CatWanderGoal extends Goal {
         }
 
         Vec3 pos = this.getPosition();
-        this.cat.getNavigation().moveTo(pos.x, pos.y, pos.z, this.speed);
+        if(pos != null) {
+            this.cat.getNavigation().moveTo(pos.x, pos.y, pos.z, this.speed);
+        }
     }
 
     @Nullable
@@ -80,25 +80,34 @@ public class CatWanderGoal extends Goal {
 
         float bestWeight = Float.MIN_VALUE;
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
-        BlockPos bestPos = bowlPos.get();
+        Optional<BlockPos> boxPos = this.cat.getLitterboxPos();
 
-        for(int attempt = 0; attempt < 5; ++attempt) {
-            int l = random.nextInt(2 * xzRange + 1) - xzRange;
-            int i1 = random.nextInt(2 * yRange + 1) - yRange;
-            int j1 = random.nextInt(2 * xzRange + 1) - xzRange;
-
-            BlockPos testPos = bowlPos.get().offset(l, i1, j1);
-
-            if(pathNavigate.isStableDestination(testPos)) {
-                float weight = this.cat.getWalkTargetValue(testPos);
-
-                if(weight > bestWeight) {
-                    bestWeight = weight;
-                    bestPos = testPos;
-                }
-            }
+        if(bowlPos.isEmpty() && boxPos.isEmpty()) {
+            return null;
         }
 
-        return new Vec3(bestPos.getX(), bestPos.getY(), bestPos.getZ());
+        BlockPos bestPos = bowlPos.orElseGet(() -> boxPos.orElseGet(() -> null));
+        if(bestPos != null) {
+            for(int attempt = 0; attempt < 5; ++attempt) {
+                int l = random.nextInt(2 * xzRange + 1) - xzRange;
+                int i1 = random.nextInt(2 * yRange + 1) - yRange;
+                int j1 = random.nextInt(2 * xzRange + 1) - xzRange;
+
+                BlockPos testPos = bestPos.offset(l, i1, j1);
+
+                if(pathNavigate.isStableDestination(testPos)) {
+                    float weight = this.cat.getWalkTargetValue(testPos);
+
+                    if(weight > bestWeight) {
+                        bestWeight = weight;
+                        bestPos = testPos;
+                    }
+                }
+            }
+
+            return new Vec3(bestPos.getX(), bestPos.getY(), bestPos.getZ());
+        }
+
+        return null;
     }
 }
