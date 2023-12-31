@@ -4,3 +4,4 @@
 - `[NEW]` Updated the book with cat management information
 - `[FIX]` Fixed placement of accessory textures
 - `[FIX]` Fixed some icons in the book
+- `[MSC]` Updated some item textures
