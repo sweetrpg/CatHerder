@@ -9,6 +9,11 @@
     },
     {
       "type": "patchouli:crafting",
+      "title": "Treat Bag",
+      "recipe": "catherder:treat_bag"
+    },
+    {
+      "type": "patchouli:crafting",
       "title": "Training Treat",
       "recipe": "catherder:training_treat"
     },

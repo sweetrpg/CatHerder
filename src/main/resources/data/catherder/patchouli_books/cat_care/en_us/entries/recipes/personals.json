@@ -8,56 +8,33 @@
       "text": "There are a number of items that you can make for your cats that will enrich their lives."
     },
     {
-      "type": "patchouli:empty"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Food Bowl",
-      "text": "This is where you provide your cat some nourishment."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Food Bowl",
+      "text": "This is where you provide your cat some nourishment.",
       "recipe": "catherder:cat_bowl"
     },
     {
-      "type": "patchouli:text",
-      "title": "Cat Tree",
-      "text": "This is your cat's personal place to sleep.$(br2)Right-click with an empty hand to assign your cat to the bed. After you do this, if your cat uses up one of its lives, you can revive it here."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Cat Tree",
+      "text": "This is your cat's personal place to sleep.$(br2)Right-click with an empty hand to assign your cat to the bed. After you do this, if your cat uses up one of its lives, you can revive it here.",
       "recipe": "catherder:cat_tree"
     },
     {
-      "type": "patchouli:text",
-      "title": "Litterbox",
-      "text": "Give your cat a place to relieve itself.$(br2)If you have litterbox maintenance enabled, your cat will leave you a little something after it uses it."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Litterbox",
+      "text": "Give your cat a place to relieve itself.$(br2)If you have litterbox maintenance enabled, your cat will leave you a little something after it uses it.",
       "recipe": "catherder:litter_box"
     },
     {
-      "type": "patchouli:text",
-      "title": "Litter Scoop",
-      "text": "If you have litterbox maintenance enabled, the scoop will clean a dirty box."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Litter Scoop",
+      "text": "If you have litterbox maintenance enabled, the scoop will clean a dirty box.",
       "recipe": "catherder:litter_scoop"
     },
     {
-      "type": "patchouli:text",
-      "title": "Pet Door",
-      "text": "Add a pet door to your structure to give your pet access.$(br2)You can also lock/unlock it by right-clicking."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Pet Door",
+      "text": "Add a pet door to your structure to give your pet access.$(br2)You can also lock/unlock it by right-clicking.",
       "recipe": "catherder:pet_door"
     }
   ]

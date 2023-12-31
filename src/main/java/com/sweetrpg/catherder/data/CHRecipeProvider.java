@@ -252,6 +252,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_slime", has(Items.SLIME_BALL))
                 .unlockedBy("has_bowl", has(Items.BOWL))
                 .save(consumer);
+
 //        ShapedRecipeBuilder.shaped(ModItems.LASAGNA.get(), 1)
 //                .pattern("PPP")
 //                .pattern("SCM")
@@ -266,94 +267,11 @@ public class CHRecipeProvider extends RecipeProvider {
 //                           .unlockedBy("has_meat", has(Items.BEEF))
 //                           .save(consumer);
 
-        // loop over wool colors and create a recipe for each
-//        List<Tuple<RegistryObject<CatTreeBlock>, Item>> itemWoolTreeTuple = Arrays.asList(
-//                new Tuple<>(ModBlocks.WHITE_CAT_TREE, Items.WHITE_WOOL),
-//                new Tuple<>(ModBlocks.BLACK_CAT_TREE, Items.BLACK_WOOL),
-//                new Tuple<>(ModBlocks.ORANGE_CAT_TREE, Items.ORANGE_WOOL),
-//                new Tuple<>(ModBlocks.YELLOW_CAT_TREE, Items.YELLOW_WOOL),
-//                new Tuple<>(ModBlocks.GREEN_CAT_TREE, Items.GREEN_WOOL),
-//                new Tuple<>(ModBlocks.BLUE_CAT_TREE, Items.BLUE_WOOL),
-//                new Tuple<>(ModBlocks.PURPLE_CAT_TREE, Items.PURPLE_WOOL),
-//                new Tuple<>(ModBlocks.RED_CAT_TREE, Items.RED_WOOL),
-//                new Tuple<>(ModBlocks.CYAN_CAT_TREE, Items.CYAN_WOOL),
-//                new Tuple<>(ModBlocks.LIME_CAT_TREE, Items.LIME_WOOL),
-//                new Tuple<>(ModBlocks.GREY_CAT_TREE, Items.GRAY_WOOL),
-//                new Tuple<>(ModBlocks.LIGHT_GREY_CAT_TREE, Items.LIGHT_GRAY_WOOL),
-//                new Tuple<>(ModBlocks.LIGHT_BLUE_CAT_TREE, Items.LIGHT_BLUE_WOOL),
-//                new Tuple<>(ModBlocks.PINK_CAT_TREE, Items.PINK_WOOL),
-//                new Tuple<>(ModBlocks.BROWN_CAT_TREE, Items.BROWN_WOOL),
-//                new Tuple<>(ModBlocks.MAGENTA_CAT_TREE, Items.MAGENTA_WOOL)
-//                );
-//        for(Tuple<RegistryObject<CatTreeBlock>, Item> tElement : itemWoolTreeTuple) {
-//            ShapedRecipeBuilder.shaped(tElement.getA().get(), 1)
-//                    .pattern("sWs")
-//                    .pattern("SF ")
-//                    .pattern("sss")
-//                    .define('s', ItemTags.SLABS)
-//                    .define('S', Items.STRING)
-//                    .define('F', ItemTags.WOODEN_FENCES)
-//                    .define('W', tElement.getB())
-//                    .unlockedBy("has_slabs", has(ItemTags.SLABS))
-//                    .unlockedBy("has_string", has(Items.STRING))
-//                    .unlockedBy("has_fences", has(ItemTags.WOODEN_FENCES))
-//                    .unlockedBy("has_wool", has(ItemTags.WOOL))
-//                    .save(consumer);
-//        }
         SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
                             .save(consumer, Util.getResourcePath("cat_tree"));
         SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE_DYED.get())
                             .save(consumer, Util.getResourcePath("cat_tree_dyed"));
 
-        // dyeable cat trees
-//        List<Tuple<RegistryObject<CatTreeBlock>, Item>> itemDyeTreeTuple = Arrays.asList(
-//                new Tuple<>(ModBlocks.WHITE_CAT_TREE, Items.WHITE_DYE),
-//                new Tuple<>(ModBlocks.BLACK_CAT_TREE, Items.BLACK_DYE),
-//                new Tuple<>(ModBlocks.ORANGE_CAT_TREE, Items.ORANGE_DYE),
-//                new Tuple<>(ModBlocks.YELLOW_CAT_TREE, Items.YELLOW_DYE),
-//                new Tuple<>(ModBlocks.GREEN_CAT_TREE, Items.GREEN_DYE),
-//                new Tuple<>(ModBlocks.BLUE_CAT_TREE, Items.BLUE_DYE),
-//                new Tuple<>(ModBlocks.PURPLE_CAT_TREE, Items.PURPLE_DYE),
-//                new Tuple<>(ModBlocks.RED_CAT_TREE, Items.RED_DYE),
-//                new Tuple<>(ModBlocks.CYAN_CAT_TREE, Items.CYAN_DYE),
-//                new Tuple<>(ModBlocks.LIME_CAT_TREE, Items.LIME_DYE),
-//                new Tuple<>(ModBlocks.GREY_CAT_TREE, Items.GRAY_DYE),
-//                new Tuple<>(ModBlocks.LIGHT_GREY_CAT_TREE, Items.LIGHT_GRAY_DYE),
-//                new Tuple<>(ModBlocks.LIGHT_BLUE_CAT_TREE, Items.LIGHT_BLUE_DYE),
-//                new Tuple<>(ModBlocks.PINK_CAT_TREE, Items.PINK_DYE),
-//                new Tuple<>(ModBlocks.BROWN_CAT_TREE, Items.BROWN_DYE),
-//                new Tuple<>(ModBlocks.MAGENTA_CAT_TREE, Items.MAGENTA_DYE)
-//        );
-//        for(Tuple<RegistryObject<CatTreeBlock>, Item> tElement : itemDyeTreeTuple) {
-//            ShapelessRecipeBuilder.shapeless(tElement.getA().get(), 1)
-//                    .requires(ModTags.CAT_TREES)
-//                    .requires(tElement.getB())
-//                    .unlockedBy("has_cat_tree", has(tElement.getA().get()))
-//                    .unlockedBy("has_dye", has(Items.BLUE_DYE))
-//                    .save(consumer);
-//        }
-//
-//        List<Tuple<RegistryObject<Block>, Item>> itemWoodDoorTuple = Arrays.asList(
-//                new Tuple<>(ModBlocks.OAK_PET_DOOR, Items.OAK_PLANKS),
-//                new Tuple<>(ModBlocks.DARK_OAK_PET_DOOR, Items.DARK_OAK_PLANKS),
-//                new Tuple<>(ModBlocks.BIRCH_PET_DOOR, Items.BIRCH_PLANKS),
-//                new Tuple<>(ModBlocks.ACACIA_PET_DOOR, Items.ACACIA_PLANKS),
-//                new Tuple<>(ModBlocks.SPRUCE_PET_DOOR, Items.SPRUCE_PLANKS),
-//                new Tuple<>(ModBlocks.JUNGLE_PET_DOOR, Items.JUNGLE_PLANKS),
-//                new Tuple<>(ModBlocks.CRIMSON_PET_DOOR, Items.CRIMSON_STEM),
-//                new Tuple<>(ModBlocks.WARPED_PET_DOOR, Items.WARPED_STEM)
-//                );
-//        for(Tuple<RegistryObject<Block>, Item> tElement : itemWoodDoorTuple) {
-//            ShapedRecipeBuilder.shaped(tElement.getA().get(), 1)
-//                    .pattern("WWW")
-//                    .pattern("WDW")
-//                    .pattern("WWW")
-//                    .define('W', tElement.getB())
-//                    .define('D', ItemTags.WOODEN_DOORS)
-//                    .unlockedBy("has_planks", has(ItemTags.PLANKS))
-//                    .unlockedBy("has_door", has(ItemTags.WOODEN_DOORS))
-//                    .save(consumer);
-//        }
         SpecialRecipeBuilder.special(ModRecipeSerializers.PET_DOOR.get())
                 .save(consumer, Util.getResourcePath("pet_door"));
 
