@@ -6,3 +6,4 @@
 - `[FIX]` Fixed some icons in the book
 - `[MSC]` Updated some item textures
 - `[FIX]` Added some missing language strings
+- `[FIX]` (Hopefully) fixed an occasional crash when rendering cat trees
