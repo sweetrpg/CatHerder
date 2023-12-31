@@ -144,6 +144,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -421,6 +422,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -697,6 +699,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -973,6 +976,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -1249,6 +1253,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -1525,6 +1530,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -1801,6 +1807,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
@@ -2077,6 +2084,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
+        add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
         add(Constants.TRANSLATION_KEY_ITEM_BREEDING_TREAT, "Breeding Treat");
         add(Constants.TRANSLATION_KEY_ITEM_CAPE, "Cape");
