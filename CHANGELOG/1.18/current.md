@@ -1,0 +1,1 @@
+- `[FIX]` Fixed NPE in cat wander goal
