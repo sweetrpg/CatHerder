@@ -3,7 +3,7 @@
   "display": {
     "icon": {
       "item": "catherder:cat_tree",
-      "nbt": "{catherder:{colorId:\"minecraft:brown_wool\"}}"
+      "nbt": "{catherder:{colorId:\"minecraft:cyan_wool\"}}"
     },
     "title": {
       "translate": "advancements.catherder.main.cat_tree.title"

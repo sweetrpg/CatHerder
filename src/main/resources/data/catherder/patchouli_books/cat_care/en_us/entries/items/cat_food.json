@@ -7,5 +7,32 @@
       "type": "patchouli:text",
       "text": "Food that your cat will eat."
     }
+    ,
+    {
+      "type": "patchouli:spotlight",
+      "title": "Fish",
+      "text": "This is the food that your cat will always eat.",
+      "item": {
+        "tag": "catherder:fish"
+      }
+    }
+    ,
+    {
+      "type": "patchouli:spotlight",
+      "title": "Meat",
+      "text": "If you allocate 3 points in the Happy Eater talent, you can feed your cat all sorts of meat.",
+      "item": {
+        "tag": "catherder:meat"
+      }
+    }
+    ,
+    {
+      "type": "patchouli:spotlight",
+      "title": "Rotten Flesh",
+      "text": "If you allocate 5 points in the Happy Eater talent, you can even feed your cat that disgusting stuff that drops from zombies.",
+      "item": {
+        "tag": "minecraft:rotten_flesh"
+      }
+    }
   ]
 }

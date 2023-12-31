@@ -27,9 +27,11 @@ public class UUIDArgument implements ArgumentType<UUID> {
         String str = reader.readUnquotedString();
         try {
             return UUID.fromString(str);
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e) {
             throw UUID_SECTION_INVALID.create(str);
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             throw UUID_FORMAT_INVALID.create(str);
         }
     }
