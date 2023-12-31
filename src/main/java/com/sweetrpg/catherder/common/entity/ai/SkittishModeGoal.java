@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +22,6 @@ public class SkittishModeGoal<T extends LivingEntity> extends AvoidEntityGoal {
 
     @Override
     public boolean canUse() {
-        return this.cat.isMode(EnumMode.SKITTISH) && super.canUse();
+        return this.cat.isMode(Mode.SKITTISH) && super.canUse();
     }
 }

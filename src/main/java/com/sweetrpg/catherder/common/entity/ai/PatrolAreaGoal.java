@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
 import com.sweetrpg.catherder.CatHerder;
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.item.PatrolItem;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
@@ -27,12 +27,12 @@ public class PatrolAreaGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return this.cat.getMode() == EnumMode.PATROL && this.cat.getTarget() == null && !this.cat.getData(PatrolItem.POS).isEmpty();
+        return this.cat.getMode() == Mode.PATROL && this.cat.getTarget() == null && !this.cat.getData(PatrolItem.POS).isEmpty();
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.cat.getMode() == EnumMode.PATROL && this.cat.getTarget() == null && !this.cat.getData(PatrolItem.POS).isEmpty();
+        return this.cat.getMode() == Mode.PATROL && this.cat.getTarget() == null && !this.cat.getData(PatrolItem.POS).isEmpty();
     }
 
     @Override

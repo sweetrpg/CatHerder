@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -42,7 +42,7 @@ public class CatFollowOwnerGoal extends Goal {
         if (owner == null) {
             return false;
         }
-        else if (this.cat.getMode() == EnumMode.PATROL) {
+        else if (this.cat.getMode() == Mode.PATROL) {
             return false;
         }
         else if (owner.isSpectator()) {
@@ -115,7 +115,7 @@ public class CatFollowOwnerGoal extends Goal {
     }
 
     public float getMinStartDistanceSq() {
-        if (this.cat.isMode(EnumMode.GUARD)) {
+        if (this.cat.isMode(Mode.GUARD)) {
             return 4F;
         }
 

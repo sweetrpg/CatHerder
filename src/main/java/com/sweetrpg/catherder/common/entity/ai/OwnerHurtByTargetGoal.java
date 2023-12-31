@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 
 public class OwnerHurtByTargetGoal extends net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal {
@@ -14,6 +14,6 @@ public class OwnerHurtByTargetGoal extends net.minecraft.world.entity.ai.goal.ta
 
     @Override
     public boolean canUse() {
-         return this.cat.isMode(EnumMode.ATTACK) && super.canUse();
+         return this.cat.isMode(Mode.ATTACK) && super.canUse();
     }
 }

@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -32,12 +32,13 @@ public class CatWanderGoal extends Goal {
             return false;
         }
 
-        if(!this.cat.isMode(EnumMode.WANDERING)) {
+        if(!this.cat.isMode(Mode.DOMESTIC)) {
             return false;
         }
 
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
         Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
+        Optional<BlockPos> treePos = this.cat.getCatTreePos();
 
         double bowlDist = 0;
         if(bowlPos.isPresent()) {
@@ -47,8 +48,12 @@ public class CatWanderGoal extends Goal {
         if(litterboxPos.isPresent()) {
             litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
         }
+        double treeDist = 0;
+        if(treeDist.isPresent()) {
+            treeDist = treePos.get().distSqr(this.cat.blockPosition());
+        }
 
-        return (Math.min(bowlDist, litterboxDist) < 400.0D);
+        return (Math.max(Math.max(bowlDist, litterboxDist), treeDist) < 400.0D);
     }
 
     @Override
@@ -81,8 +86,9 @@ public class CatWanderGoal extends Goal {
         float bestWeight = Float.MIN_VALUE;
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
         Optional<BlockPos> boxPos = this.cat.getLitterboxPos();
+        Optional<BlockPos> treePos = this.cat.getCatTreePos();
 
-        if(bowlPos.isEmpty() && boxPos.isEmpty()) {
+        if(bowlPos.isEmpty() && boxPos.isEmpty() && treePos.isEmpty()) {
             return null;
         }
 

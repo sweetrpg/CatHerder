@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.storage;
 
 import com.google.common.collect.Lists;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
@@ -84,7 +84,7 @@ public class CatRespawnData implements ICatData {
         cat.setUUID(uuid);
         cat.load(compoundnbt);
 
-        cat.setMode(EnumMode.DOCILE);
+        cat.setMode(Mode.DOCILE);
         cat.setOrderedToSit(true);
 
         return cat;
