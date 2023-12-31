@@ -2,3 +2,4 @@
 - `[FIX]` Fix position of rescue cat barrel
 - `[NEW]` Cat shears can now be used on the cat tree to clear the current owner
 - `[NEW]` Updated the book with cat management information
+- `[FIX]` Fixed placement of accessory textures
