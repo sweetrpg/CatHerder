@@ -17,6 +17,21 @@
       "type": "patchouli:crafting",
       "title": "Shears",
       "recipe": "catherder:collar_shears"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Radar",
+      "recipe": "catherder:radar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cardboard",
+      "recipe": "catherder:cardboard"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Mouse Trap",
+      "recipe": "catherder:mouse_trap"
     }
   ]
 }

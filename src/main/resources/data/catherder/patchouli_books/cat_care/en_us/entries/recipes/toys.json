@@ -8,26 +8,15 @@
       "text": "Cats love to play with toys. Here you will find some toys to make for them."
     },
     {
-      "type": "patchouli:empty"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cat Toy",
-      "text": "Your cat loves to play with stuff. Make this toy and throw it around, and your cat will bring it back to you."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Cat Toy",
+      "text": "Your cat loves to play with stuff. Make this toy and throw it around, and your cat will bring it back to you.",
       "recipe": "catherder:cat_toy"
     },
     {
-      "type": "patchouli:text",
-      "title": "Yarn",
-      "text": "A ball of yarn that your kitty will unravel."
-    },
-    {
       "type": "patchouli:crafting",
-      "title": "Recipe",
+      "title": "Yarn",
+      "text": "A ball of yarn that your kitty will unravel.",
       "recipe": "catherder:yarn"
     },
     {
