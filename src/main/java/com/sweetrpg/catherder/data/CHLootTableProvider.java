@@ -29,6 +29,8 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -227,16 +229,19 @@ public class CHLootTableProvider extends LootTableProvider {
         @Override
         protected void addTables() {
             this.registerNoLoot(ModEntityTypes.CAT);
-            this.add(EntityType.CAT, LootTable.lootTable()
-                    .withPool(LootPool.lootPool()
-                            .setRolls(ConstantValue.exactly(1.0F))
-                            .add(LootItem.lootTableItem(ModItems.CAT_GUT.get())
-                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
+
+            for(EntityType type : Arrays.asList(EntityType.CAT, EntityType.COW, EntityType.SHEEP, EntityType.HORSE, EntityType.LLAMA, EntityType.DONKEY, EntityType.GOAT, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PIG)) {
+                this.add(type, LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(0.1F))
+                                .add(LootItem.lootTableItem(ModItems.CAT_GUT.get())
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
 //            this.add(ModEntityTypes.RODENT.get(), LootTable.lootTable()
 //                                                     .withPool(LootPool.lootPool()
 //                                                                       .setRolls(ConstantValue.exactly(1.0F))
 //                                                                       .add(LootItem.lootTableItem(ModItems.RODENT.get())
 //                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
+            }
         }
 
         protected void registerNoLoot(Supplier<? extends EntityType<?>> type) {

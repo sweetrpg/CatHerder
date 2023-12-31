@@ -7,3 +7,4 @@
 - `[MSC]` Updated some item textures
 - `[FIX]` Added some missing language strings
 - `[FIX]` (Hopefully) fixed an occasional crash when rendering cat trees
+- `[NEW]` Updated loot tables of some vanilla mobs because ... reasons
