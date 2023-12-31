@@ -223,10 +223,6 @@ public class CatTreeBlock extends BaseEntityBlock {
         }
     }
 
-    private void setCatTreeOwner(Level worldIn, CatTreeBlockEntity catTreeEntity) {
-
-    }
-
     private CatEntity findClosest(Level worldIn, Player player, BlockPos pos) {
         List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
         Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));

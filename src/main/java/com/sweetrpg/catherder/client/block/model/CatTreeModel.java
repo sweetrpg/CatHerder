@@ -29,7 +29,10 @@ import net.minecraftforge.registries.IRegistryDelegate;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
 public class CatTreeModel implements BakedModel {
@@ -53,7 +56,7 @@ public class CatTreeModel implements BakedModel {
         return this.getModelVariant(data.getData(CatTreeBlockEntity.COLOR), data.getData(CatTreeBlockEntity.FACING));
     }
 
-    public BakedModel getModelVariant(IColorMaterial color, Direction facing) {
+    public synchronized BakedModel getModelVariant(IColorMaterial color, Direction facing) {
         Tuple<IRegistryDelegate<IColorMaterial>, Direction> key =
                 new Tuple<>(color != null ? color.delegate : null, facing != null ? facing : Direction.NORTH);
 
@@ -81,11 +84,11 @@ public class CatTreeModel implements BakedModel {
         Direction facing = Direction.NORTH;
 
         BlockEntity tile = world.getBlockEntity(pos);
-        if (tile instanceof CatTreeBlockEntity) {
-            color = ((CatTreeBlockEntity) tile).getColor();
+        if(tile instanceof CatTreeBlockEntity catTreeBlockEntity) {
+            color = catTreeBlockEntity.getColor();
         }
 
-        if (state.hasProperty(CatTreeBlock.FACING)) {
+        if(state.hasProperty(CatTreeBlock.FACING)) {
             facing = state.getValue(CatTreeBlock.FACING);
         }
 
@@ -98,16 +101,15 @@ public class CatTreeModel implements BakedModel {
     public BakedModel bakeModelVariant(@Nullable IRegistryDelegate<IColorMaterial> colorResource, @Nonnull Direction facing) {
         List<BlockElement> parts = this.model.getElements();
         List<BlockElement> elements = new ArrayList<>(parts.size()); //We have to duplicate this so we can edit it below.
-        for (BlockElement part : parts) {
+        for(BlockElement part : parts) {
             elements.add(new BlockElement(part.from, part.to, Maps.newHashMap(part.faces), part.rotation, part.shade));
         }
 
         BlockModel newModel = new BlockModel(this.model.getParentLocation(), elements,
-            Maps.newHashMap(this.model.textureMap), this.model.hasAmbientOcclusion(), this.model.getGuiLight(),
-            this.model.getTransforms(), new ArrayList<>(this.model.getOverrides()));
+                Maps.newHashMap(this.model.textureMap), this.model.hasAmbientOcclusion(), this.model.getGuiLight(),
+                this.model.getTransforms(), new ArrayList<>(this.model.getOverrides()));
         newModel.name = this.model.name;
         newModel.parent = this.model.parent;
-
 
         Either<Material, String> colorTexture = findColorTexture(colorResource);
 //        newModel.textureMap.put("bedding", findBeddingTexture(beddingResource));
@@ -129,7 +131,7 @@ public class CatTreeModel implements BakedModel {
     }
 
     private Either<Material, String> findTexture(@Nullable ResourceLocation resource) {
-        if (resource == null) {
+        if(resource == null) {
             resource = MISSING_TEXTURE;
         }
 
