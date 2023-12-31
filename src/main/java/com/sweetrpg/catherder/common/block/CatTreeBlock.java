@@ -74,8 +74,8 @@ public class CatTreeBlock extends BaseEntityBlock {
     public CatTreeBlock() {
         super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
         this.registerDefaultState(this.stateDefinition.any()
-                                      .setValue(FACING, Direction.NORTH)
-                                      .setValue(WATERLOGGED, false));
+                .setValue(FACING, Direction.NORTH)
+                .setValue(WATERLOGGED, false));
     }
 
     @SuppressWarnings("deprecation")
@@ -183,7 +183,7 @@ public class CatTreeBlock extends BaseEntityBlock {
                 if(stack.getItem() == Items.NAME_TAG && stack.hasCustomHoverName()) {
                     catTreeEntity.setBedName(stack.getHoverName());
 
-                    if (!player.getAbilities().instabuild) {
+                    if(!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }
 
@@ -191,30 +191,13 @@ public class CatTreeBlock extends BaseEntityBlock {
                     return InteractionResult.SUCCESS;
                 }
                 else if(player.isShiftKeyDown() && catTreeEntity.getOwnerUUID() == null) {
-                    List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
-                    Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
-
-                    CatEntity closestStanding = null;
-                    CatEntity closestSitting = null;
-                    for(CatEntity cat : cats) {
-                        if(closestSitting != null && closestSitting != null) {
-                            break;
-                        }
-
-                        if(closestSitting == null && cat.isInSittingPose()) {
-                            closestSitting = cat;
-                        }
-                        else if(closestStanding == null && !cat.isInSittingPose()) {
-                            closestStanding = cat;
-                        }
-                    }
-
-                    CatEntity closests = closestStanding != null ? closestStanding : closestSitting;
-                    if(closests != null) {
-                        closests.setTargetBlock(pos);
+                    CatEntity closest = findClosest(worldIn, player, pos);
+                    if(closest != null) {
+                        closest.setTargetBlock(pos);
                     }
                 }
                 else if(catTreeEntity.getOwnerUUID() != null) {
+                    // the bed already has an owner
                     CatRespawnData storage = CatRespawnStorage.get(worldIn).remove(catTreeEntity.getOwnerUUID());
 
                     if(storage != null) {
@@ -240,6 +223,34 @@ public class CatTreeBlock extends BaseEntityBlock {
         }
     }
 
+    private void setCatTreeOwner(Level worldIn, CatTreeBlockEntity catTreeEntity) {
+
+    }
+
+    private CatEntity findClosest(Level worldIn, Player player, BlockPos pos) {
+        List<CatEntity> cats = worldIn.getEntities(ModEntityTypes.CAT.get(), new AABB(pos).inflate(10D), (cat) -> cat.isAlive() && cat.isOwnedBy(player));
+        Collections.sort(cats, new EntityUtil.Sorter(new Vec3(pos.getX(), pos.getY(), pos.getZ())));
+
+        CatEntity closestStanding = null;
+        CatEntity closestSitting = null;
+        for(CatEntity cat : cats) {
+            if(closestSitting != null && closestSitting != null) {
+                break;
+            }
+
+            if(closestSitting == null && cat.isInSittingPose()) {
+                closestSitting = cat;
+            }
+            else if(closestStanding == null && !cat.isInSittingPose()) {
+                closestStanding = cat;
+            }
+        }
+
+        CatEntity closest = closestStanding != null ? closestStanding : closestSitting;
+
+        return closest;
+    }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter worldIn, List<Component> tooltip, TooltipFlag flagIn) {
@@ -254,26 +265,26 @@ public class CatTreeBlock extends BaseEntityBlock {
 //                ? materials.getRight().getTooltip()
 //                : new TranslatableComponent("cattree.bedding.null").withStyle(ChatFormatting.RED));
 //
-        if (colorMaterial == null) {
+        if(colorMaterial == null) {
             tooltip.add(new TranslatableComponent("cattree.explain.missing").withStyle(ChatFormatting.ITALIC));
         }
 
         CompoundTag tag = stack.getTagElement("catherder");
-        if (tag != null) {
+        if(tag != null) {
             UUID ownerId = NBTUtil.getUniqueId(tag, "ownerId");
             Component name = NBTUtil.getTextComponent(tag, "name");
             Component ownerName = NBTUtil.getTextComponent(tag, "ownerName");
 
-            if (name != null) {
+            if(name != null) {
                 tooltip.add(new TextComponent("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
             }
 
-            if (ownerName != null) {
+            if(ownerName != null) {
                 tooltip.add(new TextComponent("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
 
             }
 
-            if (ownerId != null && (flagIn.isAdvanced() || Screen.hasShiftDown())) {
+            if(ownerId != null && (flagIn.isAdvanced() || Screen.hasShiftDown())) {
                 tooltip.add(new TextComponent("UUID: ").withStyle(ChatFormatting.AQUA).append(new TextComponent(ownerId.toString())));
             }
         }
@@ -281,16 +292,16 @@ public class CatTreeBlock extends BaseEntityBlock {
 
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-            for (IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
-                items.add(CatTreeUtil.createItemStack(colorId));
-            }
+        for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+            items.add(CatTreeUtil.createItemStack(colorId));
+        }
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
         CatTreeBlockEntity catTreeBlockEntity = WorldUtil.getBlockEntity(world, pos, CatTreeBlockEntity.class);
 
-        if (catTreeBlockEntity != null) {
+        if(catTreeBlockEntity != null) {
             return CatTreeUtil.createItemStack(catTreeBlockEntity.getColor());
         }
 
