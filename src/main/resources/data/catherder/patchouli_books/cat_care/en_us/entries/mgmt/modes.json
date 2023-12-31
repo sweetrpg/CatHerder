@@ -1,0 +1,46 @@
+{
+  "name": "Modes",
+  "icon": "catherder:",
+  "category": "catherder:mgmt",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In the info screen chapter, you learned that you can assign modes to your cat. They will be discussed in further detail here."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Docile",
+      "text": "In this mode your cat will follow you but not attack anything. They are ready for you to throw the toy."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wandering",
+      "text": "\"In this mode your cat so stay near it's bowl and wait for your next command. To set you cat's bowl bring your cat within a few blocks of it."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Attack",
+      "text": "In this mode your cat will follow you and attack anything that attacks you or that you attack."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tactical",
+      "text": "In this mode your cat will follow you but will not attack anything unless you use the command beam."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Patrol",
+      "text": "In this mode your cat will patrol between 2-4 points (set using a command emblem) and attack monsters that try come into view."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Guard",
+      "text": "Cats follow closely and attack any monsters that come close."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Skittish",
+      "text": "The cat will avoid all other creatures, and sometimes its owner."
+    }
+  ]
+}
