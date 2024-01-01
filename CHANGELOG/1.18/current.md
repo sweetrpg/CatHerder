@@ -1,0 +1,1 @@
+- `[FIX]` Made the wandering logic smarter when the cat is in domestic mode
