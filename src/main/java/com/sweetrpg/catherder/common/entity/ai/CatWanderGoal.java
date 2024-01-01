@@ -33,6 +33,10 @@ public class CatWanderGoal extends Goal {
             return false;
         }
 
+        if(this.cat.isInSittingPose() || this.cat.isLying() || this.cat.isLyingDown()) {
+            return false;
+        }
+
         if(this.cat.isMode(Mode.DOMESTIC)) {
             Optional<BlockPos> bowlPos = this.cat.getBowlPos();
             Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
@@ -52,6 +56,21 @@ public class CatWanderGoal extends Goal {
             }
 
             return (Math.min(Math.min(bowlDist, litterboxDist), treeDist) < 512D);
+        }
+
+        if(!this.cat.isMode(Mode.WANDERING)) {
+
+            if(this.cat.getOwner() == null) {
+                return false;
+            }
+
+            BlockPos ownerPos = this.cat.getOwner().blockPosition();
+            BlockPos catPos = this.cat.blockPosition();
+
+            // if the owner is more than 40-ish blocks away
+            if(ownerPos.distSqr(catPos) > 400D) {
+                return false;
+            }
         }
 
         return true;
