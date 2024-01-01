@@ -134,12 +134,12 @@ public class CatInfoScreen extends Screen {
                 List<Component> list = new ArrayList<>();
                 String str = I18n.get(cat.getMode().getUnlocalizedInfo());
                 list.addAll(ScreenUtil.splitInto(str, 150, CatInfoScreen.this.font));
-                if(CatInfoScreen.this.cat.getMode() == Mode.DOCILE) {
+                if(CatInfoScreen.this.cat.getMode() == Mode.DOMESTIC) {
 
                     if(CatInfoScreen.this.cat.getBowlPos().isPresent()) {
                         double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBowlPos().get());
 
-                        if(distance > 256D) {
+                        if(distance > 512D) {
                             list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOWL_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
                         }
                         else {
@@ -151,17 +151,31 @@ public class CatInfoScreen extends Screen {
                     }
 
                     if(CatInfoScreen.this.cat.getLitterboxPos().isPresent()) {
-                        double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBowlPos().get());
+                        double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getLitterboxPos().get());
 
-                        if(distance > 256D) {
-                            list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOWL_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
+                        if(distance > 512D) {
+                            list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOX_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
                         }
                         else {
-                            list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOWL_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
+                            list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOX_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
                         }
                     }
                     else {
-                        list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_BOWL).withStyle(ChatFormatting.RED));
+                        list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_BOX).withStyle(ChatFormatting.RED));
+                    }
+
+                    if(CatInfoScreen.this.cat.getBedPos().isPresent()) {
+                        double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBedPos().get());
+
+                        if(distance > 512D) {
+                            list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_TREE_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
+                        }
+                        else {
+                            list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_TREE_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
+                        }
+                    }
+                    else {
+                        list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_TREE).withStyle(ChatFormatting.RED));
                     }
                 }
 
@@ -248,7 +262,9 @@ public class CatInfoScreen extends Screen {
         for(int i = 0; i < perPage; ++i) {
 
             int index = this.currentPage * perPage + i;
-            if(index >= this.talentList.size()) {break;}
+            if(index >= this.talentList.size()) {
+                break;
+            }
             Talent talent = this.talentList.get(index);
 
             // decrease button (-)

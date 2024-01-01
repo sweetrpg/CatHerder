@@ -59,10 +59,17 @@ public class ConfigHandler {
         public ForgeConfigSpec.BooleanValue RENDER_SADDLE;
         public ForgeConfigSpec.BooleanValue RENDER_WINGS;
         public ForgeConfigSpec.BooleanValue RENDER_BLOOD;
+        public ForgeConfigSpec.IntValue SKITTISH_OWNER;
+        public ForgeConfigSpec.IntValue SKITTISH_ANIMALS;
+        public ForgeConfigSpec.IntValue SKITTISH_OTHERS;
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
             {
                 builder.push("General");
+
+                SKITTISH_OWNER = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid its owner.").translation("catherder.config.client.skittish_owner").defineInRange("skittish_owner", 25, 1, 100);
+                SKITTISH_ANIMALS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid other animals.").translation("catherder.config.client.skittish_animals").defineInRange("skittish_animals", 40, 1, 100);
+                SKITTISH_OTHERS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid any other creature.").translation("catherder.config.client.skittish_others").defineInRange("skittish_others", 75, 1, 100);
 
                 builder.pop();
             }

@@ -214,23 +214,23 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
-        this.goalSelector.addGoal(5, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
-//        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
-        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-        this.goalSelector.addGoal(6, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
-        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
+//        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
+        this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(6, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
+        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new FetchGoal(this, 1.3D, 32.0F));
+        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(8, new CatSitOnBlockGoal<>(this, 0.8F));
+        this.goalSelector.addGoal(8, new BreedGoal(this, 1.0D));
 //        this.goalSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
-        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(9, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
-        this.goalSelector.addGoal(9, new UseLitterboxGoal<>(this, 10));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
+        this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));
 
         //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
@@ -1872,24 +1872,8 @@ public class CatEntity extends AbstractCatEntity {
         this.setLitterboxPos(registryKey, WorldUtil.toImmutable(pos));
     }
 
-    public Optional<BlockPos> getCatTreePos() {
-        return this.getCatTreePos(this.level.dimension());
-    }
-
-    public void setCatTreePos(@Nullable BlockPos pos) {
-        this.setCatTreePos(this.level.dimension(), pos);
-    }
-
-    public Optional<BlockPos> getCatTreePos(ResourceKey<Level> registryKey) {
-        return this.entityData.get(CAT_TREE_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
-    }
-
-    public void setCatTreePos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
-        this.setCatTreePos(registryKey, WorldUtil.toImmutable(pos));
-    }
-
-    public void setCatTreePos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
-        this.entityData.set(CAT_TREE_LOCATION.get(), this.entityData.get(CAT_TREE_LOCATION.get()).copy().set(registryKey, pos));
+    public void setLitterboxPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
+        this.entityData.set(LITTERBOX_LOCATION.get(), this.entityData.get(LITTERBOX_LOCATION.get()).copy().set(registryKey, pos));
     }
 
     @Override

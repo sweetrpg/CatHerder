@@ -1,9 +1,14 @@
 package com.sweetrpg.catherder.common.block;
 
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.block.entity.LitterboxBlockEntity;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.item.LitterScoopItem;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
+import com.sweetrpg.catherder.common.util.InventoryUtil;
+import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,11 +36,15 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class LitterboxBlock extends BaseEntityBlock {
 
@@ -55,7 +65,7 @@ public class LitterboxBlock extends BaseEntityBlock {
     @javax.annotation.Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return null;
+        return createTickerHelper(blockEntityType, ModBlockEntityTypes.LITTERBOX.get(), LitterboxBlockEntity::tick);
     }
 
     @SuppressWarnings("deprecation")
@@ -116,6 +126,17 @@ public class LitterboxBlock extends BaseEntityBlock {
         return Block.canSupportCenter(worldIn, pos.below(), Direction.UP);
     }
 
+    @Override
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        LitterboxBlockEntity litterboxBlockEntity = WorldUtil.getBlockEntity(worldIn, pos, LitterboxBlockEntity.class);
+
+        if (litterboxBlockEntity != null) {
+            litterboxBlockEntity.setPlacer(placer);
+        }
+
+        worldIn.setBlock(pos, state, Block.UPDATE_CLIENTS);
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -162,4 +183,5 @@ public class LitterboxBlock extends BaseEntityBlock {
             pLevel.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }
     }
+
 }

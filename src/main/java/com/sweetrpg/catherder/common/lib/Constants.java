@@ -180,9 +180,9 @@ public class Constants {
     public static final String TRANSLATION_KEY_CAT_MODE_DOCILE = "cat.mode.docile";
     public static final String TRANSLATION_KEY_CAT_MODE_DOCILE_INDICATOR = "cat.mode.docile.indicator";
     public static final String TRANSLATION_KEY_CAT_MODE_DOCILE_DESCRIPTION = "cat.mode.docile.description";
-//    public static final String TRANSLATION_KEY_CAT_MODE_PATROL = "cat.mode.patrol";
-//    public static final String TRANSLATION_KEY_CAT_MODE_PATROL_INDICATOR = "cat.mode.patrol.indicator";
-//    public static final String TRANSLATION_KEY_CAT_MODE_PATROL_DESCRIPTION = "cat.mode.patrol.description";
+    public static final String TRANSLATION_KEY_CAT_MODE_WANDERING = "cat.mode.wandering";
+    public static final String TRANSLATION_KEY_CAT_MODE_WANDERING_INDICATOR = "cat.mode.wandering.indicator";
+    public static final String TRANSLATION_KEY_CAT_MODE_WANDERING_DESCRIPTION = "cat.mode.wandering.description";
     public static final String TRANSLATION_KEY_CAT_MODE_GUARD = "cat.mode.guard";
     public static final String TRANSLATION_KEY_CAT_MODE_GUARD_INDICATOR = "cat.mode.guard.indicator";
     public static final String TRANSLATION_KEY_CAT_MODE_GUARD_DESCRIPTION = "cat.mode.guard.description";
