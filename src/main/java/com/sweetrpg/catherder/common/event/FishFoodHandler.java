@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.entity;
+package com.sweetrpg.catherder.common.event;
 
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatFoodHandler;

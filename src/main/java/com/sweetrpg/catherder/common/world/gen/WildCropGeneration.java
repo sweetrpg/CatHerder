@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.world;
+package com.sweetrpg.catherder.common.world.gen;
 
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.registry.ModBlocks;

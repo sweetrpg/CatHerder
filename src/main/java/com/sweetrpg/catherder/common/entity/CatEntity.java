@@ -17,7 +17,7 @@ import com.sweetrpg.catherder.common.entity.ai.BreedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatLieOnBedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatSitOnBlockGoal;
 import com.sweetrpg.catherder.common.entity.ai.*;
-import com.sweetrpg.catherder.common.entity.serializers.DimensionDependantArg;
+import com.sweetrpg.catherder.common.entity.misc.DimensionDependentArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
@@ -27,6 +27,7 @@ import com.sweetrpg.catherder.common.util.Cache;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.Util;
 import com.sweetrpg.catherder.common.util.WorldUtil;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,6 +45,7 @@ import net.minecraft.network.syncher.SynchedEntityData.DataItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -158,7 +160,7 @@ public class CatEntity extends AbstractCatEntity {
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
         this.setTame(false);
-        this.setGender(Gender.random(this.getRandom()));
+        this.setGender(EnumGender.random(this.getRandom()));
     }
 
     public void setRelaxStateOne(boolean p_28186_) {
@@ -214,23 +216,23 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
-        this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
-        this.goalSelector.addGoal(6, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(5, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
 //        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-        this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(6, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-        this.goalSelector.addGoal(7, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-        this.goalSelector.addGoal(7, new CatWanderGoal(this, 1.0D));
-        this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(8, new CatSitOnBlockGoal<>(this, 0.8F));
-        this.goalSelector.addGoal(8, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
+        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
+        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
+        this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(6, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
+        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
 //        this.goalSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
-        this.goalSelector.addGoal(9, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 //        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
-        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
-        this.goalSelector.addGoal(11, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(11, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(9, new UseLitterboxGoal<>(this, 10));
+        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 
         //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
 //        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
@@ -754,7 +756,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean canAttack(LivingEntity target) {
-        if(this.isMode(Mode.DOCILE)) {
+        if(this.isMode(EnumMode.DOCILE)) {
             return false;
         }
 
@@ -780,7 +782,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean canAttackType(EntityType<?> entityType) {
-        if(this.isMode(Mode.DOCILE)) {
+        if(this.isMode(EnumMode.DOCILE)) {
             return false;
         }
 
@@ -806,7 +808,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean wantsToAttack(LivingEntity target, LivingEntity owner) {
-        if(this.isMode(Mode.DOCILE)) {
+        if(this.isMode(EnumMode.DOCILE)) {
             return false;
         }
 
@@ -1508,10 +1510,10 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         try {
-            this.setGender(Gender.bySaveName(compound.getString("catGender")));
+            this.setGender(EnumGender.bySaveName(compound.getString("catGender")));
 
             if(compound.contains("mode", Tag.TAG_STRING)) {
-                this.setMode(Mode.bySaveName(compound.getString("mode")));
+                this.setMode(EnumMode.bySaveName(compound.getString("mode")));
             }
 
             if(compound.contains("customSkinHash", Tag.TAG_STRING)) {
@@ -1788,26 +1790,26 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(LAST_KNOWN_NAME, collar);
     }
 
-    public Gender getGender() {
+    public EnumGender getGender() {
         return this.entityData.get(GENDER.get());
     }
 
-    public void setGender(Gender collar) {
+    public void setGender(EnumGender collar) {
         this.entityData.set(GENDER.get(), collar);
     }
 
     @Override
-    public Mode getMode() {
+    public EnumMode getMode() {
         return this.entityData.get(MODE.get());
     }
 
-    public void setMode(Mode collar) {
+    public void setMode(EnumMode collar) {
         this.entityData.set(MODE.get(), collar);
     }
 
-    public boolean isMode(Mode... modes) {
-        Mode mode = this.getMode();
-        for(Mode test : modes) {
+    public boolean isMode(EnumMode... modes) {
+        EnumMode mode = this.getMode();
+        for(EnumMode test : modes) {
             if(mode == test) {
                 return true;
             }
@@ -2221,7 +2223,7 @@ int newLevel = currentLevel + adjustment;
 
         this.setOwnerUUID(null);
         this.setWillObeyOthers(false);
-        this.setMode(Mode.DOCILE);
+        this.setMode(EnumMode.DOCILE);
     }
 
     public boolean canSpendPoints(int amount) {
@@ -2438,8 +2440,8 @@ int newLevel = currentLevel + adjustment;
     }
 
     @Override
-    public TranslatableComponent getTranslationKey(Function<Gender, String> function) {
-        return new TranslatableComponent(function.apply(ConfigHandler.SERVER.CAT_GENDER.get() ? this.getGender() : Gender.UNISEX));
+    public TranslatableComponent getTranslationKey(Function<EnumGender, String> function) {
+        return new TranslatableComponent(function.apply(ConfigHandler.SERVER.CAT_GENDER.get() ? this.getGender() : EnumGender.UNISEX));
     }
 
     @Override

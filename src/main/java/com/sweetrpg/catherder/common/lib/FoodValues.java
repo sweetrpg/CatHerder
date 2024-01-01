@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common;
+package com.sweetrpg.catherder.common.lib;
 
 import net.minecraft.world.food.FoodProperties;
 

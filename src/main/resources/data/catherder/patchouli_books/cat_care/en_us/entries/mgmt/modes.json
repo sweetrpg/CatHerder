@@ -1,6 +1,6 @@
 {
   "name": "Modes",
-  "icon": "catherder:",
+  "icon": "catherder:cat_gut",
   "category": "catherder:mgmt",
   "pages": [
     {
@@ -10,27 +10,27 @@
     {
       "type": "patchouli:text",
       "title": "Docile",
-      "text": "In this mode your cat will follow you but not attack anything. They are ready for you to throw the toy."
+      "text": "In this mode your cat will follow you but not attack anything. But you can always toss some toys around."
     },
     {
       "type": "patchouli:text",
       "title": "Wandering",
-      "text": "\"In this mode your cat so stay near it's bowl and wait for your next command. To set you cat's bowl bring your cat within a few blocks of it."
+      "text": "In this mode, your cat will wander the world freely. You may want to put a radio collar on your cat first.... Jus' sayin'."
     },
     {
       "type": "patchouli:text",
       "title": "Attack",
-      "text": "In this mode your cat will follow you and attack anything that attacks you or that you attack."
+      "text": "In this mode, your cat will follow you and attack anything that attacks you or that you attack."
     },
     {
       "type": "patchouli:text",
       "title": "Tactical",
-      "text": "In this mode your cat will follow you but will not attack anything unless you use the command beam."
+      "text": "In this mode, your cat will follow you but will not attack anything unless you use the command beam."
     },
     {
       "type": "patchouli:text",
-      "title": "Patrol",
-      "text": "In this mode your cat will patrol between 2-4 points (set using a command emblem) and attack monsters that try come into view."
+      "title": "Domestic",
+      "text": "In this mode, your cat will stay near its bowl, litterbox, and cat tree."
     },
     {
       "type": "patchouli:text",
@@ -40,7 +40,7 @@
     {
       "type": "patchouli:text",
       "title": "Skittish",
-      "text": "The cat will avoid all other creatures, and sometimes its owner."
+      "text": "The cat will avoid all other creatures, and sometimes its owner.$(br2)You can configure how skittish your cats are in the client configuration."
     }
   ]
 }

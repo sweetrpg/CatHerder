@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.registry;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel;
 import com.sweetrpg.catherder.api.registry.Accessory;
-import com.sweetrpg.catherder.common.FoodValues;
+import com.sweetrpg.catherder.common.lib.FoodValues;
 import com.sweetrpg.catherder.common.entity.accessory.DyeableAccessory;
 import com.sweetrpg.catherder.common.item.*;
 import com.sweetrpg.catherder.common.util.Util;
@@ -50,7 +50,7 @@ public class ModItems {
     public static final RegistryObject<Item> BREEDING_TREAT = register("breeding_treat");
 
     // maintenance items
-    public static final RegistryObject<Item> COLLAR_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
+    public static final RegistryObject<Item> CAT_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
     public static final RegistryObject<Item> CAT_CHARM = registerWith("cat_charm", CatCharmItem::new, 1);
     public static final RegistryObject<Item> RADAR = registerWith("radar", RadarItem::new, 1);
     public static final RegistryObject<Item> CREATIVE_RADAR = registerWith("creative_radar", RadarItem::new, 1);
