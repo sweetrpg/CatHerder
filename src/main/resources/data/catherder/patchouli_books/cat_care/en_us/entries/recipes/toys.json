@@ -2,6 +2,7 @@
   "name": "Toys",
   "icon": "catherder:cat_toy",
   "category": "catherder:recipes",
+  "sortnum": 2,
   "pages": [
     {
       "type": "patchouli:text",

@@ -49,11 +49,11 @@ public class ModAccessories {
 //
 //    public static final RegistryObject<LeatherArmourAccessory> LEATHER_HELMET = register("leather_helmet", () -> new LeatherArmourAccessory(CatAccessoryTypes.HEAD, Items.LEATHER_HELMET.delegate).setModelTexture(Resources.LEATHER_HELMET));
 //    public static final RegistryObject<LeatherArmourAccessory> LEATHER_BODY_PIECE = register("leather_body_piece", () -> new LeatherArmourAccessory(CatAccessoryTypes.CLOTHING, Items.LEATHER_CHESTPLATE.delegate).setModelTexture(Resources.LEATHER_BODY_PIECE));
-    public static final RegistryObject<LeatherArmourAccessory> LEATHER_BOOTS = register("leather_boots", () -> new LeatherArmourAccessory(ModAccessoryTypes.FEET, Items.LEATHER_BOOTS.delegate).setModelTexture(Resources.LEATHER_BOOTS));
+//    public static final RegistryObject<LeatherArmourAccessory> LEATHER_BOOTS = register("leather_boots", () -> new LeatherArmourAccessory(ModAccessoryTypes.FEET, Items.LEATHER_BOOTS.delegate).setModelTexture(Resources.LEATHER_BOOTS));
 
-    private static RegistryObject<Helmet> registerHelmet(final String name, final Supplier<? extends ItemLike> itemIn, ResourceLocation modelLocation) {
-        return ACCESSORIES.register(name, () -> new Helmet(itemIn).setModelTexture(modelLocation));
-    }
+//    private static RegistryObject<Helmet> registerHelmet(final String name, final Supplier<? extends ItemLike> itemIn, ResourceLocation modelLocation) {
+//        return ACCESSORIES.register(name, () -> new Helmet(itemIn).setModelTexture(modelLocation));
+//    }
 
     private static RegistryObject<ArmourAccessory> registerBoots(final String name, final Supplier<? extends ItemLike> itemIn, ResourceLocation modelLocation) {
         return ACCESSORIES.register(name, () -> new ArmourAccessory(ModAccessoryTypes.FEET, itemIn).setModelTexture(modelLocation));

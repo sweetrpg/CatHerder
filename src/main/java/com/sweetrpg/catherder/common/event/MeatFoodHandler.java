@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.entity;
+package com.sweetrpg.catherder.common.event;
 
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatFoodHandler;
@@ -22,8 +22,8 @@ public class MeatFoodHandler implements ICatFoodHandler {
     @Override
     public InteractionResult consume(AbstractCatEntity catIn, ItemStack stackIn, Entity entityIn) {
 
-        if (catIn.getCatHunger() < catIn.getMaxHunger()) {
-            if (!catIn.level.isClientSide) {
+        if(catIn.getCatHunger() < catIn.getMaxHunger()) {
+            if(!catIn.level.isClientSide) {
                 int heal = stackIn.getItem().getFoodProperties().getNutrition() * 5;
 
                 catIn.setCatHunger(catIn.getCatHunger() + heal);

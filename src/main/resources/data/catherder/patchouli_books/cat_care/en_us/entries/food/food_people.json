@@ -18,7 +18,7 @@
     {
       "type": "patchouli:spotlight",
       "title": "Cheese Wheel",
-      "text": "It's cheese! Who doesn't like cheese?$(br2)The cheese wheel gives you 8 wedges of cheese. You can use them to make a mouse trap.",
+      "text": "It's cheese! Who doesn't like cheese?$(br2)The cheese wheel gives you 8 wedges of cheese. You can use them to make a mouse trap. Or to snack on.",
       "item": {
         "item": "catherder:cheese_wheel"
       }

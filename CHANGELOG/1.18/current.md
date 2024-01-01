@@ -1,1 +1,2 @@
-- `[FIX]` Fixed NPE in cat wander goal
+- `[CHG]` Changed recipe for radio collar
+- `[CHG]` Re-worked the Cat Care book

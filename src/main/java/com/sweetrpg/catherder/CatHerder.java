@@ -4,7 +4,7 @@ import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.client.ClientSetup;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
 import com.sweetrpg.catherder.client.event.ClientEventHandler;
-import com.sweetrpg.catherder.common.Capabilities;
+import com.sweetrpg.catherder.common.lib.Capabilities;
 import com.sweetrpg.catherder.common.CommonSetup;
 import com.sweetrpg.catherder.common.addon.AddonManager;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;

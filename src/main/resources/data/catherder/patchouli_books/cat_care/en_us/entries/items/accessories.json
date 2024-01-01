@@ -1,6 +1,6 @@
 {
   "name": "Accessories",
-  "icon": "catherder:cardboard_box",
+  "icon": "catherder:sunglasses",
   "category": "catherder:items",
   "pages": [
     {
@@ -9,18 +9,18 @@
     },
     {
       "type": "patchouli:spotlight",
-      "title": "Radio Collar",
-      "text": "The radio collar will help you keep track of your cat when you're far away or get lost.",
-      "item": {
-        "item": "catherder:radio_collar"
-      }
-    },
-    {
-      "type": "patchouli:spotlight",
       "title": "Cape",
       "text": "You can make a cape to put on your cat, using any color of wool. You'll love it; not sure the cat will....",
       "item": {
         "item": "catherder:cape"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wool Collar",
+      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars.",
+      "item": {
+        "item": "catherder:wool_collar"
       }
     },
     {
@@ -41,10 +41,10 @@
     },
     {
       "type": "patchouli:spotlight",
-      "title": "Wool Collar",
-      "text": "The basic type of collar. You can use this collar as the base for creating the fancier collars.",
+      "title": "Radio Collar",
+      "text": "The radio collar will help you keep track of your cat when you're far away or get lost.",
       "item": {
-        "item": "catherder:wool_collar"
+        "item": "catherder:radio_collar"
       }
     }
   ]

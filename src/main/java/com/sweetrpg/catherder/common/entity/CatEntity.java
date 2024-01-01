@@ -17,7 +17,7 @@ import com.sweetrpg.catherder.common.entity.ai.BreedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatLieOnBedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatSitOnBlockGoal;
 import com.sweetrpg.catherder.common.entity.ai.*;
-import com.sweetrpg.catherder.common.entity.serializers.DimensionDependantArg;
+import com.sweetrpg.catherder.common.entity.misc.DimensionDependentArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
@@ -27,7 +27,6 @@ import com.sweetrpg.catherder.common.util.Cache;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.Util;
 import com.sweetrpg.catherder.common.util.WorldUtil;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,7 +44,6 @@ import net.minecraft.network.syncher.SynchedEntityData.DataItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -126,9 +124,9 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependantArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<Integer>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER.get().getSerializer()));
 
     public final Map<Integer, Object> objects = new HashMap<>();
@@ -198,9 +196,9 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(SIZE, (byte) 3);
         this.entityData.define(ORIGINAL_BREED_INT, 0);
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
-        this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
-        this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
-        this.entityData.define(LITTERBOX_LOCATION.get(), new DimensionDependantArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
+        this.entityData.define(LITTERBOX_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
 //        this.entityData.define(IS_LYING, false);
         this.entityData.define(RELAX_STATE_ONE, false);
     }
@@ -1309,7 +1307,7 @@ public class CatEntity extends AbstractCatEntity {
         compound.putInt("original_breed", this.getOriginalBreed());
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
-        DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
+        DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
 
         if(!bedsData.isEmpty()) {
             ListTag bedsList = new ListTag();
@@ -1324,7 +1322,7 @@ public class CatEntity extends AbstractCatEntity {
             compound.put("beds", bedsList);
         }
 
-        DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get());
+        DimensionDependentArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get());
 
         if(!bowlsData.isEmpty()) {
             ListTag bowlsList = new ListTag();
@@ -1555,7 +1553,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         // cat tree
-        DimensionDependantArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
+        DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
 
         try {
             if(compound.contains("beds", Tag.TAG_LIST)) {
@@ -1578,7 +1576,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(CAT_TREE_LOCATION.get(), bedsData);
 
         // cat bowl
-        DimensionDependantArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
+        DimensionDependentArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
 
         try {
             if(compound.contains("bowls", Tag.TAG_LIST)) {
@@ -1601,7 +1599,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(CAT_BOWL_LOCATION.get(), bowlsData);
 
         // litterbox
-        DimensionDependantArg<Optional<BlockPos>> litterboxData = this.entityData.get(LITTERBOX_LOCATION.get()).copyEmpty();
+        DimensionDependentArg<Optional<BlockPos>> litterboxData = this.entityData.get(LITTERBOX_LOCATION.get()).copyEmpty();
 
         try {
             if(compound.contains("litterbox", Tag.TAG_LIST)) {
