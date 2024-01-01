@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
 
-public enum EnumGender {
+public enum Gender {
 
     MALE(1, "male"),
     FEMALE(2, "female"),
@@ -18,11 +18,11 @@ public enum EnumGender {
     private String unlocalisedSubject;
     private String unlocalisedTitle;
 
-    public static final EnumGender[] VALUES = Arrays.stream(EnumGender.values()).sorted(Comparator.comparingInt(EnumGender::getIndex)).toArray(size -> {
-        return new EnumGender[size];
+    public static final Gender[] VALUES = Arrays.stream(Gender.values()).sorted(Comparator.comparingInt(Gender::getIndex)).toArray(size -> {
+        return new Gender[size];
     });
 
-    private EnumGender(int index, String name) {
+    private Gender(int index, String name) {
         this.index = index;
         this.saveName = name;
         this.unlocalisedName = "cat.gender." + name;
@@ -60,20 +60,20 @@ public enum EnumGender {
         return this.unlocalisedTitle;
     }
 
-    public boolean canMateWith(EnumGender gender) {
+    public boolean canMateWith(Gender gender) {
         boolean equalGenders = this == gender;
-        return (equalGenders && this == EnumGender.UNISEX) || !equalGenders;
+        return (equalGenders && this == Gender.UNISEX) || !equalGenders;
     }
 
-    public static EnumGender byIndex(int i) {
+    public static Gender byIndex(int i) {
         if (i < 0 | i >= VALUES.length) {
-            i = EnumGender.UNISEX.getIndex();
+            i = Gender.UNISEX.getIndex();
         }
         return VALUES[i];
     }
 
-    public static EnumGender bySaveName(String saveName) {
-        for (EnumGender gender : EnumGender.values()) {
+    public static Gender bySaveName(String saveName) {
+        for (Gender gender : Gender.values()) {
             if (gender.getSaveName().equals(saveName)) {
                 return gender;
             }
@@ -82,7 +82,7 @@ public enum EnumGender {
         return UNISEX;
     }
 
-    public static EnumGender random(Random rng) {
+    public static Gender random(Random rng) {
         return rng.nextBoolean() ? MALE : FEMALE;
     }
 

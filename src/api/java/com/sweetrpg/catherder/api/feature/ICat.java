@@ -20,7 +20,7 @@ public interface ICat {
 
     public boolean canInteract(LivingEntity playerIn);
 
-    public EnumMode getMode();
+    public Mode getMode();
 
     public CatLevel getCatLevel();
     public void increaseLevel(CatLevel.Type typeIn);

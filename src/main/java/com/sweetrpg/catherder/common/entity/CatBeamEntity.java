@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.entity;
 
 import com.google.common.base.Predicates;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.core.particles.ParticleTypes;
@@ -48,7 +48,7 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
 
                 this.level.getEntitiesOfClass(CatEntity.class, this.getBoundingBox().inflate(64D, 16D, 64D)).stream()
                     .filter(Predicates.not(CatEntity::isInSittingPose))
-                    .filter(d -> d.isMode(EnumMode.ATTACK, EnumMode.TACTICAL))
+                    .filter(d -> d.isMode(Mode.ATTACK, Mode.TACTICAL))
                     .filter(d -> d.canInteract(livingThrower))
                     .filter(d -> d != livingEntity && d.wantsToAttack(livingEntity, d.getOwner()))
                     .filter(d -> d.distanceTo(entityHit) < EntityUtil.getFollowRange(d))

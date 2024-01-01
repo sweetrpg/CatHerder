@@ -1,0 +1,1 @@
+- `[FIX]` Fixed a crash when removing a bowl with cats in wander mode

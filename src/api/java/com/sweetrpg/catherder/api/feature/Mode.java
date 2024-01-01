@@ -5,13 +5,13 @@ import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public enum EnumMode {
+public enum Mode {
 
     DOCILE(0, "docile"),
     WANDERING(1, "wandering"),
     ATTACK(2, "attack"),
     TACTICAL(3, "tactical"),
-    PATROL(4, "patrol"),
+    DOMESTIC(4, "domestic"),
     GUARD(5, "guard"),
     SKITTISH(6, "skittish");
 
@@ -21,15 +21,15 @@ public enum EnumMode {
     private String unlocalizedName;
     private String unlocalizedInfo;
 
-    public static final EnumMode[] VALUES = Arrays.stream(EnumMode.values()).sorted(Comparator.comparingInt(EnumMode::getIndex)).toArray(size -> {
-        return new EnumMode[size];
+    public static final Mode[] VALUES = Arrays.stream(Mode.values()).sorted(Comparator.comparingInt(Mode::getIndex)).toArray(size -> {
+        return new Mode[size];
     });
 
-    private EnumMode(int index, String name) {
+    private Mode(int index, String name) {
         this(index, name, "cat.mode." + name, "cat.mode." + name + ".indicator", "cat.mode." + name + ".description");
     }
 
-    private EnumMode(int index, String mode, String unlocalizedName, String tip, String info) {
+    private Mode(int index, String mode, String unlocalizedName, String tip, String info) {
         this.index = index;
         this.saveName = mode;
         this.unlocalizedName = unlocalizedName;
@@ -57,43 +57,45 @@ public enum EnumMode {
         return this.unlocalizedInfo;
     }
 
-    public void onModeSet(AbstractCatEntity cat, EnumMode prev) {
+    public void onModeSet(AbstractCatEntity cat, Mode prev) {
         switch(prev) {
-        default:
-            cat.getNavigation().stop();
-            cat.setTarget(null);
-            cat.setLastHurtByMob(null);
-            break;
+            default:
+                cat.getNavigation().stop();
+                cat.setTarget(null);
+                cat.setLastHurtByMob(null);
+                break;
         }
     }
 
-    public EnumMode previousMode() {
+    public Mode previousMode() {
         int i = this.getIndex() - 1;
-        if (i < 0) {
+        if(i < 0) {
             i = VALUES.length - 1;
         }
         return VALUES[i];
     }
 
-    public EnumMode nextMode() {
+    public Mode nextMode() {
         int i = this.getIndex() + 1;
-        if (i >= VALUES.length) {
+        if(i >= VALUES.length) {
             i = 0;
         }
+
         return VALUES[i];
     }
 
-    public static EnumMode byIndex(int i) {
-        if (i < 0 || i >= VALUES.length) {
-            i = EnumMode.DOCILE.getIndex();
+    public static Mode byIndex(int i) {
+        if(i < 0 || i >= VALUES.length) {
+            i = Mode.DOCILE.getIndex();
         }
+
         return VALUES[i];
     }
 
-    public static EnumMode bySaveName(String saveName) {
-        for (EnumMode gender : EnumMode.values()) {
-            if (gender.saveName.equals(saveName)) {
-                return gender;
+    public static Mode bySaveName(String saveName) {
+        for(Mode value : Mode.values()) {
+            if(value.saveName.equals(saveName)) {
+                return value;
             }
         }
 

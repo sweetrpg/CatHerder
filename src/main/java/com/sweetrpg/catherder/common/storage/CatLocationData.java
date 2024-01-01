@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.storage;
 
 import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.api.feature.EnumGender;
+import com.sweetrpg.catherder.api.feature.Gender;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -36,7 +36,7 @@ public class CatLocationData implements ICatData {
     // Other saved data
     private @Nullable Component name;
     private @Nullable Component ownerName;
-    private @Nullable EnumGender gender;
+    private @Nullable Gender gender;
     private boolean hasRadarCollar;
 
     // Cached objects
@@ -94,7 +94,7 @@ public class CatLocationData implements ICatData {
         this.dimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, NBTUtil.getResourceLocation(compound, "dimension"));
         this.name = NBTUtil.getTextComponent(compound, "name_text_component");
         if (compound.contains("gender", Tag.TAG_STRING)) {
-            this.gender = EnumGender.bySaveName(compound.getString("gender"));
+            this.gender = Gender.bySaveName(compound.getString("gender"));
         }
         this.hasRadarCollar = compound.getBoolean("collar");
     }
