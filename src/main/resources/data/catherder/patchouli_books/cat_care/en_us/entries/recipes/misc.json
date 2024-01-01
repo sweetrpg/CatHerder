@@ -2,6 +2,7 @@
   "name": "Miscellaneous",
   "icon": "catherder:litter_scoop",
   "category": "catherder:recipes",
+  "sortnum": 4,
   "pages": [
     {
       "type": "patchouli:text",
@@ -12,11 +13,6 @@
       "title": "Cheese Wheel",
       "text": "Cheese! Who doesn't like cheese?",
       "recipe": "catherder:cheese_wheel"
-    },
-    {
-      "type": "patchouli:crafting",
-      "title": "Shears",
-      "recipe": "catherder:collar_shears"
     },
     {
       "type": "patchouli:crafting",

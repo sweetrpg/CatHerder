@@ -2,6 +2,7 @@
   "name": "Treats",
   "icon": "catherder:training_treat",
   "category": "catherder:recipes",
+  "sortnum": 1,
   "pages": [
     {
       "type": "patchouli:text",
@@ -31,6 +32,11 @@
       "type": "patchouli:crafting",
       "title": "Wild Treat",
       "recipe": "catherder:wild_treat"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Breeding Treat",
+      "recipe": "catherder:breeding_treat"
     }
   ]
 }

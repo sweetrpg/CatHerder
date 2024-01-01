@@ -1,10 +1,12 @@
 {
-  "name": "Personal Items",
+  "name": "Cat Items",
   "icon": "catherder:cat_tree",
   "category": "catherder:recipes",
+  "sortnum": 0,
   "pages": [
     {
       "type": "patchouli:text",
+      "title": "Essentials",
       "text": "There are a number of items that you can make for your cats that will enrich their lives."
     },
     {
@@ -36,6 +38,41 @@
       "title": "Pet Door",
       "text": "Add a pet door to your structure to give your pet access.$(br2)You can also lock/unlock it by right-clicking.",
       "recipe": "catherder:pet_door"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Accessories",
+      "text": "You can outfit your cat with accessories to make them look stylish and cool."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Cape",
+      "recipe": "catherder:cape"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Sunglasses",
+      "recipe": "catherder:sunglasses"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Multi-colored Collar",
+      "recipe": "catherder:multicolored_collar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Radio Collar",
+      "recipe": "catherder:radio_collar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Spotted Collar",
+      "recipe": "catherder:spotted_collar"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Wool Collar",
+      "recipe": "catherder:wool_collar"
     }
   ]
 }
