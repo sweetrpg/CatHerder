@@ -122,8 +122,8 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> (EntityDataAccessor<List<TalentInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.TALENT_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<EnumGender>> GENDER = Cache.make(() -> (EntityDataAccessor<EnumGender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<EnumMode>> MODE = Cache.make(() -> (EntityDataAccessor<EnumMode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<Gender>> GENDER = Cache.make(() -> (EntityDataAccessor<Gender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<Mode>> MODE = Cache.make(() -> (EntityDataAccessor<Mode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
     private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
@@ -158,7 +158,7 @@ public class CatEntity extends AbstractCatEntity {
     public CatEntity(EntityType<? extends CatEntity> type, Level worldIn) {
         super(type, worldIn);
         this.setTame(false);
-        this.setGender(EnumGender.random(this.getRandom()));
+        this.setGender(Gender.random(this.getRandom()));
     }
 
     public void setRelaxStateOne(boolean p_28186_) {
@@ -188,8 +188,8 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(TALENTS.get(), new ArrayList<>(4));
         this.entityData.define(LAST_KNOWN_NAME, Optional.empty());
         this.entityData.define(CAT_FLAGS, (byte) 0);
-        this.entityData.define(GENDER.get(), EnumGender.UNISEX);
-        this.entityData.define(MODE.get(), EnumMode.DOCILE);
+        this.entityData.define(GENDER.get(), Gender.UNISEX);
+        this.entityData.define(MODE.get(), Mode.DOCILE);
         this.entityData.define(HUNGER_INT, 60F);
         this.entityData.define(CUSTOM_SKIN, "");
         this.entityData.define(CAT_LEVEL.get(), new CatLevel(0, 0));
@@ -754,7 +754,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean canAttack(LivingEntity target) {
-        if(this.isMode(EnumMode.DOCILE)) {
+        if(this.isMode(Mode.DOCILE)) {
             return false;
         }
 
@@ -780,7 +780,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean canAttackType(EntityType<?> entityType) {
-        if(this.isMode(EnumMode.DOCILE)) {
+        if(this.isMode(Mode.DOCILE)) {
             return false;
         }
 
@@ -806,7 +806,7 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean wantsToAttack(LivingEntity target, LivingEntity owner) {
-        if(this.isMode(EnumMode.DOCILE)) {
+        if(this.isMode(Mode.DOCILE)) {
             return false;
         }
 
@@ -1508,10 +1508,10 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         try {
-            this.setGender(EnumGender.bySaveName(compound.getString("catGender")));
+            this.setGender(Gender.bySaveName(compound.getString("catGender")));
 
             if(compound.contains("mode", Tag.TAG_STRING)) {
-                this.setMode(EnumMode.bySaveName(compound.getString("mode")));
+                this.setMode(Mode.bySaveName(compound.getString("mode")));
             }
 
             if(compound.contains("customSkinHash", Tag.TAG_STRING)) {
@@ -1788,26 +1788,26 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.set(LAST_KNOWN_NAME, collar);
     }
 
-    public EnumGender getGender() {
+    public Gender getGender() {
         return this.entityData.get(GENDER.get());
     }
 
-    public void setGender(EnumGender collar) {
+    public void setGender(Gender collar) {
         this.entityData.set(GENDER.get(), collar);
     }
 
     @Override
-    public EnumMode getMode() {
+    public Mode getMode() {
         return this.entityData.get(MODE.get());
     }
 
-    public void setMode(EnumMode collar) {
+    public void setMode(Mode collar) {
         this.entityData.set(MODE.get(), collar);
     }
 
-    public boolean isMode(EnumMode... modes) {
-        EnumMode mode = this.getMode();
-        for(EnumMode test : modes) {
+    public boolean isMode(Mode... modes) {
+        Mode mode = this.getMode();
+        for(Mode test : modes) {
             if(mode == test) {
                 return true;
             }
@@ -2221,7 +2221,7 @@ int newLevel = currentLevel + adjustment;
 
         this.setOwnerUUID(null);
         this.setWillObeyOthers(false);
-        this.setMode(EnumMode.DOCILE);
+        this.setMode(Mode.DOCILE);
     }
 
     public boolean canSpendPoints(int amount) {
@@ -2438,8 +2438,8 @@ int newLevel = currentLevel + adjustment;
     }
 
     @Override
-    public TranslatableComponent getTranslationKey(Function<EnumGender, String> function) {
-        return new TranslatableComponent(function.apply(ConfigHandler.SERVER.CAT_GENDER.get() ? this.getGender() : EnumGender.UNISEX));
+    public TranslatableComponent getTranslationKey(Function<Gender, String> function) {
+        return new TranslatableComponent(function.apply(ConfigHandler.SERVER.CAT_GENDER.get() ? this.getGender() : Gender.UNISEX));
     }
 
     @Override

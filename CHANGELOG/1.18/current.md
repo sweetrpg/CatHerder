@@ -1,2 +1,1 @@
-- `[CHG]` Changed recipe for radio collar
-- `[CHG]` Re-worked the Cat Care book
+- `[NEW]` Domestic mode (replaces patrol mode)

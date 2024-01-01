@@ -15,7 +15,7 @@
     {
       "type": "patchouli:text",
       "title": "Wandering",
-      "text": "In this mode, your cat will wander the world freely. You may want to put a radio collar on your cat first.... Jus' sayin'."
+      "text": "In this mode, your cat will wander the world freely.$(br2)You may want to put a radio collar on your cat first.... Jus' sayin'."
     },
     {
       "type": "patchouli:text",

@@ -1,9 +1,9 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
-import com.sweetrpg.catherder.common.util.EntityUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -39,19 +39,19 @@ public class CatFollowOwnerGoal extends Goal {
     @Override
     public boolean canUse() {
         LivingEntity owner = this.cat.getOwner();
-        if (owner == null) {
+        if(owner == null) {
             return false;
         }
-        else if (this.cat.getMode() == EnumMode.PATROL) {
+//        else if (this.cat.getMode() == Mode.PATROL) {
+//            return false;
+//        }
+        else if(owner.isSpectator()) {
             return false;
         }
-        else if (owner.isSpectator()) {
+        else if(this.cat.isInSittingPose()) {
             return false;
         }
-        else if (this.cat.isInSittingPose()) {
-            return false;
-        }
-        else if (!this.cat.hasToy() && this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq()) {
+        else if(!this.cat.hasToy() && this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq()) {
             return false;
         }
         else {
@@ -62,10 +62,10 @@ public class CatFollowOwnerGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        if (this.navigator.isDone()) {
+        if(this.navigator.isDone()) {
             return false;
         }
-        else if (this.cat.isInSittingPose()) {
+        else if(this.cat.isInSittingPose()) {
             return false;
         }
         else {
@@ -82,9 +82,9 @@ public class CatFollowOwnerGoal extends Goal {
 
     @Override
     public void stop() {
-        if (this.cat.hasToy()) {
+        if(this.cat.hasToy()) {
             double distanceToOwner = this.owner.distanceToSqr(this.cat);
-            if (distanceToOwner <= this.stopDist * this.stopDist) {
+            if(distanceToOwner <= this.stopDist * this.stopDist) {
                 IThrowableItem throwableItem = this.cat.getThrowableItem();
                 ItemStack fetchItem = throwableItem != null ? throwableItem.getReturnStack(this.cat.getToyVariant()) : this.cat.getToyVariant();
 
@@ -101,10 +101,10 @@ public class CatFollowOwnerGoal extends Goal {
     @Override
     public void tick() {
         this.cat.getLookControl().setLookAt(this.owner, 10.0F, this.cat.getMaxHeadXRot());
-        if (--this.timeToRecalcPath <= 0) {
+        if(--this.timeToRecalcPath <= 0) {
             this.timeToRecalcPath = 10;
-            if (!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
-                if (this.cat.distanceToSqr(this.owner) >= 144.0D) { // Further than 12 blocks away teleport
+            if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
+                if(this.cat.distanceToSqr(this.owner) >= 144.0D) { // Further than 12 blocks away teleport (12 units == one block?)
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {
@@ -115,7 +115,7 @@ public class CatFollowOwnerGoal extends Goal {
     }
 
     public float getMinStartDistanceSq() {
-        if (this.cat.isMode(EnumMode.GUARD)) {
+        if(this.cat.isMode(Mode.GUARD)) {
             return 4F;
         }
 

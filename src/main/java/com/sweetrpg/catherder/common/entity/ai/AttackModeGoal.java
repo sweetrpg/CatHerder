@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -16,6 +16,6 @@ public class AttackModeGoal<T extends LivingEntity> extends NearestAttackableTar
 
     @Override
     public boolean canUse() {
-        return this.cat.isMode(EnumMode.ATTACK) && super.canUse();
+        return this.cat.isMode(Mode.ATTACK) && super.canUse();
     }
 }
