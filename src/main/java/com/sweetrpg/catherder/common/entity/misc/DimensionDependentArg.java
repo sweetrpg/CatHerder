@@ -1,4 +1,4 @@
-package com.sweetrpg.catherder.common.entity.serializers;
+package com.sweetrpg.catherder.common.entity.misc;
 
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceKey;
@@ -7,13 +7,13 @@ import net.minecraft.world.level.Level;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class DimensionDependantArg<T> implements Map<ResourceKey<Level>, T> {
+public class DimensionDependentArg<T> implements Map<ResourceKey<Level>, T> {
 
     private Supplier<EntityDataSerializer<T>> serializer;
 
     public Map<ResourceKey<Level>, T> map = new HashMap<>();
 
-    public DimensionDependantArg(Supplier<EntityDataSerializer<T>> serializer) {
+    public DimensionDependentArg(Supplier<EntityDataSerializer<T>> serializer) {
         this.serializer = serializer;
     }
 
@@ -36,17 +36,17 @@ public class DimensionDependantArg<T> implements Map<ResourceKey<Level>, T> {
         return this.serializer.get();
     }
 
-    public DimensionDependantArg<T> copy() {
-        DimensionDependantArg<T> clone = new DimensionDependantArg<>(this.serializer);
+    public DimensionDependentArg<T> copy() {
+        DimensionDependentArg<T> clone = new DimensionDependentArg<>(this.serializer);
         clone.map.putAll(this.map);
         return clone;
     }
 
-    public DimensionDependantArg<T> copyEmpty() {
-        return new DimensionDependantArg<>(this.serializer);
+    public DimensionDependentArg<T> copyEmpty() {
+        return new DimensionDependentArg<>(this.serializer);
     }
 
-    public DimensionDependantArg<T> set(ResourceKey<Level> dim, T value) {
+    public DimensionDependentArg<T> set(ResourceKey<Level> dim, T value) {
         this.put(dim, value);
         return this;
     }
@@ -65,10 +65,10 @@ public class DimensionDependantArg<T> implements Map<ResourceKey<Level>, T> {
     public boolean equals(Object obj) {
         if (obj.getClass() != this.getClass()) {
             return false;
-        } else if (!(obj instanceof DimensionDependantArg)) {
+        } else if (!(obj instanceof DimensionDependentArg)) {
             return false;
         } else {
-            DimensionDependantArg<?> other = (DimensionDependantArg<?>) obj;
+            DimensionDependentArg<?> other = (DimensionDependentArg<?>) obj;
             return this.map.equals(other.map);
         }
     }
