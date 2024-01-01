@@ -66,7 +66,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('Y', ModItems.CATNIP.get())
                 .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.COLLAR_SHEARS.get(), 1)
+        ShapedRecipeBuilder.shaped(ModItems.CAT_SHEARS.get(), 1)
                 .pattern(" X ")
                 .pattern("XYX")
                 .pattern(" X ")
@@ -179,12 +179,11 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_cake", has(Items.CAKE))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
-                .pattern("XX")
-                .pattern("XY")
-                .define('X', Items.IRON_INGOT)
-                .define('Y', Items.REDSTONE)
+        ShapelessRecipeBuilder.shapeless(ModItems.RADIO_COLLAR.get(), 1)
+                .requires(ModItems.WOOL_COLLAR.get())
+                .requires(Items.REDSTONE)
                 .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer);
         ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1)
                 .requires(Items.MAP, 1)
