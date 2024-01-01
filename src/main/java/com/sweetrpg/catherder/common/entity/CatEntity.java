@@ -219,9 +219,9 @@ public class CatEntity extends AbstractCatEntity {
 //        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(6, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(6, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(7, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
         this.goalSelector.addGoal(8, new CatSitOnBlockGoal<>(this, 0.8F));
         this.goalSelector.addGoal(8, new BreedGoal(this, 1.0D));
