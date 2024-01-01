@@ -69,7 +69,7 @@ public class CatBowlBlockEntity extends PlacedBlockEntity implements MenuProvide
                 cat.setBowlPos(bowl.worldPosition);
             }
 
-            if(cat.getCatHunger() < cat.getMaxHunger() / 2) {
+            if(cat.isHungry()) {
                 InventoryUtil.feedCatFrom(cat, null, bowl.inventory);
             }
         }

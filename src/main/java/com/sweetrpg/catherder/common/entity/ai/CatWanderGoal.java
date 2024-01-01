@@ -70,7 +70,7 @@ public class CatWanderGoal extends Goal {
     private Optional<Tuple<BlockPos, Double>> closestDomesticItem() {
         Optional<BlockPos> bowlPos = this.cat.getBowlPos();
         Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
-        Optional<BlockPos> treePos = this.cat.getBedPos();
+        Optional<BlockPos> treePos = this.cat.getCatTreePos();
 
         if(bowlPos.isEmpty() ||
                 litterboxPos.isEmpty() ||
@@ -135,7 +135,7 @@ public class CatWanderGoal extends Goal {
                 return null;
             }
 
-            BlockPos bestPos = closestDist.get().getA().offset(xzRange, 0, xzRange);
+            BlockPos bestPos = closestDist.get().getA().offset(random.nextDouble(xzRange), 0, random.nextDouble(xzRange));
             for(int attempt = 0; attempt < 5; ++attempt) {
                 int dx = random.nextInt(2 * xzRange + 1) - xzRange;
                 int dy = random.nextInt(2 * yRange + 1) - yRange;

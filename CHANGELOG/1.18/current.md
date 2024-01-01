@@ -1,1 +1,3 @@
 - `[FIX]` Made the wandering logic smarter when the cat is in domestic mode
+- `[FIX]` Adjusted some priorities of cat goals
+- `[CHG]` Made some improvements to how Happy Eater affects hunger and feeding 

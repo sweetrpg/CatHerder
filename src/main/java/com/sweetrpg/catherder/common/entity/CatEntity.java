@@ -205,40 +205,41 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     protected void registerGoals() {
+        // personal goals
         this.goalSelector.addGoal(1, new FloatGoal(this));
-//        this.goalSelector.addGoal(1, new FindWaterGoal(this));
-        //this.goalSelector.addGoal(1, new PatrolAreaGoal(this));
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+
         this.goalSelector.addGoal(2, new CatEntity.CatRelaxOnOwnerGoal(this));
-        //this.goalSelector.addGoal(3, new WolfEntity.AvoidEntityGoal(this, LlamaEntity.class, 24.0F, 1.5D, 1.5D));
+
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
+
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
+
         this.goalSelector.addGoal(5, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
-//        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-        this.goalSelector.addGoal(5, new CatWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
-        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(6, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
-        this.goalSelector.addGoal(6, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
-        this.goalSelector.addGoal(7, new BreedGoal(this, 1.0D));
-//        this.goalSelector.addGoal(7, new CatEatAndDrinkGoal<>(this, 16));
-        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-//        this.goalSelector.addGoal(9, new CatBegGoal(this, 8.0F));
-        this.goalSelector.addGoal(9, new UseLitterboxGoal<>(this, 10));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 
-        //        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-//        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-//        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
-//        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, TARGET_ENTITIES));
-        this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>)null));
-        //        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, TurtleEntity.class, false, TurtleEntity.TARGET_DRY_BABY));
-//        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Creeper.class, false));
+        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
+        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D));
+
+        this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
+
+        this.goalSelector.addGoal(9, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+
+        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
+
+        this.goalSelector.addGoal(12, new BreedGoal(this, 1.0D));
+
+        this.goalSelector.addGoal(15, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+
+        this.goalSelector.addGoal(20, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(20, new RandomLookAroundGoal(this));
+
+        // target-based goals
+        this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>) null));
         this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
     }
@@ -1373,7 +1374,7 @@ public class CatEntity extends AbstractCatEntity {
                 NBTUtil.removeOldUniqueId(compound, "LoveCause");
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to data fix UUIDs: " + e.getMessage());
         }
 
@@ -1454,7 +1455,7 @@ public class CatEntity extends AbstractCatEntity {
                 }
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to data fix attribute IDs: " + e.getMessage());
         }
 
@@ -1502,7 +1503,7 @@ public class CatEntity extends AbstractCatEntity {
                 inst.init(this);
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to init alteration: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1531,7 +1532,7 @@ public class CatEntity extends AbstractCatEntity {
             }
             this.setOriginalBreed(compound.getInt("original_breed"));
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load info: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1547,7 +1548,7 @@ public class CatEntity extends AbstractCatEntity {
                 this.markDataParameterDirty(CAT_LEVEL.get());
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load levels: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1568,7 +1569,7 @@ public class CatEntity extends AbstractCatEntity {
                 }
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load beds: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1591,7 +1592,7 @@ public class CatEntity extends AbstractCatEntity {
                 }
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load bowls: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1614,7 +1615,7 @@ public class CatEntity extends AbstractCatEntity {
                 }
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load litterboxes: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1624,7 +1625,7 @@ public class CatEntity extends AbstractCatEntity {
         try {
             this.statsTracker.readAdditional(compound);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load stats tracker: " + e.getMessage());
             e.printStackTrace();
         }
@@ -1632,7 +1633,7 @@ public class CatEntity extends AbstractCatEntity {
             try {
                 alter.onRead(this, compound);
             }
-            catch(Exception e) {
+            catch (Exception e) {
                 CatHerder.LOGGER.error("Failed to load alteration: " + e.getMessage());
                 e.printStackTrace();
             }
@@ -1816,23 +1817,23 @@ public class CatEntity extends AbstractCatEntity {
         return false;
     }
 
-    public Optional<BlockPos> getBedPos() {
-        return this.getBedPos(this.level.dimension());
+    public Optional<BlockPos> getCatTreePos() {
+        return this.getCatTreePos(this.level.dimension());
     }
 
-    public void setBedPos(@Nullable BlockPos pos) {
-        this.setBedPos(this.level.dimension(), pos);
+    public void setCatTreePos(@Nullable BlockPos pos) {
+        this.setCatTreePos(this.level.dimension(), pos);
     }
 
-    public Optional<BlockPos> getBedPos(ResourceKey<Level> registryKey) {
+    public Optional<BlockPos> getCatTreePos(ResourceKey<Level> registryKey) {
         return this.entityData.get(CAT_TREE_LOCATION.get()).getOrDefault(registryKey, Optional.empty());
     }
 
-    public void setBedPos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
-        this.setBedPos(registryKey, WorldUtil.toImmutable(pos));
+    public void setCatTreePos(ResourceKey<Level> registryKey, @Nullable BlockPos pos) {
+        this.setCatTreePos(registryKey, WorldUtil.toImmutable(pos));
     }
 
-    public void setBedPos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
+    public void setCatTreePos(ResourceKey<Level> registryKey, Optional<BlockPos> pos) {
         this.entityData.set(CAT_TREE_LOCATION.get(), this.entityData.get(CAT_TREE_LOCATION.get()).copy().set(registryKey, pos));
     }
 
@@ -2055,7 +2056,7 @@ public class CatEntity extends AbstractCatEntity {
     public InteractionResult adjustTalentLevel(Talent talent, int adjustment) {
 
         int currentLevel = this.getCatLevel(talent);
-int newLevel = currentLevel + adjustment;
+        int newLevel = currentLevel + adjustment;
 
         int levelCost = 0;
         if(adjustment < 0) {
@@ -2068,7 +2069,7 @@ int newLevel = currentLevel + adjustment;
         else {
             levelCost = talent.getLevelCost(newLevel);
             if(newLevel > talent.getMaxLevel() ||
-            !this.canSpendPoints(levelCost)) {
+                    !this.canSpendPoints(levelCost)) {
                 return InteractionResult.FAIL;
             }
         }
@@ -2442,6 +2443,18 @@ int newLevel = currentLevel + adjustment;
         return new TranslatableComponent(function.apply(ConfigHandler.SERVER.CAT_GENDER.get() ? this.getGender() : Gender.UNISEX));
     }
 
+    public boolean isHungry() {
+        // Happy Eater is hungry at 25%
+        // all others at 40%
+        float hungryThreshold = 40;
+        Optional<TalentInstance> happyEater = this.getTalent(ModTalents.HAPPY_EATER.get());
+        if(happyEater.isPresent()) {
+            hungryThreshold = 25f - (happyEater.get().level() * 1.5f);
+        }
+
+        return ((getCatHunger() / getMaxHunger()) * 100) < hungryThreshold;
+    }
+
     @Override
     public boolean isLying() {
         LivingEntity owner = this.getOwner();
@@ -2543,10 +2556,10 @@ int newLevel = currentLevel + adjustment;
          */
         public boolean canContinueToUse() {
             return this.cat.isTame() &&
-                           !this.cat.isOrderedToSit() &&
-                           this.ownerPlayer != null &&
-                           this.ownerPlayer.isSleeping() &&
-                           this.goalPos != null && !this.spaceIsOccupied();
+                    !this.cat.isOrderedToSit() &&
+                    this.ownerPlayer != null &&
+                    this.ownerPlayer.isSleeping() &&
+                    this.goalPos != null && !this.spaceIsOccupied();
         }
 
         /**

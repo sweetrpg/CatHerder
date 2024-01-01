@@ -67,14 +67,14 @@ public class HappyEaterTalent extends TalentInstance implements ICatFoodHandler 
 
         if(item.isEdible()) {
             if(stackIn.is(ItemTags.FISHES)) {
-                catIn.addHunger(item.getFoodProperties().getNutrition() * 5);
+                catIn.addHunger(item.getFoodProperties().getNutrition() * 7);
                 catIn.consumeItemFromStack(entityIn, stackIn);
                 return InteractionResult.SUCCESS;
             }
 
             if(this.level() >= 3) {
                 if(stackIn.is(ModTags.MEAT)) {
-                    catIn.addHunger(item.getFoodProperties().getNutrition() * 5);
+                    catIn.addHunger(item.getFoodProperties().getNutrition() * 7);
                     catIn.consumeItemFromStack(entityIn, stackIn);
                     return InteractionResult.SUCCESS;
                 }

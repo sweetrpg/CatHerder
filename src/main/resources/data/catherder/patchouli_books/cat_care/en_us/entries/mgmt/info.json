@@ -27,6 +27,11 @@
     },
     {
       "type": "patchouli:text",
+      "title": "Overhead Text",
+      "text": "Above your cat's head is some text that shows various things about your cat.$(br2)At the top is the mode, current hunger, and (optionally) gender. Below that is the name of the cat. If you hold the crouch key down, the hunger value will also show the maximum hunger after a slash, and below the name, the owner's name will be displayed."
+    },
+    {
+      "type": "patchouli:text",
       "title": "Options",
       "text": "On the right is some text that shows other information about your cat. Below it are two option buttons that let you enable/disable 'friendly fire' (other players can hurt your cat) and 'obey others' (other players can give your pet instructions/commands)."
     }

@@ -7,7 +7,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
-import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.level.LevelReader;
 
 import java.util.EnumSet;
@@ -27,7 +26,7 @@ public class CatLieOnBedGoal<T extends LivingEntity> extends MoveToBlockGoal {
      * method as well.
      */
     public boolean canUse() {
-        return this.cat.isTame() && !this.cat.isOrderedToSit() && !this.cat.isLying() && super.canUse();
+        return this.cat.isTame() && !this.cat.isOrderedToSit() && !this.cat.isLying() && !this.cat.isHungry() && super.canUse();
     }
 
     /**
@@ -47,7 +46,7 @@ public class CatLieOnBedGoal<T extends LivingEntity> extends MoveToBlockGoal {
      */
     public void stop() {
         super.stop();
-// TODO        this.cat.setLying(false);
+        this.cat.setLyingDown(false);
     }
 
     /**
@@ -56,10 +55,11 @@ public class CatLieOnBedGoal<T extends LivingEntity> extends MoveToBlockGoal {
     public void tick() {
         super.tick();
         this.cat.setInSittingPose(false);
-        if (!this.isReachedTarget()) {
-       // TODO     this.cat.setLying(false);
-        } else if (!this.cat.isLying()) {
-            // TODO this.cat.setLying(true);
+        if(!this.isReachedTarget()) {
+            // TODO     this.cat.setLying(false);
+        }
+        else if(!this.cat.isLying()) {
+            this.cat.setLyingDown(true);
         }
 
     }
