@@ -3,7 +3,7 @@
   "display": {
     "icon": {
       "item": "catherder:pet_door",
-      "nbt": "{catherder:{structureId:\"minecraft:warped_planks\"}}"
+      "nbt": "{catherder:{structureId:\"minecraft:birch_planks\"}}"
     },
     "title": {
       "translate": "advancements.catherder.main.craft_pet_door.title"

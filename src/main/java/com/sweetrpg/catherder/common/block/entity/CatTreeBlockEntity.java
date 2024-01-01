@@ -14,12 +14,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
 import net.minecraftforge.client.model.data.ModelProperty;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.UUID;
 
 public class CatTreeBlockEntity extends PlacedBlockEntity {
@@ -40,8 +44,31 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     @Nullable
     private Component ownerName;
 
+    public int timeoutCounter;
+
     public CatTreeBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntityTypes.CAT_TREE.get(), pos, blockState);
+    }
+
+    public static void tick(Level level, BlockPos pos, BlockState blockState, BlockEntity blockEntity) {
+        if(!(blockEntity instanceof CatTreeBlockEntity tree)) {
+            return;
+        }
+
+        // Only run update code every 5 ticks (0.25s)
+        if(++tree.timeoutCounter < 5) { return; }
+
+        List<CatEntity> catList = tree.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
+
+        for(CatEntity cat : catList) {
+            // make cat tree remember who placed and only their cats can attach to it
+            UUID placerId = tree.getPlacerId();
+            if(placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getCatTreePos().isPresent()) {
+                cat.setCatTreePos(tree.worldPosition);
+            }
+        }
+
+        tree.timeoutCounter = 0;
     }
 
     @Override

@@ -40,7 +40,7 @@ public class MoveToBlockGoal extends Goal {
             // Double-check the bed still has no owner
             if(catTreeEntity.getOwnerUUID() == null) {
                 catTreeEntity.setOwner(this.cat);
-                this.cat.setBedPos(this.cat.level.dimension(), target);
+                this.cat.setCatTreePos(this.cat.level.dimension(), target);
             }
         }
 

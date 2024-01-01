@@ -3,7 +3,6 @@ package com.sweetrpg.catherder.client.entity.render.world;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModTalents;
 import net.minecraft.client.Minecraft;
@@ -25,7 +24,7 @@ public class BedFinderRenderer {
         for (Entity passenger : player.getPassengers()) {
             if (passenger instanceof CatEntity) {
                 CatEntity cat = (CatEntity) passenger;
-                Optional<BlockPos> bedPosOpt = cat.getBedPos();
+                Optional<BlockPos> bedPosOpt = cat.getCatTreePos();
 
                 if (bedPosOpt.isPresent()) {
                     BlockPos bedPos = bedPosOpt.get();

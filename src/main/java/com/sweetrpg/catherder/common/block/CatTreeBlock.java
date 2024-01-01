@@ -204,7 +204,7 @@ public class CatTreeBlock extends BaseEntityBlock {
                         CatEntity cat = storage.respawn((ServerLevel) worldIn, player, pos.above());
 
                         catTreeEntity.setOwner(cat);
-                        cat.setBedPos(cat.level.dimension(), pos);
+                        cat.setCatTreePos(cat.level.dimension(), pos);
                         return InteractionResult.SUCCESS;
                     }
                     else {

@@ -164,8 +164,8 @@ public class CatInfoScreen extends Screen {
                         list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_BOX).withStyle(ChatFormatting.RED));
                     }
 
-                    if(CatInfoScreen.this.cat.getBedPos().isPresent()) {
-                        double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBedPos().get());
+                    if(CatInfoScreen.this.cat.getCatTreePos().isPresent()) {
+                        double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getCatTreePos().get());
 
                         if(distance > 512D) {
                             list.add(new TranslatableComponent(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_TREE_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
