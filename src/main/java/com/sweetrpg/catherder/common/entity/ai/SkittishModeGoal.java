@@ -15,9 +15,10 @@ import java.util.Random;
 public class SkittishModeGoal<T extends LivingEntity> extends AvoidEntityGoal {
 
     private final CatEntity cat;
+    private int checkCooldown = 0;
 
     public SkittishModeGoal(CatEntity catIn) {
-        super(catIn, Entity.class, (entity) -> {
+        super(catIn, LivingEntity.class, (entity) -> {
 //            CatHerder.LOGGER.debug("(to avoid) entity = {}", entity);
             return true;
         }, 16, 2, 2, (entity) -> {
@@ -38,6 +39,12 @@ public class SkittishModeGoal<T extends LivingEntity> extends AvoidEntityGoal {
             return false;
         }
 
+        // check "twitchiness"
+        if(this.checkCooldown > 0) {
+            this.checkCooldown--;
+            return false;
+        }
+
         Random random = this.cat.getRandom();
 
         // less likely to avoid owner
@@ -54,4 +61,23 @@ public class SkittishModeGoal<T extends LivingEntity> extends AvoidEntityGoal {
         return (random.nextInt(0, 100) < ConfigHandler.CLIENT.SKITTISH_OTHERS.get());
     }
 
+//    @Override
+//    public void start() {
+//        super.start();
+//    }
+
+//    @Override
+//    public void tick() {
+//        if(this.cat.getNoActionTime() >= 100) {
+//            return;
+//        }
+//        super.tick();
+//        this.checkCooldown++;
+//    }
+
+    @Override
+    public void stop() {
+        super.stop();
+        this.checkCooldown = Math.max(100, (1000 - ConfigHandler.CLIENT.SKITTISH_TWITCHINESS.get()));
+    }
 }
