@@ -4,6 +4,8 @@ import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import net.minecraft.Util;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;

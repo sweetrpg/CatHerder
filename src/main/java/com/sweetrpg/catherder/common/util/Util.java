@@ -8,7 +8,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraft.core.Holder;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.IRegistryDelegate;
 
 import java.text.DecimalFormat;
 import java.util.Collection;
@@ -145,11 +146,10 @@ public class Util {
     }
 
     // From net.minecraft.util.Util but for RegistryObject
-    public static <T> RegistryObject<T> acceptOrElse(RegistryObject<T> opt, Consumer<T> consumer, Runnable orElse) {
+    public static <T extends IForgeRegistryEntry<? super T>> RegistryObject<T> acceptOrElse(RegistryObject<T> opt, Consumer<T> consumer, Runnable orElse) {
         if (opt.isPresent()) {
             consumer.accept(opt.get());
-        }
-        else {
+        } else {
             orElse.run();
         }
 
@@ -159,8 +159,7 @@ public class Util {
     public static <T> Optional<T> acceptOrElse(Optional<T> opt, Consumer<T> consumer, Runnable orElse) {
         if (opt.isPresent()) {
             consumer.accept(opt.get());
-        }
-        else {
+        } else {
             orElse.run();
         }
 
@@ -202,13 +201,18 @@ public class Util {
             return ResourceLocation.tryParse((String) obj);
         }
 
-        if (obj instanceof Holder.Reference) {
-            return ((Holder.Reference) obj).key().location();
+        if (obj instanceof IForgeRegistryEntry) {
+            return ((IForgeRegistryEntry) obj).getRegistryName();
+        }
+
+        if (obj instanceof IRegistryDelegate) {
+            return ((IRegistryDelegate) obj).name();
         }
 
         if (obj instanceof RegistryObject) {
             return ((RegistryObject) obj).getId();
         }
+
 
         return null;
     }

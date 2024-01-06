@@ -9,14 +9,14 @@ import com.sweetrpg.catherder.common.talent.PackCatTalent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.CommonButtons;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class CatInventoryButton extends Button {
     private final int baseX;
 
     public CatInventoryButton(int x, int y, Screen parentIn, OnPress onPress) {
-        super(x, y, 13, 10, CommonComponents.EMPTY, onPress, Button.DEFAULT_NARRATION);
+        super(x, y, 13, 10, new TextComponent(""), onPress);
         this.baseX = x;
         this.parent = parentIn;
     }
@@ -35,18 +35,19 @@ public class CatInventoryButton extends Button {
     @Override
     public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 
-        if(this.parent instanceof CreativeModeInventoryScreen t) {
-            this.visible = t.isInventoryOpen();
+        if(this.parent instanceof CreativeModeInventoryScreen) {
+            int tabIndex = ((CreativeModeInventoryScreen) this.parent).getSelectedTab();
+            this.visible = tabIndex == CreativeModeTab.TAB_INVENTORY.getId();
             this.active = this.visible;
         }
 
-        if(this.parent instanceof InventoryScreen i) {
-            RecipeBookComponent recipeBook = i.getRecipeBookComponent();
+        if(this.parent instanceof InventoryScreen) {
+            RecipeBookComponent recipeBook = ((InventoryScreen) this.parent).getRecipeBookComponent();
             if(recipeBook.isVisible()) {
-                this.setX(this.baseX + 77);
+                this.x = this.baseX + 77;
             }
             else {
-                this.setX(this.baseX);
+                this.x = this.baseX;
             }
         }
 

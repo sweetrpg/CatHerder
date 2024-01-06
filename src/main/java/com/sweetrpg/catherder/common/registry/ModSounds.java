@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;

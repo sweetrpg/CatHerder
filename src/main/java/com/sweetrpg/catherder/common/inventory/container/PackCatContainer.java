@@ -3,6 +3,7 @@ package com.sweetrpg.catherder.common.inventory.container;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import com.sweetrpg.catherder.common.talent.PackCatTalent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,7 +26,7 @@ public class PackCatContainer extends AbstractContainerMenu {
     public PackCatContainer(int windowId, Inventory playerInventory, AbstractCatEntity catIn) {
         super(ModContainerTypes.PACK_CAT.get(), windowId);
         this.cat = catIn;
-        this.level = Mth.clamp(catIn.getCatLevel(CatHerder.PACK_CAT), 0, 5);
+        this.level = Mth.clamp(catIn.getCatLevel(ModTalents.PACK_CAT), 0, 5);
         this.packInventory = catIn.getCapability(PackCatTalent.PACK_CAT_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
 
         for (int j = 0; j < 3; j++) {

@@ -23,7 +23,7 @@ public class CatBegGoal extends Goal {
 
     public CatBegGoal(CatEntity vanillaCat, float minDistance) {
         this.cat = vanillaCat;
-        this.world = vanillaCat.level();
+        this.world = vanillaCat.level;
         this.minPlayerDistance = minDistance;
         this.playerPredicate = TargetingConditions.forNonCombat().range(minDistance); // TODO check
         this.setFlags(EnumSet.of(Goal.Flag.LOOK));

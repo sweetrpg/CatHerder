@@ -22,7 +22,7 @@ public class NBTUtil {
      * Writes the UUID to the CompoundNBT under the given key if it is not null
      */
     public static void putUniqueId(CompoundTag compound, String key, @Nullable UUID uuid) {
-        if (uuid != null) {
+        if(uuid != null) {
             compound.putUUID(key, uuid);
         }
     }
@@ -32,9 +32,10 @@ public class NBTUtil {
      */
     @Nullable
     public static UUID getUniqueId(CompoundTag compound, String key) {
-        if (compound.hasUUID(key)) {
+        if(compound.hasUUID(key)) {
             return compound.getUUID(key);
-        } else if (NBTUtil.hasOldUniqueId(compound, key)) {
+        }
+        else if(NBTUtil.hasOldUniqueId(compound, key)) {
             return NBTUtil.getOldUniqueId(compound, key);
         }
 
@@ -55,14 +56,14 @@ public class NBTUtil {
     }
 
     public static void putResourceLocation(CompoundTag compound, String key, @Nullable ResourceLocation rl) {
-        if (rl != null) {
+        if(rl != null) {
             compound.putString(key, rl.toString());
         }
     }
 
     @Nullable
     public static ResourceLocation getResourceLocation(CompoundTag compound, String key) {
-        if (compound.contains(key, Tag.TAG_STRING)) {
+        if(compound.contains(key, Tag.TAG_STRING)) {
             return ResourceLocation.tryParse(compound.getString(key));
         }
 
@@ -71,7 +72,7 @@ public class NBTUtil {
 
     @Nullable
     public static void putVector3d(CompoundTag compound, @Nullable Vec3 vec3d) {
-        if (vec3d != null) {
+        if(vec3d != null) {
             compound.putDouble("x", vec3d.x());
             compound.putDouble("y", vec3d.y());
             compound.putDouble("z", vec3d.z());
@@ -80,7 +81,7 @@ public class NBTUtil {
 
     @Nullable
     public static Vec3 getVector3d(CompoundTag compound) {
-        if (compound.contains("x", Tag.TAG_ANY_NUMERIC) && compound.contains("y", Tag.TAG_ANY_NUMERIC) && compound.contains("z", Tag.TAG_ANY_NUMERIC)) {
+        if(compound.contains("x", Tag.TAG_ANY_NUMERIC) && compound.contains("y", Tag.TAG_ANY_NUMERIC) && compound.contains("z", Tag.TAG_ANY_NUMERIC)) {
             return new Vec3(compound.getDouble("x"), compound.getDouble("y"), compound.getDouble("z"));
         }
 
@@ -89,14 +90,14 @@ public class NBTUtil {
 
 
     public static void putTextComponent(CompoundTag compound, String key, @Nullable Component component) {
-        if (component != null) {
+        if(component != null) {
             compound.putString(key, Component.Serializer.toJson(component));
         }
     }
 
     @Nullable
     public static Component getTextComponent(CompoundTag compound, String key) {
-        if (compound.contains(key, Tag.TAG_STRING)) {
+        if(compound.contains(key, Tag.TAG_STRING)) {
             return Component.Serializer.fromJson(compound.getString(key));
         }
 
@@ -106,8 +107,8 @@ public class NBTUtil {
     @Nullable
     public static <T> T getRegistryValue(CompoundTag compound, String key, IForgeRegistry<T> registry) {
         ResourceLocation rl = NBTUtil.getResourceLocation(compound, key);
-        if (rl != null) {
-            if (registry.containsKey(rl)) {
+        if(rl != null) {
+            if(registry.containsKey(rl)) {
                 return registry.getValue(rl);
             }
             else {
@@ -121,14 +122,33 @@ public class NBTUtil {
         return null;
     }
 
+    @Nullable
+    public static <T> Holder.Reference<T> getRegistryDelegate(CompoundTag compound, String key, IForgeRegistry<T> registry) {
+        ResourceLocation rl = NBTUtil.getResourceLocation(compound, key);
+        if(rl != null) {
+            Optional<Holder.Reference<T>> delegate = registry.getDelegate(rl);
+            if(delegate.isPresent()) {
+                return delegate.get();
+            }
+            else {
+                CatHerder.LOGGER.warn("Unable to load registry value in registry {} with resource location {}", registry.getRegistryName(), rl);
+            }
+        }
+        else {
+            CatHerder.LOGGER.warn("Unable to load resource location in NBT:{}, for {} registry", key, registry.getRegistryName());
+        }
+
+        return null;
+    }
+
     public static <T> void putRegistryValue(CompoundTag compound, String key, Holder.Reference<T> value) {
-        if (value != null) {
+        if(value != null) {
             NBTUtil.putResourceLocation(compound, key, value.key().location());
         }
     }
 
     public static void putBlockPos(CompoundTag compound, @Nullable BlockPos vec3d) {
-        if (vec3d != null) {
+        if(vec3d != null) {
             compound.putInt("x", vec3d.getX());
             compound.putInt("y", vec3d.getY());
             compound.putInt("z", vec3d.getZ());
@@ -137,7 +157,7 @@ public class NBTUtil {
 
     @Nullable
     public static BlockPos getBlockPos(CompoundTag compound) {
-        if (compound.contains("x", Tag.TAG_ANY_NUMERIC) && compound.contains("y", Tag.TAG_ANY_NUMERIC) && compound.contains("z", Tag.TAG_ANY_NUMERIC)) {
+        if(compound.contains("x", Tag.TAG_ANY_NUMERIC) && compound.contains("y", Tag.TAG_ANY_NUMERIC) && compound.contains("z", Tag.TAG_ANY_NUMERIC)) {
             return new BlockPos(compound.getInt("x"), compound.getInt("y"), compound.getInt("z"));
         }
 
@@ -146,7 +166,7 @@ public class NBTUtil {
 
 
     public static void putBlockPos(CompoundTag compound, String key, Optional<BlockPos> vec3d) {
-        if (vec3d.isPresent()) {
+        if(vec3d.isPresent()) {
             CompoundTag posNBT = new CompoundTag();
             putBlockPos(posNBT, vec3d.get());
             compound.put(key, posNBT);
@@ -154,7 +174,7 @@ public class NBTUtil {
     }
 
     public static Optional<BlockPos> getBlockPos(CompoundTag compound, String key) {
-        if (compound.contains(key, Tag.TAG_COMPOUND)) {
+        if(compound.contains(key, Tag.TAG_COMPOUND)) {
             return Optional.of(getBlockPos(compound.getCompound(key)));
         }
 
@@ -162,7 +182,7 @@ public class NBTUtil {
     }
 
     public static void putBlockPos(CompoundTag compound, String key, @Nullable BlockPos vec3d) {
-        if (vec3d != null) {
+        if(vec3d != null) {
             CompoundTag posNBT = new CompoundTag();
             putBlockPos(posNBT, vec3d);
             compound.put(key, posNBT);
@@ -179,14 +199,14 @@ public class NBTUtil {
 //    }
 
     public static void writeItemStack(CompoundTag compound, String key, ItemStack stackIn) {
-        if (!stackIn.isEmpty()) {
+        if(!stackIn.isEmpty()) {
             compound.put(key, stackIn.save(new CompoundTag()));
         }
     }
 
     @Nonnull
     public static ItemStack readItemStack(CompoundTag compound, String key) {
-        if (compound.contains(key, Tag.TAG_COMPOUND)) {
+        if(compound.contains(key, Tag.TAG_COMPOUND)) {
             return ItemStack.of(compound.getCompound(key));
         }
 

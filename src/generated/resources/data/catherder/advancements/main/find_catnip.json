@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "catherder:wild_catnip"
+    },
+    "title": {
+      "translate": "advancements.catherder.main.find_catnip.title"
+    },
+    "description": {
+      "translate": "advancements.catherder.main.find_catnip.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "find_catnip": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "catherder:wild_catnip"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "find_catnip"
+    ]
+  ]
+}

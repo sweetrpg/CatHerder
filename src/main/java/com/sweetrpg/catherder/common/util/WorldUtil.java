@@ -30,7 +30,7 @@ public class WorldUtil {
 
     @SuppressWarnings("unchecked")
     @Nullable
-    public static <T extends BlockEntity> T getTileEntity(BlockGetter worldIn, BlockPos posIn, Class<T> type) {
+    public static <T extends BlockEntity> T getBlockEntity(BlockGetter worldIn, BlockPos posIn, Class<T> type) {
         BlockEntity tileEntity = worldIn.getBlockEntity(posIn);
         if(tileEntity != null && tileEntity.getClass().isAssignableFrom(type)) {
             return (T) tileEntity;

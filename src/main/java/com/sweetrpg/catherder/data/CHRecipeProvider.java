@@ -1,19 +1,17 @@
 package com.sweetrpg.catherder.data;
 
 import com.google.gson.JsonObject;
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
+import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;
@@ -31,7 +29,9 @@ public class CHRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        //TODO
+        CatHerder.LOGGER.debug("Build crafting recipes: {}", consumer);
+
+        // treats
         ShapelessRecipeBuilder.shapeless(ModItems.SUPER_TREAT.get(), 5)
                 .requires(ModItems.TRAINING_TREAT.get(), 5)
                 .requires(Items.GOLDEN_APPLE, 1)
@@ -66,41 +66,6 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('Y', ModItems.CATNIP.get())
                 .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.COLLAR_SHEARS.get(), 1)
-                .pattern(" X ")
-                .pattern("XYX")
-                .pattern(" X ")
-                .define('X', ModItems.YARN.get())
-                .define('Y', Items.SHEARS)
-                .unlockedBy("has_shears", has(Items.SHEARS))
-                .unlockedBy("has_yarn", has(ModItems.YARN.get()))
-                .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
-//                .pattern("XXX")
-                .pattern("FXW")
-                .pattern("XXX")
-                .define('X', Items.IRON_INGOT)
-                .define('F', ItemTags.FISHES)
-                .define('W', Items.WATER_BUCKET)
-                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                .unlockedBy("has_fishes", has(ItemTags.FISHES))
-                .unlockedBy("has_water", has(Items.WATER_BUCKET))
-                .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CAT_TOY.get(), 1)
-                .pattern("SW")
-                .pattern("WS")
-                .define('W', ModItems.CATNIP.get())
-                .define('S', Items.SUGAR)
-                .unlockedBy("has_sugar", has(Items.SUGAR))
-                .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
-                .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.WOOL_COLLAR.get(), 1)
-                .pattern("SSS")
-                .pattern("S S")
-                .pattern("SSS")
-                .define('S', Items.STRING)
-                .unlockedBy("has_stick", has(Items.STRING))
-                .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.TREAT_BAG.get(), 1)
                 .pattern("LCL")
                 .pattern("LLL")
@@ -109,58 +74,16 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_leather", has(Items.LEATHER))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(ModItems.CAPE.get(), 1)
-                .pattern("S S")
-                .pattern("LWL")
-                .pattern("WLW")
-                .define('L', Items.LEATHER)
-                .define('S', Items.STRING)
-                .define('W', ItemTags.WOOL)
-                .unlockedBy("has_leather", has(Items.LEATHER))
+        // modifiers
+        ShapedRecipeBuilder.shaped(ModItems.CAT_SHEARS.get(), 1)
+                .pattern(" X ")
+                .pattern("XYX")
+                .pattern(" X ")
+                .define('X', ModItems.YARN.get())
+                .define('Y', Items.SHEARS)
+                .unlockedBy("has_shears", has(Items.SHEARS))
+                .unlockedBy("has_yarn", has(ModItems.YARN.get()))
                 .save(consumer);
-//        ShapedRecipeBuilder.shaped(CatItems.CAPE_COLOURED.get(), 1).pattern("S S").pattern("LLL").pattern("LLL").define('L', Items.LEATHER).define('S', Items.STRING).unlockedBy("has_leather", has(Items.LEATHER)).save(consumer);
-//        ShapedRecipeBuilder.shaped(CatItems.GUARD_SUIT.get(), 1).pattern("S S").pattern("BWB").pattern("BWB").define('S', Items.STRING).define('W', Blocks.WHITE_WOOL).define('B', Blocks.BLACK_WOOL).unlockedBy("has_string", has(Items.STRING)).save(consumer);
-//        ShapedRecipeBuilder.shaped(CatItems.LEATHER_JACKET.get(), 1).pattern("L L").pattern("LWL").pattern("LWL").define('L', Items.LEATHER).define('W', ItemTags.WOOL).unlockedBy("has_leather", has(Items.LEATHER)).save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
-                .pattern("BWB")
-                .pattern("WCW")
-                .pattern("BSB")
-                .define('C', ModItems.WOOL_COLLAR.get())
-                .define('B', Items.BLACK_DYE)
-                .define('W', Items.WHITE_DYE)
-                .define('S', Items.STRING)
-                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
-                .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
-                .pattern("WBW")
-                .pattern("BCB")
-                .pattern("WSW")
-                .define('C', ModItems.WOOL_COLLAR.get())
-                .define('B', Items.BLACK_DYE)
-                .define('W', Items.WHITE_DYE)
-                .define('S', Items.STRING)
-                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
-                .save(consumer, Util.getResource("spotted_collar_alt"));
-        ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLOURED_COLLAR.get(), 1)
-                .requires(ModItems.WOOL_COLLAR.get())
-                .requires(Items.STRING)
-                .requires(Items.BLUE_DYE)
-                .requires(Items.LIME_DYE)
-                .requires(Items.YELLOW_DYE)
-                .requires(Items.ORANGE_DYE)
-                .requires(Items.RED_DYE)
-                .requires(Items.PURPLE_DYE)
-                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1)
-                .pattern("S S")
-                .pattern("GSG")
-                .define('S', Items.STICK)
-                .define('G', Blocks.GLASS_PANE)
-                .unlockedBy("has_stick", has(Items.STICK))
-                .save(consumer);
-
         ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
                 .pattern("WM")
                 .define('W', Items.POTION)
@@ -176,27 +99,113 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_cake", has(Items.CAKE))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(ModItems.RADIO_COLLAR.get(), 1)
-                .pattern("XX")
-                .pattern("YX")
+        // essentials
+        ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
+//                .pattern("XXX")
+                .pattern("FXW")
+                .pattern("XXX")
                 .define('X', Items.IRON_INGOT)
-                .define('Y', Items.REDSTONE)
-                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .define('F', ItemTags.FISHES)
+                .define('W', Items.WATER_BUCKET)
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .unlockedBy("has_fishes", has(ItemTags.FISHES))
+                .unlockedBy("has_water", has(Items.WATER_BUCKET))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1)
-                .requires(Items.MAP, 1)
-                .requires(Items.REDSTONE, 1)
-                .requires(ModItems.RADIO_COLLAR.get(), 1)
-                .unlockedBy("has_redstone", has(Items.REDSTONE))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(ModBlocks.LITTER_BOX.get(), 1)
+        ShapedRecipeBuilder.shaped(ModBlocks.LITTERBOX.get(), 1)
                 .pattern("ISI")
                 .pattern("III")
                 .define('I', Items.IRON_INGOT)
                 .define('S', Items.SAND)
                 .unlockedBy("has_sand", has(Items.SAND))
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.LITTER_SCOOP.get(), 1)
+                .pattern("IWI")
+                .pattern("III")
+                .pattern(" I ")
+                .define('I', Items.COPPER_INGOT)
+                .define('W', Items.IRON_BARS)
+                .unlockedBy("has_copper", has(Items.SAND))
+                .unlockedBy("has_iron_bars", has(Items.IRON_BARS))
+                .save(consumer);
+        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
+                .save(consumer, Util.getResourcePath("cat_tree"));
+        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE_DYED.get())
+                .save(consumer, Util.getResourcePath("cat_tree_dyed"));
+
+        // accessories
+        ShapedRecipeBuilder.shaped(ModItems.WOOL_COLLAR.get(), 1)
+                .pattern("SSS")
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', ItemTags.WOOL)
+                .unlockedBy("has_stick", has(ItemTags.WOOL))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CAPE.get(), 1)
+                .pattern("S S")
+                .pattern("LWL")
+                .pattern("WLW")
+                .define('L', Items.LEATHER)
+                .define('S', Items.STRING)
+                .define('W', ItemTags.WOOL)
+                .unlockedBy("has_leather", has(Items.LEATHER))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
+                .pattern("BWB")
+                .pattern("WCW")
+                .pattern("BSB")
+                .define('C', ModItems.WOOL_COLLAR.get())
+                .define('B', Items.BLACK_DYE)
+                .define('W', Items.WHITE_DYE)
+                .define('S', ItemTags.WOOL)
+                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
+                .pattern("WBW")
+                .pattern("BCB")
+                .pattern("WSW")
+                .define('C', ModItems.WOOL_COLLAR.get())
+                .define('B', Items.BLACK_DYE)
+                .define('W', Items.WHITE_DYE)
+                .define('S', ItemTags.WOOL)
+                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
+                .save(consumer, Util.getResource("spotted_collar_alt"));
+        ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLORED_COLLAR.get(), 1)
+                .requires(ModItems.WOOL_COLLAR.get())
+                .requires(Items.STRING)
+                .requires(Items.BLUE_DYE)
+                .requires(Items.LIME_DYE)
+                .requires(Items.YELLOW_DYE)
+                .requires(Items.ORANGE_DYE)
+                .requires(Items.RED_DYE)
+                .requires(Items.PURPLE_DYE)
+                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1)
+                .pattern(" s ")
+                .pattern("S S")
+                .pattern("GSG")
+                .define('s', Items.STRING)
+                .define('S', Items.STICK)
+                .define('G', Blocks.GLASS_PANE)
+                .unlockedBy("has_string", has(Items.STRING))
+                .unlockedBy("has_stick", has(Items.STICK))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(ModItems.RADIO_COLLAR.get(), 1)
+                .requires(ModItems.WOOL_COLLAR.get())
+                .requires(Items.REDSTONE)
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
+                .save(consumer);
+
+        // toys
+        ShapedRecipeBuilder.shaped(ModItems.CAT_TOY.get(), 1)
+                .pattern("SW")
+                .pattern("WS")
+                .define('W', ModItems.CATNIP.get())
+                .define('S', Items.SUGAR)
+                .unlockedBy("has_sugar", has(Items.SUGAR))
+                .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.CARDBOARD_BOX.get(), 1)
                 .pattern("CCC")
@@ -205,19 +214,26 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('C', ModItems.CARDBOARD.get())
                 .unlockedBy("has_cardboard", has(ModItems.CARDBOARD.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9)
-                .pattern("PPP")
-                .pattern("PPP")
-                .pattern("PPP")
-                .define('P', Items.PAPER)
-                .unlockedBy("has_paper", has(Items.PAPER))
-                .save(consumer);
         ShapedRecipeBuilder.shaped(ModItems.YARN.get(), 1)
                 .pattern("WW ")
                 .pattern("WW ")
                 .pattern("  W")
                 .define('W', ItemTags.WOOL)
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .save(consumer);
+
+// misc
+        ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1)
+                .requires(Items.MAP, 1)
+                .requires(Items.REDSTONE, 1)
+                .requires(ModItems.RADIO_COLLAR.get(), 1)
+                .unlockedBy("has_redstone", has(Items.REDSTONE))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9)
+                .pattern("PPP")
+                .pattern("PPP")
+                .define('P', Items.PAPER)
+                .unlockedBy("has_paper", has(Items.PAPER))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.MOUSE_TRAP.get(), 1)
                 .pattern("CIT")
@@ -241,6 +257,9 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_slime", has(Items.SLIME_BALL))
                 .unlockedBy("has_bowl", has(Items.BOWL))
                 .save(consumer);
+        SpecialRecipeBuilder.special(ModRecipeSerializers.PET_DOOR.get())
+                .save(consumer, Util.getResourcePath("pet_door"));
+
 //        ShapedRecipeBuilder.shaped(ModItems.LASAGNA.get(), 1)
 //                .pattern("PPP")
 //                .pattern("SCM")
@@ -254,32 +273,6 @@ public class CHRecipeProvider extends RecipeProvider {
 //                           .unlockedBy("has_cheese", has(ModItems.CHEESE_WEDGE.get()))
 //                           .unlockedBy("has_meat", has(Items.BEEF))
 //                           .save(consumer);
-
-        ShapedRecipeBuilder.shaped(ModBlocks.CAT_TREE.get(), 1)
-                .pattern("sWs")
-                .pattern("SF ")
-                .pattern("sss")
-                .define('s', ItemTags.SLABS)
-                .define('S', Items.STRING)
-                .define('F', ItemTags.WOODEN_FENCES)
-                .define('W', ItemTags.WOOL)
-                .unlockedBy("has_slabs", has(ItemTags.SLABS))
-                .unlockedBy("has_string", has(Items.STRING))
-                .unlockedBy("has_fences", has(ItemTags.WOODEN_FENCES))
-                .unlockedBy("has_wood", has(ItemTags.WOOL))
-                .save(consumer);
-//        SpecialRecipeBuilder.special(ModRecipeSerializers.CAT_TREE.get())
-//                            .save(consumer, Util.getResourcePath("cat_tree"));
-
-        ShapedRecipeBuilder.shaped(ModBlocks.PET_DOOR.get(), 1)
-                .pattern("WWW")
-                .pattern("WDW")
-                .pattern("WWW")
-                .define('W', ItemTags.PLANKS)
-                .define('D', ItemTags.WOODEN_DOORS)
-                .unlockedBy("has_planks", has(ItemTags.PLANKS))
-                .unlockedBy("has_door", has(ItemTags.WOODEN_DOORS))
-                .save(consumer);
     }
 
     @Override

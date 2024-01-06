@@ -5,7 +5,31 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Talk about the toys."
+      "text": "These are the playthings your cat needs."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cat Toy",
+      "text": "The basic toy, shaped like a mouse, that your cat will love. Throw it, and your cat will bring it back.",
+      "item": {
+        "item": "catherder:cat_toy"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ball of yarn",
+      "text": "You weren't using this to crochet something, were you?",
+      "item": {
+        "item": "catherder:yarn"
+      }
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cardboard box",
+      "text": "Who cares what came in it? It's the box that's the most fun.",
+      "item": {
+        "item": "catherder:cardboard_box"
+      }
     }
   ]
 }

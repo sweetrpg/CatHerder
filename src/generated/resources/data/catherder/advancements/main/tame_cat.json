@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "item": "catherder:training_treat"
+    },
+    "title": {
+      "translate": "advancements.catherder.main.train_cat.title"
+    },
+    "description": {
+      "translate": "advancements.catherder.main.train_cat.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "tame_cat": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "catherder:cat"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tame_cat"
+    ]
+  ]
+}

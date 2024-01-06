@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
 import com.sweetrpg.catherder.common.inventory.container.FoodBowlContainer;
 import com.sweetrpg.catherder.common.inventory.container.PackCatContainer;

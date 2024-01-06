@@ -1,12 +1,10 @@
 package com.sweetrpg.catherder;
 
-import com.sweetrpg.catherder.api.registry.Talent;
-import com.sweetrpg.catherder.api.registry.TalentInstance;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.client.ClientSetup;
-import com.sweetrpg.catherder.data.*;
 import com.sweetrpg.catherder.client.entity.render.world.BedFinderRenderer;
 import com.sweetrpg.catherder.client.event.ClientEventHandler;
-import com.sweetrpg.catherder.common.Capabilities;
+import com.sweetrpg.catherder.common.lib.Capabilities;
 import com.sweetrpg.catherder.common.CommonSetup;
 import com.sweetrpg.catherder.common.addon.AddonManager;
 import com.sweetrpg.catherder.common.command.CatRespawnCommand;
@@ -14,30 +12,24 @@ import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
-import com.sweetrpg.catherder.common.talent.*;
+import com.sweetrpg.catherder.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
-import com.sweetrpg.catherder.api.CatHerderAPI;
 
 /**
  * @author Paulyhedral, ProPercivalalb
@@ -45,43 +37,13 @@ import com.sweetrpg.catherder.api.CatHerderAPI;
 @Mod(CatHerderAPI.MOD_ID)
 public class CatHerder {
 
-    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(Talent.class, CatHerderAPI.MOD_ID);
-
-    public static final RegistryObject<Talent> BED_FINDER = registerInst("bed_finder", BedFinderTalent::new);
-    public static final RegistryObject<Talent> TOMCAT = registerInst("tomcat", TomcatTalent::new);
-    public static final RegistryObject<Talent> CREEPER_SWEEPER = registerInst("creeper_sweeper", CreeperSweeperTalent::new);
-    public static final RegistryObject<Talent> CHEETAH_SPEED = registerInst("cheetah_speed", CheetahSpeedTalent::new);
-    public static final RegistryObject<Talent> FISHER_CAT = registerInst("fisher_cat", FisherCatTalent::new);
-    public static final RegistryObject<Talent> CATLIKE_REFLEXES = registerInst("catlike_reflexes", CatlikeReflexesTalent::new);
-    public static final RegistryObject<Talent> HAPPY_EATER = registerInst("happy_eater", HappyEaterTalent::new);
-    public static final RegistryObject<Talent> HELL_BEAST = registerInst("hell_beast", HellBeastTalent::new);
-    public static final RegistryObject<Talent> BIRD_CATCHER = registerInst("bird_catcher", null);
-    public static final RegistryObject<Talent> PACK_CAT = registerInst("pack_cat", PackCatTalent::new);
-    public static final RegistryObject<Talent> PEST_FIGHTER = registerInst("pest_fighter", PestFighterTalent::new);
-    public static final RegistryObject<Talent> POISON_FANG = registerInst("poison_fang", PoisonFangTalent::new);
-    public static final RegistryObject<Talent> NERMAL = registerInst("nermal", NermalTalent::new);
-    public static final RegistryObject<Talent> QUICK_HEALER = registerInst("quick_healer", QuickHealerTalent::new);
-    public static final RegistryObject<Talent> RESCUE_CAT = registerInst("rescue_cat", RescueCatTalent::new);
-    public static final RegistryObject<Talent> MOUNT = registerInst("mount", MountTalent::new);
-    public static final RegistryObject<Talent> SUPER_JUMP = registerInst("super_jump", SuperJumpTalent::new);
-    public static final RegistryObject<Talent> POUNCE = registerInst("pounce", PounceTalent::new);
-    public static final RegistryObject<Talent> RAZOR_SHARP_CLAWS = registerInst("razor_sharp_claws", RazorsharpClawsTalent::new);
-
-    private static <T extends Talent> RegistryObject<Talent> registerInst(final String name, final BiFunction<Talent, Integer, TalentInstance> sup) {
-        return register(name, () -> new Talent(sup));
-    }
-
-    private static <T extends Talent> RegistryObject<T> register(final String name, final Supplier<T> sup) {
-        return TALENTS.register(name, sup);
-    }
-
     public static final Logger LOGGER = LogManager.getLogger(CatHerderAPI.MOD_ID);
 
     public static final SimpleChannel HANDLER = NetworkRegistry.ChannelBuilder.named(Constants.CHANNEL_NAME)
-                                                        .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
-                                                        .serverAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
-                                                        .networkProtocolVersion(Constants.PROTOCOL_VERSION::toString)
-                                                        .simpleChannel();
+            .clientAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
+            .serverAcceptedVersions(Constants.PROTOCOL_VERSION::equals)
+            .networkProtocolVersion(Constants.PROTOCOL_VERSION::toString)
+            .simpleChannel();
 
     public CatHerder() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -93,18 +55,19 @@ public class CatHerder {
 
         // Registries
         ModBlocks.BLOCKS.register(modEventBus);
-        ModTileEntityTypes.TILE_ENTITIES.register(modEventBus);
+        ModBlockEntityTypes.TILE_ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModEntityTypes.ENTITIES.register(modEventBus);
         ModContainerTypes.CONTAINERS.register(modEventBus);
         ModSerializers.SERIALIZERS.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
-//        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
-        CatHerder.TALENTS.register(modEventBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ModTalents.TALENTS.register(modEventBus);
         ModAccessories.ACCESSORIES.register(modEventBus);
         ModAccessoryTypes.ACCESSORY_TYPES.register(modEventBus);
-//        CattreeMaterials.BEDDINGS.register(modEventBus);
-//        CattreeMaterials.CASINGS.register(modEventBus);
+        ModMaterials.STRUCTURES.register(modEventBus);
+        ModMaterials.COLORS.register(modEventBus);
+        ModMaterials.DYES.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
 
         modEventBus.addListener(ModRegistries::newRegistry);
@@ -140,28 +103,35 @@ public class CatHerder {
 //    }
 
     public void serverStarting(final ServerStartingEvent event) {
-
+        LOGGER.debug("Server starting");
     }
 
     public void registerCommands(final RegisterCommandsEvent event) {
+        LOGGER.debug("Register commands");
         CatRespawnCommand.register(event.getDispatcher());
     }
 
     @OnlyIn(Dist.CLIENT)
     public void clientSetup(final FMLClientSetupEvent event) {
+        LOGGER.debug("Client startup");
+
         ClientSetup.setupScreenManagers(event);
 
         ClientSetup.setupCollarRenderers(event);
     }
 
     protected void interModProcess(final InterModProcessEvent event) {
-//        BackwardsComp.init();
+        LOGGER.debug("event {}", event);
+
+        //        BackwardsComp.init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         AddonManager.init();
     }
 
     private void gatherData(final GatherDataEvent event) {
+        LOGGER.debug("Gather data: {}", event);
+
         DataGenerator gen = event.getGenerator();
 
         if(event.includeClient()) {

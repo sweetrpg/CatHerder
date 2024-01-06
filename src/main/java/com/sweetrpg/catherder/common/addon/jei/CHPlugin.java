@@ -1,16 +1,15 @@
 package com.sweetrpg.catherder.common.addon.jei;
 
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
-import com.sweetrpg.catherder.api.registry.IBeddingMaterial;
-import com.sweetrpg.catherder.api.registry.ICasingMaterial;
-//import com.sweetrpg.catherder.common.util.CattreeUtil;
+import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.ModIds;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.resources.ResourceLocation;
-import org.apache.commons.lang3.tuple.Pair;
 
 @JeiPlugin
 public class CHPlugin implements IModPlugin {
@@ -22,23 +21,19 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-//        registration.registerSubtypeInterpreter(ModBlocks.CAT_TREE.get().asItem(), (stack, ctx) -> {
-//            Pair<ICasingMaterial, IBeddingMaterial> materials = CattreeUtil.getMaterials(stack);
-//
-//            String casingKey = materials.getLeft() != null
-//                    ? materials.getLeft().getRegistryName().toString()
-//                    : "catherder:casing_missing";
-//
-//            String beddingKey = materials.getRight() != null
-//                    ? materials.getRight().getRegistryName().toString()
-//                    : "catherder:bedding_missing";
-//
-//            return casingKey + "+" + beddingKey;
-//        });
+        registration.registerSubtypeInterpreter(ModBlocks.CAT_TREE.get().asItem(), (stack, ctx) -> {
+            IColorMaterial colorMaterial = CatTreeUtil.getColorMaterial(stack);
+
+            String colorKey = colorMaterial != null ? colorMaterial.getRegistryName().toString()
+                    : "catherder:casing_missing";
+
+            return colorKey;
+        });
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-//        registration.addRecipes(CattreeRecipeMaker.createCattreeRecipes(), VanillaRecipeCategoryUid.CRAFTING);
+        registration.addRecipes(CatTreeRecipeMaker.createCatTreeRecipes(), RecipeTypes.CRAFTING.getUid());
+        registration.addRecipes(PetDoorRecipeMaker.createPetDoorRecipes(), RecipeTypes.CRAFTING.getUid());
     }
 }

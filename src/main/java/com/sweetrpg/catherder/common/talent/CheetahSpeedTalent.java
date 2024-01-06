@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.talent;
 
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -27,10 +27,10 @@ public class CheetahSpeedTalent extends TalentInstance {
     }
 
     public AttributeModifier createSpeedModifier(AbstractCatEntity catIn, UUID uuidIn) {
-        if (this.level() > 0) {
+        if(this.level() > 0) {
             double speed = 0.03D * this.level();
 
-            if (this.level() >= 5) {
+            if(this.level() >= 5) {
                 speed += 0.04D;
             }
 

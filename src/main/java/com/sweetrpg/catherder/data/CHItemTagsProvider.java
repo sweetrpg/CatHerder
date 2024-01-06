@@ -1,5 +1,7 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -13,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Arrays;
@@ -40,12 +41,16 @@ public class CHItemTagsProvider extends ItemTagsProvider {
         createTag(ModTags.BEG_ITEMS_UNTAMED, ModItems.TRAINING_TREAT, () -> Items.STRING);
         createTag(ModTags.BREEDING_ITEMS, ModItems.BREEDING_TREAT);
         createTag(ModTags.PACK_CAT_BLACKLIST, ModItems.CAT_TOY);
-        createTag(ModTags.TREATS, ModItems.TRAINING_TREAT, ModItems.SUPER_TREAT, ModItems.MASTER_TREAT, ModItems.WILD_TREAT);
+        createTag(ModTags.TREATS, ModItems.TRAINING_TREAT, ModItems.SUPER_TREAT, ModItems.MASTER_TREAT,
+                ModItems.WILD_TREAT);
         createTag(ModTags.MEAT, () -> Items.BEEF, () -> Items.COOKED_BEEF,
                 () -> Items.CHICKEN, () -> Items.COOKED_CHICKEN,
-                () -> Items.PORKCHOP, () -> Items.COOKED_PORKCHOP,
+                () -> Items.PORKCHOP,() ->  Items.COOKED_PORKCHOP,
                 () -> Items.MUTTON, () -> Items.COOKED_MUTTON,
                 () -> Items.COOKED_RABBIT, () -> Items.RABBIT);
+        createTag(ModTags.CAT_TREES, ModBlocks.CAT_TREE);
+//        createTag(ModTags.PET_DOORS, ModBlocks.PET_DOOR);
+        createTag(ModTags.TOYS, ModItems.CAT_TOY, ModItems.YARN);
     }
 
     @SafeVarargs

@@ -22,7 +22,7 @@ public abstract class CatPacket<T extends CatData> implements IPacket<T> {
     @Override
     public final void handle(T data, Supplier<Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            Entity target = ctx.get().getSender().level().getEntity(data.entityId);
+            Entity target = ctx.get().getSender().level.getEntity(data.entityId);
 
             if (!(target instanceof CatEntity)) {
                 return;

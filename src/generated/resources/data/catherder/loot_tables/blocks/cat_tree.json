@@ -13,13 +13,8 @@
               "source": "block_entity",
               "ops": [
                 {
-                  "source": "casingId",
-                  "target": "catherder.casingId",
-                  "op": "replace"
-                },
-                {
-                  "source": "beddingId",
-                  "target": "catherder.beddingId",
+                  "source": "colorId",
+                  "target": "catherder.colorId",
                   "op": "replace"
                 },
                 {

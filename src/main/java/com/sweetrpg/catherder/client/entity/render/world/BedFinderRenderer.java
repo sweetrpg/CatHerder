@@ -3,8 +3,8 @@ package com.sweetrpg.catherder.client.entity.render.world;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.event.RenderLevelLastEvent;
 
 import java.util.Optional;
 
@@ -23,11 +24,11 @@ public class BedFinderRenderer {
         for (Entity passenger : player.getPassengers()) {
             if (passenger instanceof CatEntity) {
                 CatEntity cat = (CatEntity) passenger;
-                Optional<BlockPos> bedPosOpt = cat.getBedPos();
+                Optional<BlockPos> bedPosOpt = cat.getCatTreePos();
 
                 if (bedPosOpt.isPresent()) {
                     BlockPos bedPos = bedPosOpt.get();
-                    int level = cat.getCatLevel(CatHerder.BED_FINDER);
+                    int level = cat.getCatLevel(ModTalents.BED_FINDER);
                     double distance = (level * 200D) - Math.sqrt(bedPos.distSqr(cat.blockPosition()));
                     if (level == 5 || distance >= 0.0D) {
                         PoseStack stack = event.getPoseStack();

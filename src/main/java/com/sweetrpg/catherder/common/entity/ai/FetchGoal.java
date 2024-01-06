@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ public class FetchGoal extends MoveToClosestItemGoal {
             return false;
         }
 
-        return this.cat.getMode() == EnumMode.DOCILE && super.canUse();
+        return this.cat.getMode() == Mode.DOCILE && super.canUse();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class FetchGoal extends MoveToClosestItemGoal {
             return false;
         }
 
-        return this.cat.getMode() == EnumMode.DOCILE && super.canContinueToUse();
+        return this.cat.getMode() == Mode.DOCILE && super.canContinueToUse();
     }
 
     @Override

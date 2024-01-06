@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.block.CatnipBlock;
 import com.sweetrpg.catherder.common.block.CheeseWheelBlock;
 import com.sweetrpg.catherder.common.lib.Constants;

@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common;
 
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
-import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
 import com.sweetrpg.catherder.common.inventory.container.PackCatContainer;
 import com.sweetrpg.catherder.common.inventory.container.TreatBagContainer;

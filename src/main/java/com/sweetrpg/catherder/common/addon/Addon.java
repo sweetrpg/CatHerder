@@ -39,5 +39,5 @@ public interface Addon {
         return modIds.isEmpty() || modIds.stream().allMatch(ModList.get()::isLoaded);
     }
 
-    public String getName();
+    String getName();
 }

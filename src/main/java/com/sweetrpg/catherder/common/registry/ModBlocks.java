@@ -1,15 +1,15 @@
 package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.CatHerder;
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.block.*;
-import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -20,12 +20,12 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.Keys.BLOCKS, Constants.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.Keys.BLOCKS, CatHerderAPI.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = ModItems.ITEMS;
 
     // cat items
     public static final RegistryObject<CatTreeBlock> CAT_TREE = registerWithItem("cat_tree", CatTreeBlock::new);
-    public static final RegistryObject<LitterboxBlock> LITTER_BOX = registerWithItem("litter_box", LitterboxBlock::new);
+    public static final RegistryObject<LitterboxBlock> LITTERBOX = registerWithItem("litter_box", LitterboxBlock::new);
     public static final RegistryObject<CatBowlBlock> CAT_BOWL = registerWithItem("cat_bowl", CatBowlBlock::new);
     public static final RegistryObject<Block> CARDBOARD_BOX = registerWithItem("cardboard_box", CardboardBoxBlock::new);
 
@@ -44,7 +44,7 @@ public class ModBlocks {
                                                                                   () -> new CatnipBlock(Block.Properties.copy(Blocks.WHEAT)));
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties()/*.tab(ModItemGroups.GENERAL)*/;
+        return new Item.Properties().tab(ModItemGroups.GENERAL);
     }
 
     private static BlockItem makeItemBlock(Block block) {
@@ -74,7 +74,7 @@ public class ModBlocks {
         return BLOCKS.register(name, blockSupplier);
     }
 
-    public static void registerBlockColours(final RegisterColorHandlersEvent.Block event) {
+    public static void registerBlockColours(final ColorHandlerEvent.Block event) {
         BlockColors blockColors = event.getBlockColors();
 
 //        Util.acceptOrElse(CatBlocks.CAT_BATH, (block) -> {
