@@ -122,7 +122,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${jupiter_version}")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiter_version}")
 
-    implementation fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
 }
 
 // Define a task to create a jar of project sources
