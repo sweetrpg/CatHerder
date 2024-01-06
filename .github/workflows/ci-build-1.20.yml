@@ -21,27 +21,32 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
-        with:
-          arguments: build
       - id: get_last_version
         name: Get last version
         run: |
           echo "latest_version=$(cat .release-info/1.20/VERSION)" >> $GITHUB_ENV
       - id: bump_version
+        name: Bump version
         uses: cbrgm/semver-bump-action@main
         with:
           current-version: ${{ env.latest_version }}
-          bump-level: patch
+          bump-level: major
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+        with:
+          arguments: build test
       - name: Commit version file
         run: |
           git config --global user.email "ci@sweetrpg.com"
@@ -50,3 +55,10 @@ jobs:
           git add .release-info/1.20/VERSION
           git commit -m "Update 1.20 VERSION file"
           git push origin
+      - name: Release artifacts
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "1.20.4-${{ steps.bump_version.outputs.new_version }}"
+          prerelease: true
+          files: |
+            build/libs/*.jar
