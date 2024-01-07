@@ -6,11 +6,11 @@ import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.client.entity.render.CatRenderer;
 import com.sweetrpg.catherder.client.entity.model.CatModel;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.world.item.ItemDisplayContext;
 
 public class CatToyLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
 
@@ -39,7 +39,7 @@ public class CatToyLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
             matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
             IThrowableItem throwableItem = cat.getThrowableItem();
-            this.itemInHandRenderer.renderItem(cat, throwableItem != null ? throwableItem.getRenderStack(cat.getToyVariant()) : cat.getToyVariant(), ItemTransforms.TransformType.GROUND, false, matrixStack, bufferSource, packedLight);
+            this.itemInHandRenderer.renderItem(cat, throwableItem != null ? throwableItem.getRenderStack(cat.getToyVariant()) : cat.getToyVariant(), ItemDisplayContext.GROUND, false, matrixStack, bufferSource, packedLight);
             matrixStack.popPose();
         }
     }

@@ -8,6 +8,7 @@ import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
@@ -18,8 +19,8 @@ import java.util.function.Consumer;
 
 public class CHRecipeProvider extends RecipeProvider {
 
-    public CHRecipeProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public CHRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     @Override

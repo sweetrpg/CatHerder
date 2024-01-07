@@ -17,6 +17,7 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -33,8 +34,8 @@ public class CHAdvancementProvider extends AdvancementProvider {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
     private final DataGenerator generator;
 
-    public CHAdvancementProvider(DataGenerator generatorIn) {
-        super(generatorIn);
+    public CHAdvancementProvider(PackOutput packOutput) {
+        super(packOutput);
         this.generator = generatorIn;
     }
 

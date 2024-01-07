@@ -4,7 +4,9 @@ import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -17,8 +19,8 @@ import java.util.function.Supplier;
 
 public class CHItemModelProvider extends ItemModelProvider {
 
-    public CHItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, CatHerderAPI.MOD_ID, existingFileHelper);
+    public CHItemModelProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -81,7 +83,7 @@ public class CHItemModelProvider extends ItemModelProvider {
     }
 
     private String name(Supplier<? extends ItemLike> item) {
-        return item.get().asItem().getRegistryName().getPath();
+        return item.get().asItem().toString();
     }
 
     private ItemModelBuilder blockItem(Supplier<? extends Block> block) {
@@ -94,10 +96,10 @@ public class CHItemModelProvider extends ItemModelProvider {
 
     private ItemModelBuilder radar(Supplier<? extends ItemLike> item, ResourceLocation texture) {
         ItemModelBuilder builder = generated(item, texture);
-        builder.transforms().transform(Perspective.THIRDPERSON_RIGHT).rotation(0, 0, 55F).translation(0, 4F, 0.5F).scale(0.85F);
-        builder.transforms().transform(Perspective.THIRDPERSON_LEFT).rotation(0, 0, -55F).translation(0, 4F, 0.5F).scale(0.85F);
-        builder.transforms().transform(Perspective.FIRSTPERSON_RIGHT).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
-        builder.transforms().transform(Perspective.FIRSTPERSON_LEFT).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
+        builder.transforms().transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0, 0, 55F).translation(0, 4F, 0.5F).scale(0.85F);
+        builder.transforms().transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(0, 0, -55F).translation(0, 4F, 0.5F).scale(0.85F);
+        builder.transforms().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
+        builder.transforms().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
         return builder;
     }
 

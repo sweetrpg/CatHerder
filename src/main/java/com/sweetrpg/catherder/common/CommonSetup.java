@@ -8,7 +8,6 @@ import com.sweetrpg.catherder.common.event.FishFoodHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.HappyEaterTalent;
-import com.sweetrpg.catherder.common.world.gen.WildCropGeneration;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -27,7 +26,7 @@ public class CommonSetup {
             CatRespawnCommand.registerSerilizers();
             CatEntity.initDataParameters();
 
-            WildCropGeneration.registerWildCatnipGeneration();
+//            WildCropGeneration.registerWildCatnipGeneration();
 
             registerCompostables();
 //            registerDispenserBehaviors();

@@ -156,12 +156,12 @@ public class CatHerder {
 
         if(event.includeServer()) {
             // gen.addProvider(new DTBlockTagsProvider(gen));
-            gen.addProvider(true, new CHAdvancementProvider(gen));
+            gen.addProvider(true, new CHAdvancementProvider(packOutput));
             CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(packOutput, event.getLookupProvider(), event.getExistingFileHelper());
             gen.addProvider(true, blockTagProvider);
             gen.addProvider(true, new CHItemTagsProvider(packOutput, event.getLookupProvider(), blockTagProvider, event.getExistingFileHelper()));
-            gen.addProvider(true, new CHRecipeProvider(gen));
-            gen.addProvider(true, new CHLootTableProvider(gen));
+            gen.addProvider(true, new CHRecipeProvider(packOutput));
+            gen.addProvider(true, new CHLootTableProvider(packOutput));
         }
     }
 }
