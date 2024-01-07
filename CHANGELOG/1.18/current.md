@@ -1,1 +1,0 @@
-- `[FIX]` Fix overridden vanilla loot tables to drop their original loot also 
