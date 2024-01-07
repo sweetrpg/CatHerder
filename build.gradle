@@ -214,7 +214,7 @@ curseforge {
             optionalDependency 'Autumnity'
             optionalDependency 'Biomes O\'Plenty'
             optionalDependency 'Botania'
-            optionalDependency 'ItemPhysic Full'
+            optionalDependency 'ItemPhysic'
         }
     }
     options {
