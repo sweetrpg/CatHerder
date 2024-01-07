@@ -122,7 +122,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${jupiter_version}")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiter_version}")
 
-    implementation fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
 }
 
 // Define a task to create a jar of project sources
@@ -179,7 +179,7 @@ jar {
         attributes([
             "Specification-Title": "Cat Herder",
             "Specification-Vendor": "SweetRPG",
-            "Specification-Version": "1", // project.version,
+            "Specification-Version": "1",
             "Implementation-Title": project.name,
             "Implementation-Version": project.version,
             "Implementation-Vendor" :"SweetRPG",
@@ -209,6 +209,12 @@ curseforge {
         relations {
             optionalDependency 'Configured'
             optionalDependency 'Patchouli'
+            optionalDependency 'Just Enough Items (JEI)'
+            optionalDependency 'Farmer\'s Delight'
+            optionalDependency 'Autumnity'
+            optionalDependency 'Biomes O\' Plenty'
+            optionalDependency 'Botania'
+            optionalDependency 'ItemPhysic Full'
         }
     }
     options {

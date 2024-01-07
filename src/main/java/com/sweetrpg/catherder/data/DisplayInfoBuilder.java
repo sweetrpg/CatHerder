@@ -29,8 +29,8 @@ public class DisplayInfoBuilder {
     }
 
     public DisplayInfoBuilder translate(String key) {
-        this.title(new TranslatableComponent("advancements."+key+".title"));
-        this.description(new TranslatableComponent("advancements."+key+".description"));
+        this.title(new TranslatableComponent("advancements." + key + ".title"));
+        this.description(new TranslatableComponent("advancements." + key + ".description"));
         return this;
     }
 

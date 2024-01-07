@@ -1,9 +1,9 @@
 package com.sweetrpg.catherder.common.entity;
 
 import com.google.common.base.Predicates;
-import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.lib.Constants;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
@@ -37,30 +37,30 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
 
     @Override
     protected void onHit(HitResult result) {
-        if (result.getType() == HitResult.Type.ENTITY) {
+        if(result.getType() == HitResult.Type.ENTITY) {
             Entity entityHit = ((EntityHitResult) result).getEntity();
 
             Entity thrower = this.getOwner();
 
-            if (thrower instanceof LivingEntity && entityHit instanceof LivingEntity) {
+            if(thrower instanceof LivingEntity && entityHit instanceof LivingEntity) {
                 LivingEntity livingThrower = (LivingEntity) thrower;
                 LivingEntity livingEntity = (LivingEntity) entityHit;
 
                 this.level.getEntitiesOfClass(CatEntity.class, this.getBoundingBox().inflate(64D, 16D, 64D)).stream()
-                    .filter(Predicates.not(CatEntity::isInSittingPose))
-                    .filter(d -> d.isMode(Mode.ATTACK, Mode.TACTICAL))
-                    .filter(d -> d.canInteract(livingThrower))
-                    .filter(d -> d != livingEntity && d.wantsToAttack(livingEntity, d.getOwner()))
-                    .filter(d -> d.distanceTo(entityHit) < EntityUtil.getFollowRange(d))
-                    .forEach(d -> d.setTarget(livingEntity));
+                        .filter(Predicates.not(CatEntity::isInSittingPose))
+                        .filter(d -> d.isMode(Mode.ATTACK, Mode.TACTICAL))
+                        .filter(d -> d.canInteract(livingThrower))
+                        .filter(d -> d != livingEntity && d.wantsToAttack(livingEntity, d.getOwner()))
+                        .filter(d -> d.distanceTo(entityHit) < EntityUtil.getFollowRange(d))
+                        .forEach(d -> d.setTarget(livingEntity));
             }
 
-            for (int j = 0; j < 8; ++j) {
+            for(int j = 0; j < 8; ++j) {
                 this.level.addParticle(ParticleTypes.ITEM_SNOWBALL, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
-        if (!this.level.isClientSide) {
+        if(!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, Constants.EntityState.DEATH);
             this.discard();
         }
@@ -75,7 +75,7 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
     public void writeSpawnData(FriendlyByteBuf buffer) {
         UUID ownerId = this.uuid;
         buffer.writeBoolean(ownerId != null);
-        if (ownerId != null) {
+        if(ownerId != null) {
             buffer.writeUUID(ownerId);
         }
     }
@@ -83,7 +83,7 @@ public class CatBeamEntity extends ThrowableProjectile implements IEntityAdditio
     @Override
     public void readSpawnData(FriendlyByteBuf buffer) {
         boolean hasThrower = buffer.readBoolean();
-        if (hasThrower) {
+        if(hasThrower) {
             this.uuid = buffer.readUUID();
         }
     }
