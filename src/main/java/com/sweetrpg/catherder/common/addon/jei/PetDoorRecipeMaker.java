@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.common.crafting.IShapedRecipe;
@@ -40,7 +41,7 @@ public final class PetDoorRecipeMaker {
             ItemStack output = PetDoorUtil.createItemStack(structureId);
 
             ResourceLocation id = Util.getResource("" + output.getDescriptionId()); // TODO: update resource location
-            ShapedRecipe recipe = new ShapedRecipe(id, group, 3, 3, inputs, output);
+            ShapedRecipe recipe = new ShapedRecipe(id, group, CraftingBookCategory.BUILDING, 3, 3, inputs, output);
             recipes.add(recipe);
         }
 

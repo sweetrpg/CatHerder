@@ -5,6 +5,7 @@ import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -12,6 +13,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -19,8 +21,8 @@ import net.minecraftforge.common.crafting.IShapedRecipe;
 
 public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<CraftingContainer> {
 
-    public CatTreeRecipe(ResourceLocation resource) {
-        super(resource);
+    public CatTreeRecipe(ResourceLocation resource, CraftingBookCategory craftingBookCategory) {
+        super(resource, craftingBookCategory);
     }
 
     @Override
@@ -90,7 +92,7 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inv) {
+    public ItemStack assemble(CraftingContainer inv, RegistryAccess access) {
         IColorMaterial colorId = CatTreeUtil.getColorFromStack(CatHerderAPI.COLOR_MATERIAL.get(), inv.getItem(1));
 //        ICasingMaterial casingId = CattreeUtil.getCasingFromStack(CatHerderAPI.CASING_MATERIAL, inv.getItem(0));
 

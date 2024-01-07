@@ -146,6 +146,11 @@ public class NBTUtil {
             NBTUtil.putResourceLocation(compound, key, value.key().location());
         }
     }
+    public static <T> void putRegistryValue(CompoundTag compound, String key, T value, IForgeRegistry<T> registry) {
+        if (value != null) {
+            NBTUtil.putResourceLocation(compound, key, registry.getKey(value));
+        }
+    }
 
     public static void putBlockPos(CompoundTag compound, @Nullable BlockPos vec3d) {
         if(vec3d != null) {

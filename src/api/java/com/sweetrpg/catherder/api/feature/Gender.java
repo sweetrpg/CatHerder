@@ -1,5 +1,7 @@
 package com.sweetrpg.catherder.api.feature;
 
+import net.minecraft.util.RandomSource;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
@@ -82,7 +84,7 @@ public enum Gender {
         return UNISEX;
     }
 
-    public static Gender random(Random rng) {
+    public static Gender random(RandomSource rng) {
         return rng.nextBoolean() ? MALE : FEMALE;
     }
 

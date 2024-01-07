@@ -18,13 +18,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -33,7 +32,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public void rightClickEntity(final PlayerInteractEvent.EntityInteract event) {
-        Level world = event.getWorld();
+        Level world = event.getLevel();
 
         ItemStack stack = event.getItemStack();
         Entity target = event.getTarget();
@@ -43,7 +42,7 @@ public class EventHandler {
 
             TamableAnimal vanillaCat = (TamableAnimal) target;
 
-            Player player = event.getPlayer();
+            Player player = event.getEntity();
 
             if(vanillaCat.isAlive() && vanillaCat.isTame() && vanillaCat.isOwnedBy(player)) {
                 if(!world.isClientSide) {
@@ -57,7 +56,7 @@ public class EventHandler {
                     cat.setOrderedToSit(false);
                     cat.setAge(vanillaCat.getAge());
                     cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
-                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType());
+                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getUUID().variant());
 
                     world.addFreshEntity(cat);
 
@@ -72,23 +71,23 @@ public class EventHandler {
         }
     }
 
-    @SubscribeEvent
-    public static void onBiomeLoad(BiomeLoadingEvent event) {
-        BiomeGenerationSettingsBuilder builder = event.getGeneration();
-        Biome.ClimateSettings climate = event.getClimate();
-
-        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
-                event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
-                event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
-                event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
-                event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
-                event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
-                event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
-                event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
-                (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
-            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
-        }
-    }
+//    @SubscribeEvent
+//    public static void onBiomeLoad(BiomeLoadingEvent event) {
+//        BiomeGenerationSettingsBuilder builder = event.getGeneration();
+//        Biome.ClimateSettings climate = event.getClimate();
+//
+//        if((event.getCategory().equals(Biome.BiomeCategory.PLAINS) ||
+//                event.getCategory().equals(Biome.BiomeCategory.EXTREME_HILLS) ||
+//                event.getCategory().equals(Biome.BiomeCategory.FOREST) ||
+//                event.getCategory().equals(Biome.BiomeCategory.SAVANNA) ||
+//                event.getCategory().equals(Biome.BiomeCategory.MUSHROOM) ||
+//                event.getCategory().equals(Biome.BiomeCategory.TAIGA) ||
+//                event.getCategory().equals(Biome.BiomeCategory.MOUNTAIN) ||
+//                event.getCategory().equals(Biome.BiomeCategory.JUNGLE)) &&
+//                (climate.temperature >= 0.2F && climate.temperature < 1.5F)) {
+//            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, WildCropGeneration.PATCH_WILD_CATNIP);
+//        }
+//    }
 
     @SubscribeEvent
     public void onEntitySpawn(final EntityJoinWorldEvent event) {
@@ -103,7 +102,7 @@ public class EventHandler {
     @SubscribeEvent
     public void playerLoggedIn(final PlayerLoggedInEvent event) {
         if(ConfigHandler.SERVER.STARTING_ITEMS.get()) {
-            Player player = event.getPlayer();
+            Player player = event.getEntity();
             CompoundTag tag = player.getPersistentData();
 
             if(!tag.contains(Player.PERSISTED_NBT_TAG)) {

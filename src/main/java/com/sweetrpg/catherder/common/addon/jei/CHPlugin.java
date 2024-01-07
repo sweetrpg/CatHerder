@@ -24,7 +24,7 @@ public class CHPlugin implements IModPlugin {
         registration.registerSubtypeInterpreter(ModBlocks.CAT_TREE.get().asItem(), (stack, ctx) -> {
             IColorMaterial colorMaterial = CatTreeUtil.getColorMaterial(stack);
 
-            String colorKey = colorMaterial != null ? colorMaterial.getRegistryName().toString()
+            String colorKey = colorMaterial != null ? colorMaterial.toString()
                     : "catherder:casing_missing";
 
             return colorKey;
@@ -33,7 +33,7 @@ public class CHPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(CatTreeRecipeMaker.createCatTreeRecipes(), RecipeTypes.CRAFTING.getUid());
-        registration.addRecipes(PetDoorRecipeMaker.createPetDoorRecipes(), RecipeTypes.CRAFTING.getUid());
+        registration.addRecipes(RecipeTypes.CRAFTING, CatTreeRecipeMaker.createCatTreeRecipes());
+        registration.addRecipes(RecipeTypes.CRAFTING, PetDoorRecipeMaker.createPetDoorRecipes());
     }
 }

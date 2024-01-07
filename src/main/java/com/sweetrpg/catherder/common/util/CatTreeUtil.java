@@ -8,7 +8,6 @@ import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,7 +44,7 @@ public class CatTreeUtil {
         ItemStack stack = new ItemStack(ModBlocks.CAT_TREE.get(), 1);
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
-        NBTUtil.putRegistryValue(tag, "colorId", colorId);
+        NBTUtil.putRegistryValue(tag, "colorId", colorId, CatHerderAPI.COLOR_MATERIAL.get());
 //        NBTUtil.putRegistryValue(tag, "beddingId", beddingId);
 
         return stack;
@@ -81,7 +80,7 @@ public class CatTreeUtil {
 //        return null;
 //    }
 
-    public static <T extends IForgeRegistryEntry<T>> T pickRandom(IForgeRegistry<T> registry) {
+    public static <T> T pickRandom(IForgeRegistry<T> registry) {
         Collection<T> values = registry.getValues();
         List<T> list = values instanceof List ? (List<T>) values : new ArrayList<>(values);
         return list.get(RANDOM.nextInt(list.size()));

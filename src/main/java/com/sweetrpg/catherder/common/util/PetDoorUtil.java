@@ -43,7 +43,7 @@ public class PetDoorUtil {
         ItemStack stack = new ItemStack(ModBlocks.PET_DOOR.get(), 1);
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
-        NBTUtil.putRegistryValue(tag, "structureId", structureId);
+        NBTUtil.putRegistryValue(tag, "structureId", structureId, CatHerderAPI.STRUCTURE_MATERIAL.get());
 
         return stack;
     }
@@ -58,7 +58,7 @@ public class PetDoorUtil {
         return null;
     }
 
-    public static <T extends IForgeRegistryEntry<T>> T pickRandom(IForgeRegistry<T> registry) {
+    public static <T> T pickRandom(IForgeRegistry<T> registry) {
         Collection<T> values = registry.getValues();
         List<T> list = values instanceof List ? (List<T>) values : new ArrayList<>(values);
         return list.get(RANDOM.nextInt(list.size()));

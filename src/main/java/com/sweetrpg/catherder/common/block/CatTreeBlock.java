@@ -20,8 +20,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -209,12 +207,12 @@ public class CatTreeBlock extends BaseEntityBlock {
                     }
                     else {
                         Component name = catTreeEntity.getOwnerName();
-                        player.sendMessage(Component.translatable("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
+                        player.sendSystemMessage(Component.translatable("block.catherder.cat_tree.owner", name != null ? name : "someone"));
                         return InteractionResult.FAIL;
                     }
                 }
                 else {
-                    player.sendMessage(Component.translatable("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
+                    player.sendSystemMessage(Component.translatable("block.catherder.cat_tree.set_owner_help"));
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -272,26 +270,26 @@ public class CatTreeBlock extends BaseEntityBlock {
             Component ownerName = NBTUtil.getTextComponent(tag, "ownerName");
 
             if(name != null) {
-                tooltip.add(new TextComponent("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
+                tooltip.add(Component.literal("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
             }
 
             if(ownerName != null) {
-                tooltip.add(new TextComponent("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
+                tooltip.add(Component.literal("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
 
             }
 
             if(ownerId != null && (flagIn.isAdvanced() || Screen.hasShiftDown())) {
-                tooltip.add(new TextComponent("UUID: ").withStyle(ChatFormatting.AQUA).append(new TextComponent(ownerId.toString())));
+                tooltip.add(Component.literal("UUID: ").withStyle(ChatFormatting.AQUA).append(Component.literal(ownerId.toString())));
             }
         }
     }
 
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
-            items.add(CatTreeUtil.createItemStack(colorId));
-        }
-    }
+//    @Override
+//    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+//        for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+//            items.add(CatTreeUtil.createItemStack(colorId));
+//        }
+//    }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {

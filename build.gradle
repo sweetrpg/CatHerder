@@ -212,14 +212,14 @@ curseforge {
         }
         addArtifact apiJar
         relations {
-            optionalDependency 'Configured'
-            optionalDependency 'Patchouli'
-            optionalDependency 'Just Enough Items (JEI)'
-            optionalDependency 'Farmer\'s Delight'
-            optionalDependency 'Autumnity'
-            optionalDependency 'Biomes O\' Plenty'
-            optionalDependency 'Botania'
-            optionalDependency 'ItemPhysic Full'
+            optionalDependency 'configured'
+            optionalDependency 'patchouli'
+            optionalDependency 'jei'
+            optionalDependency 'farmers-delight'
+            optionalDependency 'autumnity'
+            optionalDependency 'biomes-O-plenty'
+            optionalDependency 'botania'
+            optionalDependency 'itemphysic'
         }
     }
     options {

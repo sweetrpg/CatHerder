@@ -9,7 +9,7 @@ import com.sweetrpg.catherder.common.item.*;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.world.item.*;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -25,9 +25,9 @@ public class ModItems {
 //    public static final RegistryObject<Item> CAT_TREE = register("cat_tree", () -> new BlockItem(ModBlocks.CAT_TREE.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
     // catnip
-    public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
-    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()./*food(FoodValues.CATNIP).*/tab(ModItemGroups.GENERAL)));
-    public static final RegistryObject<Item> CATNIP_SEEDS = ITEMS.register("catnip_seeds", () -> new ItemNameBlockItem(ModBlocks.CATNIP_CROP.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
+    public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties() /*.tab(ModItemGroups.GENERAL) */));
+    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()/*.food(FoodValues.CATNIP).*/ /*.tab(ModItemGroups.GENERAL) */));
+    public static final RegistryObject<Item> CATNIP_SEEDS = ITEMS.register("catnip_seeds", () -> new ItemNameBlockItem(ModBlocks.CATNIP_CROP.get(), new Item.Properties() /*.tab(ModItemGroups.GENERAL) */));
 
     // toys
     public static final RegistryObject<Item> YARN = registerThrowToy("yarn");
@@ -39,7 +39,7 @@ public class ModItems {
 
     // food
     public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge",
-                                                                     () -> new Item(new Item.Properties().food(FoodValues.CHEESE).tab(ModItemGroups.GENERAL)));
+                                                                     () -> new Item(new Item.Properties().food(FoodValues.CHEESE) /*.tab(ModItemGroups.GENERAL) */));
 //    public static final RegistryObject<Item> LASAGNA = register("lasagna");
 
     // treats
@@ -58,7 +58,7 @@ public class ModItems {
     public static final RegistryObject<Item> CAT_SMALLERER = registerSizer("small_catsizer", CatSizerItem.Type.SMALL);
     public static final RegistryObject<Item> CAT_BIGGERER = registerSizer("big_catsizer", CatSizerItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
-    public static final RegistryObject<Item> LITTER_SCOOP = register("litter_scoop", () -> new LitterScoopItem(new Item.Properties().durability(64).tab(ModItemGroups.GENERAL)));
+    public static final RegistryObject<Item> LITTER_SCOOP = register("litter_scoop", () -> new LitterScoopItem(new Item.Properties().durability(64) /*.tab(ModItemGroups.GENERAL) */));
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
 
     // other items
@@ -77,7 +77,7 @@ public class ModItems {
 //    public static final RegistryObject<AccessoryItem> LEATHER_JACKET = registerAccessory("leather_jacket", CatAccessories.LEATHER_JACKET_CLOTHING);
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties().tab(ModItemGroups.GENERAL);
+        return new Item.Properties() /*.tab(ModItemGroups.GENERAL) */;
     }
 
     private static RegistryObject<Item> registerThrowToy(final String name) {
@@ -121,7 +121,7 @@ public class ModItems {
         return ITEMS.register(name, sup);
     }
 
-    public static void registerItemColours(final ColorHandlerEvent.Item event) {
+    public static void registerItemColours(final RegisterColorHandlersEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
         Util.acceptOrElse(ModItems.WOOL_COLLAR, (item) -> {
             itemColors.register((stack, tintIndex) -> {

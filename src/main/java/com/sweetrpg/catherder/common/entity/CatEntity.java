@@ -32,6 +32,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -50,6 +51,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -118,15 +120,15 @@ public class CatEntity extends AbstractCatEntity {
     private static final EntityDataAccessor<Boolean> RELAX_STATE_ONE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
-    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> (EntityDataAccessor<List<TalentInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.TALENT_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<Gender>> GENDER = Cache.make(() -> (EntityDataAccessor<Gender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<Mode>> MODE = Cache.make(() -> (EntityDataAccessor<Mode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER.get().getSerializer()));
-    private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<Integer>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER.get().getSerializer()));
+    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER));
+    private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.TALENT_SERIALIZER));
+    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER));
+    private static final Cache<EntityDataAccessor<Gender>> GENDER = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER));
+    private static final Cache<EntityDataAccessor<Mode>> MODE = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
+    private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER));
 
     public final Map<Integer, Object> objects = new HashMap<>();
     public final StatsTracker statsTracker = new StatsTracker();
@@ -1562,7 +1564,7 @@ public class CatEntity extends AbstractCatEntity {
                 for(int i = 0; i < bedsList.size(); i++) {
                     CompoundTag bedNBT = bedsList.getCompound(i);
                     ResourceLocation loc = NBTUtil.getResourceLocation(bedNBT, "dim");
-                    ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
+                    ResourceKey<Level> type = ResourceKey.create(Registries.DIMENSION, loc);
                     Optional<BlockPos> pos = NBTUtil.getBlockPos(bedNBT, "pos");
                     bedsData.put(type, pos);
                 }
@@ -1608,7 +1610,7 @@ public class CatEntity extends AbstractCatEntity {
                 for(int i = 0; i < litterboxList.size(); i++) {
                     CompoundTag litterboxNBT = litterboxList.getCompound(i);
                     ResourceLocation loc = NBTUtil.getResourceLocation(litterboxNBT, "dim");
-                    ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
+                    ResourceKey<Level> type = ResourceKey.create(Registries.DIMENSION, loc);
                     Optional<BlockPos> pos = NBTUtil.getBlockPos(litterboxNBT, "pos");
                     litterboxData.put(type, pos);
                 }
@@ -2252,10 +2254,10 @@ public class CatEntity extends AbstractCatEntity {
         return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
     }
 
-    @Override
-    public boolean canBeControlledByRider() {
-        return this.getControllingPassenger() instanceof LivingEntity;
-    }
+//    @Override
+//    public boolean canBeControlledByRider() {
+//        return this.getControllingPassenger() instanceof LivingEntity;
+//    }
 
     //TODO
     @Override
@@ -2347,7 +2349,7 @@ public class CatEntity extends AbstractCatEntity {
                         //this.playJumpSound();
                     }
 
-                    // Mark as unable jump until reset
+                    // Mark as unable to jump until reset
                     this.jumpPower = 0.0F;
                 }
 
@@ -2588,7 +2590,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         private void giveMorningGift() {
-            Random random = this.cat.getRandom();
+            RandomSource random = this.cat.getRandom();
             BlockPos.MutableBlockPos blockPos$mutableBlockPos = new BlockPos.MutableBlockPos();
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
             this.cat.randomTeleport(blockPos$mutableBlockPos.getX() + random.nextInt(11) - 5, blockPos$mutableBlockPos.getY() + random.nextInt(5) - 2, blockPos$mutableBlockPos.getZ() + random.nextInt(11) - 5, false);

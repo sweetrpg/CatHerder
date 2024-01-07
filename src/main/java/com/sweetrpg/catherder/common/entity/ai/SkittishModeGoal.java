@@ -5,6 +5,7 @@ import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
@@ -45,7 +46,7 @@ public class SkittishModeGoal<T extends LivingEntity> extends AvoidEntityGoal {
             return false;
         }
 
-        Random random = this.cat.getRandom();
+        RandomSource random = this.cat.getRandom();
 
         // less likely to avoid owner
         if(this.cat.getOwner() == this.toAvoid) {

@@ -7,10 +7,12 @@ import com.sweetrpg.catherder.common.registry.ModRecipeSerializers;
 import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import com.sweetrpg.catherder.common.util.ColorDyeUtil;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,8 +20,8 @@ import net.minecraft.world.level.Level;
 
 public class CatTreeRecipeDyed extends CustomRecipe implements Recipe<CraftingContainer> {
 
-    public CatTreeRecipeDyed(ResourceLocation resource) {
-        super(resource);
+    public CatTreeRecipeDyed(ResourceLocation resource, CraftingBookCategory craftingBookCategory) {
+        super(resource, craftingBookCategory);
     }
 
     @Override
@@ -60,7 +62,7 @@ public class CatTreeRecipeDyed extends CustomRecipe implements Recipe<CraftingCo
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inv) {
+    public ItemStack assemble(CraftingContainer inv, RegistryAccess access) {
         for (int col = 0; col < inv.getWidth(); col++) {
             for (int row = 0; row < inv.getHeight(); row++) {
                 IDyeMaterial dye = CatTreeUtil.getDyeFromStack(CatHerderAPI.DYE_MATERIAL.get(), inv.getItem(row * inv.getWidth() + col));

@@ -18,8 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.client.model.data.IModelData;
-import net.minecraftforge.client.model.data.ModelDataMap;
+import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelProperty;
 
 import javax.annotation.Nullable;
@@ -91,7 +90,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
 
-        NBTUtil.putRegistryValue(compound, "colorId", this.colorType);
+        NBTUtil.putRegistryValue(compound, "colorId", this.colorType, CatHerderAPI.COLOR_MATERIAL.get());
 //        NBTUtil.putRegistryValue(compound, "beddingId", this.beddingType);
 
         NBTUtil.putUniqueId(compound, "ownerId", this.catUUID);
@@ -120,11 +119,11 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
 //    }
 
     @Override
-    public IModelData getModelData() {
-        return new ModelDataMap.Builder()
-                .withInitial(COLOR, this.colorType)
+    public ModelData getModelData() {
+        return ModelData.builder()
+                .with(COLOR, this.colorType)
 //                .withInitial(BEDDING, this.beddingType)
-                .withInitial(FACING, Direction.NORTH)
+                .with(FACING, Direction.NORTH)
                 .build();
     }
 

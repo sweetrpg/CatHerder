@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -71,7 +72,7 @@ public class CatRespawnData implements ICatData {
 
     @Nullable
     public CatEntity respawn(ServerLevel worldIn, Player playerIn, BlockPos pos) {
-        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, (CompoundTag) null, (Component) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
+        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, (ItemStack) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
 
         // Failed for some reason
         if (cat == null) {

@@ -8,13 +8,16 @@ import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
-import net.minecraft.data.loot.EntityLoot;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -29,39 +32,41 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CHLootTableProvider extends LootTableProvider {
 
-    public CHLootTableProvider(DataGenerator dataGeneratorIn) {
-        super(dataGeneratorIn);
+    public CHLootTableProvider(PackOutput packOutput) {
+        super(packOutput, BuiltInLootTables.all(), List.of(new LootTableProvider.SubProviderEntry(Blocks::new, LootContextParamSets.BLOCK), new LootTableProvider.SubProviderEntry(Entities::new, LootContextParamSets.ENTITY)));
     }
 
-    @Override
-    public String getName() {
-        return "CatHerder LootTables";
-    }
+//    @Override
+//    public String getName() {
+//        return "CatHerder LootTables";
+//    }
 
-    @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-        return ImmutableList.of(Pair.of(Blocks::new, LootContextParamSets.BLOCK), Pair.of(Entities::new, LootContextParamSets.ENTITY));
-    }
+//    @Override
+//    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+//        return ImmutableList.of(Pair.of(Blocks::new, LootContextParamSets.BLOCK), Pair.of(Entities::new, LootContextParamSets.ENTITY));
+//    }
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
     }
 
-    private static class Blocks extends BlockLoot {
+    private static class Blocks extends BlockLootSubProvider {
+
+        protected Blocks() {
+            super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
+        }
 
         @Override
-        protected void addTables() {
+        protected void generate() {
             dropCatTree(ModBlocks.CAT_TREE);
             dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTERBOX);
@@ -224,33 +229,42 @@ public class CHLootTableProvider extends LootTableProvider {
         }
     }
 
-    private static class Entities extends EntityLoot {
+    private static class Entities extends EntityLootSubProvider {
+
+        protected Entities() {
+            super(FeatureFlags.REGISTRY.allFlags());
+        }
 
         @Override
-        protected void addTables() {
+        public void generate() {
             this.registerNoLoot(ModEntityTypes.CAT);
-
-            for(EntityType type : Arrays.asList(EntityType.CAT, EntityType.COW, EntityType.SHEEP, EntityType.HORSE, EntityType.LLAMA, EntityType.DONKEY, EntityType.GOAT, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PIG)) {
-                this.add(type, LootTable.lootTable()
-                        .withPool(LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(0.1F))
-                                .add(LootItem.lootTableItem(ModItems.CAT_GUT.get())
-                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
-//            this.add(ModEntityTypes.RODENT.get(), LootTable.lootTable()
-//                                                     .withPool(LootPool.lootPool()
-//                                                                       .setRolls(ConstantValue.exactly(1.0F))
-//                                                                       .add(LootItem.lootTableItem(ModItems.RODENT.get())
-//                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
-            }
         }
+
+//        @Override
+//        protected void addTables() {
+//
+//
+//            for(EntityType type : Arrays.asList(EntityType.CAT, EntityType.COW, EntityType.SHEEP, EntityType.HORSE, EntityType.LLAMA, EntityType.DONKEY, EntityType.GOAT, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PIG)) {
+//                this.add(type, LootTable.lootTable()
+//                        .withPool(LootPool.lootPool()
+//                                .setRolls(ConstantValue.exactly(0.1F))
+//                                .add(LootItem.lootTableItem(ModItems.CAT_GUT.get())
+//                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
+////            this.add(ModEntityTypes.RODENT.get(), LootTable.lootTable()
+////                                                     .withPool(LootPool.lootPool()
+////                                                                       .setRolls(ConstantValue.exactly(1.0F))
+////                                                                       .add(LootItem.lootTableItem(ModItems.RODENT.get())
+////                                                                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))));
+//            }
+//        }
 
         protected void registerNoLoot(Supplier<? extends EntityType<?>> type) {
             this.add(type.get(), LootTable.lootTable());
         }
 
         @Override
-        protected Iterable<EntityType<?>> getKnownEntities() {
-            return ModEntityTypes.ENTITIES.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        protected Stream<EntityType<?>> getKnownEntityTypes() {
+            return ModEntityTypes.ENTITIES.getEntries().stream().map(Supplier::get);
         }
     }
 }

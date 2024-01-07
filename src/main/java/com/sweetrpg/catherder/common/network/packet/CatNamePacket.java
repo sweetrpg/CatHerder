@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.network.packet;
 import com.sweetrpg.catherder.common.network.packet.data.CatNameData;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent.Context;
 
 import java.util.function.Supplier;
@@ -33,7 +33,7 @@ public class CatNamePacket extends CatPacket<CatNameData> {
             catIn.setCustomName(null);
         }
         else {
-            catIn.setCustomName(new TextComponent(data.name));
+            catIn.setCustomName(Component.literal(data.name));
         }
     }
 }

@@ -4,11 +4,11 @@ import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.common.lib.Constants;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.registries.IRegistryDelegate;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -137,21 +137,22 @@ public class ConfigHandler {
     }
 
     public static class TalentConfig {
-        public Map<IRegistryDelegate<Talent>, ForgeConfigSpec.BooleanValue> DISABLED_TALENTS;
+        public Map<ResourceLocation, ForgeConfigSpec.BooleanValue> DISABLED_TALENTS;
 
         public TalentConfig(ForgeConfigSpec.Builder builder) {
             builder.comment("Here you can disable talents.").push("Talents");
 
             DISABLED_TALENTS = new HashMap<>();
 
-            CatHerderAPI.TALENTS.get().forEach((loc) ->
-                DISABLED_TALENTS.put(loc.delegate, builder.define(loc.getRegistryName().toString(), true))
-            );
+            CatHerderAPI.TALENTS.get().forEach((talent) -> {
+                ResourceLocation loc = CatHerderAPI.TALENTS.get().getKey(talent);
+                DISABLED_TALENTS.put(loc, builder.define(CatHerderAPI.TALENTS.get().getKey(talent).toString(), true));
+            });
             builder.pop();
         }
 
         public boolean getFlag(Talent talent) {
-            ForgeConfigSpec.BooleanValue booleanValue = this.DISABLED_TALENTS.get(talent.delegate);
+            ForgeConfigSpec.BooleanValue booleanValue = this.DISABLED_TALENTS.get(CatHerderAPI.TALENTS.get().getKey(talent));
             if (booleanValue == null) {
                 return true;
             }

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
@@ -42,7 +43,7 @@ public final class CatTreeRecipeMaker {
             ItemStack output = CatTreeUtil.createItemStack(colorId);
 
             ResourceLocation id = Util.getResource("" + output.getDescriptionId()); // TODO: update resource location
-            ShapedRecipe recipe = new ShapedRecipe(id, group, 3, 3, inputs, output);
+            ShapedRecipe recipe = new ShapedRecipe(id, group, CraftingBookCategory.BUILDING, 3, 3, inputs, output);
             recipes.add(recipe);
         }
 

@@ -9,7 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -44,7 +44,7 @@ public class ModBlocks {
                                                                                   () -> new CatnipBlock(Block.Properties.copy(Blocks.WHEAT)));
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties().tab(ModItemGroups.GENERAL);
+        return new Item.Properties() /*.tab(ModItemGroups.GENERAL) */;
     }
 
     private static BlockItem makeItemBlock(Block block) {
@@ -74,7 +74,7 @@ public class ModBlocks {
         return BLOCKS.register(name, blockSupplier);
     }
 
-    public static void registerBlockColours(final ColorHandlerEvent.Block event) {
+    public static void registerBlockColours(final RegisterColorHandlersEvent.Block event) {
         BlockColors blockColors = event.getBlockColors();
 
 //        Util.acceptOrElse(CatBlocks.CAT_BATH, (block) -> {

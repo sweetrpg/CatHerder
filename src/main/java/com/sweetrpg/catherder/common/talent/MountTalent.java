@@ -4,7 +4,7 @@ import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.common.registry.ModAttributes;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -72,7 +72,7 @@ public class MountTalent extends TalentInstance {
     @Override
     public void livingTick(AbstractCatEntity cat) {
         if(cat.isVehicle() && cat.getCatHunger() < 1) {
-            cat.getControllingPassenger().sendMessage(Component.translatable("talent.catherder.mount.exhausted", cat.getName()), cat.getUUID());
+            cat.getControllingPassenger().sendSystemMessage(Component.translatable("talent.catherder.mount.exhausted", cat.getName()));
 
             cat.ejectPassengers();
         }
