@@ -212,7 +212,7 @@ curseforge {
             optionalDependency 'Just Enough Items (JEI)'
             optionalDependency 'Farmer\'s Delight'
             optionalDependency 'Autumnity'
-            optionalDependency 'Biomes O\' Plenty'
+            optionalDependency 'Biomes O\'Plenty'
             optionalDependency 'Botania'
             optionalDependency 'ItemPhysic Full'
         }
