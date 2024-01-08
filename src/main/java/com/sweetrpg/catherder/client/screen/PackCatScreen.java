@@ -44,6 +44,6 @@ public class PackCatScreen extends AbstractContainerScreen<PackCatContainer> {
             for (int k1 = 0; k1 < Mth.clamp(this.getMenu().getCatLevel(), 0, 5); k1++)
                 this.blit(stack, l + 78 + 18 * k1, i1 + 9 + 18 * j1 + 15, 197, 2, 18, 18);
 
-        InventoryScreen.renderEntityInInventory(l + 42, i1 + 51, 30, (float)(l + 51) - xMouse, (float)((i1 + 75) - 50) - yMouse, this.getMenu().getCat());
+        InventoryScreen.renderEntityInInventory(stack, l + 42, i1 + 51, 30, (float)(l + 51) - xMouse, (float)((i1 + 75) - 50) - yMouse, this.getMenu().getCat());
     }
 }

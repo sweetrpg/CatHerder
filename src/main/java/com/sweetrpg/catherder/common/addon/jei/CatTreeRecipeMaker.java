@@ -11,6 +11,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public final class CatTreeRecipeMaker {
 
-    public static List<IShapedRecipe<? extends Container>> createCatTreeRecipes() {
+    public static List<CraftingRecipe> createCatTreeRecipes() {
         Collection<IColorMaterial> colorMaterials = CatHerderAPI.COLOR_MATERIAL.get().getValues();
 
         List<IShapedRecipe<? extends Container>> recipes = new ArrayList<>(colorMaterials.size());

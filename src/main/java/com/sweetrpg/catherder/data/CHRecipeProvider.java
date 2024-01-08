@@ -23,27 +23,27 @@ public class CHRecipeProvider extends RecipeProvider {
         super(packOutput);
     }
 
-    @Override
-    public String getName() {
-        return "CatHerder Recipes";
-    }
+//    @Override
+//    public String getName() {
+//        return "CatHerder Recipes";
+//    }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         CatHerder.LOGGER.debug("Build crafting recipes: {}", consumer);
 
         // treats
-        ShapelessRecipeBuilder.shapeless(ModItems.SUPER_TREAT.get(), 5)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SUPER_TREAT.get(), 5)
                 .requires(ModItems.TRAINING_TREAT.get(), 5)
                 .requires(Items.GOLDEN_APPLE, 1)
                 .unlockedBy("has_golden_apple", has(Items.GOLDEN_APPLE))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(ModItems.WILD_TREAT.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.WILD_TREAT.get(), 1)
                 .requires(ModItems.MASTER_TREAT.get(), 5)
                 .requires(Blocks.END_STONE, 1)
                 .unlockedBy("has_master_treat", has(ModItems.MASTER_TREAT.get()))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(ModItems.BREEDING_TREAT.get(), 2)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BREEDING_TREAT.get(), 2)
                 .requires(ModItems.MASTER_TREAT.get(), 1)
                 .requires(Items.COOKED_BEEF, 1)
                 .requires(Items.COOKED_PORKCHOP, 1)
@@ -51,12 +51,12 @@ public class CHRecipeProvider extends RecipeProvider {
                 .requires(Items.COOKED_COD, 1)
                 .unlockedBy("has_cooked_porkchop", has(Items.COOKED_PORKCHOP))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(ModItems.MASTER_TREAT.get(), 5)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MASTER_TREAT.get(), 5)
                 .requires(ModItems.SUPER_TREAT.get(), 5)
                 .requires(Items.DIAMOND, 1)
                 .unlockedBy("has_master_treat", has(ModItems.SUPER_TREAT.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.TRAINING_TREAT.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TRAINING_TREAT.get(), 1)
                 .pattern("TFR")
                 .pattern("XXX")
                 .pattern("YYY")
@@ -67,7 +67,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('Y', ModItems.CATNIP.get())
                 .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.TREAT_BAG.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.TREAT_BAG.get(), 1)
                 .pattern("LCL")
                 .pattern("LLL")
                 .define('L', Items.LEATHER)
@@ -76,7 +76,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // modifiers
-        ShapedRecipeBuilder.shaped(ModItems.CAT_SHEARS.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.CAT_SHEARS.get(), 1)
                 .pattern(" X ")
                 .pattern("XYX")
                 .pattern(" X ")
@@ -85,14 +85,14 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_shears", has(Items.SHEARS))
                 .unlockedBy("has_yarn", has(ModItems.YARN.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CAT_SMALLERER.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CAT_SMALLERER.get(), 1)
                 .pattern("WM")
                 .define('W', Items.POTION)
                 .define('M', Items.BROWN_MUSHROOM)
                 .unlockedBy("has_potion", has(Items.POTION))
                 .unlockedBy("has_mushroom", has(Items.BROWN_MUSHROOM))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CAT_BIGGERER.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CAT_BIGGERER.get(), 1)
                 .pattern("MC")
                 .define('M', Items.RED_MUSHROOM)
                 .define('C', Items.CAKE)
@@ -101,7 +101,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // essentials
-        ShapedRecipeBuilder.shaped(ModBlocks.CAT_BOWL.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.CAT_BOWL.get(), 1)
 //                .pattern("XXX")
                 .pattern("FXW")
                 .pattern("XXX")
@@ -112,7 +112,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_fishes", has(ItemTags.FISHES))
                 .unlockedBy("has_water", has(Items.WATER_BUCKET))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.LITTERBOX.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.LITTERBOX.get(), 1)
                 .pattern("ISI")
                 .pattern("III")
                 .define('I', Items.IRON_INGOT)
@@ -120,7 +120,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_sand", has(Items.SAND))
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.LITTER_SCOOP.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.LITTER_SCOOP.get(), 1)
                 .pattern("IWI")
                 .pattern("III")
                 .pattern(" I ")
@@ -135,14 +135,14 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer, Util.getResourcePath("cat_tree_dyed"));
 
         // accessories
-        ShapedRecipeBuilder.shaped(ModItems.WOOL_COLLAR.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.WOOL_COLLAR.get(), 1)
                 .pattern("SSS")
                 .pattern("S S")
                 .pattern("SSS")
                 .define('S', ItemTags.WOOL)
                 .unlockedBy("has_stick", has(ItemTags.WOOL))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CAPE.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.CAPE.get(), 1)
                 .pattern("S S")
                 .pattern("LWL")
                 .pattern("WLW")
@@ -151,7 +151,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('W', ItemTags.WOOL)
                 .unlockedBy("has_leather", has(Items.LEATHER))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.SPOTTED_COLLAR.get(), 1)
                 .pattern("BWB")
                 .pattern("WCW")
                 .pattern("BSB")
@@ -161,7 +161,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('S', ItemTags.WOOL)
                 .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.SPOTTED_COLLAR.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.SPOTTED_COLLAR.get(), 1)
                 .pattern("WBW")
                 .pattern("BCB")
                 .pattern("WSW")
@@ -171,7 +171,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .define('S', ItemTags.WOOL)
                 .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer, Util.getResource("spotted_collar_alt"));
-        ShapelessRecipeBuilder.shapeless(ModItems.MULTICOLORED_COLLAR.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.MULTICOLORED_COLLAR.get(), 1)
                 .requires(ModItems.WOOL_COLLAR.get())
                 .requires(Items.STRING)
                 .requires(Items.BLUE_DYE)
@@ -182,7 +182,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .requires(Items.PURPLE_DYE)
                 .unlockedBy("has_wool_collar", has(ModItems.WOOL_COLLAR.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.SUNGLASSES.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.SUNGLASSES.get(), 1)
                 .pattern(" s ")
                 .pattern("S S")
                 .pattern("GSG")
@@ -192,7 +192,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_string", has(Items.STRING))
                 .unlockedBy("has_stick", has(Items.STICK))
                 .save(consumer);
-        ShapelessRecipeBuilder.shapeless(ModItems.RADIO_COLLAR.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.RADIO_COLLAR.get(), 1)
                 .requires(ModItems.WOOL_COLLAR.get())
                 .requires(Items.REDSTONE)
                 .unlockedBy("has_redstone", has(Items.REDSTONE))
@@ -200,7 +200,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
         // toys
-        ShapedRecipeBuilder.shaped(ModItems.CAT_TOY.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CAT_TOY.get(), 1)
                 .pattern("SW")
                 .pattern("WS")
                 .define('W', ModItems.CATNIP.get())
@@ -208,14 +208,14 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_sugar", has(Items.SUGAR))
                 .unlockedBy("has_catnip", has(ModItems.CATNIP.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.CARDBOARD_BOX.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.CARDBOARD_BOX.get(), 1)
                 .pattern("CCC")
                 .pattern("C C")
                 .pattern("CCC")
                 .define('C', ModItems.CARDBOARD.get())
                 .unlockedBy("has_cardboard", has(ModItems.CARDBOARD.get()))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.YARN.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.YARN.get(), 1)
                 .pattern("WW ")
                 .pattern("WW ")
                 .pattern("  W")
@@ -224,19 +224,19 @@ public class CHRecipeProvider extends RecipeProvider {
                 .save(consumer);
 
 // misc
-        ShapelessRecipeBuilder.shapeless(ModItems.RADAR.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, ModItems.RADAR.get(), 1)
                 .requires(Items.MAP, 1)
                 .requires(Items.REDSTONE, 1)
                 .requires(ModItems.RADIO_COLLAR.get(), 1)
                 .unlockedBy("has_redstone", has(Items.REDSTONE))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModItems.CARDBOARD.get(), 9)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CARDBOARD.get(), 9)
                 .pattern("PPP")
                 .pattern("PPP")
                 .define('P', Items.PAPER)
                 .unlockedBy("has_paper", has(Items.PAPER))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.MOUSE_TRAP.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.MOUSE_TRAP.get(), 1)
                 .pattern("CIT")
                 .pattern("PPP")
                 .define('C', ModItems.CHEESE_WEDGE.get())
@@ -248,7 +248,7 @@ public class CHRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
                 .unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(consumer);
-        ShapedRecipeBuilder.shaped(ModBlocks.CHEESE_WHEEL.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModBlocks.CHEESE_WHEEL.get(), 1)
                 .pattern("MSM")
                 .pattern(" B ")
                 .define('M', Items.MILK_BUCKET)
@@ -276,8 +276,8 @@ public class CHRecipeProvider extends RecipeProvider {
 //                           .save(consumer);
     }
 
-    @Override
-    protected void saveAdvancement(HashCache cache, JsonObject advancementJson, Path pathIn) {
-        // NOOP - We don't replace any of the advancement things yet...
-    }
+//    @Override
+//    protected void saveAdvancement(HashCache cache, JsonObject advancementJson, Path pathIn) {
+//        // NOOP - We don't replace any of the advancement things yet...
+//    }
 }

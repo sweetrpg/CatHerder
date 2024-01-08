@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.common.crafting.IShapedRecipe;
@@ -23,7 +24,7 @@ import net.minecraft.world.level.block.Blocks;
 
 public final class PetDoorRecipeMaker {
 
-    public static List<IShapedRecipe<? extends Container>> createPetDoorRecipes() {
+    public static List<CraftingRecipe> createPetDoorRecipes() {
         Collection<IStructureMaterial> structureMaterials = CatHerderAPI.STRUCTURE_MATERIAL.get().getValues();
 
         List<IShapedRecipe<? extends Container>> recipes = new ArrayList<>(structureMaterials.size());

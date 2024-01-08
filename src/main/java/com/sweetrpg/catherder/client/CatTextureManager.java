@@ -16,13 +16,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.SkinManager;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.CatVariant;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -101,8 +104,8 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         Minecraft mc = Minecraft.getInstance();
 
         ResourceManager resourceManager = mc.getResourceManager();
-        Resource resource = resourceManager.getResource(loc);
-        return resource.getInputStream();
+        Resource resource = resourceManager.getResource(loc).get();
+        return resource.open();
     }
 
     public ResourceLocation getTexture(CatEntity cat) {
@@ -112,7 +115,8 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         }
 
         Integer originalBreed = cat.getOriginalBreed();
-        ResourceLocation texturePath = Cat.TEXTURE_BY_TYPE.get(originalBreed);
+        CatVariant variant = cat.getVariant();
+        ResourceLocation texturePath =BuiltInRegistries.CAT_VARIANT.getKey(variant);
         if(texturePath != null) {
             return texturePath;
         }
@@ -184,7 +188,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
     private synchronized void loadCatSkinResource(CatTextureManager.Preparations prep, Resource resource) {
         InputStream inputstream = null;
         try {
-            inputstream = resource.getInputStream();
+            inputstream = resource.open();
             String hash = CatTextureServer.INSTANCE.getHash(IOUtils.toByteArray(inputstream));
             ResourceLocation rl = resource.getLocation();
 
@@ -208,7 +212,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
 
     private void loadOverrideData(CatTextureManager.Preparations prep, List<Resource> resourcesList) {
         for(Resource iresource : resourcesList) {
-            InputStream inputstream = iresource.getInputStream();
+            InputStream inputstream = iresource.open();
             CatHerder.LOGGER.debug("Loading {}", iresource);
             try {
                 this.loadLocaleData(prep, inputstream);

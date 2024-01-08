@@ -1587,7 +1587,7 @@ public class CatEntity extends AbstractCatEntity {
                 for(int i = 0; i < bowlsList.size(); i++) {
                     CompoundTag bowlsNBT = bowlsList.getCompound(i);
                     ResourceLocation loc = NBTUtil.getResourceLocation(bowlsNBT, "dim");
-                    ResourceKey<Level> type = ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
+                    ResourceKey<Level> type = ResourceKey.create(Registries.DIMENSION, loc);
                     Optional<BlockPos> pos = NBTUtil.getBlockPos(bowlsNBT, "pos");
                     bowlsData.put(type, pos);
                 }
@@ -2249,9 +2249,9 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     @Override
-    public Entity getControllingPassenger() {
+    public LivingEntity getControllingPassenger() {
         // Gets the first passenger which is the controlling passenger
-        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
+        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0).getControllingPassenger();
     }
 
 //    @Override

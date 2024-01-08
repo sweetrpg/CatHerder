@@ -36,7 +36,6 @@ public class CHAdvancementProvider extends AdvancementProvider {
 
     public CHAdvancementProvider(PackOutput packOutput) {
         super(packOutput);
-        this.generator = generatorIn;
     }
 
     private static Path getPath(Path pathIn, Advancement advancementIn) {

@@ -6,6 +6,7 @@ import com.sweetrpg.catherder.api.registry.TalentInstance;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 
 public class HellBeastTalent extends TalentInstance {
@@ -26,7 +27,7 @@ public class HellBeastTalent extends TalentInstance {
 
     @Override
     public InteractionResult isInvulnerableTo(AbstractCatEntity catIn, DamageSource source) {
-        if(source.isFire()) {
+        if(source.is(DamageTypes.ON_FIRE)) {
             return this.level() >= 5 ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
 
