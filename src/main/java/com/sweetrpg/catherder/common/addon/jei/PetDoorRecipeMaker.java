@@ -27,7 +27,7 @@ public final class PetDoorRecipeMaker {
     public static List<CraftingRecipe> createPetDoorRecipes() {
         Collection<IStructureMaterial> structureMaterials = CatHerderAPI.STRUCTURE_MATERIAL.get().getValues();
 
-        List<IShapedRecipe<? extends Container>> recipes = new ArrayList<>(structureMaterials.size());
+        List<CraftingRecipe> recipes = new ArrayList<>(structureMaterials.size());
         String group = "catherder";
         for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get()) {
 

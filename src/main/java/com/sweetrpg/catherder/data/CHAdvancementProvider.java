@@ -20,6 +20,7 @@ import net.minecraft.data.HashCache;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +29,7 @@ import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class CHAdvancementProvider extends AdvancementProvider {
+public class CHAdvancementProvider extends ForgeAdvancementProvider {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
@@ -42,10 +43,10 @@ public class CHAdvancementProvider extends AdvancementProvider {
         return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
     }
 
-    @Override
-    public String getName() {
-        return "CatHerder Advancements";
-    }
+//    @Override
+//    public String getName() {
+//        return "CatHerder Advancements";
+//    }
 
     @Override
     public void run(HashCache cache) {

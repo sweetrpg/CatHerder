@@ -3,25 +3,23 @@ package com.sweetrpg.catherder.client.event;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.client.block.model.CatTreeModel;
 import com.sweetrpg.catherder.client.block.model.PetDoorModel;
-import com.sweetrpg.catherder.common.registry.ModBlocks;
-import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.client.screen.widget.CatInventoryButton;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.network.packet.data.OpenCatScreenData;
-import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -29,8 +27,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
@@ -46,7 +44,7 @@ public class ClientEventHandler {
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
             event.register(unbakedModelLoc);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.warn("Could not get base Cat Tree model. Reverting to default textures...");
             e.printStackTrace();
         }
@@ -56,7 +54,7 @@ public class ClientEventHandler {
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
             event.register(unbakedModelLoc);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.warn("Could not get base Pet Door model. Reverting to default textures...");
             e.printStackTrace();
         }
@@ -68,10 +66,11 @@ public class ClientEventHandler {
         // cat tree
         try {
             ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
-            ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
+            ResourceLocation modelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
 
-            BlockModel model = (BlockModel) event.getModelBakery().getModel(unbakedModelLoc);
-            BakedModel customModel = new CatTreeModel(event.getModelBakery(), model, model.bake(event.getModelBakery(), model, ModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
+            BakedModel bakedModel = modelRegistry.get(modelLoc);
+            BlockModel unbakedModel = (BlockModel) event.getModelBakery().getModel(modelLoc);
+            BakedModel customModel = new CatTreeModel(event.getModelBakery(), unbakedModel, bakedModel);
 
             // Replace all valid block states
             ModBlocks.CAT_TREE.get().getStateDefinition().getPossibleStates().forEach(state -> {
@@ -81,7 +80,7 @@ public class ClientEventHandler {
             // Replace inventory model
             modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.warn("Could not get base Cat Tree model. Reverting to default textures...");
             e.printStackTrace();
         }
@@ -89,10 +88,11 @@ public class ClientEventHandler {
         // pet door
         try {
             ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.PET_DOOR.get());
-            ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
+            ResourceLocation modelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
 
-            BlockModel model = (BlockModel) event.getModelBakery().getModel(unbakedModelLoc);
-            BakedModel customModel = new PetDoorModel(event.getModelBakery(), model, model.bake(event.getModelBakery(), model, ModelBakery.defaultTextureGetter(), BlockModelRotation.X180_Y180, unbakedModelLoc, true));
+            BakedModel bakedModel = modelRegistry.get(modelLoc);
+            BlockModel unbakedModel = (BlockModel) event.getModelBakery().getModel(modelLoc);
+            BakedModel customModel = new PetDoorModel(event.getModelBakery(), unbakedModel, bakedModel);
 
             // Replace all valid block states
             ModBlocks.PET_DOOR.get().getStateDefinition().getPossibleStates().forEach(state -> {
@@ -102,7 +102,7 @@ public class ClientEventHandler {
             // Replace inventory model
             modelRegistry.put(new ModelResourceLocation(resourceLocation, "inventory"), customModel);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             CatHerder.LOGGER.warn("Could not get base Cat Tree model. Reverting to default textures...");
             e.printStackTrace();
         }
@@ -110,12 +110,12 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public void onInputEvent(final MovementInputUpdateEvent event) {
-        if (event.getInput().jumping) {
+        if(event.getInput().jumping) {
             Entity entity = event.getEntity().getVehicle();
-            if (event.getEntity().isPassenger() && entity instanceof CatEntity) {
+            if(event.getEntity().isPassenger() && entity instanceof CatEntity) {
                 CatEntity cat = (CatEntity) entity;
 
-                if (cat.canJump()) {
+                if(cat.canJump()) {
                     cat.setJumpPower(100);
                 }
             }
@@ -125,7 +125,7 @@ public class ClientEventHandler {
     @SubscribeEvent
     public void onScreenInit(final ScreenEvent.Init.Post event) {
         Screen screen = event.getScreen();
-        if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
+        if(screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             boolean creative = screen instanceof CreativeModeInventoryScreen;
             boolean dtLoaded = ModList.get().isLoaded("doggytalents");
             Minecraft mc = Minecraft.getInstance();
@@ -149,7 +149,7 @@ public class ClientEventHandler {
     @SubscribeEvent
     public void onScreenDrawForeground(final ScreenEvent event) {
         Screen screen = event.getScreen();
-        if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
+        if(screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             boolean creative = screen instanceof CreativeModeInventoryScreen;
             CatInventoryButton btn = null;
 

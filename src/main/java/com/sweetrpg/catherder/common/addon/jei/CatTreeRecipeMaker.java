@@ -27,7 +27,7 @@ public final class CatTreeRecipeMaker {
     public static List<CraftingRecipe> createCatTreeRecipes() {
         Collection<IColorMaterial> colorMaterials = CatHerderAPI.COLOR_MATERIAL.get().getValues();
 
-        List<IShapedRecipe<? extends Container>> recipes = new ArrayList<>(colorMaterials.size());
+        List<CraftingRecipe> recipes = new ArrayList<>(colorMaterials.size());
         String group = "catherder";
         for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get()) {
 

@@ -20,6 +20,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -89,7 +90,7 @@ public class EventHandler {
 //    }
 
     @SubscribeEvent
-    public void onEntitySpawn(final EntityJoinWorldEvent event) {
+    public void onEntitySpawn(final EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
 
         if(entity instanceof Creeper) {
