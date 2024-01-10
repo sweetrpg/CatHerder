@@ -73,10 +73,10 @@ public class CatHerder {
 
         modEventBus.addListener(ModRegistries::newRegistry);
         modEventBus.addListener(ModEntityTypes::addEntityAttributes);
-        modEventBus.addListener(ModItemGroups::creativeModeTabRegisterEvent);
-        modEventBus.addListener(ModItemGroups::creativeModeTabBuildEvent);
-
         modEventBus.addListener(Capabilities::registerCaps);
+
+        modEventBus.addListener(ModItemGroups::creativeModeTabRegisterEvent);
+//        modEventBus.addListener(ModItemGroups::creativeModeTabBuildEvent);
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::serverStarting);
@@ -87,14 +87,17 @@ public class CatHerder {
 
         // Client Events
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+// TODO            modEventBus.addListener(ModKeybinds::registerKeyMapping);
             modEventBus.addListener(this::clientSetup);
             modEventBus.addListener(ModBlocks::registerBlockColours);
             modEventBus.addListener(ModItems::registerItemColours);
-            modEventBus.addListener(ClientEventHandler::onRegisterAdditionalModel);
-            modEventBus.addListener(ClientEventHandler::onModelBakeEvent);
+            modEventBus.addListener(ClientEventHandler::registerModelForBaking);
+            modEventBus.addListener(ClientEventHandler::modifyBakedModels);
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
+      // TODO      modEventBus.addListener(ClientSetup::registerOverlay);
+
             forgeEventBus.register(new ClientEventHandler());
             forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
         });

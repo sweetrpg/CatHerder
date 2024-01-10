@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class ClientEventHandler {
 
-    public static void onRegisterAdditionalModel(final ModelEvent.RegisterAdditional event) {
+    public static void registerModelForBaking(final ModelEvent.RegisterAdditional event) {
         try {
             ResourceLocation resourceLocation = ForgeRegistries.BLOCKS.getKey(ModBlocks.CAT_TREE.get());
             ResourceLocation unbakedModelLoc = new ResourceLocation(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath());
@@ -60,7 +60,7 @@ public class ClientEventHandler {
         }
     }
 
-    public static void onModelBakeEvent(final ModelEvent.ModifyBakingResult event) {
+    public static void modifyBakedModels(final ModelEvent.ModifyBakingResult event) {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
 
         // cat tree

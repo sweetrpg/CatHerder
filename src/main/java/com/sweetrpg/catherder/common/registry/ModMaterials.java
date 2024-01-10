@@ -71,14 +71,14 @@ public class ModMaterials {
     public static final RegistryObject<IDyeMaterial> BLACK_DYE = registerDye(() -> Items.BLACK_DYE);
 
     private static RegistryObject<IStructureMaterial> registerStructure(final Supplier<Block> sup) {
-        return STRUCTURES.register(ForgeRegistries.BLOCKS.getKey(sup.get()).getPath(), () -> new StructureMaterial(sup.get().builtInRegistryHolder()));
+        return STRUCTURES.register(ForgeRegistries.BLOCKS.getKey(sup.get()).getPath(), () -> new StructureMaterial(sup));
     }
 
     private static RegistryObject<IColorMaterial> registerColor(final Supplier<Block> sup) {
-        return COLORS.register(ForgeRegistries.BLOCKS.getKey(sup.get()).getPath(), () -> new ColorMaterial(sup.get().builtInRegistryHolder()));
+        return COLORS.register(ForgeRegistries.BLOCKS.getKey(sup.get()).getPath(), () -> new ColorMaterial(sup));
     }
 
     private static RegistryObject<IDyeMaterial> registerDye(final Supplier<Item> sup) {
-        return DYES.register(ForgeRegistries.ITEMS.getKey(sup.get()).getPath(), () -> new DyeMaterial(sup.get().builtInRegistryHolder()));
+        return DYES.register(ForgeRegistries.ITEMS.getKey(sup.get()).getPath(), () -> new DyeMaterial(sup));
     }
 }
