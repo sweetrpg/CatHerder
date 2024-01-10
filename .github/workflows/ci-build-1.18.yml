@@ -47,6 +47,8 @@ jobs:
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
         with:
           arguments: build test
+        env:
+          CATHERDER_VERSION: "${{ steps.bump_version.outputs.new_version }}"
       - name: Commit version file
         run: |
           git config --global user.email "ci@sweetrpg.com"
