@@ -156,7 +156,7 @@ public class CatHerder {
 
         if(event.includeServer()) {
             // gen.addProvider(new DTBlockTagsProvider(gen));
-            gen.addProvider(true, new CHAdvancementProvider(packOutput));
+            gen.addProvider(true, new CHAdvancements(packOutput, event.getLookupProvider(), event.getExistingFileHelper()));
             CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(packOutput, event.getLookupProvider(), event.getExistingFileHelper());
             gen.addProvider(true, blockTagProvider);
             gen.addProvider(true, new CHItemTagsProvider(packOutput, event.getLookupProvider(), blockTagProvider, event.getExistingFileHelper()));
