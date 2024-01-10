@@ -179,7 +179,7 @@ jar {
         attributes([
             "Specification-Title": "Cat Herder",
             "Specification-Vendor": "SweetRPG",
-            "Specification-Version": "1",
+            "Specification-Version": project.version, // "1",
             "Implementation-Title": project.name,
             "Implementation-Version": project.version,
             "Implementation-Vendor" :"SweetRPG",
