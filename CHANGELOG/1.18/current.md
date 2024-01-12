@@ -1,0 +1,1 @@
+- `[FIX]` Fixed loot tables for catnip and wild catnip.
