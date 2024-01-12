@@ -20,14 +20,14 @@
 
 ## Integrations
 
-**Autumnity** &mdash; uses woods types for pet doors
-**Biomes O' Plenty** &mdash; uses wood types for pet doors
-**Botania** &mdash; uses wood types for pet doors
-**Configured** &mdash; supports dynamic configuration updates
-**Farmer's Delight** &mdash; add crates for catnip
-**ItemPhysic Full** &mdash; sets physics properties for mod items
-**JEI** &mdash; supports search for new recipes
-**Patchouli** &mdash; adds the Caring for Your Cat book
+* **Autumnity** &mdash; uses woods types for pet doors
+* **Biomes O' Plenty** &mdash; uses wood types for pet doors
+* **Botania** &mdash; uses wood types for pet doors
+* **Configured** &mdash; supports dynamic configuration updates
+* **Farmer's Delight** &mdash; add crates for catnip
+* **ItemPhysic** &mdash; sets physics properties for mod items
+* **JEI** &mdash; supports search for new recipes
+* **Patchouli** &mdash; adds the Caring for Your Cat book
 
 ## Contributing
 
