@@ -1,3 +1,5 @@
+[![CatHerder Logo](images/CatHerder.jpeg)]
+
 # Cat Herder
 
 <a href="https://www.curseforge.com/minecraft/mc-mods/cat-herder">
