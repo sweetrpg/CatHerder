@@ -1,6 +1,6 @@
 {
   "type": "catherder:add_features_by_filter",
-  "allowed_biomes": ["minecraft:plains","minecraft:extreme_hills","minecraft:forest","minecraft:savanna","minecraft:mushroom","minecraft:taiga","minecraft:mountain","minecraft:jungle"],
+  "allowed_biomes": ["minecraft:plains","minecraft:windswept_hills","minecraft:forest","minecraft:savanna","minecraft:mushroom_fields","minecraft:taiga","minecraft:jungle","minecraft:meadow"],
   "denied_biomes": [],
   "min_temperature": 0.2,
   "max_temperature": 1.5,

@@ -1,12 +1,19 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.CatHerder;
+import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.api.registry.IColorMaterial;
+import com.sweetrpg.catherder.api.registry.IStructureMaterial;
+import com.sweetrpg.catherder.common.block.CatTreeBlock;
+import com.sweetrpg.catherder.common.block.PetDoorBlock;
 import com.sweetrpg.catherder.common.item.IDyeableArmorItem;
+import com.sweetrpg.catherder.common.util.CatTreeUtil;
+import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.function.Supplier;
 import net.minecraftforge.event.CreativeModeTabEvent;
 
 public class ModItemGroups {
@@ -23,51 +30,32 @@ public class ModItemGroups {
     }
 
     public static void creativeModeTabBuildEvent(final CreativeModeTabEvent.BuildContents event) {
-        if (event.getTab() == GENERAL) {
-            // Adds items in the order of definition in DoggyItems. This matches order
-            // from previous version of MC prior to 1.19.3.
-            for (var item : ModItems.ITEMS.getEntries()) {
-                if (item.get() instanceof IDyeableArmorItem dyeableItem) {
-                    ItemStack stack = new ItemStack(item.get());
+        CatHerder.LOGGER.debug("Creative mode tab build event: {}", event);
 
-                    dyeableItem.setColor(stack, dyeableItem.getDefaultColor(stack));
-                    event.accept(stack);
+        for(var item : ModItems.ITEMS.getEntries()) {
+            if(item.get() instanceof IDyeableArmorItem dyeableItem) {
+                ItemStack stack = new ItemStack(item.get());
+
+                dyeableItem.setColor(stack, dyeableItem.getDefaultColor(stack));
+                event.accept(stack);
+                continue;
+            }
+            else if(item.get() instanceof BlockItem blockItem) {
+                if(blockItem.getBlock() instanceof CatTreeBlock) {
+                    for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+                        event.accept(CatTreeUtil.createItemStack(colorId));
+                    }
                     continue;
                 }
-
-                event.accept(item);
+                else if(blockItem.getBlock() instanceof PetDoorBlock) {
+                    for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
+                        event.accept(PetDoorUtil.createItemStack(structureId));
+                    }
+                    continue;
+                }
             }
-//
-//            // Add the block items, missing the dog bed out as that has it's own tab.
-//            for (var blockItem : ModBlocks.ITEMS.getEntries()) {
-//                if (blockItem.getId().getPath() == "dog_bed") {
-//                    continue;
-//                }
-//
-//                event.accept(blockItem);
-//            }
-        }
 
-//        if (event.getTab() == DOG_BED) {
-//            for (IBeddingMaterial beddingId : DoggyTalentsAPI.BEDDING_MATERIAL.get().getValues()) {
-//                for (ICasingMaterial casingId : DoggyTalentsAPI.CASING_MATERIAL.get().getValues()) {
-//                    event.accept(DogBedUtil.createItemStack(casingId, beddingId), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
-//                }
-//            }
-//        }
+            event.accept(item);
+        }
     }
-//    public static class CustomItemGroup extends CreativeModeTab {
-//
-//        private Supplier<ItemStack> icon;
-//
-//        public CustomItemGroup(String label, Supplier<ItemStack> iconIn) {
-//            super(label);
-//            this.icon = iconIn;
-//        }
-//
-//        @Override
-//        public ItemStack makeIcon() {
-//            return this.icon.get();
-//        }
-//    }
 }

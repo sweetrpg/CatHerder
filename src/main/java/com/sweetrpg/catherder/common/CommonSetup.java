@@ -1,7 +1,6 @@
 package com.sweetrpg.catherder.common;
 
 import com.sweetrpg.catherder.api.feature.FoodHandler;
-import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.event.FishFoodHandler;
@@ -24,10 +23,10 @@ public class CommonSetup {
 
 //            InteractHandler.registerHandler(new HelmetInteractHandler());
             ConfigHandler.initTalentConfig();
-            CatRespawnCommand.registerSerilizers(FMLJavaModLoadingContext.get().getModEventBus());
+//            CatRespawnCommand.registerSerilizers(FMLJavaModLoadingContext.get().getModEventBus());
             CatEntity.initDataParameters();
 
-//            WildCropGeneration.registerWildCatnipGeneration();
+//            WildCropGeneration.load();
 
             registerCompostables();
 //            registerDispenserBehaviors();
