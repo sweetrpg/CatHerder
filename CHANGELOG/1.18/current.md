@@ -1,1 +1,1 @@
-- `[FIX]` Fix overridden vanilla loot tables to drop their original loot also 
+- `[FIX]` Fixed loot tables for catnip and wild catnip.
