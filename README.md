@@ -29,7 +29,7 @@
 
 Thanks to everyone that has contributed/helped/inspired. This includes but is not limited to...
 
-* [Doggy Talents](https://www.curseforge.com/minecraft/mc-mods/doggy-talents) -- from which this mod borrows heavily
+* [Doggy Talents](https://www.curseforge.com/minecraft/mc-mods/doggy-talents) / [Doggy Talents Next](https://www.curseforge.com/minecraft/mc-mods/doggy-talents-next) -- from which this mod borrows heavily
 * [Farmer's Delight](https://www.curseforge.com/minecraft/mc-mods/farmers-delight) -- inspiration
 * **Katy Schifferer** -- graphics and textures
 * **Beth Schifferer** -- models and textures
