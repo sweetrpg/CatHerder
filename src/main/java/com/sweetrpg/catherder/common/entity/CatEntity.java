@@ -33,6 +33,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -69,6 +70,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.CatVariant;
 import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
@@ -118,6 +120,7 @@ public class CatEntity extends AbstractCatEntity {
     private static final EntityDataAccessor<Float> HUNGER_INT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<String> CUSTOM_SKIN = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> ORIGINAL_BREED_INT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<String> VARIANT_STR = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.STRING);
 
     private static final EntityDataAccessor<Byte> SIZE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<ItemStack> TOY_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
@@ -134,6 +137,7 @@ public class CatEntity extends AbstractCatEntity {
     private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
     private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
     private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER));
+    private static final Cache<EntityDataAccessor<String>> VARIANT = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.VARIANT_SERIALIZER));
 
     public final Map<Integer, Object> objects = new HashMap<>();
     public final StatsTracker statsTracker = new StatsTracker();
@@ -185,6 +189,7 @@ public class CatEntity extends AbstractCatEntity {
         CAT_BOWL_LOCATION.get();
         LITTERBOX_LOCATION.get();
         ORIGINAL_BREED.get();
+        VARIANT.get();
     }
 
     @Override
@@ -201,6 +206,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(CAT_LEVEL.get(), new CatLevel(0, 0));
         this.entityData.define(SIZE, (byte) 3);
         this.entityData.define(ORIGINAL_BREED_INT, 0);
+        this.entityData.define(VARIANT_STR, CatVariant.TABBY.toString());
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
@@ -1314,6 +1320,7 @@ public class CatEntity extends AbstractCatEntity {
         compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
         compound.putInt("level_dire", this.getCatLevel().getLevel(Type.WILD));
         compound.putInt("original_breed", this.getOriginalBreed());
+        compound.putInt("cat_variant", this.getOriginalBreed());
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
         DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
@@ -2502,6 +2509,38 @@ public class CatEntity extends AbstractCatEntity {
     public void setOriginalBreed(int originalBreed) {
         this.entityData.set(ORIGINAL_BREED_INT, originalBreed);
     }
+
+    public CatVariant getVariant() {
+        try {
+        var data = this.entityData.get(VARIANT_STR);
+            return BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(data));
+        }
+        catch (Exception e) {
+            CatHerder.LOGGER.warn(e.toString());
+        }
+
+        return null;
+//
+//        if(data == null) {
+//            return BuiltInRegistries.CAT_VARIANT.get(CatVariant.ALL_BLACK);
+//        }
+//
+//        try {
+//
+//        }
+//        catch(Exception e) {
+//
+//        }
+//
+//        return BuiltInRegistries.CAT_VARIANT.get(CatVariant.ALL_BLACK);
+    }
+
+    public void setVariant(CatVariant variant) {
+        var path = BuiltInRegistries.CAT_VARIANT.getKey(variant).getPath();
+        this.entityData.set(VARIANT_STR, path);
+    }
+
+    public
 
     static class CatRelaxOnOwnerGoal extends Goal {
         private final CatEntity cat;

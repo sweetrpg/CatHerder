@@ -32,6 +32,7 @@ public class ModSerializers {
     public static final EntityDataSerializer<CatLevel> CAT_LEVEL_SERIALIZER = new CatLevelSerializer();
     public static final EntityDataSerializer<DimensionDependentArg<Optional<BlockPos>>> CAT_TREE_LOC_SERIALIZER = new TreeLocationsSerializer();
     public static final EntityDataSerializer<Integer> ORIGINAL_BREED_SERIALIZER = EntityDataSerializers.INT;
+    public static final EntityDataSerializer<String> VARIANT_SERIALIZER = EntityDataSerializers.STRING;
 
     private static RegistryObject<EntityDataSerializer> register(final String name, final Supplier<EntityDataSerializer> sup) {
         return SERIALIZERS.register(name, sup);

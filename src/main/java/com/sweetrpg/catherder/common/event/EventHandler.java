@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +41,7 @@ public class EventHandler {
         if(target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == ModItems.TRAINING_TREAT.get()) {
             event.setCanceled(true);
 
-            TamableAnimal vanillaCat = (TamableAnimal) target;
+            Cat vanillaCat = (Cat) target;
 
             Player player = event.getEntity();
 
@@ -56,7 +57,8 @@ public class EventHandler {
                     cat.setOrderedToSit(false);
                     cat.setAge(vanillaCat.getAge());
                     cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
-                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getUUID().variant());
+//                    cat.setOriginalBreed(vanillaCat.getUUID().variant());
+                    cat.setVariant(vanillaCat.getVariant());
 
                     world.addFreshEntity(cat);
 
