@@ -33,7 +33,7 @@ Thanks to everyone that has contributed/helped/inspired. This includes but is no
 * [Farmer's Delight](https://www.curseforge.com/minecraft/mc-mods/farmers-delight) -- inspiration
 * **Katy Schifferer** -- graphics and textures
 * **Beth Schifferer** -- models and textures
-* **Michelle Schifferer** -- testing and ideas
+* **Michelle Schifferer** / **Jennifer Harper** -- testing and ideas
 
 Download it from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cat-herder).
 
