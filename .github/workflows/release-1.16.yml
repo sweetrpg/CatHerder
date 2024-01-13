@@ -46,7 +46,7 @@ jobs:
           git add .release-info/1.16/RELEASE_HASH
           git commit -m "Update 1.16 RELEASE_HASH"
           version=$(cat .release-info/1.16/VERSION)
-          git tag "release-${version}"
+          git tag "release-1.16-${version}"
 
           echo "# $version" > CHANGELOG/1.16/${version}.md
           echo "" >> CHANGELOG/1.16/${version}.md
