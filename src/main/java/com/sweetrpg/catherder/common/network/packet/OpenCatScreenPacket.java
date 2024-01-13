@@ -31,7 +31,7 @@ public class OpenCatScreenPacket implements IPacket<OpenCatScreenData>  {
         ctx.get().enqueueWork(() -> {
             if (ctx.get().getDirection().getReceptionSide() == LogicalSide.SERVER) {
                 ServerPlayer player = ctx.get().getSender();
-                List<CatEntity> cats = player.level().getEntitiesOfClass(CatEntity.class, player.getBoundingBox().inflate(12D, 12D, 12D),
+                List<CatEntity> cats = player.level.getEntitiesOfClass(CatEntity.class, player.getBoundingBox().inflate(12D, 12D, 12D),
                                                                        (cat) -> cat.canInteract(player) && PackCatTalent.hasInventory(cat)
                 );
 				if (!cats.isEmpty()) {

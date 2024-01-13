@@ -41,8 +41,8 @@ public class TalentInstance implements ICatAlteration {
         return this.of(talentIn.get());
     }
 
-    public boolean of(Talent talentDelegateIn) {
-        return talentDelegateIn == this.talentDelegate;
+    public boolean of(Talent talentIn) {
+        return this.of(talentIn);
     }
 
     public TalentInstance copy() {

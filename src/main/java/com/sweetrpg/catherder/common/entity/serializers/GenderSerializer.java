@@ -1,23 +1,23 @@
 package com.sweetrpg.catherder.common.entity.serializers;
 
-import com.sweetrpg.catherder.api.feature.EnumGender;
+import com.sweetrpg.catherder.api.feature.Gender;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 
-public class GenderSerializer implements EntityDataSerializer<EnumGender> {
+public class GenderSerializer implements EntityDataSerializer<Gender> {
 
     @Override
-    public void write(FriendlyByteBuf buf, EnumGender value) {
+    public void write(FriendlyByteBuf buf, Gender value) {
         buf.writeByte(value.getIndex());
     }
 
     @Override
-    public EnumGender read(FriendlyByteBuf buf) {
-        return EnumGender.byIndex(buf.readByte());
+    public Gender read(FriendlyByteBuf buf) {
+        return Gender.byIndex(buf.readByte());
     }
 
     @Override
-    public EnumGender copy(EnumGender value) {
+    public Gender copy(Gender value) {
         return value;
     }
 

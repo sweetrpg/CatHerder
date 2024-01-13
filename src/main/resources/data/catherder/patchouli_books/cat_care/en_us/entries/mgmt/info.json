@@ -1,0 +1,39 @@
+{
+  "name": "Info",
+  "icon": "catherder:catnip",
+  "category": "catherder:mgmt",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Once you've trained your cat, there are things you can do/use to manage your new friend."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "String",
+      "text": "Right-click on your cat with string in your hand to open up the cat info screen. This screen has several sections.",
+      "item": {
+        "item": "minecraft:string"
+      }
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Talents",
+      "text": "On the left is a list of the talents you can assign to your pet. Next to the name of the talent are a pair of buttons for decreasing or increasing the number of points assigned to the talent. Hovering your mouse over either button will display a tooltip describing the talent and showing how many points are currently assigned.$(br2)You can only assign up to 5 points to a talent."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Name and Mode",
+      "text": "In the center of the screen is a text field that lets you give a name to your cat. Above it is a button that, when clicked, will cycle through the various modes you can put your cat in."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Overhead Text",
+      "text": "Above your cat's head is some text that shows various things about your cat.$(br2)At the top is the mode, current hunger, and (optionally) gender. Below that is the name of the cat. If you hold the crouch key down, the hunger value will also show the maximum hunger after a slash, and below the name, the owner's name will be displayed."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Options",
+      "text": "On the right is some text that shows other information about your cat. Below it are two option buttons that let you enable/disable 'friendly fire' (other players can hurt your cat) and 'obey others' (other players can give your pet instructions/commands)."
+    }
+  ]
+}

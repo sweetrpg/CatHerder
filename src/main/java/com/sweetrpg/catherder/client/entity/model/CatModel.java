@@ -51,7 +51,7 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
     }
 
     private static LayerDefinition createBodyLayerInternal(CubeDeformation scale) {
-        CatHerder.LOGGER.debug("Creating body layer with scale: {}", scale);
+        CatHerder.LOGGER.trace("Creating body layer with scale: {}", scale);
 
         MeshDefinition meshDefinition = new MeshDefinition();
         PartDefinition root = meshDefinition.getRoot();
@@ -139,15 +139,15 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 
     @Override
     public void prepareMobModel(T cat, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        CatHerder.LOGGER.debug("Preparing mob model: {}, limbSwing {}, limgSwingAmount {}, partialTickTime {}", cat, limbSwing, limbSwingAmount, partialTickTime);
+        CatHerder.LOGGER.trace("Preparing mob model: {}, limbSwing {}, limgSwingAmount {}, partialTickTime {}", cat, limbSwing, limbSwingAmount, partialTickTime);
 
         this.lowerTail.xRot = cat.getWagAngle(limbSwing, limbSwingAmount, partialTickTime);
 
         if(cat.isInSittingPose()) {
-            CatHerder.LOGGER.debug("Cat is sitting");
+            CatHerder.LOGGER.trace("Cat is sitting");
 
             if(cat.isLying()) {
-                CatHerder.LOGGER.debug("Cat is lying (like a Persian rug)");
+                CatHerder.LOGGER.trace("Cat is lying (like a Persian rug)");
 
 //                this.head.setPos(-1, 19.5F, -7);
 //                this.body.setPos(0, 20, 2);
@@ -165,7 +165,7 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 //                this.legFrontLeft.xRot = -(float) Math.PI / 2F;
             }
             else {
-                CatHerder.LOGGER.debug("Cat is sitting.");
+                CatHerder.LOGGER.trace("Cat is sitting.");
 
                 this.head.setPos(0F, 10.5F, -7.0F);
 //                this.belly.setPos(-1.0F, 16.0F, -3.0F);
@@ -190,7 +190,7 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
             }
         }
         else {
-            CatHerder.LOGGER.debug("Cat is standing/walking.");
+            CatHerder.LOGGER.trace("Cat is standing/walking.");
 
             this.body.setPos(0.0F, 16.5F, 0.0F);
             this.body.xRot = ((float) Math.PI / 2F);
@@ -226,7 +226,7 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
 
     @Override
     public void setupAnim(T catIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        CatHerder.LOGGER.debug("Setup cat animation: {}, limbSwing {}, limbSwingAmount {}, ageInTicks {}, netHeadYaw {}, headPitch {}", catIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        CatHerder.LOGGER.trace("Setup cat animation: {}, limbSwing {}, limbSwingAmount {}, ageInTicks {}, netHeadYaw {}, headPitch {}", catIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
         this.head.xRot = headPitch * ((float) Math.PI / 180F);
         this.head.yRot = netHeadYaw * (catIn.isInSittingPose() && catIn.isLying() ? 0.005F : (float) Math.PI / 180F);

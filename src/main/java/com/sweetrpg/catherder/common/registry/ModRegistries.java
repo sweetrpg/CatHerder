@@ -1,8 +1,9 @@
 package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.api.impl.MissingBeddingMaterial;
-import com.sweetrpg.catherder.api.impl.MissingCasingMissing;
+import com.sweetrpg.catherder.api.impl.MissingDyeMaterial;
+import com.sweetrpg.catherder.api.impl.MissingStructureMaterial;
+import com.sweetrpg.catherder.api.impl.MissingColorMaterial;
 import com.sweetrpg.catherder.api.registry.*;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -16,14 +17,44 @@ public class ModRegistries {
         CatHerderAPI.TALENTS = event.create(makeRegistry(CatHerderAPI.RegistryKeys.TALENTS_REGISTRY, Talent.class));
         CatHerderAPI.ACCESSORIES = event.create(makeRegistry(CatHerderAPI.RegistryKeys.ACCESSORY_REGISTRY, Accessory.class));
         CatHerderAPI.ACCESSORY_TYPE = event.create(makeRegistry(CatHerderAPI.RegistryKeys.ACCESSORY_TYPE_REGISTRY, AccessoryType.class).disableSync());
-//        CatHerderAPI.BEDDING_MATERIAL = event.create(makeRegistry(CatHerderAPI.RegistryKeys.BEDDING_REGISTRY, IBeddingMaterial.class).addCallback(BeddingCallbacks.INSTANCE));
-//        CatHerderAPI.CASING_MATERIAL = event.create(makeRegistry(CatHerderAPI.RegistryKeys.CASING_REGISTRY, ICasingMaterial.class).addCallback(CasingCallbacks.INSTANCE)); //TODO ADD holder object
+        CatHerderAPI.STRUCTURE_MATERIAL = event.create(makeRegistry(CatHerderAPI.RegistryKeys.STRUCTURE_REGISTRY, IStructureMaterial.class).addCallback(StructureCallbacks.INSTANCE));
+        CatHerderAPI.COLOR_MATERIAL = event.create(makeRegistry(CatHerderAPI.RegistryKeys.COLOR_REGISTRY, IColorMaterial.class).addCallback(ColorCallbacks.INSTANCE));
+        CatHerderAPI.DYE_MATERIAL = event.create(makeRegistry(CatHerderAPI.RegistryKeys.DYE_REGISTRY, IDyeMaterial.class).addCallback(DyeCallbacks.INSTANCE));
     }
 
     private static <T> RegistryBuilder<T> makeRegistry(final ResourceLocation rl, Class<T> type) {
         return new RegistryBuilder<T>().setName(rl);
     }
 
+    private static class StructureCallbacks implements IForgeRegistry.DummyFactory<IStructureMaterial> {
+
+        static final StructureCallbacks INSTANCE = new StructureCallbacks();
+
+        @Override
+        public IStructureMaterial createDummy(ResourceLocation key) {
+            return new MissingStructureMaterial();
+        }
+    }
+
+    private static class ColorCallbacks implements IForgeRegistry.DummyFactory<IColorMaterial> {
+
+        static final ColorCallbacks INSTANCE = new ColorCallbacks();
+
+        @Override
+        public IColorMaterial createDummy(ResourceLocation key) {
+            return new MissingColorMaterial();
+        }
+    }
+
+    private static class DyeCallbacks implements IForgeRegistry.DummyFactory<IDyeMaterial> {
+
+        static final DyeCallbacks INSTANCE = new DyeCallbacks();
+
+        @Override
+        public IDyeMaterial createDummy(ResourceLocation key) {
+            return new MissingDyeMaterial();
+        }
+    }
 
 //
 //    private static class AccessoryCallbacks implements IForgeRegistry.DummyFactory<Accessory> {

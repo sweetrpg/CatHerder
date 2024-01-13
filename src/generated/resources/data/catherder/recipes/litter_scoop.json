@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IWI",
+    "III",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "W": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "catherder:litter_scoop"
+  }
+}

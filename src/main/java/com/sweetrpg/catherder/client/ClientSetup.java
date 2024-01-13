@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.client;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModContainerTypes;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
@@ -9,7 +10,6 @@ import com.sweetrpg.catherder.client.entity.model.CatRescueModel;
 import com.sweetrpg.catherder.client.entity.render.CollarRenderManager;
 import com.sweetrpg.catherder.client.entity.render.CatScreenOverlays;
 import com.sweetrpg.catherder.client.entity.render.CatRenderer;
-//import com.sweetrpg.catherder.client.entity.render.CatBeamRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.PackCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.RescueCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.ArmorAccessoryRenderer;
@@ -18,8 +18,6 @@ import com.sweetrpg.catherder.client.screen.CatInventoriesScreen;
 import com.sweetrpg.catherder.client.screen.CatBowlScreen;
 import com.sweetrpg.catherder.client.screen.PackCatScreen;
 import com.sweetrpg.catherder.client.screen.TreatBagScreen;
-//import com.sweetrpg.catherder.client.tileentity.renderer.CattreeRenderer;
-import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -27,11 +25,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientSetup {
 
-    public static final ModelLayerLocation CAT = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "katze"), "main");
+    public static final ModelLayerLocation CAT = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat"), "main");
     public static final ModelLayerLocation CAT_ARMOR = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat"), "armor");
     public static final ModelLayerLocation CAT_BACKPACK = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat_backpack"), "main");
     public static final ModelLayerLocation CAT_RESCUE_BOX = new ModelLayerLocation(new ResourceLocation(CatHerderAPI.MOD_ID, "cat_rescue_box"), "main");
@@ -66,9 +65,11 @@ public class ClientSetup {
         CollarRenderManager.registerLayer(ArmorAccessoryRenderer::new);
         CollarRenderManager.registerLayer(PackCatRenderer::new);
         CollarRenderManager.registerLayer(RescueCatRenderer::new);
+    }
 
-//        OverlayRegistry.registerOverlayTop("Cat Food Level", CatScreenOverlays.FOOD_LEVEL_ELEMENT);
-//        OverlayRegistry.registerOverlayTop("Cat Air Level", CatScreenOverlays.AIR_LEVEL_ELEMENT);
+    public static void registerOverlays(final RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll("cat_food_level", CatScreenOverlays.FOOD_LEVEL_ELEMENT);
+        event.registerAboveAll("cat_air_level", CatScreenOverlays.AIR_LEVEL_ELEMENT);
     }
 
     public static void addClientReloadListeners(final RegisterClientReloadListenersEvent event) {

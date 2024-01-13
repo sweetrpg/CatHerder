@@ -1,0 +1,31 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "display": {
+    "icon": {
+      "item": "catherder:cardboard_box"
+    },
+    "title": {
+      "translate": "advancements.catherder.main.place_cardboard_box.title"
+    },
+    "description": {
+      "translate": "advancements.catherder.main.place_cardboard_box.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "place_cardboard_box": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "catherder:cardboard_box"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "place_cardboard_box"
+    ]
+  ]
+}

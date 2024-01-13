@@ -1,0 +1,30 @@
+{
+  "name": "Modifications",
+  "icon": "catherder:big_catsizer",
+  "category": "catherder:recipes",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "If you want to alter the size of your cat, this is the place to look."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Shears",
+      "text": "Use these to remove a collar from your cat. Can also be used to reset the owner of a cat tree.",
+      "recipe": "catherder:collar_shears"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Enlarger",
+      "text": "It's huge!",
+      "recipe": "catherder:big_catsizer"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Shrinker",
+      "text": "Eat me...",
+      "recipe": "catherder:small_catsizer"
+    }
+  ]
+}

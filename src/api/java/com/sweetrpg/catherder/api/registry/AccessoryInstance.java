@@ -18,22 +18,22 @@ public class AccessoryInstance {
     public static final Comparator<AccessoryInstance> RENDER_SORTER = Comparator.comparing(AccessoryInstance::getRenderIndex);
 
     @Deprecated // Do not call directly use AccessoryInstance#getAccessory
-    private final Accessory accessory;
+    private final Accessory accessoryDelegate;
 
     public AccessoryInstance(Accessory typeIn) {
-        this.accessory = typeIn;
+        this.accessoryDelegate = typeIn;
     }
 
     public Accessory getAccessory() {
-        return this.accessory;
+        return this.accessoryDelegate;
     }
 
     public <T extends Accessory> boolean of(Supplier<T> accessoryIn) {
-        return this.accessory.of(accessoryIn);
+        return this.accessoryDelegate.of(accessoryIn);
     }
 
     public <T extends Accessory> boolean of(T accessoryIn) {
-        return this.accessory.of(accessoryIn);
+        return this.accessoryDelegate.of(accessoryIn);
     }
 
     public <T extends AccessoryType> boolean ofType(Supplier<T> accessoryTypeIn) {
@@ -41,15 +41,15 @@ public class AccessoryInstance {
     }
 
     public <T extends AccessoryType> boolean ofType(T accessoryTypeIn) {
-        return this.ofType(CatHerderAPI.ACCESSORY_TYPE.get().getKey(accessoryTypeIn));
+        return this.ofType(accessoryTypeIn);
     }
 
     public <T extends AccessoryType> boolean ofType(ResourceLocation accessoryTypeDelegateIn) {
-        return CatHerderAPI.ACCESSORY_TYPE.get().getKey(this.accessory.getType()).equals(accessoryTypeDelegateIn);
+        return CatHerderAPI.ACCESSORY_TYPE.get().getKey(this.accessoryDelegate.getType()).equals(accessoryTypeDelegateIn);
     }
 
     public AccessoryInstance copy() {
-        return new AccessoryInstance(this.accessory);
+        return new AccessoryInstance(this.accessoryDelegate);
     }
 
     public ItemStack getReturnItem() {
@@ -61,7 +61,7 @@ public class AccessoryInstance {
     }
 
     public final void writeInstance(CompoundTag compound) {
-        ResourceLocation rl = CatHerderAPI.ACCESSORIES.get().getKey(this.accessory);
+        ResourceLocation rl = CatHerderAPI.ACCESSORIES.get().getKey(this.accessoryDelegate);
         if (rl != null) {
             compound.putString("type", rl.toString());
         }

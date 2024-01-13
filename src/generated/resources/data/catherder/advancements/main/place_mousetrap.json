@@ -1,0 +1,31 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "display": {
+    "icon": {
+      "item": "catherder:mouse_trap"
+    },
+    "title": {
+      "translate": "advancements.catherder.main.place_mousetrap.title"
+    },
+    "description": {
+      "translate": "advancements.catherder.main.place_mousetrap.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "place_mousetrap": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "catherder:mouse_trap"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "place_mousetrap"
+    ]
+  ]
+}

@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +17,7 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.Keys.SOUND_EVENTS, CatHerderAPI.MOD_ID);
 
     private static RegistryObject<SoundEvent> register(final String name) {
-        return register(name, SoundEvent::new);
+        return register(name, SoundEvent::createVariableRangeEvent);
     }
 
     private static <T extends SoundEvent> RegistryObject<T> register(final String name, final Function<ResourceLocation, T> factory) {

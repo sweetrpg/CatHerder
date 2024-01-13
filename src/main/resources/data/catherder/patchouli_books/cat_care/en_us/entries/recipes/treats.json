@@ -1,19 +1,17 @@
 {
   "name": "Treats",
   "icon": "catherder:training_treat",
-  "category": "catherder:items",
+  "category": "catherder:recipes",
+  "sortnum": 1,
   "pages": [
     {
       "type": "patchouli:text",
       "text": "To make your cat smarter or more skilled, you need some special treats."
     },
     {
-      "type": "patchouli:empty"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
+      "type": "patchouli:crafting",
+      "title": "Treat Bag",
+      "recipe": "catherder:treat_bag"
     },
     {
       "type": "patchouli:crafting",
@@ -21,19 +19,9 @@
       "recipe": "catherder:training_treat"
     },
     {
-      "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
-    },
-    {
       "type": "patchouli:crafting",
       "title": "Super Treat",
       "recipe": "catherder:super_treat"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
     },
     {
       "type": "patchouli:crafting",
@@ -41,14 +29,14 @@
       "recipe": "catherder:master_treat"
     },
     {
-      "type": "patchouli:text",
-      "title": "Item",
-      "text": "TODO"
-    },
-    {
       "type": "patchouli:crafting",
       "title": "Wild Treat",
       "recipe": "catherder:wild_treat"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Breeding Treat",
+      "recipe": "catherder:breeding_treat"
     }
   ]
 }

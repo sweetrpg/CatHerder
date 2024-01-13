@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
 import com.sweetrpg.catherder.common.inventory.container.FoodBowlContainer;
 import com.sweetrpg.catherder.common.inventory.container.PackCatContainer;
@@ -23,7 +24,7 @@ import java.util.function.Supplier;
 
 public class ModContainerTypes {
 
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.Keys.CONTAINER_TYPES, CatHerderAPI.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.Keys.MENU_TYPES, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<MenuType<FoodBowlContainer>> CAT_BOWL = register("cat_bowl", (windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();

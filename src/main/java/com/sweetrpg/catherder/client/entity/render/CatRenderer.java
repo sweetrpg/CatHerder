@@ -5,7 +5,7 @@ import com.sweetrpg.catherder.client.CatTextureManager;
 import com.sweetrpg.catherder.client.ClientSetup;
 import com.sweetrpg.catherder.client.entity.model.CatModel;
 //import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
-import com.sweetrpg.catherder.client.entity.render.layer.CatnipLayer;
+import com.sweetrpg.catherder.client.entity.render.layer.CatToyLayer;
 import com.sweetrpg.catherder.client.entity.render.layer.LayerFactory;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -22,7 +22,7 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
         super(ctx, new CatModel(ctx.bakeLayer(ClientSetup.CAT)), 0.5F);
 //        this.addLayer(new CatTalentLayer(this, ctx));
 //        this.addLayer(new CatAccessoryLayer(this, ctx));
-        this.addLayer(new CatnipLayer(this));
+        this.addLayer(new CatToyLayer(this, ctx.getItemInHandRenderer()));
         for(LayerFactory<CatEntity, CatModel<CatEntity>> layer : CollarRenderManager.getLayers()) {
             this.addLayer(layer.createLayer(this, ctx));
         }
@@ -46,8 +46,23 @@ public class CatRenderer extends MobRenderer<CatEntity, CatModel<CatEntity>> {
             double d0 = this.entityRenderDispatcher.distanceToSqr(entityIn);
             if(d0 <= 64 * 64) {
                 String tip = entityIn.getMode().getTip();
-                String label = String.format(ConfigHandler.SERVER.CAT_GENDER.get() ? "%s(%d)%s" : "%s(%d)", Component.translatable(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Component.translatable(entityIn.getGender().getUnlocalisedTip()).getString());
-
+                String label;
+                if(ConfigHandler.SERVER.CAT_GENDER.get()) {
+                    if(this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
+                        label = String.format("%s(%d/%d)%s", Component.translatable(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Mth.ceil(entityIn.getMaxHunger()), Component.translatable(entityIn.getGender().getUnlocalizedTip()).getString());
+                    }
+                    else {
+                        label = String.format("%s(%d)%s", Component.translatable(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Component.translatable(entityIn.getGender().getUnlocalizedTip()).getString());
+                    }
+                }
+                else {
+                    if(this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {
+                        label = String.format("%s(%d/%d)", Component.translatable(tip).getString(), Mth.ceil(entityIn.getCatHunger()), Mth.ceil(entityIn.getMaxHunger()));
+                    }
+                    else {
+                        label = String.format("%s(%d)", Component.translatable(tip).getString(), Mth.ceil(entityIn.getCatHunger()));
+                    }
+                }
                 RenderUtil.renderLabelWithScale(entityIn, this, this.entityRenderDispatcher, label, matrixStackIn, bufferIn, packedLightIn, 0.01F, 0.12F);
 
                 if(d0 <= 5 * 5 && this.entityRenderDispatcher.camera.getEntity().isShiftKeyDown()) {

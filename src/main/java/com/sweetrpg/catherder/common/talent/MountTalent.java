@@ -1,9 +1,10 @@
 package com.sweetrpg.catherder.common.talent;
 
-import com.sweetrpg.catherder.common.registry.ModAttributes;
+import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
-import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
+import com.sweetrpg.catherder.common.registry.ModAttributes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -34,10 +35,10 @@ public class MountTalent extends TalentInstance {
     }
 
     public AttributeModifier createSpeedModifier(AbstractCatEntity catIn, UUID uuidIn) {
-        if (this.level() > 0) {
+        if(this.level() > 0) {
             double speed = 0.06D * this.level();
 
-            if (this.level() >= 5) {
+            if(this.level() >= 5) {
                 speed += 0.04D;
             }
 
@@ -51,10 +52,10 @@ public class MountTalent extends TalentInstance {
     public InteractionResult processInteract(AbstractCatEntity catIn, Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
 
-        if (stack.isEmpty()) { // Held item
-            if (catIn.canInteract(playerIn) && this.level() > 0) { // Cat
-                if (playerIn.getVehicle() == null && !playerIn.isOnGround()) { // Player
-                    if (!catIn.level.isClientSide) {
+        if(stack.isEmpty()) { // Held item
+            if(catIn.canInteract(playerIn) && this.level() > 0) { // Cat
+                if(playerIn.getVehicle() == null && !playerIn.isOnGround()) { // Player
+                    if(!catIn.level.isClientSide) {
                         catIn.setOrderedToSit(false);
                         playerIn.setYRot(catIn.getYRot());
                         playerIn.setXRot(catIn.getXRot());
@@ -70,8 +71,8 @@ public class MountTalent extends TalentInstance {
 
     @Override
     public void livingTick(AbstractCatEntity cat) {
-        if (cat.isVehicle() && cat.getCatHunger() < 1) {
-            cat.getControllingPassenger().sendMessage(Component.translatable("talent.catherder.mount.exhausted", cat.getName()), cat.getUUID());
+        if(cat.isVehicle() && cat.getCatHunger() < 1) {
+            cat.getControllingPassenger().sendSystemMessage(Component.translatable("talent.catherder.mount.exhausted", cat.getName()));
 
             cat.ejectPassengers();
         }
@@ -79,7 +80,7 @@ public class MountTalent extends TalentInstance {
 
     @Override
     public InteractionResultHolder<Integer> hungerTick(AbstractCatEntity catIn, int hungerTick) {
-        if (catIn.isControlledByLocalInstance()) {
+        if(catIn.isControlledByLocalInstance()) {
             hungerTick += this.level() < 5 ? 3 : 1;
             return InteractionResultHolder.success(hungerTick);
         }
@@ -89,7 +90,7 @@ public class MountTalent extends TalentInstance {
 
     @Override
     public InteractionResultHolder<Float> calculateFallDistance(AbstractCatEntity catIn, float distance) {
-        if (this.level() >= 5) {
+        if(this.level() >= 5) {
             return InteractionResultHolder.success(distance - 1F);
         }
 

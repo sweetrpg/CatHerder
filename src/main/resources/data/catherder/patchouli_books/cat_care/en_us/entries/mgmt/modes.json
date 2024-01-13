@@ -1,0 +1,46 @@
+{
+  "name": "Modes",
+  "icon": "catherder:cat_gut",
+  "category": "catherder:mgmt",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In the info screen chapter, you learned that you can assign modes to your cat. They will be discussed in further detail here."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Docile",
+      "text": "In this mode your cat will follow you but not attack anything. But you can always toss some toys around."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wandering",
+      "text": "In this mode, your cat will wander the world freely.$(br2)You may want to put a radio collar on your cat first.... Jus' sayin'."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Attack",
+      "text": "In this mode, your cat will follow you and attack anything that attacks you or that you attack."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tactical",
+      "text": "In this mode, your cat will follow you but will not attack anything unless you use the command beam."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Domestic",
+      "text": "In this mode, your cat will stay near its bowl, litterbox, and cat tree."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Guard",
+      "text": "Cats follow closely and attack any monsters that come close."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Skittish",
+      "text": "The cat will avoid all other creatures, and sometimes its owner.$(br2)You can configure how skittish your cats are in the client configuration."
+    }
+  ]
+}

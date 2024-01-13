@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -23,7 +23,7 @@ public class GuardModeGoal extends NearestAttackableTargetGoal<Monster> {
             return false;
         }
 
-        if (!this.cat.isMode(EnumMode.GUARD)) {
+        if (!this.cat.isMode(Mode.GUARD)) {
             return false;
         }
 
@@ -44,6 +44,6 @@ public class GuardModeGoal extends NearestAttackableTargetGoal<Monster> {
 
     @Override
     protected void findTarget() {
-       this.target = this.cat.level().getNearestEntity(this.targetType, this.targetConditions, this.cat, this.owner.getX(), this.owner.getEyeY(), this.owner.getZ(), this.getTargetSearchArea(this.getFollowDistance()));
+       this.target = this.cat.level.getNearestEntity(this.targetType, this.targetConditions, this.cat, this.owner.getX(), this.owner.getEyeY(), this.owner.getZ(), this.getTargetSearchArea(this.getFollowDistance()));
     }
 }

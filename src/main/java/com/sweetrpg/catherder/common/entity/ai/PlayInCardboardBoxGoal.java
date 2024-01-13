@@ -70,7 +70,7 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
 //
         if(this.isReachedTarget()) {
             if(this.cat.isInSittingPose()) {
-                this.cat.level().playSound(null, this.cat, SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1, 1);
+                this.cat.level.playSound(null, this.cat, SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1, 1);
 
             }
             else if(this.cat.isLyingDown()) {
@@ -81,7 +81,7 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
 //                    this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
 //                }
 //                this.usingLitterboxCounter++;
-                this.cat.level().playSound(null, this.cat, SoundEvents.CAT_PURREOW, SoundSource.AMBIENT, 2, 1);
+                this.cat.level.playSound(null, this.cat, SoundEvents.CAT_PURREOW, SoundSource.AMBIENT, 2, 1);
             }
             else {
                 int what = new Random().nextInt(100);
@@ -97,7 +97,7 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
                 }
                 // 20% chance to just make some noise
                 else {
-                    this.cat.level().playSound(null, this.cat, SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1, 1);
+                    this.cat.level.playSound(null, this.cat, SoundEvents.DEEPSLATE_BREAK, SoundSource.AMBIENT, 1, 1);
                     this.usingCounter = MAX_CARDBOARDBOX_USE_COUNT;
                 }
             }

@@ -1,19 +1,15 @@
 package com.sweetrpg.catherder.common;
 
 import com.sweetrpg.catherder.api.feature.FoodHandler;
-import com.sweetrpg.catherder.api.feature.InteractHandler;
-import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.entity.FishFoodHandler;
-import com.sweetrpg.catherder.common.entity.HelmetInteractHandler;
-import com.sweetrpg.catherder.common.entity.MeatFoodHandler;
+import com.sweetrpg.catherder.common.event.FishFoodHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.HappyEaterTalent;
-import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class CommonSetup {
     public static void init(final FMLCommonSetupEvent event) {
@@ -25,12 +21,12 @@ public class CommonSetup {
             FoodHandler.registerHandler(new FishFoodHandler());
             FoodHandler.registerDynPredicate(HappyEaterTalent.INNER_DYN_PRED);
 
-            InteractHandler.registerHandler(new HelmetInteractHandler());
+//            InteractHandler.registerHandler(new HelmetInteractHandler());
             ConfigHandler.initTalentConfig();
-            CatRespawnCommand.registerSerilizers();
+//            CatRespawnCommand.registerSerilizers(FMLJavaModLoadingContext.get().getModEventBus());
             CatEntity.initDataParameters();
 
-            WildCropGeneration.registerWildCatnipGeneration();
+//            WildCropGeneration.load();
 
             registerCompostables();
 //            registerDispenserBehaviors();

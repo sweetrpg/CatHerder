@@ -13,8 +13,11 @@ public class ModTags {
     public static TagKey<Item> BREEDING_ITEMS = modItemTag("breeding_items");
     public static TagKey<Item> PACK_CAT_BLACKLIST = modItemTag("pack_cat_blacklist");
     public static TagKey<Item> TREATS = modItemTag("treats");
+    public static TagKey<Item> TOYS = modItemTag("toys");
     public static TagKey<Item> MEAT = modItemTag("meat");
     public static final TagKey<Block> WILD_CROPS = modBlockTag("wild_crops");
+    public static final TagKey<Item> CAT_TREES = modItemTag("cat_trees");
+    public static final TagKey<Block> PET_DOORS = modBlockTag("pet_doors");
 //    public static Tag.Named<EntityType<?>> PESTS = modEntityTag("pests");
 
     private static TagKey<Item> modItemTag(String name) {

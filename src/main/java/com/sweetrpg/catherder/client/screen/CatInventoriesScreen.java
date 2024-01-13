@@ -3,15 +3,15 @@ package com.sweetrpg.catherder.client.screen;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.api.registry.AccessoryInstance;
 import com.sweetrpg.catherder.client.screen.widget.SmallButton;
+import com.sweetrpg.catherder.common.entity.accessory.DyeableAccessory;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
 import com.sweetrpg.catherder.common.inventory.container.slot.CatInventorySlot;
 import com.sweetrpg.catherder.common.lib.Resources;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.network.packet.data.CatInventoryPageData;
-import com.sweetrpg.catherder.common.entity.accessory.DyeableAccessory;
+import com.sweetrpg.catherder.common.registry.ModAccessories;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -47,7 +47,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
         this.left = new SmallButton(this.leftPos + this.imageWidth - 29, this.topPos + 4, Component.literal("<"), (btn) -> {
             int page = this.getMenu().getPage();
 
-            if (page > 0) {
+            if(page > 0) {
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatInventoryPageData(--page));
             }
 
@@ -57,7 +57,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
         this.right = new SmallButton(this.leftPos + this.imageWidth - 26 + 9, this.topPos + 4, Component.literal(">"), (btn) -> {
             int page = this.getMenu().getPage();
 
-            if (page < this.getMenu().getTotalNumColumns() - 9) {
+            if(page < this.getMenu().getTotalNumColumns() - 9) {
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatInventoryPageData(++page));
             }
 
@@ -65,10 +65,11 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
             this.left.active = page > 0;
 
         });
-        if (this.getMenu().getTotalNumColumns() > 9) {
+        if(this.getMenu().getTotalNumColumns() > 9) {
             this.left.active = false;
             this.right.active = true;
-        } else {
+        }
+        else {
             this.left.visible = false;
             this.right.visible = false;
         }
@@ -92,16 +93,17 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
         int i1 = (this.height - this.imageHeight) / 2;
         this.blit(stack, l, i1, 0, 0, this.imageWidth, this.imageHeight);
 
-        for (CatInventorySlot slot : this.getMenu().getSlots()) {
-            if (!slot.isActive()) {
+        for(CatInventorySlot slot : this.getMenu().getSlots()) {
+            if(!slot.isActive()) {
                 continue;
             }
 
             Optional<AccessoryInstance> inst = slot.getCat().getAccessory(ModAccessories.DYEABLE_COLLAR.get());
-            if (inst.isPresent()) {
+            if(inst.isPresent()) {
                 float[] color = inst.get().cast(DyeableAccessory.DyeableAccessoryInstance.class).getColor();
                 RenderSystem.setShaderColor(color[0], color[1], color[2], 1.0F);
-            } else {
+            }
+            else {
                 RenderSystem.setShaderColor(1, 1, 1, 1);
             }
 
@@ -111,26 +113,27 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-       InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
-       if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
-           if (this.player.getAbilities().instabuild) {
-               this.minecraft.setScreen(new CreativeModeInventoryScreen(this.player));
-           } else {
-               this.minecraft.setScreen(new InventoryScreen(this.player));
-           }
-           return true;
-       }
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        if(this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
+            if(this.player.getAbilities().instabuild) {
+                this.minecraft.setScreen(new CreativeModeInventoryScreen(this.player, this.minecraft.player.connection.enabledFeatures(), this.minecraft.options.operatorItemsTab().get()));
+            }
+            else {
+                this.minecraft.setScreen(new InventoryScreen(this.player));
+            }
+            return true;
+        }
 
-       return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
     protected void renderTooltip(PoseStack stack, int mouseX, int mouseY) {
-        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+        if(this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
 //            if (this.hoveredSlot instanceof CatInventorySlot) {
 //                this.renderTooltip(Arrays.asList(new TranslationTextComponent("test").applyTextStyle(TextFormatting.RED).getFormattedText()), mouseX, mouseY);
 //            } else {
-                this.renderTooltip(stack, this.hoveredSlot.getItem(), mouseX, mouseY);
+            this.renderTooltip(stack, this.hoveredSlot.getItem(), mouseX, mouseY);
 //            }
         }
 

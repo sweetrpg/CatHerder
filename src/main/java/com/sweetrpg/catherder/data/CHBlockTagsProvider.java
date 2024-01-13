@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModTags;
@@ -25,7 +26,7 @@ public class CHBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    public void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.Provider provider) {
         this.registerModTags();
         this.registerMinecraftTags();
         this.registerForgeTags();

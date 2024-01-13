@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import org.joml.Matrix4f;
 
 public class RenderUtil {
 
@@ -36,9 +37,9 @@ public class RenderUtil {
         int j = (int) (f1 * 255.0F) << 24;
         Font fontrenderer = renderer.getFont();
         float f2 = -fontrenderer.width(text) / 2F;
-        fontrenderer.drawInBatch(text, f2, 0, 553648127, false, matrix4f, buffer, flag, j, packedLightIn);
-        if (flag) {
-            fontrenderer.drawInBatch(text, f2, 0, -1, false, matrix4f, buffer, false, 0, packedLightIn);
+        fontrenderer.drawInBatch(text, f2, 0, 553648127, false, matrix4f, buffer, Font.DisplayMode.NORMAL, j, packedLightIn);
+        if(flag) {
+            fontrenderer.drawInBatch(text, f2, 0, -1, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0, packedLightIn);
         }
 
         stack.popPose();
@@ -77,7 +78,6 @@ public class RenderUtil {
         bufferbuilder.vertex(maxX, yMax, zLevel).uv(textureXMax, textureYMax).endVertex();
         bufferbuilder.vertex(maxX, yMin, zLevel).uv(textureXMax, textureYMin).endVertex();
         bufferbuilder.vertex(minX, yMin, zLevel).uv(textureXMin, textureYMin).endVertex();
-        bufferbuilder.end();
-        BufferUploader.end(bufferbuilder);
+        BufferUploader.drawWithShader(bufferbuilder.end());
     }
 }

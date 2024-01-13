@@ -3,10 +3,9 @@ package com.sweetrpg.catherder.common.registry;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel;
 import com.sweetrpg.catherder.api.registry.Accessory;
-import com.sweetrpg.catherder.common.FoodValues;
+import com.sweetrpg.catherder.common.lib.FoodValues;
 import com.sweetrpg.catherder.common.entity.accessory.DyeableAccessory;
 import com.sweetrpg.catherder.common.item.*;
-import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.world.item.*;
@@ -26,9 +25,9 @@ public class ModItems {
 //    public static final RegistryObject<Item> CAT_TREE = register("cat_tree", () -> new BlockItem(ModBlocks.CAT_TREE.get(), new Item.Properties().tab(ModItemGroups.GENERAL)));
 
     // catnip
-    public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties()/*.tab(ModItemGroups.GENERAL)*/));
-    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()/*.food(FoodValues.CATNIP).*//*.tab(ModItemGroups.GENERAL)*/));
-    public static final RegistryObject<Item> CATNIP_SEEDS = ITEMS.register("catnip_seeds", () -> new ItemNameBlockItem(ModBlocks.CATNIP_CROP.get(), new Item.Properties()/*.tab(ModItemGroups.GENERAL)*/));
+    public static final RegistryObject<Item> WILD_CATNIP = register("wild_catnip", () -> new BlockItem(ModBlocks.WILD_CATNIP.get(), new Item.Properties() /*.tab(ModItemGroups.GENERAL) */));
+    public static final RegistryObject<Item> CATNIP = register("catnip", () -> new CatnipItem(new Item.Properties()/*.food(FoodValues.CATNIP).*/ /*.tab(ModItemGroups.GENERAL) */));
+    public static final RegistryObject<Item> CATNIP_SEEDS = ITEMS.register("catnip_seeds", () -> new ItemNameBlockItem(ModBlocks.CATNIP_CROP.get(), new Item.Properties() /*.tab(ModItemGroups.GENERAL) */));
 
     // toys
     public static final RegistryObject<Item> YARN = registerThrowToy("yarn");
@@ -40,7 +39,7 @@ public class ModItems {
 
     // food
     public static final RegistryObject<Item> CHEESE_WEDGE = register("cheese_wedge",
-                                                                     () -> new Item(new Item.Properties().food(FoodValues.CHEESE)/*.tab(ModItemGroups.GENERAL)*/));
+                                                                     () -> new Item(new Item.Properties().food(FoodValues.CHEESE) /*.tab(ModItemGroups.GENERAL) */));
 //    public static final RegistryObject<Item> LASAGNA = register("lasagna");
 
     // treats
@@ -51,7 +50,7 @@ public class ModItems {
     public static final RegistryObject<Item> BREEDING_TREAT = register("breeding_treat");
 
     // maintenance items
-    public static final RegistryObject<Item> COLLAR_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
+    public static final RegistryObject<Item> CAT_SHEARS = registerWith("collar_shears", CatShearsItem::new, 1);
     public static final RegistryObject<Item> CAT_CHARM = registerWith("cat_charm", CatCharmItem::new, 1);
     public static final RegistryObject<Item> RADAR = registerWith("radar", RadarItem::new, 1);
     public static final RegistryObject<Item> CREATIVE_RADAR = registerWith("creative_radar", RadarItem::new, 1);
@@ -59,7 +58,7 @@ public class ModItems {
     public static final RegistryObject<Item> CAT_SMALLERER = registerSizer("small_catsizer", CatSizerItem.Type.SMALL);
     public static final RegistryObject<Item> CAT_BIGGERER = registerSizer("big_catsizer", CatSizerItem.Type.BIG);
     public static final RegistryObject<Item> OWNER_CHANGE = registerWith("owner_change", ChangeOwnerItem::new, 1);
-//    public static final RegistryObject<Item> LITTER_BOX = register("litter_box", LitterBoxItem::new);
+    public static final RegistryObject<Item> LITTER_SCOOP = register("litter_scoop", () -> new LitterScoopItem(new Item.Properties().durability(64) /*.tab(ModItemGroups.GENERAL) */));
     //public static final RegistryObject<Item> PATROL = registerWith("patrol_item", PatrolItem::new, 1);
 
     // other items
@@ -70,7 +69,7 @@ public class ModItems {
     public static final RegistryObject<DyeableAccessoryItem> WOOL_COLLAR = registerAccessoryDyed("wool_collar", ModAccessories.DYEABLE_COLLAR);
     public static final RegistryObject<AccessoryItem> CREATIVE_COLLAR = registerAccessory("creative_collar", ModAccessories.GOLDEN_COLLAR);
     public static final RegistryObject<AccessoryItem> SPOTTED_COLLAR = registerAccessory("spotted_collar", ModAccessories.SPOTTED_COLLAR);
-    public static final RegistryObject<AccessoryItem> MULTICOLOURED_COLLAR = registerAccessory("multicolored_collar", ModAccessories.MULTICOLORED_COLLAR);
+    public static final RegistryObject<AccessoryItem> MULTICOLORED_COLLAR = registerAccessory("multicolored_collar", ModAccessories.MULTICOLORED_COLLAR);
     public static final RegistryObject<AccessoryItem> CAPE = registerAccessory("cape", ModAccessories.CAPE);
     //    public static final RegistryObject<DyeableAccessoryItem> CAPE_COLOURED = registerAccessoryDyed("cape_coloured", CatAccessories.DYEABLE_CAPE);
     public static final RegistryObject<AccessoryItem> SUNGLASSES = registerAccessory("sunglasses", ModAccessories.SUNGLASSES);
@@ -78,7 +77,7 @@ public class ModItems {
 //    public static final RegistryObject<AccessoryItem> LEATHER_JACKET = registerAccessory("leather_jacket", CatAccessories.LEATHER_JACKET_CLOTHING);
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties()/*.tab(ModItemGroups.GENERAL)*/;
+        return new Item.Properties() /*.tab(ModItemGroups.GENERAL) */;
     }
 
     private static RegistryObject<Item> registerThrowToy(final String name) {

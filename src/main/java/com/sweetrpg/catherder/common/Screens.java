@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common;
 
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
-import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.inventory.container.CatInventoriesContainer;
 import com.sweetrpg.catherder.common.inventory.container.PackCatContainer;
 import com.sweetrpg.catherder.common.inventory.container.TreatBagContainer;
@@ -86,7 +86,7 @@ public class Screens {
 
     public static void openPackCatScreen(ServerPlayer player, AbstractCatEntity catIn) {
         if (catIn.isAlive()) {
-            NetworkHooks.openGui(player, new PackCatContainerProvider(catIn), (buf) -> {
+            NetworkHooks.openScreen(player, new PackCatContainerProvider(catIn), (buf) -> {
                 buf.writeInt(catIn.getId());
             });
         }
@@ -94,7 +94,7 @@ public class Screens {
 
     public static void openCatInventoriesScreen(ServerPlayer player, List<CatEntity> catIn) {
         if (!catIn.isEmpty()) {
-            NetworkHooks.openGui(player, new CatInventoriesContainerProvider(catIn), (buf) -> {
+            NetworkHooks.openScreen(player, new CatInventoriesContainerProvider(catIn), (buf) -> {
                 buf.writeInt(catIn.size());
                 for (CatEntity cat : catIn) {
                     buf.writeInt(cat.getId());
@@ -104,12 +104,12 @@ public class Screens {
     }
 
     public static void openFoodBowlScreen(ServerPlayer player, CatBowlBlockEntity foodBowl) {
-        NetworkHooks.openGui(player, foodBowl, foodBowl.getBlockPos());
+        NetworkHooks.openScreen(player, foodBowl, foodBowl.getBlockPos());
     }
 
     public static void openTreatBagScreen(ServerPlayer player, ItemStack stackIn, int slotId) {
         if (stackIn.getItem() == ModItems.TREAT_BAG.get()) {
-            NetworkHooks.openGui(player, new TreatBagContainerProvider(stackIn, slotId), buf -> {
+            NetworkHooks.openScreen(player, new TreatBagContainerProvider(stackIn, slotId), buf -> {
                 buf.writeVarInt(slotId);
                 buf.writeItem(stackIn);
             });

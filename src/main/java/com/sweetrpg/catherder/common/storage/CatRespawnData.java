@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.storage;
 
 import com.google.common.collect.Lists;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -71,7 +72,7 @@ public class CatRespawnData implements ICatData {
 
     @Nullable
     public CatEntity respawn(ServerLevel worldIn, Player playerIn, BlockPos pos) {
-        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, (CompoundTag) null, (Component) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
+        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, (ItemStack) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
 
         // Failed for some reason
         if (cat == null) {
@@ -84,7 +85,7 @@ public class CatRespawnData implements ICatData {
         cat.setUUID(uuid);
         cat.load(compoundnbt);
 
-        cat.setMode(EnumMode.DOCILE);
+        cat.setMode(Mode.DOCILE);
         cat.setOrderedToSit(true);
 
         return cat;

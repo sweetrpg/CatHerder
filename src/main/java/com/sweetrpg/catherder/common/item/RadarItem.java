@@ -4,6 +4,8 @@ import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import net.minecraft.Util;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -39,20 +41,20 @@ public class RadarItem extends Item {
             if (playerIn.isShiftKeyDown()) {
                 CatLocationStorage locationManager = CatLocationStorage.get(worldIn);
                 for (UUID uuid : locationManager.getAllUUID()) {
-                    playerIn.sendMessage(new TextComponent(locationManager.getData(uuid).toString()), Util.NIL_UUID);
+                    playerIn.sendSystemMessage(Component.literal(locationManager.getData(uuid).toString()));
                 }
                 return new InteractionResultHolder<>(InteractionResult.FAIL, playerIn.getItemInHand(handIn));
             }
 
             ResourceKey<Level> dimCurr = playerIn.level.dimension();
 
-            playerIn.sendMessage(new TextComponent(""), Util.NIL_UUID);
+            playerIn.sendSystemMessage(CommonComponents.EMPTY);
 
             CatLocationStorage locationManager = CatLocationStorage.get(worldIn);
             List<CatLocationData> ownCats = locationManager.getCats(playerIn, dimCurr).collect(Collectors.toList());
 
             if (ownCats.isEmpty()) {
-                playerIn.sendMessage(Component.translatable("catradar.errornull", dimCurr.location()), Util.NIL_UUID);
+                playerIn.sendSystemMessage(Component.translatable("catradar.errornull", dimCurr.location()));
             } else {
                 boolean flag = false;
 
@@ -63,12 +65,12 @@ public class RadarItem extends Item {
                         String translateStr = RadarItem.getDirectionTranslationKey(loc, playerIn);
                         int distance = Mth.ceil(loc.getPos() != null ? loc.getPos().distanceTo(playerIn.position()) : -1);
 
-                        playerIn.sendMessage(Component.translatable(translateStr, loc.getName(worldIn), distance), Util.NIL_UUID);
+                        playerIn.sendSystemMessage(Component.translatable(translateStr, loc.getName(worldIn), distance));
                     }
                 }
 
                 if (!flag) {
-                    playerIn.sendMessage(Component.translatable("catradar.errornoradio"), Util.NIL_UUID);
+                    playerIn.sendSystemMessage(Component.translatable("catradar.errornoradio"));
                 }
             }
 
@@ -82,11 +84,11 @@ public class RadarItem extends Item {
             }
 
             if (otherCats.size() > 0) {
-                playerIn.sendMessage(Component.translatable("catradar.notindim", otherCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+                playerIn.sendSystemMessage(Component.translatable("catradar.notindim", otherCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))));
             }
 
             if (noCats.size() > 0 && stack.getItem() == ModItems.CREATIVE_RADAR.get()) {
-                playerIn.sendMessage(Component.translatable("catradar.errornull", noCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))), Util.NIL_UUID);
+                playerIn.sendSystemMessage(Component.translatable("catradar.errornull", noCats.stream().map(ResourceKey::location).map(Objects::toString).collect(Collectors.joining(", "))));
             }
         }
         return new InteractionResultHolder<ItemStack>(InteractionResult.FAIL, stack);

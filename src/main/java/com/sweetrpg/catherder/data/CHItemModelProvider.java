@@ -1,10 +1,12 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -17,8 +19,8 @@ import java.util.function.Supplier;
 
 public class CHItemModelProvider extends ItemModelProvider {
 
-    public CHItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, CatHerderAPI.MOD_ID, existingFileHelper);
+    public CHItemModelProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -29,50 +31,51 @@ public class CHItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        handheld(ModItems.CAT_SMALLERER);
         handheld(ModItems.CAT_BIGGERER);
+        handheld(ModItems.CAT_SMALLERER);
 
-        handheld(ModItems.TRAINING_TREAT);
-        handheld(ModItems.SUPER_TREAT);
-        handheld(ModItems.MASTER_TREAT);
-        handheld(ModItems.WILD_TREAT);
         handheld(ModItems.BREEDING_TREAT);
         handheld(ModItems.CAT_TOY);
+        handheld(ModItems.LITTER_SCOOP);
+        handheld(ModItems.MASTER_TREAT);
+        handheld(ModItems.SUPER_TREAT);
+        handheld(ModItems.TRAINING_TREAT);
+        handheld(ModItems.WILD_TREAT);
 
         radar(ModItems.CREATIVE_RADAR);
         radar(ModItems.RADAR);
 
         generated(ModItems.CAPE);
-//        generated(CatItems.CAPE_COLOURED);
-        generated(ModItems.COLLAR_SHEARS);
-        generated(ModItems.CREATIVE_COLLAR);
+        generated(ModItems.CARDBOARD);
+        generated(ModItems.CATNIP);
+        generated(ModItems.CATNIP_SEEDS);
         generated(ModItems.CAT_CHARM);
-//        generated(CatItems.GUARD_SUIT);
-//        generated(CatItems.LEATHER_JACKET);
-        generated(ModItems.MULTICOLOURED_COLLAR);
+        generated(ModItems.CAT_GUT);
+        generated(ModItems.CHEESE_WEDGE);
+        generated(ModItems.CAT_SHEARS);
+        generated(ModItems.CREATIVE_COLLAR);
+        generated(ModItems.MULTICOLORED_COLLAR);
         generated(ModItems.OWNER_CHANGE);
         generated(ModItems.RADIO_COLLAR);
         generated(ModItems.SPOTTED_COLLAR);
         generated(ModItems.SUNGLASSES);
         generated(ModItems.TREAT_BAG);
         generated(ModItems.WOOL_COLLAR);
-        generated(ModItems.CATNIP);
-        generated(ModItems.CATNIP_SEEDS);
-        generated(ModItems.CARDBOARD);
         generated(ModItems.YARN);
-//        generated(ModItems.RODENT);
-        generated(ModItems.CHEESE_WEDGE);
-        generated(ModItems.CAT_GUT);
+//        generated(CatItems.CAPE_COLOURED);
+//        generated(CatItems.GUARD_SUIT);
+//        generated(CatItems.LEATHER_JACKET);
 //        generated(ModItems.LASAGNA);
+//        generated(ModItems.RODENT);
 
-        blockItem(ModBlocks.CAT_TREE);
-        blockItem(ModBlocks.PET_DOOR);
-        blockItem(ModBlocks.CAT_BOWL);
-        blockItem(ModBlocks.LITTER_BOX);
-        blockItem(ModBlocks.WILD_CATNIP);
         blockItem(ModBlocks.CARDBOARD_BOX);
+        blockItem(ModBlocks.CAT_BOWL);
+        blockItem(ModBlocks.CAT_TREE);
         blockItem(ModBlocks.CHEESE_WHEEL);
+        blockItem(ModBlocks.LITTERBOX);
         blockItem(ModBlocks.MOUSE_TRAP, "_triggered");
+        blockItem(ModBlocks.PET_DOOR);
+        blockItem(ModBlocks.WILD_CATNIP);
     }
 
     private ResourceLocation itemTexture(Supplier<? extends ItemLike> item) {
@@ -80,7 +83,7 @@ public class CHItemModelProvider extends ItemModelProvider {
     }
 
     private String name(Supplier<? extends ItemLike> item) {
-        return item.get().asItem().getRegistryName().getPath();
+        return item.get().asItem().toString();
     }
 
     private ItemModelBuilder blockItem(Supplier<? extends Block> block) {
@@ -93,10 +96,10 @@ public class CHItemModelProvider extends ItemModelProvider {
 
     private ItemModelBuilder radar(Supplier<? extends ItemLike> item, ResourceLocation texture) {
         ItemModelBuilder builder = generated(item, texture);
-        builder.transforms().transform(Perspective.THIRDPERSON_RIGHT).rotation(0, 0, 55F).translation(0, 4F, 0.5F).scale(0.85F);
-        builder.transforms().transform(Perspective.THIRDPERSON_LEFT).rotation(0, 0, -55F).translation(0, 4F, 0.5F).scale(0.85F);
-        builder.transforms().transform(Perspective.FIRSTPERSON_RIGHT).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
-        builder.transforms().transform(Perspective.FIRSTPERSON_LEFT).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
+        builder.transforms().transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0, 0, 55F).translation(0, 4F, 0.5F).scale(0.85F);
+        builder.transforms().transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(0, 0, -55F).translation(0, 4F, 0.5F).scale(0.85F);
+        builder.transforms().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
+        builder.transforms().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).translation(-3.13F, 3.2F, 1.13F).scale(0.8F);
         return builder;
     }
 
