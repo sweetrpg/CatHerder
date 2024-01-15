@@ -1,17 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cake"
+    },
+    "M": {
+      "item": "minecraft:red_mushroom"
+    }
+  },
   "pattern": [
     "MC"
   ],
-  "key": {
-    "M": {
-      "item": "minecraft:red_mushroom"
-    },
-    "C": {
-      "item": "minecraft:cake"
-    }
-  },
   "result": {
     "item": "catherder:big_catsizer"
-  }
+  },
+  "show_notification": true
 }

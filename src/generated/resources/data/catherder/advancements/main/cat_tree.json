@@ -1,27 +1,27 @@
 {
   "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "cat_tree": {
+      "conditions": {
+        "block": "catherder:cat_tree"
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "catherder:cat_tree",
-      "nbt": "{catherder:{colorId:\"minecraft:lime_wool\"}}"
-    },
-    "title": {
-      "translate": "advancements.catherder.main.cat_tree.title"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "advancements.catherder.main.cat_tree.description"
     },
     "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:cat_tree",
+      "nbt": "{catherder:{colorId:\"minecraft:black_wool\"}}"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "cat_tree": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "catherder:cat_tree"
-      }
+    "title": {
+      "translate": "advancements.catherder.main.cat_tree.title"
     }
   },
   "requirements": [

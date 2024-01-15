@@ -1,37 +1,37 @@
 {
   "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "play_with_cat": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ],
+        "item": {
+          "tag": "catherder:toys"
+        }
+      },
+      "trigger": "minecraft:thrown_item_picked_up_by_entity"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "catherder:cat_toy"
-    },
-    "title": {
-      "translate": "advancements.catherder.main.toy.title"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "advancements.catherder.main.toy.description"
     },
     "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:cat_toy"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "play_with_cat": {
-      "trigger": "minecraft:thrown_item_picked_up_by_entity",
-      "conditions": {
-        "item": {
-          "tag": "catherder:toys"
-        },
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "predicate": {
-              "type": "catherder:cat"
-            },
-            "entity": "this"
-          }
-        ]
-      }
+    "title": {
+      "translate": "advancements.catherder.main.toy.title"
     }
   },
   "requirements": [

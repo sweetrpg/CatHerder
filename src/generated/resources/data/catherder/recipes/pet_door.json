@@ -1,3 +1,4 @@
 {
-  "type": "catherder:pet_door"
+  "type": "catherder:pet_door",
+  "category": "misc"
 }
