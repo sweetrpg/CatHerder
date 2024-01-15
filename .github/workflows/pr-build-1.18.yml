@@ -5,11 +5,11 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: PR (1.19 Release)
+name: PR (1.18)
 
 on:
   pull_request:
-    branches: [ 1.19-release ]
+    branches: [ 1.18 ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -24,6 +24,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
