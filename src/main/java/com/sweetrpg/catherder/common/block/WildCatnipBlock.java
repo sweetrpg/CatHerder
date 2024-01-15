@@ -37,10 +37,10 @@ public class WildCatnipBlock extends FlowerBlock /* implements BonemealableBlock
         return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
     }
 
-    @Override
-    public OffsetType getOffsetType() {
-        return renderOffset ? OffsetType.XZ : OffsetType.NONE;
-    }
+//    @Override
+//    public OffsetType getOffsetType() {
+//        return renderOffset ? OffsetType.XZ : OffsetType.NONE;
+//    }
 
     @Override
     public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {

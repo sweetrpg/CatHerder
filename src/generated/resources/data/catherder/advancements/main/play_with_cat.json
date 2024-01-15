@@ -1,0 +1,43 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "play_with_cat": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ],
+        "item": {
+          "tag": "catherder:toys"
+        }
+      },
+      "trigger": "minecraft:thrown_item_picked_up_by_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.toy.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:cat_toy"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.toy.title"
+    }
+  },
+  "requirements": [
+    [
+      "play_with_cat"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

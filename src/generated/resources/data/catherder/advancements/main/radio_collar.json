@@ -1,0 +1,45 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "radio_collar": {
+      "conditions": {
+        "item": {
+          "items": [
+            "catherder:radio_collar"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.radio_collar.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:radio_collar"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.radio_collar.title"
+    }
+  },
+  "requirements": [
+    [
+      "radio_collar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

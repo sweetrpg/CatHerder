@@ -1,18 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "S S",
-    "GSG"
-  ],
+  "category": "misc",
   "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
     "S": {
       "item": "minecraft:stick"
     },
-    "G": {
-      "item": "minecraft:glass_pane"
+    "s": {
+      "item": "minecraft:string"
     }
   },
+  "pattern": [
+    " s ",
+    "S S",
+    "GSG"
+  ],
   "result": {
     "item": "catherder:sunglasses"
-  }
+  },
+  "show_notification": true
 }

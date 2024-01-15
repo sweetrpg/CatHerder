@@ -37,7 +37,7 @@ public class FindWaterGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.creature.getFirstPassenger().onGround() || (this.creature.tickCount % 5) != 0) {
+        if (!this.creature.onGround() || (this.creature.tickCount % 5) != 0) {
             return false;
         }
 
@@ -164,10 +164,10 @@ public class FindWaterGoal extends Goal {
      */
     public BlockType getBlockType(BlockPos posIn) {
         // If the block is fire or lava
-        Material material = this.world.getBlockState(posIn).getMaterial();
-        if (material == Material.FIRE || material == Material.LAVA) {
-            return BlockType.FIRE;
-        }
+//        Material material = this.world.getBlockState(posIn).getMaterial();
+//        if (material == Material.FIRE || material == Material.LAVA) {
+//            return BlockType.FIRE;
+//        }
 
         // If it is water
         if (this.world.getFluidState(posIn).is(FluidTags.WATER)) {

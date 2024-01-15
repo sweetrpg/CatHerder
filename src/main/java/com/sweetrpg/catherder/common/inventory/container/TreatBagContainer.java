@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -20,7 +21,7 @@ public class TreatBagContainer extends AbstractContainerMenu {
         super(ModContainerTypes.TREAT_BAG.get(), windowId);
         this.slot = slotIn;
         this.itemstack = itemstackIn;
-        this.bagInventory = itemstackIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(() -> new RuntimeException("Item handler not present."));
+        this.bagInventory = itemstackIn.getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(() -> new RuntimeException("Item handler not present."));
 
         checkContainerSize(playerInventory, 3 * 5);
 

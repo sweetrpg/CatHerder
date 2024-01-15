@@ -1,0 +1,38 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "cat_tree": {
+      "conditions": {
+        "location": [
+          {
+            "block": "catherder:cat_tree",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.cat_tree.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:cat_tree",
+      "nbt": "{catherder:{colorId:\"minecraft:pink_wool\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.cat_tree.title"
+    }
+  },
+  "requirements": [
+    [
+      "cat_tree"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

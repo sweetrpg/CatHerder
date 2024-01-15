@@ -80,7 +80,7 @@ public class Accessory {
     }
 
     public <T extends Accessory> boolean of(T accessoryIn) {
-        return CatHerderAPI.ACCESSORIES.get().getKey(accessoryIn).equals(CatHerderAPI.ACCESSORIES.get().getKey(this));
+        return this.of(accessoryIn);
     }
 
     private ResourceLocation modelTexture;

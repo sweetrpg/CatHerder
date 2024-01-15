@@ -1,0 +1,52 @@
+{
+  "parent": "catherder:main/place_litterbox",
+  "criteria": {
+    "clean_litterbox": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "catherder:litter_box"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "catherder:litter_scoop"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.clean_litterbox.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:litter_scoop",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.clean_litterbox.title"
+    }
+  },
+  "requirements": [
+    [
+      "clean_litterbox"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Function;
 
-import com.sweetrpg.catherder.api.feature.EnumGender;
+import com.sweetrpg.catherder.api.feature.Gender;
 import com.sweetrpg.catherder.api.feature.ICat;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -76,25 +76,25 @@ public abstract class AbstractCatEntity extends TamableAnimal implements ICat {
         }
     }
 
-    public abstract Component getTranslationKey(Function<EnumGender, String> function);
+    public abstract Component getTranslationKey(Function<Gender, String> function);
 
     public Component getGenderPronoun() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedPronoun);
+        return this.getTranslationKey(Gender::getUnlocalisedPronoun);
     }
 
     public Component getGenderSubject() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedSubject);
+        return this.getTranslationKey(Gender::getUnlocalisedSubject);
     }
 
     public Component getGenderTitle() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedTitle);
+        return this.getTranslationKey(Gender::getUnlocalizedTitle);
     }
 
     public Component getGenderTip() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedTip);
+        return this.getTranslationKey(Gender::getUnlocalizedTip);
     }
 
     public Component getGenderName() {
-        return this.getTranslationKey(EnumGender::getUnlocalisedName);
+        return this.getTranslationKey(Gender::getUnlocalizedName);
     }
 }

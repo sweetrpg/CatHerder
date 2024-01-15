@@ -4,6 +4,7 @@ import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import com.sweetrpg.catherder.common.registry.ModItems;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +27,7 @@ public class BedFinderTalent extends TalentInstance {
             if(!playerIn.hasPassenger(catIn)) {
                 if(playerIn.getItemInHand(handIn).getItem() == ModItems.YARN.get() && catIn.canInteract(playerIn)) {
                     if(catIn.startRiding(playerIn)) {
-                        if(!catIn.level.isClientSide) {
+                        if(!catIn.level().isClientSide) {
                             catIn.setOrderedToSit(true);
                         }
 

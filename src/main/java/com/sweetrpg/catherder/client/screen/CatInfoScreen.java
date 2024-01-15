@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.feature.CatLevel.Type;
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -15,6 +15,7 @@ import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -32,7 +33,6 @@ import net.minecraftforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class CatInfoScreen extends Screen {
@@ -118,18 +118,18 @@ public class CatInfoScreen extends Screen {
 //        this.addRenderableWidget(lessBtn);
         //}
 
-        Button modeBtn = new Button.Builder(Component.translatable(this.cat.getMode().getUnlocalisedName()), button -> {
-            EnumMode mode = CatInfoScreen.this.cat.getMode().nextMode();
+        Button modeBtn = new Button.Builder(Component.translatable(this.cat.getMode().getUnlocalizedName()), button -> {
+            Mode mode = CatInfoScreen.this.cat.getMode().nextMode();
 
-            if(mode == EnumMode.WANDERING && !CatInfoScreen.this.cat.getBowlPos().isPresent()) {
-                button.setMessage(Component.translatable(mode.getUnlocalisedName()).withStyle(ChatFormatting.RED));
+            if(mode == Mode.DOMESTIC && !CatInfoScreen.this.cat.getBowlPos().isPresent()) {
+                button.setMessage(Component.translatable(mode.getUnlocalizedName()).withStyle(ChatFormatting.RED));
             }
             else {
-                button.setMessage(Component.translatable(mode.getUnlocalisedName()));
+                button.setMessage(Component.translatable(mode.getUnlocalizedName()));
             }
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatModeData(CatInfoScreen.this.cat.getId(), mode));
-        }).pos(topX + 40, topY + 25).size(60, 20).tooltip(this.getTooltipForMode(this.cat.getMode())).build();
+        }).pos(topX + 40, topY + 25).size(60, 20).tooltip(getTooltipForMode(cat.getMode())).build();
 
         this.addRenderableWidget(modeBtn);
 
@@ -145,15 +145,15 @@ public class CatInfoScreen extends Screen {
                 btn.active = this.currentPage > 0;
                 this.rightBtn.active = true;
                 this.recalculatePage(perPage);
-            }).pos(25, perPage * 21 + 10).size(20, 20).tooltip(Tooltip.create(Component.translatable(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE).withStyle(ChatFormatting.ITALIC))).build();
+            }).pos(25, perPage * 21 + 10).size(20, 20).tooltip(Tooltip.create(Component.translatable("catgui.prevpage").withStyle(ChatFormatting.ITALIC))).build();
             this.leftBtn.active = false;
 
-            this.rightBtn = new Button.Builder(48, perPage * 21 + 10, 20, 20, Component.literal(">"), (btn) -> {
+            this.rightBtn = new Button.Builder(Component.literal(">"), (btn) -> {
                 this.currentPage = Math.min(this.maxPages - 1, this.currentPage + 1);
                 btn.active = this.currentPage < this.maxPages - 1;
                 this.leftBtn.active = true;
                 this.recalculatePage(perPage);
-            }).pos(48, perPage * 21 + 10).size(20, 20).tooltip(Tooltip.create(Component.translatable(Constants.TRANSLATION_KEY_GUI_NEXT_PAGE).withStyle(ChatFormatting.ITALIC))).build();
+            }).pos(48, perPage * 21 + 10).size(20, 20).tooltip(Tooltip.create(Component.translatable("catgui.nextpage").withStyle(ChatFormatting.ITALIC))).build();
 
             this.addRenderableWidget(this.leftBtn);
             this.addRenderableWidget(this.rightBtn);
@@ -175,6 +175,89 @@ public class CatInfoScreen extends Screen {
 //        }
 //    }
 
+    private Tooltip getTooltipForTalent(Talent talent, int level) {
+        List<Component> list = Lists.newArrayList(Component.translatable(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
+
+        if(ConfigHandler.TALENT.getFlag(talent)) {
+            list.add(Component.literal("Level: " + level));
+            list.add(Component.literal("----------------------------").withStyle(ChatFormatting.GRAY));
+            list.add(Component.translatable(talent.getInfoTranslationKey()));
+        }
+        else {
+            list.add(Component.literal("Talent disabled").withStyle(ChatFormatting.RED));
+        }
+
+        return Tooltip.create(ComponentUtils.formatList(list, CommonComponents.NEW_LINE));
+    }
+
+    private Tooltip getTooltipForMode(Mode mode) {
+        List<Component> list = new ArrayList<>();
+        String str = I18n.get(mode.getUnlocalizedInfo());
+        list.addAll(ScreenUtil.splitInto(str, 150, CatInfoScreen.this.font));
+        if(mode == Mode.DOMESTIC) {
+
+            if(CatInfoScreen.this.cat.getBowlPos().isPresent()) {
+                double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBowlPos().get());
+
+                if(distance > 512D) {
+                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOWL_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
+                }
+                else {
+                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOWL_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
+                }
+            }
+            else {
+                list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_BOWL).withStyle(ChatFormatting.RED));
+            }
+
+            if(CatInfoScreen.this.cat.getLitterboxPos().isPresent()) {
+                double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getLitterboxPos().get());
+
+                if(distance > 512D) {
+                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOX_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
+                }
+                else {
+                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_BOX_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
+                }
+            }
+            else {
+                list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_BOX).withStyle(ChatFormatting.RED));
+            }
+
+            if(CatInfoScreen.this.cat.getCatTreePos().isPresent()) {
+                double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getCatTreePos().get());
+
+                if(distance > 512D) {
+                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_TREE_TOO_FAR, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
+                }
+                else {
+                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_TREE_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
+                }
+            }
+            else {
+                list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOMESTIC_NO_TREE).withStyle(ChatFormatting.RED));
+            }
+        }
+
+        return Tooltip.create(ComponentUtils.formatList(list, CommonComponents.NEW_LINE));
+    }
+
+//    public void renderTalentToolTip(Talent talent, Button button, PoseStack stack, int mouseX, int mouseY) {
+//        List<Component> list = new ArrayList<>();
+//
+//        list.add(Component.translatable(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
+//        if(button.active) {
+//            list.add(Component.literal("Level: " + CatInfoScreen.this.cat.getCatLevel(talent)));
+//            list.add(Component.literal("--------------------------------").withStyle(ChatFormatting.GRAY));
+//            list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, CatInfoScreen.this.font));
+//        }
+//        else {
+//            list.add(Component.literal("Talent disabled").withStyle(ChatFormatting.RED));
+//        }
+//
+//        CatInfoScreen.this.renderComponentTooltip(stack, list, mouseX, mouseY);
+//    }
+
     private void recalculatePage(int perPage) {
         this.talentWidgets.forEach(this::removeWidget);
         this.talentWidgets.clear();
@@ -184,29 +267,49 @@ public class CatInfoScreen extends Screen {
         for(int i = 0; i < perPage; ++i) {
 
             int index = this.currentPage * perPage + i;
-            if(index >= this.talentList.size()) {break;}
+            if(index >= this.talentList.size()) {
+                break;
+            }
             Talent talent = this.talentList.get(index);
 
-            Button button = new Button.Builder(Component.literal("+"), (btn) -> {
-                int level = CatInfoScreen.this.cat.getCatLevel(talent);
-                if(level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
-                    PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent));
-                }
+            // decrease button (-)
+            {
+                Button button = new Button.Builder(Component.literal("-"), (btn) -> {
+                    int level = CatInfoScreen.this.cat.getCatLevel(talent);
+                    if(level > 0) {
+                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent, -1));
+                        btn.setTooltip(CatInfoScreen.this.getTooltipForTalent(talent, level - 1));
+                    }
+                }).pos(25, 10 + i * 21).size(20, 20).tooltip(this.getTooltipForTalent(talent, CatInfoScreen.this.cat.getCatLevel(talent))).build(b -> new TalentButton(b, talent, false));
+                button.active = ConfigHandler.TALENT.getFlag(talent);
 
-            }).pos(25, 10 + i * 21).size(20, 20).tooltip(getTooltipForTalent(talent, this.cat.getCatLevel(talent))).build(b -> TalentButton(b, talent));
-            button.active = ConfigHandler.TALENT.getFlag(talent);
+                this.talentWidgets.add(button);
+                this.addRenderableWidget(button);
+            }
 
-            this.talentWidgets.add(button);
-            this.addRenderableWidget(button);
+            // increase button (+)
+            {
+                Button button = new Button.Builder(Component.literal("+"), (btn) -> {
+                    int level = CatInfoScreen.this.cat.getCatLevel(talent);
+                    if(level < talent.getMaxLevel() && CatInfoScreen.this.cat.canSpendPoints(talent.getLevelCost(level + 1))) {
+                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatTalentData(CatInfoScreen.this.cat.getId(), talent, 1));
+                        btn.setTooltip(CatInfoScreen.this.getTooltipForTalent(talent, level + 1));
+                    }
+                }).pos(47, 10 + i * 21).size(20, 20).tooltip(this.getTooltipForTalent(talent, CatInfoScreen.this.cat.getCatLevel(talent))).build(b -> new TalentButton(b, talent, true));
+                button.active = ConfigHandler.TALENT.getFlag(talent);
+
+                this.talentWidgets.add(button);
+                this.addRenderableWidget(button);
+            }
         }
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         //Background
         int topX = this.width / 2;
         int topY = this.height / 2;
-        this.renderBackground(stack);
+        this.renderBackground(graphics);
 
         // Background
         String health = Util.format1DP(this.cat.getHealth());
@@ -229,22 +332,22 @@ public class CatInfoScreen extends Screen {
         }
 
         //this.font.drawString(I18n.format("catgui.health") + healthState, this.width - 160, topY - 110, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_SPEED) + " " + speedValue, this.width - 160, topY - 100, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_OWNER) + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_AGE) + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_ARMOR) + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_SPEED) + " " + speedValue, this.width - 160, topY - 100, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_OWNER) + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_AGE) + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_ARMOR) + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
         if(ConfigHandler.SERVER.CAT_GENDER.get()) {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalisedName()), this.width - 160, topY - 60, 0xFFFFFF);
+            graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalizedName()), this.width - 160, topY - 60, 0xFFFFFF);
         }
 
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL) + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL_DIRE) + " " + this.cat.getCatLevel().getLevel(Type.WILD), topX, topY + 75, 0xFF10F9);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL) + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD) + " " + this.cat.getCatLevel().getLevel(Type.WILD), topX, topY + 75, 0xFF10F9);
         if(this.cat.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent()) {
-            this.font.draw(stack, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
+            graphics.drawString(this.font, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
         }
         else {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT) + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
+            graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT) + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
         }
         // if (ConfigHandler.CLIENT.USE_DT_TEXTURES.get()) {
 //        this.font.draw(stack, I18n.get("catgui.textureindex"), this.width - 80, topY + 20, 0xFFFFFF);
@@ -252,28 +355,28 @@ public class CatInfoScreen extends Screen {
         // }
 
         if(this.cat.isOwnedBy(this.player)) {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS), this.width - 76, topY + 67, 0xFFFFFF);
+            graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS), this.width - 76, topY + 67, 0xFFFFFF);
         }
 
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE), this.width - 76, topY - 15, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE), this.width - 76, topY - 15, 0xFFFFFF);
 
         this.renderables.forEach(widget -> {
-            if(widget instanceof TalentButton talBut) {
-                this.font.draw(stack, I18n.get(talBut.talent.getTranslationKey()), talBut.x + 25, talBut.y + 7, 0xFFFFFF);
+            if(widget instanceof TalentButton) {
+                TalentButton talBut = (TalentButton) widget;
+                if(talBut.showTalentName) {
+                    graphics.drawString(this.font, I18n.get(talBut.talent.getTranslationKey()), talBut.getX() + 25, talBut.getY() + 7, 0xFFFFFF);
+                }
             }
         });
 
-        super.render(stack, mouseX, mouseY, partialTicks);
-        //RenderHelper.disableStandardItemLighting(); // 1.14 enableGUIStandardItemLighting
+        super.render(graphics, mouseX, mouseY, partialTicks);
 
-//        for(Widget widget : this.renderables) {
-//            if(widget instanceof AbstractWidget w && w.isHoveredOrFocused()) {
-//                w.renderToolTip(stack, mouseX, mouseY);
-//                break;
-//            }
+        if (!this.cat.isAlive()) {
+            Minecraft.getInstance().setScreen(null);
+        }
+//        else if (this.cat.isDefeated()) {
+//            DogCannotInteractWithScreen.open(dog);
 //        }
-
-        // RenderHelper.enableStandardItemLighting();
     }
 
 //    @Override
@@ -290,49 +393,13 @@ public class CatInfoScreen extends Screen {
     private static class TalentButton extends Button {
 
         protected Talent talent;
+        protected boolean showTalentName;
 
-        private TalentButton(Button.Builder builder, Talent talent) {
+        TalentButton(Button.Builder builder, Talent talent, boolean showTalentName) {
             super(builder);
             this.talent = talent;
+            this.showTalentName = showTalentName;
         }
 
-    }
-
-    private Tooltip getTooltipForTalent(Talent talent, int level) {
-        List<Component> list = Lists.newArrayList(Component.translatable(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
-
-        if (ConfigHandler.TALENT.getFlag(talent)) {
-            list.add(Component.literal("Level: " + level));
-            list.add(Component.literal("----------------------------").withStyle(ChatFormatting.GRAY));
-            list.add(Component.translatable(talent.getInfoTranslationKey()));
-        } else {
-            list.add(Component.literal("Talent disabled").withStyle(ChatFormatting.RED));
-        }
-
-        return Tooltip.create(ComponentUtils.formatList(list, CommonComponents.NEW_LINE));
-    }
-
-    public Tooltip getTooltipForMode(EnumMode mode) {
-        List<Component> list = new ArrayList<>();
-        String str = I18n.get(cat.getMode().getUnlocalisedInfo());
-        list.addAll(ScreenUtil.splitInto(str, 150, CatInfoScreen.this.font));
-        if(mode == EnumMode.WANDERING) {
-
-            if(CatInfoScreen.this.cat.getBowlPos().isPresent()) {
-                double distance = CatInfoScreen.this.cat.blockPosition().distSqr(CatInfoScreen.this.cat.getBowlPos().get());
-
-                if(distance > 256D) {
-                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOCILE_DISTANCE, (int) Math.sqrt(distance)).withStyle(ChatFormatting.RED));
-                }
-                else {
-                    list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOCILE_BOWL, (int) Math.sqrt(distance)).withStyle(ChatFormatting.GREEN));
-                }
-            }
-            else {
-                list.add(Component.translatable(Constants.TRANSLATION_KEY_CAT_MODE_DOCILE_NO_BOWL).withStyle(ChatFormatting.RED));
-            }
-        }
-
-        return Tooltip.create(ComponentUtils.formatList(list, CommonComponents.NEW_LINE));
     }
 }

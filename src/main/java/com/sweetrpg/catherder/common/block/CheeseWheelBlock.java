@@ -146,7 +146,9 @@ public class CheeseWheelBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState()
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+//                .setValue(SERVINGS, context.);
     }
 
     @SuppressWarnings("deprecation")
@@ -155,11 +157,11 @@ public class CheeseWheelBlock extends Block {
         return facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
-    }
+//    @SuppressWarnings("deprecation")
+//    @Override
+//    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+//        return worldIn.getBlockState(pos.below()).canSurvive(worldIn, pos);
+//    }
 
     @SuppressWarnings("deprecation")
     @Override

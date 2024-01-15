@@ -1,19 +1,4 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "WWW",
-    "WDW",
-    "WWW"
-  ],
-  "key": {
-    "W": {
-      "tag": "minecraft:planks"
-    },
-    "D": {
-      "tag": "minecraft:wooden_doors"
-    }
-  },
-  "result": {
-    "item": "catherder:pet_door"
-  }
+  "type": "catherder:pet_door",
+  "category": "misc"
 }

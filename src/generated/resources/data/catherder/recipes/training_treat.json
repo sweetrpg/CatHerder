@@ -1,19 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "TFR",
-    "XXX",
-    "YYY"
-  ],
+  "category": "misc",
   "key": {
-    "T": {
-      "item": "minecraft:string"
-    },
     "F": {
       "tag": "minecraft:fishes"
     },
     "R": {
       "item": "catherder:yarn"
+    },
+    "T": {
+      "item": "minecraft:string"
     },
     "X": {
       "item": "minecraft:sugar"
@@ -22,7 +18,13 @@
       "item": "catherder:catnip"
     }
   },
+  "pattern": [
+    "TFR",
+    "XXX",
+    "YYY"
+  ],
   "result": {
     "item": "catherder:training_treat"
-  }
+  },
+  "show_notification": true
 }

@@ -1,0 +1,45 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "change_owner": {
+      "conditions": {
+        "item": {
+          "items": [
+            "catherder:owner_change"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.change_owner.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:owner_change"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.change_owner.title"
+    }
+  },
+  "requirements": [
+    [
+      "change_owner"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

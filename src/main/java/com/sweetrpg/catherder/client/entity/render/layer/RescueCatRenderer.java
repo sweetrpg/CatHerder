@@ -8,6 +8,7 @@ import com.sweetrpg.catherder.common.lib.Resources;
 import com.sweetrpg.catherder.client.entity.model.CatModel;
 import com.sweetrpg.catherder.client.entity.model.CatRescueModel;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.registry.ModTalents;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -30,7 +31,7 @@ public class RescueCatRenderer extends RenderLayer<CatEntity, CatModel<CatEntity
             return;
         }
 
-        Optional<TalentInstance> inst = cat.getTalent(CatHerder.RESCUE_CAT);
+        Optional<TalentInstance> inst = cat.getTalent(ModTalents.RESCUE_CAT);
         if (inst.isPresent() && inst.get().level() >= 5) {
             this.getParentModel().copyPropertiesTo(this.model);
             this.model.prepareMobModel(cat, limbSwing, limbSwingAmount, partialTicks);

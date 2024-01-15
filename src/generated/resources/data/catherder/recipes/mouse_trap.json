@@ -1,9 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "CIT",
-    "PPP"
-  ],
+  "category": "misc",
   "key": {
     "C": {
       "item": "catherder:cheese_wedge"
@@ -11,14 +8,19 @@
     "I": {
       "item": "minecraft:iron_ingot"
     },
-    "T": {
-      "item": "minecraft:tripwire_hook"
-    },
     "P": {
       "tag": "minecraft:planks"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
     }
   },
+  "pattern": [
+    "CIT",
+    "PPP"
+  ],
   "result": {
     "item": "catherder:mouse_trap"
-  }
+  },
+  "show_notification": true
 }

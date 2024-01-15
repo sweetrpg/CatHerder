@@ -4,7 +4,8 @@ license="MIT"
 issueTrackerURL="https://github.com/sweetrpg/CatHerder/issues"
 displayURL="https://minecraft.curseforge.com/projects/cat-herder/"
 logoFile= "ch_logo.png"
-[[mods]] #mandatory
+
+[[mods]]
     modId="catherder"
     version="${version}"
     updateJSONURL="https://minecraft.sweetrpg.com/mods/catherder/version.json"
@@ -14,10 +15,10 @@ logoFile= "ch_logo.png"
     description='''
     Turning your cats into fun, playful cats.
     '''
-[[dependencies.catherder]] #optional
+[[dependencies.catherder]]
     modId="forge"
     mandatory=true
-    versionRange="${forge_version_range}" #mandatory
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
 
@@ -27,3 +28,14 @@ logoFile= "ch_logo.png"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+
+#[[dependencies.catherder]]
+#    modId="configured"
+#    mandatory=false
+#    versionRange="[1.5.4,)"
+#    ordering="NONE"
+#    side="BOTH"
+
+#[modproperties.configured]
+#    catalogueImageIcon="configured_icon.png"
+#    configuredBackground="minecraft:textures/block/gray_wool.png"

@@ -51,7 +51,7 @@ public class ThrowableItem extends Item implements IThrowableItem {
         float f2 = Mth.cos(rotationYawIn * ((float) Math.PI / 180F)) * Mth.cos(rotationPitchIn * ((float) Math.PI / 180F));
         this.setThrowableHeading(entityItem, f, f1, f2, velocity, inaccuracy);
         Vec3 vec3d = entityThrower.getDeltaMovement();
-        entityItem.setDeltaMovement(entityItem.getDeltaMovement().add(vec3d.x, entityThrower.isOnGround() ? 0.0D : vec3d.y, vec3d.z));
+        entityItem.setDeltaMovement(entityItem.getDeltaMovement().add(vec3d.x, entityThrower.onGround() ? 0.0D : vec3d.y, vec3d.z));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ThrowableItem extends Item implements IThrowableItem {
         if(!worldIn.isClientSide) {
             ItemStack stack = itemStackIn.copy();
             stack.setCount(1);
-            ItemEntity entityitem = new ItemEntity(playerIn.level, playerIn.getX(), (playerIn.getY() - 0.30000001192092896D) + playerIn.getEyeHeight(), playerIn.getZ(), stack);
+            ItemEntity entityitem = new ItemEntity(playerIn.level(), playerIn.getX(), (playerIn.getY() - 0.30000001192092896D) + playerIn.getEyeHeight(), playerIn.getZ(), stack);
             entityitem.setPickUpDelay(20);
             this.setHeadingFromThrower(entityitem, playerIn, playerIn.getXRot(), playerIn.getYRot(), 0.0F, 1.2F, 1.0F);
             worldIn.addFreshEntity(entityitem);
@@ -79,7 +79,7 @@ public class ThrowableItem extends Item implements IThrowableItem {
     }
 
     public void setThrowableHeading(ItemEntity entityItem, double x, double y, double z, float velocity, float inaccuracy) {
-        Vec3 vec3d = (new Vec3(x, y, z)).normalize().add(entityItem.level.random.nextGaussian() * 0.0075F * inaccuracy, entityItem.level.random.nextGaussian() * 0.0075F * inaccuracy, entityItem.level.random.nextGaussian() * 0.0075F * inaccuracy).scale(velocity);
+        Vec3 vec3d = (new Vec3(x, y, z)).normalize().add(entityItem.level().random.nextGaussian() * 0.0075F * inaccuracy, entityItem.level().random.nextGaussian() * 0.0075F * inaccuracy, entityItem.level().random.nextGaussian() * 0.0075F * inaccuracy).scale(velocity);
         entityItem.setDeltaMovement(vec3d);
         float f = Mth.sqrt((float) (vec3d.x * vec3d.x + vec3d.z * vec3d.z));
         entityItem.setYRot((float) (Mth.atan2(vec3d.x, vec3d.z) * (180F / (float) Math.PI)));

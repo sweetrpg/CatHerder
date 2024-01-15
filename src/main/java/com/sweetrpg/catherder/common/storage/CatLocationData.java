@@ -2,11 +2,12 @@ package com.sweetrpg.catherder.common.storage;
 
 import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.api.feature.EnumGender;
+import com.sweetrpg.catherder.api.feature.Gender;
 import com.sweetrpg.catherder.common.util.NBTUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -36,7 +37,7 @@ public class CatLocationData implements ICatData {
     // Other saved data
     private @Nullable Component name;
     private @Nullable Component ownerName;
-    private @Nullable EnumGender gender;
+    private @Nullable Gender gender;
     private boolean hasRadarCollar;
 
     // Cached objects
@@ -76,7 +77,7 @@ public class CatLocationData implements ICatData {
     public void update(CatEntity catIn) {
         this.ownerId = catIn.getOwnerUUID();
         this.position = catIn.position();
-        this.dimension = catIn.level.dimension();
+        this.dimension = catIn.level().dimension();
 
         this.name = catIn.getName();
         this.ownerName = catIn.getOwnersName().orElse(null);
@@ -91,10 +92,10 @@ public class CatLocationData implements ICatData {
     public void read(CompoundTag compound) {
         this.ownerId = NBTUtil.getUniqueId(compound, "ownerId");
         this.position = NBTUtil.getVector3d(compound);
-        this.dimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, NBTUtil.getResourceLocation(compound, "dimension"));
+        this.dimension = ResourceKey.create(Registries.DIMENSION, NBTUtil.getResourceLocation(compound, "dimension"));
         this.name = NBTUtil.getTextComponent(compound, "name_text_component");
         if (compound.contains("gender", Tag.TAG_STRING)) {
-            this.gender = EnumGender.bySaveName(compound.getString("gender"));
+            this.gender = Gender.bySaveName(compound.getString("gender"));
         }
         this.hasRadarCollar = compound.getBoolean("collar");
     }

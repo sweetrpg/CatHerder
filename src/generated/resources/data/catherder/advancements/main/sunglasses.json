@@ -1,0 +1,45 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "sunglasses": {
+      "conditions": {
+        "item": {
+          "items": [
+            "catherder:sunglasses"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.sunglasses.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:sunglasses"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.sunglasses.title"
+    }
+  },
+  "requirements": [
+    [
+      "sunglasses"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

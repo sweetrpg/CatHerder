@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-public class CatRescueModel extends ListModel<CatEntity>{
+public class CatRescueModel extends ListModel<CatEntity> {
 
     public ModelPart rescueBox;
 
@@ -26,7 +26,10 @@ public class CatRescueModel extends ListModel<CatEntity>{
         MeshDefinition var0 = new MeshDefinition();
         PartDefinition var1 = var0.getRoot();
 
-        var1.addOrReplaceChild("rescue_box", CubeListBuilder.create().texOffs(0, 0).addBox(-1F, -4F, -4.5F, 4, 2, 2), PartPose.offsetAndRotation(-1F, 14F, -3F, (float) (Math.PI / 2), 0F, 0F));
+        var1.addOrReplaceChild("rescue_box", CubeListBuilder.create()
+                        .texOffs(0, 0)
+                        .addBox(-1F, -4F, -4.5F, 4, 2, 2),
+                PartPose.offsetAndRotation(-1F, 14F, -3F, (float) (Math.PI / 2), 0F, 0F));
 
         return LayerDefinition.create(var0, 64, 32);
     }
@@ -38,18 +41,18 @@ public class CatRescueModel extends ListModel<CatEntity>{
 
     @Override
     public void prepareMobModel(CatEntity catIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        if (catIn.isInSittingPose()) {
-            if (catIn.isLying()) {
+        if(catIn.isInSittingPose()) {
+            if(catIn.isLying()) {
                 this.rescueBox.setPos(-1F, 20F, -2F);
                 this.rescueBox.xRot = (float) (Math.PI / 2);
             }
-            else  {
+            else {
                 this.rescueBox.setPos(-1, 16, -3);
                 this.rescueBox.xRot = (float) (Math.PI * 2 / 5);
             }
         }
         else {
-            this.rescueBox.setPos(-1F, 14F, -3F);
+            this.rescueBox.setPos(-1F, 14F, -5F);
             this.rescueBox.xRot = (float) (Math.PI / 2);
         }
     }

@@ -1,11 +1,13 @@
 package com.sweetrpg.catherder.data;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.block.CatnipBlock;
 import com.sweetrpg.catherder.common.block.CheeseWheelBlock;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -13,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -25,8 +28,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
     // Applies texture to all faces and for the input face culls that direction
     private static final BiFunction<String, Direction, BiConsumer<Direction, ModelBuilder<BlockModelBuilder>.ElementBuilder.FaceBuilder>> cullFaceFactory = (texture, input) -> (d, b) -> b.texture(texture).cullface(d == input ? d : null);
 
-    public CHBlockstateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, CatHerderAPI.MOD_ID, exFileHelper);
+    public CHBlockstateProvider(PackOutput packOutput, ExistingFileHelper exFileHelper) {
+        super(packOutput, CatHerderAPI.MOD_ID, exFileHelper);
     }
 
     public ExistingFileHelper getExistingHelper() {
@@ -50,7 +53,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
     }
 
     private String blockName(Block block) {
-        return block.getRegistryName().getPath();
+        return ForgeRegistries.BLOCKS.getKey(block).getPath();
     }
 
     public ResourceLocation resourceBlock(String path) {
@@ -192,12 +195,12 @@ public class CHBlockstateProvider extends BlockStateProvider {
         }, ignored);
     }
 
-    private String name(Supplier<? extends IForgeRegistryEntry<?>> block) {
-        return block.get().getRegistryName().getPath();
+    private String name(Supplier<? extends Block> block) {
+        return ForgeRegistries.BLOCKS.getKey(block.get()).getPath();
     }
 
     private ResourceLocation blockTexture(Supplier<? extends Block> block) {
-        ResourceLocation base = block.get().getRegistryName();
+        ResourceLocation base = ForgeRegistries.BLOCKS.getKey(block.get());
         return prextend(base, ModelProvider.BLOCK_FOLDER + "/");
     }
 

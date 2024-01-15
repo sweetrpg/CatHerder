@@ -1,17 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "XX",
-    "YX"
-  ],
-  "key": {
-    "X": {
-      "item": "minecraft:iron_ingot"
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "catherder:wool_collar"
     },
-    "Y": {
+    {
       "item": "minecraft:redstone"
     }
-  },
+  ],
   "result": {
     "item": "catherder:radio_collar"
   }

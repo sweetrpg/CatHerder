@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.common.registry;
 
+import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.common.entity.accessory.*;
-import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.lib.Resources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -14,12 +14,12 @@ import java.util.function.Supplier;
 
 public class ModAccessories {
 
-    public static final DeferredRegister<Accessory> ACCESSORIES = DeferredRegister.create(ModRegistries.Keys.ACCESSORY_REGISTRY, CatHerderAPI.MOD_ID);
+    public static final DeferredRegister<Accessory> ACCESSORIES = DeferredRegister.create(CatHerderAPI.RegistryKeys.ACCESSORY_REGISTRY, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<DyeableAccessory> DYEABLE_COLLAR = register("dyeable_collar", () -> new DyeableAccessory(ModAccessoryTypes.COLLAR, ModItems.WOOL_COLLAR).setModelTexture(Resources.COLLAR_DEFAULT).setRenderer("DefaultAccessoryRenderer"));
     public static final RegistryObject<Collar> GOLDEN_COLLAR = register("golden_collar", () -> new Collar(ModItems.CREATIVE_COLLAR).setModelTexture(Resources.COLLAR_GOLDEN).setRenderer("DefaultAccessoryRenderer"));
     public static final RegistryObject<Collar> SPOTTED_COLLAR = register("spotted_collar", () -> new Collar(ModItems.SPOTTED_COLLAR).setModelTexture(Resources.COLLAR_SPOTTED).setRenderer("DefaultAccessoryRenderer"));
-    public static final RegistryObject<Collar> MULTICOLORED_COLLAR = register("multicolored_collar", () -> new Collar(ModItems.MULTICOLOURED_COLLAR).setModelTexture(Resources.COLLAR_MULTICOLORED).setRenderer("DefaultAccessoryRenderer"));
+    public static final RegistryObject<Collar> MULTICOLORED_COLLAR = register("multicolored_collar", () -> new Collar(ModItems.MULTICOLORED_COLLAR).setModelTexture(Resources.COLLAR_MULTICOLORED).setRenderer("DefaultAccessoryRenderer"));
 
 //    public static final RegistryObject<Clothing> GUARD_SUIT = register("guard_suit", () -> new Clothing(CatItems.GUARD_SUIT).setModelTexture(Resources.GUARD_SUIT).setRenderer("DefaultAccessoryRenderer"));
 //    public static final RegistryObject<Clothing> LEATHER_JACKET_CLOTHING = register("leather_jacket_clothing", () -> new Clothing(CatItems.LEATHER_JACKET).setModelTexture(Resources.CLOTHING_LEATHER_JACKET).setRenderer("DefaultAccessoryRenderer"));
@@ -49,11 +49,11 @@ public class ModAccessories {
 //
 //    public static final RegistryObject<LeatherArmourAccessory> LEATHER_HELMET = register("leather_helmet", () -> new LeatherArmourAccessory(CatAccessoryTypes.HEAD, Items.LEATHER_HELMET.delegate).setModelTexture(Resources.LEATHER_HELMET));
 //    public static final RegistryObject<LeatherArmourAccessory> LEATHER_BODY_PIECE = register("leather_body_piece", () -> new LeatherArmourAccessory(CatAccessoryTypes.CLOTHING, Items.LEATHER_CHESTPLATE.delegate).setModelTexture(Resources.LEATHER_BODY_PIECE));
-    public static final RegistryObject<LeatherArmourAccessory> LEATHER_BOOTS = register("leather_boots", () -> new LeatherArmourAccessory(ModAccessoryTypes.FEET, Items.LEATHER_BOOTS.delegate).setModelTexture(Resources.LEATHER_BOOTS));
+//    public static final RegistryObject<LeatherArmourAccessory> LEATHER_BOOTS = register("leather_boots", () -> new LeatherArmourAccessory(ModAccessoryTypes.FEET, Items.LEATHER_BOOTS.delegate).setModelTexture(Resources.LEATHER_BOOTS));
 
-    private static RegistryObject<Helmet> registerHelmet(final String name, final Supplier<? extends ItemLike> itemIn, ResourceLocation modelLocation) {
-        return ACCESSORIES.register(name, () -> new Helmet(itemIn).setModelTexture(modelLocation));
-    }
+//    private static RegistryObject<Helmet> registerHelmet(final String name, final Supplier<? extends ItemLike> itemIn, ResourceLocation modelLocation) {
+//        return ACCESSORIES.register(name, () -> new Helmet(itemIn).setModelTexture(modelLocation));
+//    }
 
     private static RegistryObject<ArmourAccessory> registerBoots(final String name, final Supplier<? extends ItemLike> itemIn, ResourceLocation modelLocation) {
         return ACCESSORIES.register(name, () -> new ArmourAccessory(ModAccessoryTypes.FEET, itemIn).setModelTexture(modelLocation));

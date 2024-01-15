@@ -16,13 +16,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.SkinManager;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.CatVariant;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -38,11 +39,25 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
 
     public static final CatTextureManager INSTANCE = new CatTextureManager();
     private static final Gson GSON = new Gson();
-    private static final ResourceLocation OVERRIDE_RESOURCE_LOCATION = Util.getResource("textures/entity/katze/custom/overrides.json");
+    private static final ResourceLocation OVERRIDE_RESOURCE_LOCATION = Util.getResource("textures/entity/cat/custom/overrides.json");
     protected final Map<String, ResourceLocation> skinHashToLoc = Maps.newHashMap();
     protected final Map<ResourceLocation, String> locToSkinHash = Maps.newHashMap();
     protected final List<ResourceLocation> customSkinLoc = new ArrayList<>(20);
     private final Map<String, SkinRequest> hashToSkinRequest = Maps.newConcurrentMap();
+
+    private final Map<Integer, ResourceLocation> typeToVariantMap = net.minecraft.Util.make(Maps.newHashMap(), (m) -> {
+        m.put(0, CatVariant.TABBY.location());
+        m.put(1, CatVariant.BLACK.location());
+        m.put(2, CatVariant.RED.location());
+        m.put(3, CatVariant.SIAMESE.location());
+        m.put(4, CatVariant.BRITISH_SHORTHAIR.location());
+        m.put(5, CatVariant.CALICO.location());
+        m.put(6, CatVariant.PERSIAN.location());
+        m.put(7, CatVariant.RAGDOLL.location());
+        m.put(8, CatVariant.WHITE.location());
+        m.put(9, CatVariant.JELLIE.location());
+        m.put(10, CatVariant.ALL_BLACK.location());
+    });
 
     public SkinRequest getRequestStatus(String hash) {
         return this.hashToSkinRequest.getOrDefault(hash, SkinRequest.UNREQUESTED);
@@ -101,8 +116,8 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         Minecraft mc = Minecraft.getInstance();
 
         ResourceManager resourceManager = mc.getResourceManager();
-        Resource resource = resourceManager.getResource(loc);
-        return resource.getInputStream();
+        Resource resource = resourceManager.getResource(loc).get();
+        return resource.open();
     }
 
     public ResourceLocation getTexture(CatEntity cat) {
@@ -111,8 +126,19 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
             return CatTextureManager.INSTANCE.getLocFromHashOrGet(hash, this::getCached);
         }
 
-        Integer originalBreed = cat.getOriginalBreed();
-        ResourceLocation texturePath = Cat.TEXTURE_BY_TYPE.get(originalBreed);
+        ResourceLocation texturePath;
+        CatVariant variant = cat.getVariant();
+        if(variant == null) {
+            Integer originalBreed = cat.getOriginalBreed();
+            ResourceLocation location = typeToVariantMap.get(originalBreed);
+            CatVariant actualVariant = BuiltInRegistries.CAT_VARIANT.get(location);
+            cat.setVariant(actualVariant);
+
+            texturePath = actualVariant.texture();
+        }
+        else {
+            texturePath = variant.texture();
+        }
         if(texturePath != null) {
             return texturePath;
         }
@@ -181,15 +207,14 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         return Resources.ENTITY_VANILLA_CAT;
     }
 
-    private synchronized void loadCatSkinResource(CatTextureManager.Preparations prep, Resource resource) {
+    private synchronized void loadCatSkinResource(CatTextureManager.Preparations prep, ResourceLocation rl, Resource resource) {
         InputStream inputstream = null;
         try {
-            inputstream = resource.getInputStream();
+            inputstream = resource.open();
             String hash = CatTextureServer.INSTANCE.getHash(IOUtils.toByteArray(inputstream));
-            ResourceLocation rl = resource.getLocation();
 
             if(prep.skinHashToLoc.containsKey(hash)) {
-                CatHerder.LOGGER.warn("The loaded resource packs contained a duplicate custom cat skin ({} & {})", resource.getLocation(), this.skinHashToLoc.get(hash));
+                CatHerder.LOGGER.warn("The loaded resource packs contained a duplicate custom cat skin ({} & {})", rl, this.skinHashToLoc.get(hash));
             }
             else {
                 CatHerder.LOGGER.info("Found custom cat skin at {} with hash {}", rl, hash);
@@ -198,7 +223,7 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
                 prep.customSkinLoc.add(rl);
             }
         }
-        catch(IOException e) {
+        catch (IOException e) {
             e.printStackTrace();
         }
         finally {
@@ -206,9 +231,9 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
         }
     }
 
-    private void loadOverrideData(CatTextureManager.Preparations prep, List<Resource> resourcesList) {
+    private void loadOverrideData(CatTextureManager.Preparations prep, Collection<Resource> resourcesList) throws IOException {
         for(Resource iresource : resourcesList) {
-            InputStream inputstream = iresource.getInputStream();
+            InputStream inputstream = iresource.open();
             CatHerder.LOGGER.debug("Loading {}", iresource);
             try {
                 this.loadLocaleData(prep, inputstream);
@@ -246,34 +271,33 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
 
         profiler.startTick();
 
-        Collection<ResourceLocation> resources = resourceManager.listResources("textures/entity/katze/custom", (fileName) -> {
-            return fileName.endsWith(".png");
+        Map<ResourceLocation, Resource> resources = resourceManager.listResources("textures/entity/cat/custom", (fileName) -> {
+            return fileName.getPath().endsWith(".png");
         });
-        for(ResourceLocation rl : resources) {
+        for(Entry<ResourceLocation, Resource> i : resources.entrySet()) {
             try {
-                Resource resource = resourceManager.getResource(rl);
+                Optional<Resource> resource = resourceManager.getResource(i.getKey());
 
                 if(resource == null) {
                     CatHerder.LOGGER.warn("Could not get resource");
                     continue;
                 }
 
-                this.loadCatSkinResource(prep, resource);
+                this.loadCatSkinResource(prep, i.getKey(), resource.get());
             }
-            catch(FileNotFoundException e) {
-            }
-            catch(Exception exception) {
-                CatHerder.LOGGER.warn("Skipped custom cat skin file: {} ({})", rl, exception);
+            catch (Exception exception) {
+                CatHerder.LOGGER.warn("Skipped custom cat skin file: {} ({})", i.getKey(), exception);
             }
         }
 
         try {
-            List<Resource> override = resourceManager.getResources(OVERRIDE_RESOURCE_LOCATION);
+            Collection<Resource> override = resourceManager.listResources(OVERRIDE_RESOURCE_LOCATION.getPath(), _t -> true).values();
             this.loadOverrideData(prep, override);
         }
-        catch(FileNotFoundException e) {
+        catch (FileNotFoundException e) {
+            ;
         }
-        catch(IOException | RuntimeException runtimeexception) {
+        catch (IOException | RuntimeException runtimeexception) {
             CatHerder.LOGGER.warn("Unable to parse cat skin override data: {}", runtimeexception);
         }
 

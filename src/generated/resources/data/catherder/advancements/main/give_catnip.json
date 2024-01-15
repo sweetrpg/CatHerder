@@ -1,0 +1,45 @@
+{
+  "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "give_catnip": {
+      "conditions": {
+        "item": {
+          "items": [
+            "catherder:catnip"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.give_catnip.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:catnip"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.give_catnip.title"
+    }
+  },
+  "requirements": [
+    [
+      "give_catnip"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

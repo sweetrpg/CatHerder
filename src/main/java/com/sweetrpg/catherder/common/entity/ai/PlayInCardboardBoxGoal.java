@@ -75,10 +75,10 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
             }
             else if(this.cat.isLyingDown()) {
 //                if(this.usingLitterboxCounter % 10 == 0) {
-//                    this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
+//                    this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
 //                }
 //                if(this.usingLitterboxCounter % 5 == 0) {
-//                    this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
+//                    this.cat.level().playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
 //                }
 //                this.usingLitterboxCounter++;
                 this.cat.level().playSound(null, this.cat, SoundEvents.CAT_PURREOW, SoundSource.AMBIENT, 2, 1);
@@ -127,5 +127,3 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
         return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(ModBlocks.CARDBOARD_BOX.get());
     }
 }
-
-

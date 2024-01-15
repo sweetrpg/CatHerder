@@ -31,8 +31,14 @@ public class CatBackpackModel extends ListModel<CatEntity> {
         MeshDefinition var0 = new MeshDefinition();
         PartDefinition var1 = var0.getRoot();
 
-        var1.addOrReplaceChild("right_chest", CubeListBuilder.create().texOffs(52, 0).addBox(2.0F, -1F, 0F, 2, 7, 4), PartPose.offset(0.0F, 14.0F, 2.0F));
-        var1.addOrReplaceChild("left_chest", CubeListBuilder.create().texOffs(52, 0).addBox(-4.0F, -1F, 0F, 2F, 7F, 4F), PartPose.offset(0.0F, 14.0F, 2.0F));
+        var1.addOrReplaceChild("right_chest", CubeListBuilder.create()
+                        .texOffs(52, 0)
+                        .addBox(2.0F, -1F, 0F, 2F, 7F, 4F),
+                PartPose.offset(0.0F, 14.0F, 2.0F));
+        var1.addOrReplaceChild("left_chest", CubeListBuilder.create()
+                        .texOffs(52, 0)
+                        .addBox(-4.0F, -1F, 0F, 2F, 7F, 4F),
+                PartPose.offset(0.0F, 14.0F, 2.0F));
 
         return LayerDefinition.create(var0, 64, 32);
     }
@@ -44,25 +50,26 @@ public class CatBackpackModel extends ListModel<CatEntity> {
 
     @Override
     public void prepareMobModel(CatEntity catIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
-        if (catIn.isInSittingPose()) {
-            if (catIn.isLying()) {
+        if(catIn.isInSittingPose()) {
+            if(catIn.isLying()) {
                 this.rightChest.setPos(0.0F, 20.0F, 2.0F);
-                this.rightChest.xRot = ((float)Math.PI / 2F);
+                this.rightChest.xRot = ((float) Math.PI / 2F);
                 this.leftChest.setPos(0.0F, 20.0F, 2.0F);
-                this.leftChest.xRot = ((float)Math.PI / 2F);
-            } else {
-                this.rightChest.setPos(0.0F, 18.0F, 0.0F);
-                this.rightChest.xRot = ((float)Math.PI / 4F);
-                this.leftChest.setPos(0.0F, 18.0F, 0.0F);
-                this.leftChest.xRot = ((float)Math.PI / 4F);
+                this.leftChest.xRot = ((float) Math.PI / 2F);
+            }
+            else {
+                this.rightChest.setPos(0.0F, 20.0F, 0.0F);
+                this.rightChest.xRot = ((float) Math.PI / 4F);
+                this.leftChest.setPos(0.0F, 20.0F, 0.0F);
+                this.leftChest.xRot = ((float) Math.PI / 4F);
             }
 
         }
         else {
-            this.rightChest.setPos(0.0F, 14.0F, 2.0F);
-            this.rightChest.xRot = ((float)Math.PI / 2F);
-            this.leftChest.setPos(0.0F, 14.0F, 2.0F);
-            this.leftChest.xRot = ((float)Math.PI / 2F);
+            this.rightChest.setPos(0.0F, 18.0F, 2.0F);
+            this.rightChest.xRot = ((float) Math.PI / 2F);
+            this.leftChest.setPos(0.0F, 18.0F, 2.0F);
+            this.leftChest.xRot = ((float) Math.PI / 2F);
 
         }
 

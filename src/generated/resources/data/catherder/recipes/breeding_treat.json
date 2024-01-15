@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
       "item": "catherder:master_treat"
@@ -18,7 +19,7 @@
     }
   ],
   "result": {
-    "item": "catherder:breeding_treat",
-    "count": 2
+    "count": 2,
+    "item": "catherder:breeding_treat"
   }
 }

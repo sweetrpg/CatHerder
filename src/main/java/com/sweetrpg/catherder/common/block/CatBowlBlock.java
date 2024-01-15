@@ -1,9 +1,9 @@
 package com.sweetrpg.catherder.common.block;
 
 import com.sweetrpg.catherder.common.registry.ModItems;
-import com.sweetrpg.catherder.common.registry.ModTileEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModBlockEntityTypes;
 import com.sweetrpg.catherder.common.Screens;
-import com.sweetrpg.catherder.common.block.tileentity.CatBowlBlockEntity;
+import com.sweetrpg.catherder.common.block.entity.CatBowlBlockEntity;
 import com.sweetrpg.catherder.common.util.InventoryUtil;
 import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.core.BlockPos;
@@ -32,12 +32,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -52,7 +53,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     protected static final VoxelShape EAST_WEST_SHAPE = Block.box(4.0D, 0.0D, 0.0D, 12.0D, 5.0D, 16.0D);
 
     public CatBowlBlock() {
-        super(Block.Properties.of(Material.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
+        super(Block.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 5.0F).sound(SoundType.METAL));
     }
 
     @Override
@@ -63,7 +64,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModTileEntityTypes.CAT_BOWL.get(), CatBowlBlockEntity::tick);
+        return createTickerHelper(blockEntityType, ModBlockEntityTypes.CAT_BOWL.get(), CatBowlBlockEntity::tick);
     }
 
     @SuppressWarnings("deprecation")
@@ -89,7 +90,7 @@ public class CatBowlBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        CatBowlBlockEntity foodBowlTileEntity = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+        CatBowlBlockEntity foodBowlTileEntity = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
 
         if (foodBowlTileEntity != null) {
             foodBowlTileEntity.setPlacer(placer);
@@ -102,7 +103,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (entityIn instanceof ItemEntity) {
-            CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+            CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
 
             if (foodBowl != null) {
                 ItemEntity entityItem = (ItemEntity) entityIn;
@@ -124,7 +125,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+            CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
             if (foodBowl != null) {
                 IItemHandler bowlInventory = foodBowl.getInventory();
                 for (int i = 0; i < bowlInventory.getSlots(); ++i) {
@@ -146,7 +147,7 @@ public class CatBowlBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, pos, CatBowlBlockEntity.class);
+        CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, pos, CatBowlBlockEntity.class);
 
         if (foodBowl != null) {
             IItemHandler bowlInventory = foodBowl.getInventory();
@@ -163,13 +164,13 @@ public class CatBowlBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
         else {
-            CatBowlBlockEntity foodBowl = WorldUtil.getTileEntity(worldIn, posIn, CatBowlBlockEntity.class);
+            CatBowlBlockEntity foodBowl = WorldUtil.getBlockEntity(worldIn, posIn, CatBowlBlockEntity.class);
 
             if (foodBowl != null) {
                 ItemStack stack = playerIn.getItemInHand(handIn);
 
                 if (!stack.isEmpty() && stack.getItem() == ModItems.TREAT_BAG.get()) {
-                    IItemHandler bagInventory = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(EmptyHandler.INSTANCE);
+                    IItemHandler bagInventory = stack.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(EmptyHandler.INSTANCE);
                     IItemHandler bowlInventory = foodBowl.getInventory();
 
                     InventoryUtil.transferStacks((IItemHandlerModifiable) bagInventory, bowlInventory);

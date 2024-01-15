@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.common.network.packet;
 
-import com.sweetrpg.catherder.api.feature.EnumMode;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.network.packet.data.CatModeData;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,7 +20,7 @@ public class CatModePacket extends CatPacket<CatModeData> {
     public CatModeData decode(FriendlyByteBuf buf) {
         int entityId = buf.readInt();
         int modeIndex = buf.readInt();
-        return new CatModeData(entityId, EnumMode.byIndex(modeIndex));
+        return new CatModeData(entityId, Mode.byIndex(modeIndex));
     }
 
     @Override
