@@ -1,0 +1,1 @@
+- `[FIX]` Updated required version of Configured
