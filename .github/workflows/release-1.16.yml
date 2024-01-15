@@ -21,6 +21,8 @@ jobs:
   release:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -41,12 +43,12 @@ jobs:
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
-          
+
           echo "${{ github.sha }}" > .release-info/1.16/RELEASE_HASH
           git add .release-info/1.16/RELEASE_HASH
           git commit -m "Update 1.16 RELEASE_HASH"
           version=$(cat .release-info/1.16/VERSION)
-          git tag "release-1.16-${version}"
+          git tag "release-${version}"
 
           echo "# $version" > CHANGELOG/1.16/${version}.md
           echo "" >> CHANGELOG/1.16/${version}.md
@@ -56,7 +58,7 @@ jobs:
           git commit -m "Reset 1.16 changelog"
 
           git push origin --tags
-          
+
           git checkout 1.16
           git merge 1.16-release
           git push origin
