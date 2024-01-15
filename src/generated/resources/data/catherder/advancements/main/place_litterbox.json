@@ -1,31 +1,37 @@
 {
   "parent": "catherder:main/tame_cat",
+  "criteria": {
+    "place_litterbox": {
+      "conditions": {
+        "location": [
+          {
+            "block": "catherder:litter_box",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
   "display": {
-    "icon": {
-      "item": "catherder:litter_box"
-    },
-    "title": {
-      "translate": "advancements.catherder.main.place_litterbox.title"
-    },
+    "announce_to_chat": true,
     "description": {
       "translate": "advancements.catherder.main.place_litterbox.description"
     },
     "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:litter_box"
+    },
     "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
-  "criteria": {
-    "place_litterbox": {
-      "trigger": "minecraft:placed_block",
-      "conditions": {
-        "block": "catherder:litter_box"
-      }
+    "title": {
+      "translate": "advancements.catherder.main.place_litterbox.title"
     }
   },
   "requirements": [
     [
       "place_litterbox"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -29,13 +29,13 @@ logoFile= "ch_logo.png"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.catherder]]
-    modId="configured"
-    mandatory=false
-    versionRange="[1.5.4,)"
-    ordering="NONE"
-    side="BOTH"
+#[[dependencies.catherder]]
+#    modId="configured"
+#    mandatory=false
+#    versionRange="[1.5.4,)"
+#    ordering="NONE"
+#    side="BOTH"
 
-[modproperties.configured]
-    catalogueImageIcon="configured_icon.png"
-    configuredBackground="minecraft:textures/block/gray_wool.png"
+#[modproperties.configured]
+#    catalogueImageIcon="configured_icon.png"
+#    configuredBackground="minecraft:textures/block/gray_wool.png"

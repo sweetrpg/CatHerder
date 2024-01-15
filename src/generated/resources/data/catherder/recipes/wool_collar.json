@@ -1,16 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "SSS",
-    "S S",
-    "SSS"
-  ],
+  "category": "misc",
   "key": {
     "S": {
       "tag": "minecraft:wool"
     }
   },
+  "pattern": [
+    "SSS",
+    "S S",
+    "SSS"
+  ],
   "result": {
     "item": "catherder:wool_collar"
-  }
+  },
+  "show_notification": true
 }

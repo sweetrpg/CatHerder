@@ -1,24 +1,7 @@
 {
   "parent": "catherder:main/tame_cat",
-  "display": {
-    "icon": {
-      "item": "catherder:pet_door",
-      "nbt": "{catherder:{structureId:\"minecraft:birch_planks\"}}"
-    },
-    "title": {
-      "translate": "advancements.catherder.main.craft_pet_door.title"
-    },
-    "description": {
-      "translate": "advancements.catherder.main.craft_pet_door.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "craft_pet_door": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -27,12 +10,30 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.craft_pet_door.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:pet_door",
+      "nbt": "{catherder:{structureId:\"minecraft:crimson_planks\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.craft_pet_door.title"
     }
   },
   "requirements": [
     [
       "craft_pet_door"
     ]
-  ]
+  ],
+  "sends_telemetry_event": true
 }

@@ -1,21 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "FXW",
-    "XXX"
-  ],
+  "category": "misc",
   "key": {
-    "X": {
-      "item": "minecraft:iron_ingot"
-    },
     "F": {
       "tag": "minecraft:fishes"
     },
     "W": {
       "item": "minecraft:water_bucket"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
     }
   },
+  "pattern": [
+    "FXW",
+    "XXX"
+  ],
   "result": {
     "item": "catherder:cat_bowl"
-  }
+  },
+  "show_notification": true
 }
