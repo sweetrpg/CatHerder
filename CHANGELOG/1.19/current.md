@@ -1,3 +1,0 @@
-- `[FIX]` Updated required version of Configured
-- `[DEV]` Fix data generator for wild catnip
-- `[NEW]` Put cat trees and pet doors in their own creative mode tabs
