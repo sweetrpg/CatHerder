@@ -5,11 +5,11 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Release (1.20)
+name: Release (1.16)
 
 on:
   push:
-    branches: [ 1.20-release ]
+    branches: [ 1.16-release ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -44,21 +44,21 @@ jobs:
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
 
-          echo "${{ github.sha }}" > .release-info/1.20/RELEASE_HASH
-          git add .release-info/1.20/RELEASE_HASH
-          git commit -m "Update 1.20 RELEASE_HASH"
-          version=$(cat .release-info/1.20/VERSION)
+          echo "${{ github.sha }}" > .release-info/1.16/RELEASE_HASH
+          git add .release-info/1.16/RELEASE_HASH
+          git commit -m "Update 1.16 RELEASE_HASH"
+          version=$(cat .release-info/1.16/VERSION)
           git tag "release-${version}"
 
-          echo "# $version" > CHANGELOG/1.20/${version}.md
-          echo "" >> CHANGELOG/1.20/${version}.md
-          cat CHANGELOG/1.20/current.md >> CHANGELOG/1.20/${version}.md
-          cat /dev/null > CHANGELOG/1.20/current.md
-          git add CHANGELOG/1.20
-          git commit -m "Reset 1.20 changelog"
+          echo "# $version" > CHANGELOG/1.16/${version}.md
+          echo "" >> CHANGELOG/1.16/${version}.md
+          cat CHANGELOG/1.16/current.md >> CHANGELOG/1.16/${version}.md
+          cat /dev/null > CHANGELOG/1.16/current.md
+          git add CHANGELOG/1.16
+          git commit -m "Reset 1.16 changelog"
 
           git push origin --tags
 
-          git checkout 1.20
-          git merge 1.20-release
+          git checkout 1.16
+          git merge 1.16-release
           git push origin
