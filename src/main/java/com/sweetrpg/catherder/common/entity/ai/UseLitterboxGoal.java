@@ -83,13 +83,13 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
 
         if(this.isReachedTarget()) {
             BlockPos catPos = this.cat.blockPosition();
-            BlockState blockState = this.cat.level.getBlockState(catPos);
+            BlockState blockState = this.cat.level().getBlockState(catPos);
             Integer currentWaste = blockState.getValue(LitterboxBlock.CAT_WASTE);
 
             // check if the cat can use the litter box
             if(!LitterboxBlock.CAT_WASTE.getPossibleValues().contains(currentWaste + 1)) {
-                this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
-                this.cat.level.playSound(null, catPos, SoundEvents.CAT_BEG_FOR_FOOD, SoundSource.AMBIENT, 1, 1);
+                this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
+                this.cat.level().playSound(null, catPos, SoundEvents.CAT_BEG_FOR_FOOD, SoundSource.AMBIENT, 1, 1);
 
                 this.stop();
 
@@ -98,10 +98,10 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
 
             if(this.cat.isInSittingPose()) {
                 if(this.usingLitterboxCounter % 10 == 0) {
-                    this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
+                    this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_SMOKE);
                 }
                 if(this.usingLitterboxCounter % 5 == 0) {
-                    this.cat.level.playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
+                    this.cat.level().playSound(null, this.cat, SoundEvents.AXE_STRIP, SoundSource.AMBIENT, 1, 1);
                 }
                 this.usingLitterboxCounter++;
             }
@@ -112,17 +112,17 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
             }
 
             if(this.usingLitterboxCounter > MAX_LITTERBOX_USE_COUNT) {
-                this.cat.level.broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
+                this.cat.level().broadcastEntityEvent(this.cat, Constants.EntityState.CAT_HEARTS);
                 this.cat.setInSittingPose(false);
                 this.cat.setSprinting(false);
                 this.cat.setLitterboxCooldown(LITTERBOX_USE_DELAY);
 
                 if(ConfigHandler.SERVER.LITTERBOX.get()) {
                     // leave something in the litterbox
-                    Optional<LitterboxBlockEntity> box = this.cat.level.getBlockEntity(catPos, ModBlockEntityTypes.LITTERBOX.get());
+                    Optional<LitterboxBlockEntity> box = this.cat.level().getBlockEntity(catPos, ModBlockEntityTypes.LITTERBOX.get());
                     if(box.isPresent()) {
                         BlockState newBlockState = blockState.setValue(LitterboxBlock.CAT_WASTE, currentWaste + 1);
-                        this.cat.level.setBlockAndUpdate(catPos, newBlockState);
+                        this.cat.level().setBlockAndUpdate(catPos, newBlockState);
                     }
                 }
 
@@ -146,4 +146,3 @@ public class UseLitterboxGoal<T extends LivingEntity> extends MoveToBlockGoal {
         return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(ModBlocks.LITTERBOX.get());
     }
 }
-

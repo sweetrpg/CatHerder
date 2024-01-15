@@ -12,6 +12,7 @@ import com.sweetrpg.catherder.common.lib.Resources;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.network.packet.data.CatInventoryPageData;
 import com.sweetrpg.catherder.common.registry.ModAccessories;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -35,19 +36,12 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(stack);
-        super.render(stack, mouseX, mouseY, partialTicks);
-        this.renderTooltip(stack, mouseX, mouseY);
-    }
-
-    @Override
     public void init() {
         super.init();
         this.left = new SmallButton(this.leftPos + this.imageWidth - 29, this.topPos + 4, Component.literal("<"), (btn) -> {
             int page = this.getMenu().getPage();
 
-            if(page > 0) {
+            if (page > 0) {
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatInventoryPageData(--page));
             }
 
@@ -57,7 +51,7 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
         this.right = new SmallButton(this.leftPos + this.imageWidth - 26 + 9, this.topPos + 4, Component.literal(">"), (btn) -> {
             int page = this.getMenu().getPage();
 
-            if(page < this.getMenu().getTotalNumColumns() - 9) {
+            if (page < this.getMenu().getTotalNumColumns() - 9) {
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new CatInventoryPageData(++page));
             }
 
@@ -65,11 +59,10 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
             this.left.active = page > 0;
 
         });
-        if(this.getMenu().getTotalNumColumns() > 9) {
+        if (this.getMenu().getTotalNumColumns() > 9) {
             this.left.active = false;
             this.right.active = true;
-        }
-        else {
+        } else {
             this.left.visible = false;
             this.right.visible = false;
         }
@@ -79,46 +72,44 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
     }
 
     @Override
-    protected void renderLabels(PoseStack stack, int par1, int par2) {
-        this.font.draw(stack, this.title.getString(), 8, 6, 4210752);
-        this.font.draw(stack, this.playerInventoryTitle, 8.0F, this.imageHeight - 96 + 2, 4210752);
+    protected void renderLabels(GuiGraphics graphics, int par1, int par2) {
+        graphics.drawString(font, this.title.getString(), 8, 6, 4210752, false);
+        graphics.drawString(font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 4210752, false);
     }
 
     @Override
-    protected void renderBg(PoseStack stack, float partialTicks, int xMouse, int yMouse) {
+    protected void renderBg(GuiGraphics graphics, float partialTicks, int xMouse, int yMouse) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, Resources.CAT_INVENTORY);
         int l = (this.width - this.imageWidth) / 2;
         int i1 = (this.height - this.imageHeight) / 2;
-        this.blit(stack, l, i1, 0, 0, this.imageWidth, this.imageHeight);
+        graphics.blit(Resources.CAT_INVENTORY, l, i1, 0, 0, this.imageWidth, this.imageHeight);
 
-        for(CatInventorySlot slot : this.getMenu().getSlots()) {
-            if(!slot.isActive()) {
+        for (CatInventorySlot slot : this.getMenu().getSlots()) {
+            if (!slot.isActive()) {
                 continue;
             }
 
             Optional<AccessoryInstance> inst = slot.getCat().getAccessory(ModAccessories.DYEABLE_COLLAR.get());
-            if(inst.isPresent()) {
+            if (inst.isPresent()) {
                 float[] color = inst.get().cast(DyeableAccessory.DyeableAccessoryInstance.class).getColor();
                 RenderSystem.setShaderColor(color[0], color[1], color[2], 1.0F);
-            }
-            else {
+            } else {
                 RenderSystem.setShaderColor(1, 1, 1, 1);
             }
 
-            this.blit(stack, l + slot.x - 1, i1 + slot.y - 1, 197, 2, 18, 18);
+            graphics.blit(Resources.CAT_INVENTORY, l + slot.x - 1, i1 + slot.y - 1, 197, 2, 18, 18);
         }
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
-        if(this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
-            if(this.player.getAbilities().instabuild) {
-                this.minecraft.setScreen(new CreativeModeInventoryScreen(this.player, this.minecraft.player.connection.enabledFeatures(), this.minecraft.options.operatorItemsTab().get()));
-            }
-            else {
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
+            if (this.player.getAbilities().instabuild) {
+                this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player, this.minecraft.player.connection.enabledFeatures(), this.minecraft.options.operatorItemsTab().get()));
+            } else {
                 this.minecraft.setScreen(new InventoryScreen(this.player));
             }
             return true;
@@ -128,12 +119,12 @@ public class CatInventoriesScreen extends AbstractContainerScreen<CatInventories
     }
 
     @Override
-    protected void renderTooltip(PoseStack stack, int mouseX, int mouseY) {
-        if(this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
-//            if (this.hoveredSlot instanceof CatInventorySlot) {
+    protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+//            if (this.hoveredSlot instanceof DogInventorySlot) {
 //                this.renderTooltip(Arrays.asList(new TranslationTextComponent("test").applyTextStyle(TextFormatting.RED).getFormattedText()), mouseX, mouseY);
 //            } else {
-            this.renderTooltip(stack, this.hoveredSlot.getItem(), mouseX, mouseY);
+            graphics.renderItem(this.hoveredSlot.getItem(), mouseX, mouseY);
 //            }
         }
 

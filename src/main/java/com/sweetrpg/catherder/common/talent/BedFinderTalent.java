@@ -27,7 +27,7 @@ public class BedFinderTalent extends TalentInstance {
             if(!playerIn.hasPassenger(catIn)) {
                 if(playerIn.getItemInHand(handIn).getItem() == ModItems.YARN.get() && catIn.canInteract(playerIn)) {
                     if(catIn.startRiding(playerIn)) {
-                        if(!catIn.level.isClientSide) {
+                        if(!catIn.level().isClientSide) {
                             catIn.setOrderedToSit(true);
                         }
 

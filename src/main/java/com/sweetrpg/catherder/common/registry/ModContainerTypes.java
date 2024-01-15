@@ -28,10 +28,10 @@ public class ModContainerTypes {
 
     public static final RegistryObject<MenuType<FoodBowlContainer>> CAT_BOWL = register("cat_bowl", (windowId, inv, data) -> {
         BlockPos pos = data.readBlockPos();
-        return new FoodBowlContainer(windowId, inv.player.level, pos, inv, inv.player);
+        return new FoodBowlContainer(windowId, inv.player.level(), pos, inv, inv.player);
     });
     public static final RegistryObject<MenuType<PackCatContainer>> PACK_CAT = register("pack_cat", (windowId, inv, data) -> {
-        Entity entity = inv.player.level.getEntity(data.readInt());
+        Entity entity = inv.player.level().getEntity(data.readInt());
         return entity instanceof CatEntity ? new PackCatContainer(windowId, inv, (CatEntity) entity) : null;
     });
     public static final RegistryObject<MenuType<TreatBagContainer>> TREAT_BAG = register("treat_bag", (windowId, inv, data) -> {
@@ -43,7 +43,7 @@ public class ModContainerTypes {
         List<CatEntity> cats = new ArrayList<>(noCats);
         SimpleContainerData array = new SimpleContainerData(noCats);
         for (int i = 0; i < noCats; i++) {
-            Entity entity = inv.player.level.getEntity(data.readInt());
+            Entity entity = inv.player.level().getEntity(data.readInt());
             if (entity instanceof CatEntity) {
                 cats.add((CatEntity) entity);
                 array.set(i, entity.getId());

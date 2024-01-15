@@ -30,7 +30,7 @@ public class CreeperSweeperTalent extends TalentInstance {
             int timeLeft = this.cooldown - catIn.tickCount;
 
             if(timeLeft <= 0 && !catIn.isInSittingPose()) {
-                List<Creeper> list = catIn.level.getEntitiesOfClass(Creeper.class, catIn.getBoundingBox().inflate(this.level() * 5, this.level() * 2, this.level() * 5));
+                List<Creeper> list = catIn.level().getEntitiesOfClass(Creeper.class, catIn.getBoundingBox().inflate(this.level() * 5, this.level() * 2, this.level() * 5));
 
                 if(!list.isEmpty()) {
                     catIn.playSound(SoundEvents.CAT_HISS, catIn.getSoundVolume(), (catIn.getRandom().nextFloat() - catIn.getRandom().nextFloat()) * 0.2F + 1.0F);

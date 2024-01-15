@@ -8,6 +8,7 @@ import com.sweetrpg.catherder.common.lib.Resources;
 import com.sweetrpg.catherder.common.talent.PackCatTalent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
@@ -35,7 +36,7 @@ public class CatInventoryButton extends Button {
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
 
         if(this.parent instanceof CreativeModeInventoryScreen t) {
             this.visible = t.isInventoryOpen();
@@ -63,7 +64,7 @@ public class CatInventoryButton extends Button {
             this.setTooltip(this.active ? ACTIVE : INACTIVE);
         }
 
-        super.render(stack, mouseX, mouseY, partialTicks);
+        super.render(graphics, mouseX, mouseY, partialTicks);
     }
 
 //    @Override

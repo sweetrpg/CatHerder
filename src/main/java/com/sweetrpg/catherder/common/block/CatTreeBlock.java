@@ -45,7 +45,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -70,7 +70,7 @@ public class CatTreeBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 29.0D, 16.0D);
 
     public CatTreeBlock() {
-        super(Block.Properties.of(Material.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
+        super(Block.Properties.of().mapColor(MapColor.WOOD).strength(1.0F, 5.0F).sound(SoundType.WOOD));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false));
@@ -202,7 +202,7 @@ public class CatTreeBlock extends BaseEntityBlock {
                         CatEntity cat = storage.respawn((ServerLevel) worldIn, player, pos.above());
 
                         catTreeEntity.setOwner(cat);
-                        cat.setCatTreePos(cat.level.dimension(), pos);
+                        cat.setCatTreePos(cat.level().dimension(), pos);
                         return InteractionResult.SUCCESS;
                     }
                     else {

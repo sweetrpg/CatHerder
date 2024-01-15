@@ -28,7 +28,7 @@ public class CatFollowOwnerGoal extends Goal {
 
     public CatFollowOwnerGoal(CatEntity catIn, double speedIn, float startMoveDist, float stopMoveDist) {
         this.cat = catIn;
-        this.world = catIn.level;
+        this.world = catIn.level();
         this.followSpeed = speedIn;
         this.navigator = catIn.getNavigation();
         this.startDist = startMoveDist;

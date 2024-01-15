@@ -15,7 +15,7 @@ public class FisherCatTalent extends TalentInstance {
 
     @Override
     public void onShakingDry(AbstractCatEntity catIn, WetSource source) {
-        if(catIn.level.isClientSide) { // On client do nothing
+        if(catIn.level().isClientSide) { // On client do nothing
             return;
         }
 

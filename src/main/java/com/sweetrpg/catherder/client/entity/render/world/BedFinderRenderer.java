@@ -13,13 +13,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.RenderLevelLastEvent;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 
 import java.util.Optional;
 
 public class BedFinderRenderer {
 
-    public static void onWorldRenderLast(RenderLevelLastEvent event) {
+    public static void onWorldRenderLast(RenderLevelStageEvent event) {
         Player player = Minecraft.getInstance().player;
         for (Entity passenger : player.getPassengers()) {
             if (passenger instanceof CatEntity) {

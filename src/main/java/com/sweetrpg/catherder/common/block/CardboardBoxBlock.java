@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,7 +32,7 @@ public class CardboardBoxBlock extends Block {
 //    protected static final VoxelShape SHAPE_COLLISION = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
     public CardboardBoxBlock() {
-        super(Block.Properties.of(Material.METAL).strength(1.0F, 5.0F).sound(SoundType.METAL));
+        super(Block.Properties.of().mapColor(MapColor.METAL).strength(1.0F, 5.0F).sound(SoundType.METAL));
     }
 
     @SuppressWarnings("deprecation")

@@ -60,7 +60,7 @@ public class NermalTalent extends TalentInstance {
             return;
         }
 
-        if(catIn.level.isClientSide || !catIn.isTame()) {
+        if(catIn.level().isClientSide || !catIn.isTame()) {
             return;
         }
 
@@ -127,7 +127,7 @@ public class NermalTalent extends TalentInstance {
     }
 
     public LivingEntity getClosestVisibleVillager(AbstractCatEntity catIn, double radiusIn) {
-        List<AbstractVillager> list = catIn.level.getEntitiesOfClass(
+        List<AbstractVillager> list = catIn.level().getEntitiesOfClass(
                 AbstractVillager.class,
                 catIn.getBoundingBox().inflate(radiusIn, radiusIn, radiusIn),
                 (village) -> village.hasLineOfSight(catIn)

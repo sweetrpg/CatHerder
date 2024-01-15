@@ -14,7 +14,7 @@ public class RescueCatTalent extends TalentInstance {
 
     @Override
     public void livingTick(AbstractCatEntity catIn) {
-        if(catIn.level.isClientSide) {
+        if(catIn.level().isClientSide) {
             return;
         }
 

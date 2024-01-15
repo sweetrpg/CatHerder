@@ -44,7 +44,7 @@ public class CatlikeReflexesTalent extends TalentInstance {
 
     @Override
     public InteractionResultHolder<Float> attackEntityFrom(AbstractCatEntity catIn, DamageSource damageSource, float damage) {
-        if(catIn.level.isClientSide) {
+        if(catIn.level().isClientSide) {
             return InteractionResultHolder.pass(damage);
         }
 

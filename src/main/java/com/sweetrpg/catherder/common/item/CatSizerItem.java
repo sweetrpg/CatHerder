@@ -38,7 +38,7 @@ public class CatSizerItem extends Item implements ICatItem {
     public InteractionResult processInteract(AbstractCatEntity cat, Level level, Player player, InteractionHand hand) {
         if(cat.getAge() < 0) {
 
-            if(!player.level.isClientSide) {
+            if(!player.level().isClientSide) {
                 player.sendSystemMessage(Component.translatable("treat.catherder." + this.type.getName() + ".too_young"));
             }
 
@@ -53,7 +53,7 @@ public class CatSizerItem extends Item implements ICatItem {
                 }
             }
 
-            if(!player.level.isClientSide) {
+            if(!player.level().isClientSide) {
                 cat.setCatSize(size + (this.type == Type.BIG ? 1 : -1));
             }
 

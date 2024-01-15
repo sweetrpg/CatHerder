@@ -36,7 +36,7 @@ public class CatInventoriesContainer extends AbstractContainerMenu {
     //Server method
     public CatInventoriesContainer(int windowId, Inventory playerInventory, SimpleContainerData trackableArray) {
         super(ModContainerTypes.CAT_INVENTORIES.get(), windowId);
-        this.world = playerInventory.player.level;
+        this.world = playerInventory.player.level();
         this.player = playerInventory.player;
         this.position = DataSlot.standalone();
         checkContainerDataCount(trackableArray, 1);

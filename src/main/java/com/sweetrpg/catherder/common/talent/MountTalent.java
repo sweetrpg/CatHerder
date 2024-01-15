@@ -54,8 +54,8 @@ public class MountTalent extends TalentInstance {
 
         if(stack.isEmpty()) { // Held item
             if(catIn.canInteract(playerIn) && this.level() > 0) { // Cat
-                if(playerIn.getVehicle() == null && !playerIn.isOnGround()) { // Player
-                    if(!catIn.level.isClientSide) {
+                if(playerIn.getVehicle() == null && !playerIn.onGround()) { // Player
+                    if(!catIn.level().isClientSide) {
                         catIn.setOrderedToSit(false);
                         playerIn.setYRot(catIn.getYRot());
                         playerIn.setXRot(catIn.getXRot());

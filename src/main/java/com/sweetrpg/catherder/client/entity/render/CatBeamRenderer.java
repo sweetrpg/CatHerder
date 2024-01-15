@@ -43,7 +43,7 @@ public class CatBeamRenderer<T extends Entity> extends EntityRenderer<T> {
         matrixStackIn.scale(this.scale, this.scale, this.scale);
         matrixStackIn.mulPose(this.entityRenderDispatcher.cameraOrientation());
         matrixStackIn.mulPose(Axis.YP.rotationDegrees(180.0F));
-        this.itemRenderer.renderStatic(new ItemStack(Items.SNOWBALL), ItemDisplayContext.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, entityIn.getLevel(), 0);
+        this.itemRenderer.renderStatic(new ItemStack(Items.SNOWBALL), ItemDisplayContext.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, entityIn.level(), 0);
         matrixStackIn.popPose();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }

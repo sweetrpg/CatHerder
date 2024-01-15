@@ -87,6 +87,7 @@ import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -388,9 +389,9 @@ public class CatEntity extends AbstractCatEntity {
                 if(this.wetSource == null) {
                     this.wetSource = WetSource.of(inWater, inBubbleColumn, inRain);
                 }
-                if(this.isShaking && !this.level.isClientSide) {
+                if(this.isShaking && !this.level().isClientSide) {
                     this.finishShaking();
-                    this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_INTERRUPT_SHAKING);
+                    this.level().broadcastEntityEvent(this, Constants.EntityState.CAT_INTERRUPT_SHAKING);
                 }
             }
             else if((this.wetSource != null || this.isShaking) && this.isShaking) {
@@ -421,13 +422,13 @@ public class CatEntity extends AbstractCatEntity {
                     for(int j = 0; j < i; ++j) {
                         float f1 = (this.random.nextFloat() * 2.0F - 1.0F) * this.getBbWidth() * 0.5F;
                         float f2 = (this.random.nextFloat() * 2.0F - 1.0F) * this.getBbWidth() * 0.5F;
-                        this.level.addParticle(ParticleTypes.SPLASH, this.getX() + f1, f + 0.8F, this.getZ() + f2, vec3d.x, vec3d.y, vec3d.z);
+                        this.level().addParticle(ParticleTypes.SPLASH, this.getX() + f1, f + 0.8F, this.getZ() + f2, vec3d.x, vec3d.y, vec3d.z);
                     }
                 }
             }
 
             // On server side
-            if(!this.level.isClientSide) {
+            if(!this.level().isClientSide) {
                 if(this.catnipTick > 0) {
                     this.catnipTick--;
                 }
@@ -447,7 +448,7 @@ public class CatEntity extends AbstractCatEntity {
 
                 // Every 2 seconds
                 if(this.tickCount % 40 == 0) {
-                    CatLocationStorage.get(this.level).getOrCreateData(this).update(this);
+                    CatLocationStorage.get(this.level()).getOrCreateData(this).update(this);
 
                     if(this.getOwner() != null) {
                         this.setOwnersName(this.getOwner().getName());
@@ -462,12 +463,12 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     public void aiStep() {
         super.aiStep();
-        if(!this.level.isClientSide && this.wetSource != null && !this.isShaking && !this.isPathFinding() && this.isOnGround()) {
+        if(!this.level().isClientSide && this.wetSource != null && !this.isShaking && !this.isPathFinding() && this.onGround()) {
             this.startShaking();
-            this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_START_SHAKING);
+            this.level().broadcastEntityEvent(this, Constants.EntityState.CAT_START_SHAKING);
         }
 
-        if(!this.level.isClientSide) {
+        if(!this.level().isClientSide) {
             if(!ConfigHandler.SERVER.DISABLE_HUNGER.get()) {
                 this.prevHungerTick = this.hungerTick;
 
@@ -513,20 +514,20 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
-        if(ConfigHandler.CLIENT.DIRE_PARTICLES.get() && this.level.isClientSide && this.getCatLevel().isDireCat()) {
+        if(ConfigHandler.CLIENT.DIRE_PARTICLES.get() && this.level().isClientSide && this.getCatLevel().isDireCat()) {
             for(int i = 0; i < 2; i++) {
-                this.level.addParticle(ParticleTypes.PORTAL, this.getRandomX(0.5D), this.getRandomY() - 0.25D, this.getRandomZ(0.5D), (this.random.nextDouble() - 0.5D) * 2D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2D);
+                this.level().addParticle(ParticleTypes.PORTAL, this.getRandomX(0.5D), this.getRandomY() - 0.25D, this.getRandomZ(0.5D), (this.random.nextDouble() - 0.5D) * 2D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2D);
             }
         }
 
         // Check if cat bowl still exists every 50t/2.5s, if not remove
         if(this.tickCount % 50 == 0) {
-            ResourceKey<Level> dimKey = this.level.dimension();
+            ResourceKey<Level> dimKey = this.level().dimension();
             Optional<BlockPos> bowlPos = this.getBowlPos(dimKey);
 
             // If the cat has a cat bowl in this dimension then check if it is still there
             // Only check if the chunk it is in is loaded
-            if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.CAT_BOWL.get())) {
+            if(bowlPos.isPresent() && this.level().hasChunkAt(bowlPos.get()) && !this.level().getBlockState(bowlPos.get()).is(ModBlocks.CAT_BOWL.get())) {
                 this.setBowlPos(dimKey, Optional.empty());
             }
         }
@@ -536,7 +537,7 @@ public class CatEntity extends AbstractCatEntity {
 
     public InteractionResult consumeCatnip(Player player, InteractionHand hand) {
         if(this.catnipTick > 0 || this.catnipCooldown > 0) {
-            this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_SMOKE);
+            this.level().broadcastEntityEvent(this, Constants.EntityState.CAT_SMOKE);
             return InteractionResult.FAIL;
         }
 
@@ -559,7 +560,7 @@ public class CatEntity extends AbstractCatEntity {
         if(this.isTame()) {
             if(stack.getItem() == Items.STRING && this.canInteract(player)) {
 
-                if(this.level.isClientSide) {
+                if(this.level().isClientSide) {
                     CatInfoScreen.open(this);
                 }
 
@@ -569,7 +570,7 @@ public class CatEntity extends AbstractCatEntity {
         else { // Not tamed
             if(/*stack.getItem() == ModItems. ||*/ stack.getItem() == ModItems.TRAINING_TREAT.get()) {
 
-                if(!this.level.isClientSide) {
+                if(!this.level().isClientSide) {
                     this.usePlayerItem(player, hand, stack);
 
                     if(stack.getItem() == ModItems.TRAINING_TREAT.get() || this.random.nextInt(3) == 0) {
@@ -578,10 +579,10 @@ public class CatEntity extends AbstractCatEntity {
                         this.setTarget(null);
                         this.setOrderedToSit(true);
                         this.setHealth(20.0F);
-                        this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_HEARTS);
+                        this.level().broadcastEntityEvent(this, Constants.EntityState.CAT_HEARTS);
                     }
                     else {
-                        this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_SMOKE);
+                        this.level().broadcastEntityEvent(this, Constants.EntityState.CAT_SMOKE);
                     }
                 }
 
@@ -602,7 +603,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         for(ICatAlteration alter : this.alterations) {
-            InteractionResult result = alter.processInteract(this, this.level, player, hand);
+            InteractionResult result = alter.processInteract(this, this.level(), player, hand);
             if(result != InteractionResult.PASS) {
                 return result;
             }
@@ -1059,9 +1060,9 @@ public class CatEntity extends AbstractCatEntity {
 
         super.setUUID(uniqueIdIn);
 
-        if(this.level != null && !this.level.isClientSide) {
-            CatLocationStorage.get(this.level).remove(oldUniqueId);
-            CatLocationStorage.get(this.level).getOrCreateData(this).update(this);
+        if(this.level() != null && !this.level().isClientSide) {
+            CatLocationStorage.get(this.level()).remove(oldUniqueId);
+            CatLocationStorage.get(this.level()).getOrCreateData(this).update(this);
         }
     }
 
@@ -1214,7 +1215,7 @@ public class CatEntity extends AbstractCatEntity {
     public Entity changeDimension(ServerLevel worldIn, ITeleporter teleporter) {
         Entity transportedEntity = super.changeDimension(worldIn, teleporter);
         if(transportedEntity instanceof CatEntity) {
-            CatLocationStorage.get(this.level).getOrCreateData(this).update((CatEntity) transportedEntity);
+            CatLocationStorage.get(this.level()).getOrCreateData(this).update((CatEntity) transportedEntity);
         }
         return transportedEntity;
     }
@@ -1224,9 +1225,9 @@ public class CatEntity extends AbstractCatEntity {
         super.remove(removalReason);
 
         if(removalReason == RemovalReason.DISCARDED || removalReason == RemovalReason.KILLED) {
-            if(this.level != null && !this.level.isClientSide) {
-                CatRespawnStorage.get(this.level).putData(this);
-                CatLocationStorage.get(this.level).remove(this);
+            if(this.level() != null && !this.level().isClientSide) {
+                CatRespawnStorage.get(this.level()).putData(this);
+                CatLocationStorage.get(this.level()).remove(this);
             }
         }
     }
@@ -1234,7 +1235,7 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     protected void tickDeath() {
         if(this.deathTime == 19) { // 1 second after death
-            if(this.level != null && !this.level.isClientSide) {
+            if(this.level() != null && !this.level().isClientSide) {
 //                catrespawnStorage.get(this.world).putData(this);
 //                CatHerder.LOGGER.debug("Saved cat as they died {}", this);
 //
@@ -1412,7 +1413,7 @@ public class CatEntity extends AbstractCatEntity {
                             name = ForgeMod.ENTITY_GRAVITY;
                             break;
                         case "forge.reachDistance":
-                            name = ForgeMod.REACH_DISTANCE;
+                            name = ForgeMod.BLOCK_REACH;
                             break;
                         case "generic.maxHealth":
                             name = Attributes.MAX_HEALTH;
@@ -1677,7 +1678,7 @@ public class CatEntity extends AbstractCatEntity {
 
         if(ACCESSORIES.get().equals(key)) {
             // If client sort accessories
-            if(this.level.isClientSide) {
+            if(this.level().isClientSide) {
                 // Does not recall this notifyDataManagerChange as list object is
                 // still the same, maybe in future MC versions this will change so need to watch out
                 this.getAccessories().sort(AccessoryInstance.RENDER_SORTER);
@@ -1833,11 +1834,11 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public Optional<BlockPos> getCatTreePos() {
-        return this.getCatTreePos(this.level.dimension());
+        return this.getCatTreePos(this.level().dimension());
     }
 
     public void setCatTreePos(@Nullable BlockPos pos) {
-        this.setCatTreePos(this.level.dimension(), pos);
+        this.setCatTreePos(this.level().dimension(), pos);
     }
 
     public Optional<BlockPos> getCatTreePos(ResourceKey<Level> registryKey) {
@@ -1853,11 +1854,11 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public Optional<BlockPos> getBowlPos() {
-        return this.getBowlPos(this.level.dimension());
+        return this.getBowlPos(this.level().dimension());
     }
 
     public void setBowlPos(@Nullable BlockPos pos) {
-        this.setBowlPos(this.level.dimension(), pos);
+        this.setBowlPos(this.level().dimension(), pos);
     }
 
     public Optional<BlockPos> getBowlPos(ResourceKey<Level> registryKey) {
@@ -1873,11 +1874,11 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public Optional<BlockPos> getLitterboxPos() {
-        return this.getLitterboxPos(this.level.dimension());
+        return this.getLitterboxPos(this.level().dimension());
     }
 
     public void setLitterboxPos(@Nullable BlockPos pos) {
-        this.setLitterboxPos(this.level.dimension(), pos);
+        this.setLitterboxPos(this.level().dimension(), pos);
     }
 
     public Optional<BlockPos> getLitterboxPos(ResourceKey<Level> registryKey) {
@@ -2436,7 +2437,7 @@ public class CatEntity extends AbstractCatEntity {
                     this.statsTracker.increaseDistanceInWater(k);
                 }
             }
-            else if(this.isOnGround()) {
+            else if(this.onGround()) {
                 int l = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
                 if(l > 0) {
                     if(this.isSprinting()) {
@@ -2484,7 +2485,7 @@ public class CatEntity extends AbstractCatEntity {
             return true;
         }
 
-        BlockState blockBelow = this.level.getBlockState(this.blockPosition().below());
+        BlockState blockBelow = this.level().getBlockState(this.blockPosition().below());
         boolean onBed = /* TODO: remove temporarily blockBelow.is(ModBlocks.CAT_TREE.get()) || */ blockBelow.is(BlockTags.BEDS);
         return onBed;
     }
@@ -2579,7 +2580,7 @@ public class CatEntity extends AbstractCatEntity {
                     }
 
                     BlockPos blockPos = this.ownerPlayer.blockPosition();
-                    BlockState blockState = this.cat.level.getBlockState(blockPos);
+                    BlockState blockState = this.cat.level().getBlockState(blockPos);
                     if(blockState.is(BlockTags.BEDS)) {
                         this.goalPos = blockState.getOptionalValue(BedBlock.FACING).map((p_28209_) -> {
                             return blockPos.relative(p_28209_.getOpposite());
@@ -2595,7 +2596,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         private boolean spaceIsOccupied() {
-            for(CatEntity cat : this.cat.level.getEntitiesOfClass(CatEntity.class, (new AABB(this.goalPos)).inflate(2.0D))) {
+            for(CatEntity cat : this.cat.level().getEntitiesOfClass(CatEntity.class, (new AABB(this.goalPos)).inflate(2.0D))) {
                 if(cat != this.cat && (cat.isLying() || cat.isRelaxStateOne())) {
                     return true;
                 }
@@ -2631,8 +2632,8 @@ public class CatEntity extends AbstractCatEntity {
          */
         public void stop() {
 //            this.cat.setLying(false);
-            float f = this.cat.level.getTimeOfDay(1.0F);
-            if(this.ownerPlayer.getSleepTimer() >= 100 && (double) f > 0.77D && (double) f < 0.8D && (double) this.cat.level.getRandom().nextFloat() < 0.7D) {
+            float f = this.cat.level().getTimeOfDay(1.0F);
+            if(this.ownerPlayer.getSleepTimer() >= 100 && (double) f > 0.77D && (double) f < 0.8D && (double) this.cat.level().getRandom().nextFloat() < 0.7D) {
                 this.giveMorningGift();
             }
 
@@ -2647,11 +2648,11 @@ public class CatEntity extends AbstractCatEntity {
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
             this.cat.randomTeleport(blockPos$mutableBlockPos.getX() + random.nextInt(11) - 5, blockPos$mutableBlockPos.getY() + random.nextInt(5) - 2, blockPos$mutableBlockPos.getZ() + random.nextInt(11) - 5, false);
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
-            LootTable loottable = this.cat.level.getServer().getLootTables().get(BuiltInLootTables.CAT_MORNING_GIFT);
-            LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel) this.cat.level)).withParameter(LootContextParams.ORIGIN, this.cat.position()).withParameter(LootContextParams.THIS_ENTITY, this.cat).withRandom(random);
+            LootTable loottable = this.cat.level().getServer().getLootData().getLootTable(BuiltInLootTables.CAT_MORNING_GIFT);
+            LootContext.Builder lootcontext$builder = (new LootContext.Builder(new LootParams.Builder(this.cat.level().getServer().getLevel(this.cat.level().getServer().overworld().dimension())).)).withParameter(LootContextParams.ORIGIN, this.cat.position()).withParameter(LootContextParams.THIS_ENTITY, this.cat).withRandom(random);
 
-            for(ItemStack itemstack : loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.GIFT))) {
-                this.cat.level.addFreshEntity(new ItemEntity(this.cat.level, (double) blockPos$mutableBlockPos.getX() - (double) Mth.sin(this.cat.yBodyRot * ((float) Math.PI / 180F)), blockPos$mutableBlockPos.getY(), (double) blockPos$mutableBlockPos.getZ() + (double) Mth.cos(this.cat.yBodyRot * ((float) Math.PI / 180F)), itemstack));
+            for(ItemStack itemstack : loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.GIFT.))) {
+                this.cat.level().addFreshEntity(new ItemEntity(this.cat.level(), (double) blockPos$mutableBlockPos.getX() - (double) Mth.sin(this.cat.yBodyRot * ((float) Math.PI / 180F)), blockPos$mutableBlockPos.getY(), (double) blockPos$mutableBlockPos.getZ() + (double) Mth.cos(this.cat.yBodyRot * ((float) Math.PI / 180F)), itemstack));
             }
         }
 

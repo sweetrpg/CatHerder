@@ -10,52 +10,50 @@ import com.sweetrpg.catherder.common.item.IDyeableArmorItem;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import com.sweetrpg.catherder.common.util.Util;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 public class ModItemGroups {
 
-    public static CreativeModeTab GENERAL;
+    public static final DeferredRegister<CreativeModeTab> ITEM_GROUP = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CatHerderAPI.MOD_ID);
 // TODO   public static CreativeModeTab CAT_TREE;
 // TODO   public static CreativeModeTab PET_DOOR;
 
-//    public static final CreativeModeTab GENERAL = new CustomItemGroup("catherder", () -> new ItemStack(ModItems.TRAINING_TREAT.get()));
-//    public static final CreativeModeTab CAT_TREE = new CustomItemGroup("catherder.cattree", CattreeUtil::createRandomBed);
+    public static RegistryObject<CreativeModeTab> GENERAL = register("tabgeneral", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.catherder"))
+            .icon(() -> {
+                return new ItemStack(ModItems.TRAINING_TREAT.get());
+            })
+            .displayItems((a, b) -> {
+                var allItemsIter = ModItems.ITEMS.getEntries();
+                for (var val : allItemsIter) {
+                    if (val.get() instanceof BlockItem blockItem) {
+                        if(blockItem.getBlock() instanceof CatTreeBlock) {
+                            for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+                                b.accept(CatTreeUtil.createItemStack(colorId));
+                            }
+                            continue;
+                        }
+                        else if(blockItem.getBlock() instanceof PetDoorBlock) {
+                            for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
+                                b.accept(PetDoorUtil.createItemStack(structureId));
+                            }
+                            continue;
+                        }
+                    }
+                    b.accept(val.get());
+                }
+            }).build());
 
-    public static void creativeModeTabRegisterEvent(final CreativeModeTabEvent.Register event) {
-        GENERAL = event.registerCreativeModeTab(Util.getResource("main"), (builder) -> builder.title(Component.translatable("itemGroup.catherder")).icon(() -> new ItemStack(ModItems.TRAINING_TREAT.get())));
+    public static RegistryObject<CreativeModeTab> register(String name, Supplier<CreativeModeTab> sup) {
+        return ITEM_GROUP.register(name, sup);
     }
 
-    public static void creativeModeTabBuildEvent(final CreativeModeTabEvent.BuildContents event) {
-        CatHerder.LOGGER.debug("Creative mode tab build event: {}", event);
-
-        for(var item : ModItems.ITEMS.getEntries()) {
-            if(item.get() instanceof IDyeableArmorItem dyeableItem) {
-                ItemStack stack = new ItemStack(item.get());
-
-                dyeableItem.setColor(stack, dyeableItem.getDefaultColor(stack));
-                event.accept(stack);
-                continue;
-            }
-            else if(item.get() instanceof BlockItem blockItem) {
-                if(blockItem.getBlock() instanceof CatTreeBlock) {
-                    for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
-                        event.accept(CatTreeUtil.createItemStack(colorId));
-                    }
-                    continue;
-                }
-                else if(blockItem.getBlock() instanceof PetDoorBlock) {
-                    for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
-                        event.accept(PetDoorUtil.createItemStack(structureId));
-                    }
-                    continue;
-                }
-            }
-
-            event.accept(item);
-        }
-    }
 }

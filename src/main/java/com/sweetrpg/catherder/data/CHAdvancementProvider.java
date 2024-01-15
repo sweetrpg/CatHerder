@@ -38,9 +38,9 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement trainCat = Advancement.Builder.advancement()
 //                .parent(Util.mcLoc("tame_animal"))
                 .display(DisplayInfoBuilder.create().icon(ModItems.TRAINING_TREAT).frame(FrameType.TASK).translate("catherder.main.train_cat").background("stone.png").build())
-                .addCriterion("tame_cat", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(ModEntityTypes.CAT.get()).build()))
+                .addCriterion("tame_cat", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(ModEntityTypes.CAT.get())))
                 //.withCriterion("get_cat", ItemUseTrigger.TameAnimalTrigger.Instance.create(EntityPredicate.Builder.create().type(CatEntityTypes.CAT.get()).build()))
-                .requirements(RequirementsStrategy.OR)
+//                .requirements(RequirementsStrategy.OR)
                 .save(consumer, Util.getResourcePath("main/tame_cat"));
         // max level
 

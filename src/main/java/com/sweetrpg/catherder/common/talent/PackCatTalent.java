@@ -52,8 +52,8 @@ public class PackCatTalent extends TalentInstance {
 
     @Override
     public void tick(AbstractCatEntity catIn) {
-        if(catIn.isAlive() && !catIn.level.isClientSide && this.level() >= 5) {
-            List<ItemEntity> list = catIn.level.getEntitiesOfClass(ItemEntity.class, catIn.getBoundingBox().inflate(2.5D, 1D, 2.5D), SHOULD_PICKUP_ENTITY_ITEM);
+        if(catIn.isAlive() && !catIn.level().isClientSide && this.level() >= 5) {
+            List<ItemEntity> list = catIn.level().getEntitiesOfClass(ItemEntity.class, catIn.getBoundingBox().inflate(2.5D, 1D, 2.5D), SHOULD_PICKUP_ENTITY_ITEM);
 
             if(!list.isEmpty()) {
                 for(ItemEntity entityItem : list) {
@@ -64,7 +64,7 @@ public class PackCatTalent extends TalentInstance {
                     }
                     else {
                         entityItem.discard();
-                        catIn.playSound(SoundEvents.ITEM_PICKUP, 0.25F, ((catIn.level.random.nextFloat() - catIn.level.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                        catIn.playSound(SoundEvents.ITEM_PICKUP, 0.25F, ((catIn.level().random.nextFloat() - catIn.level().random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                     }
                 }
             }
@@ -104,7 +104,7 @@ public class PackCatTalent extends TalentInstance {
         //TODO either drop inventory or save to respawn data, currently does both
         // No need to drop anything if cat didn't have pack cat
         for(int i = 0; i < this.packCatItemHandler.getSlots(); ++i) {
-            Containers.dropItemStack(catIn.level, catIn.getX(), catIn.getY(), catIn.getZ(), this.packCatItemHandler.getStackInSlot(i));
+            Containers.dropItemStack(catIn.level(), catIn.getX(), catIn.getY(), catIn.getZ(), this.packCatItemHandler.getStackInSlot(i));
             this.packCatItemHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
     }

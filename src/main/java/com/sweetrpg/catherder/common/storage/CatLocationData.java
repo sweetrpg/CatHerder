@@ -77,7 +77,7 @@ public class CatLocationData implements ICatData {
     public void update(CatEntity catIn) {
         this.ownerId = catIn.getOwnerUUID();
         this.position = catIn.position();
-        this.dimension = catIn.level.dimension();
+        this.dimension = catIn.level().dimension();
 
         this.name = catIn.getName();
         this.ownerName = catIn.getOwnersName().orElse(null);

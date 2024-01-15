@@ -26,13 +26,13 @@ public class CatTorchTalent extends TalentInstance {
             BlockPos pos = catIn.blockPosition();
             BlockState torchState = Blocks.TORCH.defaultBlockState();
 
-            if(catIn.level.getMaxLocalRawBrightness(catIn.blockPosition()) < 8 && catIn.level.isEmptyBlock(pos) && torchState.canSurvive(catIn.level, pos)) {
+            if(catIn.level().getMaxLocalRawBrightness(catIn.blockPosition()) < 8 && catIn.level().isEmptyBlock(pos) && torchState.canSurvive(catIn.level(), pos)) {
                 PackCatItemHandler inventory = catIn.getTalent(ModTalents.PACK_CAT)
                         .map((inst) -> inst.cast(PackCatTalent.class).inventory()).orElse(null);
 
                 // If null might be because no pack cat
                 if(this.level() >= 5) {
-                    catIn.level.setBlockAndUpdate(pos, torchState);
+                    catIn.level().setBlockAndUpdate(pos, torchState);
                 }
                 else if(inventory != null) { // If null might be because no pack cat
                     Pair<ItemStack, Integer> foundDetails = InventoryUtil.findStack(inventory, (stack) -> stack.getItem() == Items.TORCH);
@@ -40,7 +40,7 @@ public class CatTorchTalent extends TalentInstance {
                         ItemStack torchStack = foundDetails.getLeft();
                         catIn.consumeItemFromStack(catIn, torchStack);
                         inventory.setStackInSlot(foundDetails.getRight(), torchStack);
-                        catIn.level.setBlockAndUpdate(pos, torchState);
+                        catIn.level().setBlockAndUpdate(pos, torchState);
                     }
                 }
             }

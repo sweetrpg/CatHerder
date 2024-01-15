@@ -82,8 +82,8 @@ public class CatHerder {
         modEventBus.addListener(ModEntityTypes::addEntityAttributes);
         modEventBus.addListener(Capabilities::registerCaps);
 
-        modEventBus.addListener(ModItemGroups::creativeModeTabRegisterEvent);
-        modEventBus.addListener(ModItemGroups::creativeModeTabBuildEvent);
+//        modEventBus.addListener(ModItemGroups::creativeModeTabRegisterEvent);
+//        modEventBus.addListener(ModItemGroups::creativeModeTabBuildEvent);
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::serverStarting);
