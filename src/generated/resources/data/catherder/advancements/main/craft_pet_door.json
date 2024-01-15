@@ -23,7 +23,7 @@
     "hidden": false,
     "icon": {
       "item": "catherder:pet_door",
-      "nbt": "{catherder:{structureId:\"minecraft:warped_planks\"}}"
+      "nbt": "{catherder:{structureId:\"minecraft:jungle_planks\"}}"
     },
     "show_toast": true,
     "title": {
