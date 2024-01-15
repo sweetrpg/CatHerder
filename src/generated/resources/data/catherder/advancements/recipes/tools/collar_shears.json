@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shears": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:shears"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "catherder:collar_shears"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yarn": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "catherder:yarn"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_shears",
+      "has_yarn",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "catherder:collar_shears"
+    ]
+  },
+  "sends_telemetry_event": false
+}

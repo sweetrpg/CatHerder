@@ -22,7 +22,7 @@
     "hidden": false,
     "icon": {
       "item": "catherder:cat_tree",
-      "nbt": "{catherder:{colorId:\"minecraft:green_wool\"}}"
+      "nbt": "{catherder:{colorId:\"minecraft:red_wool\"}}"
     },
     "show_toast": true,
     "title": {
