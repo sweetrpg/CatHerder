@@ -60,7 +60,7 @@ jobs:
       - name: Release artifacts
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "1.18.2-${{ steps.bump_version.outputs.new_version }}"
+          tag_name: "1.18-${{ steps.bump_version.outputs.new_version }}"
           prerelease: true
           files: |
             build/libs/*.jar
