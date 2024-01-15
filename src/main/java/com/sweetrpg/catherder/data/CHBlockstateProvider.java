@@ -53,7 +53,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
     }
 
     private String blockName(Block block) {
-        return block.getName().getString();
+        return ForgeRegistries.BLOCKS.getKey(block).getPath();
     }
 
     public ResourceLocation resourceBlock(String path) {

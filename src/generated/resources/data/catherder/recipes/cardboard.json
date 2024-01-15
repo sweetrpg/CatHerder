@@ -1,16 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "PPP",
-    "PPP"
-  ],
+  "category": "misc",
   "key": {
     "P": {
       "item": "minecraft:paper"
     }
   },
+  "pattern": [
+    "PPP",
+    "PPP"
+  ],
   "result": {
-    "item": "catherder:cardboard",
-    "count": 9
-  }
+    "count": 9,
+    "item": "catherder:cardboard"
+  },
+  "show_notification": true
 }

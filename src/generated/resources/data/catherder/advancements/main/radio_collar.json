@@ -1,39 +1,39 @@
 {
   "parent": "catherder:main/tame_cat",
-  "display": {
-    "icon": {
-      "item": "catherder:radio_collar"
-    },
-    "title": {
-      "translate": "advancements.catherder.main.radio_collar.title"
-    },
-    "description": {
-      "translate": "advancements.catherder.main.radio_collar.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
     "radio_collar": {
-      "trigger": "minecraft:using_item",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "predicate": {
-              "type": "catherder:cat"
-            },
-            "entity": "this"
-          }
-        ],
         "item": {
           "items": [
             "catherder:radio_collar"
           ]
-        }
-      }
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "catherder:cat"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.catherder.main.radio_collar.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "catherder:radio_collar"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.catherder.main.radio_collar.title"
     }
   },
   "requirements": [

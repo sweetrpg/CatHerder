@@ -1,16 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "WW ",
-    "WW ",
-    "  W"
-  ],
+  "category": "misc",
   "key": {
     "W": {
       "tag": "minecraft:wool"
     }
   },
+  "pattern": [
+    "WW ",
+    "WW ",
+    "  W"
+  ],
   "result": {
     "item": "catherder:yarn"
-  }
+  },
+  "show_notification": true
 }

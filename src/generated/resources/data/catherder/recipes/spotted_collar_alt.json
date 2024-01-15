@@ -1,25 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:black_dye"
+    },
+    "C": {
+      "item": "catherder:wool_collar"
+    },
+    "S": {
+      "tag": "minecraft:wool"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
   "pattern": [
     "WBW",
     "BCB",
     "WSW"
   ],
-  "key": {
-    "C": {
-      "item": "catherder:wool_collar"
-    },
-    "B": {
-      "item": "minecraft:black_dye"
-    },
-    "W": {
-      "item": "minecraft:white_dye"
-    },
-    "S": {
-      "tag": "minecraft:wool"
-    }
-  },
   "result": {
     "item": "catherder:spotted_collar"
-  }
+  },
+  "show_notification": true
 }
