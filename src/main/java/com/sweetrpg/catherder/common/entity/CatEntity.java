@@ -30,8 +30,6 @@ import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -58,10 +56,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -86,10 +81,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
@@ -103,7 +96,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.holdersets.HolderSetType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -403,7 +395,7 @@ public class CatEntity extends AbstractCatEntity {
                 this.timeCatIsShaking += 0.05F;
                 if(this.prevTimeCatIsShaking >= 2.0F) {
 
-                    //TODO check if only called server side
+                    // TODO check if only called server side
                     if(this.wetSource != null) {
                         for(ICatAlteration alter : this.alterations) {
                             alter.onShakingDry(this, this.wetSource);
@@ -2513,7 +2505,7 @@ public class CatEntity extends AbstractCatEntity {
 
     public CatVariant getVariant() {
         try {
-        var data = this.entityData.get(VARIANT_STR);
+            var data = this.entityData.get(VARIANT_STR);
             return BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(data));
         }
         catch (Exception e) {
@@ -2648,11 +2640,22 @@ public class CatEntity extends AbstractCatEntity {
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
             this.cat.randomTeleport(blockPos$mutableBlockPos.getX() + random.nextInt(11) - 5, blockPos$mutableBlockPos.getY() + random.nextInt(5) - 2, blockPos$mutableBlockPos.getZ() + random.nextInt(11) - 5, false);
             blockPos$mutableBlockPos.set(this.cat.blockPosition());
-            LootTable loottable = this.cat.level().getServer().getLootData().getLootTable(BuiltInLootTables.CAT_MORNING_GIFT);
-            LootContext.Builder lootcontext$builder = (new LootContext.Builder(new LootParams.Builder(this.cat.level().getServer().getLevel(this.cat.level().getServer().overworld().dimension())).)).withParameter(LootContextParams.ORIGIN, this.cat.position()).withParameter(LootContextParams.THIS_ENTITY, this.cat).withRandom(random);
+            LootTable lootTable = this.cat.level().getServer().getLootData().getLootTable(BuiltInLootTables.CAT_MORNING_GIFT);
+            var dimension = this.cat.getServer().overworld().dimension();
+            var serverLevel = this.cat.getServer().getLevel(dimension);
+            LootParams lootParams = new LootParams.Builder(serverLevel)
+                    .withParameter(LootContextParams.ORIGIN, this.cat.position())
+                    .withParameter(LootContextParams.THIS_ENTITY, this.cat).create(null);
+//            LootContext.Builder lootContext$builder = new LootContext.Builder(lootParams);
+//                    .withRandom(random);
 
-            for(ItemStack itemstack : loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.GIFT.))) {
-                this.cat.level().addFreshEntity(new ItemEntity(this.cat.level(), (double) blockPos$mutableBlockPos.getX() - (double) Mth.sin(this.cat.yBodyRot * ((float) Math.PI / 180F)), blockPos$mutableBlockPos.getY(), (double) blockPos$mutableBlockPos.getZ() + (double) Mth.cos(this.cat.yBodyRot * ((float) Math.PI / 180F)), itemstack));
+            for(ItemStack itemstack : lootTable.getRandomItems(lootParams)) {
+                // LootContextParamSets.GIFT /* lootContext$builder.create(null /*LootContextParamSets.GIFT*/ ))) {
+                this.cat.level().addFreshEntity(new ItemEntity(this.cat.level(),
+                        (double) blockPos$mutableBlockPos.getX() - (double) Mth.sin(this.cat.yBodyRot * ((float) Math.PI / 180F)),
+                        blockPos$mutableBlockPos.getY(),
+                        (double) blockPos$mutableBlockPos.getZ() + (double) Mth.cos(this.cat.yBodyRot * ((float) Math.PI / 180F)),
+                        itemstack));
             }
         }
 

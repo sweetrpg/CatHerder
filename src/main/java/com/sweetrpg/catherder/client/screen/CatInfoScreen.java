@@ -15,6 +15,7 @@ import com.sweetrpg.catherder.common.registry.ModAccessories;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -241,21 +242,21 @@ public class CatInfoScreen extends Screen {
         return Tooltip.create(ComponentUtils.formatList(list, CommonComponents.NEW_LINE));
     }
 
-    public void renderTalentToolTip(Talent talent, Button button, PoseStack stack, int mouseX, int mouseY) {
-        List<Component> list = new ArrayList<>();
-
-        list.add(Component.translatable(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
-        if(button.active) {
-            list.add(Component.literal("Level: " + CatInfoScreen.this.cat.getCatLevel(talent)));
-            list.add(Component.literal("--------------------------------").withStyle(ChatFormatting.GRAY));
-            list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, CatInfoScreen.this.font));
-        }
-        else {
-            list.add(Component.literal("Talent disabled").withStyle(ChatFormatting.RED));
-        }
-
-        CatInfoScreen.this.renderComponentTooltip(stack, list, mouseX, mouseY);
-    }
+//    public void renderTalentToolTip(Talent talent, Button button, PoseStack stack, int mouseX, int mouseY) {
+//        List<Component> list = new ArrayList<>();
+//
+//        list.add(Component.translatable(talent.getTranslationKey()).withStyle(ChatFormatting.GREEN));
+//        if(button.active) {
+//            list.add(Component.literal("Level: " + CatInfoScreen.this.cat.getCatLevel(talent)));
+//            list.add(Component.literal("--------------------------------").withStyle(ChatFormatting.GRAY));
+//            list.addAll(ScreenUtil.splitInto(I18n.get(talent.getInfoTranslationKey()), 200, CatInfoScreen.this.font));
+//        }
+//        else {
+//            list.add(Component.literal("Talent disabled").withStyle(ChatFormatting.RED));
+//        }
+//
+//        CatInfoScreen.this.renderComponentTooltip(stack, list, mouseX, mouseY);
+//    }
 
     private void recalculatePage(int perPage) {
         this.talentWidgets.forEach(this::removeWidget);
@@ -304,11 +305,11 @@ public class CatInfoScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         //Background
         int topX = this.width / 2;
         int topY = this.height / 2;
-        this.renderBackground(stack);
+        this.renderBackground(graphics);
 
         // Background
         String health = Util.format1DP(this.cat.getHealth());
@@ -331,22 +332,22 @@ public class CatInfoScreen extends Screen {
         }
 
         //this.font.drawString(I18n.format("catgui.health") + healthState, this.width - 160, topY - 110, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_SPEED) + " " + speedValue, this.width - 160, topY - 100, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_OWNER) + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_AGE) + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_ARMOR) + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_SPEED) + " " + speedValue, this.width - 160, topY - 100, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_OWNER) + " " + tamedString, this.width - 160, topY - 90, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_AGE) + " " + ageString, this.width - 160, topY - 80, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_ARMOR) + " " + armorValue, this.width - 160, topY - 70, 0xFFFFFF);
         if(ConfigHandler.SERVER.CAT_GENDER.get()) {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalizedName()), this.width - 160, topY - 60, 0xFFFFFF);
+            graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_GENDER) + " " + I18n.get(this.cat.getGender().getUnlocalizedName()), this.width - 160, topY - 60, 0xFFFFFF);
         }
 
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL) + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD) + " " + this.cat.getCatLevel().getLevel(Type.WILD), topX, topY + 75, 0xFF10F9);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_NEW_NAME), topX - 100, topY + 38, 4210752);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL) + " " + this.cat.getCatLevel().getLevel(Type.NORMAL), topX - 65, topY + 75, 0xFF10F9);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_LEVEL_WILD) + " " + this.cat.getCatLevel().getLevel(Type.WILD), topX, topY + 75, 0xFF10F9);
         if(this.cat.getAccessory(ModAccessories.GOLDEN_COLLAR.get()).isPresent()) {
-            this.font.draw(stack, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
+            graphics.drawString(this.font, ChatFormatting.GOLD + "Unlimited Points", topX - 38, topY + 89, 0xFFFFFF); //TODO translation
         }
         else {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT) + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
+            graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_POINTS_LEFT) + " " + this.cat.getSpendablePoints(), topX - 38, topY + 89, 0xFFFFFF);
         }
         // if (ConfigHandler.CLIENT.USE_DT_TEXTURES.get()) {
 //        this.font.draw(stack, I18n.get("catgui.textureindex"), this.width - 80, topY + 20, 0xFFFFFF);
@@ -354,21 +355,28 @@ public class CatInfoScreen extends Screen {
         // }
 
         if(this.cat.isOwnedBy(this.player)) {
-            this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS), this.width - 76, topY + 67, 0xFFFFFF);
+            graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_OBEY_OTHERS), this.width - 76, topY + 67, 0xFFFFFF);
         }
 
-        this.font.draw(stack, I18n.get(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE), this.width - 76, topY - 15, 0xFFFFFF);
+        graphics.drawString(this.font, I18n.get(Constants.TRANSLATION_KEY_GUI_FRIENDLY_FIRE), this.width - 76, topY - 15, 0xFFFFFF);
 
         this.renderables.forEach(widget -> {
             if(widget instanceof TalentButton) {
                 TalentButton talBut = (TalentButton) widget;
                 if(talBut.showTalentName) {
-                    this.font.draw(stack, I18n.get(talBut.talent.getTranslationKey()), talBut.getX() + 25, talBut.getY() + 7, 0xFFFFFF);
+                    graphics.drawString(this.font, I18n.get(talBut.talent.getTranslationKey()), talBut.getX() + 25, talBut.getY() + 7, 0xFFFFFF);
                 }
             }
         });
 
-        super.render(stack, mouseX, mouseY, partialTicks);
+        super.render(graphics, mouseX, mouseY, partialTicks);
+
+        if (!this.cat.isAlive()) {
+            Minecraft.getInstance().setScreen(null);
+        }
+//        else if (this.cat.isDefeated()) {
+//            DogCannotInteractWithScreen.open(dog);
+//        }
     }
 
 //    @Override

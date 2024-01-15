@@ -38,7 +38,7 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement trainCat = Advancement.Builder.advancement()
 //                .parent(Util.mcLoc("tame_animal"))
                 .display(DisplayInfoBuilder.create().icon(ModItems.TRAINING_TREAT).frame(FrameType.TASK).translate("catherder.main.train_cat").background("stone.png").build())
-                .addCriterion("tame_cat", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(ModEntityTypes.CAT.get())))
+                .addCriterion("tame_cat", TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(ModEntityTypes.CAT.get()).build()))
                 //.withCriterion("get_cat", ItemUseTrigger.TameAnimalTrigger.Instance.create(EntityPredicate.Builder.create().type(CatEntityTypes.CAT.get()).build()))
 //                .requirements(RequirementsStrategy.OR)
                 .save(consumer, Util.getResourcePath("main/tame_cat"));
@@ -48,12 +48,12 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement litterbox = Advancement.Builder.advancement()
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(ModBlocks.LITTERBOX).frame(FrameType.TASK).translate("catherder.main.place_litterbox").build())
-                .addCriterion("place_litterbox", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.LITTERBOX.get()))
+                .addCriterion("place_litterbox", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.LITTERBOX.get()))
                 .save(consumer, Util.getResourcePath("main/place_litterbox"));
         Advancement cleanLitterbox = Advancement.Builder.advancement()
                 .parent(litterbox)
                 .display(DisplayInfoBuilder.create().icon(ModItems.LITTER_SCOOP).frame(FrameType.TASK).translate("catherder.main.clean_litterbox").build())
-                .addCriterion("clean_litterbox", ItemInteractWithBlockTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.LITTERBOX.get()).build()),
+                .addCriterion("clean_litterbox", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.LITTERBOX.get()).build()),
                         ItemPredicate.Builder.item().of(ModItems.LITTER_SCOOP.get())))
                 .save(consumer, Util.getResourcePath("main/clean_litterbox"));
 
@@ -61,14 +61,14 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement cardboardBox = Advancement.Builder.advancement()
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(ModBlocks.CARDBOARD_BOX).frame(FrameType.TASK).translate("catherder.main.place_cardboard_box").build())
-                .addCriterion("place_cardboard_box", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.CARDBOARD_BOX.get()))
+                .addCriterion("place_cardboard_box", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.CARDBOARD_BOX.get()))
                 .save(consumer, Util.getResourcePath("main/place_cardboard_box"));
 
         // mousetrap
         Advancement mousetrap = Advancement.Builder.advancement()
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(ModBlocks.MOUSE_TRAP).frame(FrameType.TASK).translate("catherder.main.place_mousetrap").build())
-                .addCriterion("place_mousetrap", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.MOUSE_TRAP.get()))
+                .addCriterion("place_mousetrap", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.MOUSE_TRAP.get()))
                 .save(consumer, Util.getResourcePath("main/place_mousetrap"));
 
         // catnip
@@ -120,16 +120,16 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement catTree = Advancement.Builder.advancement()
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(CatTreeUtil.createRandomTree()).frame(FrameType.TASK).translate("catherder.main.cat_tree").build())
-                .addCriterion("cat_tree", PlacedBlockTrigger.TriggerInstance.placedBlock(ModBlocks.CAT_TREE.get()))
+                .addCriterion("cat_tree", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(ModBlocks.CAT_TREE.get()))
                 .save(consumer, Util.getResourcePath("main/cat_tree"));
 
         // throw toy
         Advancement throwToy = Advancement.Builder.advancement()
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(ModItems.CAT_TOY).frame(FrameType.TASK).translate("catherder.main.toy").build())
-                .addCriterion("play_with_cat", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByEntity(EntityPredicate.Composite.ANY,
+                .addCriterion("play_with_cat", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByEntity(ContextAwarePredicate.ANY,
                                 ItemPredicate.Builder.item().of(ModTags.TOYS).build(),
-                                EntityPredicate.Composite.wrap(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntityTypes.CAT.get())).build())))
+                                EntityPredicate.wrap(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntityTypes.CAT.get())).build())))
                 .save(consumer, Util.getResourcePath("main/play_with_cat"));
 
         // Nermal
