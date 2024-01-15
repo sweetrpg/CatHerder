@@ -16,46 +16,69 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.CreativeModeTabEvent;
 
+import java.util.List;
+import java.util.function.Consumer;
+
 public class ModItemGroups {
 
     public static CreativeModeTab GENERAL;
-// TODO   public static CreativeModeTab CAT_TREE;
-// TODO   public static CreativeModeTab PET_DOOR;
+    public static CreativeModeTab CAT_TREE;
+    public static CreativeModeTab PET_DOOR;
 
-//    public static final CreativeModeTab GENERAL = new CustomItemGroup("catherder", () -> new ItemStack(ModItems.TRAINING_TREAT.get()));
-//    public static final CreativeModeTab CAT_TREE = new CustomItemGroup("catherder.cattree", CattreeUtil::createRandomBed);
+    public static void onCreativeTabRegister(CreativeModeTabEvent.Register event) {
+        Consumer<CreativeModeTab.Builder> GENERAL_BUILDER = builder ->
+                builder.title(Component.translatable("itemGroup.catherder"))
+                        .icon(() -> {
+                            return new ItemStack(ModItems.TRAINING_TREAT.get());
+                        })
+                        .displayItems((a, b) -> {
+                            var allItemsIter = ModItems.ITEMS.getEntries();
+                            for (var val : allItemsIter) {
+                                if (val.get() instanceof BlockItem blockItem) {
+                                    if (blockItem.getBlock() instanceof CatTreeBlock) {
+                                        continue;
+                                    }
+                                    else if (blockItem.getBlock() instanceof PetDoorBlock) {
+                                        continue;
+                                    }
+                                }
+                                b.accept(val.get());
+                            }
+                        });
 
-    public static void creativeModeTabRegisterEvent(final CreativeModeTabEvent.Register event) {
-        GENERAL = event.registerCreativeModeTab(Util.getResource("main"), (builder) -> builder.title(Component.translatable("itemGroup.catherder")).icon(() -> new ItemStack(ModItems.TRAINING_TREAT.get())));
+        GENERAL = event.registerCreativeModeTab(
+                Util.getResource("ch_tab_general"),
+                GENERAL_BUILDER);
+
+        Consumer<CreativeModeTab.Builder> CAT_TREE_BUILDER = builder ->
+                builder.title(Component.translatable("itemGroup.catherder.cattree"))
+                        .icon(CatTreeUtil::createRandomTree)
+                        .displayItems((a, b) -> {
+                            for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+                                b.accept(CatTreeUtil.createItemStack(colorId));
+                            }
+                        });
+
+        CAT_TREE = event.registerCreativeModeTab(
+                Util.getResource("ch_tab_cattree"),
+                List.of(), List.of(GENERAL),
+                CAT_TREE_BUILDER
+        );
+
+        Consumer<CreativeModeTab.Builder> PET_DOOR_BUILDER = builder ->
+                builder.title(Component.translatable("itemGroup.catherder.petdoor"))
+                        .icon(PetDoorUtil::createRandomDoor)
+                        .displayItems((a, b) -> {
+                            for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
+                                b.accept(PetDoorUtil.createItemStack(structureId));
+                            }
+                        });
+
+        PET_DOOR = event.registerCreativeModeTab(
+                Util.getResource("ch_tab_petdoor"),
+                List.of(), List.of(CAT_TREE),
+                PET_DOOR_BUILDER
+        );
     }
 
-    public static void creativeModeTabBuildEvent(final CreativeModeTabEvent.BuildContents event) {
-        CatHerder.LOGGER.debug("Creative mode tab build event: {}", event);
-
-        for(var item : ModItems.ITEMS.getEntries()) {
-            if(item.get() instanceof IDyeableArmorItem dyeableItem) {
-                ItemStack stack = new ItemStack(item.get());
-
-                dyeableItem.setColor(stack, dyeableItem.getDefaultColor(stack));
-                event.accept(stack);
-                continue;
-            }
-            else if(item.get() instanceof BlockItem blockItem) {
-                if(blockItem.getBlock() instanceof CatTreeBlock) {
-                    for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
-                        event.accept(CatTreeUtil.createItemStack(colorId));
-                    }
-                    continue;
-                }
-                else if(blockItem.getBlock() instanceof PetDoorBlock) {
-                    for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
-                        event.accept(PetDoorUtil.createItemStack(structureId));
-                    }
-                    continue;
-                }
-            }
-
-            event.accept(item);
-        }
-    }
 }

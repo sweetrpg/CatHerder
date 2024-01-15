@@ -150,6 +150,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -434,6 +435,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -717,6 +719,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -1000,6 +1003,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -1283,6 +1287,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -1566,6 +1571,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -1849,6 +1855,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
@@ -2132,6 +2139,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_GUI_PREVIOUS_PAGE, "Previous Page");
         add(Constants.TRANSLATION_KEY_GUI_SPEED, "Speed:");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_CATTREE, "Cat Tree Variants");
+        add(Constants.TRANSLATION_KEY_ITEMGROUP_PETDOOR, "Pet Door Variants");
         add(Constants.TRANSLATION_KEY_ITEMGROUP_MAIN, "Cat Herder");
         add(Constants.TRANSLATION_KEY_ITEM_CAT_GUT, "Cat Gut");
         add(Constants.TRANSLATION_KEY_ITEM_BIG_CATSIZER, "Cat Enlarger");
