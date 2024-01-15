@@ -5,11 +5,11 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: CI (1.16)
+name: CI (1.18)
 
 on:
   push:
-    branches: [ 1.16 ]
+    branches: [ 1.18 ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -36,7 +36,7 @@ jobs:
       - id: get_last_version
         name: Get last version
         run: |
-          echo "latest_version=$(cat .release-info/1.16/VERSION)" >> $GITHUB_ENV
+          echo "latest_version=$(cat .release-info/1.18/VERSION)" >> $GITHUB_ENV
       - id: bump_version
         name: Bump version
         uses: cbrgm/semver-bump-action@main
@@ -53,14 +53,14 @@ jobs:
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
-          echo "${{ steps.bump_version.outputs.new_version }}" > .release-info/1.16/VERSION
-          git add .release-info/1.16/VERSION
-          git commit -m "Update 1.16 VERSION file"
+          echo "${{ steps.bump_version.outputs.new_version }}" > .release-info/1.18/VERSION
+          git add .release-info/1.18/VERSION
+          git commit -m "Update 1.18 VERSION file"
           git push origin
       - name: Release artifacts
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "1.16-${{ steps.bump_version.outputs.new_version }}"
-          prerelease: true
+          tag_name: "1.18-${{ steps.bump_version.outputs.new_version }}"
+          prerelease: false
           files: |
             build/libs/*.jar

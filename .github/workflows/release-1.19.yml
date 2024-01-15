@@ -5,11 +5,11 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: CI (1.16)
+name: Release (1.19)
 
 on:
   push:
-    branches: [ 1.16 ]
+    branches: [ 1.19-release ]
     paths:
       - 'src/**'
       - 'test/**'
@@ -18,7 +18,7 @@ on:
       - settings.gradle
 
 jobs:
-  build:
+  release:
 
     runs-on: ubuntu-latest
     permissions:
@@ -33,34 +33,32 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - id: get_last_version
-        name: Get last version
-        run: |
-          echo "latest_version=$(cat .release-info/1.16/VERSION)" >> $GITHUB_ENV
-      - id: bump_version
-        name: Bump version
-        uses: cbrgm/semver-bump-action@main
-        with:
-          current-version: ${{ env.latest_version }}
-          bump-level: patch
       - name: Build with Gradle
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
-        with:
-          arguments: build test
         env:
-          CATHERDER_VERSION: "${{ steps.bump_version.outputs.new_version }}"
-      - name: Commit version file
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        with:
+          arguments: curseforge
+      - name: Commit hash file and reset changelog
         run: |
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
-          echo "${{ steps.bump_version.outputs.new_version }}" > .release-info/1.16/VERSION
-          git add .release-info/1.16/VERSION
-          git commit -m "Update 1.16 VERSION file"
+
+          echo "${{ github.sha }}" > .release-info/1.19/RELEASE_HASH
+          git add .release-info/1.19/RELEASE_HASH
+          git commit -m "Update 1.19 RELEASE_HASH"
+          version=$(cat .release-info/1.19/VERSION)
+          git tag "release-${version}"
+
+          echo "# $version" > CHANGELOG/1.19/${version}.md
+          echo "" >> CHANGELOG/1.19/${version}.md
+          cat CHANGELOG/1.19/current.md >> CHANGELOG/1.19/${version}.md
+          cat /dev/null > CHANGELOG/1.19/current.md
+          git add CHANGELOG/1.19
+          git commit -m "Reset 1.19 changelog"
+
+          git push origin --tags
+
+          git checkout 1.19
+          git merge 1.19-release
           git push origin
-      - name: Release artifacts
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: "1.16-${{ steps.bump_version.outputs.new_version }}"
-          prerelease: true
-          files: |
-            build/libs/*.jar
