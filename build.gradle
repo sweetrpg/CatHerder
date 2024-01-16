@@ -236,7 +236,7 @@ modrinth {
     uploadFile = jar
     additionalFiles = [apiJar]
     gameVersions = [project.target_mc_version] // Must be an array, even with only one version
-    changelog = file("CHANGELOG/${project.base_mc_version}/current.md")
+    changelog = file("CHANGELOG/${project.base_mc_version}/current.md").text
     loaders = ["forge"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     dependencies { // A special DSL for creating dependencies
         // scope.type
