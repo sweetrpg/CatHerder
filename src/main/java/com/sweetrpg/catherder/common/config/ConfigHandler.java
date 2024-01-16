@@ -63,6 +63,7 @@ public class ConfigHandler {
         public ForgeConfigSpec.IntValue SKITTISH_ANIMALS;
         public ForgeConfigSpec.IntValue SKITTISH_OTHERS;
         public ForgeConfigSpec.IntValue SKITTISH_TWITCHINESS;
+        public ForgeConfigSpec.IntValue MAX_ITEM_DISTANCE;
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
             {
@@ -72,6 +73,14 @@ public class ConfigHandler {
                 SKITTISH_ANIMALS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid other animals.").translation("catherder.config.client.skittish_animals").defineInRange("skittish_animals", 40, 1, 100);
                 SKITTISH_OTHERS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid any other creature.").translation("catherder.config.client.skittish_others").defineInRange("skittish_others", 75, 1, 100);
                 SKITTISH_TWITCHINESS = builder.comment("Sets how sensitive the check for fleeing from an entity is.").translation("catherder.config.client.skittish_twitchiness").defineInRange("skittish_twitchiness", 750, 1, 1000);
+
+                builder.pop();
+            }
+
+            {
+                builder.push("Domestic");
+
+                MAX_ITEM_DISTANCE = builder.comment("Sets the maximum distance domestic items may be away from each other to be considered part of the cat's wandering area.").translation("catherder.config.client.domestic_item_max_distance").defineInRange("domestic_item_max_distance", 40, 20, 100);
 
                 builder.pop();
             }
