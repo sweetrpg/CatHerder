@@ -59,16 +59,17 @@ public class CatWanderGoal extends Goal {
                 CatHerder.LOGGER.debug("A cat item is missing for domestic mode wander.");
                 return false;
             }
-            if(itemPositions.a.get().distSqr(itemPositions.b.get()) > this.maxiumItemDistance) {
-                CatHerder.LOGGER.debug("The distance between the litter box and food bowl is greater than {}", this.maxiumItemDistance);
+            final var blockDistance = this.maxiumItemDistance * 12;
+            if(itemPositions.a.get().distSqr(itemPositions.b.get()) > blockDistance) {
+                CatHerder.LOGGER.debug("The distance between {}'s litter box and food bowl is greater than {}", this.cat, blockDistance);
                 return false;
             }
-            if(itemPositions.a.get().distSqr(itemPositions.c.get()) > this.maxiumItemDistance) {
-                CatHerder.LOGGER.debug("The distance between the litter box and cat tree is greater than {}", this.maxiumItemDistance);
+            if(itemPositions.a.get().distSqr(itemPositions.c.get()) > blockDistance) {
+                CatHerder.LOGGER.debug("The distance between {}'s litter box and cat tree is greater than {}", this.cat, blockDistance);
                 return false;
             }
-            if(itemPositions.b.get().distSqr(itemPositions.c.get()) > this.maxiumItemDistance) {
-                CatHerder.LOGGER.debug("The distance between the food bowl and cat tree is greater than {}", this.maxiumItemDistance);
+            if(itemPositions.b.get().distSqr(itemPositions.c.get()) > blockDistance) {
+                CatHerder.LOGGER.debug("The distance between {}'s food bowl and cat tree is greater than {}", this.cat, blockDistance);
                 return false;
             }
             BlockPos itemCenter = MathUtil.calculateCenter(itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
