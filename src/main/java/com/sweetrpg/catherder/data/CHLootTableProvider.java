@@ -6,6 +6,7 @@ import com.sweetrpg.catherder.common.block.CheeseWheelBlock;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
@@ -15,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
@@ -25,7 +27,9 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
+import net.minecraft.world.level.storage.loot.providers.number.BinomialDistributionGenerator;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -65,9 +69,9 @@ public class CHLootTableProvider extends LootTableProvider {
             dropCatTree(ModBlocks.CAT_TREE);
             dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
             dropsSelf(ModBlocks.LITTERBOX);
-//            dropCatnip(ModBlocks.WILD_CATNIP);
+//            dropsWildCatnip(ModBlocks.WILD_CATNIP);
             dropsSelf(ModBlocks.CARDBOARD_BOX);
-//            dropsSelf(ModBlocks.CATNIP_CROP);
+//            dropsCatnipCrop(ModBlocks.CATNIP_CROP);
             dropsMouseTrap(ModBlocks.MOUSE_TRAP);
             dropsCheeseWheel(ModBlocks.CHEESE_WHEEL);
             dropPetDoor(ModBlocks.PET_DOOR);
@@ -157,16 +161,28 @@ public class CHLootTableProvider extends LootTableProvider {
             this.add(block.get(), lootTableBuilder);
         }
 
-        private void dropCatnip(Supplier<? extends Block> block) {
-            LootTable.Builder lootTableBuilder = LootTable.lootTable()
-                    .withPool(applyExplosionCondition(block.get(),
-                            LootPool.lootPool().setRolls(UniformGenerator.between(0, 2)))
-                            .add(LootItem.lootTableItem(ModItems.CATNIP_SEEDS.get())));
+//        private void dropsWildCatnip(Supplier<? extends Block> block) {
+//            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+//                    .withPool(applyExplosionCondition(block.get(),
+//                            LootPool.lootPool().setRolls(UniformGenerator.between(0, 2)))
+//                            .add(LootItem.lootTableItem(ModItems.CATNIP_SEEDS.get())))
+//                    .withPool(applyExplosionCondition(block.get(),
+//                            LootPool.lootPool()
+//                                    .setRolls(ConstantValue.exactly(1))
+//                                    .add(LootItem.lootTableItem(ModItems.CATNIP_SEEDS.get()))
+//                                    .apply(EnchantmentPredicate.Builder.
+//                                            BinomialDistributionGenerator.binomial(3, 0.5714286F)
+//                                    )
+//                                    .when(() -> {
+//                                     return   new LootItemBlockStatePropertyCondition.Builder(block.get())
+//                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+//                                                        .hasProperty(BlockStateProperties.STAGE, "5")).build();
+//                                    })));
+//
+//            this.add(block.get(), lootTableBuilder);
+//        }
 
-            this.add(block.get(), lootTableBuilder);
-        }
-
-//        private void dropCatnipCrop(Supplier<? extends Block> block) {
+//        private void dropsCatnipCrop(Supplier<? extends Block> block) {
 //            LootTable.Builder builder = LootTable.lootTable()
 //                                                 .withPool(LootPool.lootPool()
 //                                                                   .setRolls(ConstantValue.exactly(1))

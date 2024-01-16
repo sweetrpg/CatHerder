@@ -42,12 +42,12 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
         // Only run update code every 5 ticks (0.25s)
         if(++box.timeoutCounter < 5) { return; }
 
-        List<CatEntity> catList = box.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
+        List<CatEntity> catList = box.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(15, 15, 15));
 
         for(CatEntity cat : catList) {
             // TODO: make litterbox remember who placed and only their cats can attach to it
             UUID placerId = box.getPlacerId();
-            if(placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getLitterboxPos().isPresent()) {
+            if(placerId != null && placerId.equals(cat.getOwnerUUID()) /* && !cat.getLitterboxPos().isPresent() */) {
                 cat.setLitterboxPos(box.worldPosition);
             }
         }

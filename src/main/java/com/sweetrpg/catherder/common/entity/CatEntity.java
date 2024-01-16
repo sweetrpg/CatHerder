@@ -222,14 +222,15 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
 
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_ITEM_DISTANCE.get()));
+        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
 
-        this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
+        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 20.0F, 4.0F));
 
-        this.goalSelector.addGoal(9, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
 
-        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
+        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 20));
 
         this.goalSelector.addGoal(12, new BreedGoal(this, 1.0D));
 
@@ -2449,7 +2450,7 @@ public class CatEntity extends AbstractCatEntity {
         float hungryThreshold = 40;
         Optional<TalentInstance> happyEater = this.getTalent(ModTalents.HAPPY_EATER.get());
         if(happyEater.isPresent()) {
-            hungryThreshold = 25f - (happyEater.get().level() * 1.5f);
+            hungryThreshold = 25f - (happyEater.get().level() * 2.5f);
         }
 
         return ((getCatHunger() / getMaxHunger()) * 100) < hungryThreshold;

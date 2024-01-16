@@ -19,8 +19,8 @@ public class CatFollowOwnerGoal extends Goal {
     private final PathNavigation navigator;
     private final Level world;
     private final double followSpeed;
-    private final float stopDist; // If closer than stopDist stop moving towards owner
-    private final float startDist; // If further than startDist moving towards owner
+    private final float stopDist; // If closer than stopDist, stop moving towards owner
+    private final float startDist; // If further than startDist, start moving towards owner
 
     private LivingEntity owner;
     private int timeToRecalcPath;
@@ -51,13 +51,12 @@ public class CatFollowOwnerGoal extends Goal {
         else if(this.cat.isInSittingPose()) {
             return false;
         }
-        else if(!this.cat.hasToy() && this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq()) {
+        else if(!this.cat.hasToy() && (this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq())) {
             return false;
         }
-        else {
-            this.owner = owner;
-            return true;
-        }
+
+        this.owner = owner;
+        return true;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class CatFollowOwnerGoal extends Goal {
             return false;
         }
         else {
-            return this.cat.distanceToSqr(this.owner) > this.stopDist * this.stopDist;
+            return this.cat.distanceToSqr(this.owner) > (this.stopDist * this.stopDist);
         }
     }
 
@@ -84,7 +83,7 @@ public class CatFollowOwnerGoal extends Goal {
     public void stop() {
         if(this.cat.hasToy()) {
             double distanceToOwner = this.owner.distanceToSqr(this.cat);
-            if(distanceToOwner <= this.stopDist * this.stopDist) {
+            if(distanceToOwner <= (this.stopDist * this.stopDist)) {
                 IThrowableItem throwableItem = this.cat.getThrowableItem();
                 ItemStack fetchItem = throwableItem != null ? throwableItem.getReturnStack(this.cat.getToyVariant()) : this.cat.getToyVariant();
 
@@ -104,7 +103,7 @@ public class CatFollowOwnerGoal extends Goal {
         if(--this.timeToRecalcPath <= 0) {
             this.timeToRecalcPath = 10;
             if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
-                if(this.cat.distanceToSqr(this.owner) >= 144.0D) { // Further than 12 blocks away teleport (12 units == one block?)
+                if(this.cat.distanceToSqr(this.owner) >= 400.0D) { // Further than ? blocks away teleport (12 units == one block?)
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {
