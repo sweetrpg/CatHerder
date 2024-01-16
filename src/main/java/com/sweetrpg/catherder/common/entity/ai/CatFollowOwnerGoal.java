@@ -51,7 +51,7 @@ public class CatFollowOwnerGoal extends Goal {
         else if(this.cat.isInSittingPose()) {
             return false;
         }
-        else if(!this.cat.hasToy() && this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq()) {
+        else if(!this.cat.hasToy() && (this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq())) {
             return false;
         }
         else {
@@ -69,7 +69,7 @@ public class CatFollowOwnerGoal extends Goal {
             return false;
         }
         else {
-            return this.cat.distanceToSqr(this.owner) > this.stopDist * this.stopDist;
+            return this.cat.distanceToSqr(this.owner) > (this.stopDist * this.stopDist);
         }
     }
 
@@ -104,7 +104,7 @@ public class CatFollowOwnerGoal extends Goal {
         if(--this.timeToRecalcPath <= 0) {
             this.timeToRecalcPath = 10;
             if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
-                if(this.cat.distanceToSqr(this.owner) >= 144.0D) { // Further than 12 blocks away teleport (12 units == one block?)
+                if(this.cat.distanceToSqr(this.owner) >= 400.0D) { // Further than ? blocks away teleport (12 units == one block?)
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {
