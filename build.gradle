@@ -201,21 +201,21 @@ curseforge {
         changelogType = 'markdown'
         releaseType = findProperty("curseforge_release_type") ?: 'beta'
         addGameVersion project.target_mc_version
-        for (String v : project.additional_mc_versions.split(',')) {
-            if (v) {
-                addGameVersion v
-            }
-        }
+//        for (String v : project.additional_mc_versions.split(',')) {
+//            if (v) {
+//                addGameVersion v
+//            }
+//        }
         addArtifact apiJar
         relations {
-            optionalDependency 'configured'
-            optionalDependency 'patchouli'
-            optionalDependency 'jei'
-            optionalDependency 'farmers-delight'
             optionalDependency 'autumnity'
             optionalDependency 'biomes-o-plenty'
             optionalDependency 'botania'
+            optionalDependency 'configured'
+            optionalDependency 'farmers-delight'
             optionalDependency 'itemphysic'
+            optionalDependency 'jei'
+            optionalDependency 'patchouli'
         }
     }
     options {
@@ -229,7 +229,9 @@ modrinth {
     versionNumber = project.version
     versionType = project.modrinth_release_type
     uploadFile = jar
+    additionalFiles = [apiJar]
     gameVersions = [project.target_mc_version] // Must be an array, even with only one version
+    changelog = file("CHANGELOG/${project.base_mc_version}/current.md")
     loaders = ["forge"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
     dependencies { // A special DSL for creating dependencies
         // scope.type
@@ -237,13 +239,13 @@ modrinth {
         // The type can either be `project` or `version`
         //        required.project "fabric-api" // Creates a new required dependency on Fabric API
         optional.project "autumnity"
-        optional.project "configured"
-        optional.project "jei"
-        optional.project "patchouli"
-        optional.project "farmers-delight"
         optional.project "biomes-o-plenty"
         optional.project "botania"
+        optional.project "configured"
+        optional.project "farmers-delight"
         optional.project "itemphysic"
+        optional.project "jei"
+        optional.project "patchouli"
     }
 }
 
