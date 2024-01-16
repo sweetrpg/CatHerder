@@ -234,7 +234,7 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
 
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_ITEM_DISTANCE.get()));
 
         this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
         this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));

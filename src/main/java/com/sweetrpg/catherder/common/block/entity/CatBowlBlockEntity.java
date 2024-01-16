@@ -59,12 +59,12 @@ public class CatBowlBlockEntity extends PlacedBlockEntity implements MenuProvide
         // Only run update code every 5 ticks (0.25s)
         if(++bowl.timeoutCounter < 5) { return; }
 
-        List<CatEntity> catList = bowl.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
+        List<CatEntity> catList = bowl.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(15, 15, 15));
 
         for(CatEntity cat : catList) {
             //TODO make cat bowl remember who placed and only their cats can attach to the bowl
             UUID placerId = bowl.getPlacerId();
-            if(placerId != null && placerId.equals(cat.getOwnerUUID()) && !cat.getBowlPos().isPresent()) {
+            if(placerId != null && placerId.equals(cat.getOwnerUUID()) /*&& !cat.getBowlPos().isPresent()*/) {
                 cat.setBowlPos(bowl.worldPosition);
             }
 
