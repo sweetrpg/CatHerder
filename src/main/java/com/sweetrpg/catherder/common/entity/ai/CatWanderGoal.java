@@ -19,14 +19,14 @@ public class CatWanderGoal extends Goal {
     protected final float maximumDistance;
     protected int executionChance;
 
-    private final double NUM_BLOCKS_AWAY = 15;
-    private final double BLOCK_SIZE = 12;
-    private final double MAX_DISTANCE = NUM_BLOCKS_AWAY * BLOCK_SIZE;
+//    private final double NUM_BLOCKS_AWAY = 15;
+//    private final double BLOCK_SIZE = 12;
+//    private final double MAX_DISTANCE = NUM_BLOCKS_AWAY * BLOCK_SIZE;
 
-    public CatWanderGoal(CatEntity catIn, double speedIn, float maxiumDistance) {
+    public CatWanderGoal(CatEntity catIn, double speedIn, float maximumDistance) {
         this.cat = catIn;
         this.speed = speedIn;
-        this.maximumDistance = maxiumDistance;
+        this.maximumDistance = maximumDistance;
         this.executionChance = 60;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
@@ -53,11 +53,7 @@ public class CatWanderGoal extends Goal {
         BlockPos catPos = this.cat.blockPosition();
 
         // if the owner is more than 40-ish blocks away
-        if(ownerPos.distSqr(catPos) > this.maximumDistance) {
-            return false;
-        }
-
-        return true;
+        return (ownerPos.distSqr(catPos) < (this.maximumDistance * this.maximumDistance));
     }
 
     @Override
