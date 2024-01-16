@@ -72,7 +72,7 @@ public class CatWanderGoal extends Goal {
                 return false;
             }
             BlockPos itemCenter = MathUtil.calculateCenter(itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
-            double maxWanderDistance = MathUtil.furthestDistance(itemCenter, itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
+            double maxWanderDistance = MathUtil.furthestDistance(itemCenter, itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get()) * 1.5;
 
             if(this.cat.blockPosition().distSqr(itemCenter) > maxWanderDistance) {
                 CatHerder.LOGGER.debug("{} is more than {} from the center point.", this.cat, maxWanderDistance);
