@@ -54,11 +54,7 @@ public class CatWanderGoal extends Goal {
         BlockPos catPos = this.cat.blockPosition();
 
         // if the owner is more than 40-ish blocks away
-        if(ownerPos.distSqr(catPos) > this.maximumDistance) {
-            return false;
-        }
-
-        return true;
+        return (ownerPos.distSqr(catPos) < (this.maximumDistance * this.maximumDistance));
     }
 
     @Override
