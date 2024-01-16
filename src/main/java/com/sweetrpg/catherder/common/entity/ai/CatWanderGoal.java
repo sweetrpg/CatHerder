@@ -71,7 +71,7 @@ public class CatWanderGoal extends Goal {
                 return false;
             }
             BlockPos itemCenter = MathUtil.calculateCenter(itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
-            double maxWanderDistance = MathUtil.furthestDistance(itemCenter, itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
+            double maxWanderDistance = MathUtil.furthestDistance(itemCenter, itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get()) * 1.5;
 
             if(this.cat.blockPosition().distSqr(itemCenter) > maxWanderDistance) {
                 CatHerder.LOGGER.debug("{} is more than {} from the center point.", this.cat, maxWanderDistance);
@@ -96,38 +96,38 @@ public class CatWanderGoal extends Goal {
         return true;
     }
 
-    private Optional<Tuple<BlockPos, Double>> closestDomesticItem() {
-        Optional<BlockPos> bowlPos = this.cat.getBowlPos();
-        Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
-        Optional<BlockPos> treePos = this.cat.getCatTreePos();
-
-        if(bowlPos.isEmpty() ||
-                litterboxPos.isEmpty() ||
-                treePos.isEmpty()) {
-            return Optional.empty();
-        }
-
-        double closestDist = Double.MAX_VALUE;
-        BlockPos closestPos = null;
-
-        double bowlDist = bowlPos.get().distSqr(this.cat.blockPosition());
-        if(bowlDist < closestDist) {
-            closestDist = bowlDist;
-            closestPos = bowlPos.get();
-        }
-        double litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
-        if(litterboxDist < closestDist) {
-            closestDist = litterboxDist;
-            closestPos = litterboxPos.get();
-        }
-        double treeDist = treePos.get().distSqr(this.cat.blockPosition());
-        if(treeDist < closestDist) {
-            closestDist = treeDist;
-            closestPos = treePos.get();
-        }
-
-        return Optional.of(new Tuple<>(closestPos, closestDist));
-    }
+//    private Optional<Tuple<BlockPos, Double>> closestDomesticItem() {
+//        Optional<BlockPos> bowlPos = this.cat.getBowlPos();
+//        Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
+//        Optional<BlockPos> treePos = this.cat.getCatTreePos();
+//
+//        if(bowlPos.isEmpty() ||
+//                litterboxPos.isEmpty() ||
+//                treePos.isEmpty()) {
+//            return Optional.empty();
+//        }
+//
+//        double closestDist = Double.MAX_VALUE;
+//        BlockPos closestPos = null;
+//
+//        double bowlDist = bowlPos.get().distSqr(this.cat.blockPosition());
+//        if(bowlDist < closestDist) {
+//            closestDist = bowlDist;
+//            closestPos = bowlPos.get();
+//        }
+//        double litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
+//        if(litterboxDist < closestDist) {
+//            closestDist = litterboxDist;
+//            closestPos = litterboxPos.get();
+//        }
+//        double treeDist = treePos.get().distSqr(this.cat.blockPosition());
+//        if(treeDist < closestDist) {
+//            closestDist = treeDist;
+//            closestPos = treePos.get();
+//        }
+//
+//        return Optional.of(new Tuple<>(closestPos, closestDist));
+//    }
 
     @Override
     public void tick() {
