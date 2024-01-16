@@ -2470,7 +2470,7 @@ public class CatEntity extends AbstractCatEntity {
         float hungryThreshold = 40;
         Optional<TalentInstance> happyEater = this.getTalent(ModTalents.HAPPY_EATER.get());
         if(happyEater.isPresent()) {
-            hungryThreshold = 25f - (happyEater.get().level() * 1.5f);
+            hungryThreshold = 25f - (happyEater.get().level() * 2.5f);
         }
 
         return ((getCatHunger() / getMaxHunger()) * 100) < hungryThreshold;
