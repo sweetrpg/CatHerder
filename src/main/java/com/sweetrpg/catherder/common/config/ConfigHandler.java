@@ -63,6 +63,7 @@ public class ConfigHandler {
         public ForgeConfigSpec.IntValue SKITTISH_ANIMALS;
         public ForgeConfigSpec.IntValue SKITTISH_OTHERS;
         public ForgeConfigSpec.IntValue SKITTISH_TWITCHINESS;
+        public ForgeConfigSpec.IntValue MAX_ITEM_DISTANCE;
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
             {
@@ -72,6 +73,14 @@ public class ConfigHandler {
                 SKITTISH_ANIMALS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid other animals.").translation("catherder.config.client.skittish_animals").defineInRange("skittish_animals", 40, 1, 100);
                 SKITTISH_OTHERS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid any other creature.").translation("catherder.config.client.skittish_others").defineInRange("skittish_others", 75, 1, 100);
                 SKITTISH_TWITCHINESS = builder.comment("Sets how sensitive the check for fleeing from an entity is.").translation("catherder.config.client.skittish_twitchiness").defineInRange("skittish_twitchiness", 750, 1, 1000);
+
+                builder.pop();
+            }
+
+            {
+                builder.push("Domestic");
+
+                MAX_ITEM_DISTANCE = builder.comment("Sets the maximum distance domestic items may be away from each other to be considered part of the cat's wandering area.").translation("catherder.config.client.domestic_item_max_distance").defineInRange("domestic_item_max_distance", 40, 20, 100);
 
                 builder.pop();
             }
@@ -123,7 +132,7 @@ public class ConfigHandler {
             {
                 builder.push("Cat Constants");
 
-                LITTERBOX = builder.comment("Enables litterbox maintenance").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX).define("enable_litterbox", false);
+                LITTERBOX = builder.comment("Enables litterbox maintenance").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX).define("enable_litterbox", true);
                 DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation(Constants.TRANSLATION_KEY_CONFIG_DISABLE_HUNGER).define("disable_hunger", false);
                 STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS).define("enable_starting_items", false);
                 CAT_GENDER = builder.comment("When enabled, cats will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_GENDER).define("enable_gender", true);

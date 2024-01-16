@@ -1,12 +1,15 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
+import com.sweetrpg.catherder.common.util.MathUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
+import org.antlr.v4.runtime.misc.Triple;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -18,15 +21,17 @@ public class CatWanderGoal extends Goal {
     protected final CatEntity cat;
 
     protected final double speed;
+    protected final float maxiumItemDistance;
     protected int executionChance;
 
     private final double NUM_BLOCKS_AWAY = 15;
     private final double BLOCK_SIZE = 12;
     private final double MAX_DISTANCE = NUM_BLOCKS_AWAY * BLOCK_SIZE;
 
-    public CatWanderGoal(CatEntity catIn, double speedIn) {
+    public CatWanderGoal(CatEntity catIn, double speedIn, float maxiumItemDistance) {
         this.cat = catIn;
         this.speed = speedIn;
+        this.maxiumItemDistance = maxiumItemDistance;
         this.executionChance = 60;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
@@ -42,12 +47,36 @@ public class CatWanderGoal extends Goal {
         }
 
         if(this.cat.isMode(Mode.DOMESTIC)) {
-            Optional<Tuple<BlockPos, Double>> closestDist = closestDomesticItem();
-            if(closestDist.isEmpty()) {
+            // The cat should wander an area centered on the center-point of the three items: litter box, food bowl, cat tree
+            // If any one of the items is missing, do not wander.
+            // If the distance between any pair of the items is further than a given distance, do not wander.
+            // Calculate center of the three items. That point is the center of the wandering area.
+            // The maximum wander distance becomes the radius of the wander circle, which is the distance of the furthest item from the center.
+            // The cat will not go further than that distance.
+            final var itemPositions = getItemPositions();
+            if(itemPositions.a.isEmpty() || itemPositions.b.isEmpty() || itemPositions.c.isEmpty()) {
+                CatHerder.LOGGER.debug("A cat item is missing for domestic mode wander.");
                 return false;
             }
+            if(itemPositions.a.get().distSqr(itemPositions.b.get()) > this.maxiumItemDistance) {
+                CatHerder.LOGGER.debug("The distance between the litter box and food bowl is greater than {}", this.maxiumItemDistance);
+                return false;
+            }
+            if(itemPositions.a.get().distSqr(itemPositions.c.get()) > this.maxiumItemDistance) {
+                CatHerder.LOGGER.debug("The distance between the litter box and cat tree is greater than {}", this.maxiumItemDistance);
+                return false;
+            }
+            if(itemPositions.b.get().distSqr(itemPositions.c.get()) > this.maxiumItemDistance) {
+                CatHerder.LOGGER.debug("The distance between the food bowl and cat tree is greater than {}", this.maxiumItemDistance);
+                return false;
+            }
+            BlockPos itemCenter = MathUtil.calculateCenter(itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
+            double maxWanderDistance = MathUtil.furthestDistance(itemCenter, itemPositions.a.get(), itemPositions.b.get(), itemPositions.c.get());
 
-            return (closestDist.get().getB() < MAX_DISTANCE);
+            if(this.cat.blockPosition().distSqr(itemCenter) > maxWanderDistance) {
+                CatHerder.LOGGER.debug("{} is more than {} from the center point.", this.cat, maxWanderDistance);
+                return false;
+            }
         }
 
         if(!this.cat.isMode(Mode.WANDERING)) {
@@ -130,12 +159,13 @@ public class CatWanderGoal extends Goal {
         float bestWeight = Float.MIN_VALUE;
 
         if(this.cat.isMode(Mode.DOMESTIC)) {
-            Optional<Tuple<BlockPos, Double>> closestDist = closestDomesticItem();
-            if(closestDist.isEmpty()) {
-                return null;
+            final var itemPositions = getItemPositions();
+            if(itemPositions.a.isEmpty() || itemPositions.b.isEmpty() || itemPositions.c.isEmpty()) {
+                CatHerder.LOGGER.debug("A cat item is missing for domestic mode wander.");
+                return this.cat.position();
             }
 
-            BlockPos bestPos = closestDist.get().getA().offset(random.nextDouble(xzRange), 0, random.nextDouble(xzRange));
+            BlockPos bestPos = this.cat.blockPosition().offset(random.nextDouble(xzRange), 0, random.nextDouble(xzRange));
             for(int attempt = 0; attempt < 5; ++attempt) {
                 int dx = random.nextInt(2 * xzRange + 1) - xzRange;
                 int dy = random.nextInt(2 * yRange + 1) - yRange;
@@ -175,5 +205,19 @@ public class CatWanderGoal extends Goal {
         }
 
         return new Vec3(bestPos.getX(), bestPos.getY(), bestPos.getZ());
+    }
+
+    /**
+     * 0: litter box
+     * 1: food bowl
+     * 2: cat tree
+     * @return tuple of block positions
+     */
+    private Triple<Optional<BlockPos>, Optional<BlockPos>, Optional<BlockPos>> getItemPositions() {
+        Optional<BlockPos> bowlPos = this.cat.getBowlPos();
+        Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
+        Optional<BlockPos> treePos = this.cat.getCatTreePos();
+
+        return new Triple<>(litterboxPos, bowlPos, treePos);
     }
 }

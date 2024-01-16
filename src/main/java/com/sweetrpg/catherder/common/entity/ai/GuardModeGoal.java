@@ -12,29 +12,24 @@ public class GuardModeGoal extends NearestAttackableTargetGoal<Monster> {
     private LivingEntity owner;
 
     public GuardModeGoal(CatEntity catIn, boolean checkSight) {
-        super(catIn, Monster.class, 0, checkSight, false, null);
+        super(catIn, Monster.class, 0, checkSight, true, null);
         this.cat = catIn;
     }
 
     @Override
     public boolean canUse() {
         LivingEntity owner = this.cat.getOwner();
-        if (owner == null) {
+        if(owner == null) {
             return false;
         }
 
-        if (!this.cat.isMode(Mode.GUARD)) {
+        if(!this.cat.isMode(Mode.GUARD)) {
             return false;
         }
 
         this.owner = owner;
 
-        if (super.canUse()) {
-            this.owner = owner;
-            return true;
-        }
-
-        return false;
+        return super.canUse();
     }
 
     @Override
@@ -44,6 +39,6 @@ public class GuardModeGoal extends NearestAttackableTargetGoal<Monster> {
 
     @Override
     protected void findTarget() {
-       this.target = this.cat.level.getNearestEntity(this.targetType, this.targetConditions, this.cat, this.owner.getX(), this.owner.getEyeY(), this.owner.getZ(), this.getTargetSearchArea(this.getFollowDistance()));
+        this.target = this.cat.level.getNearestEntity(this.targetType, this.targetConditions, this.cat, this.owner.getX(), this.owner.getEyeY(), this.owner.getZ(), this.getTargetSearchArea(this.getFollowDistance()));
     }
 }
