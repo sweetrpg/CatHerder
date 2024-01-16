@@ -64,6 +64,7 @@ public class ConfigHandler {
         public ForgeConfigSpec.IntValue SKITTISH_OTHERS;
         public ForgeConfigSpec.IntValue SKITTISH_TWITCHINESS;
         public ForgeConfigSpec.IntValue MAX_ITEM_DISTANCE;
+        public ForgeConfigSpec.IntValue MAX_WANDER_DISTANCE;
 
         public ClientConfig(ForgeConfigSpec.Builder builder) {
             {
@@ -78,9 +79,10 @@ public class ConfigHandler {
             }
 
             {
-                builder.push("Domestic");
+                builder.push("Wandering");
 
                 MAX_ITEM_DISTANCE = builder.comment("Sets the maximum distance domestic items may be away from each other to be considered part of the cat's wandering area.").translation("catherder.config.client.domestic_item_max_distance").defineInRange("domestic_item_max_distance", 40, 20, 100);
+                MAX_WANDER_DISTANCE = builder.comment("Sets the maximum distance a cat in wander mode will wander from its owner.").translation("catherder.config.client.wander_max_distance").defineInRange("wander_max_distance", 200, 20, 1000);
 
                 builder.pop();
             }

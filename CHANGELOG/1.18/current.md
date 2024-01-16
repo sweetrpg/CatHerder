@@ -1,3 +1,4 @@
 - `[CHG]` Improvements to how cats wander when in domestic mode
 - `[CHG]` Increase distance for setting a cat's litter box and food bowl
 - `[CHG]` Reset cat's litter box / food bowl when placing another one
+- `[FIX]` Happy Eater now has a stronger effect on food consumption
