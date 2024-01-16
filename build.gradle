@@ -22,6 +22,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.matthewprenger.cursegradle'
 apply plugin: 'org.ajoberstar.grgit'
 apply from: "https://moddingtutorials.org/applesilicon.gradle"
+apply plugin: "com.modrinth.minotaur"
 
 def branch = grgit.branch.current()
 println "On branch: ${branch.fullName}"
@@ -212,13 +213,37 @@ curseforge {
             optionalDependency 'jei'
             optionalDependency 'farmers-delight'
             optionalDependency 'autumnity'
-            optionalDependency 'biomes-O-plenty'
+            optionalDependency 'biomes-o-plenty'
             optionalDependency 'botania'
             optionalDependency 'itemphysic'
         }
     }
     options {
         detectNewerJava = true
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_API_KEY")
+    projectId = project.modrinth_project_id
+    versionNumber = project.version
+    versionType = project.modrinth_release_type
+    uploadFile = jar
+    gameVersions = [project.target_mc_version] // Must be an array, even with only one version
+    loaders = ["forge"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
+    dependencies { // A special DSL for creating dependencies
+        // scope.type
+        // The scope can be `required`, `optional`, `incompatible`, or `embedded`
+        // The type can either be `project` or `version`
+        //        required.project "fabric-api" // Creates a new required dependency on Fabric API
+        optional.project "autumnity"
+        optional.project "configured"
+        optional.project "jei"
+        optional.project "patchouli"
+        optional.project "farmers-delight"
+        optional.project "biomes-o-plenty"
+        optional.project "botania"
+        optional.project "itemphysic"
     }
 }
 

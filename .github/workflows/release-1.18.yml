@@ -37,8 +37,9 @@ jobs:
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
         env:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          MODRINTH_API_KEY: ${{ secrets.MODRINTH_API_KEY }}
         with:
-          arguments: curseforge
+          arguments: curseforge modrinth
       - name: Commit hash file and reset changelog
         run: |
           git config --global user.email "ci@sweetrpg.com"
