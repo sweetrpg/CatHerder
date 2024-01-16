@@ -6,7 +6,7 @@
   <img src="http://cf.way2muchnoise.eu/full_580311_downloads.svg" alt="Curseforge Downloads">
 </a>
 <a href="https://www.curseforge.com/minecraft/mc-mods/cat-herder">
-  <img src="" alt="Modrinth Downloads">
+  <img src="https://img.shields.io/modrinth/dt/nwS25u6U" alt="Modrinth Downloads">
 </a>
 
 [![CI (1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml/badge.svg?branch=1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml)
