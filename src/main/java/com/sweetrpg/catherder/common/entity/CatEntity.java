@@ -1320,19 +1320,19 @@ public class CatEntity extends AbstractCatEntity {
         }
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
-        DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
+        DimensionDependentArg<Optional<BlockPos>> treesData = this.entityData.get(CAT_TREE_LOCATION.get());
+        if(!treesData.isEmpty()) {
+            ListTag treesList = new ListTag();
 
-        if(!bedsData.isEmpty()) {
-            ListTag bedsList = new ListTag();
-
-            for(Entry<ResourceKey<Level>, Optional<BlockPos>> entry : bedsData.entrySet()) {
-                CompoundTag bedNBT = new CompoundTag();
-                NBTUtil.putResourceLocation(bedNBT, "dim", entry.getKey().location());
-                NBTUtil.putBlockPos(bedNBT, "pos", entry.getValue());
-                bedsList.add(bedNBT);
+            for(Entry<ResourceKey<Level>, Optional<BlockPos>> entry : treesData.entrySet()) {
+                CompoundTag treeTag = new CompoundTag();
+                NBTUtil.putResourceLocation(treeTag, "dim", entry.getKey().location());
+                NBTUtil.putBlockPos(treeTag, "pos", entry.getValue());
+                treesList.add(treeTag);
             }
 
-            compound.put("beds", bedsList);
+            compound.put("beds", treesList); // TODO: remove this eventually
+            compound.put("trees", treesList);
         }
 
         DimensionDependentArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get());
@@ -1567,27 +1567,26 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         // cat tree
-        DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
-
+        DimensionDependentArg<Optional<BlockPos>> treesData = this.entityData.get(CAT_TREE_LOCATION.get()).copyEmpty();
         try {
-            if(compound.contains("beds", Tag.TAG_LIST)) {
-                ListTag bedsList = compound.getList("beds", Tag.TAG_COMPOUND);
+            if(compound.contains("beds", Tag.TAG_LIST)) { // TODO: eventually replace with "trees"
+                ListTag treesList = compound.getList("beds", Tag.TAG_COMPOUND);
 
-                for(int i = 0; i < bedsList.size(); i++) {
-                    CompoundTag bedNBT = bedsList.getCompound(i);
-                    ResourceLocation loc = NBTUtil.getResourceLocation(bedNBT, "dim");
+                for(int i = 0; i < treesList.size(); i++) {
+                    CompoundTag treeTag = treesList.getCompound(i);
+                    ResourceLocation loc = NBTUtil.getResourceLocation(treeTag, "dim");
                     ResourceKey<Level> type = ResourceKey.create(Registries.DIMENSION, loc);
-                    Optional<BlockPos> pos = NBTUtil.getBlockPos(bedNBT, "pos");
-                    bedsData.put(type, pos);
+                    Optional<BlockPos> pos = NBTUtil.getBlockPos(treeTag, "pos");
+                    treesData.put(type, pos);
                 }
             }
         }
         catch (Exception e) {
-            CatHerder.LOGGER.error("Failed to load beds: " + e.getMessage());
+            CatHerder.LOGGER.error("Failed to load trees: " + e.getMessage());
             e.printStackTrace();
         }
 
-        this.entityData.set(CAT_TREE_LOCATION.get(), bedsData);
+        this.entityData.set(CAT_TREE_LOCATION.get(), treesData);
 
         // cat bowl
         DimensionDependentArg<Optional<BlockPos>> bowlsData = this.entityData.get(CAT_BOWL_LOCATION.get()).copyEmpty();
@@ -1629,7 +1628,7 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
         catch (Exception e) {
-            CatHerder.LOGGER.error("Failed to load litterboxes: " + e.getMessage());
+            CatHerder.LOGGER.error("Failed to load litter boxes: " + e.getMessage());
             e.printStackTrace();
         }
 
