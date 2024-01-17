@@ -1314,7 +1314,10 @@ public class CatEntity extends AbstractCatEntity {
         compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
         compound.putInt("level_dire", this.getCatLevel().getLevel(Type.WILD));
         compound.putInt("original_breed", this.getOriginalBreed());
-        compound.putInt("cat_variant", this.getOriginalBreed());
+        var variant = this.getVariant();
+        if(variant != null) {
+            compound.putString("cat_variant", BuiltInRegistries.CAT_VARIANT.getKey(variant).getPath());
+        }
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
         DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
@@ -1540,6 +1543,7 @@ public class CatEntity extends AbstractCatEntity {
                 this.setCatSize(compound.getInt("catSize"));
             }
             this.setOriginalBreed(compound.getInt("original_breed"));
+            this.setVariant(BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(compound.getString("cat_variant"))));
         }
         catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load info: " + e.getMessage());
