@@ -2533,8 +2533,14 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public void setVariant(CatVariant variant) {
-        var path = BuiltInRegistries.CAT_VARIANT.getKey(variant).getPath();
-        this.entityData.set(VARIANT_STR, path);
+        var varResLoc = BuiltInRegistries.CAT_VARIANT.getKey(variant);
+        if(varResLoc != null) {
+            var path = varResLoc.getPath();
+            this.entityData.set(VARIANT_STR, path);
+        }
+        else {
+            CatHerder.LOGGER.error("Variant could not be found for parameter {}", variant);
+        }
     }
 
     public

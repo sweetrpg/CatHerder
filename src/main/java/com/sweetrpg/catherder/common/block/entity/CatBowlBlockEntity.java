@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -91,14 +92,14 @@ public class CatBowlBlockEntity extends PlacedBlockEntity implements MenuProvide
         return this.inventory;
     }
 
-//    @Nonnull
-//    @Override
-//    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-//        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-//            return (LazyOptional<T>) this.itemStackHandler;
-//        }
-//        return super.getCapability(cap, side);
-//    }
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if(cap == ForgeCapabilities.ITEM_HANDLER) {
+            return (LazyOptional<T>) this.itemStackHandler;
+        }
+        return super.getCapability(cap, side);
+    }
 
     @Override
     public Component getDisplayName() {

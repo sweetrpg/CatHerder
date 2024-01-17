@@ -1,7 +1,5 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
-//import com.sweetrpg.catherder.common.block.tileentity.CattreeTileEntity;
-
 import com.sweetrpg.catherder.common.block.entity.CatTreeBlockEntity;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.lib.Constants;

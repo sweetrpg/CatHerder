@@ -112,9 +112,7 @@ public class ClientEventHandler {
     public void onInputEvent(final MovementInputUpdateEvent event) {
         if(event.getInput().jumping) {
             Entity entity = event.getEntity().getVehicle();
-            if(event.getEntity().isPassenger() && entity instanceof CatEntity) {
-                CatEntity cat = (CatEntity) entity;
-
+            if(event.getEntity().isPassenger() && entity instanceof CatEntity cat) {
                 if(cat.canJump()) {
                     cat.setJumpPower(100);
                 }
@@ -127,7 +125,7 @@ public class ClientEventHandler {
         Screen screen = event.getScreen();
         if(screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             boolean creative = screen instanceof CreativeModeInventoryScreen;
-            boolean dtLoaded = ModList.get().isLoaded("doggytalents");
+            boolean dtLoaded = ModList.get().isLoaded("doggytalents") || ModList.get().isLoaded("doggytalentsnext");
             Minecraft mc = Minecraft.getInstance();
             int width = mc.getWindow().getGuiScaledWidth();
             int height = mc.getWindow().getGuiScaledHeight();

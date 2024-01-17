@@ -54,10 +54,9 @@ public class CatFollowOwnerGoal extends Goal {
         else if(!this.cat.hasToy() && (this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq())) {
             return false;
         }
-        else {
-            this.owner = owner;
-            return true;
-        }
+
+        this.owner = owner;
+        return true;
     }
 
     @Override
@@ -68,9 +67,8 @@ public class CatFollowOwnerGoal extends Goal {
         else if(this.cat.isInSittingPose()) {
             return false;
         }
-        else {
-            return this.cat.distanceToSqr(this.owner) > (this.stopDist * this.stopDist);
-        }
+
+        return this.cat.distanceToSqr(this.owner) > (this.stopDist * this.stopDist);
     }
 
     @Override
