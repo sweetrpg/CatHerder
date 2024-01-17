@@ -15,7 +15,7 @@ public class MoveToBlockGoal extends Goal {
 
     public MoveToBlockGoal(CatEntity catIn) {
         this.cat = catIn;
-        this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Flag.LOOK));
     }
 
     @Override

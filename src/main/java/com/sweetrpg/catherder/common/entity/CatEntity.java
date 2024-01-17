@@ -57,6 +57,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -117,7 +118,7 @@ public class CatEntity extends AbstractCatEntity {
 
     private static final EntityDataAccessor<Byte> SIZE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<ItemStack> TOY_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
-    //    private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
+        private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> RELAX_STATE_ONE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
@@ -204,7 +205,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(LITTERBOX_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
-//        this.entityData.define(IS_LYING, false);
+        this.entityData.define(IS_LYING, false);
         this.entityData.define(RELAX_STATE_ONE, false);
     }
 
@@ -836,12 +837,10 @@ public class CatEntity extends AbstractCatEntity {
             return false;
         }
 
-        if(target instanceof Cat) {
-            Cat catEntity = (Cat) target;
+        if(target instanceof Cat catEntity) {
             return !catEntity.isTame() || catEntity.getOwner() != owner;
         }
-        else if(target instanceof CatEntity) {
-            CatEntity catEntity = (CatEntity) target;
+        else if(target instanceof CatEntity catEntity) {
             return !catEntity.isTame() || catEntity.getOwner() != owner;
         }
         else if(target instanceof Player && owner instanceof Player && !((Player) owner).canHarmPlayer((Player) target)) {
@@ -850,9 +849,8 @@ public class CatEntity extends AbstractCatEntity {
 //        else if(target instanceof AbstractHorse && ((AbstractHorse) target).isTamed()) {
 //            return false;
 //        }
-        else {
+
             return !(target instanceof TamableAnimal) || !((TamableAnimal) target).isTame();
-        }
     }
 
     // TODO
@@ -1188,7 +1186,6 @@ public class CatEntity extends AbstractCatEntity {
         // accessed during the classes super() call.
         // Since this.alterations will be empty anyway as we have not read
         // NBT data at this point just avoid silent error
-        // CatHerder#295, CatHerder#296
         if(this.alterations == null) {
             return super.getCapability(cap, side);
         }
@@ -2313,113 +2310,130 @@ public class CatEntity extends AbstractCatEntity {
         //TODO return this.TALENTS.getLevel(ModTalents.WOLF_MOUNT) > 0;
     }
 
-    @Override
-    public void travel(Vec3 positionIn) {
-        super.travel(positionIn);
-        this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
-    }
-
 //    @Override
 //    public void travel(Vec3 positionIn) {
-//        if(this.isAlive()) {
-//            if(this.isVehicle() && this.canRiderInteract()) {
-//                LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
+//        super.travel(positionIn);
+//        if (this.isFallFlying()) {
+//            var moveVec = this.getDeltaMovement();
+//            double down = moveVec.y;
 //
-//                // Face the cat in the direction of the controlling passenger
-//                this.setYRot(livingentity.getYRot());
-//                this.yRotO = this.getYRot();
-//                this.setXRot(livingentity.getXRot() * 0.5F);
-//                this.setRot(this.getYRot(), this.getXRot());
-//                this.yBodyRot = this.getYRot();
-//                this.yHeadRot = this.yBodyRot;
+//            double gravity = -0.112102;
+//            var attrib = this.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+//            if (attrib != null)
+//                gravity = -attrib.getValue();
 //
-//                this.maxUpStep = 1.0F;
-//
-//                float straf = livingentity.xxa * 0.7F;
-//                float foward = livingentity.zza;
-//
-//                // If moving backwards half the speed
-//                if(foward <= 0.0F) {
-//                    foward *= 0.5F;
-//                }
-//
-//                if(this.jumpPower > 0.0F && !this.isCatJumping() && this.isOnGround()) {
-//
-//                    // Calculate jump value based of jump strength, power this jump and jump boosts
-//                    double jumpValue = this.getAttribute(ModAttributes.JUMP_POWER.get()).getValue() * this.getBlockJumpFactor() * this.jumpPower; //TODO do we want getJumpFactor?
-//                    if(this.hasEffect(MobEffects.JUMP)) {
-//                        jumpValue += (this.getEffect(MobEffects.JUMP).getAmplifier() + 1) * 0.1F;
-//                    }
-//
-//                    // Apply jump
-//                    Vec3 vec3d = this.getDeltaMovement();
-//                    this.setDeltaMovement(vec3d.x, jumpValue, vec3d.z);
-//                    this.setCatJumping(true);
-//                    this.hasImpulse = true;
-//
-//                    // If moving forward, propel further in the direction
-//                    if(foward > 0.0F) {
-//                        final float amount = 0.4F; // TODO Allow people to change this value
-//                        float compX = Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
-//                        float compZ = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
-//                        this.setDeltaMovement(this.getDeltaMovement().add(-amount * compX * this.jumpPower, 0.0D, amount * compZ * this.jumpPower));
-//                        //this.playJumpSound();
-//                    }
-//
-//                    // Mark as unable to jump until reset
-//                    this.jumpPower = 0.0F;
-//                }
-//
-////                this.getFlyingSpeed()flyingSpeed = this.getSpeed() * 0.1F;
-//                if(this.isControlledByLocalInstance()) {
-//                    // Set the move speed and move the cat in the direction of the controlling entity
-//                    this.setSpeed((float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.5F);
-//                    super.travel(new Vec3(straf, positionIn.y, foward));
-//                    this.lerpSteps = 0;
-//                }
-//                else if(livingentity instanceof Player) {
-//                    // A player is riding and can not control then
-//                    this.setDeltaMovement(Vec3.ZERO);
-//                }
-//
-//                // Once the entity reaches the ground again allow it to jump again
-//                if(this.isOnGround()) {
-//                    this.jumpPower = 0.0F;
-//                    this.setCatJumping(false);
-//                }
-//
-//                //
-////                this.animationSpeedOld = this.animationSpeed;
-//                double changeX = this.getX() - this.xo;
-//                double changeY = this.getZ() - this.zo;
-//                float f4 = Mth.sqrt((float) (changeX * changeX + changeY * changeY)) * 4.0F;
-//
-//                if(f4 > 1.0F) {
-//                    f4 = 1.0F;
-//                }
-//
-////                this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
-////                this.animationPosition += this.animationSpeed;
-//
-//                if(this.onClimbable()) {
-//                    this.fallDistance = 0.0F;
-//                }
+//            if (down < 0 ) {
+//                down = Math.min(down * 0.7, gravity);
+//            } else {
+//                down *= 0.7;
 //            }
-//            else {
-//                this.maxUpStep = 0.5F; // Default
-////                this.flyingSpeed = 0.02F; // Default
-//                super.travel(positionIn);
-//            }
-//
-//            this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
+//            this.setDeltaMovement(moveVec.x*0.67, down, moveVec.z*0.67);
 //        }
+//        this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
 //    }
+
+    @Override
+    public void travel(Vec3 positionIn) {
+        if(this.isAlive()) {
+            if(this.isVehicle() && this.canRiderInteract()) {
+                LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
+
+                // Face the cat in the direction of the controlling passenger
+                this.setYRot(livingentity.getYRot());
+                this.yRotO = this.getYRot();
+                this.setXRot(livingentity.getXRot() * 0.5F);
+                this.setRot(this.getYRot(), this.getXRot());
+                this.yBodyRot = this.getYRot();
+                this.yHeadRot = this.yBodyRot;
+
+                this.setMaxUpStep(1.0F);
+
+                float straf = livingentity.xxa * 0.7F;
+                float foward = livingentity.zza;
+
+                // If moving backwards half the speed
+                if(foward <= 0.0F) {
+                    foward *= 0.5F;
+                }
+
+                if(this.jumpPower > 0.0F && !this.isCatJumping() && this.onGround()) {
+
+                    // Calculate jump value based of jump strength, power this jump and jump boosts
+                    double jumpValue = this.getAttribute(ModAttributes.JUMP_POWER.get()).getValue() * this.getBlockJumpFactor() * this.jumpPower; //TODO do we want getJumpFactor?
+                    if(this.hasEffect(MobEffects.JUMP)) {
+                        jumpValue += (this.getEffect(MobEffects.JUMP).getAmplifier() + 1) * 0.1F;
+                    }
+
+                    // Apply jump
+                    Vec3 vec3d = this.getDeltaMovement();
+                    this.setDeltaMovement(vec3d.x, jumpValue, vec3d.z);
+                    this.setCatJumping(true);
+                    this.hasImpulse = true;
+
+                    // If moving forward, propel further in the direction
+                    if(foward > 0.0F) {
+                        final float amount = 0.4F; // TODO Allow people to change this value
+                        float compX = Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
+                        float compZ = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
+                        this.setDeltaMovement(this.getDeltaMovement().add(-amount * compX * this.jumpPower, 0.0D, amount * compZ * this.jumpPower));
+                        //this.playJumpSound();
+                    }
+
+                    // Mark as unable to jump until reset
+                    this.jumpPower = 0.0F;
+                }
+
+//                this.getFlyingSpeed()flyingSpeed = this.getSpeed() * 0.1F;
+                if(this.isControlledByLocalInstance()) {
+                    // Set the move speed and move the cat in the direction of the controlling entity
+                    this.setSpeed((float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.5F);
+                    super.travel(new Vec3(straf, positionIn.y, foward));
+                    this.lerpSteps = 0;
+                }
+                else if(livingentity instanceof Player) {
+                    // A player is riding and can not control then
+                    this.setDeltaMovement(Vec3.ZERO);
+                }
+
+                // Once the entity reaches the ground again allow it to jump again
+                if(this.onGround()) {
+                    this.jumpPower = 0.0F;
+                    this.setCatJumping(false);
+                }
+
+                //
+//                this.animationSpeedOld = this.animationSpeed;
+                double changeX = this.getX() - this.xo;
+                double changeY = this.getZ() - this.zo;
+                float f4 = Mth.sqrt((float) (changeX * changeX + changeY * changeY)) * 4.0F;
+
+                if(f4 > 1.0F) {
+                    f4 = 1.0F;
+                }
+
+//                this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
+//                this.animationPosition += this.animationSpeed;
+
+                if(this.onClimbable()) {
+                    this.fallDistance = 0.0F;
+                }
+            }
+            else {
+                this.setMaxUpStep(0.5F); // Default
+//                this.flyingSpeed = 0.02F; // Default
+                super.travel(positionIn);
+            }
+
+            this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
+        }
+    }
 
     public void addMovementStat(double xD, double yD, double zD) {
         if(this.isVehicle()) {
             int j = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
             this.statsTracker.increaseDistanceRidden(j);
         }
+
         if(!this.isPassenger()) {
             if(this.isEyeInFluid(FluidTags.WATER)) {
                 int j = Math.round(Mth.sqrt((float) (xD * xD + yD * yD + zD * zD)) * 100.0F);
@@ -2451,8 +2465,6 @@ public class CatEntity extends AbstractCatEntity {
                 int j1 = Math.round(Mth.sqrt((float) (xD * xD + zD * zD)) * 100.0F);
                 //this.STATS.increaseDistanceInWater(k);
             }
-
-
         }
     }
 
@@ -2543,9 +2555,7 @@ public class CatEntity extends AbstractCatEntity {
         }
     }
 
-    public
-
-    static class CatRelaxOnOwnerGoal extends Goal {
+    public static class CatRelaxOnOwnerGoal extends Goal {
         private final CatEntity cat;
         @Nullable
         private Player ownerPlayer;

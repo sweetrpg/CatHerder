@@ -58,7 +58,7 @@ public class CatDomesticWanderGoal extends Goal {
         // The cat will not go further than that distance.
         final var itemPositions = getItemPositions();
         if(itemPositions.a.isEmpty() || itemPositions.b.isEmpty() || itemPositions.c.isEmpty()) {
-            CatHerder.LOGGER.debug("A cat item is missing for domestic mode wander.");
+            CatHerder.LOGGER.debug("A cat item is missing for {}'s domestic mode wander.", this.cat);
             return false;
         }
         final var blockDistance = this.maxiumItemDistance * 12;
