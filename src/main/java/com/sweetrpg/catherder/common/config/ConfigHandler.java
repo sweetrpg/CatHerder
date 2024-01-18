@@ -74,15 +74,8 @@ public class ConfigHandler {
                 SKITTISH_ANIMALS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid other animals.").translation("catherder.config.client.skittish_animals").defineInRange("skittish_animals", 40, 1, 100);
                 SKITTISH_OTHERS = builder.comment("Sets the likelihood (in percent) that a skittish cat will avoid any other creature.").translation("catherder.config.client.skittish_others").defineInRange("skittish_others", 75, 1, 100);
                 SKITTISH_TWITCHINESS = builder.comment("Sets how sensitive the check for fleeing from an entity is.").translation("catherder.config.client.skittish_twitchiness").defineInRange("skittish_twitchiness", 750, 1, 1000);
-
-                builder.pop();
-            }
-
-            {
-                builder.push("Domestic");
-
                 MAX_ITEM_DISTANCE = builder.comment("Sets the maximum distance domestic items may be away from each other to be considered part of the cat's wandering area.").translation("catherder.config.client.domestic_item_max_distance").defineInRange("domestic_item_max_distance", 40, 20, 100);
-                MAX_WANDER_DISTANCE = builder.comment("Sets the maximum distance a cat in wander mode will wander from its owner.").translation("catherder.config.client.wander_max_distance").defineInRange("wander_max_distance", 200, 20, 1000);
+                MAX_WANDER_DISTANCE = builder.comment("Sets the maximum distance a cat in wander mode will wander from its owner.").translation("catherder.config.client.wander_max_distance").defineInRange("wander_max_distance", 600, 200, 1000);
 
                 builder.pop();
             }

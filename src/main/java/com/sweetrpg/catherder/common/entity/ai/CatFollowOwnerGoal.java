@@ -2,6 +2,7 @@ package com.sweetrpg.catherder.common.entity.ai;
 
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
+import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,9 +43,9 @@ public class CatFollowOwnerGoal extends Goal {
         if(owner == null) {
             return false;
         }
-//        else if (this.cat.getMode() == Mode.PATROL) {
-//            return false;
-//        }
+        else if (this.cat.isMode(Mode.DOMESTIC)) {
+            return false;
+        }
         else if(owner.isSpectator()) {
             return false;
         }
@@ -65,6 +66,9 @@ public class CatFollowOwnerGoal extends Goal {
             return false;
         }
         else if(this.cat.isInSittingPose()) {
+            return false;
+        }
+        else if (this.cat.isMode(Mode.DOMESTIC)) {
             return false;
         }
 
@@ -102,7 +106,12 @@ public class CatFollowOwnerGoal extends Goal {
         if(--this.timeToRecalcPath <= 0) {
             this.timeToRecalcPath = 10;
             if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
-                if(this.cat.distanceToSqr(this.owner) >= 400.0D) { // Further than ? blocks away teleport (12 units == one block?)
+                var wanderMaxDistance = 400.0D;
+                if(this.cat.getMode() == Mode.WANDERING) {
+                    wanderMaxDistance = ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get();
+                }
+
+                if(this.cat.distanceToSqr(this.owner) >= wanderMaxDistance) { // Further than ? blocks away teleport (12 units == one block?)
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {

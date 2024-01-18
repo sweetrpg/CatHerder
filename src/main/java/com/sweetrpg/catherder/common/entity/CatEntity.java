@@ -118,7 +118,7 @@ public class CatEntity extends AbstractCatEntity {
 
     private static final EntityDataAccessor<Byte> SIZE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<ItemStack> TOY_VARIANT = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.ITEM_STACK);
-        private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_LYING = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> RELAX_STATE_ONE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
@@ -229,12 +229,12 @@ public class CatEntity extends AbstractCatEntity {
 
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_ITEM_DISTANCE.get()));
-        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
+//        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
 
-        this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
+        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 20.0F, 4.0F));
 
-        this.goalSelector.addGoal(9, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
 
         this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
 
@@ -850,7 +850,7 @@ public class CatEntity extends AbstractCatEntity {
 //            return false;
 //        }
 
-            return !(target instanceof TamableAnimal) || !((TamableAnimal) target).isTame();
+        return !(target instanceof TamableAnimal) || !((TamableAnimal) target).isTame();
     }
 
     // TODO
