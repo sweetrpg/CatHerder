@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common;
 
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.FoodHandler;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -14,6 +15,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class CommonSetup {
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            CatHerder.LOGGER.info("CommonSetup.init starting");
+
             PacketHandler.init();
             //TODO CriteriaTriggers.register(criterion)
 
@@ -31,6 +34,8 @@ public class CommonSetup {
             registerCompostables();
 //            registerDispenserBehaviors();
 //            registerAnimalFeeds();
+
+            CatHerder.LOGGER.info("CommonSetup.init complete");
         });
     }
 
@@ -39,6 +44,8 @@ public class CommonSetup {
 //    }
 
     public static void registerCompostables() {
+        CatHerder.LOGGER.info("Registering compostables...");
+
         ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP.get(), 0.65F);
         ComposterBlock.COMPOSTABLES.put(ModItems.WILD_CATNIP.get(), 0.65F);
         ComposterBlock.COMPOSTABLES.put(ModItems.CATNIP_SEEDS.get(), 1.0F);

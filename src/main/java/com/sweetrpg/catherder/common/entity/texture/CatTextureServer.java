@@ -27,9 +27,11 @@ public class CatTextureServer {
         InputStream stream = getCachedStream(baseFolder, hash);
         try {
             return stream != null ? IOUtils.toByteArray(stream) : null;
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             IOUtils.closeQuietly(stream);
         }
 
@@ -40,12 +42,13 @@ public class CatTextureServer {
     public InputStream getCachedStream(File baseFolder, String hash) {
         File cacheFile = getCacheFile(baseFolder, hash);
 
-        if (cacheFile.isFile() && cacheFile.exists()) {
+        if(cacheFile.isFile() && cacheFile.exists()) {
             try {
                 FileInputStream stream = new FileInputStream(cacheFile);
                 CatHerder.LOGGER.debug("Loaded cat texture from local cache ({})", cacheFile);
                 return stream;
-            } catch (FileNotFoundException e) {
+            }
+            catch (FileNotFoundException e) {
                 CatHerder.LOGGER.debug("Failed to load cat texture from local cache ({})", cacheFile);
                 e.printStackTrace();
             }
@@ -76,7 +79,7 @@ public class CatTextureServer {
         String hash = getHash(stream);
         File cacheFile = getCacheFile(baseFolder, hash);
 
-        if (!cacheFile.isFile()) {
+        if(!cacheFile.isFile()) {
             CatHerder.LOGGER.debug("Saved cat texture to local cache ({})", cacheFile);
             FileUtils.writeByteArrayToFile(cacheFile, stream);
             return true;

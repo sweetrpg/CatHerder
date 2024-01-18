@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
@@ -71,12 +72,18 @@ public class CatWanderGoal extends Goal {
         }
 
         Vec3 pos = this.getPosition();
-        if(pos != null) {
-            this.cat.getNavigation().moveTo(pos.x, pos.y, pos.z, this.speed);
-        }
+//        if(pos != null) {
+        this.cat.setOnGround(true);
+            if(this.cat.getNavigation().moveTo(pos.x, pos.y, pos.z, this.speed)) {
+                CatHerder.LOGGER.debug("Cat {} is moving to {}", this.cat, pos);
+            }
+            else {
+                CatHerder.LOGGER.warn("Cat {} will not move to {}", this.cat, pos);
+            }
+//        }
     }
 
-    @Nullable
+//    @Nullable
     protected Vec3 getPosition() {
         PathNavigation pathNavigate = this.cat.getNavigation();
         RandomSource random = this.cat.getRandom();
@@ -88,11 +95,11 @@ public class CatWanderGoal extends Goal {
 
         BlockPos bestPos = this.cat.blockPosition();
         for(int attempt = 0; attempt < 5; ++attempt) {
-            int l = random.nextInt(2 * xzRange + 1) - xzRange;
-            int i1 = random.nextInt(2 * yRange + 1) - yRange;
-            int j1 = random.nextInt(2 * xzRange + 1) - xzRange;
+            int x = random.nextInt(2 * xzRange + 1) - xzRange;
+            int y = random.nextInt(2 * yRange + 1) - yRange;
+            int z = random.nextInt(2 * xzRange + 1) - xzRange;
 
-            BlockPos testPos = bestPos.offset(l, i1, j1);
+            BlockPos testPos = bestPos.offset(x, y, z);
 
             if(pathNavigate.isStableDestination(testPos)) {
                 float weight = this.cat.getWalkTargetValue(testPos);

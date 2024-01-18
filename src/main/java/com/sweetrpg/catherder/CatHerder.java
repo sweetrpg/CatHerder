@@ -47,6 +47,8 @@ public class CatHerder {
             .simpleChannel();
 
     public CatHerder() {
+        LOGGER.info("Starting...");
+
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Mod lifecycle
@@ -89,11 +91,14 @@ public class CatHerder {
         forgeEventBus.addListener(this::serverStarting);
         forgeEventBus.addListener(this::registerCommands);
 
+        CatHerder.LOGGER.info("Register event handler");
         forgeEventBus.register(new EventHandler());
 //        forgeEventBus.register(new BackwardsComp());
 
         // Client Events
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+            CatHerder.LOGGER.info("Add client event listeners");
+
 // TODO            modEventBus.addListener(ModKeybinds::registerKeyMapping);
             modEventBus.addListener(this::clientSetup);
             modEventBus.addListener(ModBlocks::registerBlockColours);
@@ -109,8 +114,10 @@ public class CatHerder {
             forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
         });
 
+        CatHerder.LOGGER.info("Initialize config handler");
         ConfigHandler.init(modEventBus);
 
+        CatHerder.LOGGER.info("Initialize addon manager");
         AddonManager.init();
     }
 

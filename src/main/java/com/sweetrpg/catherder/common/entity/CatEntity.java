@@ -541,7 +541,7 @@ public class CatEntity extends AbstractCatEntity {
 //        this.setSprinting(true);
 //        this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_HEARTS);
         this.catnipGoal = new CatnipGoal(this, 4);
-        this.goalSelector.addGoal(1, this.catnipGoal);
+        this.goalSelector.addGoal(2, this.catnipGoal);
 
         return InteractionResult.SUCCESS;
     }
@@ -2334,6 +2334,8 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public void travel(Vec3 positionIn) {
+        CatHerder.LOGGER.trace("Cat {} travel to {}", this, positionIn);
+
         if(this.isAlive()) {
             if(this.isVehicle() && this.canRiderInteract()) {
                 LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
