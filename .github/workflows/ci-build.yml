@@ -9,49 +9,58 @@ name: CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ "1.16", "1.18", "1.19", "1.20" ]
     paths:
       - 'src/**'
       - 'test/**'
       - build.gradle
       - gradle.properties
-  pull_request:
-    branches: [ develop ]
-    paths:
-      - 'src/**'
-      - 'test/**'
-      - build.gradle
-      - gradle.properties
+      - settings.gradle
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
-      with:
-        arguments: build
-    - id: tag-version
-      name: Create tag
-      uses: SOLIDSoftworks/semver-tags@1.0.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        tag-prefix: ''
-        default-version: '0.0.1'
-        prerelease: 'alpha'
-    - name: Commit version file
-      run: |
-        git config --global user.email "ci@sweetrpg.com"
-        git config --global user.name "SweetRPG CI"
-        echo "${{ steps.tag-version.outputs.semantic-version }}" > .VERSION
-        git add .VERSION
-        git commit -m "Update .VERSION"
-        git push origin
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - id: get_last_version
+        name: Get last version
+        run: |
+          echo "latest_version=$(cat .release-info/${{ github.ref_name }}/VERSION)" >> $GITHUB_ENV
+      - id: bump_version
+        name: Bump version
+        uses: cbrgm/semver-bump-action@main
+        with:
+          current-version: ${{ env.latest_version }}
+          bump-level: patch
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+        with:
+          arguments: build test --scans
+        env:
+          CATHERDER_VERSION: "${{ steps.bump_version.outputs.new_version }}"
+      - name: Commit version file
+        run: |
+          git config --global user.email "ci@sweetrpg.com"
+          git config --global user.name "SweetRPG CI"
+          echo "${{ steps.bump_version.outputs.new_version }}" > .release-info/${{ github.ref_name }}/VERSION
+          git add .release-info/${{ github.ref_name }}/VERSION
+          git commit -m "Update ${{ github.ref_name }} VERSION file"
+          git push origin
+      - name: Release artifacts
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "${{ github.ref_name }}-${{ steps.bump_version.outputs.new_version }}"
+          prerelease: true
+          files: |
+            build/libs/*.jar
