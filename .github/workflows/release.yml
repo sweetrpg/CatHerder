@@ -1,0 +1,67 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Release
+
+on:
+  push:
+    branches: [ "1.16-release", "1.18-release", "1.19-release", "1.20-release" ]
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - build.gradle
+      - gradle.properties
+      - settings.gradle
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          MODRINTH_API_KEY: ${{ secrets.MODRINTH_API_KEY }}
+        with:
+          arguments: curseforge modrinth --console=verbose
+      - name: Commit hash file and reset changelog
+        run: |
+          git config --global user.email "ci@sweetrpg.com"
+          git config --global user.name "SweetRPG CI"
+          
+          branch_version=$(cat ${{ github.ref_name }} | cut -f1 -d-)
+          
+          echo "${{ github.sha }}" > .release-info/${branch_version}/RELEASE_HASH
+          git add .release-info/${branch_version}/RELEASE_HASH
+          git commit -m "Update ${branch_version} RELEASE_HASH"
+          version=$(cat .release-info/${branch_version}/VERSION)
+          git tag "release-${version}"
+
+          echo "# $version" > CHANGELOG/${branch_version}/${version}.md
+          echo "" >> CHANGELOG/${branch_version}/${version}.md
+          cat CHANGELOG/${branch_version}/current.md >> CHANGELOG/${branch_version}/${version}.md
+          cat /dev/null > CHANGELOG/${branch_version}/current.md
+          git add CHANGELOG/${branch_version}
+          git commit -m "Reset ${branch_version} changelog"
+
+          git push origin --tags
+
+          git checkout ${branch_version}
+          git merge ${{ github.ref_name }}
+          git push origin
