@@ -2,13 +2,13 @@ package com.sweetrpg.catherder.common.entity.ai;
 
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
+import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import java.util.EnumSet;
@@ -17,7 +17,6 @@ public class CatFollowOwnerGoal extends Goal {
 
     private final CatEntity cat;
     private final PathNavigation navigator;
-    private final Level world;
     private final double followSpeed;
     private final float stopDist; // If closer than stopDist, stop moving towards owner
     private final float startDist; // If further than startDist, start moving towards owner
@@ -28,7 +27,6 @@ public class CatFollowOwnerGoal extends Goal {
 
     public CatFollowOwnerGoal(CatEntity catIn, double speedIn, float startMoveDist, float stopMoveDist) {
         this.cat = catIn;
-        this.world = catIn.level;
         this.followSpeed = speedIn;
         this.navigator = catIn.getNavigation();
         this.startDist = startMoveDist;
@@ -45,13 +43,20 @@ public class CatFollowOwnerGoal extends Goal {
 //        else if (this.cat.getMode() == Mode.PATROL) {
 //            return false;
 //        }
-        else if(owner.isSpectator()) {
+        if(owner.isSpectator()) {
             return false;
         }
-        else if(this.cat.isInSittingPose()) {
+
+        if(this.cat.isInSittingPose()) {
             return false;
         }
-        else if(!this.cat.hasToy() && (this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq())) {
+
+        if(this.cat.isHungry()) {
+            this.owner = owner;
+            return true;
+        }
+
+        if(!this.cat.hasToy() && (this.cat.distanceToSqr(owner) < this.getMinStartDistanceSq())) {
             return false;
         }
 
@@ -64,12 +69,12 @@ public class CatFollowOwnerGoal extends Goal {
         if(this.navigator.isDone()) {
             return false;
         }
-        else if(this.cat.isInSittingPose()) {
+
+        if(this.cat.isInSittingPose()) {
             return false;
         }
-        else {
-            return this.cat.distanceToSqr(this.owner) > (this.stopDist * this.stopDist);
-        }
+
+        return this.cat.distanceToSqr(this.owner) > (this.stopDist * this.stopDist);
     }
 
     @Override
@@ -117,6 +122,11 @@ public class CatFollowOwnerGoal extends Goal {
     public float getMinStartDistanceSq() {
         if(this.cat.isMode(Mode.GUARD)) {
             return 4F;
+        }
+
+        if(this.cat.isMode(Mode.WANDERING)) {
+            var maxDist = ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get();
+            return maxDist * maxDist;
         }
 
         return this.startDist * this.startDist;

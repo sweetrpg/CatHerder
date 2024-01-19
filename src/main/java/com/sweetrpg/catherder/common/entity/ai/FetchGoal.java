@@ -20,7 +20,12 @@ public class FetchGoal extends MoveToClosestItemGoal {
         if(this.cat.isInSittingPose()) {
             return false;
         }
-        else if(this.cat.hasToy()) {
+
+        if(this.cat.hasToy()) {
+            return false;
+        }
+
+        if(this.cat.isHungry()) {
             return false;
         }
 

@@ -2,6 +2,7 @@ package com.sweetrpg.catherder.common.entity.ai;
 
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.Mode;
+import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.util.MathUtil;
 import net.minecraft.core.BlockPos;
@@ -20,17 +21,15 @@ public class CatDomesticWanderGoal extends Goal {
     protected final CatEntity cat;
 
     protected final double speed;
-    protected final float maxiumItemDistance;
     protected int executionChance;
 
     private final double NUM_BLOCKS_AWAY = 15;
     private final double BLOCK_SIZE = 12;
     private final double MAX_DISTANCE = NUM_BLOCKS_AWAY * BLOCK_SIZE;
 
-    public CatDomesticWanderGoal(CatEntity catIn, double speedIn, float maxiumItemDistance) {
+    public CatDomesticWanderGoal(CatEntity catIn, double speedIn) {
         this.cat = catIn;
         this.speed = speedIn;
-        this.maxiumItemDistance = maxiumItemDistance;
         this.executionChance = 60;
         this.setFlags(EnumSet.of(Flag.MOVE));
     }
@@ -60,7 +59,7 @@ public class CatDomesticWanderGoal extends Goal {
             CatHerder.LOGGER.debug("A cat item is missing for domestic mode wander.");
             return false;
         }
-        final var blockDistance = this.maxiumItemDistance * 12;
+        final var blockDistance = ConfigHandler.CLIENT.MAX_ITEM_DISTANCE.get() * 12;
         if(itemPositions.a.get().distSqr(itemPositions.b.get()) > blockDistance) {
             CatHerder.LOGGER.debug("The distance between {}'s litter box and food bowl is greater than {}", this.cat, blockDistance);
             return false;
@@ -83,39 +82,6 @@ public class CatDomesticWanderGoal extends Goal {
 
         return true;
     }
-
-//    private Optional<Tuple<BlockPos, Double>> closestDomesticItem() {
-//        Optional<BlockPos> bowlPos = this.cat.getBowlPos();
-//        Optional<BlockPos> litterboxPos = this.cat.getLitterboxPos();
-//        Optional<BlockPos> treePos = this.cat.getCatTreePos();
-//
-//        if(bowlPos.isEmpty() ||
-//                litterboxPos.isEmpty() ||
-//                treePos.isEmpty()) {
-//            return Optional.empty();
-//        }
-//
-//        double closestDist = Double.MAX_VALUE;
-//        BlockPos closestPos = null;
-//
-//        double bowlDist = bowlPos.get().distSqr(this.cat.blockPosition());
-//        if(bowlDist < closestDist) {
-//            closestDist = bowlDist;
-//            closestPos = bowlPos.get();
-//        }
-//        double litterboxDist = litterboxPos.get().distSqr(this.cat.blockPosition());
-//        if(litterboxDist < closestDist) {
-//            closestDist = litterboxDist;
-//            closestPos = litterboxPos.get();
-//        }
-//        double treeDist = treePos.get().distSqr(this.cat.blockPosition());
-//        if(treeDist < closestDist) {
-//            closestDist = treeDist;
-//            closestPos = treePos.get();
-//        }
-//
-//        return Optional.of(new Tuple<>(closestPos, closestDist));
-//    }
 
     @Override
     public void tick() {
