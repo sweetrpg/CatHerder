@@ -237,10 +237,10 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_ITEM_DISTANCE.get()));
         this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
 
-        this.goalSelector.addGoal(7, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(7, new CatSitOnBlockGoal<>(this, 0.8F));
+        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 20.0F, 4.0F));
 
-        this.goalSelector.addGoal(9, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+        this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
+        this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
 
         this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
 
@@ -1547,6 +1547,7 @@ public class CatEntity extends AbstractCatEntity {
                 this.setCatSize(compound.getInt("catSize"));
             }
             this.setOriginalBreed(compound.getInt("original_breed"));
+            this.setVariant(BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(compound.getString("cat_variant"))));
         }
         catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load info: " + e.getMessage());
@@ -2537,8 +2538,14 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public void setVariant(CatVariant variant) {
-        var path = BuiltInRegistries.CAT_VARIANT.getKey(variant).getPath();
-        this.entityData.set(VARIANT_STR, path);
+        var varResLoc = BuiltInRegistries.CAT_VARIANT.getKey(variant);
+        if(varResLoc != null) {
+            var path = varResLoc.getPath();
+            this.entityData.set(VARIANT_STR, path);
+        }
+        else {
+            CatHerder.LOGGER.error("Variant could not be found for parameter {}", variant);
+        }
     }
 
     public
