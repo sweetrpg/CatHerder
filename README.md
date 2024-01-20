@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/modrinth/dt/nwS25u6U" alt="Modrinth Downloads">
 </a>
 
-[![CI (1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml/badge.svg?branch=1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml)
+[![CI (1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg?branch=1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
 
 ## Overview 
 
