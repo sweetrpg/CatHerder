@@ -1,19 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "M": {
-      "item": "minecraft:brown_mushroom"
-    },
-    "W": {
-      "item": "minecraft:potion"
-    }
-  },
   "pattern": [
     "WM"
   ],
+  "key": {
+    "W": {
+      "item": "minecraft:potion"
+    },
+    "M": {
+      "item": "minecraft:brown_mushroom"
+    }
+  },
   "result": {
     "item": "catherder:small_catsizer"
-  },
-  "show_notification": true
+  }
 }

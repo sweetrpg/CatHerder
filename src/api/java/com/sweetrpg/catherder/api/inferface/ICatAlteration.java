@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidType;
 
 public interface ICatAlteration {
 
@@ -69,7 +70,7 @@ public interface ICatAlteration {
         return InteractionResult.PASS;
     }
 
-    default InteractionResult canBeRiddenInWater(AbstractCatEntity catIn, Entity rider) {
+    default InteractionResult canBeRiddenInWater(AbstractCatEntity catIn) {
         return InteractionResult.PASS;
     }
 
@@ -159,6 +160,18 @@ public interface ICatAlteration {
     }
 
     default InteractionResult onLivingFall(AbstractCatEntity catIn, float distance, float damageMultiplier) {
+        return InteractionResult.PASS;
+    }
+
+    default InteractionResult isBlockSafe(BlockState blockIn) {
+        return InteractionResult.PASS;
+    }
+
+    default InteractionResult canSwimUnderwater(AbstractCatEntity catIn) {
+        return InteractionResult.PASS;
+    }
+
+    default InteractionResult canResistPushFromFluidType(FluidType type) {
         return InteractionResult.PASS;
     }
 

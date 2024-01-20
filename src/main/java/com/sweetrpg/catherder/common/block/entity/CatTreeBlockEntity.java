@@ -90,7 +90,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
 
-        NBTUtil.putRegistryValue(compound, "colorId", this.colorType, CatHerderAPI.COLOR_MATERIAL.get());
+        NBTUtil.putRegistryValue(compound, "colorId", CatHerderAPI.COLOR_MATERIAL.get().getKey(this.colorType));
 //        NBTUtil.putRegistryValue(compound, "beddingId", this.beddingType);
 
         NBTUtil.putUniqueId(compound, "ownerId", this.catUUID);

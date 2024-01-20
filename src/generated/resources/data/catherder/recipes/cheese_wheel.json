@@ -1,23 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "pattern": [
+    "MSM",
+    " B "
+  ],
   "key": {
-    "B": {
-      "item": "minecraft:bowl"
-    },
     "M": {
       "item": "minecraft:milk_bucket"
     },
     "S": {
       "item": "minecraft:slime_ball"
+    },
+    "B": {
+      "item": "minecraft:bowl"
     }
   },
-  "pattern": [
-    "MSM",
-    " B "
-  ],
   "result": {
     "item": "catherder:cheese_wheel"
-  },
-  "show_notification": true
+  }
 }

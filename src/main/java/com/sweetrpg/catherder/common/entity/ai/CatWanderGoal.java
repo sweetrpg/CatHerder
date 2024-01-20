@@ -10,6 +10,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Random;
 
 public class CatWanderGoal extends Goal {
 
@@ -19,14 +20,14 @@ public class CatWanderGoal extends Goal {
     protected final float maximumDistance;
     protected int executionChance;
 
-    private final double NUM_BLOCKS_AWAY = 15;
-    private final double BLOCK_SIZE = 12;
-    private final double MAX_DISTANCE = NUM_BLOCKS_AWAY * BLOCK_SIZE;
+//    private final double NUM_BLOCKS_AWAY = 15;
+//    private final double BLOCK_SIZE = 12;
+//    private final double MAX_DISTANCE = NUM_BLOCKS_AWAY * BLOCK_SIZE;
 
-    public CatWanderGoal(CatEntity catIn, double speedIn, float maxiumDistance) {
+    public CatWanderGoal(CatEntity catIn, double speedIn, float maximumDistance) {
         this.cat = catIn;
         this.speed = speedIn;
-        this.maximumDistance = maxiumDistance;
+        this.maximumDistance = maximumDistance;
         this.executionChance = 60;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
@@ -38,6 +39,10 @@ public class CatWanderGoal extends Goal {
         }
 
         if(this.cat.isInSittingPose() || this.cat.isLying() || this.cat.isLyingDown()) {
+            return false;
+        }
+
+        if(this.cat.isHungry()) {
             return false;
         }
 

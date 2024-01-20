@@ -11,14 +11,14 @@ import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
+import com.sweetrpg.catherder.common.util.BackwardsComp;
 import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import com.sweetrpg.catherder.data.*;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -26,7 +26,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
@@ -82,18 +81,15 @@ public class CatHerder {
         modEventBus.addListener(ModEntityTypes::addEntityAttributes);
         modEventBus.addListener(Capabilities::registerCaps);
 
-        modEventBus.addListener(ModItemGroups::onCreativeTabRegister);
-
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::serverStarting);
-        forgeEventBus.addListener(this::registerCommands);
+//        forgeEventBus.addListener(this::registerCommands);
 
         forgeEventBus.register(new EventHandler());
-//        forgeEventBus.register(new BackwardsComp());
+        forgeEventBus.register(new BackwardsComp());
 
         // Client Events
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-// TODO            modEventBus.addListener(ModKeybinds::registerKeyMapping);
             modEventBus.addListener(this::clientSetup);
             modEventBus.addListener(ModBlocks::registerBlockColours);
             modEventBus.addListener(ModItems::registerItemColours);
@@ -102,8 +98,6 @@ public class CatHerder {
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
-      // TODO      modEventBus.addListener(ClientSetup::registerOverlay);
-
             forgeEventBus.register(new ClientEventHandler());
             forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
         });
@@ -120,10 +114,10 @@ public class CatHerder {
         LOGGER.debug("Server starting");
     }
 
-    public void registerCommands(final RegisterCommandsEvent event) {
-        LOGGER.debug("Register commands");
+//    public void registerCommands(final RegisterCommandsEvent event) {
+//        LOGGER.debug("Register commands");
 //        CatRespawnCommand.register(event.getDispatcher());
-    }
+//    }
 
     @OnlyIn(Dist.CLIENT)
     public void clientSetup(final FMLClientSetupEvent event) {
@@ -147,14 +141,14 @@ public class CatHerder {
         LOGGER.debug("Gather data: {}", event);
 
         DataGenerator gen = event.getGenerator();
-        PackOutput packOutput = gen.getPackOutput();
+        var packOutput = gen.getPackOutput();
         var lookup = event.getLookupProvider();
         var fileHelper = event.getExistingFileHelper();
 
         if(event.includeClient()) {
-            CHBlockstateProvider blockstates = new CHBlockstateProvider(packOutput, fileHelper);
+            CHBlockstateProvider blockstates = new CHBlockstateProvider(packOutput, event.getExistingFileHelper());
             gen.addProvider(true, blockstates);
-            gen.addProvider(true, new CHItemModelProvider(packOutput, fileHelper));
+            gen.addProvider(true, new CHItemModelProvider(packOutput, blockstates.getExistingHelper()));
             gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_EN_US));
             gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_EN_GB));
             gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_DE_DE));
@@ -170,7 +164,7 @@ public class CatHerder {
             gen.addProvider(true, new CHAdvancements(packOutput, lookup, fileHelper));
             CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(packOutput, lookup, fileHelper);
             gen.addProvider(true, blockTagProvider);
-            gen.addProvider(true, new CHItemTagsProvider(packOutput, lookup, blockTagProvider, fileHelper));
+            gen.addProvider(true, new CHItemTagsProvider(packOutput, lookup, blockTagProvider, event.getExistingFileHelper()));
             gen.addProvider(true, new CHRecipeProvider(packOutput));
             gen.addProvider(true, new CHLootTableProvider(packOutput));
         }

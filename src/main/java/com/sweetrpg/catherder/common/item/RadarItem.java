@@ -4,7 +4,6 @@ import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.storage.CatLocationData;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import net.minecraft.Util;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
@@ -48,7 +47,7 @@ public class RadarItem extends Item {
 
             ResourceKey<Level> dimCurr = playerIn.level.dimension();
 
-            playerIn.sendSystemMessage(CommonComponents.EMPTY);
+            playerIn.sendSystemMessage(Component.literal(""));
 
             CatLocationStorage locationManager = CatLocationStorage.get(worldIn);
             List<CatLocationData> ownCats = locationManager.getCats(playerIn, dimCurr).collect(Collectors.toList());

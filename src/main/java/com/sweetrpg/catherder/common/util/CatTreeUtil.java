@@ -44,7 +44,7 @@ public class CatTreeUtil {
         ItemStack stack = new ItemStack(ModBlocks.CAT_TREE.get(), 1);
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
-        NBTUtil.putRegistryValue(tag, "colorId", colorId, CatHerderAPI.COLOR_MATERIAL.get());
+        NBTUtil.putRegistryValue(tag, "colorId", CatHerderAPI.COLOR_MATERIAL.get().getKey(colorId));
 //        NBTUtil.putRegistryValue(tag, "beddingId", beddingId);
 
         return stack;

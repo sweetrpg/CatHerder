@@ -17,7 +17,7 @@ public class MissingDyeMaterial extends IDyeMaterial {
 
     @Override
     public Component getTooltip() {
-        return Component.translatable("cattree.dye.missing", "//TODO");
+        return Component.translatable("cattree.dye.missing");
     }
 
     @Override

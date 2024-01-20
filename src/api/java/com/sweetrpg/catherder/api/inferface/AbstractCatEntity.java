@@ -16,6 +16,8 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -97,4 +99,49 @@ public abstract class AbstractCatEntity extends TamableAnimal implements ICat {
     public Component getGenderName() {
         return this.getTranslationKey(Gender::getUnlocalizedName);
     }
+
+    public void setNavigation(PathNavigation p) {
+        if (this.navigation == p) return;
+        this.navigation.stop();
+        this.navigation = p;
+    }
+
+    //TODO try to replicate the bug and check if moveControl.haveWantedPosition using debug magic
+    public void setMoveControl(MoveControl m) {
+        breakMoveControl();
+
+        this.moveControl = m;
+    }
+
+    public void breakMoveControl() {
+        /*
+         * Force the MoveControl To Reset :
+         * this will set the dog's wanted Position to his current Position
+         * which will cause the moveControl to halt movement and reset in the
+         * next tick().
+         * And then immediately update the moveControl by calling tick() so
+         * that everything is resolved before anything else.
+         */
+        this.moveControl.setWantedPosition(
+                this.getX(),
+                this.getY(),
+                this.getZ(), 1.0
+        );
+        this.moveControl.tick();
+
+        //Also reset jump just to be sure.
+        this.setJumping(false);
+
+        //Also reset accelerations just to be sure.
+        this.setSpeed(0.0F);
+        this.setXxa(0.0F);
+        this.setYya(0.0F);
+        this.setZza(0.0F);
+    }
+
+    public abstract void resetNavigation();
+
+    public abstract void resetMoveControl();
+
+    public abstract boolean canSwimUnderwater();
 }

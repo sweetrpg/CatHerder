@@ -17,21 +17,18 @@ import com.sweetrpg.catherder.common.entity.ai.BreedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatLieOnBedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatSitOnBlockGoal;
 import com.sweetrpg.catherder.common.entity.ai.*;
+import com.sweetrpg.catherder.common.entity.ai.navigation.CatMoveControl;
+import com.sweetrpg.catherder.common.entity.ai.navigation.CatPathNavigation;
 import com.sweetrpg.catherder.common.entity.misc.DimensionDependentArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
 import com.sweetrpg.catherder.common.storage.CatLocationStorage;
 import com.sweetrpg.catherder.common.storage.CatRespawnStorage;
-import com.sweetrpg.catherder.common.util.Cache;
-import com.sweetrpg.catherder.common.util.NBTUtil;
-import com.sweetrpg.catherder.common.util.Util;
-import com.sweetrpg.catherder.common.util.WorldUtil;
+import com.sweetrpg.catherder.common.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -58,16 +55,16 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.CatVariant;
@@ -99,10 +96,8 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.holdersets.HolderSetType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -128,19 +123,21 @@ public class CatEntity extends AbstractCatEntity {
     private static final EntityDataAccessor<Boolean> RELAX_STATE_ONE = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
     // Use Cache.make to ensure static fields are not initialised too early (before Serializers have been registered)
-    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER));
-    private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.TALENT_SERIALIZER));
-    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER));
-    private static final Cache<EntityDataAccessor<Gender>> GENDER = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER));
-    private static final Cache<EntityDataAccessor<Mode>> MODE = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER));
-    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
-    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
-    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
-    private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER));
+    private static final Cache<EntityDataAccessor<List<AccessoryInstance>>> ACCESSORIES = Cache.make(() -> (EntityDataAccessor<List<AccessoryInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ACCESSORY_SERIALIZER));
+    private static final Cache<EntityDataAccessor<List<TalentInstance>>> TALENTS = Cache.make(() -> (EntityDataAccessor<List<TalentInstance>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.TALENT_SERIALIZER));
+    private static final Cache<EntityDataAccessor<CatLevel>> CAT_LEVEL = Cache.make(() -> (EntityDataAccessor<CatLevel>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_LEVEL_SERIALIZER));
+    private static final Cache<EntityDataAccessor<Gender>> GENDER = Cache.make(() -> (EntityDataAccessor<Gender>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.GENDER_SERIALIZER));
+    private static final Cache<EntityDataAccessor<Mode>> MODE = Cache.make(() -> (EntityDataAccessor<Mode>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.MODE_SERIALIZER));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_TREE_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> CAT_BOWL_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
+    private static final Cache<EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>> LITTERBOX_LOCATION = Cache.make(() -> (EntityDataAccessor<DimensionDependentArg<Optional<BlockPos>>>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.CAT_TREE_LOC_SERIALIZER));
+    private static final Cache<EntityDataAccessor<Integer>> ORIGINAL_BREED = Cache.make(() -> (EntityDataAccessor<Integer>) SynchedEntityData.defineId(CatEntity.class, ModSerializers.ORIGINAL_BREED_SERIALIZER));
     private static final Cache<EntityDataAccessor<String>> VARIANT = Cache.make(() -> SynchedEntityData.defineId(CatEntity.class, ModSerializers.VARIANT_SERIALIZER));
 
     public final Map<Integer, Object> objects = new HashMap<>();
     public final StatsTracker statsTracker = new StatsTracker();
+    protected final PathNavigation defaultNavigation;
+    protected final MoveControl defaultMoveControl;
     // Cached values
     private final Cache<Integer> spendablePoints = Cache.make(this::getSpendablePointsInternal);
     private final List<ICatAlteration> alterations = new ArrayList<>(4);
@@ -169,6 +166,12 @@ public class CatEntity extends AbstractCatEntity {
         super(type, worldIn);
         this.setTame(false);
         this.setGender(Gender.random(this.getRandom()));
+
+        this.navigation = new CatPathNavigation(this, worldIn);
+        this.moveControl = new CatMoveControl(this);
+
+        this.defaultNavigation = this.navigation;
+        this.defaultMoveControl = this.moveControl;
     }
 
     public void setRelaxStateOne(boolean p_28186_) {
@@ -206,7 +209,7 @@ public class CatEntity extends AbstractCatEntity {
         this.entityData.define(CAT_LEVEL.get(), new CatLevel(0, 0));
         this.entityData.define(SIZE, (byte) 3);
         this.entityData.define(ORIGINAL_BREED_INT, 0);
-        this.entityData.define(VARIANT_STR, CatVariant.TABBY.toString());
+        this.entityData.define(VARIANT_STR, BuiltInRegistries.CAT_VARIANT.get(CatVariant.TABBY).texture().getPath());
         this.entityData.define(TOY_VARIANT, ItemStack.EMPTY);
         this.entityData.define(CAT_TREE_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
         this.entityData.define(CAT_BOWL_LOCATION.get(), new DimensionDependentArg<>(() -> EntityDataSerializers.OPTIONAL_BLOCK_POS));
@@ -234,15 +237,15 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
 
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_ITEM_DISTANCE.get()));
-        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
+        this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D));
+//        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
 
         this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 20.0F, 4.0F));
 
         this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
         this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
 
-        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 10));
+        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 20));
 
         this.goalSelector.addGoal(12, new BreedGoal(this, 1.0D));
 
@@ -457,12 +460,15 @@ public class CatEntity extends AbstractCatEntity {
             }
         }
 
+        this.setMaxUpStep(this.isVehicle() ? 1f : 0.6f);
+
         this.alterations.forEach((alter) -> alter.tick(this));
     }
 
     @Override
     public void aiStep() {
         super.aiStep();
+
         if(!this.level.isClientSide && this.wetSource != null && !this.isShaking && !this.isPathFinding() && this.isOnGround()) {
             this.startShaking();
             this.level.broadcastEntityEvent(this, Constants.EntityState.CAT_START_SHAKING);
@@ -524,11 +530,19 @@ public class CatEntity extends AbstractCatEntity {
         if(this.tickCount % 50 == 0) {
             ResourceKey<Level> dimKey = this.level.dimension();
             Optional<BlockPos> bowlPos = this.getBowlPos(dimKey);
+            Optional<BlockPos> boxPos = this.getLitterboxPos(dimKey);
+            Optional<BlockPos> treePos = this.getCatTreePos(dimKey);
 
             // If the cat has a cat bowl in this dimension then check if it is still there
             // Only check if the chunk it is in is loaded
             if(bowlPos.isPresent() && this.level.hasChunkAt(bowlPos.get()) && !this.level.getBlockState(bowlPos.get()).is(ModBlocks.CAT_BOWL.get())) {
                 this.setBowlPos(dimKey, Optional.empty());
+            }
+            if(boxPos.isPresent() && this.level.hasChunkAt(boxPos.get()) && !this.level.getBlockState(boxPos.get()).is(ModBlocks.LITTERBOX.get())) {
+                this.setLitterboxPos(dimKey, Optional.empty());
+            }
+            if(treePos.isPresent() && this.level.hasChunkAt(treePos.get()) && !this.level.getBlockState(treePos.get()).is(ModBlocks.CAT_TREE.get())) {
+                this.setCatTreePos(dimKey, Optional.empty());
             }
         }
 
@@ -622,21 +636,18 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     @Override
-    public boolean canBeRiddenUnderFluidType(FluidType fluidType, Entity rider) {
-        if(fluidType == ForgeMod.WATER_TYPE.get()) {
-            for(ICatAlteration alter : this.alterations) {
-                InteractionResult result = alter.canBeRiddenInWater(this, rider);
+    public boolean dismountsUnderwater() {
+        for (ICatAlteration alter : this.alterations) {
+            InteractionResult result = alter.canBeRiddenInWater(this);
 
-                if(result.shouldSwing()) {
-                    return true;
-                }
-                else if(result == InteractionResult.FAIL) {
-                    return false;
-                }
+            if (result.shouldSwing()) {
+                return false;
+            } else if (result == InteractionResult.FAIL) {
+                return true;
             }
         }
 
-        return super.canBeRiddenUnderFluidType(fluidType, rider);
+        return super.dismountsUnderwater();
     }
 
     @Override
@@ -702,26 +713,12 @@ public class CatEntity extends AbstractCatEntity {
     // TODO
     @Override
     public int getMaxFallDistance() {
-        return super.getMaxFallDistance();
+        return Integer.MAX_VALUE;
     }
 
     @Override
     protected int calculateFallDamage(float distance, float damageMultiplier) {
         return 0;
-//        MobEffectInstance effectInst = this.getEffect(MobEffects.JUMP);
-//        float f = effectInst == null ? 0.0F : effectInst.getAmplifier() + 1;
-//        distance -= f;
-//
-//        for(ICatAlteration alter : this.alterations) {
-//            InteractionResultHolder<Float> result = alter.calculateFallDistance(this, distance);
-//
-//            if(result.getResult().shouldSwing()) {
-//                distance = result.getObject();
-//                break;
-//            }
-//        }
-//
-//        return Mth.ceil((distance - 3.0F - f) * damageMultiplier);
     }
 
     @Override
@@ -930,7 +927,7 @@ public class CatEntity extends AbstractCatEntity {
             critModifiers.forEach(attackDamageInst::removeModifier);
         }
 
-        boolean flag = target.hurt(this.damageSources().generic(), damage);
+        boolean flag = target.hurt(this.damageSources().mobAttack(this), damage);
         if(flag) {
             this.doEnchantDamageEffects(this, target);
             this.statsTracker.increaseDamageDealt(damage);
@@ -1321,7 +1318,11 @@ public class CatEntity extends AbstractCatEntity {
         compound.putInt("level_normal", this.getCatLevel().getLevel(Type.NORMAL));
         compound.putInt("level_dire", this.getCatLevel().getLevel(Type.WILD));
         compound.putInt("original_breed", this.getOriginalBreed());
-        compound.putInt("cat_variant", this.getOriginalBreed());
+        var variant = this.getVariant();
+        if(variant != null) {
+            compound.putString("cat_variant", BuiltInRegistries.CAT_VARIANT.getKey(variant).getPath());
+        }
+
         NBTUtil.writeItemStack(compound, "fetchItem", this.getToyVariant());
 
         DimensionDependentArg<Optional<BlockPos>> bedsData = this.entityData.get(CAT_TREE_LOCATION.get());
@@ -1547,7 +1548,13 @@ public class CatEntity extends AbstractCatEntity {
                 this.setCatSize(compound.getInt("catSize"));
             }
             this.setOriginalBreed(compound.getInt("original_breed"));
-            this.setVariant(BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(compound.getString("cat_variant"))));
+            if(compound.contains("cat_variant", Tag.TAG_STRING)) {
+                var variant = BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(compound.getString("cat_variant")));
+                this.setVariant(variant);
+            }
+            else {
+                BackwardsComp.getCatVariant(compound, this::setVariant);
+            }
         }
         catch (Exception e) {
             CatHerder.LOGGER.error("Failed to load info: " + e.getMessage());
@@ -2323,11 +2330,9 @@ public class CatEntity extends AbstractCatEntity {
         super.travel(positionIn);
         this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
     }
-
-//    @Override
 //    public void travel(Vec3 positionIn) {
 //        if(this.isAlive()) {
-//            if(this.isVehicle() && this.canRiderInteract()) {
+//            if(this.isVehicle() && this.canBeControlledByRider()) {
 //                LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
 //
 //                // Face the cat in the direction of the controlling passenger
@@ -2371,11 +2376,11 @@ public class CatEntity extends AbstractCatEntity {
 //                        //this.playJumpSound();
 //                    }
 //
-//                    // Mark as unable to jump until reset
+//                    // Mark as unable jump until reset
 //                    this.jumpPower = 0.0F;
 //                }
 //
-////                this.getFlyingSpeed()flyingSpeed = this.getSpeed() * 0.1F;
+//                this.flyingSpeed = this.getSpeed() * 0.1F;
 //                if(this.isControlledByLocalInstance()) {
 //                    // Set the move speed and move the cat in the direction of the controlling entity
 //                    this.setSpeed((float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.5F);
@@ -2394,7 +2399,7 @@ public class CatEntity extends AbstractCatEntity {
 //                }
 //
 //                //
-////                this.animationSpeedOld = this.animationSpeed;
+//                this.animationSpeedOld = this.animationSpeed;
 //                double changeX = this.getX() - this.xo;
 //                double changeY = this.getZ() - this.zo;
 //                float f4 = Mth.sqrt((float) (changeX * changeX + changeY * changeY)) * 4.0F;
@@ -2403,8 +2408,8 @@ public class CatEntity extends AbstractCatEntity {
 //                    f4 = 1.0F;
 //                }
 //
-////                this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
-////                this.animationPosition += this.animationSpeed;
+//                this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
+//                this.animationPosition += this.animationSpeed;
 //
 //                if(this.onClimbable()) {
 //                    this.fallDistance = 0.0F;
@@ -2412,7 +2417,7 @@ public class CatEntity extends AbstractCatEntity {
 //            }
 //            else {
 //                this.maxUpStep = 0.5F; // Default
-////                this.flyingSpeed = 0.02F; // Default
+//                this.flyingSpeed = 0.02F; // Default
 //                super.travel(positionIn);
 //            }
 //
@@ -2496,6 +2501,29 @@ public class CatEntity extends AbstractCatEntity {
         return this.foodHandlers;
     }
 
+    @Override
+    public void resetNavigation() {
+        this.setNavigation(this.defaultNavigation);
+    }
+
+    @Override
+    public void resetMoveControl() {
+        this.setMoveControl(this.defaultMoveControl);
+
+    }
+
+    @Override
+    public boolean canSwimUnderwater() {
+        for (ICatAlteration alter : this.alterations) {
+            InteractionResult result = alter.canSwimUnderwater(this);
+
+            if (result.shouldSwing()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public BlockPos getTargetBlock() {
         return this.targetBlock;
     }
@@ -2513,42 +2541,27 @@ public class CatEntity extends AbstractCatEntity {
     }
 
     public CatVariant getVariant() {
-        try {
-        var data = this.entityData.get(VARIANT_STR);
-            return BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(data));
-        }
-        catch (Exception e) {
-            CatHerder.LOGGER.warn(e.toString());
-        }
-
-        return null;
-//
-//        if(data == null) {
-//            return BuiltInRegistries.CAT_VARIANT.get(CatVariant.ALL_BLACK);
-//        }
-//
 //        try {
-//
+            var data = this.entityData.get(VARIANT_STR);
+            return BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(data));
 //        }
-//        catch(Exception e) {
-//
+//        catch (Exception e) {
+//            CatHerder.LOGGER.warn(e.toString());
 //        }
 //
-//        return BuiltInRegistries.CAT_VARIANT.get(CatVariant.ALL_BLACK);
+//        return null;
     }
 
     public void setVariant(CatVariant variant) {
         var varResLoc = BuiltInRegistries.CAT_VARIANT.getKey(variant);
-        if(varResLoc != null) {
+//        if(varResLoc != null) {
             var path = varResLoc.getPath();
             this.entityData.set(VARIANT_STR, path);
-        }
-        else {
-            CatHerder.LOGGER.error("Variant could not be found for parameter {}", variant);
-        }
+//        }
+//        else {
+//            CatHerder.LOGGER.error("Variant could not be found for parameter {}", variant);
+//        }
     }
-
-    public
 
     static class CatRelaxOnOwnerGoal extends Goal {
         private final CatEntity cat;

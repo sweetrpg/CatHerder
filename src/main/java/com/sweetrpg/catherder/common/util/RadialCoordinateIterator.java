@@ -39,27 +39,30 @@ public class RadialCoordinateIterator {
     }
 
     public boolean hasNext() {
-        if (!this.started) {
-            if (this.oddX) {
+        if(!this.started) {
+            if(this.oddX) {
                 this.x = this.startX + (this.endX - this.startX) / 2;
                 this.radiusX = 0;
-            } else {
+            }
+            else {
                 this.x = this.startX + (this.endX - this.startX - 1) / 2;
                 this.radiusX = 1;
             }
 
-            if (this.oddY) {
+            if(this.oddY) {
                 this.y = this.startY + (this.endY - this.startY - 1) / 2;
                 this.radiusY = 0;
-            } else {
+            }
+            else {
                 this.y = this.startY + (this.endY - this.startY - 1) / 2;
                 this.radiusY = 1;
             }
 
-            if (this.oddZ) {
+            if(this.oddZ) {
                 this.z = this.startZ + (this.endZ - this.startZ) / 2;
                 this.radiusZ = 0;
-            } else {
+            }
+            else {
                 this.z = this.startZ + (this.endZ - this.startZ - 1) / 2;
                 this.radiusZ = 1;
             }
@@ -69,22 +72,28 @@ public class RadialCoordinateIterator {
             this.centreZ = this.z;
             this.started = true;
             return true;
-        } else if (this.x == this.endX && this.y == this.endY && this.z == this.endZ) {
+        }
+        else if(this.x == this.endX && this.y == this.endY && this.z == this.endZ) {
             return false;
-        } else {
+        }
+        else {
             boolean xBoundary = this.x == this.centreX + this.radiusX;
             boolean yBoundary = this.y == this.centreY + this.radiusY;
             boolean zBoundary = this.z == this.centreZ + this.radiusZ;
 
-            if (this.x <= this.centreX + this.radiusX) {
+            if(this.x <= this.centreX + this.radiusX) {
                 ++this.x;
-            } else if (this.z <= this.centreZ + this.radiusZ) {
+            }
+            else if(this.z <= this.centreZ + this.radiusZ) {
                 ++this.z;
-            } else if (this.x >= this.centreX - this.radiusX) {
+            }
+            else if(this.x >= this.centreX - this.radiusX) {
                 --this.x;
-            } else if (this.z >= this.centreZ - this.radiusZ) {
+            }
+            else if(this.z >= this.centreZ - this.radiusZ) {
                 --this.z;
-            } else if (this.z < this.endZ) {
+            }
+            else if(this.z < this.endZ) {
                 this.x = this.startX;
                 this.y = this.startY;
                 ++this.z;

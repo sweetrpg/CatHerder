@@ -47,7 +47,7 @@ public class LitterboxBlockEntity extends PlacedBlockEntity {
         for(CatEntity cat : catList) {
             // TODO: make litterbox remember who placed and only their cats can attach to it
             UUID placerId = box.getPlacerId();
-            if(placerId != null && placerId.equals(cat.getOwnerUUID()) /*&& !cat.getLitterboxPos().isPresent()*/) {
+            if(placerId != null && placerId.equals(cat.getOwnerUUID()) /* && !cat.getLitterboxPos().isPresent() */) {
                 cat.setLitterboxPos(box.worldPosition);
             }
         }

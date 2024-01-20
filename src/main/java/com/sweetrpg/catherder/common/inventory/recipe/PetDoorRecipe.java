@@ -19,8 +19,8 @@ import net.minecraftforge.common.crafting.IShapedRecipe;
 
 public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<CraftingContainer> {
 
-    public PetDoorRecipe(ResourceLocation resource, CraftingBookCategory craftingBookCategory) {
-        super(resource, craftingBookCategory);
+    public PetDoorRecipe(ResourceLocation resource, CraftingBookCategory p_249010_) {
+        super(resource, p_249010_);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PetDoorRecipe extends CustomRecipe implements IShapedRecipe<Craftin
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inv, RegistryAccess access) {
+    public ItemStack assemble(CraftingContainer inv, RegistryAccess p_267165_) {
         IStructureMaterial structureId = PetDoorUtil.getStructureFromStack(CatHerderAPI.STRUCTURE_MATERIAL.get(), inv.getItem(1));
 
         return PetDoorUtil.createItemStack(structureId);

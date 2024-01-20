@@ -21,14 +21,14 @@ public class ModRecipeSerializers {
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CatHerderAPI.MOD_ID);
 
-    public static final RegistryObject<SimpleCraftingRecipeSerializer<CatTreeRecipe>> CAT_TREE = register("cat_tree", CatTreeRecipe::new);
-    public static final RegistryObject<SimpleCraftingRecipeSerializer<CatTreeRecipeDyed>> CAT_TREE_DYED = register("cat_tree_dyed", CatTreeRecipeDyed::new);
-    public static final RegistryObject<SimpleCraftingRecipeSerializer<PetDoorRecipe>> PET_DOOR = register("pet_door", PetDoorRecipe::new);
+    public static final RegistryObject<RecipeSerializer<CatTreeRecipe>> CAT_TREE = register("cat_tree", CatTreeRecipe::new);
+    public static final RegistryObject<RecipeSerializer<CatTreeRecipeDyed>> CAT_TREE_DYED = register("cat_tree_dyed", CatTreeRecipeDyed::new);
+    public static final RegistryObject<RecipeSerializer<PetDoorRecipe>> PET_DOOR = register("pet_door", PetDoorRecipe::new);
 ////    public static final RegistryObject<SpecialRecipeSerializer<CatCollarRecipe>> COLLAR_COLOURING = register("collar_colouring", CatCollarRecipe::new);
 ////    public static final RegistryObject<SpecialRecipeSerializer<CatCapeRecipe>> CAPE_COLOURING = register("cape_colouring", CatCapeRecipe::new);
 
-    private static <R extends CraftingRecipe, T extends RecipeSerializer<R>> RegistryObject<SimpleCraftingRecipeSerializer<R>> register(final String name, SimpleCraftingRecipeSerializer.Factory<R> factory) {
-        return register(name, () -> new SimpleCraftingRecipeSerializer<>(factory));
+    private static <R extends CraftingRecipe, T extends RecipeSerializer<R>> RegistryObject<RecipeSerializer<R>> register(final String name, SimpleCraftingRecipeSerializer.Factory<R> factory) {
+        return register(name, () -> new SimpleCraftingRecipeSerializer<R>(factory));
     }
 
     private static <T extends RecipeSerializer<?>> RegistryObject<T> register(final String name, final Supplier<T> sup) {

@@ -106,13 +106,11 @@ public class PetDoorModel implements BakedModel {
         newModel.name = this.model.name;
         newModel.parent = this.model.parent;
 
-
         Either<Material, String> structureTexture = findStructureTexture(structureResource);
 //        newModel.textureMap.put("bedding", findBeddingTexture(beddingResource));
         newModel.textureMap.put("structure", structureTexture);
         newModel.textureMap.put("particle", structureTexture);
 
-//        return newModel.bake(this.modelLoader, newModel, ModelBakery.defaultTextureGetter(), getModelRotation(facing), createResourceVariant(structureResource, facing), true);
         return (new ModelBaker() {
 
             @Override

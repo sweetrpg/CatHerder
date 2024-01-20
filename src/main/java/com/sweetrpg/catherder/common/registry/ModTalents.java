@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class ModTalents {
 
-    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(CatHerderAPI.RegistryKeys.TALENTS_REGISTRY, CatHerderAPI.MOD_ID);
+    public static final DeferredRegister<Talent> TALENTS = DeferredRegister.create(ModRegistries.Keys.TALENTS_REGISTRY, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<Talent> BED_FINDER = registerInst("bed_finder", BedFinderTalent::new);
     public static final RegistryObject<Talent> CATLIKE_REFLEXES = registerInst("catlike_reflexes", CatlikeReflexesTalent::new);

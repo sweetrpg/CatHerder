@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     {
       "item": "catherder:super_treat"
@@ -22,7 +21,7 @@
     }
   ],
   "result": {
-    "count": 5,
-    "item": "catherder:master_treat"
+    "item": "catherder:master_treat",
+    "count": 5
   }
 }

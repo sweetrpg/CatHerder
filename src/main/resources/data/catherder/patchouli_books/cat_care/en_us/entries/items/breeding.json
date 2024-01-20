@@ -1,7 +1,7 @@
 {
   "name": "Breeding",
   "icon": "catherder:breeding_treat",
-  "category": "catherder:misc",
+  "category": "catherder:items",
   "pages": [
     {
       "type": "patchouli:text",

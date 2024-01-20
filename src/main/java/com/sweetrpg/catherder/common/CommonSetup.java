@@ -7,9 +7,9 @@ import com.sweetrpg.catherder.common.event.FishFoodHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.HappyEaterTalent;
+import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class CommonSetup {
     public static void init(final FMLCommonSetupEvent event) {
@@ -23,7 +23,7 @@ public class CommonSetup {
 
 //            InteractHandler.registerHandler(new HelmetInteractHandler());
             ConfigHandler.initTalentConfig();
-//            CatRespawnCommand.registerSerilizers(FMLJavaModLoadingContext.get().getModEventBus());
+//            CatRespawnCommand.registerSerilizers();
             CatEntity.initDataParameters();
 
 //            WildCropGeneration.load();

@@ -1,6 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "pattern": [
+    "ISI",
+    "III"
+  ],
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
@@ -9,12 +12,7 @@
       "item": "minecraft:sand"
     }
   },
-  "pattern": [
-    "ISI",
-    "III"
-  ],
   "result": {
     "item": "catherder:litter_box"
-  },
-  "show_notification": true
+  }
 }

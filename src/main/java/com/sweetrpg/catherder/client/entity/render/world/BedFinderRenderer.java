@@ -59,6 +59,7 @@ public class BedFinderRenderer {
         BufferBuilder buf = Tesselator.getInstance().getBuilder();
         buf.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
         LevelRenderer.renderLineBox(stack, buf, boundingBox.move(-d0, -d1, -d2), 1F, 1F, 0, 1F);
+        buf.end();
         BufferUploader.drawWithShader(buf.end());
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

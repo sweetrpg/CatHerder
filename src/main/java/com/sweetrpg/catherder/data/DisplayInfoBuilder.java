@@ -28,8 +28,8 @@ public class DisplayInfoBuilder {
     }
 
     public DisplayInfoBuilder translate(String key) {
-        this.title(Component.translatable("advancements."+key+".title"));
-        this.description(Component.translatable("advancements."+key+".description"));
+        this.title(Component.translatable("advancements." + key + ".title"));
+        this.description(Component.translatable("advancements." + key + ".description"));
         return this;
     }
 

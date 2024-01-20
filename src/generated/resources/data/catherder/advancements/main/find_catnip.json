@@ -1,25 +1,25 @@
 {
-  "criteria": {
-    "find_catnip": {
-      "conditions": {
-        "block": "catherder:wild_catnip"
-      },
-      "trigger": "minecraft:enter_block"
-    }
-  },
   "display": {
-    "announce_to_chat": true,
+    "icon": {
+      "item": "catherder:wild_catnip"
+    },
+    "title": {
+      "translate": "advancements.catherder.main.find_catnip.title"
+    },
     "description": {
       "translate": "advancements.catherder.main.find_catnip.description"
     },
     "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "catherder:wild_catnip"
-    },
     "show_toast": true,
-    "title": {
-      "translate": "advancements.catherder.main.find_catnip.title"
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "find_catnip": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "catherder:wild_catnip"
+      }
     }
   },
   "requirements": [

@@ -44,7 +44,7 @@ public class ModBlocks {
                                                                                   () -> new CatnipBlock(Block.Properties.copy(Blocks.WHEAT)));
 
     private static Item.Properties createInitialProp() {
-        return new Item.Properties() /*.tab(ModItemGroups.GENERAL) */;
+        return new Item.Properties();
     }
 
     private static BlockItem makeItemBlock(Block block) {

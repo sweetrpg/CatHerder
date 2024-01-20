@@ -8,8 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelProperty;
 import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.data.ModelProperty;
 
 public class PetDoorBlockEntity extends PlacedBlockEntity {
 
@@ -35,7 +35,7 @@ public class PetDoorBlockEntity extends PlacedBlockEntity {
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
 
-        NBTUtil.putRegistryValue(compound, "structureId", this.structureType, CatHerderAPI.STRUCTURE_MATERIAL.get());
+        NBTUtil.putRegistryValue(compound, "structureId",CatHerderAPI.STRUCTURE_MATERIAL.get().getKey(this.structureType));
     }
 
     public void setStructure(IStructureMaterial structureType) {

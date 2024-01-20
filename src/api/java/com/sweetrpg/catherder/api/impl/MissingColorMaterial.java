@@ -17,7 +17,7 @@ public class MissingColorMaterial extends IColorMaterial {
 
     @Override
     public Component getTooltip() {
-        return Component.translatable("cattree.color.missing", "//TODO");
+        return Component.translatable("cattree.color.missing");
     }
 
     @Override

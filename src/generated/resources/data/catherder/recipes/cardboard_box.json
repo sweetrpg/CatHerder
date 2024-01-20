@@ -1,18 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "C": {
-      "item": "catherder:cardboard"
-    }
-  },
   "pattern": [
     "CCC",
     "C C",
     "CCC"
   ],
+  "key": {
+    "C": {
+      "item": "catherder:cardboard"
+    }
+  },
   "result": {
     "item": "catherder:cardboard_box"
-  },
-  "show_notification": true
+  }
 }
