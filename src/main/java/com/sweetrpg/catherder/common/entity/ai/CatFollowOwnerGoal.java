@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
@@ -105,6 +106,7 @@ public class CatFollowOwnerGoal extends Goal {
     @Override
     public void tick() {
         this.cat.getLookControl().setLookAt(this.owner, 10.0F, this.cat.getMaxHeadXRot());
+
         if(--this.timeToRecalcPath <= 0) {
             this.timeToRecalcPath = 10;
             if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
@@ -113,7 +115,12 @@ public class CatFollowOwnerGoal extends Goal {
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {
-                    this.navigator.moveTo(this.owner, this.followSpeed);
+                    if(this.cat.getNavigation().moveTo(this.owner, this.followSpeed)) {
+                        CatHerder.LOGGER.debug("Cat {} is moving to owner at position {}", this.cat, this.owner.blockPosition());
+                    }
+                    else {
+                        CatHerder.LOGGER.warn("Cat {} WILL NOT MOVE to position {}", this.cat, this.owner.blockPosition());
+                    }
                 }
             }
         }

@@ -56,7 +56,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -136,8 +135,8 @@ public class CatEntity extends AbstractCatEntity {
 
     public final Map<Integer, Object> objects = new HashMap<>();
     public final StatsTracker statsTracker = new StatsTracker();
-    protected final PathNavigation defaultNavigation;
-    protected final MoveControl defaultMoveControl;
+//    protected final PathNavigation defaultNavigation;
+//    protected final MoveControl defaultMoveControl;
     // Cached values
     private final Cache<Integer> spendablePoints = Cache.make(this::getSpendablePointsInternal);
     private final List<ICatAlteration> alterations = new ArrayList<>(4);
@@ -167,11 +166,11 @@ public class CatEntity extends AbstractCatEntity {
         this.setTame(false);
         this.setGender(Gender.random(this.getRandom()));
 
-        this.navigation = new CatPathNavigation(this, worldIn);
-        this.moveControl = new CatMoveControl(this);
-
-        this.defaultNavigation = this.navigation;
-        this.defaultMoveControl = this.moveControl;
+//        this.navigation = new CatPathNavigation(this, worldIn);
+//        this.moveControl = new CatMoveControl(this);
+//
+//        this.defaultNavigation = this.navigation;
+//        this.defaultMoveControl = this.moveControl;
     }
 
     public void setRelaxStateOne(boolean p_28186_) {
@@ -222,32 +221,33 @@ public class CatEntity extends AbstractCatEntity {
     protected void registerGoals() {
         // personal goals
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+//        this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
+//
+//        this.goalSelector.addGoal(2, new CatEntity.CatRelaxOnOwnerGoal(this));
+//
+//        this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
+//
+//        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
+//        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
+//
+//        this.goalSelector.addGoal(5, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
+//        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+//        this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
+//        this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
+//
+//        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
+//        this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D));
+////        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
 
-        this.goalSelector.addGoal(2, new CatEntity.CatRelaxOnOwnerGoal(this));
+        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 10.0F, 2.0F));
+//        this.goalSelector.addGoal(7, new FollowOwnerGoal(this, 1, 10, 4, false));
 
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.5D, Ingredient.of(ModItems.CATNIP.get()), false));
-
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ItemTags.FISHES), false));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(ModTags.MEAT), false));
-
-        this.goalSelector.addGoal(5, new PlayInCardboardBoxGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(5, new com.sweetrpg.catherder.common.entity.ai.MoveToBlockGoal(this));
-        this.goalSelector.addGoal(5, new SkittishModeGoal<>(this));
-
-        this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
-        this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D));
-//        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
-
-        this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 20.0F, 4.0F));
-
-        this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
-        this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
-
-        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 20));
-
-        this.goalSelector.addGoal(12, new BreedGoal(this, 1.0D));
+//        this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
+//        this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
+//
+//        this.goalSelector.addGoal(10, new UseLitterboxGoal<>(this, 20));
+//
+//        this.goalSelector.addGoal(12, new BreedGoal(this, 1.0D));
 
         this.goalSelector.addGoal(15, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 
@@ -255,9 +255,9 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(20, new RandomLookAroundGoal(this));
 
         // target-based goals
-        this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>) null));
-        this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
-        this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
+//        this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>) null));
+//        this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
+//        this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
     }
 
 //    @Override
@@ -2503,12 +2503,12 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public void resetNavigation() {
-        this.setNavigation(this.defaultNavigation);
+//        this.setNavigation(this.defaultNavigation);
     }
 
     @Override
     public void resetMoveControl() {
-        this.setMoveControl(this.defaultMoveControl);
+//        this.setMoveControl(this.defaultMoveControl);
 
     }
 
