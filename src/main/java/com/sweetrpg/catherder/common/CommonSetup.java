@@ -1,7 +1,6 @@
 package com.sweetrpg.catherder.common;
 
 import com.sweetrpg.catherder.api.feature.FoodHandler;
-import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.event.FishFoodHandler;
@@ -15,7 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class CommonSetup {
     public static void init(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
+//        event.enqueueWork(() -> {
             PacketHandler.init();
             //TODO CriteriaTriggers.register(criterion)
 
@@ -33,7 +32,7 @@ public class CommonSetup {
             registerCompostables();
 //            registerDispenserBehaviors();
 //            registerAnimalFeeds();
-        });
+//        });
     }
 
 //    public static void registerDispenserBehaviors() {

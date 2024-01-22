@@ -55,7 +55,7 @@ public class CatHerder {
 
         // Registries
         ModBlocks.BLOCKS.register(modEventBus);
-        ModBlockEntityTypes.TILE_ENTITIES.register(modEventBus);
+        ModBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModEntityTypes.ENTITIES.register(modEventBus);
         ModContainerTypes.CONTAINERS.register(modEventBus);
@@ -69,6 +69,8 @@ public class CatHerder {
         ModMaterials.COLORS.register(modEventBus);
         ModMaterials.DYES.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
+
+        modEventBus.addListener(ModItemGroups::onCreativeTabRegister);
 
         ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
         ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
@@ -98,6 +100,7 @@ public class CatHerder {
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
+
             forgeEventBus.register(new ClientEventHandler());
             forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
         });
@@ -131,10 +134,10 @@ public class CatHerder {
     protected void interModProcess(final InterModProcessEvent event) {
         LOGGER.debug("event {}", event);
 
-        //        BackwardsComp.init();
+                BackwardsComp.init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        AddonManager.init();
+//        AddonManager.init();
     }
 
     private void gatherData(final GatherDataEvent event) {
