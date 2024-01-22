@@ -18,6 +18,8 @@
 //import net.minecraft.commands.CommandSourceStack;
 //import net.minecraft.commands.Commands;
 //import net.minecraft.commands.SharedSuggestionProvider;
+//import net.minecraft.commands.synchronization.ArgumentTypeInfos;
+//import net.minecraft.commands.synchronization.SingletonArgumentInfo;
 //import net.minecraft.network.chat.Component;
 //import net.minecraft.server.level.ServerLevel;
 //import net.minecraft.util.Mth;
@@ -69,7 +71,7 @@
 //    }
 //
 //    public static void registerSerilizers() {
-//        ArgumentTypes.register(Util.getResourcePath("uuid"), UUIDArgument.class, new EmptyArgumentSerializer<>(UUIDArgument::uuid));
+//        ArgumentTypeInfos.registerByClass(UUIDArgument.class, SingletonArgumentInfo.contextFree(UUIDArgument::uuid));
 //    }
 //
 //    private static <S extends SharedSuggestionProvider> SuggestionProvider<S> getOwnerIdSuggestionsLocate() {
