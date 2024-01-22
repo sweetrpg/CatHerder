@@ -19,6 +19,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -85,7 +86,7 @@ public class CatHerder {
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::serverStarting);
-//        forgeEventBus.addListener(this::registerCommands);
+        forgeEventBus.addListener(this::registerCommands);
 
         forgeEventBus.register(new EventHandler());
         forgeEventBus.register(new BackwardsComp());
@@ -100,6 +101,7 @@ public class CatHerder {
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
+            modEventBus.addListener(ClientSetup::registerOverlays);
 
             forgeEventBus.register(new ClientEventHandler());
             forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
@@ -117,10 +119,10 @@ public class CatHerder {
         LOGGER.debug("Server starting");
     }
 
-//    public void registerCommands(final RegisterCommandsEvent event) {
-//        LOGGER.debug("Register commands");
+    public void registerCommands(final RegisterCommandsEvent event) {
+        LOGGER.debug("Register commands");
 //        CatRespawnCommand.register(event.getDispatcher());
-//    }
+    }
 
     @OnlyIn(Dist.CLIENT)
     public void clientSetup(final FMLClientSetupEvent event) {
