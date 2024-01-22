@@ -56,7 +56,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -75,6 +74,7 @@ import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -96,6 +96,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -370,6 +371,16 @@ public class CatEntity extends AbstractCatEntity {
         return this.getVehicle() instanceof Player ? 0.5D : 0.0D;
     }
 
+//    @Override
+//    protected void updateControlFlags() {
+////        boolean incapBlockedMove = this.isDefeated() && !this.incapacitatedMananger.canMove();
+//        boolean notControlledByPlayer = !(this.getControllingPassenger() instanceof ServerPlayer);
+//        boolean notRidingBoat = !(this.getVehicle() instanceof Boat);
+//        this.goalSelector.setControlFlag(Goal.Flag.MOVE, notControlledByPlayer /*&& !incapBlockedMove*/);
+//        this.goalSelector.setControlFlag(Goal.Flag.JUMP, notControlledByPlayer && notRidingBoat);
+//        this.goalSelector.setControlFlag(Goal.Flag.LOOK, notControlledByPlayer);
+//    }
+
     @Override
     public void tick() {
         super.tick();
@@ -490,9 +501,9 @@ public class CatEntity extends AbstractCatEntity {
                     }
                 }
 
-                if(this.hungerTick > 400) {
+                if(this.hungerTick > 600) {
                     this.setCatHunger(this.getCatHunger() - 1);
-                    this.hungerTick -= 400;
+                    this.hungerTick -= 600;
                 }
             }
 
@@ -605,13 +616,11 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         Optional<ICatFoodHandler> foodHandler = FoodHandler.getMatch(this, stack, player);
-
         if(foodHandler.isPresent()) {
             return foodHandler.get().consume(this, stack, player);
         }
 
         InteractionResult interactResult = InteractHandler.getMatch(this, stack, player, hand);
-
         if(interactResult != InteractionResult.PASS) {
             return interactResult;
         }
@@ -635,20 +644,20 @@ public class CatEntity extends AbstractCatEntity {
         return actionResultType;
     }
 
-    @Override
-    public boolean dismountsUnderwater() {
-        for (ICatAlteration alter : this.alterations) {
-            InteractionResult result = alter.canBeRiddenInWater(this);
-
-            if (result.shouldSwing()) {
-                return false;
-            } else if (result == InteractionResult.FAIL) {
-                return true;
-            }
-        }
-
-        return super.dismountsUnderwater();
-    }
+//    @Override
+//    public boolean dismountsUnderwater() {
+//        for (ICatAlteration alter : this.alterations) {
+//            InteractionResult result = alter.canBeRiddenInWater(this);
+//
+//            if (result.shouldSwing()) {
+//                return false;
+//            } else if (result == InteractionResult.FAIL) {
+//                return true;
+//            }
+//        }
+//
+//        return super.dismountsUnderwater();
+//    }
 
     @Override
     public boolean canTrample(BlockState state, BlockPos pos, float fallDistance) {
@@ -721,21 +730,21 @@ public class CatEntity extends AbstractCatEntity {
         return 0;
     }
 
-    @Override
-    public boolean canBreatheUnderwater() {
-        for(ICatAlteration alter : this.alterations) {
-            InteractionResult result = alter.canBreatheUnderwater(this);
-
-            if(result.shouldSwing()) {
-                return true;
-            }
-            else if(result == InteractionResult.FAIL) {
-                return false;
-            }
-        }
-
-        return super.canBreatheUnderwater();
-    }
+//    @Override
+//    public boolean canBreatheUnderwater() {
+//        for(ICatAlteration alter : this.alterations) {
+//            InteractionResult result = alter.canBreatheUnderwater(this);
+//
+//            if(result.shouldSwing()) {
+//                return true;
+//            }
+//            else if(result == InteractionResult.FAIL) {
+//                return false;
+//            }
+//        }
+//
+//        return super.canBreatheUnderwater();
+//    }
 
     @Override
     protected int decreaseAirSupply(int air) {
@@ -1414,7 +1423,7 @@ public class CatEntity extends AbstractCatEntity {
                             name = ForgeMod.ENTITY_GRAVITY;
                             break;
                         case "forge.reachDistance":
-                            name = ForgeMod.REACH_DISTANCE;
+                            name = ForgeMod.BLOCK_REACH;
                             break;
                         case "generic.maxHealth":
                             name = Attributes.MAX_HEALTH;
@@ -2274,7 +2283,7 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     public LivingEntity getControllingPassenger() {
         // Gets the first passenger which is the controlling passenger
-        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0).getControllingPassenger();
+        return this.getPassengers().isEmpty() ? null : (LivingEntity) this.getPassengers().get(0);
     }
 
 //    @Override
@@ -2332,7 +2341,7 @@ public class CatEntity extends AbstractCatEntity {
     }
 //    public void travel(Vec3 positionIn) {
 //        if(this.isAlive()) {
-//            if(this.isVehicle() && this.canBeControlledByRider()) {
+//            if(this.isVehicle() && this.canRiderInteract()) {
 //                LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
 //
 //                // Face the cat in the direction of the controlling passenger
@@ -2380,7 +2389,7 @@ public class CatEntity extends AbstractCatEntity {
 //                    this.jumpPower = 0.0F;
 //                }
 //
-//                this.flyingSpeed = this.getSpeed() * 0.1F;
+////                this.flyingSpeed = this.getSpeed() * 0.1F;
 //                if(this.isControlledByLocalInstance()) {
 //                    // Set the move speed and move the cat in the direction of the controlling entity
 //                    this.setSpeed((float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.5F);
@@ -2399,7 +2408,7 @@ public class CatEntity extends AbstractCatEntity {
 //                }
 //
 //                //
-//                this.animationSpeedOld = this.animationSpeed;
+////                this.animationSpeedOld = this.animationSpeed;
 //                double changeX = this.getX() - this.xo;
 //                double changeY = this.getZ() - this.zo;
 //                float f4 = Mth.sqrt((float) (changeX * changeX + changeY * changeY)) * 4.0F;
@@ -2408,8 +2417,8 @@ public class CatEntity extends AbstractCatEntity {
 //                    f4 = 1.0F;
 //                }
 //
-//                this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
-//                this.animationPosition += this.animationSpeed;
+////                this.animationSpeed += (f4 - this.animationSpeed) * 0.4F;
+////                this.animationPosition += this.animationSpeed;
 //
 //                if(this.onClimbable()) {
 //                    this.fallDistance = 0.0F;
@@ -2417,7 +2426,7 @@ public class CatEntity extends AbstractCatEntity {
 //            }
 //            else {
 //                this.maxUpStep = 0.5F; // Default
-//                this.flyingSpeed = 0.02F; // Default
+////                this.flyingSpeed = 0.02F; // Default
 //                super.travel(positionIn);
 //            }
 //
@@ -2510,6 +2519,18 @@ public class CatEntity extends AbstractCatEntity {
     public void resetMoveControl() {
         this.setMoveControl(this.defaultMoveControl);
 
+    }
+
+    @Override
+    public boolean isPushedByFluid(FluidType type) {
+        for (var alter : this.alterations) {
+            InteractionResult result = alter.canResistPushFromFluidType(type);
+
+            if (result.shouldSwing()) {
+                return false;
+            }
+        }
+        return super.isPushedByFluid(type);
     }
 
     @Override
