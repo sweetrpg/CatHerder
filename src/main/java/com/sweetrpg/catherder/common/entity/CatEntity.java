@@ -74,7 +74,6 @@ import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -137,8 +136,8 @@ public class CatEntity extends AbstractCatEntity {
 
     public final Map<Integer, Object> objects = new HashMap<>();
     public final StatsTracker statsTracker = new StatsTracker();
-    protected final PathNavigation defaultNavigation;
-    protected final MoveControl defaultMoveControl;
+//    protected final PathNavigation defaultNavigation;
+//    protected final MoveControl defaultMoveControl;
     // Cached values
     private final Cache<Integer> spendablePoints = Cache.make(this::getSpendablePointsInternal);
     private final List<ICatAlteration> alterations = new ArrayList<>(4);
@@ -168,11 +167,11 @@ public class CatEntity extends AbstractCatEntity {
         this.setTame(false);
         this.setGender(Gender.random(this.getRandom()));
 
-        this.navigation = new CatPathNavigation(this, worldIn);
-        this.moveControl = new CatMoveControl(this);
+//        this.navigation = new CatPathNavigation(this, worldIn);
+//        this.moveControl = new CatMoveControl(this);
 
-        this.defaultNavigation = this.navigation;
-        this.defaultMoveControl = this.moveControl;
+//        this.defaultNavigation = this.navigation;
+//        this.defaultMoveControl = this.moveControl;
     }
 
     public void setRelaxStateOne(boolean p_28186_) {
@@ -2338,11 +2337,11 @@ public class CatEntity extends AbstractCatEntity {
         //TODO return this.TALENTS.getLevel(ModTalents.WOLF_MOUNT) > 0;
     }
 
-    @Override
-    public void travel(Vec3 positionIn) {
-        super.travel(positionIn);
-        this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
-    }
+//    @Override
+//    public void travel(Vec3 positionIn) {
+//        super.travel(positionIn);
+//        this.addMovementStat(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
+//    }
 //    public void travel(Vec3 positionIn) {
 //        if(this.isAlive()) {
 //            if(this.isVehicle() && this.canRiderInteract()) {
@@ -2514,22 +2513,22 @@ public class CatEntity extends AbstractCatEntity {
         return this.foodHandlers;
     }
 
-    @Override
-    public void resetNavigation() {
-        this.setNavigation(this.defaultNavigation);
-    }
-
-    @Override
-    public void resetMoveControl() {
-        this.setMoveControl(this.defaultMoveControl);
-    }
+//    @Override
+//    public void resetNavigation() {
+//        this.setNavigation(this.defaultNavigation);
+//    }
+//
+//    @Override
+//    public void resetMoveControl() {
+//        this.setMoveControl(this.defaultMoveControl);
+//    }
 
     @Override
     public boolean isPushedByFluid(FluidType type) {
-        for (var alter : this.alterations) {
+        for(var alter : this.alterations) {
             InteractionResult result = alter.canResistPushFromFluidType(type);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return false;
             }
         }
@@ -2538,10 +2537,10 @@ public class CatEntity extends AbstractCatEntity {
 
     @Override
     public boolean canSwimUnderwater() {
-        for (ICatAlteration alter : this.alterations) {
+        for(ICatAlteration alter : this.alterations) {
             InteractionResult result = alter.canSwimUnderwater(this);
 
-            if (result.shouldSwing()) {
+            if(result.shouldSwing()) {
                 return true;
             }
         }
@@ -2566,8 +2565,8 @@ public class CatEntity extends AbstractCatEntity {
 
     public CatVariant getVariant() {
 //        try {
-            var data = this.entityData.get(VARIANT_STR);
-            return BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(data));
+        var data = this.entityData.get(VARIANT_STR);
+        return BuiltInRegistries.CAT_VARIANT.get(new ResourceLocation(data));
 //        }
 //        catch (Exception e) {
 //            CatHerder.LOGGER.warn(e.toString());
@@ -2579,8 +2578,8 @@ public class CatEntity extends AbstractCatEntity {
     public void setVariant(CatVariant variant) {
         var varResLoc = BuiltInRegistries.CAT_VARIANT.getKey(variant);
 //        if(varResLoc != null) {
-            var path = varResLoc.getPath();
-            this.entityData.set(VARIANT_STR, path);
+        var path = varResLoc.getPath();
+        this.entityData.set(VARIANT_STR, path);
 //        }
 //        else {
 //            CatHerder.LOGGER.error("Variant could not be found for parameter {}", variant);

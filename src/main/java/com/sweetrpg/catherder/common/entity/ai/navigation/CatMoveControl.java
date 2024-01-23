@@ -42,14 +42,14 @@ public class CatMoveControl extends MoveControl {
 
             float f9 = (float) (Mth.atan2(d1, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
             this.mob.setYRot(this.rotlerp(this.mob.getYRot(), f9, 90.0F));
-            float speed_cap = dy > 1.75 ? SNEAK_SPEED_2 : SNEAK_SPEED_1;
-            float speed = Math.min(speed_cap,
+            float speedCap = dy > 1.75 ? SNEAK_SPEED_2 : SNEAK_SPEED_1;
+            float speed = Math.min(speedCap,
                     (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
             this.mob.setSpeed(speed);
-            BlockPos blockpos = this.mob.blockPosition();
-            BlockState blockstate = this.mob.level.getBlockState(blockpos);
-            VoxelShape voxelshape = blockstate.getCollisionShape(this.mob.level, blockpos);
-            if(d2 > (double) this.mob.getStepHeight() && d0 * d0 + d1 * d1 < (double) Math.max(1.0F, this.mob.getBbWidth()) || !voxelshape.isEmpty() && this.mob.getY() < voxelshape.max(Direction.Axis.Y) + (double) blockpos.getY() && !blockstate.is(BlockTags.DOORS) && !blockstate.is(BlockTags.FENCES)) {
+            BlockPos blockPos = this.mob.blockPosition();
+            BlockState blockState = this.mob.level.getBlockState(blockPos);
+            VoxelShape voxelShape = blockState.getCollisionShape(this.mob.level, blockPos);
+            if(d2 > (double) this.mob.getStepHeight() && d0 * d0 + d1 * d1 < (double) Math.max(1.0F, this.mob.getBbWidth()) || !voxelShape.isEmpty() && this.mob.getY() < voxelShape.max(Direction.Axis.Y) + (double) blockPos.getY() && !blockState.is(BlockTags.DOORS) && !blockState.is(BlockTags.FENCES)) {
                 this.mob.getJumpControl().jump();
                 this.operation = MoveControl.Operation.JUMPING;
             }
