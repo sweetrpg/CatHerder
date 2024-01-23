@@ -10,8 +10,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class CHBlockTagsProvider extends BlockTagsProvider {
@@ -26,7 +26,7 @@ public class CHBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.Provider p_256380_) {
         this.registerModTags();
         this.registerMinecraftTags();
         this.registerForgeTags();

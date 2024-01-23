@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "catherder:training_treat",
     "catherder:super_treat",

@@ -1,7 +1,0 @@
-{
-  "parent": "catherder:block/crop_cross",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "cross": "catherder:block/catnip_stage5"
-  }
-}

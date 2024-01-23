@@ -9,18 +9,18 @@ import java.util.Collections;
 public interface Addon {
 
     /**
-     * Called from the CH mod class constructor
+     * Called from the DT2 mod class constructor
      *
-     * @throws RuntimeException You should re-throw any exceptions as {@link RuntimeException}
+     * @throws RuntimeException You should re-throw any exceptions as {@link RuntimeException}, this are
      */
     default void init() throws RuntimeException {
 
     }
 
     /**
-     * Called from the CH {@link InterModProcessEvent}
+     * Called from the DT2 {@link InterModProcessEvent}
      *
-     * @throws RuntimeException You should re-throw any exceptions as {@link RuntimeException}
+     * @throws RuntimeException You should re-throw any exceptions as {@link RuntimeException}, this are
      */
     default void exec() throws RuntimeException {
 

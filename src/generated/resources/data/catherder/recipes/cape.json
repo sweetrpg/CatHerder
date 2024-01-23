@@ -1,6 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "pattern": [
+    "S S",
+    "LWL",
+    "WLW"
+  ],
   "key": {
     "L": {
       "item": "minecraft:leather"
@@ -12,13 +16,7 @@
       "tag": "minecraft:wool"
     }
   },
-  "pattern": [
-    "S S",
-    "LWL",
-    "WLW"
-  ],
   "result": {
     "item": "catherder:cape"
-  },
-  "show_notification": true
+  }
 }

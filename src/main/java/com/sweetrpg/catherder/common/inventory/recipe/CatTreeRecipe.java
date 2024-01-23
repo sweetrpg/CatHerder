@@ -21,8 +21,8 @@ import net.minecraftforge.common.crafting.IShapedRecipe;
 
 public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<CraftingContainer> {
 
-    public CatTreeRecipe(ResourceLocation resource, CraftingBookCategory craftingBookCategory) {
-        super(resource, craftingBookCategory);
+    public CatTreeRecipe(ResourceLocation resource, CraftingBookCategory p_249010_) {
+        super(resource, p_249010_);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CatTreeRecipe extends CustomRecipe implements IShapedRecipe<Craftin
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inv, RegistryAccess access) {
+    public ItemStack assemble(CraftingContainer inv, RegistryAccess p_267165_) {
         IColorMaterial colorId = CatTreeUtil.getColorFromStack(CatHerderAPI.COLOR_MATERIAL.get(), inv.getItem(1));
 //        ICasingMaterial casingId = CattreeUtil.getCasingFromStack(CatHerderAPI.CASING_MATERIAL, inv.getItem(0));
 

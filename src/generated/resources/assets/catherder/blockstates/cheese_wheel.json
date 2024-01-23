@@ -1,111 +1,111 @@
 {
   "variants": {
-    "facing=east,servings=0": {
+    "facing=north,servings=0": {
       "model": "catherder:block/cheese_wheel_servings0"
     },
-    "facing=east,servings=1": {
-      "model": "catherder:block/cheese_wheel_servings1"
+    "facing=south,servings=0": {
+      "model": "catherder:block/cheese_wheel_servings0"
     },
-    "facing=east,servings=2": {
-      "model": "catherder:block/cheese_wheel_servings2"
+    "facing=west,servings=0": {
+      "model": "catherder:block/cheese_wheel_servings0"
     },
-    "facing=east,servings=3": {
-      "model": "catherder:block/cheese_wheel_servings3"
-    },
-    "facing=east,servings=4": {
-      "model": "catherder:block/cheese_wheel_servings4"
-    },
-    "facing=east,servings=5": {
-      "model": "catherder:block/cheese_wheel_servings5"
-    },
-    "facing=east,servings=6": {
-      "model": "catherder:block/cheese_wheel_servings6"
-    },
-    "facing=east,servings=7": {
-      "model": "catherder:block/cheese_wheel_servings7"
-    },
-    "facing=east,servings=8": {
-      "model": "catherder:block/cheese_wheel_servings8"
-    },
-    "facing=north,servings=0": {
+    "facing=east,servings=0": {
       "model": "catherder:block/cheese_wheel_servings0"
     },
     "facing=north,servings=1": {
       "model": "catherder:block/cheese_wheel_servings1"
     },
+    "facing=south,servings=1": {
+      "model": "catherder:block/cheese_wheel_servings1"
+    },
+    "facing=west,servings=1": {
+      "model": "catherder:block/cheese_wheel_servings1"
+    },
+    "facing=east,servings=1": {
+      "model": "catherder:block/cheese_wheel_servings1"
+    },
     "facing=north,servings=2": {
+      "model": "catherder:block/cheese_wheel_servings2"
+    },
+    "facing=south,servings=2": {
+      "model": "catherder:block/cheese_wheel_servings2"
+    },
+    "facing=west,servings=2": {
+      "model": "catherder:block/cheese_wheel_servings2"
+    },
+    "facing=east,servings=2": {
       "model": "catherder:block/cheese_wheel_servings2"
     },
     "facing=north,servings=3": {
       "model": "catherder:block/cheese_wheel_servings3"
     },
+    "facing=south,servings=3": {
+      "model": "catherder:block/cheese_wheel_servings3"
+    },
+    "facing=west,servings=3": {
+      "model": "catherder:block/cheese_wheel_servings3"
+    },
+    "facing=east,servings=3": {
+      "model": "catherder:block/cheese_wheel_servings3"
+    },
     "facing=north,servings=4": {
+      "model": "catherder:block/cheese_wheel_servings4"
+    },
+    "facing=south,servings=4": {
+      "model": "catherder:block/cheese_wheel_servings4"
+    },
+    "facing=west,servings=4": {
+      "model": "catherder:block/cheese_wheel_servings4"
+    },
+    "facing=east,servings=4": {
       "model": "catherder:block/cheese_wheel_servings4"
     },
     "facing=north,servings=5": {
       "model": "catherder:block/cheese_wheel_servings5"
     },
+    "facing=south,servings=5": {
+      "model": "catherder:block/cheese_wheel_servings5"
+    },
+    "facing=west,servings=5": {
+      "model": "catherder:block/cheese_wheel_servings5"
+    },
+    "facing=east,servings=5": {
+      "model": "catherder:block/cheese_wheel_servings5"
+    },
     "facing=north,servings=6": {
+      "model": "catherder:block/cheese_wheel_servings6"
+    },
+    "facing=south,servings=6": {
+      "model": "catherder:block/cheese_wheel_servings6"
+    },
+    "facing=west,servings=6": {
+      "model": "catherder:block/cheese_wheel_servings6"
+    },
+    "facing=east,servings=6": {
       "model": "catherder:block/cheese_wheel_servings6"
     },
     "facing=north,servings=7": {
       "model": "catherder:block/cheese_wheel_servings7"
     },
-    "facing=north,servings=8": {
-      "model": "catherder:block/cheese_wheel_servings8"
-    },
-    "facing=south,servings=0": {
-      "model": "catherder:block/cheese_wheel_servings0"
-    },
-    "facing=south,servings=1": {
-      "model": "catherder:block/cheese_wheel_servings1"
-    },
-    "facing=south,servings=2": {
-      "model": "catherder:block/cheese_wheel_servings2"
-    },
-    "facing=south,servings=3": {
-      "model": "catherder:block/cheese_wheel_servings3"
-    },
-    "facing=south,servings=4": {
-      "model": "catherder:block/cheese_wheel_servings4"
-    },
-    "facing=south,servings=5": {
-      "model": "catherder:block/cheese_wheel_servings5"
-    },
-    "facing=south,servings=6": {
-      "model": "catherder:block/cheese_wheel_servings6"
-    },
     "facing=south,servings=7": {
       "model": "catherder:block/cheese_wheel_servings7"
-    },
-    "facing=south,servings=8": {
-      "model": "catherder:block/cheese_wheel_servings8"
-    },
-    "facing=west,servings=0": {
-      "model": "catherder:block/cheese_wheel_servings0"
-    },
-    "facing=west,servings=1": {
-      "model": "catherder:block/cheese_wheel_servings1"
-    },
-    "facing=west,servings=2": {
-      "model": "catherder:block/cheese_wheel_servings2"
-    },
-    "facing=west,servings=3": {
-      "model": "catherder:block/cheese_wheel_servings3"
-    },
-    "facing=west,servings=4": {
-      "model": "catherder:block/cheese_wheel_servings4"
-    },
-    "facing=west,servings=5": {
-      "model": "catherder:block/cheese_wheel_servings5"
-    },
-    "facing=west,servings=6": {
-      "model": "catherder:block/cheese_wheel_servings6"
     },
     "facing=west,servings=7": {
       "model": "catherder:block/cheese_wheel_servings7"
     },
+    "facing=east,servings=7": {
+      "model": "catherder:block/cheese_wheel_servings7"
+    },
+    "facing=north,servings=8": {
+      "model": "catherder:block/cheese_wheel_servings8"
+    },
+    "facing=south,servings=8": {
+      "model": "catherder:block/cheese_wheel_servings8"
+    },
     "facing=west,servings=8": {
+      "model": "catherder:block/cheese_wheel_servings8"
+    },
+    "facing=east,servings=8": {
       "model": "catherder:block/cheese_wheel_servings8"
     }
   }

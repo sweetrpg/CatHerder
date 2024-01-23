@@ -1,20 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "C": {
-      "item": "catherder:cat_toy"
-    },
-    "L": {
-      "item": "minecraft:leather"
-    }
-  },
   "pattern": [
     "LCL",
     "LLL"
   ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "C": {
+      "item": "catherder:cat_toy"
+    }
+  },
   "result": {
     "item": "catherder:treat_bag"
-  },
-  "show_notification": true
+  }
 }

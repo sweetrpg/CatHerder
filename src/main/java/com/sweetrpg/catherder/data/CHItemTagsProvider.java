@@ -35,7 +35,7 @@ public class CHItemTagsProvider extends ItemTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         createTag(ModTags.BEG_ITEMS_TAMED, ModItems.BREEDING_TREAT,
-                  ModItems.CAT_TOY,
+                ModItems.CAT_TOY,
                 () -> Items.STRING);
         appendToTag(ModTags.TREATS);
         createTag(ModTags.BEG_ITEMS_UNTAMED, ModItems.TRAINING_TREAT, () -> Items.STRING);

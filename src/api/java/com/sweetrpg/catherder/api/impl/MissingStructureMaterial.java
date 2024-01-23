@@ -17,7 +17,7 @@ public class MissingStructureMaterial extends IStructureMaterial {
 
     @Override
     public Component getTooltip() {
-        return Component.translatable("structure.missing", "//TODO");
+        return Component.translatable("structure.missing");
     }
 
     @Override

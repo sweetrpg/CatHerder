@@ -3,10 +3,10 @@ package com.sweetrpg.catherder.common.talent;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 
 public class HellBeastTalent extends TalentInstance {
@@ -27,7 +27,7 @@ public class HellBeastTalent extends TalentInstance {
 
     @Override
     public InteractionResult isInvulnerableTo(AbstractCatEntity catIn, DamageSource source) {
-        if(source.is(DamageTypes.ON_FIRE)) {
+        if(source.is(DamageTypeTags.IS_FIRE)) {
             return this.level() >= 5 ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
 

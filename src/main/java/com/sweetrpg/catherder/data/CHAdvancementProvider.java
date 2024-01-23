@@ -128,8 +128,8 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(ModItems.CAT_TOY).frame(FrameType.TASK).translate("catherder.main.toy").build())
                 .addCriterion("play_with_cat", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByEntity(EntityPredicate.Composite.ANY,
-                                ItemPredicate.Builder.item().of(ModTags.TOYS).build(),
-                                EntityPredicate.Composite.wrap(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntityTypes.CAT.get())).build())))
+                        ItemPredicate.Builder.item().of(ModTags.TOYS).build(),
+                        EntityPredicate.Composite.wrap(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntityTypes.CAT.get())).build())))
                 .save(consumer, Util.getResourcePath("main/play_with_cat"));
 
         // Nermal

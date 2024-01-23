@@ -33,7 +33,7 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
      * method as well.
      */
     public boolean canUse() {
-        return this.cat.isTame() && !this.cat.isOrderedToSit() && !this.cat.isLying() && super.canUse();
+        return this.cat.isTame() && !this.cat.isOrderedToSit() && !this.cat.isLying() && !this.cat.isHungry() && super.canUse();
     }
 
     /**
@@ -127,5 +127,3 @@ public class PlayInCardboardBoxGoal<T extends LivingEntity> extends MoveToBlockG
         return level.isEmptyBlock(pos.above()) && level.getBlockState(pos).is(ModBlocks.CARDBOARD_BOX.get());
     }
 }
-
-

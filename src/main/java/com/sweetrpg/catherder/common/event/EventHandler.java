@@ -17,10 +17,6 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
@@ -41,7 +37,7 @@ public class EventHandler {
         if(target.getType() == EntityType.CAT && target instanceof TamableAnimal && stack.getItem() == ModItems.TRAINING_TREAT.get()) {
             event.setCanceled(true);
 
-            Cat vanillaCat = (Cat) target;
+            TamableAnimal vanillaCat = (TamableAnimal) target;
 
             Player player = event.getEntity();
 
@@ -57,8 +53,8 @@ public class EventHandler {
                     cat.setOrderedToSit(false);
                     cat.setAge(vanillaCat.getAge());
                     cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
-//                    cat.setOriginalBreed(vanillaCat.getUUID().variant());
-                    cat.setVariant(vanillaCat.getVariant());
+                    cat.setOriginalBreed(-1 /*((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType()*/);
+                    cat.setVariant(((Cat)vanillaCat).getVariant());
 
                     world.addFreshEntity(cat);
 

@@ -1,6 +1,6 @@
 {
   "name": "Cat Food",
-  "icon": "catherder:salmon",
+  "icon": "minecraft:salmon",
   "category": "catherder:food",
   "pages": [
     {

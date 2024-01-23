@@ -17,7 +17,8 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.Keys.SOUND_EVENTS, CatHerderAPI.MOD_ID);
 
     private static RegistryObject<SoundEvent> register(final String name) {
-        return register(name, SoundEvent::createVariableRangeEvent);
+        //TODO 1.19.3 ??
+        return register(name, () -> SoundEvent.createVariableRangeEvent(Util.getResource(name)));
     }
 
     private static <T extends SoundEvent> RegistryObject<T> register(final String name, final Function<ResourceLocation, T> factory) {

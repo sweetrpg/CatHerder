@@ -141,7 +141,7 @@ public class CatModel<T extends AbstractCatEntity> extends ColorableAgeableListM
     public void prepareMobModel(T cat, float limbSwing, float limbSwingAmount, float partialTickTime) {
         CatHerder.LOGGER.trace("Preparing mob model: {}, limbSwing {}, limgSwingAmount {}, partialTickTime {}", cat, limbSwing, limbSwingAmount, partialTickTime);
 
-        this.lowerTail.xRot = cat.getWagAngle(limbSwing, limbSwingAmount, partialTickTime);
+//        this.lowerTail.xRot = cat.getWagAngle(limbSwing, limbSwingAmount, partialTickTime);
 
         if(cat.isInSittingPose()) {
             CatHerder.LOGGER.trace("Cat is sitting");

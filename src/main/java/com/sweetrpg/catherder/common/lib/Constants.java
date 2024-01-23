@@ -89,7 +89,6 @@ public class Constants {
     public static final String TRANSLATION_KEY_CONTAINER_INVENTORIES = "container.catherder.cat_inventories";
     public static final String TRANSLATION_KEY_ITEMGROUP_MAIN = "itemGroup.catherder";
     public static final String TRANSLATION_KEY_ITEMGROUP_CATTREE = "itemGroup.catherder.cattree";
-    public static final String TRANSLATION_KEY_ITEMGROUP_PETDOOR = "itemGroup.catherder.petdoor";
     public static final String TRANSLATION_KEY_WILD_TREAT_LOW_LEVEL = "treat.catherder.wild_treat.low_level";
     public static final String TRANSLATION_KEY_WILD_TREAT_LEVEL_UP = "treat.catherder.wild_treat.level_up";
     public static final String TRANSLATION_KEY_WILD_TREAT_TOO_YOUNG = "treat.catherder.wild_treat.too_young";

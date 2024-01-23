@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "equipment",
   "ingredients": [
     {
       "item": "minecraft:map"

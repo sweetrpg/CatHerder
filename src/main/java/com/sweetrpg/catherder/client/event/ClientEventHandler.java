@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.block.BlockModelShaper;
@@ -108,6 +109,7 @@ public class ClientEventHandler {
         }
     }
 
+
     @SubscribeEvent
     public void onInputEvent(final MovementInputUpdateEvent event) {
         if(event.getInput().jumping) {
@@ -146,22 +148,22 @@ public class ClientEventHandler {
         }
     }
 
-    @SubscribeEvent
-    public void onScreenDrawForeground(final ScreenEvent event) {
-        Screen screen = event.getScreen();
-        if(screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
-            boolean creative = screen instanceof CreativeModeInventoryScreen;
-            CatInventoryButton btn = null;
-
-            //TODO just create a static variable in this class
-//            for (Widget widget : screen.renderables) {
-//                if (widget instanceof CatInventoryButton) {
+//    @SubscribeEvent
+//    public void onScreenDrawForeground(final ScreenEvent event) {
+//        Screen screen = event.getScreen();
+//        if(screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
+//            boolean creative = screen instanceof CreativeModeInventoryScreen;
+//            CatInventoryButton btn = null;
+//
+//            //TODO just create a static variable in this class
+//            for(Widget widget : screen.renderables) {
+//                if(widget instanceof CatInventoryButton) {
 //                    btn = (CatInventoryButton) widget;
 //                    break;
 //                }
 //            }
 //
-//            if (btn.visible && btn.isHoveredOrFocused()) {
+//            if(btn.visible && btn.isHoveredOrFocused()) {
 //                Minecraft mc = Minecraft.getInstance();
 //                int width = mc.getWindow().getGuiScaledWidth();
 //                int height = mc.getWindow().getGuiScaledHeight();
@@ -169,9 +171,9 @@ public class ClientEventHandler {
 //                int sizeY = creative ? 136 : 166;
 //                int guiLeft = (width - sizeX) / 2;
 //                int guiTop = (height - sizeY) / 2;
-//                if (!creative) {
+//                if(!creative) {
 //                    RecipeBookComponent recipeBook = ((InventoryScreen) screen).getRecipeBookComponent();
-//                    if (recipeBook.isVisible()) {
+//                    if(recipeBook.isVisible()) {
 //                        guiLeft += 76;
 //                    }
 //                }
@@ -180,8 +182,8 @@ public class ClientEventHandler {
 //                btn.renderToolTip(event.getPoseStack(), event.getMouseX(), event.getMouseY());
 //                //event.getPoseStack().translate(guiLeft, guiTop, 0);
 //            }
-        }
-    }
+//        }
+//    }
 
 // TODO Implement patrol item
 //    @SubscribeEvent
@@ -224,7 +226,7 @@ public class ClientEventHandler {
         //TODO Used when drawing outline of bounding box
         RenderSystem.lineWidth(2.0F);
 
-//        RenderSystem.disableTexture();
+        //RenderSystem.disableTexture();
         Vec3 vec3d = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         double d0 = vec3d.x();
         double d1 = vec3d.y();
@@ -236,7 +238,7 @@ public class ClientEventHandler {
         Tesselator.getInstance().end();
         RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 0.3F);
         RenderSystem.depthMask(true);
-//        RenderSystem.enableTexture();
+        //RenderSystem.enableTexture();
         RenderSystem.disableBlend();
         //RenderSystem.enableAlphaTest();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

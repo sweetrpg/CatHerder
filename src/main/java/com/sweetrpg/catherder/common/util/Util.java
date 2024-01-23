@@ -2,8 +2,8 @@ package com.sweetrpg.catherder.common.util;
 
 import com.google.common.collect.Lists;
 import com.sweetrpg.catherder.api.CatHerderAPI;
+import com.sweetrpg.catherder.common.lib.Constants;
 import io.netty.buffer.Unpooled;
-import net.minecraft.core.Holder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -41,7 +41,7 @@ public class Util {
         int g = (rgbInt >> 8) & 255;
         int b = (rgbInt >> 0) & 255;
 
-        return new float[]{r / 255F, g / 255F, b / 255F};
+        return new float[] {r / 255F, g / 255F, b / 255F};
     }
 
     public static int[] rgbIntToIntArray(int rgbInt) {
@@ -49,7 +49,7 @@ public class Util {
         int g = (rgbInt >> 8) & 255;
         int b = (rgbInt >> 0) & 255;
 
-        return new int[]{r, g, b};
+        return new int[] {r, g, b};
     }
 
     public static int colorDye(int startColor, DyeColor dye) {
@@ -62,7 +62,7 @@ public class Util {
                 .mapToObj(Util::rgbIntToIntArray)
                 .collect(Collectors.toList());
 
-        if(startColor != -1) {
+        if (startColor != -1) {
             colors.add(0, rgbIntToIntArray(startColor));
         }
 
@@ -73,12 +73,12 @@ public class Util {
         int[] temp = new int[3];
         int maxCompSum = 0;
 
-        for(int[] color : colors) {
+        for (int[] color : colors) {
             maxCompSum += Math.max(color[0], Math.max(color[1], color[2]));
             temp[0] += color[0];
             temp[1] += color[1];
             temp[2] += color[2];
-        }
+         }
 
         int redAve = temp[0] / colors.size();
         int greenAve = temp[1] / colors.size();
@@ -87,9 +87,9 @@ public class Util {
         float maxAve = (float) maxCompSum / (float) colors.size();
         float max = Math.max(redAve, Math.max(greenAve, blueAve));
 
-        redAve = (int) (redAve * maxAve / max);
-        greenAve = (int) (greenAve * maxAve / max);
-        blueAve = (int) (blueAve * maxAve / max);
+        redAve = (int)(redAve * maxAve / max);
+        greenAve = (int)(greenAve * maxAve / max);
+        blueAve = (int)(blueAve * maxAve / max);
 
         int finalColor = (redAve << 8) + greenAve;
         finalColor = (finalColor << 8) + blueAve;
@@ -121,7 +121,7 @@ public class Util {
 
     /**
      * @param modId The namespace
-     * @param name  The path
+     * @param name The path
      * @return The total path of the resource e.g "minecraft:air"
      */
     public static String getResourcePath(String modId, String name) {
@@ -145,10 +145,9 @@ public class Util {
 
     // From net.minecraft.util.Util but for RegistryObject
     public static <T> RegistryObject<T> acceptOrElse(RegistryObject<T> opt, Consumer<T> consumer, Runnable orElse) {
-        if(opt.isPresent()) {
+        if (opt.isPresent()) {
             consumer.accept(opt.get());
-        }
-        else {
+        } else {
             orElse.run();
         }
 
@@ -156,10 +155,9 @@ public class Util {
     }
 
     public static <T> Optional<T> acceptOrElse(Optional<T> opt, Consumer<T> consumer, Runnable orElse) {
-        if(opt.isPresent()) {
+        if (opt.isPresent()) {
             consumer.accept(opt.get());
-        }
-        else {
+        } else {
             orElse.run();
         }
 
@@ -168,8 +166,8 @@ public class Util {
 
     public static <T> boolean allMatch(Iterable<T> input, Predicate<T> matcher) {
         Objects.requireNonNull(matcher);
-        for(T e : input) {
-            if(!matcher.test(e)) {
+        for (T e : input) {
+            if (!matcher.test(e)) {
                 return false;
             }
         }
@@ -178,8 +176,8 @@ public class Util {
 
     public static <T> boolean anyMatch(Iterable<T> input, Predicate<T> matcher) {
         Objects.requireNonNull(matcher);
-        for(T e : input) {
-            if(matcher.test(e)) {
+        for (T e : input) {
+            if (matcher.test(e)) {
                 return true;
             }
         }
@@ -191,21 +189,25 @@ public class Util {
      * registry id of the object it is representing
      */
     public static ResourceLocation getRegistryId(Object obj) {
-        if(obj instanceof ResourceLocation) {
+        if (obj instanceof ResourceLocation) {
             return (ResourceLocation) obj;
         }
 
-        if(obj instanceof String) {
+        if (obj instanceof String) {
             // Returns null when namespace or path contain invalid
             // characters
             return ResourceLocation.tryParse((String) obj);
         }
 
-        if(obj instanceof Holder.Reference) {
-            return ((Holder.Reference) obj).key().location();
-        }
+//        if (obj instanceof IForgeRegistryEntry) {
+//            return ((IForgeRegistryEntry) obj).getRegistryName();
+//        }
+//
+//        if (obj instanceof IRegistryDelegate) {
+//            return ((IRegistryDelegate) obj).name();
+//        }
 
-        if(obj instanceof RegistryObject) {
+        if (obj instanceof RegistryObject) {
             return ((RegistryObject) obj).getId();
         }
 

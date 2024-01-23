@@ -4,7 +4,6 @@ import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.monster.Silverfish;
 
@@ -34,7 +33,7 @@ public class PestFighterTalent extends TalentInstance {
             );
             for(Silverfish silverfish : list) {
                 if(catIn.getRandom().nextInt(10) == 0) {
-                    silverfish.hurt(catIn.damageSources().generic(), damage);
+                    silverfish.hurt(silverfish.damageSources().generic(), damage);
                 }
             }
         }

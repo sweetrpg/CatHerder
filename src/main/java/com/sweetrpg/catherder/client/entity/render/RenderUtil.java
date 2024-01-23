@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
-import org.joml.Matrix4f;
 
 public class RenderUtil {
 
@@ -32,12 +31,12 @@ public class RenderUtil {
         stack.translate(0.0D, yOffset, 0.0D);
         stack.mulPose(entityRenderDispatcher.cameraOrientation());
         stack.scale(-scale, -scale, scale);
-        Matrix4f matrix4f = stack.last().pose();
+        var matrix4f = stack.last().pose();
         float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
         int j = (int) (f1 * 255.0F) << 24;
         Font fontrenderer = renderer.getFont();
         float f2 = -fontrenderer.width(text) / 2F;
-        fontrenderer.drawInBatch(text, f2, 0, 553648127, false, matrix4f, buffer, Font.DisplayMode.NORMAL, j, packedLightIn);
+        fontrenderer.drawInBatch(text, f2, 0, 553648127, false, matrix4f, buffer, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, packedLightIn);
         if(flag) {
             fontrenderer.drawInBatch(text, f2, 0, -1, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0, packedLightIn);
         }

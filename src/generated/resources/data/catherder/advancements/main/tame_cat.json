@@ -1,34 +1,34 @@
 {
-  "criteria": {
-    "tame_cat": {
-      "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type": "catherder:cat"
-            }
-          }
-        ]
-      },
-      "trigger": "minecraft:tame_animal"
-    }
-  },
   "display": {
-    "announce_to_chat": true,
-    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "icon": {
+      "item": "catherder:training_treat"
+    },
+    "title": {
+      "translate": "advancements.catherder.main.train_cat.title"
+    },
     "description": {
       "translate": "advancements.catherder.main.train_cat.description"
     },
     "frame": "task",
-    "hidden": false,
-    "icon": {
-      "item": "catherder:training_treat"
-    },
     "show_toast": true,
-    "title": {
-      "translate": "advancements.catherder.main.train_cat.title"
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "tame_cat": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "catherder:cat"
+            },
+            "entity": "this"
+          }
+        ]
+      }
     }
   },
   "requirements": [

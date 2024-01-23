@@ -10,6 +10,7 @@ import com.sweetrpg.catherder.client.entity.model.CatRescueModel;
 import com.sweetrpg.catherder.client.entity.render.CollarRenderManager;
 import com.sweetrpg.catherder.client.entity.render.CatScreenOverlays;
 import com.sweetrpg.catherder.client.entity.render.CatRenderer;
+//import com.sweetrpg.catherder.client.entity.render.CatBeamRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.PackCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.RescueCatRenderer;
 import com.sweetrpg.catherder.client.entity.render.layer.accessory.ArmorAccessoryRenderer;

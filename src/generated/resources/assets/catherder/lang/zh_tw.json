@@ -193,7 +193,6 @@
   "item.catherder.yarn": "Ball of Yarn",
   "itemGroup.catherder": "Cat Herder",
   "itemGroup.catherder.cattree": "Cat Tree Variants",
-  "itemGroup.catherder.petdoor": "Pet Door Variants",
   "modgui.catherder.config.catsettings": "Cat Behaviour Settings",
   "modgui.catherder.config.catsettings.tooltip": "Change certain behaviours of cats.",
   "modgui.catherder.config.general": "General Settings",

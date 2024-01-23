@@ -15,7 +15,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -47,5 +46,6 @@ public class ModSerializers {
         register("cat_level", () -> CAT_LEVEL_SERIALIZER);
         register("cat_tree_location", () -> CAT_TREE_LOC_SERIALIZER);
         register("original_breed", () -> ORIGINAL_BREED_SERIALIZER);
+        register("cat_variant", () -> VARIANT_SERIALIZER);
     }
 }

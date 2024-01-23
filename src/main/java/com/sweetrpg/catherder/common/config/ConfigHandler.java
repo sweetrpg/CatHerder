@@ -4,7 +4,6 @@ import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.common.lib.Constants;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -79,7 +78,7 @@ public class ConfigHandler {
             }
 
             {
-                builder.push("Domestic");
+                builder.push("Wandering");
 
                 MAX_ITEM_DISTANCE = builder.comment("Sets the maximum distance domestic items may be away from each other to be considered part of the cat's wandering area.").translation("catherder.config.client.domestic_item_max_distance").defineInRange("domestic_item_max_distance", 40, 20, 100);
                 MAX_WANDER_DISTANCE = builder.comment("Sets the maximum distance a cat in wander mode will wander from its owner.").translation("catherder.config.client.wander_max_distance").defineInRange("wander_max_distance", 200, 20, 1000);
@@ -134,7 +133,7 @@ public class ConfigHandler {
             {
                 builder.push("Cat Constants");
 
-                LITTERBOX = builder.comment("Enables litterbox maintenance").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX).define("enable_litterbox", false);
+                LITTERBOX = builder.comment("Enables litterbox maintenance").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_LITTERBOX).define("enable_litterbox", true);
                 DISABLE_HUNGER = builder.comment("Disable hunger mode for the cat").translation(Constants.TRANSLATION_KEY_CONFIG_DISABLE_HUNGER).define("disable_hunger", false);
                 STARTING_ITEMS = builder.comment("When enabled you will spawn with a guide, Cat Charm and Command Emblem.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_STARTING_ITEMS).define("enable_starting_items", false);
                 CAT_GENDER = builder.comment("When enabled, cats will be randomly assigned genders and will only mate and produce children with the opposite gender.").translation(Constants.TRANSLATION_KEY_CONFIG_ENABLE_GENDER).define("enable_gender", true);
@@ -148,22 +147,21 @@ public class ConfigHandler {
     }
 
     public static class TalentConfig {
-        public Map<ResourceLocation, ForgeConfigSpec.BooleanValue> DISABLED_TALENTS;
+        public Map<Talent, ForgeConfigSpec.BooleanValue> DISABLED_TALENTS;
 
         public TalentConfig(ForgeConfigSpec.Builder builder) {
             builder.comment("Here you can disable talents.").push("Talents");
 
             DISABLED_TALENTS = new HashMap<>();
 
-            CatHerderAPI.TALENTS.get().forEach((talent) -> {
-                ResourceLocation loc = CatHerderAPI.TALENTS.get().getKey(talent);
-                DISABLED_TALENTS.put(loc, builder.define(CatHerderAPI.TALENTS.get().getKey(talent).toString(), true));
-            });
+            CatHerderAPI.TALENTS.get().forEach((loc) ->
+                DISABLED_TALENTS.put(loc, builder.define(loc.toString(), true))
+            );
             builder.pop();
         }
 
         public boolean getFlag(Talent talent) {
-            ForgeConfigSpec.BooleanValue booleanValue = this.DISABLED_TALENTS.get(CatHerderAPI.TALENTS.get().getKey(talent));
+            ForgeConfigSpec.BooleanValue booleanValue = this.DISABLED_TALENTS.get(talent);
             if (booleanValue == null) {
                 return true;
             }

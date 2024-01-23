@@ -1,8 +1,8 @@
 package com.sweetrpg.catherder.api.registry;
 
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public abstract class IColorMaterial {
 

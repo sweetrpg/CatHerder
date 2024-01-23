@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 public class ModBlockEntityTypes {
 
-    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, CatHerderAPI.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<CatTreeBlockEntity>> CAT_TREE = register("cat_tree", CatTreeBlockEntity::new, ModBlocks.CAT_TREE);
     public static final RegistryObject<BlockEntityType<PetDoorBlockEntity>> PET_DOOR = register("pet_door", PetDoorBlockEntity::new, ModBlocks.PET_DOOR);
@@ -29,7 +29,7 @@ public class ModBlockEntityTypes {
     }
 
     private static <T extends BlockEntityType<?>> RegistryObject<T> register(final String name, final Supplier<T> sup) {
-        return TILE_ENTITIES.register(name, sup);
+        return BLOCK_ENTITIES.register(name, sup);
     }
 
 }

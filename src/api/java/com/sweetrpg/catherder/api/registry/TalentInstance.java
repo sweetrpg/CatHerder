@@ -12,21 +12,25 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TalentInstance implements ICatAlteration {
 
-    protected final Talent talentDelegate;
+    protected final Talent talent;
 
     protected int level;
+
+//    public TalentInstance(Talent talentIn, int levelIn) {
+//        this(talentIn, levelIn);
+//    }
 
     public TalentInstance(Talent talentIn) {
         this(talentIn, 1);
     }
 
-    public TalentInstance(Talent talentDelegateIn, int levelIn) {
-        this.talentDelegate = talentDelegateIn;
+    public TalentInstance(Talent talent, int levelIn) {
+        this.talent = talent;
         this.level = levelIn;
     }
 
     public Talent getTalent() {
-        return this.talentDelegate;
+        return this.talent;
     }
 
     public final int level() {
@@ -45,8 +49,12 @@ public class TalentInstance implements ICatAlteration {
         return this.of(talentIn);
     }
 
+//    public boolean of(IRegistryDelegate<Talent> talentDelegateIn) {
+//        return talentDelegateIn.equals(this.talentDelegate);
+//    }
+
     public TalentInstance copy() {
-        return this.talentDelegate.getDefault(this.level);
+        return this.talent.getDefault(this.level);
     }
 
     public void writeToNBT(AbstractCatEntity catIn, CompoundTag compound) {
@@ -66,7 +74,7 @@ public class TalentInstance implements ICatAlteration {
     }
 
     public final void writeInstance(AbstractCatEntity catIn, CompoundTag compound) {
-        ResourceLocation rl = CatHerderAPI.TALENTS.get().getKey(this.talentDelegate);
+        ResourceLocation rl = CatHerderAPI.TALENTS.get().getKey(this.talent);
         if (rl != null) {
             compound.putString("type", rl.toString());
         }
@@ -97,7 +105,7 @@ public class TalentInstance implements ICatAlteration {
 
     @Override
     public String toString() {
-        return String.format("%s [talent: %s, level: %d]", this.getClass().getSimpleName(), CatHerderAPI.TALENTS.get().getKey(talentDelegate), this.level);
+        return String.format("%s [talent: %s, level: %d]", this.getClass().getSimpleName(), talent, this.level);
     }
 
     /**

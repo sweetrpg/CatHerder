@@ -18,22 +18,22 @@ public class AccessoryInstance {
     public static final Comparator<AccessoryInstance> RENDER_SORTER = Comparator.comparing(AccessoryInstance::getRenderIndex);
 
     @Deprecated // Do not call directly use AccessoryInstance#getAccessory
-    private final Accessory accessoryDelegate;
+    private final Accessory accessory;
 
     public AccessoryInstance(Accessory typeIn) {
-        this.accessoryDelegate = typeIn;
+        this.accessory = typeIn;
     }
 
     public Accessory getAccessory() {
-        return this.accessoryDelegate;
+        return this.accessory;
     }
 
     public <T extends Accessory> boolean of(Supplier<T> accessoryIn) {
-        return this.accessoryDelegate.of(accessoryIn);
+        return this.accessory.of(accessoryIn);
     }
 
     public <T extends Accessory> boolean of(T accessoryIn) {
-        return this.accessoryDelegate.of(accessoryIn);
+        return this.accessory.of(accessoryIn);
     }
 
     public <T extends AccessoryType> boolean ofType(Supplier<T> accessoryTypeIn) {
@@ -44,12 +44,12 @@ public class AccessoryInstance {
         return this.ofType(accessoryTypeIn);
     }
 
-    public <T extends AccessoryType> boolean ofType(ResourceLocation accessoryTypeDelegateIn) {
-        return CatHerderAPI.ACCESSORY_TYPE.get().getKey(this.accessoryDelegate.getType()).equals(accessoryTypeDelegateIn);
+    public <T> boolean ofType(T accessoryTypeDelegateIn) {
+        return accessoryTypeDelegateIn.equals(this.accessory.getType());
     }
 
     public AccessoryInstance copy() {
-        return new AccessoryInstance(this.accessoryDelegate);
+        return new AccessoryInstance(this.accessory);
     }
 
     public ItemStack getReturnItem() {
@@ -61,7 +61,7 @@ public class AccessoryInstance {
     }
 
     public final void writeInstance(CompoundTag compound) {
-        ResourceLocation rl = CatHerderAPI.ACCESSORIES.get().getKey(this.accessoryDelegate);
+        ResourceLocation rl = CatHerderAPI.ACCESSORIES.get().getKey(this.getAccessory());
         if (rl != null) {
             compound.putString("type", rl.toString());
         }

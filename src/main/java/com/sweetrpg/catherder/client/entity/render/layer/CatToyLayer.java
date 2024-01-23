@@ -8,7 +8,6 @@ import com.sweetrpg.catherder.client.entity.model.CatModel;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.item.ItemDisplayContext;
 
@@ -20,7 +19,6 @@ public class CatToyLayer extends RenderLayer<CatEntity, CatModel<CatEntity>> {
         super(catRendererIn);
         this.itemInHandRenderer = itemInHandRenderer;
     }
-
     @Override
     public void render(PoseStack matrixStack, MultiBufferSource bufferSource, int packedLight, CatEntity cat, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (cat.hasToy()) {

@@ -1,6 +1,5 @@
 package com.sweetrpg.catherder.common.registry;
 
-import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.impl.DyeMaterial;
 import com.sweetrpg.catherder.api.impl.ColorMaterial;
 import com.sweetrpg.catherder.api.impl.StructureMaterial;
@@ -20,9 +19,9 @@ import java.util.function.Supplier;
 
 public class ModMaterials {
     // material registries
-    public static final DeferredRegister<IStructureMaterial> STRUCTURES = DeferredRegister.create(CatHerderAPI.RegistryKeys.STRUCTURE_REGISTRY, Constants.VANILLA_ID);
-    public static final DeferredRegister<IColorMaterial> COLORS = DeferredRegister.create(CatHerderAPI.RegistryKeys.COLOR_REGISTRY, Constants.VANILLA_ID);
-    public static final DeferredRegister<IDyeMaterial> DYES = DeferredRegister.create(CatHerderAPI.RegistryKeys.DYE_REGISTRY, Constants.VANILLA_ID);
+    public static final DeferredRegister<IStructureMaterial> STRUCTURES = DeferredRegister.create(ModRegistries.Keys.STRUCTURE_REGISTRY, Constants.VANILLA_ID);
+    public static final DeferredRegister<IColorMaterial> COLORS = DeferredRegister.create(ModRegistries.Keys.COLOR_REGISTRY, Constants.VANILLA_ID);
+    public static final DeferredRegister<IDyeMaterial> DYES = DeferredRegister.create(ModRegistries.Keys.DYE_REGISTRY, Constants.VANILLA_ID);
 
     // structures
     public static final RegistryObject<IStructureMaterial> OAK_PLANKS = registerStructure(() -> Blocks.OAK_PLANKS);

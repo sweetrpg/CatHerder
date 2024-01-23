@@ -14,13 +14,14 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
 public class CHItemModelProvider extends ItemModelProvider {
 
-    public CHItemModelProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
-        super(packOutput, CatHerderAPI.MOD_ID, existingFileHelper);
+    public CHItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class CHItemModelProvider extends ItemModelProvider {
     }
 
     private String name(Supplier<? extends ItemLike> item) {
-        return item.get().asItem().toString();
+        return ForgeRegistries.ITEMS.getKey(item.get().asItem()).getPath();
     }
 
     private ItemModelBuilder blockItem(Supplier<? extends Block> block) {

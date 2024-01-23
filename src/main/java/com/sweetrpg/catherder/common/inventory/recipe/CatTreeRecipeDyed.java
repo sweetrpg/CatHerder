@@ -20,8 +20,8 @@ import net.minecraft.world.level.Level;
 
 public class CatTreeRecipeDyed extends CustomRecipe implements Recipe<CraftingContainer> {
 
-    public CatTreeRecipeDyed(ResourceLocation resource, CraftingBookCategory craftingBookCategory) {
-        super(resource, craftingBookCategory);
+    public CatTreeRecipeDyed(ResourceLocation resource, CraftingBookCategory p_249010_) {
+        super(resource, p_249010_);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CatTreeRecipeDyed extends CustomRecipe implements Recipe<CraftingCo
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inv, RegistryAccess access) {
+    public ItemStack assemble(CraftingContainer inv, RegistryAccess p_267165_) {
         for (int col = 0; col < inv.getWidth(); col++) {
             for (int row = 0; row < inv.getHeight(); row++) {
                 IDyeMaterial dye = CatTreeUtil.getDyeFromStack(CatHerderAPI.DYE_MATERIAL.get(), inv.getItem(row * inv.getWidth() + col));

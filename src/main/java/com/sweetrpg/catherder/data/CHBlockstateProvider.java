@@ -28,8 +28,8 @@ public class CHBlockstateProvider extends BlockStateProvider {
     // Applies texture to all faces and for the input face culls that direction
     private static final BiFunction<String, Direction, BiConsumer<Direction, ModelBuilder<BlockModelBuilder>.ElementBuilder.FaceBuilder>> cullFaceFactory = (texture, input) -> (d, b) -> b.texture(texture).cullface(d == input ? d : null);
 
-    public CHBlockstateProvider(PackOutput packOutput, ExistingFileHelper exFileHelper) {
-        super(packOutput, CatHerderAPI.MOD_ID, exFileHelper);
+    public CHBlockstateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, CatHerderAPI.MOD_ID, exFileHelper);
     }
 
     public ExistingFileHelper getExistingHelper() {
@@ -91,12 +91,12 @@ public class CHBlockstateProvider extends BlockStateProvider {
 
     protected void createFromShape(Supplier<? extends Block> blockIn, AABB bb) {
         BlockModelBuilder model = this.models()
-                                      .getBuilder(name(blockIn))
+                                      .getBuilder(name(blockIn.get()))
                                       .parent(this.models().getExistingFile(mcLoc(ModelProvider.BLOCK_FOLDER + "/block")))
-                                      .texture("particle", extend(blockTexture(blockIn), "_bottom"))
-                                      .texture("bottom", extend(blockTexture(blockIn), "_bottom"))
-                                      .texture("top", extend(blockTexture(blockIn), "_top"))
-                                      .texture("side", extend(blockTexture(blockIn), "_side"));
+                                      .texture("particle", extend(blockTexture(blockIn.get()), "_bottom"))
+                                      .texture("bottom", extend(blockTexture(blockIn.get()), "_bottom"))
+                                      .texture("top", extend(blockTexture(blockIn.get()), "_top"))
+                                      .texture("side", extend(blockTexture(blockIn.get()), "_side"));
 
         model.element()
              .from((float) bb.minX, (float) bb.minY, (float) bb.minZ)
@@ -195,17 +195,17 @@ public class CHBlockstateProvider extends BlockStateProvider {
         }, ignored);
     }
 
-    private String name(Supplier<? extends Block> block) {
-        return ForgeRegistries.BLOCKS.getKey(block.get()).getPath();
+    private String name(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block).getPath();
     }
 
-    private ResourceLocation blockTexture(Supplier<? extends Block> block) {
-        ResourceLocation base = ForgeRegistries.BLOCKS.getKey(block.get());
+    public ResourceLocation blockTexture(Block block) {
+        ResourceLocation base = ForgeRegistries.BLOCKS.getKey(block);
         return prextend(base, ModelProvider.BLOCK_FOLDER + "/");
     }
 
     public ModelFile cross(Supplier<? extends Block> block) {
-        return this.models().cross(name(block), blockTexture(block));
+        return this.models().cross(name(block.get()), blockTexture(block.get()));
     }
 
     protected void makeSimple(Supplier<? extends Block> blockIn) {

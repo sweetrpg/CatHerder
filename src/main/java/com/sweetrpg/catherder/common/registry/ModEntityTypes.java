@@ -2,9 +2,6 @@ package com.sweetrpg.catherder.common.registry;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.entity.CatEntity;
-import com.sweetrpg.catherder.common.entity.CatBeamEntity;
-//import com.sweetrpg.catherder.common.entity.RodentEntity;
-import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -24,7 +21,7 @@ public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.Keys.ENTITY_TYPES, CatHerderAPI.MOD_ID);
 
     public static final RegistryObject<EntityType<CatEntity>> CAT = register("cat", CatEntity::new, MobCategory.CREATURE, (b) -> b
-            .sized(0.6F, 0.85F)
+            .sized(0.45F, 0.5F)
             .setUpdateInterval(3)
             .setTrackingRange(16)
             .setShouldReceiveVelocityUpdates(true));
@@ -35,13 +32,13 @@ public class ModEntityTypes {
 //            .setTrackingRange(16)
 //            .setShouldReceiveVelocityUpdates(true));
 
-    public static final RegistryObject<EntityType<CatBeamEntity>> CAT_BEAM = register("cat_beam", CatBeamEntity::new, MobCategory.MISC, (b) -> b
-            .sized(0.25F, 0.25F)
-            .setUpdateInterval(4)
-            .setTrackingRange(10)
-            .setShouldReceiveVelocityUpdates(true)
-            .setCustomClientFactory(CatBeamEntity::new)
-            .noSummon());
+//    public static final RegistryObject<EntityType<CatBeamEntity>> CAT_BEAM = register("cat_beam", CatBeamEntity::new, MobCategory.MISC, (b) -> b
+//            .sized(0.25F, 0.25F)
+//            .setUpdateInterval(4)
+//            .setTrackingRange(10)
+//            .setShouldReceiveVelocityUpdates(true)
+//            .setCustomClientFactory(CatBeamEntity::new)
+//            .noSummon());
 
     private static <E extends Entity, T extends EntityType<E>> RegistryObject<EntityType<E>> register(final String name, final EntityType.EntityFactory<E> sup, final MobCategory classification, final Function<EntityType.Builder<E>, EntityType.Builder<E>> builder) {
          return register(name, () -> builder.apply(EntityType.Builder.of(sup, classification)).build(Util.getResourcePath(name)));
