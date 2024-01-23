@@ -120,9 +120,9 @@ public class CatFollowOwnerGoal extends Goal {
     }
 
     public float getMinStartDistanceSq() {
-        if(this.cat.isMode(Mode.GUARD)) {
-            return 4F;
-        }
+//        if(this.cat.isMode(Mode.GUARD)) {
+//            return 4F;
+//        }
 
         if(this.cat.isMode(Mode.WANDERING)) {
             var maxDist = ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get();

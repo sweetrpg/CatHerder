@@ -240,8 +240,10 @@ public class CatEntity extends AbstractCatEntity {
         this.goalSelector.addGoal(6, new FetchGoal(this, 1.3D, 32.0F));
         this.goalSelector.addGoal(6, new CatDomesticWanderGoal(this, 1.0D));
 //        this.goalSelector.addGoal(6, new CatWanderGoal(this, 1.0D, ConfigHandler.CLIENT.MAX_WANDER_DISTANCE.get()));
+        this.goalSelector.addGoal(6, new GuardModeGoal(this, false));
 
         this.goalSelector.addGoal(7, new CatFollowOwnerGoal(this, 1.0D, 20.0F, 4.0F));
+//        this.goalSelector.addGoal(7, new FollowOwnerGoal(this, 1.0D, 20.0F, 4.0F, false));
 
         this.goalSelector.addGoal(9, new CatLieOnBedGoal<>(this, 1.1F, 16));
         this.goalSelector.addGoal(9, new CatSitOnBlockGoal<>(this, 0.8F));
@@ -258,7 +260,6 @@ public class CatEntity extends AbstractCatEntity {
         // target-based goals
         this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>) null));
         this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
-        this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
     }
 
 //    @Override
@@ -479,6 +480,9 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     public void aiStep() {
         super.aiStep();
+
+//        if (!this.level.isClientSide && this.delayedActionStart > 0)
+//            --this.delayedActionStart;
 
         if(!this.level.isClientSide && this.wetSource != null && !this.isShaking && !this.isPathFinding() && this.isOnGround()) {
             this.startShaking();
@@ -2501,7 +2505,7 @@ public class CatEntity extends AbstractCatEntity {
         }
 
         BlockState blockBelow = this.level.getBlockState(this.blockPosition().below());
-        boolean onBed = /* TODO: remove temporarily blockBelow.is(ModBlocks.CAT_TREE.get()) || */ blockBelow.is(BlockTags.BEDS);
+        boolean onBed = blockBelow.is(ModBlocks.CAT_TREE.get()) || blockBelow.is(BlockTags.BEDS);
         return onBed;
     }
 
@@ -2518,7 +2522,6 @@ public class CatEntity extends AbstractCatEntity {
     @Override
     public void resetMoveControl() {
         this.setMoveControl(this.defaultMoveControl);
-
     }
 
     @Override
