@@ -346,11 +346,11 @@ public class CatEntity extends AbstractCatEntity {
         return ((float) Math.PI / 5F);
     }
 
-    @Override
-    public float getWagAngle(float limbSwing, float limbSwingAmount, float partialTickTime) {
-//        return Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        return Mth.cos(limbSwing * 0.6662F) * 0.9F * limbSwingAmount;
-    }
+//    @Override
+//    public float getWagAngle(float limbSwing, float limbSwingAmount, float partialTickTime) {
+////        return Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+//        return Mth.cos(limbSwing * 0.6662F) * 0.9F * limbSwingAmount;
+//    }
 
     @Override
     protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {

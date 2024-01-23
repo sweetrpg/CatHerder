@@ -60,7 +60,7 @@ public interface ICat {
     public List<AccessoryInstance> removeAccessories();
     public void markAccessoriesDirty();
 
-    public float getWagAngle(float limbSwing, float limbSwingAmount, float partialTickTime);
+//    public float getWagAngle(float limbSwing, float limbSwingAmount, float partialTickTime);
     public float getShakeAngle(float partialTicks, float offset);
     public float getInterestedAngle(float partialTicks);
 
