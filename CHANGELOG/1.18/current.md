@@ -1,1 +1,2 @@
 - `[CHG]` Hungry cats will follow their owner until fed to the detriment of most other things
+- `[FIX]` Fixed a few issues with the Patchouli book
