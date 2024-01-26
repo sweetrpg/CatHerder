@@ -41,6 +41,10 @@ public class CatWanderGoal extends Goal {
             return false;
         }
 
+        if(this.cat.isHungry()) {
+            return false;
+        }
+
         if(!this.cat.isMode(Mode.WANDERING)) {
             return false;
         }

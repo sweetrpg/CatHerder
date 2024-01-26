@@ -5,8 +5,11 @@
 <a href="https://www.curseforge.com/minecraft/mc-mods/cat-herder">
   <img src="http://cf.way2muchnoise.eu/full_580311_downloads.svg" alt="Curseforge Downloads">
 </a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/cat-herder">
+  <img src="https://img.shields.io/modrinth/dt/nwS25u6U" alt="Modrinth Downloads">
+</a>
 
-[![CI (1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml/badge.svg?branch=1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.18.yml)
+[![CI (1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg?branch=1.18)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
 
 ## Overview 
 
@@ -39,6 +42,6 @@ Thanks to everyone that has contributed/helped/inspired. This includes but is no
 * **Beth Schifferer** -- models and textures
 * **Michelle Schifferer** -- testing and ideas
 
-Download it from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cat-herder).
+Download it from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cat-herder) or [Modrinth](https://modrinth.com/mod/cat-herder).
 
 Want to know more about the mod? Take a peek at the [wiki](https://github.com/sweetrpg/CatHerder/wiki)!
