@@ -45,7 +45,7 @@ jobs:
           git config --global user.email "ci@sweetrpg.com"
           git config --global user.name "SweetRPG CI"
           
-          branch_version=$(cat ${{ github.ref_name }} | cut -f1 -d-)
+          branch_version=$(echo ${{ github.ref_name }} | cut -f1 -d-)
           
           echo "${{ github.sha }}" > .release-info/${branch_version}/RELEASE_HASH
           git add .release-info/${branch_version}/RELEASE_HASH
