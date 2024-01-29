@@ -34,8 +34,8 @@ println "On branch: ${branch.fullName}"
 println "Pipeline branch: " + (System.getenv('CI_COMMIT_BRANCH') ?: 'NONE')
 
 group = 'com.sweetrpg'
-archivesBaseName = "CatHerder-${project.target_mc_version}"
-version = System.getenv("CATHERDER_VERSION") ?: new File(".release-info/1.18/VERSION").text.trim()
+archivesBaseName = "${project.name}-${project.target_mc_version}"
+version = System.getenv("MOD_VERSION") ?: new File(".release-info/1.18/VERSION").text.trim()
 
 println "Project version: ${version}"
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -80,36 +80,45 @@ minecraft {
 
     runs {
         client {
-            taskName 'catherder_client'
+            taskName 'client'
             workingDirectory file('run')
             property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
-                catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                create(mod_id) {
+                    source(sourceSets.main)
+                    source(sourceSets.api)
+                }
             }
         }
 
         server {
-            taskName 'catherder_server'
+            taskName 'server'
             workingDirectory file('run-server')
             property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
-                catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                create(mod_id) {
+                    source(sourceSets.main)
+                    source(sourceSets.api)
+                }
             }
         }
 
         data {
-            taskName 'catherder_data'
+            taskName 'data'
             workingDirectory file('run')
             property 'forge.logging.console.level', 'debug'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            args '--mod', 'catherder', '--all', '--output', '"' + file('src/generated/resources/') + '"', '--existing', '"' + sourceSets.main.resources.srcDirs[0] + '"'
+            args '--mod', project.mod_id, '--all', '--output', '"' + file('src/generated/resources/') + '"', '--existing', '"' + sourceSets.main.resources.srcDirs[0] + '"'
             mods {
-                catherder.sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                create(mod_id) {
+                    source(sourceSets.main)
+                    source(sourceSets.api)
+                }
             }
         }
     }
