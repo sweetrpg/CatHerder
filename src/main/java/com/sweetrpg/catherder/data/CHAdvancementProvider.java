@@ -44,7 +44,7 @@ public class CHAdvancementProvider extends AdvancementProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Advancements";
+        return "Cat Herder Advancements";
     }
 
     @Override

@@ -50,7 +50,7 @@ public class CHLootTableProvider extends LootTableProvider {
 
     @Override
     public String getName() {
-        return "CatHerder LootTables";
+        return "Cat Herder Loot Tables";
     }
 
     @Override

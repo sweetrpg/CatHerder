@@ -17,7 +17,7 @@ public class CHBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Block Tags";
+        return "Cat Herder Block Tags";
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CHItemTagsProvider extends ItemTagsProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Item Tags";
+        return "Cat Herder Item Tags";
     }
 
     @Override
