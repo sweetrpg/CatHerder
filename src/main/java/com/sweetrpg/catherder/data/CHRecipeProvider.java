@@ -24,7 +24,7 @@ public class CHRecipeProvider extends RecipeProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Recipes";
+        return "Cat Herder Recipes";
     }
 
     @Override

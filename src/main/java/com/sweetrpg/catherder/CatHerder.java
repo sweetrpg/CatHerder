@@ -90,6 +90,7 @@ public class CatHerder {
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
+
             forgeEventBus.register(new ClientEventHandler());
             forgeEventBus.addListener(BedFinderRenderer::onWorldRenderLast);
         });

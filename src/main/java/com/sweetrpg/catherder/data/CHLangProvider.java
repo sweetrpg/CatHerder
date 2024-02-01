@@ -15,7 +15,7 @@ public class CHLangProvider extends LanguageProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Language Provider";
+        return "Cat Herder Language Provider";
     }
 
     @Override

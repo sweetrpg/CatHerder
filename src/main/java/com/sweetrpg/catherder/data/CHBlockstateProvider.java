@@ -37,7 +37,7 @@ public class CHBlockstateProvider extends BlockStateProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Blockstates/Block Models";
+        return "Cat Herder Blockstates/Block Models";
     }
 
     @Override

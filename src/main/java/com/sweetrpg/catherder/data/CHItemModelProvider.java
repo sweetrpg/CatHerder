@@ -24,7 +24,7 @@ public class CHItemModelProvider extends ItemModelProvider {
 
     @Override
     public String getName() {
-        return "CatHerder Item Models";
+        return "Cat Herder Item Models";
     }
 
     @Override
