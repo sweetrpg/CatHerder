@@ -237,7 +237,7 @@
   "talent.catherder.nermal": "Nermal",
   "talent.catherder.nermal.description": "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.",
   "talent.catherder.nermal.msg.1.line.1": "Villager: Cute cat! Take good care of %s.",
-  "talent.catherder.nermal.msg.1.line.2": "Here, %s can have some pork.",
+  "talent.catherder.nermal.msg.1.line.2": "Here, %s can have some food.",
   "talent.catherder.nermal.msg.2.line.1": "Villager: Awww, who's a good %s?",
   "talent.catherder.nermal.msg.2.line.2": "Whoozagood%s? You are! YOU ARE!",
   "talent.catherder.nermal.msg.2.line.3": "Yes you are! And a good %s gotta eat!",

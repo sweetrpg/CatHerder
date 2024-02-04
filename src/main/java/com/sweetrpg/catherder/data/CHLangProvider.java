@@ -236,7 +236,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -519,7 +519,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -802,7 +802,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -1085,7 +1085,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -1368,7 +1368,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -1651,7 +1651,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -1934,7 +1934,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");
@@ -2217,7 +2217,7 @@ public class CHLangProvider extends LanguageProvider {
         add(Constants.TRANSLATION_KEY_TALENT_MOUNT_NAME, "Mount");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_DESCRIPTION, "This skill will cause your cat to warm the heart of any villager, prompting the villager to give you presents! Higher levels in the skill increase the quality of the random gifts. This can only be done once every two Minecraft days. Mastering the skill allows you to do this once every Minecraft day.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_1, "Villager: Cute cat! Take good care of %s.");
-        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some pork.");
+        add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_1_LINE_2, "Here, %s can have some food.");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_1, "Villager: Awww, who's a good %s?");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_2, "Whoozagood%s? You are! YOU ARE!");
         add(Constants.TRANSLATION_KEY_TALENT_NERMAL_MSG_2_LINE_3, "Yes you are! And a good %s gotta eat!");

@@ -3,6 +3,8 @@ package com.sweetrpg.catherder.common.talent;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.registry.Talent;
 import com.sweetrpg.catherder.api.registry.TalentInstance;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.util.EntityUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -85,13 +87,13 @@ public class NermalTalent extends TalentInstance {
                 if(rewardId == 0) {
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.1.line.1", catIn.getGenderPronoun()), villager.getUUID());
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.1.line.2", catIn.getGenderSubject()), villager.getUUID());
-                    villager.spawnAtLocation(Items.PORKCHOP, 2);
+                    villager.spawnAtLocation(Items.SALMON, 2);
                 }
                 else if(rewardId == 1) {
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.2.line.1", catIn.getGenderTitle()), villager.getUUID());
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.2.line.2", catIn.getGenderTitle()), villager.getUUID());
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.2.line.3", catIn.getGenderTitle()), villager.getUUID());
-                    villager.spawnAtLocation(Items.PORKCHOP, 5);
+                    villager.spawnAtLocation(Items.SALMON_BUCKET, 2);
                 }
                 else if(rewardId == 2) {
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.3.line.1"), villager.getUUID());
@@ -116,9 +118,9 @@ public class NermalTalent extends TalentInstance {
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.6.line.2"), villager.getUUID());
                     owner.sendMessage(new TranslatableComponent("talent.catherder.nermal.msg.6.line.3"), villager.getUUID());
                     villager.spawnAtLocation(Items.APPLE, 1);
-                    villager.spawnAtLocation(Blocks.CAKE, 1);
-                    villager.spawnAtLocation(Items.SLIME_BALL, 3);
-                    villager.spawnAtLocation(Items.PORKCHOP, 5);
+                    villager.spawnAtLocation(ModBlocks.CHEESE_WHEEL.get(), 1);
+                    villager.spawnAtLocation(ModItems.CAT_TOY.get(), 3);
+                    villager.spawnAtLocation(Items.SALMON_BUCKET, 2);
                 }
 
                 this.cooldown = catIn.tickCount + (this.level() >= 5 ? 24000 : 48000);
