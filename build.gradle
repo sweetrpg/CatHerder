@@ -12,10 +12,12 @@ buildscript {
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
         classpath "org.ajoberstar.grgit:grgit-gradle:5.2.1"
         classpath 'org.parchmentmc:librarian:1.+'
+        classpath 'fr.flowarg:flowupdater-optifineplugin:2.0.0'
     }
 }
 
 plugins {
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id "com.modrinth.minotaur" version "2.+"
     // It's safest to have this on 2.+ to get the latest features and
     // bug fixes without having to worry about breaking changes.
@@ -70,6 +72,9 @@ repositories {
     }
     maven { // ???
         url 'https://maven.blamejared.com'
+    }
+    flatDir {
+        dir 'libs'
     }
 }
 
@@ -138,6 +143,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiter_version}")
 
     runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
+
+    runtimeOnly fg.deobf("fr.flowarg:flowupdater-optifineplugin:2.0.0")
 }
 
 // Define a task to create a jar of project sources
