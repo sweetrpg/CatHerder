@@ -32,10 +32,10 @@ jobs:
       - id: get_java_version
         run: |
           echo "java_version=$(cat .java-version | cut -d. -f1)" >> $GITHUB_OUTPUT
-      - name: Set up JDK ${{ steps.get_java_version.outputs.java_version | '17' }}
+      - name: Set up JDK ${{ steps.get_java_version.outputs.java_version || '17' }}
         uses: actions/setup-java@v2
         with:
-          java-version: ${{ steps.get_java_version.outputs.java_version | '17' }}
+          java-version: ${{ steps.get_java_version.outputs.java_version || '17' }}
           distribution: 'temurin'
       - id: get_last_version
         name: Get last version
