@@ -10,7 +10,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.+', changing: true
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
-        classpath "org.ajoberstar.grgit:grgit-gradle:5.2.1"
+        classpath "org.ajoberstar.grgit:grgit-gradle:5.2.2"
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
