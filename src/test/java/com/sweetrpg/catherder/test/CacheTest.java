@@ -10,7 +10,7 @@ public class CacheTest {
 
     @Test
     public void test() {
-        Cache<String> cache = Cache.make(() -> new String("string"));
+        Cache<String> cache = Cache.make(() -> new String("value"));
         String first = cache.get();
         String second = cache.get();
 
