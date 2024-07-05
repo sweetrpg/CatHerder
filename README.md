@@ -1,7 +1,7 @@
 Cat Herder
 ==========
 
-[![CI (1.16)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.16.yml/badge.svg?branch=1.16)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build-1.16.yml)
+[![CI (1.16)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml/badge.svg?branch=1.16)](https://github.com/sweetrpg/CatHerder/actions/workflows/ci-build.yml)
 
 **Cat Herder** is a **Minecraft** mod made for **Minecraft Forge**.
 
