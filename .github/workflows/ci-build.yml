@@ -29,10 +29,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up JDK 17
+      - id: get_java_version
+        run: |
+          echo "java_version=$(cat .java-version | cut -d. -f1)" >> $GITHUB_OUTPUT
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '17'
+          java-version: ${{ steps.get_java_version.outputs.java_version | '17' }}
           distribution: 'temurin'
       - id: get_last_version
         name: Get last version
