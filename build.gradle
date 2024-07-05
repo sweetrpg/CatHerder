@@ -132,12 +132,12 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:doggytalents-${dt_project_id}:${dt_file_id}")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
-//    implementation fg.deobf("curse.maven:farmers-delight-398521:${fd_file_id}")
+//    implementation fg.deobf("curse.maven:farmers-delight-${fd_project_id}:${fd_file_id}")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${jupiter_version}")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiter_version}")
 
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${top_file_id}")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-${top_project_id}:${top_file_id}")
 }
 
 // Define a task to create a jar of project sources
