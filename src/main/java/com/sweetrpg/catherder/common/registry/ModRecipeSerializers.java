@@ -2,7 +2,7 @@ package com.sweetrpg.catherder.common.registry;
 
 //import com.sweetrpg.catherder.common.inventory.recipe.CattreeRecipe;
 import com.sweetrpg.catherder.common.lib.Constants;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleRecipeSerializer;

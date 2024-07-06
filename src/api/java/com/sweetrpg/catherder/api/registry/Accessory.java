@@ -6,12 +6,9 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.Util;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Util;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IRegistryDelegate;
 

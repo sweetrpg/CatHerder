@@ -5,7 +5,7 @@ import com.sweetrpg.catherder.api.impl.MissingBeddingMaterial;
 import com.sweetrpg.catherder.api.impl.MissingCasingMissing;
 import com.sweetrpg.catherder.api.registry.*;
 import com.sweetrpg.catherder.common.util.Util;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;

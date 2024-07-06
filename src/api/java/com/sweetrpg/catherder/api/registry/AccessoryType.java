@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.api.registry;
 import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class AccessoryType extends ForgeRegistryEntry<AccessoryType> {

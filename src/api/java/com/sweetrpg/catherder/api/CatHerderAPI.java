@@ -11,7 +11,7 @@ import com.sweetrpg.catherder.api.registry.Talent;
 import net.minecraftforge.registries.IForgeRegistry;
 
 /**
- * @author ProPercivalalb
+ * @author ProPercivalalb, paulyhedral
  */
 public class CatHerderAPI {
 

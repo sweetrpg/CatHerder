@@ -2,9 +2,8 @@ package com.sweetrpg.catherder.api.inferface;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 
 public interface ICatFoodHandler extends ICatFoodPredicate {
 

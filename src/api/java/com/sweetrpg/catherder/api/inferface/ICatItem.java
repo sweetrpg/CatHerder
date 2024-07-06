@@ -1,9 +1,7 @@
 package com.sweetrpg.catherder.api.inferface;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.entity.player.Player;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.level.Level;
 
 public interface ICatItem {
 

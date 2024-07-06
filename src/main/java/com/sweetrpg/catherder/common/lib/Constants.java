@@ -1,7 +1,7 @@
 package com.sweetrpg.catherder.common.lib;
 
 import com.sweetrpg.catherder.common.util.Util;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 public class Constants {
 

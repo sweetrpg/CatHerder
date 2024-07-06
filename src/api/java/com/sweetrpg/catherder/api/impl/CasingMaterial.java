@@ -6,12 +6,12 @@ import javax.annotation.Nullable;
 
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.block.Block;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class CasingMaterial extends ICasingMaterial {
 
@@ -47,12 +47,12 @@ public class CasingMaterial extends ICasingMaterial {
      * The translation key using for the tooltip
      */
     @Override
-    public Component getTooltip() {
+    public ITextComponent getTooltip() {
         if (this.translationKey == null) {
             this.translationKey = Util.makeDescriptionId("cattree.casing", CatHerderAPI.CASING_MATERIAL.getKey(this));
         }
 
-        return new TranslatableComponent(this.translationKey);
+        return new TranslationTextComponent(this.translationKey);
     }
 
     /**

@@ -4,7 +4,7 @@ import com.sweetrpg.catherder.api.registry.Accessory;
 import com.sweetrpg.catherder.common.entity.accessory.*;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.lib.Resources;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.RegistryObject;

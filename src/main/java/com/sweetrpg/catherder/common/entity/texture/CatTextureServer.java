@@ -3,7 +3,7 @@ package com.sweetrpg.catherder.common.entity.texture;
 import com.google.common.hash.Hashing;
 import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.common.util.Util;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;

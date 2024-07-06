@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatFoodHandler;
 import com.sweetrpg.catherder.api.inferface.ICatFoodPredicate;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 
 public class FoodHandler {
 

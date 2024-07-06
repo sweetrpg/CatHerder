@@ -6,7 +6,7 @@ package com.sweetrpg.catherder.common.inventory.recipe;
 //import com.sweetrpg.catherder.api.registry.ICasingMaterial;
 //import com.sweetrpg.catherder.common.util.CattreeUtil;
 //import net.minecraft.core.NonNullList;
-//import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.util.ResourceLocation;
 //import net.minecraft.world.inventory.CraftingContainer;
 //import net.minecraft.world.item.ItemStack;
 //import net.minecraft.world.item.crafting.CustomRecipe;

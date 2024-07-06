@@ -6,7 +6,7 @@ package com.sweetrpg.catherder.common.addon.jei;
 //import com.sweetrpg.catherder.common.util.CattreeUtil;
 //import com.sweetrpg.catherder.common.util.Util;
 //import net.minecraft.core.NonNullList;
-//import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.util.ResourceLocation;
 //import net.minecraft.world.Container;
 //import net.minecraft.world.item.ItemStack;
 //import net.minecraft.world.item.crafting.Ingredient;

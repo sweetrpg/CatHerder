@@ -5,7 +5,7 @@ import com.sweetrpg.catherder.api.impl.CasingMaterial;
 import com.sweetrpg.catherder.api.registry.ICasingMaterial;
 import com.sweetrpg.catherder.common.addon.Addon;
 import com.sweetrpg.catherder.common.util.Util;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,6 +1,6 @@
 package com.sweetrpg.catherder.api.inferface;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 
 @FunctionalInterface
 public interface ICatFoodPredicate {
