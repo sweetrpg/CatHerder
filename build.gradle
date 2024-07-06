@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.0.+', changing: true
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
         classpath "org.ajoberstar.grgit:grgit-gradle:4.1.0"
         classpath 'org.parchmentmc:librarian:1.+'
@@ -68,7 +68,7 @@ repositories {
     maven { // The One Probe
         url "https://cursemaven.com"
     }
-    maven { // ???
+    maven { // Patchouli
         url 'https://maven.blamejared.com'
     }
 }
@@ -125,10 +125,10 @@ minecraft {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.forge_version}"
+    minecraft "net.minecraftforge:forge:${forge_version}"
 
-    compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     runtimeOnly fg.deobf("curse.maven:doggytalents-${dt_project_id}:${dt_file_id}")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${ptch_version}")
