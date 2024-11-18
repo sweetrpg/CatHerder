@@ -201,7 +201,7 @@ jar {
         attributes([
             "Specification-Title": "Cat Herder",
             "Specification-Vendor": "SweetRPG",
-            "Specification-Version": project.version, // "1",
+            "Specification-Version": project.version,
             "Implementation-Title": project.name,
             "Implementation-Version": project.version,
             "Implementation-Vendor" :"SweetRPG",
@@ -268,20 +268,4 @@ modrinth {
         optional.project "jei"
         optional.project "patchouli"
     }
-}
-
-// Must be done in afterEvaluate as the specific curseforge$id
-// task is generated lazily
-afterEvaluate {
-    // tasks.named("curseforge${project.curseforge_project_id}").get().dependsOn.add(makeChangelog)
-}
-
-if (project.hasProperty('UPDATE_MAPPINGS')) {
-    extractRangeMap {
-        sources sourceSets.api.java.srcDirs
-    }
-    applyRangeMap {
-        sources sourceSets.api.java.srcDirs
-    }
-    sourceSets.api.java.srcDirs.each { extractMappedNew.addTarget it }
 }

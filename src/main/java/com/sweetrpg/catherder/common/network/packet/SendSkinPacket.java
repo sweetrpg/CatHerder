@@ -39,30 +39,32 @@ public class SendSkinPacket implements IPacket<SendSkinData> {
     public void handle(SendSkinData data, Supplier<Context> ctx) {
         ctx.get().enqueueWork(() -> {
             LogicalSide side = ctx.get().getDirection().getReceptionSide();
-            if (side.isClient()) {
+            if(side.isClient()) {
                 CatHerder.LOGGER.debug("Client: Received cat texture to save and load");
                 String hash = "";
                 try {
                     hash = CatTextureManager.INSTANCE.saveTextureAndLoad(CatTextureManager.INSTANCE.getClientFolder(), data.image);
 
                     CatTextureManager.INSTANCE.setRequestHandled(hash);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     CatHerder.LOGGER.error("Cat skin failed to load");
                     CatTextureManager.INSTANCE.setRequestFailed(hash);
                 }
-            } else if (side.isServer()) {
+            }
+            else if(side.isServer()) {
                 Entity target = ctx.get().getSender().level.getEntity(data.entityId);
-                if (!(target instanceof CatEntity)) {
+                if(!(target instanceof CatEntity)) {
                     return;
                 }
 
                 CatEntity cat = (CatEntity) target;
-                if (!cat.canInteract(ctx.get().getSender())) {
+                if(!cat.canInteract(ctx.get().getSender())) {
                     return;
                 }
 
                 try {
-                    if (ctx.get().getSender().getServer().isDedicatedServer()) {
+                    if(ctx.get().getSender().getServer().isDedicatedServer()) {
 
                         // Sanitise the data
                         ByteArrayInputStream bis = new ByteArrayInputStream(data.image);
@@ -71,7 +73,8 @@ public class SendSkinPacket implements IPacket<SendSkinData> {
 
                         CatTextureServer.INSTANCE.saveTexture(CatTextureServer.INSTANCE.getServerFolder(), IOUtils.toByteArray(bis));
                     }
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
 
