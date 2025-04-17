@@ -3,7 +3,7 @@
   "landing_text": "This volume should help you in caring for your cat.$(br2)It will cover recipes that are added by this mod, talents that you can assign to your cats, items that you can make and the recipes associated, and new food items that are available.",
   "version": 2,
   "show_progress": false,
-  "creative_tab": "catheder",
+  "creative_tab": "catherder",
   "text_overflow_mode": "resize",
   "pause_game": true,
   "model": "patchouli:book_purple"

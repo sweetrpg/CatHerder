@@ -194,26 +194,26 @@ public class PetDoorBlock extends BaseEntityBlock {
 //            Component ownerName = NBTUtil.getTextComponent(tag, "ownerName");
 //
 //            if (name != null) {
-//                tooltip.add(new TextComponent("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
+//                tooltip.add(Component.literal("Bed Name: ").withStyle(ChatFormatting.WHITE).append(name));
 //            }
 //
 //            if (ownerName != null) {
-//                tooltip.add(new TextComponent("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
+//                tooltip.add(Component.literal("Name: ").withStyle(ChatFormatting.DARK_AQUA).append(ownerName));
 //
 //            }
 //
 //            if (ownerId != null && (flagIn.isAdvanced() || Screen.hasShiftDown())) {
-//                tooltip.add(new TextComponent("UUID: ").withStyle(ChatFormatting.AQUA).append(new TextComponent(ownerId.toString())));
+//                tooltip.add(Component.literal("UUID: ").withStyle(ChatFormatting.AQUA).append(Component.literal(ownerId.toString())));
 //            }
 //        }
     }
 
-//    @Override
-//    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-//        for (IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
-//            items.add(PetDoorUtil.createItemStack(structureId));
-//        }
-//    }
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        for (IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get().getValues()) {
+            items.add(PetDoorUtil.createItemStack(structureId));
+        }
+    }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {

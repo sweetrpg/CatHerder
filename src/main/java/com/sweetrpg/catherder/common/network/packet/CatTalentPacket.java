@@ -37,7 +37,7 @@ public class CatTalentPacket extends CatPacket<CatTalentData> {
         if(!ConfigHandler.TALENT.getFlag(data.talent)) {
             CatHerder.LOGGER.info("{} tried to adjust a disabled talent ({})",
                     ctx.get().getSender().getGameProfile().getName(),
-                    data.talent);
+                    data.talent.getRegistryName());
             return;
         }
 

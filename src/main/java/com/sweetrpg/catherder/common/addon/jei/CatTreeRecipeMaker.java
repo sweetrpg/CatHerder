@@ -10,8 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.block.Blocks;
@@ -24,10 +22,10 @@ import java.util.List;
 
 public final class CatTreeRecipeMaker {
 
-    public static List<CraftingRecipe> createCatTreeRecipes() {
+    public static List<IShapedRecipe<? extends Container>> createCatTreeRecipes() {
         Collection<IColorMaterial> colorMaterials = CatHerderAPI.COLOR_MATERIAL.get().getValues();
 
-        List<CraftingRecipe> recipes = new ArrayList<>(colorMaterials.size());
+        List<IShapedRecipe<? extends Container>> recipes = new ArrayList<>(colorMaterials.size());
         String group = "catherder";
         for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get()) {
 
@@ -44,7 +42,7 @@ public final class CatTreeRecipeMaker {
             ItemStack output = CatTreeUtil.createItemStack(colorId);
 
             ResourceLocation id = Util.getResource("" + output.getDescriptionId()); // TODO: update resource location
-            ShapedRecipe recipe = new ShapedRecipe(id, group, CraftingBookCategory.BUILDING, 3, 3, inputs, output);
+            ShapedRecipe recipe = new ShapedRecipe(id, group, 3, 3, inputs, output);
             recipes.add(recipe);
         }
 

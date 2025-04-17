@@ -2,6 +2,7 @@ package com.sweetrpg.catherder.client.entity.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.GameRenderer;
@@ -31,14 +32,14 @@ public class RenderUtil {
         stack.translate(0.0D, yOffset, 0.0D);
         stack.mulPose(entityRenderDispatcher.cameraOrientation());
         stack.scale(-scale, -scale, scale);
-        var matrix4f = stack.last().pose();
+        Matrix4f matrix4f = stack.last().pose();
         float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
         int j = (int) (f1 * 255.0F) << 24;
         Font fontrenderer = renderer.getFont();
         float f2 = -fontrenderer.width(text) / 2F;
-        fontrenderer.drawInBatch(text, f2, 0, 553648127, false, matrix4f, buffer, flag ? Font.DisplayMode.SEE_THROUGH : Font.DisplayMode.NORMAL, j, packedLightIn);
-        if(flag) {
-            fontrenderer.drawInBatch(text, f2, 0, -1, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0, packedLightIn);
+        fontrenderer.drawInBatch(text, f2, 0, 553648127, false, matrix4f, buffer, flag, j, packedLightIn);
+        if (flag) {
+            fontrenderer.drawInBatch(text, f2, 0, -1, false, matrix4f, buffer, false, 0, packedLightIn);
         }
 
         stack.popPose();
@@ -77,6 +78,7 @@ public class RenderUtil {
         bufferbuilder.vertex(maxX, yMax, zLevel).uv(textureXMax, textureYMax).endVertex();
         bufferbuilder.vertex(maxX, yMin, zLevel).uv(textureXMax, textureYMin).endVertex();
         bufferbuilder.vertex(minX, yMin, zLevel).uv(textureXMin, textureYMin).endVertex();
-        BufferUploader.drawWithShader(bufferbuilder.end());
+        bufferbuilder.end();
+        BufferUploader.end(bufferbuilder);
     }
 }

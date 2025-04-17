@@ -3,8 +3,10 @@ package com.sweetrpg.catherder.data;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sweetrpg.catherder.api.CatHerderAPI;
-import com.sweetrpg.catherder.common.registry.*;
+import com.sweetrpg.catherder.common.registry.ModBlocks;
+import com.sweetrpg.catherder.common.registry.ModEntityTypes;
+import com.sweetrpg.catherder.common.registry.ModItems;
+import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.util.CatTreeUtil;
 import com.sweetrpg.catherder.common.util.PetDoorUtil;
 import com.sweetrpg.catherder.common.util.Util;
@@ -12,15 +14,11 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,10 +27,45 @@ import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class CHAdvancementProvider implements ForgeAdvancementProvider.AdvancementGenerator {
+public class CHAdvancementProvider extends AdvancementProvider {
+
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
+    private final DataGenerator generator;
+
+    public CHAdvancementProvider(DataGenerator generatorIn) {
+        super(generatorIn);
+        this.generator = generatorIn;
+    }
+
+    private static Path getPath(Path pathIn, Advancement advancementIn) {
+        return pathIn.resolve("data/" + advancementIn.getId().getNamespace() + "/advancements/" + advancementIn.getId().getPath() + ".json");
+    }
 
     @Override
-    public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper existingFileHelper) {
+    public String getName() {
+        return "CatHerder Advancements";
+    }
+
+    @Override
+    public void run(HashCache cache) {
+        Path path = this.generator.getOutputFolder();
+        Set<ResourceLocation> set = Sets.newHashSet();
+        Consumer<Advancement> consumer = (advancement) -> {
+            if(!set.add(advancement.getId())) {
+                throw new IllegalStateException("Duplicate advancement " + advancement.getId());
+            }
+            else {
+                Path path1 = getPath(path, advancement);
+
+                try {
+                    DataProvider.save(GSON, cache, advancement.deconstruct().serializeToJson(), path1);
+                }
+                catch (IOException ioexception) {
+                    LOGGER.error("Couldn't save advancement {}", path1, ioexception);
+                }
+            }
+        };
 
         // training
         Advancement trainCat = Advancement.Builder.advancement()
@@ -53,8 +86,7 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement cleanLitterbox = Advancement.Builder.advancement()
                 .parent(litterbox)
                 .display(DisplayInfoBuilder.create().icon(ModItems.LITTER_SCOOP).frame(FrameType.TASK).translate("catherder.main.clean_litterbox").build())
-                .addCriterion("clean_litterbox", ItemInteractWithBlockTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.LITTERBOX.get()).build()),
-                        ItemPredicate.Builder.item().of(ModItems.LITTER_SCOOP.get())))
+                .addCriterion("clean_litterbox", UsingItemTrigger.TriggerInstance.lookingAt(EntityPredicate.Builder.entity().of(ModBlocks.LITTERBOX.getId()), ItemPredicate.Builder.item().of(ModItems.LITTER_SCOOP.get())))
                 .save(consumer, Util.getResourcePath("main/clean_litterbox"));
 
         // cardboard box
@@ -127,12 +159,11 @@ public class CHAdvancementProvider implements ForgeAdvancementProvider.Advanceme
         Advancement throwToy = Advancement.Builder.advancement()
                 .parent(trainCat)
                 .display(DisplayInfoBuilder.create().icon(ModItems.CAT_TOY).frame(FrameType.TASK).translate("catherder.main.toy").build())
-                .addCriterion("play_with_cat", PickedUpItemTrigger.TriggerInstance.thrownItemPickedUpByEntity(EntityPredicate.Composite.ANY,
-                        ItemPredicate.Builder.item().of(ModTags.TOYS).build(),
-                        EntityPredicate.Composite.wrap(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntityTypes.CAT.get())).build())))
+                .addCriterion("play_with_cat", ItemPickedUpByEntityTrigger.TriggerInstance.itemPickedUpByEntity(EntityPredicate.Composite.ANY,
+                                ItemPredicate.Builder.item().of(ModTags.TOYS),
+                                EntityPredicate.Composite.wrap(EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntityTypes.CAT.get())).build())))
                 .save(consumer, Util.getResourcePath("main/play_with_cat"));
 
         // Nermal
     }
-
 }

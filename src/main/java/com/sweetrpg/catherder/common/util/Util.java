@@ -199,14 +199,6 @@ public class Util {
             return ResourceLocation.tryParse((String) obj);
         }
 
-//        if (obj instanceof IForgeRegistryEntry) {
-//            return ((IForgeRegistryEntry) obj).getRegistryName();
-//        }
-//
-//        if (obj instanceof IRegistryDelegate) {
-//            return ((IRegistryDelegate) obj).name();
-//        }
-
         if (obj instanceof RegistryObject) {
             return ((RegistryObject) obj).getId();
         }

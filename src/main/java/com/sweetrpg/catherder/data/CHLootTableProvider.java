@@ -2,7 +2,6 @@ package com.sweetrpg.catherder.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import com.sweetrpg.catherder.common.block.CatTreeBlock;
 import com.sweetrpg.catherder.common.block.CheeseWheelBlock;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
@@ -10,16 +9,12 @@ import com.sweetrpg.catherder.common.registry.ModItems;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.loot.EntityLootSubProvider;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -38,120 +33,133 @@ import net.minecraft.world.level.storage.loot.providers.number.BinomialDistribut
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CHLootTableProvider extends LootTableProvider {
 
-    public CHLootTableProvider(PackOutput p_254123_) {
-        super(p_254123_, Collections.emptySet(),
-                List.of(
-                        new LootTableProvider.SubProviderEntry(Blocks::new, LootContextParamSets.BLOCK),
-                        new LootTableProvider.SubProviderEntry(Entities::new, LootContextParamSets.ENTITY)
-                )
-        );
+    public CHLootTableProvider(DataGenerator dataGeneratorIn) {
+        super(dataGeneratorIn);
+    }
+
+    @Override
+    public String getName() {
+        return "CatHerder LootTables";
+    }
+
+    @Override
+    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+        return ImmutableList.of(Pair.of(Blocks::new, LootContextParamSets.BLOCK), Pair.of(Entities::new, LootContextParamSets.ENTITY));
     }
 
     @Override
     protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationTracker) {
     }
 
-        private static class Blocks extends BlockLootSubProvider {
+    private static class Blocks extends BlockLoot {
 
-            private static final Set<Item> EXPLOSION_RESISTANT = Stream.of(ModBlocks.CAT_TREE.get(), ModBlocks.PET_DOOR.get()).map(ItemLike::asItem).collect(Collectors.toSet());
+        @Override
+        protected void addTables() {
+            dropCatTree(ModBlocks.CAT_TREE);
+            dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
+            dropsSelf(ModBlocks.LITTERBOX);
+//            dropsWildCatnip(ModBlocks.WILD_CATNIP);
+            dropsSelf(ModBlocks.CARDBOARD_BOX);
+//            dropsCatnipCrop(ModBlocks.CATNIP_CROP);
+            dropsMouseTrap(ModBlocks.MOUSE_TRAP);
+            dropsCheeseWheel(ModBlocks.CHEESE_WHEEL);
+            dropPetDoor(ModBlocks.PET_DOOR);
+        }
 
-            protected Blocks() {
-                super(EXPLOSION_RESISTANT, FeatureFlags.VANILLA_SET);
-                //TODO Auto-generated constructor stub
-            }
+        private void dropsCheeseWheel(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                    .withPool(applyExplosionCondition(block.get(),
+                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                            .setRolls(ConstantValue.exactly(1))
+                            .add(AlternativesEntry.alternatives(
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 1)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 2)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 3)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 4)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 5)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(5))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 6)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 7)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(7))),
+                                    LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
+                                            .when(() -> {
+                                                return new LootItemBlockStatePropertyCondition.Builder(block.get())
+                                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                                .hasProperty(CheeseWheelBlock.SERVINGS, 8)).build();
+                                            })
+                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(8)))
+                            )))
+                    .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                            .setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(Items.BOWL)));
 
-            private void dropsCheeseWheel(Supplier<? extends Block> block) {
-                LootTable.Builder lootTableBuilder = LootTable.lootTable()
-                        .withPool(applyExplosionCondition(block.get(),
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
-                                .setRolls(ConstantValue.exactly(1))
-                                .add(AlternativesEntry.alternatives(
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 1)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 2)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 3)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 4)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 5)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(5))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 6)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 7)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(7))),
-                                        LootItem.lootTableItem(ModItems.CHEESE_WEDGE.get())
-                                                .when(() -> {
-                                                    return new LootItemBlockStatePropertyCondition.Builder(block.get())
-                                                            .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                                    .hasProperty(CheeseWheelBlock.SERVINGS, 8)).build();
-                                                })
-                                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(8)))
-                                )))
-                        .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                                .setRolls(ConstantValue.exactly(1))
-                                .add(LootItem.lootTableItem(Items.BOWL)));
+            this.add(block.get(), lootTableBuilder);
+        }
 
-                this.add(block.get(), lootTableBuilder);
-            }
-
-            private void dropsMouseTrap(Supplier<? extends Block> block) {
-                LootTable.Builder lootTableBuilder = LootTable.lootTable()
+        private void dropsMouseTrap(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
 //                                                         .withPool(applyExplosionCondition(block.get(),
 //                                                                                           LootPool.lootPool().when(() -> {
 //                                                                                               BlockStateProperties.TRIGGERED.getValue()
 //                                                                                           }))
 //                                                                           .add(LootItem.lootTableItem(ModBlocks.CHEESE_WHEEL.get())))
-                        .withPool(applyExplosionCondition(block.get(),
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
-                                .add(LootItem.lootTableItem(block.get())));
+                    .withPool(applyExplosionCondition(block.get(),
+                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                            .add(LootItem.lootTableItem(block.get())));
 
-                this.add(block.get(), lootTableBuilder);
-            }
+            this.add(block.get(), lootTableBuilder);
+        }
 
 //        private void dropsWildCatnip(Supplier<? extends Block> block) {
 //            LootTable.Builder lootTableBuilder = LootTable.lootTable()
@@ -194,65 +202,48 @@ public class CHLootTableProvider extends LootTableProvider {
 //            this.add(block.get(), builder);
 //        }
 
-            private void dropCatTree(Supplier<? extends Block> block) {
-                LootTable.Builder lootTableBuilder = LootTable.lootTable()
-                        .withPool(applyExplosionCondition(block.get(),
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
-                                .add(LootItem.lootTableItem(block.get())
-                                        .apply(
-                                                CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                                        .copy("colorId", "catherder.colorId")
+        private void dropCatTree(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                    .withPool(applyExplosionCondition(block.get(),
+                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                            .add(LootItem.lootTableItem(block.get())
+                                    .apply(
+                                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                                    .copy("colorId", "catherder.colorId")
 //                                                                                                                .copy("beddingId", "catherder.beddingId")
-                                                        .copy("ownerId", "catherder.ownerId")
-                                                        .copy("name", "catherder.name")
-                                                        .copy("ownerName", "catherder.ownerName"))));
+                                                    .copy("ownerId", "catherder.ownerId")
+                                                    .copy("name", "catherder.name")
+                                                    .copy("ownerName", "catherder.ownerName"))));
 
-                this.add(block.get(), lootTableBuilder);
-            }
+            this.add(block.get(), lootTableBuilder);
+        }
 
-            private void dropPetDoor(Supplier<? extends Block> block) {
-                LootTable.Builder lootTableBuilder = LootTable.lootTable()
-                        .withPool(applyExplosionCondition(block.get(),
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
-                                .add(LootItem.lootTableItem(block.get())
-                                        .apply(
-                                                CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                                        .copy("structureId", "catherder.structureId"))));
+        private void dropPetDoor(Supplier<? extends Block> block) {
+            LootTable.Builder lootTableBuilder = LootTable.lootTable()
+                    .withPool(applyExplosionCondition(block.get(),
+                            LootPool.lootPool().setRolls(ConstantValue.exactly(1)))
+                            .add(LootItem.lootTableItem(block.get())
+                                    .apply(
+                                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                                    .copy("structureId", "catherder.structureId"))));
 
-                this.add(block.get(), lootTableBuilder);
-            }
+            this.add(block.get(), lootTableBuilder);
+        }
 
-            private void dropsSelf(Supplier<? extends Block> block) {
-                dropSelf(block.get());
-            }
-
-            @Override
-            protected Iterable<Block> getKnownBlocks() {
-                return ModBlocks.BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
-            }
-
-            @Override
-            protected void generate() {
-                dropCatTree(ModBlocks.CAT_TREE);
-                dropsSelf(ModBlocks.CAT_BOWL); // Drop with the name of the cat bowl
-                dropsSelf(ModBlocks.LITTERBOX);
-//            dropsWildCatnip(ModBlocks.WILD_CATNIP);
-                dropsSelf(ModBlocks.CARDBOARD_BOX);
-//            dropsCatnipCrop(ModBlocks.CATNIP_CROP);
-                dropsMouseTrap(ModBlocks.MOUSE_TRAP);
-                dropsCheeseWheel(ModBlocks.CHEESE_WHEEL);
-                dropPetDoor(ModBlocks.PET_DOOR);
-            }
-    }
-
-    private static class Entities extends EntityLootSubProvider {
-
-        protected Entities() {
-            super(FeatureFlags.VANILLA_SET);
+        private void dropsSelf(Supplier<? extends Block> block) {
+            dropSelf(block.get());
         }
 
         @Override
-        public void generate() {
+        protected Iterable<Block> getKnownBlocks() {
+            return ModBlocks.BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
+        }
+    }
+
+    private static class Entities extends EntityLoot {
+
+        @Override
+        protected void addTables() {
             this.registerNoLoot(ModEntityTypes.CAT);
 
 //            for(EntityType type : Arrays.asList(EntityType.CAT, EntityType.COW, EntityType.SHEEP, EntityType.HORSE, EntityType.LLAMA, EntityType.DONKEY, EntityType.GOAT, EntityType.MULE, EntityType.MOOSHROOM, EntityType.OCELOT, EntityType.PIG)) {
@@ -274,9 +265,8 @@ public class CHLootTableProvider extends LootTableProvider {
         }
 
         @Override
-        protected java.util.stream.Stream<EntityType<?>> getKnownEntityTypes() {
-            return ModEntityTypes.ENTITIES.getEntries().stream().map(Supplier::get);
+        protected Iterable<EntityType<?>> getKnownEntities() {
+            return ModEntityTypes.ENTITIES.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
         }
     }
-
 }

@@ -8,6 +8,7 @@ import com.sweetrpg.catherder.api.registry.*;
 import com.sweetrpg.catherder.common.util.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
 
@@ -31,8 +32,8 @@ public class ModRegistries {
         CatHerderAPI.DYE_MATERIAL = event.create(makeRegistry(Keys.DYE_REGISTRY, IDyeMaterial.class).addCallback(DyeCallbacks.INSTANCE));
     }
 
-    private static <T> RegistryBuilder<T> makeRegistry(final ResourceLocation rl, Class<T> type) {
-        return new RegistryBuilder<T>().setName(rl);
+    private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(final ResourceLocation rl, Class<T> type) {
+        return new RegistryBuilder<T>().setName(rl).setType(type);
     }
 
     private static class StructureCallbacks implements IForgeRegistry.DummyFactory<IStructureMaterial> {
@@ -41,7 +42,7 @@ public class ModRegistries {
 
         @Override
         public IStructureMaterial createDummy(ResourceLocation key) {
-            return new MissingStructureMaterial();
+            return new MissingStructureMaterial().setRegistryName(key);
         }
     }
 
@@ -51,7 +52,7 @@ public class ModRegistries {
 
         @Override
         public IColorMaterial createDummy(ResourceLocation key) {
-            return new MissingColorMaterial();
+            return new MissingColorMaterial().setRegistryName(key);
         }
     }
 
@@ -61,7 +62,7 @@ public class ModRegistries {
 
         @Override
         public IDyeMaterial createDummy(ResourceLocation key) {
-            return new MissingDyeMaterial();
+            return new MissingDyeMaterial().setRegistryName(key);
         }
     }
 

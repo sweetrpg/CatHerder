@@ -2,7 +2,6 @@ package com.sweetrpg.catherder.common.util;
 
 import com.sweetrpg.catherder.CatHerder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -119,34 +118,9 @@ public class NBTUtil {
         return null;
     }
 
-    @Nullable
-    public static <T> Holder.Reference<T> getRegistryDelegate(CompoundTag compound, String key, IForgeRegistry<T> registry) {
-        ResourceLocation rl = NBTUtil.getResourceLocation(compound, key);
-        if(rl != null) {
-            Optional<Holder.Reference<T>> delegate = registry.getDelegate(rl);
-            if(delegate.isPresent()) {
-                return delegate.get();
-            }
-            else {
-                CatHerder.LOGGER.warn("Unable to load registry value in registry {} with resource location {}", registry.getRegistryName(), rl);
-            }
-        }
-        else {
-            CatHerder.LOGGER.warn("Unable to load resource location in NBT:{}, for {} registry", key, registry.getRegistryName());
-        }
-
-        return null;
-    }
-
-    public static <T> void putRegistryValue(CompoundTag compound, String key, Holder.Reference<T> value) {
-        if(value != null) {
-            NBTUtil.putResourceLocation(compound, key, value.key().location());
-        }
-    }
-
-    public static void putRegistryValue(CompoundTag compound, String key, ResourceLocation value) {
+    public static <T> void putRegistryValue(CompoundTag compound, String key, T value, IForgeRegistry<T> registry) {
         if (value != null) {
-            NBTUtil.putResourceLocation(compound, key, value);
+            NBTUtil.putResourceLocation(compound, key, registry.getKey(value));
         }
     }
 

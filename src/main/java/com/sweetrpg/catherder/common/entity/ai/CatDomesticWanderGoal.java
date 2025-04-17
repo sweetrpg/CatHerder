@@ -6,7 +6,6 @@ import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.util.MathUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.phys.Vec3;
@@ -106,7 +105,7 @@ public class CatDomesticWanderGoal extends Goal {
     @Nullable
     protected Vec3 getPosition() {
         PathNavigation pathNavigate = this.cat.getNavigation();
-        RandomSource random = this.cat.getRandom();
+        Random random = this.cat.getRandom();
 
         int xzRange = 5;
         int yRange = 3;
@@ -119,7 +118,7 @@ public class CatDomesticWanderGoal extends Goal {
             return this.cat.position();
         }
 
-        BlockPos bestPos = this.cat.blockPosition().offset(random.nextInt(xzRange), 0, random.nextInt(xzRange));
+        BlockPos bestPos = this.cat.blockPosition().offset(random.nextDouble(xzRange), 0, random.nextDouble(xzRange));
         for(int attempt = 0; attempt < 5; ++attempt) {
             int dx = random.nextInt(2 * xzRange + 1) - xzRange;
             int dy = random.nextInt(2 * yRange + 1) - yRange;

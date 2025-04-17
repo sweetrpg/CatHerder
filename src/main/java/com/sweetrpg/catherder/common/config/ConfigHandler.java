@@ -155,7 +155,7 @@ public class ConfigHandler {
             DISABLED_TALENTS = new HashMap<>();
 
             CatHerderAPI.TALENTS.get().forEach((loc) ->
-                DISABLED_TALENTS.put(loc, builder.define(loc.toString(), true))
+                DISABLED_TALENTS.put(loc, builder.define(CatHerderAPI.TALENTS.get().getKey(loc).toString(), true))
             );
             builder.pop();
         }

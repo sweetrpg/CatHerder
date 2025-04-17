@@ -4,27 +4,22 @@ import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.common.registry.ModBlocks;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.registry.ModTags;
-import com.sweetrpg.catherder.common.lib.Constants;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Arrays;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class CHItemTagsProvider extends ItemTagsProvider {
 
-    public CHItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> providers, TagsProvider<Block> tagProvider, ExistingFileHelper existingFileHelper) {
-        super(packOutput, providers, tagProvider.contentsGetter(), CatHerderAPI.MOD_ID, existingFileHelper);
+    public CHItemTagsProvider(DataGenerator generatorIn, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
+        super(generatorIn, blockTagProvider, CatHerderAPI.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -33,7 +28,7 @@ public class CHItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    public void addTags(HolderLookup.Provider provider) {
+    public void addTags() {
         createTag(ModTags.BEG_ITEMS_TAMED, ModItems.BREEDING_TREAT,
                 ModItems.CAT_TOY,
                 () -> Items.STRING);
@@ -45,7 +40,7 @@ public class CHItemTagsProvider extends ItemTagsProvider {
                 ModItems.WILD_TREAT);
         createTag(ModTags.MEAT, () -> Items.BEEF, () -> Items.COOKED_BEEF,
                 () -> Items.CHICKEN, () -> Items.COOKED_CHICKEN,
-                () -> Items.PORKCHOP,() ->  Items.COOKED_PORKCHOP,
+                () -> Items.PORKCHOP, () -> Items.COOKED_PORKCHOP,
                 () -> Items.MUTTON, () -> Items.COOKED_MUTTON,
                 () -> Items.COOKED_RABBIT, () -> Items.RABBIT);
         createTag(ModTags.CAT_TREES, ModBlocks.CAT_TREE);

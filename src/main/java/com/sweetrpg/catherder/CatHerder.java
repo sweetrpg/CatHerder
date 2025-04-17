@@ -7,18 +7,18 @@ import com.sweetrpg.catherder.client.event.ClientEventHandler;
 import com.sweetrpg.catherder.common.lib.Capabilities;
 import com.sweetrpg.catherder.common.CommonSetup;
 import com.sweetrpg.catherder.common.addon.AddonManager;
+import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.event.EventHandler;
 import com.sweetrpg.catherder.common.lib.Constants;
 import com.sweetrpg.catherder.common.registry.*;
-import com.sweetrpg.catherder.common.util.BackwardsComp;
-import com.sweetrpg.catherder.common.world.WildCropGeneration;
 import com.sweetrpg.catherder.data.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -70,31 +70,23 @@ public class CatHerder {
         ModMaterials.DYES.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
 
-        ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
-        ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
-        ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
-        ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
-
-        WildCropGeneration.load();
-
         modEventBus.addListener(ModRegistries::newRegistry);
         modEventBus.addListener(ModEntityTypes::addEntityAttributes);
         modEventBus.addListener(Capabilities::registerCaps);
 
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         forgeEventBus.addListener(this::serverStarting);
-//        forgeEventBus.addListener(this::registerCommands);
+        forgeEventBus.addListener(this::registerCommands);
 
         forgeEventBus.register(new EventHandler());
-        forgeEventBus.register(new BackwardsComp());
+//        forgeEventBus.register(new BackwardsComp());
 
         // Client Events
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             modEventBus.addListener(this::clientSetup);
             modEventBus.addListener(ModBlocks::registerBlockColours);
             modEventBus.addListener(ModItems::registerItemColours);
-            modEventBus.addListener(ClientEventHandler::registerModelForBaking);
-            modEventBus.addListener(ClientEventHandler::modifyBakedModels);
+            modEventBus.addListener(ClientEventHandler::onModelBakeEvent);
             modEventBus.addListener(ClientSetup::setupTileEntityRenderers);
             modEventBus.addListener(ClientSetup::setupEntityRenderers);
             modEventBus.addListener(ClientSetup::addClientReloadListeners);
@@ -114,10 +106,10 @@ public class CatHerder {
         LOGGER.debug("Server starting");
     }
 
-//    public void registerCommands(final RegisterCommandsEvent event) {
-//        LOGGER.debug("Register commands");
-//        CatRespawnCommand.register(event.getDispatcher());
-//    }
+    public void registerCommands(final RegisterCommandsEvent event) {
+        LOGGER.debug("Register commands");
+        CatRespawnCommand.register(event.getDispatcher());
+    }
 
     @OnlyIn(Dist.CLIENT)
     public void clientSetup(final FMLClientSetupEvent event) {
@@ -141,32 +133,30 @@ public class CatHerder {
         LOGGER.debug("Gather data: {}", event);
 
         DataGenerator gen = event.getGenerator();
-        var packOutput = gen.getPackOutput();
-        var lookup = event.getLookupProvider();
-        var fileHelper = event.getExistingFileHelper();
+//        PackOutput packOutput = gen.getPackOutput();
 
         if(event.includeClient()) {
-            CHBlockstateProvider blockstates = new CHBlockstateProvider(packOutput, event.getExistingFileHelper());
+            CHBlockstateProvider blockstates = new CHBlockstateProvider(gen, event.getExistingFileHelper());
             gen.addProvider(true, blockstates);
-            gen.addProvider(true, new CHItemModelProvider(packOutput, blockstates.getExistingHelper()));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_EN_US));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_EN_GB));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_DE_DE));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_KO_KR));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_RU_RU));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_VI_VN));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_ZH_CN));
-            gen.addProvider(true, new CHLangProvider(packOutput, Constants.LOCALE_ZH_TW));
+            gen.addProvider(true, new CHItemModelProvider(gen, blockstates.getExistingHelper()));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_EN_US));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_EN_GB));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_DE_DE));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_KO_KR));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_RU_RU));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_VI_VN));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_ZH_CN));
+            gen.addProvider(true, new CHLangProvider(gen, Constants.LOCALE_ZH_TW));
         }
 
         if(event.includeServer()) {
             // gen.addProvider(new DTBlockTagsProvider(gen));
-            gen.addProvider(true, new CHAdvancements(packOutput, lookup, fileHelper));
-            CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(packOutput, lookup, fileHelper);
+            gen.addProvider(true, new CHAdvancementProvider(gen));
+            CHBlockTagsProvider blockTagProvider = new CHBlockTagsProvider(gen, event.getExistingFileHelper());
             gen.addProvider(true, blockTagProvider);
-            gen.addProvider(true, new CHItemTagsProvider(packOutput, lookup, blockTagProvider, event.getExistingFileHelper()));
-            gen.addProvider(true, new CHRecipeProvider(packOutput));
-            gen.addProvider(true, new CHLootTableProvider(packOutput));
+            gen.addProvider(true, new CHItemTagsProvider(gen, blockTagProvider, event.getExistingFileHelper()));
+            gen.addProvider(true, new CHRecipeProvider(gen));
+            gen.addProvider(true, new CHLootTableProvider(gen));
         }
     }
 }

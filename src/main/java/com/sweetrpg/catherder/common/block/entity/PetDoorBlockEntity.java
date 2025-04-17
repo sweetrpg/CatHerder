@@ -35,7 +35,7 @@ public class PetDoorBlockEntity extends PlacedBlockEntity {
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
 
-        NBTUtil.putRegistryValue(compound, "structureId",CatHerderAPI.STRUCTURE_MATERIAL.get().getKey(this.structureType));
+        NBTUtil.putRegistryValue(compound, "structureId", this.structureType, CatHerderAPI.STRUCTURE_MATERIAL.get());
     }
 
     public void setStructure(IStructureMaterial structureType) {
@@ -50,7 +50,7 @@ public class PetDoorBlockEntity extends PlacedBlockEntity {
 
     @Override
     public ModelData getModelData() {
-        return ModelData.builder()
+        return  ModelData.builder()
                 .with(STRUCTURE, this.structureType)
                 .with(FACING, Direction.NORTH)
                 .build();

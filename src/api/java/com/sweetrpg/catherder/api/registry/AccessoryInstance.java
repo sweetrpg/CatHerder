@@ -44,9 +44,6 @@ public class AccessoryInstance {
         return this.ofType(accessoryTypeIn);
     }
 
-    public <T> boolean ofType(T accessoryTypeDelegateIn) {
-        return accessoryTypeDelegateIn.equals(this.accessory.getType());
-    }
 
     public AccessoryInstance copy() {
         return new AccessoryInstance(this.accessory);

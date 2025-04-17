@@ -50,7 +50,7 @@ public class BedFinderRenderer {
 
         // TODO: This line has no effect RenderSystem.lineWidth(2.0F);
 
-//        RenderSystem.disableTexture();
+        RenderSystem.disableTexture();
         Vec3 vec3d = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         double d0 = vec3d.x();
         double d1 = vec3d.y();
@@ -60,12 +60,12 @@ public class BedFinderRenderer {
         buf.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
         LevelRenderer.renderLineBox(stack, buf, boundingBox.move(-d0, -d1, -d2), 1F, 1F, 0, 1F);
         buf.end();
-        BufferUploader.drawWithShader(buf.end());
+        BufferUploader.end(buf);
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableDepthTest(); //Make the line see thought blocks
         RenderSystem.depthMask(true);
-//        RenderSystem.enableTexture();
+        RenderSystem.enableTexture();
         RenderSystem.disableBlend();
     }
 }

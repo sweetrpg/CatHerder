@@ -1,13 +1,14 @@
 package com.sweetrpg.catherder.common;
 
 import com.sweetrpg.catherder.api.feature.FoodHandler;
+import com.sweetrpg.catherder.common.command.CatRespawnCommand;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
 import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.event.FishFoodHandler;
 import com.sweetrpg.catherder.common.network.PacketHandler;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.HappyEaterTalent;
-import com.sweetrpg.catherder.common.world.WildCropGeneration;
+import com.sweetrpg.catherder.common.world.gen.WildCropGeneration;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
@@ -23,10 +24,10 @@ public class CommonSetup {
 
 //            InteractHandler.registerHandler(new HelmetInteractHandler());
             ConfigHandler.initTalentConfig();
-//            CatRespawnCommand.registerSerilizers();
+            CatRespawnCommand.registerSerilizers();
             CatEntity.initDataParameters();
 
-//            WildCropGeneration.load();
+            WildCropGeneration.registerWildCatnipGeneration();
 
             registerCompostables();
 //            registerDispenserBehaviors();

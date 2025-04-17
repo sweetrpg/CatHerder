@@ -8,8 +8,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.common.crafting.IShapedRecipe;
@@ -24,10 +22,10 @@ import net.minecraft.world.level.block.Blocks;
 
 public final class PetDoorRecipeMaker {
 
-    public static List<CraftingRecipe> createPetDoorRecipes() {
+    public static List<IShapedRecipe<? extends Container>> createPetDoorRecipes() {
         Collection<IStructureMaterial> structureMaterials = CatHerderAPI.STRUCTURE_MATERIAL.get().getValues();
 
-        List<CraftingRecipe> recipes = new ArrayList<>(structureMaterials.size());
+        List<IShapedRecipe<? extends Container>> recipes = new ArrayList<>(structureMaterials.size());
         String group = "catherder";
         for(IStructureMaterial structureId : CatHerderAPI.STRUCTURE_MATERIAL.get()) {
 
@@ -42,7 +40,7 @@ public final class PetDoorRecipeMaker {
             ItemStack output = PetDoorUtil.createItemStack(structureId);
 
             ResourceLocation id = Util.getResource("" + output.getDescriptionId()); // TODO: update resource location
-            ShapedRecipe recipe = new ShapedRecipe(id, group, CraftingBookCategory.BUILDING, 3, 3, inputs, output);
+            ShapedRecipe recipe = new ShapedRecipe(id, group, 3, 3, inputs, output);
             recipes.add(recipe);
         }
 

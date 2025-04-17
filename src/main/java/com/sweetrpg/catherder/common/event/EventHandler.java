@@ -6,18 +6,20 @@ import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
 import com.sweetrpg.catherder.common.registry.ModItems;
 import com.sweetrpg.catherder.common.talent.TomcatTalent;
+import com.sweetrpg.catherder.common.world.gen.WildCropGeneration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -53,8 +55,7 @@ public class EventHandler {
                     cat.setOrderedToSit(false);
                     cat.setAge(vanillaCat.getAge());
                     cat.absMoveTo(vanillaCat.getX(), vanillaCat.getY(), vanillaCat.getZ(), vanillaCat.getYRot(), vanillaCat.getXRot());
-                    cat.setOriginalBreed(-1 /*((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType()*/);
-                    cat.setVariant(((Cat)vanillaCat).getVariant());
+                    cat.setOriginalBreed(((net.minecraft.world.entity.animal.Cat) vanillaCat).getCatType());
 
                     world.addFreshEntity(cat);
 
@@ -88,7 +89,7 @@ public class EventHandler {
 //    }
 
     @SubscribeEvent
-    public void onEntitySpawn(final EntityJoinLevelEvent event) {
+    public void onEntitySpawn(final EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
 
         if(entity instanceof Creeper) {
@@ -100,7 +101,7 @@ public class EventHandler {
     @SubscribeEvent
     public void playerLoggedIn(final PlayerLoggedInEvent event) {
         if(ConfigHandler.SERVER.STARTING_ITEMS.get()) {
-            Player player = event.getEntity();
+            Player player = event.getPlayer();
             CompoundTag tag = player.getPersistentData();
 
             if(!tag.contains(Player.PERSISTED_NBT_TAG)) {

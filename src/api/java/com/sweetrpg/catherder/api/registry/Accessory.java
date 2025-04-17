@@ -83,10 +83,6 @@ public class Accessory {
         return this.of(accessoryIn);
     }
 
-    public <T> boolean of(T accessoryDelegateIn) {
-        return accessoryDelegateIn.equals(this);
-    }
-
     private ResourceLocation modelTexture;
 
     public <T extends Accessory> T setModelTexture(ResourceLocation modelTextureIn) {

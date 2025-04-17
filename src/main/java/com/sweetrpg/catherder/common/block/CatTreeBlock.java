@@ -20,6 +20,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -207,12 +209,12 @@ public class CatTreeBlock extends BaseEntityBlock {
                     }
                     else {
                         Component name = catTreeEntity.getOwnerName();
-                        player.sendSystemMessage(Component.translatable("block.catherder.cat_tree.owner", name != null ? name : "someone"));
+                        player.sendMessage(Component.translatable("block.catherder.cat_tree.owner", name != null ? name : "someone"), Util.NIL_UUID);
                         return InteractionResult.FAIL;
                     }
                 }
                 else {
-                    player.sendSystemMessage(Component.translatable("block.catherder.cat_tree.set_owner_help"));
+                    player.sendMessage(Component.translatable("block.catherder.cat_tree.set_owner_help"), Util.NIL_UUID);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -284,12 +286,12 @@ public class CatTreeBlock extends BaseEntityBlock {
         }
     }
 
-//    @Override
-//    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-//        for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
-//            items.add(CatTreeUtil.createItemStack(colorId));
-//        }
-//    }
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        for(IColorMaterial colorId : CatHerderAPI.COLOR_MATERIAL.get().getValues()) {
+            items.add(CatTreeUtil.createItemStack(colorId));
+        }
+    }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {

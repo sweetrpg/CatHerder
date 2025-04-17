@@ -1,8 +1,5 @@
 package com.sweetrpg.catherder.api.registry;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import com.sweetrpg.catherder.api.CatHerderAPI;
 import com.sweetrpg.catherder.api.inferface.AbstractCatEntity;
 import com.sweetrpg.catherder.api.inferface.ICatAlteration;
@@ -10,27 +7,26 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+
 public class TalentInstance implements ICatAlteration {
 
-    protected final Talent talent;
+    protected final Talent talentDelegate;
 
     protected int level;
 
-//    public TalentInstance(Talent talentIn, int levelIn) {
-//        this(talentIn, levelIn);
-//    }
+    public TalentInstance(Talent talentIn, int levelIn) {
+        this.talentDelegate = talentIn;
+        this.level = levelIn;
+    }
 
     public TalentInstance(Talent talentIn) {
         this(talentIn, 1);
     }
 
-    public TalentInstance(Talent talent, int levelIn) {
-        this.talent = talent;
-        this.level = levelIn;
-    }
-
     public Talent getTalent() {
-        return this.talent;
+        return this.talentDelegate;
     }
 
     public final int level() {
@@ -49,12 +45,8 @@ public class TalentInstance implements ICatAlteration {
         return this.of(talentIn);
     }
 
-//    public boolean of(IRegistryDelegate<Talent> talentDelegateIn) {
-//        return talentDelegateIn.equals(this.talentDelegate);
-//    }
-
     public TalentInstance copy() {
-        return this.talent.getDefault(this.level);
+        return this.talentDelegate.getDefault(this.level);
     }
 
     public void writeToNBT(AbstractCatEntity catIn, CompoundTag compound) {
@@ -74,8 +66,8 @@ public class TalentInstance implements ICatAlteration {
     }
 
     public final void writeInstance(AbstractCatEntity catIn, CompoundTag compound) {
-        ResourceLocation rl = CatHerderAPI.TALENTS.get().getKey(this.talent);
-        if (rl != null) {
+        ResourceLocation rl = CatHerderAPI.TALENTS.get().getKey(this.talentDelegate);
+        if(rl != null) {
             compound.putString("type", rl.toString());
         }
 
@@ -84,11 +76,12 @@ public class TalentInstance implements ICatAlteration {
 
     public static Optional<TalentInstance> readInstance(AbstractCatEntity catIn, CompoundTag compound) {
         ResourceLocation rl = ResourceLocation.tryParse(compound.getString("type"));
-        if (CatHerderAPI.TALENTS.get().containsKey(rl)) {
+        if(CatHerderAPI.TALENTS.get().containsKey(rl)) {
             TalentInstance inst = CatHerderAPI.TALENTS.get().getValue(rl).getDefault();
             inst.readFromNBT(catIn, compound);
             return Optional.of(inst);
-        } else {
+        }
+        else {
             CatHerderAPI.LOGGER.warn("Failed to load talent {}", rl);
             return Optional.empty();
         }
@@ -96,16 +89,17 @@ public class TalentInstance implements ICatAlteration {
 
     @SuppressWarnings("unchecked")
     public <T extends TalentInstance> T cast(Class<T> type) {
-        if (this.getClass().isAssignableFrom(type)) {
+        if(this.getClass().isAssignableFrom(type)) {
             return (T) this;
-        } else {
+        }
+        else {
             throw new RuntimeException("Could not cast " + this.getClass().getName() + " to " + type.getName());
         }
     }
 
     @Override
     public String toString() {
-        return String.format("%s [talent: %s, level: %d]", this.getClass().getSimpleName(), talent, this.level);
+        return String.format("%s [talent: %s, level: %d]", this.getClass().getSimpleName(), CatHerderAPI.TALENTS.get().getKey(talentDelegate), this.level);
     }
 
     /**

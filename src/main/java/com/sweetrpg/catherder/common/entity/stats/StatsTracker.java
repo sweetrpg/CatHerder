@@ -3,7 +3,6 @@ package com.sweetrpg.catherder.common.entity.stats;
 import com.google.common.collect.Maps;
 import com.sweetrpg.catherder.common.util.Cache;
 import com.sweetrpg.catherder.common.util.NBTUtil;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -18,7 +17,7 @@ import java.util.function.Predicate;
 
 public class StatsTracker {
 
-    private Map<Holder.Reference<EntityType<?>>, Integer> ENTITY_KILLS = Maps.newHashMap();
+    private Map<EntityType<?>, Integer> ENTITY_KILLS = Maps.newHashMap();
     private float damageDealt = 0;
     private int distanceOnWater = 0;
     private int distanceInWater = 0;
@@ -32,7 +31,7 @@ public class StatsTracker {
 
     public void writeAdditional(CompoundTag compound) {
         ListTag killList = new ListTag();
-        for (Entry<Holder.Reference<EntityType<?>>, Integer> entry : this.ENTITY_KILLS.entrySet()) {
+        for (Entry<EntityType<?>, Integer> entry : this.ENTITY_KILLS.entrySet()) {
             CompoundTag stats = new CompoundTag();
             NBTUtil.putRegistryValue(stats, "type", entry.getKey());
             stats.putInt("count", entry.getValue());
@@ -52,7 +51,7 @@ public class StatsTracker {
         ListTag killList = compound.getList("entityKills", Tag.TAG_COMPOUND);
         for (int i = 0; i < killList.size(); i++) {
             CompoundTag stats = killList.getCompound(i);
-            Holder.Reference<EntityType<?>> type = NBTUtil.getRegistryDelegate(stats, "type", ForgeRegistries.ENTITY_TYPES);
+            EntityType<?> type = NBTUtil.getRegistryValue(stats, "type", ForgeRegistries.ENTITIES);
             this.ENTITY_KILLS.put(type, stats.getInt("count"));
         }
         this.damageDealt = compound.getFloat("damageDealt");
@@ -70,8 +69,8 @@ public class StatsTracker {
 
     public int getKillCountFor(Predicate<MobCategory> classification) {
         int total = 0;
-        for (Entry<Holder.Reference<EntityType<?>>, Integer> entry : this.ENTITY_KILLS.entrySet()) {
-            if (classification.test(entry.getKey().get().getCategory())) {
+        for (Entry<EntityType<?>, Integer> entry : this.ENTITY_KILLS.entrySet()) {
+            if (classification.test(entry.getKey().getCategory())) {
                 total += entry.getValue();
             }
         }
@@ -80,7 +79,7 @@ public class StatsTracker {
 
     private int getTotalKillCountInternal() {
         int total = 0;
-        for (Entry<Holder.Reference<EntityType<?>>, Integer> entry : this.ENTITY_KILLS.entrySet()) {
+        for (Entry<EntityType<?>, Integer> entry : this.ENTITY_KILLS.entrySet()) {
             total += entry.getValue();
         }
         return total;
@@ -95,7 +94,7 @@ public class StatsTracker {
     }
 
     private void incrementKillCount(EntityType<?> type) {
-        this.ENTITY_KILLS.compute(ForgeRegistries.ENTITY_TYPES.getDelegateOrThrow(type), (k, v) -> (v == null ? 0 : v) + 1);
+        this.ENTITY_KILLS.compute(type, (k, v) -> (v == null ? 0 : v) + 1);
     }
 
     public void increaseDamageDealt(float damage) {

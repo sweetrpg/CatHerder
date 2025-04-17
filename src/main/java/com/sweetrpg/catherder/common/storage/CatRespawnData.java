@@ -1,10 +1,10 @@
 package com.sweetrpg.catherder.common.storage;
 
 import com.google.common.collect.Lists;
-import com.sweetrpg.catherder.api.feature.Mode;
-import com.sweetrpg.catherder.common.entity.CatEntity;
 import com.sweetrpg.catherder.common.registry.ModEntityTypes;
+import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.common.util.NBTUtil;
+import com.sweetrpg.catherder.common.entity.CatEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -61,7 +61,7 @@ public class CatRespawnData implements ICatData {
         catIn.saveWithoutId(this.data);
 
         // Remove tags that don't need to be saved
-        for(String tag : TAGS_TO_REMOVE) {
+        for (String tag : TAGS_TO_REMOVE) {
             this.data.remove(tag);
         }
 
@@ -71,10 +71,10 @@ public class CatRespawnData implements ICatData {
 
     @Nullable
     public CatEntity respawn(ServerLevel worldIn, Player playerIn, BlockPos pos) {
-        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
+        CatEntity cat = ModEntityTypes.CAT.get().spawn(worldIn, (CompoundTag) null, (Component) null, playerIn, pos, MobSpawnType.TRIGGERED, true, false);
 
         // Failed for some reason
-        if(cat == null) {
+        if (cat == null) {
             return null;
         }
 

@@ -69,8 +69,8 @@ public class ClientSetup {
     }
 
     public static void registerOverlays(final RegisterGuiOverlaysEvent event) {
-        event.registerAboveAll("cat_food_level", CatScreenOverlays.FOOD_LEVEL_ELEMENT);
-        event.registerAboveAll("cat_air_level", CatScreenOverlays.AIR_LEVEL_ELEMENT);
+        event.registerAboveAll("Cat Food Level", CatScreenOverlays.FOOD_LEVEL_ELEMENT);
+        event.registerAboveAll("Cat Air Level", CatScreenOverlays.AIR_LEVEL_ELEMENT);
     }
 
     public static void addClientReloadListeners(final RegisterClientReloadListenersEvent event) {

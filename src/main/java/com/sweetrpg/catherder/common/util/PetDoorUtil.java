@@ -43,7 +43,7 @@ public class PetDoorUtil {
         ItemStack stack = new ItemStack(ModBlocks.PET_DOOR.get(), 1);
 
         CompoundTag tag = stack.getOrCreateTagElement("catherder");
-        NBTUtil.putRegistryValue(tag, "structureId", CatHerderAPI.STRUCTURE_MATERIAL.get().getKey(structureId));
+        NBTUtil.putRegistryValue(tag, "structureId", structureId);
 
         return stack;
     }

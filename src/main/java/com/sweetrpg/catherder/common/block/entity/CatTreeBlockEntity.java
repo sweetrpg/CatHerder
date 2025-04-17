@@ -55,7 +55,9 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
         }
 
         // Only run update code every 5 ticks (0.25s)
-        if(++tree.timeoutCounter < 5) { return; }
+        if(++tree.timeoutCounter < 5) {
+            return;
+        }
 
         List<CatEntity> catList = tree.level.getEntitiesOfClass(CatEntity.class, new AABB(pos).inflate(5, 5, 5));
 
@@ -75,7 +77,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
         super.load(compound);
 
         this.colorType = NBTUtil.getRegistryValue(compound, "colorId", CatHerderAPI.COLOR_MATERIAL.get());
-        if (this.colorType == null) {
+        if(this.colorType == null) {
             this.colorType = CatTreeUtil.pickRandom(CatHerderAPI.COLOR_MATERIAL.get());
         }
 //        this.beddingType = NBTUtil.getRegistryValue(compound, "beddingId", CatHerderAPI.BEDDING_MATERIAL);
@@ -90,7 +92,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
     public void saveAdditional(CompoundTag compound) {
         super.saveAdditional(compound);
 
-        NBTUtil.putRegistryValue(compound, "colorId", CatHerderAPI.COLOR_MATERIAL.get().getKey(this.colorType));
+        NBTUtil.putRegistryValue(compound, "colorId", this.colorType, CatHerderAPI.COLOR_MATERIAL.get());
 //        NBTUtil.putRegistryValue(compound, "beddingId", this.beddingType);
 
         NBTUtil.putUniqueId(compound, "ownerId", this.catUUID);
@@ -158,7 +160,7 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
 
     @Nullable
     public Component getOwnerName() {
-        if (this.catUUID == null || this.level == null) {
+        if(this.catUUID == null || this.level == null) {
             return null;
         }
 
@@ -166,9 +168,9 @@ public class CatTreeBlockEntity extends PlacedBlockEntity {
                 .get(this.level)
                 .getData(this.catUUID);
 
-        if (locData != null) {
+        if(locData != null) {
             Component text = locData.getName(this.level);
-            if (text != null) {
+            if(text != null) {
                 this.ownerName = text;
             }
         }
