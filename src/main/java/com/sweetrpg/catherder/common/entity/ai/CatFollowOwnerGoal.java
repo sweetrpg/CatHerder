@@ -103,7 +103,7 @@ public class CatFollowOwnerGoal extends Goal {
             this.timeToRecalcPath = 10;
             if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
                 var distance = this.cat.distanceToSqr(this.owner);
-                if(distance >= 400.0D) { // Further than ? blocks away teleport (12 units == one block?)
+                if(distance >= 1024.0D) { // Further than 32 blocks away, teleport; walk from start dist up to 32 blocks
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {
