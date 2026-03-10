@@ -1,5 +1,6 @@
 package com.sweetrpg.catherder.common.entity.ai;
 
+import com.sweetrpg.catherder.CatHerder;
 import com.sweetrpg.catherder.api.feature.Mode;
 import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.common.entity.CatEntity;
@@ -62,9 +63,11 @@ public class CatFollowOwnerGoal extends Goal {
     @Override
     public boolean canContinueToUse() {
         if(this.navigator.isDone()) {
+            CatHerder.LOGGER.debug("CatFollowOwner canContinue=false: navDone dist={}", this.cat.distanceToSqr(this.owner));
             return false;
         }
         else if(this.cat.isInSittingPose()) {
+            CatHerder.LOGGER.debug("CatFollowOwner canContinue=false: sitting");
             return false;
         }
 
@@ -103,11 +106,14 @@ public class CatFollowOwnerGoal extends Goal {
             this.timeToRecalcPath = 10;
             if(!this.cat.isLeashed() && !this.cat.isPassenger()) { // Is not leashed and is not a passenger
                 var distance = this.cat.distanceToSqr(this.owner);
-                if(distance >= 400.0D) { // Further than ? blocks away teleport (12 units == one block?)
+                if(distance >= 1024.0D) { // Further than 32 blocks away, teleport; walk from start dist up to 32 blocks
                     EntityUtil.tryToTeleportNearEntity(this.cat, this.navigator, this.owner, 4);
                 }
                 else {
-                    this.navigator.moveTo(this.owner, this.followSpeed);
+                    boolean pathResult = this.navigator.moveTo(this.owner, this.followSpeed);
+                    CatHerder.LOGGER.debug("CatFollowOwner: dist={} moveTo={} navDone={} onGround={} path={}",
+                            distance, pathResult, this.navigator.isDone(), this.cat.isOnGround(),
+                            this.navigator.getPath() != null ? this.navigator.getPath().getNodeCount() + "nodes" : "null");
                 }
             }
         }

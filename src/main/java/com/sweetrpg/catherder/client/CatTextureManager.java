@@ -126,15 +126,21 @@ public class CatTextureManager extends SimplePreparableReloadListener<CatTexture
             return CatTextureManager.INSTANCE.getLocFromHashOrGet(hash, this::getCached);
         }
 
-        ResourceLocation texturePath;
+        ResourceLocation texturePath = null;
         CatVariant variant = cat.getVariant();
         if(variant == null) {
             Integer originalBreed = cat.getOriginalBreed();
             ResourceLocation location = typeToVariantMap.get(originalBreed);
             CatVariant actualVariant = BuiltInRegistries.CAT_VARIANT.get(location);
-            cat.setVariant(actualVariant);
+            if(actualVariant == null) {
+                CatHerder.LOGGER.error("Variant {} could not be found in the registry.", variant);
+                actualVariant = BuiltInRegistries.CAT_VARIANT.get(CatVariant.TABBY);
+            }
+//            return actualVariant.texture();
 
-            texturePath = actualVariant.texture();
+            if(actualVariant != null) {
+                texturePath = actualVariant.texture();
+            }
         }
         else {
             texturePath = variant.texture();

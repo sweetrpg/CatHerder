@@ -5,9 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1.19.api.iml" filepath="$PROJECT_DIR$/.idea/modules/1.19.api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1.19.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1.19.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1.19.test.iml" filepath="$PROJECT_DIR$/.idea/modules/1.19.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CatHerder.api.iml" filepath="$PROJECT_DIR$/.idea/modules/CatHerder.api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CatHerder.main.iml" filepath="$PROJECT_DIR$/.idea/modules/CatHerder.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CatHerder.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CatHerder.test.iml" />
     </modules>
   </component>
 </project>
