@@ -13,10 +13,10 @@ import com.sweetrpg.catherder.api.inferface.IThrowableItem;
 import com.sweetrpg.catherder.api.registry.*;
 import com.sweetrpg.catherder.client.screen.CatInfoScreen;
 import com.sweetrpg.catherder.common.config.ConfigHandler;
+import com.sweetrpg.catherder.common.entity.ai.*;
 import com.sweetrpg.catherder.common.entity.ai.BreedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatLieOnBedGoal;
 import com.sweetrpg.catherder.common.entity.ai.CatSitOnBlockGoal;
-import com.sweetrpg.catherder.common.entity.ai.*;
 import com.sweetrpg.catherder.common.entity.misc.DimensionDependentArg;
 import com.sweetrpg.catherder.common.entity.stats.StatsTracker;
 import com.sweetrpg.catherder.common.lib.Constants;
@@ -30,8 +30,6 @@ import com.sweetrpg.catherder.common.util.WorldUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -58,16 +56,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.CatVariant;
@@ -102,7 +98,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.holdersets.HolderSetType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -255,6 +250,11 @@ public class CatEntity extends AbstractCatEntity {
         this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>) null));
         this.targetSelector.addGoal(6, new AttackModeGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(6, new GuardModeGoal(this, false));
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new CatPathNavigation(this, level);
     }
 
 //    @Override
