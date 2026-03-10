@@ -23,6 +23,7 @@ run/*
 run-server/*
 logs
 /misc-files/
+old-src
 
 # Files from Forge MDK
 forge*changelog.txt
