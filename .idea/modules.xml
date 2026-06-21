@@ -8,6 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CatHerder.api.iml" filepath="$PROJECT_DIR$/.idea/modules/CatHerder.api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CatHerder.main.iml" filepath="$PROJECT_DIR$/.idea/modules/CatHerder.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CatHerder.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CatHerder.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.sweetrpg.1.18.api.iml" filepath="$PROJECT_DIR$/.idea/modules/com.sweetrpg.1.18.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.sweetrpg.1.18.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.sweetrpg.1.18.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.sweetrpg.1.18.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.sweetrpg.1.18.test.iml" />
     </modules>
   </component>
 </project>

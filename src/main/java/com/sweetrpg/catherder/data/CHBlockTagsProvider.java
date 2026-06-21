@@ -7,6 +7,7 @@ import com.sweetrpg.catherder.common.registry.ModTags;
 import com.sweetrpg.catherder.common.lib.Constants;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class CHBlockTagsProvider extends BlockTagsProvider {
@@ -34,9 +35,9 @@ public class CHBlockTagsProvider extends BlockTagsProvider {
     }
 
     protected void registerMinecraftTags() {
-        tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS)
+        tag(BlockTags.SMALL_FLOWERS)
                 .add(ModBlocks.WILD_CATNIP.get());
-        tag(net.minecraft.tags.BlockTags.CROPS)
+        tag(BlockTags.CROPS)
                 .add(ModBlocks.CATNIP_CROP.get());
     }
 
